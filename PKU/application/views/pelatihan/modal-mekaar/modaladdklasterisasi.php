@@ -35,18 +35,7 @@
 					</div>
                 </div>
                 
-                <div class="form-group row">
-                    <label class="col-sm-2 offset-sm-3">Maximal Pelatihan <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<select class="form-control" required="" id="max_pelatihan" name="max_pelatihan">
-							<option value="">--pilih--</option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>									
-						</select>									
-					</div>
-				</div>
+          
 
 				
             </div>
