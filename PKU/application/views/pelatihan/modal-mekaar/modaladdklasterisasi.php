@@ -46,7 +46,7 @@
 						</div>
 						<div class="card-body">
 						  <div class="table">                
-							<table id="table_rab_modaladd"  class="table">
+							<table id="table_charter_modaladd"  class="table">
 								  <thead class=" text-primary col-md-12">
 									  <th class="col-md-2">Judul</th>
 									  <th class="col-md-2">Tanggal</th>
@@ -55,10 +55,10 @@
 									  <th></th>
 									  <th></th>
 								  </thead>    
-								  <tbody id="tbody_rab_modaladd">
+								  <tbody id="tbody_charter_modaladd">
 									<tr class="d-none">
 									  <td ><input type="text" class="form-control" id="deskripsi_rab" name="deskripsi_rab[]" value=""></td>
-									  <td ><input type="number" class="form-control" id="jumlah_rab" name="jumlah_rab[]"></td>
+									  <td ><input type="text" class="form-control" id="jumlah_rab" name="jumlah_rab[]"></td>
 									  <td ><input type="text" class="form-control" id="unit_rab" name="unit_rab[]" value=""></td>
 									  <td ><input type="text" class="form-control" id="unit_cost_rab" name="unit_cost_rab[]" value=""></td>
 									  <td>                            
@@ -101,7 +101,7 @@
  </div>
 </div>
 <script type="text/javascript">
-var $TABLE = $('#table_rab_modaladd');
+var $TABLE = $('#table_charter_modaladd');
 
 $('.table-add-modaladd').click(function () {
 	console.log('modaladd');
@@ -129,14 +129,14 @@ $('.table-down-modaladd').click(function () {
 });
 
 
-$('#table_rab_modaladd tbody tr').keyup(function () {            
+$('#table_charter_modaladd tbody tr').keyup(function () {            
 	var index = parseInt($(this).index());
-	var jumlah_rab = $("#table_rab_modaladd tbody tr:eq("+index+")").find("#jumlah_rab").val(); 
-	var unit_cost_rab = $("#table_rab_modaladd tbody tr:eq("+index+")").find("#unit_cost_rab").val();
+	var jumlah_rab = $("#table_charter_modaladd tbody tr:eq("+index+")").find("#jumlah_rab").val(); 
+	var unit_cost_rab = $("#table_charter_modaladd tbody tr:eq("+index+")").find("#unit_cost_rab").val();
 	sum = parseInt(jumlah_rab) * parseInt(unit_cost_rab);                
 
 
-	$("#table_rab_modaladd tbody tr:eq("+index+")").find("#total_cost_rab").val(sum);
+	$("#table_charter_modaladd tbody tr:eq("+index+")").find("#total_cost_rab").val(sum);
 
 	calculate_grand_total();
 

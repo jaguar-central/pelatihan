@@ -38,7 +38,7 @@
 			</div>
 
 
-			<!--div class="container-fluid">
+			<div class="container-fluid">
 				  <div class="row">
 					<div class="col-sm-12">
 					  <div class="card">
@@ -47,7 +47,7 @@
 						</div>
 						<div class="card-body">
 						  <div class="table">                
-								<table id="table_rab_modaladd"  class="table">
+								<table id="table_charter_modaladd"  class="table">
 								  <thead class=" text-primary col-md-12">
 									  <th class="col-md-2">Judul</th>
 									  <th class="col-md-2">Tanggal</th>
@@ -56,10 +56,10 @@
 									  <th></th>
 									  <th></th>
 								  </thead>    
-								  <tbody id="tbody_rab_modaladd">
+								  <tbody id="tbody_charter_modaladd">
 									<tr class="d-none">
 									  <td ><input type="text" class="form-control" id="deskripsi_rab" name="deskripsi_rab[]" value=""></td>
-									  <td ><input type="number" class="form-control" id="jumlah_rab" name="jumlah_rab[]"></td>
+									  <td ><input type="text" class="form-control" id="jumlah_rab" name="jumlah_rab[]"></td>
 									  <td ><input type="text" class="form-control" id="unit_rab" name="unit_rab[]" value=""></td>
 									  <td ><input type="text" class="form-control" id="unit_cost_rab" name="unit_cost_rab[]" value=""></td>
 									  <td>                            
@@ -88,63 +88,8 @@
 				  </div>
 				</div>		
 				
-			</div-->    
-			 
-
-			<div class="container-fluid">
-				  <div class="row">
-					<div class="col-md-12">
-					  <div class="card">
-						<div class="card-header card-header-primary">
-						  <h4 class="card-title ">Rencana Anggaran Biaya</h4>                        
-						</div>
-						<div class="card-body">
-						  <div class="table">                
-							<table id="table_rab_modaladd"  class="table">
-								  <thead class=" text-primary col-md-12">
-									  <th class="col-md-2">Uraian</th>
-									  <th class="col-md-2">Jumlah</th>
-									  <th class="col-md-2">Unit</th>
-									  <th class="col-md-2">Unit Cost</th>
-									  <th class="col-md-2">Sub Total Cost</th>
-									  <th></th>
-									  <th></th>
-								  </thead>    
-								  <tbody id="tbody_rab_modaladd">
-									<tr class="d-none">
-									  <td ><input type="text" class="form-control" id="deskripsi_rab" name="deskripsi_rab[]" value=""></td>
-									  <td ><input type="number" class="form-control" id="jumlah_rab" name="jumlah_rab[]"></td>
-									  <td ><input type="text" class="form-control" id="unit_rab" name="unit_rab[]" value=""></td>
-									  <td ><input type="number" class="form-control" id="unit_cost_rab" name="unit_cost_rab[]" value=""></td>
-									  <td ><input type="number" class="form-control" id="total_cost_rab" name="total_cost_rab[]" value="" readonly=""></td>
-									  <td>                            
-										<a class="table-remove-modaladd btn btn-outline-primary btn-sm" href="#"><i class="fas fa-trash"></i></a>   
-									  </td>
-									  <td>                            
-										<a class="table-up-modaladd btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-up"></i></a>   
-										<a class="table-down-modaladd btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-down"></i></a>                               
-									  </td>
-									</tr>                        
-								  </tbody>                                                                      
-								</table>  
-
-								  <div class="col-md-12"></div>
-									<label>Grand Total </label>
-								  <div>
-								  <div class="col-md-12">    
-									<input type="text" class="form-control money" id="total_cost_rab_akhir" name="total_cost_rab_akhir" data-a-sign="Rp. " value="" readonly="" required>
-								  </div>
-								
-								
-								</br>
-								<a class="table-add-modaladd btn btn-outline-primary" href="#" ><i class="fas fa-plus"></i></a>                                                           
-							  </div>
-							</div>
-						  </div>
-						</div>
-				  </div>
-				</div> 
-
+			</div>    
+	
 			<div class="modal-footer">
 				<?php echo form_submit('submit', 'Submit', 'class="btn btn-primary submit"'); ?>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -158,7 +103,8 @@
 </div>
 
 <script type="text/javascript">
-var $TABLE = $('#table_rab_modaladd');
+
+var $TABLE = $('#table_charter_modaladd');
 
 $('.table-add-modaladd').click(function () {
 	console.log('modaladd');
@@ -186,14 +132,14 @@ $('.table-down-modaladd').click(function () {
 });
 
 
-$('#table_rab_modaladd tbody tr').keyup(function () {            
+$('#table_charter_modaladd tbody tr').keyup(function () {            
 	var index = parseInt($(this).index());
-	var jumlah_rab = $("#table_rab_modaladd tbody tr:eq("+index+")").find("#jumlah_rab").val(); 
-	var unit_cost_rab = $("#table_rab_modaladd tbody tr:eq("+index+")").find("#unit_cost_rab").val();
+	var jumlah_rab = $("#table_charter_modaladd tbody tr:eq("+index+")").find("#jumlah_rab").val(); 
+	var unit_cost_rab = $("#table_charter_modaladd tbody tr:eq("+index+")").find("#unit_cost_rab").val();
 	sum = parseInt(jumlah_rab) * parseInt(unit_cost_rab);                
 
 
-	$("#table_rab_modaladd tbody tr:eq("+index+")").find("#total_cost_rab").val(sum);
+	$("#table_charter_modaladd tbody tr:eq("+index+")").find("#total_cost_rab").val(sum);
 
 	calculate_grand_total();
 
@@ -213,4 +159,6 @@ function calculate_grand_total(){
 
 	$("#total_cost_rab_akhir").val(total);
 }			  	  
+
+
 </script>

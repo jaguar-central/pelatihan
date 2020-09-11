@@ -391,7 +391,7 @@
 	$('.table-add-modaladd').click(function () {
 		console.log('modaladd');
 		var $clone = $TABLE.find('tr.d-none').clone(true).removeClass('d-none');  		
-		$TABLE.find('tbody').append($clone);
+		$TABLE.find('tbody').append($clone);		
 		calculate_grand_total();
 	});
 
