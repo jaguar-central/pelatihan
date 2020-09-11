@@ -1,0 +1,50 @@
+.modal {
+  overflow-y:auto;
+}
+
+.dom_datable {    
+    padding: 20px;    		
+}
+
+.table-style{
+	width : 100% !IMPORTANT;
+	background-color : #F5F5F5;
+	border-radius: 5px;
+	box-shadow : 0 10px 20px 15px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
+}
+
+.table{
+	width : 100% !IMPORTANT;
+}
+
+.modal-lg{
+	max-width:100%
+}
+
+.modal{
+	padding-right:0px !IMPORTANT;
+}
+
+
+.navbar-sidebar .navbar__list li.active > a {
+	color :grey;	
+	box-shadow : 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
+	padding: 15px 10px;
+	width: 170px;
+	border-radius: 5px;
+}
+
+.navbar-sidebar .navbar__list li > a {
+	color :grey;	
+	padding: 15px 10px;
+	width: 170px;
+	border-radius: 5px;
+}
+
+.title-2{
+	background-color :#F5F5F5;	
+	box-shadow : 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
+	padding: 15px;
+	width: 100%;
+	border-radius: 5px;
+}
