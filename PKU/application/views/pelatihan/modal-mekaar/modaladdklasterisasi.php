@@ -6,7 +6,7 @@
 	<div class="modal-content">
 	  <div class="modal-header">
 		<div id="judul_modal">
-			<h4>Add Klasterisasi</h4>
+			<h4>Add Project Charter</h4>
 		</div>
 		<button type="button" class="close" data-dismiss="modal">&times;</button>
 	  </div>
@@ -34,20 +34,6 @@
 						<input type="text" class="form-control"  required="" id="tema_klasterisasi" name="tema_klasterisasi" />
 					</div>
                 </div>
-                
-                <div class="form-group row">
-                    <label class="col-sm-2 offset-sm-3">Maximal Pelatihan <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<select class="form-control" required="" id="max_pelatihan" name="max_pelatihan">
-							<option value="">--pilih--</option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>									
-						</select>									
-					</div>
-				</div>
-
 				
             </div>
 
@@ -56,7 +42,7 @@
 					<div class="col-sm-12">
 					  <div class="card">
 						<div class="card-header card-header-primary">
-						  <h4 class="card-title ">Budget</h4>                        
+						  <h4 class="card-title ">Pelatihan</h4>                        
 						</div>
 						<div class="card-body">
 						  <div class="table">                
@@ -74,8 +60,7 @@
 									  <td ><input type="text" class="form-control" id="deskripsi_rab" name="deskripsi_rab[]" value=""></td>
 									  <td ><input type="number" class="form-control" id="jumlah_rab" name="jumlah_rab[]"></td>
 									  <td ><input type="text" class="form-control" id="unit_rab" name="unit_rab[]" value=""></td>
-									  <td ><input type="number" class="form-control" id="unit_cost_rab" name="unit_cost_rab[]" value=""></td>
-									  <td ><input type="number" class="form-control" id="total_cost_rab" name="total_cost_rab[]" value="" readonly=""></td>
+									  <td ><input type="text" class="form-control" id="unit_cost_rab" name="unit_cost_rab[]" value=""></td>
 									  <td>                            
 										<a class="table-remove-modaladd btn btn-outline-primary btn-sm" href="#"><i class="fas fa-trash"></i></a>   
 									  </td>
@@ -88,11 +73,9 @@
 								</table>  
 
 								  <div class="col-md-12"></div>
-									<label>Grand Total </label>
+							
 								  <div>
-								  <div class="col-md-12">    
-									<input type="text" class="form-control money" id="total_cost_rab_akhir" name="total_cost_rab_akhir" data-a-sign="Rp. " value="" readonly="" required>
-								  </div>
+								  
 								
 								
 								</br>
@@ -118,61 +101,59 @@
  </div>
 </div>
 <script type="text/javascript">
-	$("#add_klasterisasi").submit(function(e){
-		e.preventDefault();        	
-		var formURL = "<?php echo base_url('pelatihan/post_klasterisasi'); ?>";
-		var frmdata = new FormData(this);
-					
-		var xhr = $.ajax({
-			url: formURL,
-			type: 'POST',
-			data: frmdata,
-			processData: false,
-			contentType: false
-		});
-		xhr.done(function(data) {
-			var obj = $.parseJSON(data);
-			
-			console.log(data);
-			
-			if(obj.result == 'OK')
-			{
-				Swal.fire({
-				  position: 'center',
-				  icon: 'success',
-				  title: 'Klasterisasi telah di simpan',
-				  showConfirmButton: false,
-				  timer: 1500
-				})
-				setTimeout(function () {
-					window.location.href = '<?php echo base_url(); ?>pelatihan/mekaar';
-				}, 1600);
-			}
-			if(obj.result == 'UP')
-			{
-				console.log(data);
-				Swal.fire({
-				  position: 'center',
-				  icon: 'error',
-				  title: obj.msg,
-				  showConfirmButton: false,
-				  timer: 1500
-				})					
-			}
-			if(obj.result == 'NG')
-			{
-				Swal.fire({
-				  position: 'center',
-				  icon: 'error',
-				  title: obj.msg,
-				  showConfirmButton: false,
-				  timer: 1500
-				})	
-			}
-		});
-		xhr.fail(function() {
-			$("#loader_container").hide();
-			var failMsg = "Something error happened! as";
-		});	
-	});	
+var $TABLE = $('#table_rab_modaladd');
+
+$('.table-add-modaladd').click(function () {
+	console.log('modaladd');
+	var $clone = $TABLE.find('tr.d-none').clone(true).removeClass('d-none');  
+	$TABLE.find('tbody').append($clone);
+	calculate_grand_total();
+});
+
+
+$('.table-remove-modaladd').click(function () {		
+
+	$(this).parents('tr').detach();
+	calculate_grand_total();
+});
+
+$('.table-up-modaladd').click(function () {        
+	var $row = $(this).parents('tbody tr');
+	if ($row.index() === 1) return;
+	$row.prev().before($row.get(0));
+});
+
+$('.table-down-modaladd').click(function () {
+	var $row = $(this).parents('tbody tr');
+	$row.next().after($row.get(0));
+});
+
+
+$('#table_rab_modaladd tbody tr').keyup(function () {            
+	var index = parseInt($(this).index());
+	var jumlah_rab = $("#table_rab_modaladd tbody tr:eq("+index+")").find("#jumlah_rab").val(); 
+	var unit_cost_rab = $("#table_rab_modaladd tbody tr:eq("+index+")").find("#unit_cost_rab").val();
+	sum = parseInt(jumlah_rab) * parseInt(unit_cost_rab);                
+
+
+	$("#table_rab_modaladd tbody tr:eq("+index+")").find("#total_cost_rab").val(sum);
+
+	calculate_grand_total();
+
+})
+
+function calculate_grand_total(){
+	var total = 0;
+	$('tr #total_cost_rab').each(function () {            
+		var total_cost_rab = $(this).val();
+		if (!isNaN(total_cost_rab) && total_cost_rab.length !== 0) {
+			total += parseFloat(total_cost_rab);
+		}
+	});
+
+	var rowCount = $('tr #total_cost_rab').length;
+	$("#PelatihanRabCount").val(rowCount);        
+
+	$("#total_cost_rab_akhir").val(total);
+}	
 </script>
