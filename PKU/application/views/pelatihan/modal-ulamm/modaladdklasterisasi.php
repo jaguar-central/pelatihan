@@ -31,7 +31,7 @@
 				<div class="form-group row">
 					<label class="col-sm-2 offset-sm-3">Tema <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="tema_klasterisasi" name="tema_klasterisasi" />
+					<textarea class="form-control" id="tema_klasterisasi" name="tema_klasterisasi" rows="4" required=""></textarea>
 					</div>
 				</div>
 
@@ -111,6 +111,11 @@
 </div>
 
 <script type="text/javascript">
+
+$(".custom-file-input").on("change", function() {
+  var fileName = $(this).val().split("\\").pop();
+  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+});
 
 var $TABLE = $('#table_charter_modaladd');
 
