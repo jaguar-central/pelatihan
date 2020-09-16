@@ -34,6 +34,14 @@
 						<input type="text" class="form-control"  required="" id="tema_klasterisasi" name="tema_klasterisasi" />
 					</div>
 				</div>
+
+				<div class="form-group row">
+                    <label class="col-sm-2 offset-sm-3">Upload File <span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+      					<input type="file" class="custom-file-input" id="customFile" name="filename">
+      					<label class="custom-file-label" for="customFile">Choose file</label>
+    				</div>
+                </div>
 				
 			</div>
 
