@@ -54,12 +54,12 @@
 			"type" :'GET'                      
 			},
 			"columns" : [
-				{ "data": "KTP" },
-				{ "data": "NAMA_NASABAH" },
-				{ "data": "NO_HP" },
-				{ "data": "KOLEKTIBILITAS" },
-				{ "data": "CABANG" },
-				{ "data": "UNIT" },
+				{ "data": "ktp" },
+				{ "data": "nama_nasabah" },
+				{ "data": "no_hp" },
+				{ "data": "kolektibilitas" },
+				{ "data": "cabang" },
+				{ "data": "unit" },
 			],
 			// "scrollY": true,
 			"dom": "<'dom_datable'f>rt<'dom_datable col-md-6'i><'dom_datable col-md-6'p>"
