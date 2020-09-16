@@ -98,7 +98,6 @@
 					</div>
 				</div>  															
 				<div class="col-sm-12">
-					<!-- <a class="btn btn-outline-primary pelatihan_details" href="#" data-toggle="modal" data-target="#modallistkehadiran"> Cek Kehadiran</a>	 -->
 					<button type="button" class="btn btn-outline-primary" data-toggle="collapse" data-target="#list_kehadiran" > Cek Kehadiran</button>	
 					<button type="button" class="btn btn-outline-danger" data-toggle="collapse" data-target="#detail_pelatihan" >Cek Pelatihan Pengajuan</button>
 					<?php echo form_submit('submit', 'Submit LPJ', 'class="btn btn-outline-success float-right submit"'); ?>					
@@ -137,15 +136,6 @@
 			</div>
 			</div>
 
-
-			<!-- DETAIL PELATIHAN START-->
-			<!-- <div class="row">
-				<div class="col-md-12">
-					<div class="overview-wrap">
-						<h2 class="title-2"><button type="button" class="btn btn-outline-success" data-toggle="collapse" data-target="#detail_pelatihan">Cek Pelatihan Detail Pengajuan</button></h2>						
-					</div>
-				</div>
-			</div> -->
 			<div id="detail_pelatihan" class="collapse" >
 			<div class = "table-style" style = "padding : 25px">
 				<div class="form-group row">
@@ -195,17 +185,6 @@
 						 <div class="input-group">										
 						 	<input type="text" class="form-control" value="<?php echo $pelatihan->TANGGAL_MULAI; ?>" disabled />
 						 	<input type="text" class="form-control" value="<?php echo $pelatihan->TANGGAL_SELESAI; ?>" disabled />
-
-							
-							<!-- <input type="text" class="form-control input-limit-datepicker" id="input-limit-datepicker" disabled  />																				
-							<input type="hidden" id="inputStartTglPelaksanaan" name="inputStartTglPelaksanaan" />
-							
-							<input type="hidden" id="inputStartTimePelaksanaan" name="inputStartTimePelaksanaan" />
-
-							<input type="hidden" id="inputAkhirTglPelaksanaan" name="inputAkhirTglPelaksanaan"/>
-							
-							<input type="hidden" id="inputEndTimePelaksanaan" name="inputEndTimePelaksanaan" /> -->
-
 						</div>
 
 					</div>

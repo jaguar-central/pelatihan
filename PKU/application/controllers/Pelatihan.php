@@ -957,24 +957,67 @@ class Pelatihan extends MY_Controller
 
 	public function get_paging_kehadiran_nasabah_ulamm($idpelatihan)
 	{					
-		$param['sektor_ekonomi'] 	= $_GET["columns"][0]['search']['value'];
-		$param['jenis_pinjaman'] 	= $_GET["columns"][1]['search']['value'];
-		$param['jenis_program'] 	= $_GET["columns"][2]['search']['value'];
-		$param['cabang'] 			= $_GET["columns"][3]['search']['value'];
-		$param['unit'] 				= $_GET["columns"][4]['search']['value'];
+		$param['sektor_ekonomi'] 	= isset($_GET["columns"][0]['search']['value']) ? str_replace(' ','%20',$_GET["columns"][0]['search']['value']) : NULL;
+		$param['jenis_pinjaman'] 	= isset($_GET["columns"][1]['search']['value']) ? str_replace(' ','%20',$_GET["columns"][1]['search']['value']) : NULL;
+		$param['jenis_program'] 	= isset($_GET["columns"][2]['search']['value']) ? str_replace(' ','%20',$_GET["columns"][2]['search']['value']) : NULL;
+		$param['kode_cabang'] 		= isset($_GET["columns"][3]['search']['value']) ? str_replace(' ','%20',$_GET["columns"][3]['search']['value']) : NULL;
+		$param['kode_unit'] 		= isset($_GET["columns"][4]['search']['value']) ? str_replace(' ','%20',$_GET["columns"][4]['search']['value']) : NULL;
 		
 		$param["idpelatihan"] = isset($idpelatihan) ? $idpelatihan : NULL;					
 		$param["start"] = isset($_GET["start"]) ? $_GET["start"] : 0;
 		$param["limit"] = isset($_GET["length"]) ? $_GET["length"] : 10;		
-		$param["search"] = isset($_GET["search"]["value"]) ? $_GET["search"]["value"] : NULL ;			
-		$param['count'] = 0;						
-		$data["data"] = $this->Pelatihan_model->paging_kehadiran_select_nasabah_ulamm($param);				
-		$param['count'] = 1;				
-		$total = $this->Pelatihan_model->paging_kehadiran_select_nasabah_ulamm($param)[0]->COUNT_DATA;				
-		$data["recordsTotal"] = $total;	
-		$data["recordsFiltered"] = $total;		
+		$param["search"] = isset($_GET["search"]["value"]) ? $_GET["search"]["value"] : NULL ;
+
+		// $param['count'] = 0;						
+		// $data["data"] = $this->Pelatihan_model->paging_kehadiran_select_nasabah_ulamm($param);				
+		// $param['count'] = 1;				
+		// $total = $this->Pelatihan_model->paging_kehadiran_select_nasabah_ulamm($param)[0]->COUNT_DATA;				
+		// $data["recordsTotal"] = $total;	
+		// $data["recordsFiltered"] = $total;		
 		
-		echo json_encode($data);
+		// echo json_encode($data);
+		// var_dump($param['sektor_ekonomi']);die();
+
+		$this->config->set_item('elastic_server', 'http://10.61.3.198:9200');
+		$this->config->set_item('index', 'nasabah');	
+		if ($param['sektor_ekonomi']!=NULL){
+			$debitur = $this->elastic->call('/_search?q=sektorekonomi:'.$param["sektor_ekonomi"].'&filter_path=hits.hits.*,aggregations.*');
+			$debitur_count = $this->elastic->call('_count?q=sektorekonomi:'.$param["sektor_ekonomi"]);
+		}else if ($param['jenis_pinjaman']!=NULL){
+				$debitur = $this->elastic->call('/_search?q=jenis_pinjaman:'.$param["jenis_pinjaman"].'&filter_path=hits.hits.*,aggregations.*');
+				$debitur_count = $this->elastic->call('_count?q=jenis_pinjaman:'.$param["jenis_pinjaman"]);			
+		}else if ($param['jenis_program']!=NULL){
+			$debitur = $this->elastic->call('/_search?q=jenis_program:'.$param["jenis_program"].'&filter_path=hits.hits.*,aggregations.*');
+			$debitur_count = $this->elastic->call('_count?q=jenis_program:'.$param["jenis_program"]);			
+		}else if ($param['kode_cabang']!=NULL){
+			$debitur = $this->elastic->call('/_search?q=kode_cabang:'.$param["kode_cabang"].'&filter_path=hits.hits.*,aggregations.*');
+			$debitur_count = $this->elastic->call('_count?q=kode_cabang:'.$param["kode_cabang"]);
+		}else if ($param['kode_unit']!=NULL){
+			$debitur = $this->elastic->call('/_search?q=kode_unit:'.$param["kode_unit"].'&filter_path=hits.hits.*,aggregations.*');
+			$debitur_count = $this->elastic->call('_count?q=kode_unit:'.$param["kode_unit"]);									
+		}else if ($param["search"]!=NULL){
+			$debitur = $this->elastic->call('/_search?q=nama:'.$param["search"].'&filter_path=hits.hits.*,aggregations.*');
+			$debitur_count = $this->elastic->call('_count?q=nama:'.$param["search"]);			
+		}else{						
+			$debitur = $this->elastic->call('_search?from='.$param["start"].'&size='.$param["limit"].'&filter_path=hits.hits.*,aggregations.*');
+			$debitur_count = $this->elastic->call('_count');
+		}				
+		
+		if (isset($debitur->hits->hits)){
+			for ($i=0;$i<count($debitur->hits->hits);$i++){
+				$data["data"][$i] = $debitur->hits->hits[$i]->_source;
+			}	
+			$data["recordsTotal"] = $debitur_count->count;	
+			$data["recordsFiltered"] = $debitur_count->count;			
+		}else{
+			$data["data"] = array();
+			$data["recordsTotal"] = 0;	
+			$data["recordsFiltered"] = 0;
+		}		
+		
+						
+		echo json_encode($data);		
+
 	}
 
 	public function get_paging_kehadiran_nasabah_mekaar($idpelatihan)
@@ -982,15 +1025,41 @@ class Pelatihan extends MY_Controller
 		$param["idpelatihan"] = isset($idpelatihan) ? $idpelatihan : NULL;					
 		$param["start"] = isset($_GET["start"]) ? $_GET["start"] : 0;
 		$param["limit"] = isset($_GET["length"]) ? $_GET["length"] : 10;		
-		$param["search"] = isset($_GET["search"]["value"]) ? $_GET["search"]["value"] : NULL ;			
-		$param['count'] = 0;						
-		$data["data"] = $this->Pelatihan_model->paging_kehadiran_select_nasabah_mekaar($param);				
-		$param['count'] = 1;				
-		$total = $this->Pelatihan_model->paging_kehadiran_select_nasabah_mekaar($param)[0]->COUNT_DATA;				
-		$data["recordsTotal"] = $total;	
-		$data["recordsFiltered"] = $total;		
+		$param["search"] = isset($_GET["search"]["value"]) ? str_replace(' ','%20',$_GET["search"]["value"]) : NULL ;			
+		// $param['count'] = 0;						
+		// $data["data"] = $this->Pelatihan_model->paging_kehadiran_select_nasabah_mekaar($param);				
+		// $param['count'] = 1;				
+		// $total = $this->Pelatihan_model->paging_kehadiran_select_nasabah_mekaar($param)[0]->COUNT_DATA;				
+		// $data["recordsTotal"] = $total;	
+		// $data["recordsFiltered"] = $total;		
 		
-		echo json_encode($data);
+		// echo json_encode($data);
+
+
+		$this->config->set_item('elastic_server', 'http://10.61.3.198:9200');
+		$this->config->set_item('index', 'debitur');		
+		if ($param["search"]!=NULL){
+			$debitur = $this->elastic->call('/_search?q=nama:'.$param["search"].'&filter_path=hits.hits.*,aggregations.*');
+			$debitur_count = $this->elastic->call('_count?q=nama:'.$param["search"]);			
+		}else{						
+			$debitur = $this->elastic->call('_search?from='.$param["start"].'&size='.$param["limit"].'&filter_path=hits.hits.*,aggregations.*');
+			$debitur_count = $this->elastic->call('_count');
+		}				
+		
+		if (isset($debitur->hits->hits)){
+			for ($i=0;$i<count($debitur->hits->hits);$i++){
+				$data["data"][$i] = $debitur->hits->hits[$i]->_source;
+			}	
+			$data["recordsTotal"] = $debitur_count->count;	
+			$data["recordsFiltered"] = $debitur_count->count;			
+		}else{
+			$data["data"] = array();
+			$data["recordsTotal"] = 0;	
+			$data["recordsFiltered"] = 0;
+		}		
+		
+						
+		echo json_encode($data);		
 	}
 
 	public function post_non_nasabah()

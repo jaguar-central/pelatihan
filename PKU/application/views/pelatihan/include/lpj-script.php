@@ -123,34 +123,34 @@ $(document).ready(function() {
 			"type" :'GET'                      
 			},
 			"columns" : [
-              { "data": "KTP", render: function (data, type, row) 
+              { "data": "ktp", render: function (data, type, row) 
                 {
-                  return '<input type="hidden" class="form-control" id="bisnis" name="bisnis[]" value="ULAMM"><input type="hidden" class="form-control" id="ktp" name="ktp[]" value="'+row.KTP+'">'+row.KTP;
+                  return '<input type="hidden" class="form-control" id="bisnis" name="bisnis[]" value="ULAMM"><input type="hidden" class="form-control" id="ktp" name="ktp[]" value="'+row.ktp+'">'+row.ktp;
                 } 
               },
-              { "data": "NAMA_NASABAH", render: function (data, type, row) 
+              { "data": "nama_nasabah", render: function (data, type, row) 
                 {
-                  return '<input type="hidden" class="form-control" id="nama_nasabah" name="nama_nasabah[]" value="'+row.NAMA_NASABAH+'">'+row.NAMA_NASABAH;
+                  return '<input type="hidden" class="form-control" id="nama_nasabah" name="nama_nasabah[]" value="'+row.nama_nasabah+'">'+row.nama_nasabah;
                 } 
               },
-              { "data": "NO_HP", render: function (data, type, row) 
+              { "data": "no_hp", render: function (data, type, row) 
                 {
-                  return '<input type="hidden" class="form-control" id="no_hp" name="no_hp[]" value="'+row.NO_HP+'">'+row.NO_HP;
+                  return '<input type="hidden" class="form-control" id="no_hp" name="no_hp[]" value="'+row.no_hp+'">'+row.no_hp;
                 }  
               },
-              { "data": "KOLEKTIBILITAS", render: function (data, type, row) 
+              { "data": "kolektibilitas", render: function (data, type, row) 
                 {
-                  return '<input type="hidden" class="form-control" id="kolektibilitas" name="kolektibilitas[]" value="'+row.KOLEKTIBILITAS+'">'+row.KOLEKTIBILITAS;
+                  return '<input type="hidden" class="form-control" id="kolektibilitas" name="kolektibilitas[]" value="'+row.kolektibilitas+'">'+row.kolektibilitas;
                 }  
               },    
-              { "data": "CABANG", render: function (data, type, row) 
+              { "data": "cabang", render: function (data, type, row) 
                 {
-                  return '<input type="hidden" class="form-control" id="cabang" name="cabang[]" value="'+row.CABANG+'">'+row.CABANG;
+                  return '<input type="hidden" class="form-control" id="cabang" name="cabang[]" value="'+row.cabang+'">'+row.cabang;
                 }  
               },    
-              { "data": "UNIT", render: function (data, type, row) 
+              { "data": "unit", render: function (data, type, row) 
                 {
-                  return '<input type="hidden" class="form-control" id="unit" name="unit[]" value="'+row.UNIT+'">'+row.UNIT;
+                  return '<input type="hidden" class="form-control" id="unit" name="unit[]" value="'+row.unit+'">'+row.unit;
                 } 
               },                         
 			],			
@@ -194,34 +194,34 @@ $(document).ready(function() {
 			"type" :'GET'                      
 			},
 			"columns" : [
-              { "data": "NoKTP", render: function (data, type, row) 
+              { "data": "noktp", render: function (data, type, row) 
                 {
-                  return '<input type="hidden" class="form-control" id="bisnis" name="bisnis[]" value="MEKAAR"><input type="hidden" class="form-control" id="ktp" name="ktp[]" value="'+row.NoKTP+'">'+row.NoKTP;
+                  return '<input type="hidden" class="form-control" id="bisnis" name="bisnis[]" value="MEKAAR"><input type="hidden" class="form-control" id="ktp" name="ktp[]" value="'+row.noktp+'">'+row.noktp;
                 } 
               },
-              { "data": "Nama", render: function (data, type, row) 
+              { "data": "nama", render: function (data, type, row) 
                 {
-                  return '<input type="hidden" class="form-control" id="nama_nasabah" name="nama_nasabah[]" value="'+row.Nama+'">'+row.Nama;
+                  return '<input type="hidden" class="form-control" id="nama_nasabah" name="nama_nasabah[]" value="'+row.nama+'">'+row.nama;
                 } 
               },
-              { "data": "Alamat", render: function (data, type, row) 
+              { "data": "alamat", render: function (data, type, row) 
                 {
-                  return '<input type="hidden" class="form-control" id="no_hp" name="no_hp[]" value="'+row.Alamat+'">'+row.Alamat;
+                  return '<input type="hidden" class="form-control" id="no_hp" name="no_hp[]" value="'+row.alamat+'">'+row.alamat;
                 }  
               },
-              { "data": "Produk", render: function (data, type, row) 
+              { "data": "produk", render: function (data, type, row) 
                 {
-                  return '<input type="hidden" class="form-control" id="produk" name="produk[]" value="'+row.Produk+'">'+row.Produk;
+                  return '<input type="hidden" class="form-control" id="produk" name="produk[]" value="'+row.produk+'">'+row.produk;
                 }  
               },    
-              { "data": "Region", render: function (data, type, row) 
+              { "data": "region", render: function (data, type, row) 
                 {
-                  return '<input type="hidden" class="form-control" id="region" name="region[]" value="'+row.Region+'">'+row.Region;
+                  return '<input type="hidden" class="form-control" id="region" name="region[]" value="'+row.region+'">'+row.region;
                 }  
               },    
-              { "data": "Area", render: function (data, type, row) 
+              { "data": "area", render: function (data, type, row) 
                 {
-                  return '<input type="hidden" class="form-control" id="area" name="area[]" value="'+row.Area+'">'+row.Area;
+                  return '<input type="hidden" class="form-control" id="area" name="area[]" value="'+row.area+'">'+row.area;
                 } 
               },                         
 			],			
@@ -270,12 +270,12 @@ $(document).ready(function() {
 		});			
 
 
-		$("div#datatable_kehadiran_mekaar_filter input").unbind();
-		$("div#datatable_kehadiran_mekaar_filter input").keyup( function (e) {
-			if (e.keyCode == 13) {
-			table_kehadiran_mekaar.search( this.value ).draw();
-			}
-		});
+		// $("div#datatable_kehadiran_mekaar_filter input").unbind();
+		// $("div#datatable_kehadiran_mekaar_filter input").keyup( function (e) {
+		// 	if (e.keyCode == 13) {
+		// 	table_kehadiran_mekaar.search( this.value ).draw();
+		// 	}
+		// });
 		
 				
 	});
