@@ -6,7 +6,7 @@
 	<div class="modal-content">
 	  <div class="modal-header">
 		<div id="judul_modal">
-			<h4>Add Klasterisasi</h4>
+			<h4>Add Project Charter</h4>
 		</div>
 		<button type="button" class="close" data-dismiss="modal">&times;</button>
 	  </div>
@@ -29,22 +29,75 @@
 				</div>
 
 				<div class="form-group row">
-					<label class="col-sm-2 offset-sm-3">Judul <span class="text-danger">*</span></label>
+					<label class="col-sm-2 offset-sm-3">Tema <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="judul_klasterisasi" name="judul_klasterisasi" />
+						<input type="text" class="form-control"  required="" id="tema_klasterisasi" name="tema_klasterisasi" />
 					</div>
 				</div>
 
 				<div class="form-group row">
-					<label class="col-sm-2 offset-sm-3">Maximal Pelatihan <span class="text-danger">*</span></label>
+                    <label class="col-sm-2 offset-sm-3">Upload File <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="max_pelatihan" name="max_pelatihan" />
-					</div>
+      					<input type="file" class="custom-file-input" id="customFile" name="filename">
+      					<label class="custom-file-label" for="customFile">Choose file</label>
+    				</div>
+                </div>
+				
+			</div>
 
+
+			<div class="container-fluid">
+				  <div class="row">
+					<div class="col-sm-12">
+					  <div class="card">
+						<div class="card-header card-header-primary">
+						  <h4 class="card-title ">Pelatihan</h4>                        
+						</div>
+						<div class="card-body">
+						  <div class="table">                
+								<table id="table_charter_modaladd"  class="table">
+								  <thead class=" text-primary col-md-12">
+									  <th class="col-md-2">Judul</th>
+									  <th class="col-md-2">Tanggal</th>
+									  <th class="col-md-2">Tempat</th>
+									  <th class="col-md-2">Budget</th>
+									  <th></th>
+									  <th></th>
+								  </thead>    
+								  <tbody id="tbody_charter_modaladd">
+									<tr class="d-none">
+									  <td ><input type="text" class="form-control" id="deskripsi_rab" name="deskripsi_rab[]" value=""></td>
+									  <td ><input type="text" class="form-control" id="jumlah_rab" name="jumlah_rab[]"></td>
+									  <td ><input type="text" class="form-control" id="unit_rab" name="unit_rab[]" value=""></td>
+									  <td ><input type="text" class="form-control" id="unit_cost_rab" name="unit_cost_rab[]" value=""></td>
+									  <td>                            
+										<a class="table-remove-modaladd btn btn-outline-primary btn-sm" href="#"><i class="fas fa-trash"></i></a>   
+									  </td>
+									  <td>                            
+										<a class="table-up-modaladd btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-up"></i></a>   
+										<a class="table-down-modaladd btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-down"></i></a>                               
+									  </td>
+									</tr>                        
+								  </tbody>                                                                      
+								</table>  
+
+								  <div class="col-md-12"></div>
+							
+								  <div>
+								  
+								
+								
+								</br>
+								<a class="table-add-modaladd btn btn-outline-primary" href="#" ><i class="fas fa-plus"></i></a>                                                           
+							  </div>
+							</div>
+						  </div>
+						</div>
+				  </div>
 				</div>		
 				
-			</div>  
-			 
+			</div>    
+	
 			<div class="modal-footer">
 				<?php echo form_submit('submit', 'Submit', 'class="btn btn-primary submit"'); ?>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -56,62 +109,64 @@
 	</div>
  </div>
 </div>
+
 <script type="text/javascript">
-	$("#add_klasterisasi").submit(function(e){
-		e.preventDefault();        	
-		var formURL = "<?php echo base_url('pelatihan/post_klasterisasi'); ?>";
-		var frmdata = new FormData(this);
-					
-		var xhr = $.ajax({
-			url: formURL,
-			type: 'POST',
-			data: frmdata,
-			processData: false,
-			contentType: false
-		});
-		xhr.done(function(data) {
-			var obj = $.parseJSON(data);
-			
-			console.log(data);
-			
-			if(obj.result == 'OK')
-			{
-				Swal.fire({
-				  position: 'center',
-				  icon: 'success',
-				  title: 'Klasterisasi telah di simpan',
-				  showConfirmButton: false,
-				  timer: 1500
-				})
-				setTimeout(function () {
-					window.location.href = '<?php echo base_url(); ?>pelatihan/ulamm';
-				}, 1600);
-			}
-			if(obj.result == 'UP')
-			{
-				console.log(data);
-				Swal.fire({
-				  position: 'center',
-				  icon: 'error',
-				  title: obj.msg,
-				  showConfirmButton: false,
-				  timer: 1500
-				})					
-			}
-			if(obj.result == 'NG')
-			{
-				Swal.fire({
-				  position: 'center',
-				  icon: 'error',
-				  title: obj.msg,
-				  showConfirmButton: false,
-				  timer: 1500
-				})	
-			}
-		});
-		xhr.fail(function() {
-			$("#loader_container").hide();
-			var failMsg = "Something error happened! as";
-		});	
-	});	
+
+var $TABLE = $('#table_charter_modaladd');
+
+$('.table-add-modaladd').click(function () {
+	console.log('modaladd');
+	var $clone = $TABLE.find('tr.d-none').clone(true).removeClass('d-none');
+	$TABLE.find('tbody').append($clone);	
+	calculate_grand_total();
+});
+
+
+$('.table-remove-modaladd').click(function () {		
+	console.log('modalklaster')
+	$(this).parents('tr').detach();
+	calculate_grand_total();
+});
+
+$('.table-up-modaladd').click(function () {        
+	var $row = $(this).parents('tbody tr');
+	if ($row.index() === 1) return;
+	$row.prev().before($row.get(0));
+});
+
+$('.table-down-modaladd').click(function () {
+	var $row = $(this).parents('tbody tr');
+	$row.next().after($row.get(0));
+});
+
+
+$('#table_charter_modaladd tbody tr').keyup(function () {            
+	var index = parseInt($(this).index());
+	var jumlah_rab = $("#table_charter_modaladd tbody tr:eq("+index+")").find("#jumlah_rab").val(); 
+	var unit_cost_rab = $("#table_charter_modaladd tbody tr:eq("+index+")").find("#unit_cost_rab").val();
+	sum = parseInt(jumlah_rab) * parseInt(unit_cost_rab);                
+
+
+	$("#table_charter_modaladd tbody tr:eq("+index+")").find("#total_cost_rab").val(sum);
+
+	calculate_grand_total();
+
+})
+
+function calculate_grand_total(){
+	var total = 0;
+	$('tr #total_cost_rab').each(function () {            
+		var total_cost_rab = $(this).val();
+		if (!isNaN(total_cost_rab) && total_cost_rab.length !== 0) {
+			total += parseFloat(total_cost_rab);
+		}
+	});
+
+	var rowCount = $('tr #total_cost_rab').length;
+	$("#PelatihanRabCount").val(rowCount);        
+
+	$("#total_cost_rab_akhir").val(total);
+}			  	  
+
+
 </script>
