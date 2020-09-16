@@ -34,11 +34,6 @@
 					<textarea class="form-control" id="tema_klasterisasi" name="tema_klasterisasi" rows="4" required=""></textarea>
 					</div>
                 </div>
-<<<<<<< HEAD
-                
-          
-=======
->>>>>>> 5d2ac0ec64b95428ca41c50dd989a40043746a45
 
 				<div class="form-group row">
                     <label class="col-sm-2 offset-sm-3">Upload File <span class="text-danger">*</span></label>
