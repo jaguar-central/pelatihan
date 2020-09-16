@@ -173,9 +173,9 @@
 			"columns" : [
 				{ "data": "ID_TIPE_DESKRIPSI" },
 				{ "data": "TITLE" },
-				{ "data": "REGIONAL_PNM" },
-				{ "data": "AREA_PNM" },    
-				{ "data": "CABANG_PNM" },    
+				{ "data": "REGIONAL_MEKAAR" },
+				{ "data": "AREA_MEKAAR" },    
+				{ "data": "CABANG_MEKAAR" },    
 				{ "data": "TANGGAL_MULAI" },    
 				{ "data": "STATUS" },    
 				{ "data": "STATUS", render: function (data, type, row) 

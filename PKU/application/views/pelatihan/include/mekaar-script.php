@@ -85,6 +85,7 @@
 		$("#add_pelatihan :input").prop("disabled", false);
 		$('#pelatihan_type').html('<option value="'+pelatihantype+'">'+pelatihantitle+'</option>');		
 		$('.select_klasterisasi').hide();  
+		$("#klasterisasi").prop('required',false);
 	});					
 
 	$(document).on("click", ".add_pelatihan_klasterisasi", function () {

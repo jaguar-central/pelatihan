@@ -173,5 +173,15 @@ class Master_model extends CI_Model {
 		$query = $this->db->select("KODE")->from("MS_PELATIHAN_TYPE")->where("ID",$id);
 		return $query->get();
 	}    
+	
+	public function insert_ms_user($data)
+	{
+		$this->db->insert('MS_USER', $data);
+	}
+	
+	public function insert_ms_user_cabang_region($data)
+	{
+		$this->db->insert('MS_USER_CABANG_REGION', $data);
+	}	
 }
 ?>

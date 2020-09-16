@@ -340,25 +340,25 @@
 		
 		
 		
-		$('#region_pelatihan').on('change', function (e) {			
+		$('#regional_mekaar').on('change', function (e) {			
 			$.ajax({
 				url: "<?php echo base_url()?>master/get_area_mekaar",
-				data: "kode_region="+$("#region_pelatihan").val(),
+				data: "kode_region="+$("#regional_mekaar").val(),
 				cache: false,
 				success: function(data){				         
-					$('#area_pelatihan').html(data)           
+					$('#area_mekaar').html(data)           
 				}
 			});
 			
 		});
 		
-		$('#area_pelatihan').on('change', function (e) {			
+		$('#area_mekaar').on('change', function (e) {			
 			$.ajax({
 				url: "<?php echo base_url()?>master/get_cabang_mekaar",
-				data: "kode_area="+$("#area_pelatihan").val(),
+				data: "kode_area="+$("#area_mekaar").val(),
 				cache: false,
 				success: function(data){				         
-					$('#cabang_pelatihan').html(data)           
+					$('#cabang_mekaar').html(data)           
 				}
 			});
 			

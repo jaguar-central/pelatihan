@@ -17,10 +17,13 @@ class Master extends MY_Controller
 		
         $data["menu"] = $this->Menu_model->select_ms_menu();
         $data["t_user"] = $this->Master_model->select_ms_user();
+        $data["user_group"] = $this->Master_model->select_ms_user_group();
+		$data["cabang"] 		= $this->Master_model->select_ms_cabang_ulamm();
+		$data["region"] 		= $this->Master_model->select_ms_region_mekaar();
         
-        //echo '<pre>';
-		//print_r($data['menu']);
-		//echo '</pre>';die;
+        // echo '<pre>';
+		// print_r($data['user_group']);
+		// echo '</pre>';die;
         $this->load->view('layout/gabung', $data);
 
     }
@@ -175,4 +178,181 @@ class Master extends MY_Controller
 				
 		echo $data;
 	}	
+
+
+
+	
+	public function get_sso_karyawan()
+
+	{
+
+		$username = 'event';
+
+		$password = 'event';
+
+        
+
+        // Get URL Host 
+
+        $url = 'http://10.61.3.37/WebService/SSO_Mobile/getSSObyAppCode.php';
+
+        
+
+	    // Set up and execute the curl process
+
+	    $curl_handle = curl_init();
+
+	    curl_setopt($curl_handle, CURLOPT_URL, $url.'?app_code=MPLT');
+
+        //curl_setopt($curl_handle, CURLOPT_URL, 'http://182.23.52.249/Dummy/WebService/SSO_Mobile/getSSObyAppCode.php?app_code=event');
+
+	    /*curl_setopt($curl_handle, CURLOPT_URL, 'http://182.23.52.249/Dummy/WebService/SSO_Mobile/get_all_karyawan.php');*/
+
+	    curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+
+	    curl_setopt($curl_handle, CURLOPT_POST, 1);
+
+	     
+
+	    // Optional, delete this line if your API is open
+
+	    curl_setopt($curl_handle, CURLOPT_USERPWD, $username . ':' . $password);
+
+	     
+
+	    $buffer = curl_exec($curl_handle);
+
+	    curl_close($curl_handle);
+
+	     
+
+	    $result = json_decode($buffer);
+
+		//count total data
+
+		$total = 0;
+
+		foreach ($result->profile[0]->data as $row) {
+
+		    $total ++;
+
+		};
+
+
+
+		//sent data to datatables
+
+		$oleh = array(
+
+					'draw' 				=> 1,
+
+					'recordsTotal' 		=> $total,
+
+					'recordsFiltered' 	=> $total,
+
+					'data'				=> $result->profile[0]->data
+
+			);
+
+		echo json_encode($oleh);
+
+		exit;
+
+	}	
+
+
+
+
+
+	public function post_user(){
+		$username   	= trim($this->security->xss_clean(strip_image_tags($this->input->post('username'))));
+        $role     		= trim($this->security->xss_clean(strip_image_tags($this->input->post('role'))));
+        $bisnis     	= trim($this->security->xss_clean(strip_image_tags($this->input->post('bisnis'))));
+        $cabang_ulamm   = trim($this->security->xss_clean(strip_image_tags($this->input->post('cabang_ulamm'))));
+        $region_mekaar  = trim($this->security->xss_clean(strip_image_tags($this->input->post('region_mekaar'))));
+        $aktif     		= trim($this->security->xss_clean(strip_image_tags($this->input->post('aktif'))));
+		$id_user		= $this->session->userdata('sess_user_idsdm');
+		
+		$output = array(
+			'result'  	=> 'OK',
+			'msg'		=> ''
+		);
+		
+
+		switch ($role) {
+		  case "1":
+			$menu_user = 'INPUT';
+			$lokasi = 'CABANG';
+			break;
+		  case "2":
+			$menu_user = 'APPROVAL';
+			$lokasi = 'CABANG';
+			break;
+		  case "3":
+			$menu_user = 'APPROVAL_INPUT';
+			$lokasi = 'PUSAT';
+			break;		  
+		  case "4":
+			$menu_user = 'APPROVAL';
+			$lokasi = 'PUSAT';
+			break;	
+		  case "5":
+			$menu_user = 'APPROVAL';
+			$lokasi = 'PUSAT';
+			break;	
+		  case "6":
+			$menu_user = 'APPROVAL';
+			$lokasi = 'PUSAT';
+			break;	
+		  case "7":
+			$menu_user = 'APPROVAL';
+			$lokasi = 'PUSAT';
+			break;			
+		}
+		
+		$kode_cabang_region = ($bisnis==1) ? $cabang_ulamm : $region_mekaar;					
+		
+		try
+		{
+			$data_user = array(
+				'USERNAME' 		=> $username,
+				'IDBISNIS' 		=> $bisnis,
+				'IDGROUP' 		=> $role,
+				'LOKASI' 		=> $lokasi,
+				'MENU_USER' 	=> $menu_user,
+				'AKTIF' 		=> '1',
+				'CREATED_BY' 	=> $id_user,
+				'CREATED_DATE' 	=> date('Y-m-d H:i:s')			
+			);
+			
+			$this->Master_model->insert_ms_user($data_user);
+			
+			$id_user = $this->db->insert_id(); //last id yang di insert				
+			
+			$data_cabang_region = array(
+				'ID_USER' 				=> $username,
+				'ID_GROUP' 				=> $bisnis,
+				'ID_BISNIS' 			=> $role,
+				'KODE_CABANG_REGION' 	=> $kode_cabang_region,
+				'AKTIF' 				=> '1',
+				'CREATED_BY' 			=> $id_user,
+				'CREATED_DATE' 			=> date('Y-m-d H:i:s')			
+			);		
+			$this->Master_model->insert_ms_user_cabang_region($data_cabang_region);
+			
+		}
+		catch (Exception $e)
+		{
+			$output = array(
+				'result'  	=> 'NG',
+				'msg'		=> $e->getMessage()
+			);
+		}
+        
+		echo json_encode($output);
+		exit;
+	}
+
+
+
 }
