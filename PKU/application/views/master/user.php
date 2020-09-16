@@ -80,14 +80,57 @@
 					<div class="form-group row">
 						<label class="col-sm-3">Role <span class="text-danger">*</span></label>
 						<div class="col-sm-9">							
-							<select class="form-control select2" required name="previlage" id="previlage" >
+							<select class="form-control select2" required name="role" id="role" >
 							<option value="0">- Pilih Role -</option>
 							<?php
-							// if($role->num_rows() > 0){ 
-							// 	foreach($role->result() as $data_role){
-							// 		echo '<option value="'.$data_role->ID.'">'.$data_role->PREVILAGE.'</option>';
-							// 	}
-							// }
+							
+								foreach($user_group as $data_role){
+									echo '<option value="'.$data_role->ID.'">'.$data_role->NAMA.'</option>';
+								}
+							
+							?>													
+							</select>
+						</div>
+					</div>	
+										
+					<div class="form-group row bisnis">
+									<label class="col-sm-3">bisnis <span class="text-danger">*</span></label>
+						<div class="col-sm-9">							
+							<select class="form-control select2" required name="bisnis" id="bisnis" >
+							<option value="0">- Pilih -</option>
+							<option value="1">Ulamm</option>
+							<option value="2">Mekaar</option>
+							</select>
+							
+					</div>					
+					</div>					
+					
+					<div class="form-group row cabang_ulamm">
+						<label class="col-sm-3">Cabang Ulamm</label>
+						<div class="col-sm-9">
+							<select class="form-control select2" required name="cabang_ulamm" id="cabang_ulamm" >
+							<option value="0">- Pilih Cabang -</option>
+							<?php
+							
+								foreach($cabang as $ulamm){
+									echo '<option value="'.$ulamm->KODE_CABANG.'">'.$ulamm->DESKRIPSI.'</option>';
+								}
+							
+							?>													
+							</select>
+						</div>
+					</div>	
+					<div class="form-group row region_mekaar">
+						<label class="col-sm-3">Region Mekaar</label>
+						<div class="col-sm-9">
+							<select class="form-control select2" required name="region_mekaar" id="region_mekaar" >
+							<option value="0">- Pilih Region -</option>
+							<?php
+							
+								foreach($region as $mekaar){
+									echo '<option value="'.$mekaar->KODE_REGION.'">'.$mekaar->DESKRIPSI.'</option>';
+								}
+							
 							?>													
 							</select>
 						</div>
@@ -144,10 +187,7 @@
             </table>		
 		
 			
-        <div class="modal-footer">
-            <button type="submit" class="btn btn-primary waves-effect waves-light">Save</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>	  
+         
     </div>	
   </div>
 </div>

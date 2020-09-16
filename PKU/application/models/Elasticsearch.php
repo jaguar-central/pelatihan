@@ -4,7 +4,7 @@ class Elasticsearch {
     public $index;
 
     // function __construct($config = array('server' => 'http://localhost:9200'))
-    function __construct($config = array('server' => 'elastic:9200'))
+    function __construct($config = array('server' => 'http://10.61.3.198:9200'))
     {
         $this->server = $config['server'];
     }

@@ -1,7 +1,7 @@
 version: '3.3'
 
 services:  
-  pelatihan:
+  aplikasi:
     image: 10.63.8.69/fzainal0707/pelatihan:latest
     ports:
-      - "30003:80"
+      - "0.0.0.0:30003:80/tcp"
