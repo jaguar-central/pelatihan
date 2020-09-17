@@ -2,15 +2,21 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Elastic {
+    public $index;
+    public $server;
+    public $ci;
+
+    function __construct(){
+        $this->ci = &get_instance();	        
+        $this->server = $this->ci->config->item('elastic_server');        			
+    }
 	
 	function call($path, $method = 'GET', $data = NULL)
-    {
-		$ci = &get_instance();	
-        $this->server = $ci->config->item('elastic_server');			
-		$this->index = $ci->config->item('index');
+    {        
+        $this->index = $this->ci->config->item('elastic_index');
         if (!$this->index) throw new Exception('$index needs a value');			
 
-        $url = $this->server . '/' . $this->index . '/' . $path;
+        $url = $this->server . '/' . $this->index . '/' . str_replace(' ','%20',$path);
 
         $headers = array(
             'Accept: application/json',

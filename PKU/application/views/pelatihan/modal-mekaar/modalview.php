@@ -235,7 +235,7 @@
 					  }
 					  
 					  if (row.STATUS=='approved' || row.STATUS=='lpj_draft'){		
-						tombol_action +='<a class= "dropdown-item" href="<?php  echo base_url('pelatihan/lpj/'); ?>'+row.ID+'mekaar"> Pleatihan LPJ</a>'; 
+						tombol_action +='<a class= "dropdown-item" href="<?php  echo base_url('pelatihan/lpj/'); ?>'+row.ID+'/mekaar"> Pelatihan LPJ</a>'; 
 					  }
 					  
 					if (row.STATUS=='lpj_approved'){

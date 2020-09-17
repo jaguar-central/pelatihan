@@ -957,29 +957,17 @@ class Pelatihan extends MY_Controller
 
 	public function get_paging_kehadiran_nasabah_ulamm($idpelatihan)
 	{					
-		$param['sektor_ekonomi'] 	= isset($_GET["columns"][0]['search']['value']) ? str_replace(' ','%20',$_GET["columns"][0]['search']['value']) : NULL;
-		$param['jenis_pinjaman'] 	= isset($_GET["columns"][1]['search']['value']) ? str_replace(' ','%20',$_GET["columns"][1]['search']['value']) : NULL;
-		$param['jenis_program'] 	= isset($_GET["columns"][2]['search']['value']) ? str_replace(' ','%20',$_GET["columns"][2]['search']['value']) : NULL;
-		$param['kode_cabang'] 		= isset($_GET["columns"][3]['search']['value']) ? str_replace(' ','%20',$_GET["columns"][3]['search']['value']) : NULL;
-		$param['kode_unit'] 		= isset($_GET["columns"][4]['search']['value']) ? str_replace(' ','%20',$_GET["columns"][4]['search']['value']) : NULL;
+		$param['sektor_ekonomi'] 	= isset($_GET["columns"][0]['search']['value']) ? $_GET["columns"][0]['search']['value'] : NULL;
+		$param['jenis_pinjaman'] 	= isset($_GET["columns"][1]['search']['value']) ? $_GET["columns"][1]['search']['value'] : NULL;
+		$param['jenis_program'] 	= isset($_GET["columns"][2]['search']['value']) ? $_GET["columns"][2]['search']['value'] : NULL;
+		$param['kode_cabang'] 		= isset($_GET["columns"][3]['search']['value']) ? $_GET["columns"][3]['search']['value'] : NULL;
+		$param['kode_unit'] 		= isset($_GET["columns"][4]['search']['value']) ? $_GET["columns"][4]['search']['value'] : NULL;
 		
-		$param["idpelatihan"] = isset($idpelatihan) ? $idpelatihan : NULL;					
 		$param["start"] = isset($_GET["start"]) ? $_GET["start"] : 0;
 		$param["limit"] = isset($_GET["length"]) ? $_GET["length"] : 10;		
 		$param["search"] = isset($_GET["search"]["value"]) ? $_GET["search"]["value"] : NULL ;
 
-		// $param['count'] = 0;						
-		// $data["data"] = $this->Pelatihan_model->paging_kehadiran_select_nasabah_ulamm($param);				
-		// $param['count'] = 1;				
-		// $total = $this->Pelatihan_model->paging_kehadiran_select_nasabah_ulamm($param)[0]->COUNT_DATA;				
-		// $data["recordsTotal"] = $total;	
-		// $data["recordsFiltered"] = $total;		
-		
-		// echo json_encode($data);
-		// var_dump($param['sektor_ekonomi']);die();
-
-		$this->config->set_item('elastic_server', 'http://10.61.3.198:9200');
-		$this->config->set_item('index', 'nasabah');	
+		$this->config->set_item('elastic_index', 'nasabah');	
 		if ($param['sektor_ekonomi']!=NULL){
 			$debitur = $this->elastic->call('/_search?q=sektorekonomi:'.$param["sektor_ekonomi"].'&filter_path=hits.hits.*,aggregations.*');
 			$debitur_count = $this->elastic->call('_count?q=sektorekonomi:'.$param["sektor_ekonomi"]);
@@ -1021,23 +1009,12 @@ class Pelatihan extends MY_Controller
 	}
 
 	public function get_paging_kehadiran_nasabah_mekaar($idpelatihan)
-	{					
-		$param["idpelatihan"] = isset($idpelatihan) ? $idpelatihan : NULL;					
+	{									
 		$param["start"] = isset($_GET["start"]) ? $_GET["start"] : 0;
 		$param["limit"] = isset($_GET["length"]) ? $_GET["length"] : 10;		
-		$param["search"] = isset($_GET["search"]["value"]) ? str_replace(' ','%20',$_GET["search"]["value"]) : NULL ;			
-		// $param['count'] = 0;						
-		// $data["data"] = $this->Pelatihan_model->paging_kehadiran_select_nasabah_mekaar($param);				
-		// $param['count'] = 1;				
-		// $total = $this->Pelatihan_model->paging_kehadiran_select_nasabah_mekaar($param)[0]->COUNT_DATA;				
-		// $data["recordsTotal"] = $total;	
-		// $data["recordsFiltered"] = $total;		
-		
-		// echo json_encode($data);
+		$param["search"] = isset($_GET["search"]["value"]) ? $_GET["search"]["value"] : NULL ;			
 
-
-		$this->config->set_item('elastic_server', 'http://10.61.3.198:9200');
-		$this->config->set_item('index', 'debitur');		
+		$this->config->set_item('elastic_index', 'debitur');		
 		if ($param["search"]!=NULL){
 			$debitur = $this->elastic->call('/_search?q=nama:'.$param["search"].'&filter_path=hits.hits.*,aggregations.*');
 			$debitur_count = $this->elastic->call('_count?q=nama:'.$param["search"]);			
