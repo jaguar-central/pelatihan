@@ -34,11 +34,8 @@
 					<textarea class="form-control" id="tema_klasterisasi" name="tema_klasterisasi" rows="4" required=""></textarea>
 					</div>
                 </div>
-<<<<<<< HEAD
                 
           
-=======
->>>>>>> e9d3bac33af940aa4c6c79eb475b7048cd645232
 
 				<div class="form-group row">
                     <label class="col-sm-2 offset-sm-3">Upload File <span class="text-danger">*</span></label>
@@ -71,7 +68,7 @@
 								  <tbody id="tbody_charter_modaladd">
 									<tr class="d-none">
 									  <td ><input type="text" class="form-control" id="deskripsi_rab" name="deskripsi_rab[]" value=""></td>
-									  <td ><input type="text" class="form-control datepicker_project_charter" id="datepicker_project_charter" required /></td>
+									  <td ><input type="text" class="form-control"  required="" id="tanggal_project_charter" name="tanggal_project_charter" /></td>
 									  <td ><input type="text" class="form-control" id="unit_rab" name="unit_rab[]" value=""></td>
 									  <td ><input type="text" class="form-control" id="unit_cost_rab" name="unit_cost_rab[]" value=""></td>
 									  <td>                            
@@ -113,17 +110,18 @@
 	</div>
  </div>
 </div>
+
+<script src="http://cdn.datatables.net/plug-ins/1.10.13/dataRender/datetime.js"></script>
+
+<script src="<?php echo base_url(); ?>assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+
+<script src="<?php echo base_url(); ?>assets/js/bootstrap-datetimepicker.js"></script>
 <script type="text/javascript">
 
-$('.datepicker_project_charter').daterangepicker({
-	timePicker: false,
-	singleDatePicker: true,
-    showDropdowns: false,
-    minYear: 1901,
-		  locale: {
-			format: 'DD MMMM YYYY'           
-		  }
-		});
+$(document).ready(function() {	
+		$('#tanggal_project_charter').datetimepicker();
+	});
 
 $(".custom-file-input").on("change", function() {
   var fileName = $(this).val().split("\\").pop();
