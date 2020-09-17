@@ -34,6 +34,11 @@
 					<textarea class="form-control" id="tema_klasterisasi" name="tema_klasterisasi" rows="4" required=""></textarea>
 					</div>
                 </div>
+<<<<<<< HEAD
+                
+          
+=======
+>>>>>>> e9d3bac33af940aa4c6c79eb475b7048cd645232
 
 				<div class="form-group row">
                     <label class="col-sm-2 offset-sm-3">Upload File <span class="text-danger">*</span></label>
@@ -66,7 +71,7 @@
 								  <tbody id="tbody_charter_modaladd">
 									<tr class="d-none">
 									  <td ><input type="text" class="form-control" id="deskripsi_rab" name="deskripsi_rab[]" value=""></td>
-									  <td ><input type="text" class="form-control" id="jumlah_rab" name="jumlah_rab[]"></td>
+									  <td ><input type="text" class="form-control datepicker_project_charter" id="datepicker_project_charter" required /></td>
 									  <td ><input type="text" class="form-control" id="unit_rab" name="unit_rab[]" value=""></td>
 									  <td ><input type="text" class="form-control" id="unit_cost_rab" name="unit_cost_rab[]" value=""></td>
 									  <td>                            
@@ -109,6 +114,16 @@
  </div>
 </div>
 <script type="text/javascript">
+
+$('.datepicker_project_charter').daterangepicker({
+	timePicker: false,
+	singleDatePicker: true,
+    showDropdowns: false,
+    minYear: 1901,
+		  locale: {
+			format: 'DD MMMM YYYY'           
+		  }
+		});
 
 $(".custom-file-input").on("change", function() {
   var fileName = $(this).val().split("\\").pop();

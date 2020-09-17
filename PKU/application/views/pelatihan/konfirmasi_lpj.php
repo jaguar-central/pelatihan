@@ -16,7 +16,7 @@
                                         <thead>
                                             <tr>
                                                 <th>ID TIPE</th>
-                                                <th>NO MEMO</th>
+                                                <th>NO PROPOSAL</th>
                                                 <th>TITLE</th>
                                                 <th>TANGGAL MULAI</th>
                                                 <th>TANGGAL SELESAI</th>
@@ -40,7 +40,7 @@
                                             foreach ($t_pelatihan_lpj as $data){
                                                 echo '<tr>';
                                                 echo '<td>'.$data->ID_TIPE.'</td>';
-                                                echo '<td>'.$data->NO_MEMO.'</td>'; 
+                                                echo '<td>'.$data->NO_PROPOSAL.'</td>'; 
                                                 echo '<td>'.$data->TITLE.'</td>';
                                                 echo '<td>'.$data->TANGGAL_MULAI.'</td>';
                                                 echo '<td>'.$data->TANGGAL_SELESAI.'</td>';
@@ -50,10 +50,10 @@
                                                 echo '<td>'.$data->KUOTA_PESERTA.'</td>';
                                                 echo '<td>'.$data->PROVINSI.'</td>';
                                                 echo '<td>'.$data->LOKASI_PNM.'</td>';
-                                                echo '<td>'.$data->REGIONAL_PNM.'</td>';
-                                                echo '<td>'.$data->AREA_PNM.'</td>';
-                                                echo '<td>'.$data->CABANG_PNM.'</td>';
-                                                echo '<td>'.$data->UNIT_PNM.'</td>';
+                                                echo '<td>'.$data->REGIONAL_MEKAAR.'</td>';
+                                                echo '<td>'.$data->AREA_MEKAAR.'</td>';
+                                                echo '<td>'.$data->CABANG_MEKAAR.'</td>';
+                                                echo '<td>'.$data->UNIT_ULAMM.'</td>';
                                                 echo '<td>'.$data->BUDGET.'</td>';
                                                 echo '<td>'.$data->STATUS.'</td>';                                              
 												echo '<td> 
@@ -66,8 +66,8 @@
 																data-pelatihanid="'.$data->ID.'"
 																data-pelatihantype="'.$data->ID_TIPE.'"
 																data-pelatihantitle="'.$data->TITLE.'"
-																data-pelatihancabang="'.$data->CABANG_PNM.'"
-																data-pelatihanunit="'.$data->UNIT_PNM.'"
+																data-pelatihancabang="'.$data->CABANG_MEKAAR.'"
+																data-pelatihanunit="'.$data->UNIT_ULAMM.'"
 																data-pelatihandeskripsi="'.$data->DESKRIPSI.'"
 																data-pelatihantanggal="'.$data->TANGGAL_MULAI.' - '.$data->TANGGAL_SELESAI.'"
 																data-pelatihandurasi="'.$data->DURASI_PELATIHAN.'"
