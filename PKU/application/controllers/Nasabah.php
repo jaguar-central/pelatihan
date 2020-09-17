@@ -110,7 +110,7 @@ class Nasabah extends MY_Controller
 	{				
 		$param["start"] = isset($_GET["start"]) ? $_GET["start"] : 0;
 		$param["limit"] = isset($_GET["length"]) ? $_GET["length"] : 10;		
-		$param["search"] = isset($_GET["search"]["value"]) ? str_replace(' ','%20',$_GET["search"]["value"]) : NULL ;						
+		$param["search"] = isset($_GET["search"]["value"]) ? $_GET["search"]["value"] : NULL ;						
 						
 		$this->config->set_item('elastic_index', 'debitur');		
 		if ($param["search"]!=NULL){

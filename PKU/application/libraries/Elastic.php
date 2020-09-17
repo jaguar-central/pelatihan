@@ -16,7 +16,7 @@ class Elastic {
         $this->index = $this->ci->config->item('elastic_index');
         if (!$this->index) throw new Exception('$index needs a value');			
 
-        $url = $this->server . '/' . $this->index . '/' . $path;
+        $url = $this->server . '/' . $this->index . '/' . str_replace(' ','%20',$path);
 
         $headers = array(
             'Accept: application/json',

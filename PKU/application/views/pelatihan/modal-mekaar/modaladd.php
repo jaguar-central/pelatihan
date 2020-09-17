@@ -389,13 +389,8 @@
 
 	$('.table-add-modaladd').click(function () {
 		console.log('modaladd');
-<<<<<<< HEAD
 		var $clone = $('#table_rab_modaladd').find('tr.d-none').clone(true).removeClass('d-none');  		
 		$('#table_rab_modaladd').find('tbody').append($clone);		
-=======
-		var $clone = $('#table_rab_modaladd').find('tr.d-none').clone(true).removeClass('d-none');  			
-		$('#table_rab_modaladd').find('tbody').append($clone);
->>>>>>> e9d3bac33af940aa4c6c79eb475b7048cd645232
 		calculate_grand_total();
 	});
 

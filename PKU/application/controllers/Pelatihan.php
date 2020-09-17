@@ -957,11 +957,11 @@ class Pelatihan extends MY_Controller
 
 	public function get_paging_kehadiran_nasabah_ulamm($idpelatihan)
 	{					
-		$param['sektor_ekonomi'] 	= isset($_GET["columns"][0]['search']['value']) ? str_replace(' ','%20',$_GET["columns"][0]['search']['value']) : NULL;
-		$param['jenis_pinjaman'] 	= isset($_GET["columns"][1]['search']['value']) ? str_replace(' ','%20',$_GET["columns"][1]['search']['value']) : NULL;
-		$param['jenis_program'] 	= isset($_GET["columns"][2]['search']['value']) ? str_replace(' ','%20',$_GET["columns"][2]['search']['value']) : NULL;
-		$param['kode_cabang'] 		= isset($_GET["columns"][3]['search']['value']) ? str_replace(' ','%20',$_GET["columns"][3]['search']['value']) : NULL;
-		$param['kode_unit'] 		= isset($_GET["columns"][4]['search']['value']) ? str_replace(' ','%20',$_GET["columns"][4]['search']['value']) : NULL;
+		$param['sektor_ekonomi'] 	= isset($_GET["columns"][0]['search']['value']) ? $_GET["columns"][0]['search']['value'] : NULL;
+		$param['jenis_pinjaman'] 	= isset($_GET["columns"][1]['search']['value']) ? $_GET["columns"][1]['search']['value'] : NULL;
+		$param['jenis_program'] 	= isset($_GET["columns"][2]['search']['value']) ? $_GET["columns"][2]['search']['value'] : NULL;
+		$param['kode_cabang'] 		= isset($_GET["columns"][3]['search']['value']) ? $_GET["columns"][3]['search']['value'] : NULL;
+		$param['kode_unit'] 		= isset($_GET["columns"][4]['search']['value']) ? $_GET["columns"][4]['search']['value'] : NULL;
 		
 		$param["start"] = isset($_GET["start"]) ? $_GET["start"] : 0;
 		$param["limit"] = isset($_GET["length"]) ? $_GET["length"] : 10;		
@@ -1012,7 +1012,7 @@ class Pelatihan extends MY_Controller
 	{									
 		$param["start"] = isset($_GET["start"]) ? $_GET["start"] : 0;
 		$param["limit"] = isset($_GET["length"]) ? $_GET["length"] : 10;		
-		$param["search"] = isset($_GET["search"]["value"]) ? str_replace(' ','%20',$_GET["search"]["value"]) : NULL ;			
+		$param["search"] = isset($_GET["search"]["value"]) ? $_GET["search"]["value"] : NULL ;			
 
 		$this->config->set_item('elastic_index', 'debitur');		
 		if ($param["search"]!=NULL){
