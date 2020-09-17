@@ -84,20 +84,26 @@
 		var pelatihantitle = $(this).data('pelatihantitle');
 		
 		$("#add_pelatihan :input").prop("disabled", false);
-		$('#pelatihan_type').html('<option value="'+pelatihantype+'">'+pelatihantitle+'</option>');	
-		$('.select_klasterisasi').hide();  
-		$("#klasterisasi").prop('required',false);	
+		$('#pelatihan_type').html('<option value="'+pelatihantype+'">'+pelatihantitle+'</option>');		
+		$('.select_project_charter').hide();  
+		$("#pilih_project_charter").prop('required',false);
 	});	
 	
-	$(document).on("click", ".add_pelatihan_klasterisasi", function () {
+	$(document).on("click", ".add_pelatihan_project_charter", function () {
 		$('#add_pelatihan').trigger("reset");
 		var pelatihantype = $(this).data('pelatihantype');	
 		var pelatihantitle = $(this).data('pelatihantitle');
 		
 		$("#add_pelatihan :input").prop("disabled", false);
 		$('#pelatihan_type').html('<option value="'+pelatihantype+'">'+pelatihantitle+'</option>');			  
-		$('.select_klasterisasi').show();  
-		$("#klasterisasi").prop('required',true);
+		$('.select_project_charter').show();  
+		$("#pilih_project_charter").prop('required',true);
+
+		$.get("<?php echo base_url() ?>pelatihan/get_project_charter",{ tipepelatihan:pelatihantype }, function(data, status){
+			if (data){
+				$('#pilih_project_charter').html(data);	
+			}
+		});
 	});			
 		
 

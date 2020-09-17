@@ -29,7 +29,7 @@ input [type="date"] {
 	  </div>
 			<?php 
 
-			$attrib = array('class' => 'form-horizontal','id'=>'add_klasterisasi','name'=>'add_klasterisasi','enctype'=>'multipart/form-data','onkeydown'=>"return event.key != 'Enter';");
+			$attrib = array('class' => 'form-horizontal','id'=>'add_project_charter','name'=>'add_project_charter','enctype'=>'multipart/form-data','onkeydown'=>"return event.key != 'Enter';");
 			echo form_open('',$attrib); 
 			?>	
 			<div class="modal-body">
@@ -48,7 +48,7 @@ input [type="date"] {
 				<div class="form-group row">
                     <label class="col-sm-2 offset-sm-3">Tema <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-					<textarea class="form-control" id="tema_klasterisasi" name="tema_klasterisasi" rows="4" required=""></textarea>
+					<textarea class="form-control" id="tema_project_charter" name="tema_project_charter" rows="4" required=""></textarea>
 					</div>
                 </div>
                 
@@ -63,61 +63,55 @@ input [type="date"] {
                 </div>				
             </div>
 
-				<div class="container-fluid">
-				  <div class="row">
-					<div class="col-sm-12">
-					  <div class="card">
-						<div class="card-header card-header-primary">
-						  <h4 class="card-title ">Pelatihan</h4>                        
-						</div>
-						<div class="card-body">
-						  <div class="table">                
-							<table id="table_charter_modaladd"  class="table">
-								  <thead class=" text-primary col-md-12">
-									  <th class="col-md-2">Judul</th>
-									  <th class="col-md-2">Tanggal</th>
-									  <th class="col-md-2">Tempat</th>
-									  <th class="col-md-2">Budget</th>
-									  <th></th>
-									  <th></th>
-								  </thead>    
-								  <tbody id="tbody_charter_modaladd">
-									<tr class="d-none">									
-									  <td><input type="text" class="form-control" id="deskripsi_rab" name="deskripsi_rab[]" value=""></td>
-									  <td>									  
-										<div class='input-group'>
-											<input type="date" class="form-control" id="datepicker_project_charter" name="datepicker_project_charter[]" required="">
-											<span class="input-group-addon">
-												<span class="fa fa-calendar"></span>
-											</span>
-										</div>
-									  </td>									  
-									  <td ><input type="text" class="form-control" id="unit_rab" name="unit_rab[]" value=""></td>
-									  <td ><input type="text" class="form-control" id="unit_cost_rab" name="unit_cost_rab[]" value=""></td>
-									  <td>                            
-										<a class="table-remove-modaladd btn btn-outline-primary btn-sm" href="#"><i class="fas fa-trash"></i></a>   
-									  </td>
-									  <td>                            
-										<a class="table-up-modaladd btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-up"></i></a>   
-										<a class="table-down-modaladd btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-down"></i></a>                               
-									  </td>
-									</tr>                        
-								  </tbody>                                                                      
-								</table>  
-
-								  <div class="col-md-12"></div>
-							
-								  <div>
-								  
-								
-								
-								</br>
-								<a class="table-add-modaladd btn btn-outline-primary" href="#" ><i class="fas fa-plus"></i></a>                                                           
-							  </div>
+			<div class="container-fluid">
+				<div class="row">
+				<div class="col-sm-12">
+					<div class="card">
+					<div class="card-header card-header-primary">
+						<h4 class="card-title ">Pelatihan</h4>                        
+					</div>
+					<div class="card-body">
+						<div class="table">                
+						<table id="table_charter_modaladd"  class="table">
+								<thead class=" text-primary col-md-12">
+									<th class="col-md-2">Judul</th>
+									<th class="col-md-2">Tanggal</th>
+									<th class="col-md-2">Tempat</th>
+									<th class="col-md-2">Budget</th>
+									<th></th>
+									<th></th>
+								</thead>    
+								<tbody id="tbody_charter_modaladd">
+								<tr class="d-none">									
+									<td><input type="text" class="form-control" id="judul_pelatihan" name="judul_pelatihan[]" value=""></td>
+									<td>									  
+									<div class='input-group'>
+										<input type="date" class="form-control" id="tanggal_pelatihan" name="tanggal_pelatihan[]">
+										<span class="input-group-addon">
+											<span class="fa fa-calendar"></span>
+										</span>
+									</div>
+									</td>									  
+									<td ><input type="text" class="form-control" id="tempat_pelatihan" name="tempat_pelatihan[]" value=""></td>
+									<td ><input type="text" class="form-control" id="budget_pelatihan" name="budget_pelatihan[]" value=""></td>
+									<td>                            
+									<a class="table-remove-modaladd btn btn-outline-primary btn-sm" href="#"><i class="fas fa-trash"></i></a>   
+									</td>
+									<td>                            
+									<a class="table-up-modaladd btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-up"></i></a>   
+									<a class="table-down-modaladd btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-down"></i></a>                               
+									</td>
+								</tr>                        
+								</tbody>                                                                      
+						</table>  						
+						<div>
+							</br>
+							<a class="table-add-modaladd btn btn-outline-primary" href="#" ><i class="fas fa-plus"></i></a>                                                           
 							</div>
-						  </div>
 						</div>
-				  </div>
+						</div>
+					</div>
+				</div>
 				</div>		
 				
 			</div>  
@@ -195,4 +189,44 @@ function calculate_grand_total(){
 
 	$("#total_cost_rab_akhir").val(total);
 }	
+
+
+
+
+$("#add_project_charter").submit(function(e){
+	console.log('masuk sni cuy');	
+		e.preventDefault();        	
+		var formURL = "<?php echo base_url('pelatihan/post_project_charter'); ?>";
+		var frmdata = new FormData(this);
+					
+		var xhr = $.ajax({
+			url: formURL,
+			type: 'POST',
+			data: frmdata,
+			processData: false,
+			contentType: false
+		});
+		xhr.done(function(data) {
+			var obj = $.parseJSON(data);
+			
+			console.log(data);
+			
+			if(obj.result == 'OK')
+			{
+				window.location.href = '<?php echo base_url(); ?>pelatihan/<?php echo $this->uri->segment(2); ?>';
+			}
+			if(obj.result == 'UP')
+			{
+				console.log(data);
+			}
+			if(obj.result == 'NG')
+			{
+				$("#m-ap-cab").html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a> '+obj.msg+'</div>');
+			}
+		});
+		xhr.fail(function() {
+			$("#loader_container").hide();
+			var failMsg = "Something error happened! as";
+		});	
+	});	
 </script>

@@ -41,11 +41,11 @@
 					</div>
 				</div>		
 				
-				<div class="form-group row select_klasterisasi">
-					<label class="col-sm-2">Pilih Klasterisasi <span class="text-danger">*</span></label>
+				<div class="form-group row select_project_charter">
+					<label class="col-sm-2">Pilih Project Charter <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<select class="form-control" required="" id="klasterisasi" name="klasterisasi">
-							<option value="">--pilih klasterisasi--</option>										
+						<select class="form-control" required="" id="pilih_project_charter" name="pilih_project_charter">
+							<option value="">--project charter belum di input--</option>																
 						</select>																	
 					</div>
 				</div>		

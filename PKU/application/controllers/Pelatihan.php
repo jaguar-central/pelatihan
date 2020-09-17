@@ -1199,7 +1199,7 @@ class Pelatihan extends MY_Controller
 
 
 
-    public function post_klasterisasi()
+    public function post_project_charter()
     {
 		$this->is_logged();	
 
@@ -1207,26 +1207,46 @@ class Pelatihan extends MY_Controller
 			'result'  	=> 'OK',
 			'msg'		=> ''
 		);			
+
+		// var_dump($this->input->post());die();
+
+		$id_user 				= $this->session->userdata('sess_user_idsdm');
+		$bisnis_pelatihan   	= trim($this->security->xss_clean(strip_image_tags($this->input->post('bisnis_pelatihan'))));
+        $type_klasterisasi		= trim($this->security->xss_clean(strip_image_tags($this->input->post('type_klasterisasi'))));
+		$tema_project_charter  	= trim($this->security->xss_clean(strip_image_tags($this->input->post('tema_project_charter'))));
 		
-        $type_klasterisasi	= trim($this->security->xss_clean(strip_image_tags($this->input->post('type_klasterisasi'))));
-        $judul_klasterisasi = trim($this->security->xss_clean(strip_image_tags($this->input->post('judul_klasterisasi'))));
-		$max_pelatihan    	= trim($this->security->xss_clean(strip_image_tags($this->input->post('max_pelatihan'))));
-		$bisnis_pelatihan   = trim($this->security->xss_clean(strip_image_tags($this->input->post('bisnis_pelatihan'))));
+
+
+		$judul_pelatihan    = $this->security->xss_clean(strip_image_tags($this->input->post('judul_pelatihan')));
+		$tanggal_pelatihan  = $this->security->xss_clean(strip_image_tags($this->input->post('tanggal_pelatihan')));
+		$tempat_pelatihan   = $this->security->xss_clean(strip_image_tags($this->input->post('tempat_pelatihan')));
+		$budget_pelatihan   = $this->security->xss_clean(strip_image_tags($this->input->post('budget_pelatihan')));
+		
+
+		
+		
+
 		$id_user			= $this->session->userdata('sess_user_idsdm');	
 		
 		try
 		{
-			$data = array(
-				'ID_TIPE_PELATIHAN' 	=> $type_klasterisasi,
-				'JUDUL_KLASTERISASI' 	=> $judul_klasterisasi,
-				'BISNIS' 				=> $bisnis_pelatihan,
-				'MAX_PELATIHAN' 		=> $max_pelatihan,
-				'AKTIF'					=> '1',
-				'CREATED_BY' 			=> $id_user,
-				'CREATED_DATE' 			=> date('Y-m-d H:i:s')			
-			);
-			
-			$this->Pelatihan_model->insert_t_klasterisasi($data);	
+			for ($i=1;$i<count($judul_pelatihan);$i++){
+				$data = array(
+					'ID_PROJECT_CHARTER'	=> base64_encode($type_klasterisasi.date('Y-m-d H:i:s')),
+					'ID_TIPE_PELATIHAN' 	=> $type_klasterisasi,
+					'TEMA_PROJECT_CHARTER' 	=> $tema_project_charter,
+					'FILE' 					=> '',
+					'JUDUL_PELATIHAN' 		=> $judul_pelatihan[$i],
+					'TANGGAL' 				=> $tanggal_pelatihan[$i],
+					'TEMPAT' 				=> $tempat_pelatihan[$i],
+					'BUDGET' 				=> $budget_pelatihan[$i],
+					'AKTIF'					=> '1',
+					'CREATED_BY' 			=> $id_user,
+					'CREATED_DATE' 			=> date('Y-m-d H:i:s')			
+				);
+				
+				$this->Pelatihan_model->insert_t_project_charter($data);	
+			}
 		}
 		catch (Exception $e)
 		{
@@ -1242,16 +1262,19 @@ class Pelatihan extends MY_Controller
 
 
 
-	public function get_klasterisasi(){
+	public function get_project_charter(){
 		$tipe = $_GET['tipepelatihan'];
-		$klasterisasi = $this->Pelatihan_model->select_t_klasterisasi_by_tipe($tipe);					
+		$project_charter = $this->Pelatihan_model->select_t_project_charter_by_tipe($tipe);					
 		
 		$return= '';
 			
-		foreach ($klasterisasi as $data) {
-			$return .="<option value='$data->ID' >$data->JUDUL_KLASTERISASI<option/>";
+		foreach ($project_charter as $data) {
+			$return .="<option value='$data->ID_PROJECT_CHARTER' >$data->TEMA_PROJECT_CHARTER</option>";
 		}
-		
+
+		// echo '<pre>';
+		// print_r($project_charter);
+		// echo '</pre>';die;
 		echo $return;	
 	}
 

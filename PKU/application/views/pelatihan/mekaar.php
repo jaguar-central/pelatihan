@@ -31,7 +31,7 @@
 										echo '<td>';										
 											echo '<button type="button" class="btn btn-primary view_pelatihan" data-pelatihantype="'.$cus->ID.'" data-pelatihanbisnis="MEKAAR" ><span class="btn-label"><i class="fa fa-eye"></i></span> View</button>';										
 										if (in_array($cus->ID,$klasterisasi)){
-											echo '<button type="button" class="btn btn-success add_pelatihan_klasterisasi" data-toggle="modal" data-target="#modaladd" data-pelatihantype="'.$cus->ID.'" data-pelatihantitle="'.$cus->TITLE.'"><span class="btn-label"><i class="fas fa-pencil-alt fa-fw"></i></span> Add</button></td>'; 										
+											echo '<button type="button" class="btn btn-success add_pelatihan_project_charter" data-toggle="modal" data-target="#modaladd" data-pelatihantype="'.$cus->ID.'" data-pelatihantitle="'.$cus->TITLE.'"><span class="btn-label"><i class="fas fa-pencil-alt fa-fw"></i></span> Add</button></td>'; 										
 										}else{
 											echo '<button type="button" class="btn btn-success add_pelatihan" data-toggle="modal" data-target="#modaladd" data-pelatihantype="'.$cus->ID.'" data-pelatihantitle="'.$cus->TITLE.'"><span class="btn-label"><i class="fas fa-pencil-alt fa-fw"></i></span> Add</button></td>'; 											
 										echo '</tr>';
