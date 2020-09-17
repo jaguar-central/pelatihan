@@ -79,20 +79,9 @@ class Nasabah extends MY_Controller
 		$param["start"] = isset($_GET["start"]) ? $_GET["start"] : 0;
 		$param["limit"] = isset($_GET["length"]) ? $_GET["length"] : 10;		
 		$param["search"] = isset($_GET["search"]["value"]) ? $_GET["search"]["value"] : NULL ;			
-		$param['count'] = 0;						
-		
-		
-		// $data["data"] = $this->Nasabah_model->paging_select_nasabah_ulamm($param);				
-		// $param['count'] = 1;				
-		// $total = $this->Nasabah_model->paging_select_nasabah_ulamm($param)[0]->COUNT_DATA;				
-		// $data["recordsTotal"] = $total;	
-		// $data["recordsFiltered"] = $total;							
-		
-		// echo json_encode($data);
-		
-		
-		$this->config->set_item('elastic_server', 'http://10.61.3.198:9200');
-		$this->config->set_item('index', 'nasabah');		
+		$param['count'] = 0;								
+				
+		$this->config->set_item('elastic_index', 'nasabah');		
 		if ($param["search"]!=NULL){
 			$debitur = $this->elastic->call('/_search?q=nama:'.$param["search"].'&filter_path=hits.hits.*,aggregations.*');
 			$debitur_count = $this->elastic->call('_count?q=nama:'.$param["search"]);			
@@ -121,31 +110,9 @@ class Nasabah extends MY_Controller
 	{				
 		$param["start"] = isset($_GET["start"]) ? $_GET["start"] : 0;
 		$param["limit"] = isset($_GET["length"]) ? $_GET["length"] : 10;		
-		$param["search"] = isset($_GET["search"]["value"]) ? str_replace(' ','%20',$_GET["search"]["value"]) : NULL ;				
-		
-		// if ($param["search"]!=NULL){
-			// $debitur = $this->Elasticsearch->call_debitur('/_search?q=nama:'.$param["search"].'&filter_path=hits.hits.*,aggregations.*');
-			// $debitur_count = $this->Elasticsearch->call_debitur('_count?q=nama:'.$param["search"]);			
-		// }else{
-			// $debitur = $this->Elasticsearch->call_debitur('_search?from='.$param["start"].'&size='.$param["limit"].'&filter_path=hits.hits.*,aggregations.*');
-			// $debitur_count = $this->Elasticsearch->call_debitur('_count');
-		// }				
-		
-		// if (isset($debitur->hits->hits)){
-			// for ($i=0;$i<count($debitur->hits->hits);$i++){
-				// $data["data"][$i] = $debitur->hits->hits[$i]->_source;
-			// }	
-			// $data["recordsTotal"] = $debitur_count->count;	
-			// $data["recordsFiltered"] = $debitur_count->count;			
-		// }else{
-			// $data["data"] = array();
-			// $data["recordsTotal"] = 0;	
-			// $data["recordsFiltered"] = 0;
-		// }
-		
-				
-		$this->config->set_item('elastic_server', 'http://10.61.3.198:9200');
-		$this->config->set_item('index', 'debitur');		
+		$param["search"] = isset($_GET["search"]["value"]) ? str_replace(' ','%20',$_GET["search"]["value"]) : NULL ;						
+						
+		$this->config->set_item('elastic_index', 'debitur');		
 		if ($param["search"]!=NULL){
 			$debitur = $this->elastic->call('/_search?q=nama:'.$param["search"].'&filter_path=hits.hits.*,aggregations.*');
 			$debitur_count = $this->elastic->call('_count?q=nama:'.$param["search"]);			
