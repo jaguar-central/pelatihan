@@ -1,3 +1,20 @@
+<style>
+[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+input [type="date"] {
+  border: 1px solid #c4c4c4;
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 3px 5px;
+  box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
+  width: 190px;
+}
+</style>
+
 <!-- Modal -->
 <div id="modaladdklasterisasi" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">
@@ -34,11 +51,8 @@
 					<textarea class="form-control" id="tema_klasterisasi" name="tema_klasterisasi" rows="4" required=""></textarea>
 					</div>
                 </div>
-<<<<<<< HEAD
                 
           
-=======
->>>>>>> e9d3bac33af940aa4c6c79eb475b7048cd645232
 
 				<div class="form-group row">
                     <label class="col-sm-2 offset-sm-3">Upload File <span class="text-danger">*</span></label>
@@ -46,8 +60,7 @@
       					<input type="file" class="custom-file-input" id="customFile" name="filename">
       					<label class="custom-file-label" for="customFile">Choose file</label>
     				</div>
-                </div>
-				
+                </div>				
             </div>
 
 				<div class="container-fluid">
@@ -69,9 +82,16 @@
 									  <th></th>
 								  </thead>    
 								  <tbody id="tbody_charter_modaladd">
-									<tr class="d-none">
-									  <td ><input type="text" class="form-control" id="deskripsi_rab" name="deskripsi_rab[]" value=""></td>
-									  <td ><input type="text" class="form-control datepicker_project_charter" id="datepicker_project_charter" required /></td>
+									<tr class="d-none">									
+									  <td><input type="text" class="form-control" id="deskripsi_rab" name="deskripsi_rab[]" value=""></td>
+									  <td>									  
+										<div class='input-group'>
+											<input type="date" class="form-control" id="datepicker_project_charter" name="datepicker_project_charter[]" required="">
+											<span class="input-group-addon">
+												<span class="fa fa-calendar"></span>
+											</span>
+										</div>
+									  </td>									  
 									  <td ><input type="text" class="form-control" id="unit_rab" name="unit_rab[]" value=""></td>
 									  <td ><input type="text" class="form-control" id="unit_cost_rab" name="unit_cost_rab[]" value=""></td>
 									  <td>                            
@@ -114,16 +134,6 @@
  </div>
 </div>
 <script type="text/javascript">
-
-$('.datepicker_project_charter').daterangepicker({
-	timePicker: false,
-	singleDatePicker: true,
-    showDropdowns: false,
-    minYear: 1901,
-		  locale: {
-			format: 'DD MMMM YYYY'           
-		  }
-		});
 
 $(".custom-file-input").on("change", function() {
   var fileName = $(this).val().split("\\").pop();
