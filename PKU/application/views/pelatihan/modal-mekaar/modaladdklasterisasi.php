@@ -111,17 +111,12 @@
  </div>
 </div>
 
-<script src="http://cdn.datatables.net/plug-ins/1.10.13/dataRender/datetime.js"></script>
 
-<script src="<?php echo base_url(); ?>assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
-<script src="<?php echo base_url(); ?>assets/plugins/timepicker/bootstrap-timepicker.min.js"></script>
-
-<script src="<?php echo base_url(); ?>assets/js/bootstrap-datetimepicker.js"></script>
 <script type="text/javascript">
 
-$(document).ready(function() {	
+//$(document).ready(function() {	
 		$('#tanggal_project_charter').datetimepicker();
-	});
+	//});
 
 $(".custom-file-input").on("change", function() {
   var fileName = $(this).val().split("\\").pop();
