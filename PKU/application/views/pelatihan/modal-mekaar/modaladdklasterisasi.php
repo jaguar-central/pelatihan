@@ -1,3 +1,20 @@
+<style>
+[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+input [type="date"] {
+  border: 1px solid #c4c4c4;
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 3px 5px;
+  box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
+  width: 190px;
+}
+</style>
+
 <!-- Modal -->
 <div id="modaladdklasterisasi" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">
@@ -43,8 +60,7 @@
       					<input type="file" class="custom-file-input" id="customFile" name="filename">
       					<label class="custom-file-label" for="customFile">Choose file</label>
     				</div>
-                </div>
-				
+                </div>				
             </div>
 
 				<div class="container-fluid">
@@ -66,9 +82,16 @@
 									  <th></th>
 								  </thead>    
 								  <tbody id="tbody_charter_modaladd">
-									<tr class="d-none">
-									  <td ><input type="text" class="form-control" id="deskripsi_rab" name="deskripsi_rab[]" value=""></td>
-									  <td ><input type="text" class="form-control"  required="" id="tanggal_project_charter" name="tanggal_project_charter" /></td>
+									<tr class="d-none">									
+									  <td><input type="text" class="form-control" id="deskripsi_rab" name="deskripsi_rab[]" value=""></td>
+									  <td>									  
+										<div class='input-group'>
+											<input type="date" class="form-control" id="datepicker_project_charter" name="datepicker_project_charter[]" required="">
+											<span class="input-group-addon">
+												<span class="fa fa-calendar"></span>
+											</span>
+										</div>
+									  </td>									  
 									  <td ><input type="text" class="form-control" id="unit_rab" name="unit_rab[]" value=""></td>
 									  <td ><input type="text" class="form-control" id="unit_cost_rab" name="unit_cost_rab[]" value=""></td>
 									  <td>                            
@@ -113,10 +136,6 @@
 
 
 <script type="text/javascript">
-
-//$(document).ready(function() {	
-		$('#tanggal_project_charter').datetimepicker();
-	//});
 
 $(".custom-file-input").on("change", function() {
   var fileName = $(this).val().split("\\").pop();
