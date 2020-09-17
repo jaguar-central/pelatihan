@@ -96,24 +96,21 @@ $route['master/get_area_mekaar']                = 'master/get_area_mekaar';
 $route['master/get_cabang_mekaar']              = 'master/get_cabang_mekaar';
 
 /* API DATA PELATIHAN*/
-$route['pelatihan/post_pelatihan']              = 'pelatihan/post_pelatihan_proposal';
-$route['pelatihan/get_rab']                     = 'pelatihan/get_rab';
-// $route['pelatihan/post_unggah_proposal']        = 'pelatihan/insert_unggah_proposal';
-$route['pelatihan/post_konfirmasi_proposal']    = 'pelatihan/post_konfirmasi_proposal';
-$route['pelatihan/post_pelatihan_lpj']          = 'pelatihan/post_pelatihan_lpj';
-$route['pelatihan/post_konfirmasi_lpj']         = 'pelatihan/post_konfirmasi_lpj';
-$route['pelatihan/post_kehadiran'] 	            = 'pelatihan/post_kehadiran';
-$route['pelatihan/get_kehadiran/(:any)'] 	    = 'pelatihan/get_kehadiran/$1';
-$route['pelatihan/delete_kehadiran'] 	        = 'pelatihan/delete_kehadiran';
+$route['pelatihan/post_pelatihan']                              = 'pelatihan/post_pelatihan_proposal';
+$route['pelatihan/get_rab']                                     = 'pelatihan/get_rab';
+$route['pelatihan/post_konfirmasi_proposal']                    = 'pelatihan/post_konfirmasi_proposal';
+$route['pelatihan/post_pelatihan_lpj']                          = 'pelatihan/post_pelatihan_lpj';
+$route['pelatihan/post_konfirmasi_lpj']                         = 'pelatihan/post_konfirmasi_lpj';
+$route['pelatihan/post_kehadiran'] 	                            = 'pelatihan/post_kehadiran';
+$route['pelatihan/get_kehadiran/(:any)'] 	                    = 'pelatihan/get_kehadiran/$1';
+$route['pelatihan/delete_kehadiran'] 	                        = 'pelatihan/delete_kehadiran';
 $route['pelatihan/get_paging_kehadiran_nasabah_ulamm/(:any)']   = 'pelatihan/get_paging_kehadiran_nasabah_ulamm/$1';
 $route['pelatihan/get_paging_kehadiran_nasabah_mekaar/(:any)']  = 'pelatihan/get_paging_kehadiran_nasabah_mekaar/$1';
-$route['pelatihan/get_paging_kehadiran_non_nasabah']  = 'pelatihan/get_paging_kehadiran_non_nasabah';
-$route['pelatihan/post_non_nasabah'] 	        = 'pelatihan/post_non_nasabah';
-$route['pelatihan/post_submit_proposal']        = 'pelatihan/post_submit_proposal';
-$route['pelatihan/post_change_status_pelatihan/(:any)/(:any)']= 'pelatihan/post_change_status_pelatihan/$1/$2';
+$route['pelatihan/get_paging_kehadiran_non_nasabah']            = 'pelatihan/get_paging_kehadiran_non_nasabah';
+$route['pelatihan/post_non_nasabah'] 	                        = 'pelatihan/post_non_nasabah';
+$route['pelatihan/post_submit_proposal']                        = 'pelatihan/post_submit_proposal';
+$route['pelatihan/post_change_status_pelatihan/(:any)/(:any)']  = 'pelatihan/post_change_status_pelatihan/$1/$2';
 $route['pelatihan/get_paging_pelatihan/(:any)/(:any)']  		= 'pelatihan/get_paging_pelatihan/$1/$2';
 
-
-
-$route['pelatihan/post_klasterisasi']          = 'pelatihan/post_klasterisasi';
-$route['pelatihan/get_klasterisasi']          = 'pelatihan/get_klasterisasi';
+$route['pelatihan/post_project_charter']                        = 'pelatihan/post_project_charter';
+$route['pelatihan/get_project_charter']                         = 'pelatihan/get_project_charter';

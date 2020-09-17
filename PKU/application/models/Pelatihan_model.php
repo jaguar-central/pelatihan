@@ -24,9 +24,9 @@ public function select_ms_pelatihan_type_mekaar()
 		return $query->result();
 }
 
-public function insert_t_klasterisasi($data)
+public function insert_t_project_charter($data)
 {
-		$this->db->insert('T_KLASTERISASI', $data);
+		$this->db->insert('T_PROJECT_CHARTER', $data);
 }
 
 public function insert_t_pelatihan($data)
@@ -207,9 +207,9 @@ public function paging_t_pelatihan($param)
 	return $query->result();
 }		
 
-public function select_t_klasterisasi_by_tipe($tipe)
+public function select_t_project_charter_by_tipe($tipe)
 {
-	$query = $this->db->query("select * from T_KLASTERISASI where ID_TIPE_PELATIHAN='".$tipe."' ");
+	$query = $this->db->query("select * from T_PROJECT_CHARTER where ID_TIPE_PELATIHAN='".$tipe."' ");
 	return $query->result();
 }
 
