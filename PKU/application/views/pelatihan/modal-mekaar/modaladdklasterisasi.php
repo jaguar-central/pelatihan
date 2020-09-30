@@ -15,6 +15,7 @@ input [type="date"] {
 }
 </style>
 
+
 <!-- Modal -->
 <div id="modaladdklasterisasi" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">
@@ -127,6 +128,8 @@ input [type="date"] {
 	</div>
  </div>
 </div>
+
+
 <script type="text/javascript">
 
 $(".custom-file-input").on("change", function() {

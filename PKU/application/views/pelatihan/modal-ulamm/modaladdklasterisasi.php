@@ -14,6 +14,8 @@ input [type="date"] {
   width: 190px;
 }
 </style>
+
+
 <!-- Modal -->
 <div id="modaladdklasterisasi" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">
