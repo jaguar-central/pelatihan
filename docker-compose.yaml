@@ -2,6 +2,6 @@ version: '3.3'
 
 services:  
   aplikasi:
-    image: 10.63.8.69/fzainal0707/pelatihan:latest
+    image: 10.63.8.69/fzainal0707/pelatihan:v.1.0.0
     ports:
       - "0.0.0.0:30003:80/tcp"

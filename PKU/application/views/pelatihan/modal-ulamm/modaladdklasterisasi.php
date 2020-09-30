@@ -1,3 +1,19 @@
+<style>
+[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+input [type="date"] {
+  border: 1px solid #c4c4c4;
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 3px 5px;
+  box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
+  width: 190px;
+}
+</style>
 <!-- Modal -->
 <div id="modaladdklasterisasi" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">
@@ -65,19 +81,26 @@
 									  <th></th>
 								  </thead>    
 								  <tbody id="tbody_charter_modaladd">
-									<tr class="d-none">
-									  <td ><input type="text" class="form-control" id="deskripsi_rab" name="deskripsi_rab[]" value=""></td>
-									  <td ><input type="text" class="form-control" id="jumlah_rab" name="jumlah_rab[]"></td>
-									  <td ><input type="text" class="form-control" id="unit_rab" name="unit_rab[]" value=""></td>
-									  <td ><input type="text" class="form-control" id="unit_cost_rab" name="unit_cost_rab[]" value=""></td>
-									  <td>                            
-										<a class="table-remove-modaladd btn btn-outline-primary btn-sm" href="#"><i class="fas fa-trash"></i></a>   
-									  </td>
-									  <td>                            
-										<a class="table-up-modaladd btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-up"></i></a>   
-										<a class="table-down-modaladd btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-down"></i></a>                               
-									  </td>
-									</tr>                        
+								  <tr class="d-none">									
+									<td><input type="text" class="form-control" id="judul_pelatihan" name="judul_pelatihan[]" value=""></td>
+									<td>									  
+									<div class='input-group'>
+										<input type="date" class="form-control" id="tanggal_pelatihan" name="tanggal_pelatihan[]">
+										<span class="input-group-addon">
+											<span class="fa fa-calendar"></span>
+										</span>
+									</div>
+									</td>									  
+									<td ><input type="text" class="form-control" id="tempat_pelatihan" name="tempat_pelatihan[]" value=""></td>
+									<td ><input type="text" class="form-control" id="budget_pelatihan" name="budget_pelatihan[]" value=""></td>
+									<td>                            
+									<a class="table-remove-modaladd btn btn-outline-primary btn-sm" href="#"><i class="fas fa-trash"></i></a>   
+									</td>
+									<td>                            
+									<a class="table-up-modaladd btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-up"></i></a>   
+									<a class="table-down-modaladd btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-down"></i></a>                               
+									</td>
+								</tr>                        
 								  </tbody>                                                                      
 								</table>  
 
