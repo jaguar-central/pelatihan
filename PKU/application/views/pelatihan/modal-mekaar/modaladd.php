@@ -79,6 +79,21 @@
 				</div>
 
 				<div class="form-group row">
+					<label class="col-sm-2">Grade <span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+					<select class="form-control select_tag" required="" id="grading" name="grading">
+							<option value="">--pilih grade--</option>
+
+							<?php 
+								foreach ($grade_mekaar as $data_grade){
+									echo '<option value="'.$data_grade->ID.'">'.$data_grade->GRADING_DESKRIPSI.'</option>';                                                                    
+								}
+								?>										
+						</select>	
+					</div>
+				</div>
+
+				<div class="form-group row">
 					<label class="col-sm-2 offset-sm-6">Cabang Ulamm <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
 					<select class="form-control select" required="" id="cabang_ulamm" name="cabang_ulamm">

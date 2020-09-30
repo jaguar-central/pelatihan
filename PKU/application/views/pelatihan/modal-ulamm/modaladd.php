@@ -68,8 +68,21 @@
 					<label class="col-sm-2">Deskripsi <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
 						<textarea class="form-control" id="deskripsi_pelatihan" name="deskripsi_pelatihan" rows="4" required=""></textarea>
-					</div>											
-				</div>	
+					</div>
+
+					<label class="col-sm-2">Grade <span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+					<select class="form-control select_tag" required="" id="grading" name="grading">
+							<option value="">--pilih grade--</option>
+
+							<?php 
+								foreach ($grade_ulamm as $data_grade){
+									echo '<option value="'.$data_grade->ID.'">'.$data_grade->GRADING_DESKRIPSI.'</option>';                                                                    
+								}
+								?>										
+						</select>	
+					</div>
+				</div>												
 				
 				<div class="form-group row">
 

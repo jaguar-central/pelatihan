@@ -82,7 +82,8 @@ class Pelatihan extends MY_Controller
 								);
 		
         $data["menu"] 			= $this->Menu_model->select_ms_menu();
-        $data["pelatihan_type"] = $this->Pelatihan_model->select_ms_pelatihan_type_ulamm();
+		$data["pelatihan_type"] = $this->Pelatihan_model->select_ms_pelatihan_type_ulamm();
+		$data["grade_ulamm"] 	= $this->Pelatihan_model->select_ms_grade_ulamm();
         // $data["pelatihan"] 		= $this->Pelatihan_model->select_t_pelatihan_ulamm_by_status(array('draft','approved','lpj_approved','lpj_draft'));		
 		$data["cabang"] 		= $this->Master_model->select_ms_cabang_ulamm();
 		$data["sektor_ekonomi"]	= $this->Master_model->select_dw_nasabah_ulamm_sektor_ekonomi();
@@ -119,6 +120,7 @@ class Pelatihan extends MY_Controller
 
 		$data["menu"] 			= $this->Menu_model->select_ms_menu();
 		$data["pelatihan_type"] = $this->Pelatihan_model->select_ms_pelatihan_type_mekaar();
+		$data["grade_mekaar"] 	= $this->Pelatihan_model->select_ms_grade_mekaar();
 		// $data["pelatihan"] 		= $this->Pelatihan_model->select_t_pelatihan_mekaar_by_status(array('draft','approved','lpj_approved','lpj_draft'));
 		$data["cabang"] 		= $this->Master_model->select_ms_cabang_ulamm();		
 		$data["region"] 		= $this->Master_model->select_ms_region_mekaar();
@@ -268,7 +270,8 @@ class Pelatihan extends MY_Controller
         $klasterisasi   			= trim($this->security->xss_clean(strip_image_tags($this->input->post('klasterisasi'))));
         $pelatihan_type     		= trim($this->security->xss_clean(strip_image_tags($this->input->post('pelatihan_type'))));
 		$judul_pelatihan    		= trim($this->security->xss_clean(strip_image_tags($this->input->post('judul_pelatihan'))));
-		
+		$grading   				= trim($this->security->xss_clean(strip_image_tags($this->input->post('grading'))));
+
 		$cabang_ulamm				= trim($this->security->xss_clean(strip_image_tags($this->input->post('cabang_ulamm'))));
 		$unit_ulamm         		= $this->security->xss_clean(strip_image_tags($this->input->post('unit_ulamm')));
 		$regional_mekaar			= trim($this->security->xss_clean(strip_image_tags($this->input->post('regional_mekaar'))));       
@@ -397,6 +400,7 @@ class Pelatihan extends MY_Controller
 				'NO_PROPOSAL' 		=> $no_proposal,
 				'NO_TRX' 			=> $no_trx,
 				'ID_KLASTERISASI' 	=> $klasterisasi,
+				'ID_GRADING'		=> $grading,
 				'TITLE' 			=> $judul_pelatihan,
 				'TIPE_BISNIS'		=> $bisnis_pelatihan,
 				'REGIONAL_MEKAAR'	=> $regional_mekaar,
