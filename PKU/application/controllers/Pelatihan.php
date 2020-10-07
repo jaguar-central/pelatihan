@@ -575,7 +575,8 @@ class Pelatihan extends MY_Controller
 		$keterangan           		= trim($this->security->xss_clean(strip_image_tags($this->input->post('keterangan'))));		
 		$id_user					= $this->session->userdata('sess_user_idsdm');
 		$tingkat_approval			= $this->session->userdata('sess_user_group');		
-		$username					= $this->session->userdata('sess_user_username');					
+		$username					= $this->session->userdata('sess_user_username');
+		$id_grading					= $this->session->userdata('grading');					
 
 		$status_approval = $this->Pelatihan_model->check_bwmp_approval_proposal($id_pelatihan,$tingkat_approval);
 		
@@ -613,6 +614,7 @@ class Pelatihan extends MY_Controller
 			$data = array(
 				'ID_PELATIHAN' 		=> $id_pelatihan,
 				'TIPE_APPROVAL' 	=> 'PROPOSAL',
+				'ID_GRADING'		=> $id_grading,
 				'URUTAN_APPROVAL'	=> $urutan_approval,
 				'USERNAME'			=> $username,	
 				'TTD'				=> base_url()."assets/images/tandatangan/".$username,
