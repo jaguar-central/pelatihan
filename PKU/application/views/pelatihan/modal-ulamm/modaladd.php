@@ -287,10 +287,12 @@
 
 	$(document).ready(function() {	
 		new AutoNumeric("#anggaran","commaDecimalCharDotSeparator");	
-	
+
 		$('.input-limit-datepicker').daterangepicker({
-		  timePicker: true
-		  ,locale: {
+		  timePicker: true,
+		  changeMonth: true,
+    	  changeYear: true,
+		  locale: {
 			format: 'DD MMMM YYYY hh:mm A'           
 		  }
 		}, function(start, end, label) {						
