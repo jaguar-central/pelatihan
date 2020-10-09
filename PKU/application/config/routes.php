@@ -85,6 +85,10 @@ $route['master/post_user'] 		= 'Master/post_user';
 $route['check_user'] 	= 'User/cek_authorization';
 $route['logout'] 		= 'User/process_signout';
 
+/* REPORT */
+$route['report/agenda_klasterisasi'] 		= 'Report/agenda_klasterisasi';
+
+
 
 /* API DATA NASABAH*/
 $route['nasabah/get_paging_nasabah_ulamm']      = 'nasabah/api_nasabah_ulamm';

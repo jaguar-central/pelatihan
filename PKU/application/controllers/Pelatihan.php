@@ -77,7 +77,7 @@ class Pelatihan extends MY_Controller
 									'pelatihan/modal-ulamm/modaldetails',
 									'pelatihan/modal-ulamm/modaledit',
 									'pelatihan/modal-ulamm/modalunggah',
-									'pelatihan/modal-ulamm/modaladdklasterisasi'								
+									'pelatihan/modal-ulamm/modaladdprojectcharter'								
 									
 								);
 		
@@ -114,7 +114,7 @@ class Pelatihan extends MY_Controller
 									'pelatihan/modal-mekaar/modaldetails',
 									'pelatihan/modal-mekaar/modaledit',
 									'pelatihan/modal-mekaar/modalunggah',
-									'pelatihan/modal-mekaar/modaladdklasterisasi'								
+									'pelatihan/modal-mekaar/modaladdprojectcharter'								
 			
 								);
 

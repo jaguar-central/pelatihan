@@ -197,7 +197,6 @@ function calculate_grand_total(){
 
 
 $("#add_project_charter").submit(function(e){
-	console.log('masuk sni cuy');	
 		e.preventDefault();        	
 		var formURL = "<?php echo base_url('pelatihan/post_project_charter'); ?>";
 		var frmdata = new FormData(this);

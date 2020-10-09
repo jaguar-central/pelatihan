@@ -30,7 +30,7 @@ input [type="date"] {
 	  </div>
 			<?php 
 
-			$attrib = array('class' => 'form-horizontal','id'=>'add_klasterisasi','name'=>'add_klasterisasi','enctype'=>'multipart/form-data','onkeydown'=>"return event.key != 'Enter';");
+			$attrib = array('class' => 'form-horizontal','id'=>'add_project_charter','name'=>'add_project_charter','enctype'=>'multipart/form-data','onkeydown'=>"return event.key != 'Enter';");
 			echo form_open('',$attrib); 
 			?>	
 			<div class="modal-body">
@@ -49,7 +49,7 @@ input [type="date"] {
 				<div class="form-group row">
 					<label class="col-sm-2 offset-sm-3">Tema <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-					<textarea class="form-control" id="tema_klasterisasi" name="tema_klasterisasi" rows="4" required=""></textarea>
+					<textarea class="form-control" id="tema_project_charter" name="tema_project_charter" rows="4" required=""></textarea>
 					</div>
 				</div>
 
@@ -198,5 +198,41 @@ function calculate_grand_total(){
 	$("#total_cost_rab_akhir").val(total);
 }			  	  
 
+
+$("#add_project_charter").submit(function(e){
+		e.preventDefault();        	
+		var formURL = "<?php echo base_url('pelatihan/post_project_charter'); ?>";
+		var frmdata = new FormData(this);
+					
+		var xhr = $.ajax({
+			url: formURL,
+			type: 'POST',
+			data: frmdata,
+			processData: false,
+			contentType: false
+		});
+		xhr.done(function(data) {
+			var obj = $.parseJSON(data);
+			
+			console.log(data);
+			
+			if(obj.result == 'OK')
+			{
+				window.location.href = '<?php echo base_url(); ?>pelatihan/<?php echo $this->uri->segment(2); ?>';
+			}
+			if(obj.result == 'UP')
+			{
+				console.log(data);
+			}
+			if(obj.result == 'NG')
+			{
+				$("#m-ap-cab").html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a> '+obj.msg+'</div>');
+			}
+		});
+		xhr.fail(function() {
+			$("#loader_container").hide();
+			var failMsg = "Something error happened! as";
+		});	
+	});	
 
 </script>
