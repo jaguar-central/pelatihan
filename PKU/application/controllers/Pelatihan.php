@@ -206,6 +206,7 @@ class Pelatihan extends MY_Controller
 									'pelatihan/modal-konfirmasi/modalapproval'
 								);		
         
+		$data["grade_approval"] = $this->Pelatihan_model->select_ms_grade_approval();
         $data["menu"] = $this->Menu_model->select_ms_menu();
 		
 		if ($this->session->userdata('sess_user_id_user_group')=='2'){

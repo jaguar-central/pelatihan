@@ -183,5 +183,12 @@ class Master_model extends CI_Model {
 	{
 		$this->db->insert('MS_USER_CABANG_REGION', $data);
 	}	
+	
+public function select_ms_grade_approval()
+{
+        $query = $this->db->query("select * from MS_GRADING ");
+        return $query->result();
+}	
+	
 }
 ?>

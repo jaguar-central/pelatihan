@@ -24,13 +24,13 @@ public function select_ms_pelatihan_type_mekaar()
 		return $query->result();
 }
 
-public function select_ms_grade_ulamm()
+public function select_ms_grade_mekaar()
 {
         $query = $this->db->query("select * from MS_GRADING ");
         return $query->result();
 }
 
-public function select_ms_grade_mekaar()
+public function select_ms_grade_approval()
 {
         $query = $this->db->query("select * from MS_GRADING ");
         return $query->result();
