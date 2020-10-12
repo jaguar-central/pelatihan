@@ -146,7 +146,7 @@ class Pelatihan extends MY_Controller
 		$data["modal"] 		= array( "pelatihan/modal-ulamm/modaldhistory"); 
 
         $data["menu"] 		= $this->Menu_model->select_ms_menu();
-		$data["pelatihan"] 	= $this->Pelatihan_model->select_t_pelatihan();
+		$data["pelatihan"] 	= $this->Pelatihan_model->select_t_pelatihan_ulamm_by_status(array('draft','submitted','approved','lpj_draft','lpj_submitted','lpj_approved'));
 		//$data["cabang"] 	= $this->Master_model->select_ms_cabang_ulamm();
 		
 		
@@ -163,7 +163,7 @@ class Pelatihan extends MY_Controller
 		$data["modal"] 		= array( "pelatihan/modal-mekaar/modaldhistory"); 
 
         $data["menu"] 		= $this->Menu_model->select_ms_menu();
-		$data["pelatihan"] 	= $this->Pelatihan_model->select_t_pelatihan();
+		$data["pelatihan"] 	= $this->Pelatihan_model->select_t_pelatihan_mekaar_by_status(array('draft','submitted','approved','lpj_draft','lpj_submitted','lpj_approved'));
 		//$data["cabang"] 	= $this->Master_model->select_ms_cabang_ulamm();
 		
 		
