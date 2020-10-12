@@ -360,7 +360,7 @@ class Master extends MY_Controller
 		$id = $_GET['id_grading'] ? (int)$_GET['id_grading'] : 0;
 		
 		
-		$grading = $this->Master_model->select_ms_grade_approval();	
+		$grading = $this->Master_model->select_ms_grading();	
 
 		$data= '<option value="">--pilih grade--</option>';
 		

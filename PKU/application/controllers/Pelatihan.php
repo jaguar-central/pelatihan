@@ -83,7 +83,7 @@ class Pelatihan extends MY_Controller
 		
         $data["menu"] 			= $this->Menu_model->select_ms_menu();
 		$data["pelatihan_type"] = $this->Pelatihan_model->select_ms_pelatihan_type_ulamm();
-		$data["grade_ulamm"] 	= $this->Pelatihan_model->select_ms_grade_ulamm();
+		$data["grade_ulamm"] 	= $this->Master_model->select_ms_grading();
         // $data["pelatihan"] 		= $this->Pelatihan_model->select_t_pelatihan_ulamm_by_status(array('draft','approved','lpj_approved','lpj_draft'));		
 		$data["cabang"] 		= $this->Master_model->select_ms_cabang_ulamm();
 		$data["sektor_ekonomi"]	= $this->Master_model->select_dw_nasabah_ulamm_sektor_ekonomi();
@@ -120,7 +120,7 @@ class Pelatihan extends MY_Controller
 
 		$data["menu"] 			= $this->Menu_model->select_ms_menu();
 		$data["pelatihan_type"] = $this->Pelatihan_model->select_ms_pelatihan_type_mekaar();
-		$data["grade_mekaar"] 	= $this->Pelatihan_model->select_ms_grade_mekaar();
+		$data["grade_mekaar"] 	= $this->Master_model->select_ms_grading();
 		// $data["pelatihan"] 		= $this->Pelatihan_model->select_t_pelatihan_mekaar_by_status(array('draft','approved','lpj_approved','lpj_draft'));
 		$data["cabang"] 		= $this->Master_model->select_ms_cabang_ulamm();		
 		$data["region"] 		= $this->Master_model->select_ms_region_mekaar();
@@ -147,7 +147,6 @@ class Pelatihan extends MY_Controller
 
         $data["menu"] 		= $this->Menu_model->select_ms_menu();
 		$data["pelatihan"] 	= $this->Pelatihan_model->select_t_pelatihan_ulamm_by_status(array('draft','submitted','approved','lpj_draft','lpj_submitted','lpj_approved'));
-		//$data["cabang"] 	= $this->Master_model->select_ms_cabang_ulamm();
 		
 		
         $this->load->view('layout/gabung', $data);
@@ -164,7 +163,6 @@ class Pelatihan extends MY_Controller
 
         $data["menu"] 		= $this->Menu_model->select_ms_menu();
 		$data["pelatihan"] 	= $this->Pelatihan_model->select_t_pelatihan_mekaar_by_status(array('draft','submitted','approved','lpj_draft','lpj_submitted','lpj_approved'));
-		//$data["cabang"] 	= $this->Master_model->select_ms_cabang_ulamm();
 		
 		
         $this->load->view('layout/gabung', $data);
@@ -459,27 +457,117 @@ class Pelatihan extends MY_Controller
 		exit;
     }
 
+	public function update_pelatihan_proposal(){
+		$this->is_logged();	
+		
+        $pelatihan_id   	= trim($this->security->xss_clean(strip_image_tags($this->input->post('id_pelatihan'))));
+        $bisnis_pelatihan   = trim($this->security->xss_clean(strip_image_tags($this->input->post('bisnis_pelatihan_edit'))));
+        $pelatihan_type     = trim($this->security->xss_clean(strip_image_tags($this->input->post('pelatihan_type_edit'))));
+		$judul_pelatihan    = trim($this->security->xss_clean(strip_image_tags($this->input->post('judul_pelatihan_edit'))));
+		$grading   			= trim($this->security->xss_clean(strip_image_tags($this->input->post('grading_edit'))));
+
+		$cabang_ulamm		= trim($this->security->xss_clean(strip_image_tags($this->input->post('cabang_ulamm_edit'))));
+		$unit_ulamm         = $this->security->xss_clean(strip_image_tags($this->input->post('unit_ulamm_edit')));
+		// $regional_mekaar			= trim($this->security->xss_clean(strip_image_tags($this->input->post('regional_mekaar'))));       
+		// $area_mekaar				= trim($this->security->xss_clean(strip_image_tags($this->input->post('area_mekaar'))));        
+		// $cabang_mekaar   			= $this->security->xss_clean(strip_image_tags($this->input->post('cabang_mekaar')));							
+        $deskripsi_pelatihan = trim($this->security->xss_clean(strip_image_tags($this->input->post('deskripsi_pelatihan_edit'))));
+        $durasi_pelatihan    = trim($this->security->xss_clean(strip_image_tags($this->input->post('durasi_pelatihan_edit'))));
+        $inputStartTglPelaksanaan   = trim($this->security->xss_clean(strip_image_tags($this->input->post('inputStartTglPelaksanaan_edit'))));
+        $inputStartTimePelaksanaan  = trim($this->security->xss_clean(strip_image_tags($this->input->post('inputStartTimePelaksanaan_edit'))));
+        $inputAkhirTglPelaksanaan   = trim($this->security->xss_clean(strip_image_tags($this->input->post('inputAkhirTglPelaksanaan_edit'))));
+        $inputEndTimePelaksanaan    = trim($this->security->xss_clean(strip_image_tags($this->input->post('inputEndTimePelaksanaan_edit'))));
+        $pembicara_pelatihan        = trim($this->security->xss_clean(strip_image_tags($this->input->post('pembicara_pelatihan_edit'))));
+        $kuota_peserta              = trim($this->security->xss_clean(strip_image_tags($this->input->post('kuota_peserta_edit'))));
+
+        $anggaran               	= str_replace(array('.',',00'),'',trim($this->security->xss_clean(strip_image_tags($this->input->post('anggaran_edit')))));
+        $provinsi               	= trim($this->security->xss_clean(strip_image_tags($this->input->post('provinsi_edit'))));
+        $alamat_tempat_pelatihan    = trim($this->security->xss_clean(strip_image_tags($this->input->post('alamat_tempat_pelatihan_edit'))));
+        $lokasi_pelatihan           = trim($this->security->xss_clean(strip_image_tags($this->input->post('lokasi_pelatihan_edit'))));
+        $radius               		= trim($this->security->xss_clean(strip_image_tags($this->input->post('radius_edit'))));
+        $latitude               	= trim($this->security->xss_clean(strip_image_tags($this->input->post('latitude_edit'))));
+        $longitude               	= trim($this->security->xss_clean(strip_image_tags($this->input->post('longitude_edit'))));
+		$id_user					= $this->session->userdata('sess_user_idsdm');	
+		
+				
+		$deskripsi_rab        		= $this->security->xss_clean(strip_image_tags($this->input->post('deskripsi_rab_edit')));
+		$jumlah_rab           		= $this->security->xss_clean(strip_image_tags($this->input->post('jumlah_rab_edit')));
+		$unit_rab             		= $this->security->xss_clean(strip_image_tags($this->input->post('unit_rab_edit')));
+		$unit_cost_rab        		= $this->security->xss_clean(strip_image_tags($this->input->post('unit_cost_rab_edit')));
+		$total_cost_rab       		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab_edit')));
+		$total_cost_rab_akhir 		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab_akhir_edit')));		
+
+
+		$output = array(
+			'result'  	=> 'OK',
+			'msg'		=> ''
+		);	
+
+		try{
+			$data_update = array(
+				'ID_TIPE' 			=> $pelatihan_type,
+				'ID_GRADING'		=> $grading,
+				'TITLE' 			=> $judul_pelatihan,
+				'TIPE_BISNIS'		=> $bisnis_pelatihan,
+				// 'REGIONAL_MEKAAR'	=> $regional_mekaar,
+				// 'AREA_MEKAAR' 		=> $area_mekaar,
+				// 'CABANG_MEKAAR'		=> $data_cabang_mekaar,
+				'CABANG_ULAMM' 		=> $cabang_ulamm,
+				// 'UNIT_ULAMM'		=> $data_unit_ulamm,
+				'DESKRIPSI' 		=> $deskripsi_pelatihan,
+				'DURASI_PELATIHAN' 	=> $durasi_pelatihan,
+				'TANGGAL_MULAI' 	=> $inputStartTglPelaksanaan.' '.date("H:i", strtotime($inputStartTimePelaksanaan)),
+				'TANGGAL_SELESAI' 	=> $inputAkhirTglPelaksanaan.' '.date("H:i", strtotime($inputEndTimePelaksanaan)),
+				'KUOTA_PESERTA' 	=> $kuota_peserta,
+				'BUDGET' 			=> $anggaran,
+				'STATUS' 			=> 'draft',
+				'PROVINSI' 			=> $provinsi,
+				'ALAMAT' 			=> $alamat_tempat_pelatihan,
+				'LOKASI' 			=> $lokasi_pelatihan,
+				'RADIUS' 			=> $radius,
+				'LATITUDE' 			=> $latitude,
+				'LONGITUDE' 		=> $longitude,
+				'PEMBICARA'			=> $pembicara_pelatihan,
+				'CREATED_BY' 		=> $id_user,
+				'CREATED_DATE' 		=> date('Y-m-d H:i:s')			
+			);			
+			$where_update	= array('ID' 	=> $pelatihan_id);
+			$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
+		}		
+		catch (Exception $e)
+		{
+			$output = array(
+				'result'  	=> 'NG',
+				'msg'		=> $e->getMessage()
+			);
+		}
+		
+		echo json_encode($output);
+		exit;	
+	}
 
 	public function get_rab(){
 		$id_pelatihan = $_GET['pelatihanid'];
+		$tipe_modal = $_GET['tipe_modal'];
 		$rab = $this->Pelatihan_model->select_t_rab_by_id($id_pelatihan);					
 		
 		$data= '';
-			
+		
+		
 		foreach ($rab as $data_rab) {
 			$data .= '
 			<tr class="">
-			  <td><input type="text" class="form-control" id="deskripsi_rab_details" name="deskripsi_rab[]" value="'.$data_rab->URAIAN.'" disabled=""></td>
-			  <td><input type="number" class="form-control" id="jumlah_rab_details" name="jumlah_rab[]" disabled="" value="'.$data_rab->JUMLAH.'"></td>
-			  <td><input type="text" class="form-control" id="unit_rab_details" name="unit_rab[]" value="'.$data_rab->SATUAN.'" disabled=""></td>
-			  <td><input type="number" class="form-control" id="unit_cost_rab_details" name="unit_cost_rab[]" value="'.$data_rab->UNIT_COST.'" disabled=""></td>
-			  <td><input type="number" class="form-control" id="total_cost_rab_details" name="total_cost_rab[]" value="'.$data_rab->SUB_TOTAL_COST.'" readonly="" disabled=""></td>
+			  <td><input type="text" class="form-control" id="deskripsi_rab_'.$tipe_modal.'" name="deskripsi_rab[]" value="'.$data_rab->URAIAN.'" disabled=""></td>
+			  <td><input type="number" class="form-control" id="jumlah_rab_'.$tipe_modal.'" name="jumlah_rab[]" disabled="" value="'.$data_rab->JUMLAH.'"></td>
+			  <td><input type="text" class="form-control" id="unit_rab_'.$tipe_modal.'" name="unit_rab[]" value="'.$data_rab->SATUAN.'" disabled=""></td>
+			  <td><input type="number" class="form-control" id="unit_cost_rab_'.$tipe_modal.'" name="unit_cost_rab[]" value="'.$data_rab->UNIT_COST.'" disabled=""></td>
+			  <td><input type="number" class="form-control" id="total_cost_rab_'.$tipe_modal.'" name="total_cost_rab[]" value="'.$data_rab->SUB_TOTAL_COST.'" readonly="" disabled=""></td>
 			  <td>                            
-				<a class="table-remove btn btn-outline-primary btn-sm" href="#"><i class="fas fa-trash"></i></a>   
+				<a class="table-remove-'.$tipe_modal.' btn btn-outline-primary btn-sm" href="#"><i class="fas fa-trash"></i></a>   
 			  </td>
 			  <td>                            
-				<a class="table-up btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-up"></i></a>   
-				<a class="table-down btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-down"></i></a>                               
+				<a class="table-up-'.$tipe_modal.' btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-up"></i></a>   
+				<a class="table-down-'.$tipe_modal.' btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-down"></i></a>                               
 			  </td>
 			</tr>
 			';

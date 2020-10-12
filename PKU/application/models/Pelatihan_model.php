@@ -24,18 +24,6 @@ public function select_ms_pelatihan_type_mekaar()
 		return $query->result();
 }
 
-public function select_ms_grade_mekaar()
-{
-        $query = $this->db->query("select * from MS_GRADING ");
-        return $query->result();
-}
-
-public function select_ms_grade_approval()
-{
-        $query = $this->db->query("select * from MS_GRADING ");
-        return $query->result();
-}
-
 public function insert_t_project_charter($data)
 {
 		$this->db->insert('T_PROJECT_CHARTER', $data);
