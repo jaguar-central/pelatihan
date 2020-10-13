@@ -129,7 +129,7 @@
 				
 		$.ajax({
 			url: "<?php echo base_url()?>pelatihan/get_rab",
-			data: "pelatihanid="+$(this).data("pelatihanid"),
+			data: "pelatihanid="+$(this).data("pelatihanid")+"&tipe_modal=details",
 			cache: false,
 			success: function(data){				         
 				$('#table_rab_details').html(data);    
@@ -209,4 +209,132 @@
 		$('#id_pelatihan').val($(this).data('pelatihanid'));													
 	});
 
+	$(document).on("click", ".view_pelatihan", function () {
+		var pelatihantype 	= $(this).data('pelatihantype');						
+		var tipe_bisnis 	= $(this).data('pelatihanbisnis');	
+		
+		$('#datatable_modalview').DataTable().clear();
+		$('#datatable_modalview').DataTable().destroy();
+
+		$('#datatable_modalview').DataTable({			
+			"paging": true,
+			"processing": true,
+			"serverSide": true,
+			"ajax": {
+			"url" : '<?php echo base_url('pelatihan/get_paging_pelatihan/'); ?>'+pelatihantype+'/'+tipe_bisnis,
+			"type" :'GET'                      
+			},
+			"columns" : [
+				{ "data": "ID_TIPE_DESKRIPSI" },
+				{ "data": "TITLE" },
+				{ "data": "REGIONAL_MEKAAR" },
+				{ "data": "AREA_MEKAAR" },    
+				{ "data": "CABANG_MEKAAR" },    
+				{ "data": "TANGGAL_MULAI" },    
+				{ "data": "STATUS" },    
+				{ "data": "STATUS", render: function (data, type, row) 
+					{
+					  var tombol_action = '';
+					  
+					  tombol_action = '<div class="dropdown"><button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Action<span class="caret"></span></button><div class="dropdown-menu">';
+					  
+					  if (row.STATUS=='draft' || row.STATUS=='approved' || row.STATUS=='lpj_draft')
+					  {
+						tombol_action +='<a class="dropdown-item pelatihan_details" href="#" data-toggle="modal" data-target="#modaldetails" '
+						+'data-pelatihanid="'+row.ID+'" '
+						+'data-pelatihantype="'+row.ID_TIPE+'" '
+						+'data-pelatihantitle="'+row.TITLE+'" '
+						+'data-pelatihanregion="'+row.REGIONAL_MEKAAR+'" '
+						+'data-pelatihanarea="'+row.AREA_MEKAAR+'" '
+						+'data-pelatihancabang="'+row.CABANG_MEKAAR+'" '
+						+'data-pelatihancabangulamm="'+row.CABANG_ULAMM+'" '
+						+'data-pelatihandeskripsi="'+row.DESKRIPSI+'" '
+						+'data-pelatihantanggal="'+row.TANGGAL_MULAI+' - '+row.TANGGAL_SELESAI+'" '
+						+'data-pelatihandurasi="'+row.DURASI_PELATIHAN+'" '
+						+'data-pelatihankuota="'+row.KUOTA_PESERTA+'" '
+						+'data-pelatihananggaran="'+row.BUDGET+'" '
+						+'data-pelatihanprovinsi="'+row.PROVINSI+'" '
+						+'data-pelatihanalamat="'+row.ALAMAT+'" '
+						+'data-pelatihanlokasi="'+row.LOKASI+'" '
+						+'data-pelatihanlradius="'+row.RADIUS+'" '
+						+'data-pelatihanlongitude="'+row.LONGITUDE+'" '
+						+'data-pelatihanlatitude="'+row.LATITUDE+'" '
+						+'data-pelatihanpembicara="'+row.PEMBICARA+'"> Details</a>';
+						tombol_action +='<a class="dropdown-item pelatihan_edit" href="#" data-toggle="modal" '
+						+'data-target="#modaledit" '
+						+'data-pelatihanid="'+row.ID+'" '
+						+'data-pelatihantype="'+row.ID_TIPE+'" '
+						+'data-pelatihantitle="'+row.TITLE+'" '
+						+'data-pelatihanregion="'+row.REGIONAL_MEKAAR+'" '
+						+'data-pelatihanarea="'+row.AREA_MEKAAR+'" '
+						+'data-pelatihancabang="'+row.CABANG_MEKAAR+'" '						
+						+'data-pelatihancabangulamm="'+row.CABANG_ULAMM+'" '
+						+'data-pelatihandeskripsi="'+row.DESKRIPSI+'" '
+						+'data-pelatihantanggal="'+row.TANGGAL_MULAI+' - '+row.TANGGAL_SELESAI+'" '
+						+'data-pelatihandurasi="'+row.DURASI_PELATIHAN+'" '
+						+'data-pelatihankuota="'+row.KUOTA_PESERTA+'" '
+						+'data-pelatihananggaran="'+row.BUDGET+'" '
+						+'data-pelatihanprovinsi="'+row.PROVINSI+'" '
+						+'data-pelatihanalamat="'+row.ALAMAT+'" '
+						+'data-pelatihanlokasi="'+row.LOKASI+'" '
+						+'data-pelatihanlradius="'+row.RADIUS+'" '
+						+'data-pelatihanlongitude="'+row.LONGITUDE+'" '
+						+'data-pelatihanlatitude="'+row.LATITUDE+'" '
+						+'data-pelatihanpembicara="'+row.PEMBICARA+'"> Edit</a>';
+						tombol_action += '<a class= "dropdown-item" target="_blank" href="<?php echo $this->config->item('jasper_report').'Pelatihan.pdf?ID=' ?>'+row.ID+'"> Unduh Proposal</a>';
+					  }
+					  
+					  if (row.STATUS=='draft'){	
+						tombol_action +='<a id="submit_proposal" class="dropdown-item submit_proposal" data-idpelatihan="'+row.ID+'" data-judulpelatihan="'+row.TITLE+'"  href="#" > Submit Proposal</a></div></div> ';
+					  }
+					  
+					  if (row.STATUS=='approved' || row.STATUS=='lpj_draft'){		
+						tombol_action +='<a class= "dropdown-item" href="<?php  echo base_url('pelatihan/lpj/'); ?>'+row.ID+'/mekaar"> Pelatihan LPJ</a>'; 
+					  }
+					  
+					if (row.STATUS=='lpj_approved'){
+						tombol_action +='<a class="dropdown-item pelatihan_details" href="#" data-toggle="modal" '
+						+'data-target="#modaldetails" '
+						+'data-pelatihanid="'+row.ID+'" '
+						+'data-pelatihantype="'+row.ID_TIPE+'" '
+						+'data-pelatihantitle="'+row.TITLE+'" '
+						+'data-pelatihanregion="'+row.REGIONAL_MEKAAR+'" '
+						+'data-pelatihanarea="'+row.AREA_MEKAAR+'" '
+						+'data-pelatihancabang="'+row.CABANG_MEKAAR+'" '						
+						+'data-pelatihancabangulamm="'+row.CABANG_ULAMM+'" '
+						+'data-pelatihandeskripsi="'+row.DESKRIPSI+'" '
+						+'data-pelatihantanggal="'+row.TANGGAL_MULAI+' - '+row.TANGGAL_SELESAI+'" '
+						+'data-pelatihandurasi="'+row.DURASI_PELATIHAN+'" '
+						+'data-pelatihankuota="'+row.KUOTA_PESERTA+'" '
+						+'data-pelatihananggaran="'+row.BUDGET+'" '
+						+'data-pelatihanprovinsi="'+row.PROVINSI+'" '
+						+'data-pelatihanalamat="'+row.ALAMAT+'" '
+						+'data-pelatihanlokasi="'+row.LOKASI+'" '
+						+'data-pelatihanlradius="'+row.RADIUS+'" '
+						+'data-pelatihanlongitude="'+row.LONGITUDE+'" '
+						+'data-pelatihanlatitude="'+row.LATITUDE+'" > Details</a>';
+						
+						tombol_action += '<a class= "dropdown-item" target="_blank" href="<?php echo $this->config->item('jasper_report').'Pelatihan.pdf?ID=' ?>'+row.ID+'"> Unduh Proposal Approved</a>';
+						
+						tombol_action += '<a class= "dropdown-item" target="_blank" href="<?php echo $this->config->item('jasper_report').'Pelatihan.pdf?ID=' ?>'+row.ID+'"> Unduh LPJ Approved</a>';
+					}
+					
+					
+					  tombol_action += '</div></div> </td>';					  
+					  return tombol_action;
+					} 
+				},                         
+			],
+			"dom": "<'dom_datable'f>rt<'dom_datable col-md-6'i>",
+			"createdRow" : function (row, data, index) {
+				$(row).addClass("add-kehadiran-non-nasabah");      
+			}
+		});	
+				
+										
+		$('#modalview').modal({
+			show: true
+		}); 
+		
+	});	
 </script>       

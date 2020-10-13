@@ -63,7 +63,7 @@
 																data-pelatihanlatitude="'.$data->LATITUDE.'"
 																> Details</a>
 																<a class= "dropdown-item" target="_blank" href="'.$this->config->item("jasper_report").'Pelatihan.pdf?ID='.$data->ID.'"> Unduh Proposal</a>				
-																<a class= "dropdown-item pelatihan_approval" href="#" data-toggle="modal" data-target="#modalapproval" data-pelatihanid="'.$data->ID.'"> Verify</a>				
+																<a class= "dropdown-item pelatihan_approval" href="#" data-toggle="modal" data-target="#modalapproval" data-pelatihanid="'.$data->ID.'" data-gradingid="'.$data->ID_GRADING.'" > Verify</a>				
 															  </div>
 															</div> 
 													</td>'; 

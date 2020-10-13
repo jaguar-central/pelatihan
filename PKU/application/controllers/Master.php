@@ -355,4 +355,23 @@ class Master extends MY_Controller
 
 
 
+
+	public function get_grading(){
+		$id = $_GET['id_grading'] ? (int)$_GET['id_grading'] : 0;
+		
+		
+		$grading = $this->Master_model->select_ms_grading();	
+
+		$data= '<option value="">--pilih grade--</option>';
+		
+		foreach ($grading as $data_grade) {
+			if ($data_grade->ID==$id){
+				$data .= "<option value='".$data_grade->ID."' selected>".$data_grade->GRADING_DESKRIPSI." </option>";
+			}else{
+				$data .= "<option value='".$data_grade->ID."' >".$data_grade->GRADING_DESKRIPSI." </option>";
+			}	
+		} 	
+				
+		echo $data;
+	}
 }

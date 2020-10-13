@@ -1,7 +1,7 @@
 FROM php:7.2-apache
 
 LABEL author="FZL"
-
+USER root
 #ENV ACCEPT_EULA=Y
 
 # Microsoft SQL Server Prerequisites
@@ -29,7 +29,19 @@ RUN curl -L -o /tmp/memcached.tar.gz "https://github.com/php-memcached-dev/php-m
     && docker-php-ext-install memcached \
     && rm /tmp/memcached.tar.gz
 
-RUN apt-get install -y ufw
+# RUN apt-get install -y ufw
+
+# RUN apt install -y iptables-persistent
+# RUN mkdir -p /etc/iptables
+# RUN iptables-save > -y /etc/iptables/rules.v4 
+# RUN ip6tables-save > -y /etc/iptables/rules.v6
+# RUN service iptables-persistent start
+
+
+
+# COPY iptables.sh /usr/local/bin/iptables.sh
+# RUN chmod +x /usr/local/bin/iptables.sh && apt-get install -y iptables
+# CMD iptables.sh
 
 RUN a2enmod rewrite
 

@@ -35,9 +35,13 @@
 	
     <link href="<?php echo base_url() ?>assets/css/style.css" rel="stylesheet">
 	
-    <link href="<?php echo base_url() ?>assets/css/daterangepicker.css" rel="stylesheet">
+    <!-- <link href="<?php echo base_url() ?>assets/css/daterangepicker.css" rel="stylesheet">     -->
+
+    <link href="<?php echo base_url() ?>assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 	
     <link href="<?php echo base_url() ?>assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
+    
 	
 	
 		

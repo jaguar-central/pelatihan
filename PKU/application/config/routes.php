@@ -85,6 +85,10 @@ $route['master/post_user'] 		= 'Master/post_user';
 $route['check_user'] 	= 'User/cek_authorization';
 $route['logout'] 		= 'User/process_signout';
 
+/* REPORT */
+$route['report/agenda_klasterisasi'] 		= 'Report/agenda_klasterisasi';
+
+
 
 /* API DATA NASABAH*/
 $route['nasabah/get_paging_nasabah_ulamm']      = 'nasabah/api_nasabah_ulamm';
@@ -94,9 +98,11 @@ $route['nasabah/get_paging_nasabah_mekaar']     = 'nasabah/api_nasabah_mekaar';
 $route['master/get_unit_ulamm']                 = 'master/get_unit_ulamm';
 $route['master/get_area_mekaar']                = 'master/get_area_mekaar';
 $route['master/get_cabang_mekaar']              = 'master/get_cabang_mekaar';
+$route['master/get_grading']              		= 'master/get_grading';
 
 /* API DATA PELATIHAN*/
 $route['pelatihan/post_pelatihan']                              = 'pelatihan/post_pelatihan_proposal';
+$route['pelatihan/update_pelatihan']                              = 'pelatihan/update_pelatihan_proposal';
 $route['pelatihan/get_rab']                                     = 'pelatihan/get_rab';
 $route['pelatihan/post_konfirmasi_proposal']                    = 'pelatihan/post_konfirmasi_proposal';
 $route['pelatihan/post_pelatihan_lpj']                          = 'pelatihan/post_pelatihan_lpj';
