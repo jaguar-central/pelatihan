@@ -15,23 +15,14 @@
 									<table id="datatable" class="table table-bordered table-striped table-responsive">
                                         <thead>
                                             <tr>
-                                                <th>ID TIPE</th>
+                                                <th>JENIS PELATIHAN</th>
                                                 <th>NO PROPOSAL</th>
                                                 <th>TITLE</th>
                                                 <th>TANGGAL MULAI</th>
                                                 <th>TANGGAL SELESAI</th>
                                                 <th>DURASI PELATIHAN</th>
                                                 <th>DESKRIPSI</th>
-                                                <th>LOKASI</th>
-                                                <th>KUOTA PESERTA</th>
-                                                <th>PROVINSI</th>
-                                                <th>LOKASI PNM</th>
-                                                <th>REGIONAL PNM</th>
-                                                <th>AREA PNM</th>
-                                                <th>CABANG PNM</th>
-                                                <th>UNIT PNM</th>
-                                                <th>BUDGET</th>
-                                                <th>STATUS</th>
+                                                <th>LOKASI</th>                                            
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -39,23 +30,14 @@
                                             <?php 
                                             foreach ($t_pelatihan_lpj as $data){
                                                 echo '<tr>';
-                                                echo '<td>'.$data->ID_TIPE.'</td>';
+                                                echo '<td>'.$data->DESKRIPSI_PELATIHAN_TYPE.'</td>';
                                                 echo '<td>'.$data->NO_PROPOSAL.'</td>'; 
                                                 echo '<td>'.$data->TITLE.'</td>';
                                                 echo '<td>'.$data->TANGGAL_MULAI.'</td>';
                                                 echo '<td>'.$data->TANGGAL_SELESAI.'</td>';
                                                 echo '<td>'.$data->DURASI_PELATIHAN.'</td>';
                                                 echo '<td>'.$data->DESKRIPSI.'</td>';
-                                                echo '<td>'.$data->LOKASI.'</td>';
-                                                echo '<td>'.$data->KUOTA_PESERTA.'</td>';
-                                                echo '<td>'.$data->PROVINSI.'</td>';
-                                                echo '<td>'.$data->LOKASI_PNM.'</td>';
-                                                echo '<td>'.$data->REGIONAL_MEKAAR.'</td>';
-                                                echo '<td>'.$data->AREA_MEKAAR.'</td>';
-                                                echo '<td>'.$data->CABANG_MEKAAR.'</td>';
-                                                echo '<td>'.$data->UNIT_ULAMM.'</td>';
-                                                echo '<td>'.$data->BUDGET.'</td>';
-                                                echo '<td>'.$data->STATUS.'</td>';                                              
+                                                echo '<td>'.$data->LOKASI.'</td>';                                                                                
 												echo '<td> 
 															<div class="dropdown">
 															  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Action

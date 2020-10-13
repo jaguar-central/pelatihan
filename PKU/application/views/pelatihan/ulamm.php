@@ -24,7 +24,7 @@
 								<?php 
 								$klasterisasi = array(3,4);								
 								foreach ($pelatihan_type as $cus){
-									if ($this->session->userdata('sess_user_id_user_group')!=3){ //kecuali pic pusat
+									if ($this->session->userdata('sess_user_id_user_group')!=3){ //untuk pic cabang
 										echo '<tr>';
 										echo '<td>'.$cus->TITLE.'</td>'; 
 										echo '<td>'.$cus->AKTIF.'</td>'; 									

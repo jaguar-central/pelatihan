@@ -154,8 +154,9 @@
 		$('#timeawal_edit').val($(this).data('pelatihantanggalmulai'));		
 		$('#timeakhir_edit').val($(this).data('pelatihantanggalselesai'));		
 		$('#durasi_pelatihan_edit').val($(this).data('pelatihandurasi'));		
-		$('#kuota_peserta_edit').val($(this).data('pelatihankuota'));		
+		$('#kuota_peserta_edit').val($(this).data('pelatihankuota'));				
 		$('#anggaran_edit').val($(this).data('pelatihananggaran'));		
+		new AutoNumeric("#anggaran_edit","commaDecimalCharDotSeparator");
 		$('#provinsi_edit').val($(this).data('pelatihanprovinsi'));		
 		$('#alamat_tempat_pelatihan_edit').val($(this).data('pelatihanalamat'));		
 		$('#lokasi_pelatihan_edit').val($(this).data('pelatihanlokasi'));		
@@ -299,7 +300,7 @@
 					  }
 					  
 					  if (row.STATUS=='draft'){	
-						tombol_action +='<a id="submit_proposal" class="dropdown-item submit_proposal" data-idpelatihan="'+row.ID+'" data-judulpelatihan="'+row.TITLE+'"  href="#" > Submit Proposal</a></div></div> ';
+						tombol_action +='<div class="dropdown-divider"></div> <a id="submit_proposal" class="dropdown-item submit_proposal" data-idpelatihan="'+row.ID+'" data-judulpelatihan="'+row.TITLE+'"  href="#" > Submit Proposal</a></div></div> ';
 					  }
 					  
 					  if (row.STATUS=='approved' || row.STATUS=='lpj_draft'){		

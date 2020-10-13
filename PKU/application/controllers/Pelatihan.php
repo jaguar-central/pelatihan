@@ -83,8 +83,7 @@ class Pelatihan extends MY_Controller
 		
         $data["menu"] 			= $this->Menu_model->select_ms_menu();
 		$data["pelatihan_type"] = $this->Pelatihan_model->select_ms_pelatihan_type_ulamm();
-		$data["grade_ulamm"] 	= $this->Master_model->select_ms_grading();
-        // $data["pelatihan"] 		= $this->Pelatihan_model->select_t_pelatihan_ulamm_by_status(array('draft','approved','lpj_approved','lpj_draft'));		
+		$data["grade_ulamm"] 	= $this->Master_model->select_ms_grading();        
 		$data["cabang"] 		= $this->Master_model->select_ms_cabang_ulamm();
 		$data["sektor_ekonomi"]	= $this->Master_model->select_dw_nasabah_ulamm_sektor_ekonomi();
 		$data["jenis_pinjaman"]	= $this->Master_model->select_dw_nasabah_ulamm_jenis_pinjaman();
@@ -141,7 +140,7 @@ class Pelatihan extends MY_Controller
 		$this->is_logged();				
 		
         $data["content"] 	= "Pelatihan";
-        $data["view"] 		= "pelatihan/history";
+        $data["view"] 		= "pelatihan/history_ulamm";
 		$data["script"] 	= "pelatihan/include/history-script";
 		$data["modal"] 		= array( "pelatihan/modal-ulamm/modaldhistory"); 
 
@@ -157,7 +156,7 @@ class Pelatihan extends MY_Controller
 		$this->is_logged();				
 		
         $data["content"] 	= "Pelatihan";
-        $data["view"] 		= "pelatihan/history";
+        $data["view"] 		= "pelatihan/history_mekaar";
 		$data["script"] 	= "pelatihan/include/history-script";
 		$data["modal"] 		= array( "pelatihan/modal-mekaar/modaldhistory"); 
 
@@ -204,7 +203,7 @@ class Pelatihan extends MY_Controller
 									'pelatihan/modal-konfirmasi/modalapproval'
 								);		
         
-		$data["grade_approval"] = $this->Pelatihan_model->select_ms_grade_approval();
+		// $data["grade_approval"] = $this->Master_model->select_ms_grade_approval();
         $data["menu"] = $this->Menu_model->select_ms_menu();
 		
 		if ($this->session->userdata('sess_user_id_user_group')=='2'){
@@ -265,7 +264,7 @@ class Pelatihan extends MY_Controller
     {
 		$this->is_logged();				
 		
-        $bisnis_pelatihan   		= trim($this->security->xss_clean(strip_image_tags($this->input->post('bisnis_pelatihan'))));
+        $id_bisnis_pelatihan   		= trim($this->security->xss_clean(strip_image_tags($this->input->post('id_bisnis_pelatihan'))));
         $klasterisasi   			= trim($this->security->xss_clean(strip_image_tags($this->input->post('klasterisasi'))));
         $pelatihan_type     		= trim($this->security->xss_clean(strip_image_tags($this->input->post('pelatihan_type'))));
 		$judul_pelatihan    		= trim($this->security->xss_clean(strip_image_tags($this->input->post('judul_pelatihan'))));
@@ -305,7 +304,7 @@ class Pelatihan extends MY_Controller
 		$no_trx='';		
 		$no_trx_reject='';
 		$no_proposal='';
-		if ($bisnis_pelatihan=='ULAMM'){
+		if ($id_bisnis_pelatihan=='1'){
 			$data_unit_ulamm = '';
 			$data_cabang_mekaar = '';
 			foreach ($unit_ulamm as $key => $value) {	
@@ -341,7 +340,7 @@ class Pelatihan extends MY_Controller
 			$no_proposal = $this->create_trx_no($param);
 		}	
 		
-		if ($bisnis_pelatihan=='MEKAAR'){	
+		if ($id_bisnis_pelatihan=='2'){	
 			$data_unit_ulamm = '';
 			$data_cabang_mekaar = '';
 			foreach ($cabang_mekaar as $key => $value) {
@@ -401,7 +400,7 @@ class Pelatihan extends MY_Controller
 				'ID_KLASTERISASI' 	=> $klasterisasi,
 				'ID_GRADING'		=> $grading,
 				'TITLE' 			=> $judul_pelatihan,
-				'TIPE_BISNIS'		=> $bisnis_pelatihan,
+				'ID_BISNIS'			=> $id_bisnis_pelatihan,
 				'REGIONAL_MEKAAR'	=> $regional_mekaar,
 				'AREA_MEKAAR' 		=> $area_mekaar,
 				'CABANG_MEKAAR'		=> $data_cabang_mekaar,
@@ -432,7 +431,7 @@ class Pelatihan extends MY_Controller
 			for ($i=1;$i<count($deskripsi_rab);$i++){
 				$rab = array(
 					'ID_PELATIHAN' 		=> $id_pelatihan,
-					'TIPE_BISNIS' 		=> $bisnis_pelatihan,
+					'ID_BISNIS' 		=> $id_bisnis_pelatihan,
 					'URAIAN' 			=> $deskripsi_rab[$i],
 					'JUMLAH' 			=> $jumlah_rab[$i],
 					'SATUAN' 			=> $unit_rab[$i],

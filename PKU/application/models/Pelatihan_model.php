@@ -56,7 +56,7 @@ public function update_t_pelatihan($data,$where){
 public function select_t_pelatihan_ulamm_by_status($status)
         {
                 $query = $this->db->select('*,dbo.DESKRIPSI_PELATIHAN_TYPE(ID_TIPE) as DESKRIPSI_PELATIHAN_TYPE')->from('T_PELATIHAN')->
-				where('TIPE_BISNIS','ULAMM')->
+				where('ID_BISNIS','1')->
 				where_in('STATUS',$status)->get();				
                 return $query->result();
         }
@@ -64,7 +64,7 @@ public function select_t_pelatihan_ulamm_by_status($status)
 public function select_t_pelatihan_mekaar_by_status($status)
         {
                 $query = $this->db->select('*,dbo.DESKRIPSI_PELATIHAN_TYPE(ID_TIPE) as DESKRIPSI_PELATIHAN_TYPE')->from('T_PELATIHAN')->
-				where('TIPE_BISNIS','MEKAAR')->
+				where('ID_BISNIS','2')->
 				where_in('STATUS',$status)->get();				
                 return $query->result();
         }
@@ -78,9 +78,9 @@ public function insert_t_approval($data)
 public function select_t_pelatihan_proposal_by_approval($approval)
         {			
 			if ($approval=='' || $approval=='Pinca'){	
-                $query = $this->db->query("select * from T_PELATIHAN where STATUS='submitted' and ISNULL(APPROVAL,'')='".$approval."' and CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ");
+                $query = $this->db->query("select *,dbo.DESKRIPSI_PELATIHAN_TYPE(ID_TIPE) as DESKRIPSI_PELATIHAN_TYPE from T_PELATIHAN where STATUS='submitted' and ISNULL(APPROVAL,'')='".$approval."' and CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ");
 			}else{
-                $query = $this->db->query("select * from T_PELATIHAN where STATUS='submitted' and ISNULL(APPROVAL,'')='".$approval."' ");				
+                $query = $this->db->query("select *,dbo.DESKRIPSI_PELATIHAN_TYPE(ID_TIPE) as DESKRIPSI_PELATIHAN_TYPE from T_PELATIHAN where STATUS='submitted' and ISNULL(APPROVAL,'')='".$approval."' ");				
 			}
 				
             return $query->result();
@@ -99,9 +99,9 @@ public function insert_t_rab_lpj($data)
 public function select_t_pelatihan_lpj_by_approval($approval)
         {
 			if ($approval=='' || $approval=='Pinca'){	
-                $query = $this->db->query("select * from T_PELATIHAN where STATUS='lpj_submitted' and ISNULL(APPROVAL,'')='".$approval."' and CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ");			
+                $query = $this->db->query("select *,dbo.DESKRIPSI_PELATIHAN_TYPE(ID_TIPE) as DESKRIPSI_PELATIHAN_TYPE from T_PELATIHAN where STATUS='lpj_submitted' and ISNULL(APPROVAL,'')='".$approval."' and CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ");			
 			}else{				
-                $query = $this->db->query("select * from T_PELATIHAN where STATUS='lpj_submitted' and ISNULL(APPROVAL,'')='".$approval."' ");
+                $query = $this->db->query("select *,dbo.DESKRIPSI_PELATIHAN_TYPE(ID_TIPE) as DESKRIPSI_PELATIHAN_TYPE from T_PELATIHAN where STATUS='lpj_submitted' and ISNULL(APPROVAL,'')='".$approval."' ");
 			}
             return $query->result();
         }
@@ -203,6 +203,7 @@ public function paging_t_pelatihan($param)
 	,@TIPEPELATIHAN = '".$param["tipe_pelatihan"]."'
 	,@TIPEBISNIS = '".$param["tipe_bisnis"]."'
 	,@COUNT = '".$param["count"]."'
+	,@IDUSER = '".$this->session->userdata('sess_user_id')."'
 	");
 	return $query->result();
 }		

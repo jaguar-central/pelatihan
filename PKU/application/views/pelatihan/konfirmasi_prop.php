@@ -15,7 +15,7 @@
 									<table id="datatable" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th>ID TIPE</th>
+                                                <th>JENIS PELATIHAN</th>
                                                 <th>NO MEMO</th>
                                                 <th>TITLE</th>
                                                 <th>TANGGAL MULAI</th>
@@ -30,7 +30,7 @@
                                             <?php 
                                             foreach ($t_pelatihan as $data){
                                                 echo '<tr>';
-                                                echo '<td>'.$data->ID_TIPE.'</td>';
+                                                echo '<td>'.$data->DESKRIPSI_PELATIHAN_TYPE.'</td>';
                                                 echo '<td>'.$data->NO_PROPOSAL.'</td>'; 
                                                 echo '<td>'.$data->TITLE.'</td>';
                                                 echo '<td>'.$data->TANGGAL_MULAI.'</td>';

@@ -30,7 +30,6 @@ class User extends MY_Controller {
 			$this->session->set_flashdata('error', 'Mohon maaf, anda tidak terdaftar pada sistem event management system. Hubungi IT center');		
 			redirect('lock');
 		}else{
-		//End: Penambahan Andika 17092018
 
 		$idsdm = $pecah[0];
 
@@ -57,14 +56,13 @@ class User extends MY_Controller {
 		header('Content-Type: application/json');
 
         $data = json_decode(file_get_contents($url.'?secret='.$secret_code.'&app_code=MPLT&username='.$username));
-
-		//$data = json_decode(file_get_contents('http://182.23.52.249/Dummy/SSO_WebService/crosscheck.php?secret='.$secret_code.'&app_code=MPLT&username='.$username));
+		
 
 		$data = json_encode($data);
 
 		$json = json_decode($data, true);
 		
-		// var_dump($secret_code);die();
+
 
 		/*====================================================================
 

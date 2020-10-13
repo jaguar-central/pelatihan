@@ -15,16 +15,14 @@
 			<table id="datatable" class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<th>ID TIPE</th>
+						<th>JENIS PELATIHAN</th>
 						<th>NO MEMO</th>
 						<th>TITLE</th>
 						<th>TANGGAL MULAI</th>
 						<th>TANGGAL SELESAI</th>
-						<th>REGION M</th>
-						<th>AREA M</th>
-						<th>CABANG M</th>
-						<th>CABANG U</th>
-						<th>UNIT U</th>
+						<th>CABANG</th>
+						<th>UNIT</th>
+						<th>STATUS</th>
 						<th>ACTION</th>
 					</tr>
 				</thead>
@@ -32,16 +30,14 @@
 					<?php 
 					foreach ($pelatihan as $cus){
 						echo '<tr>';
-						echo '<td>'.$cus->ID_TIPE.'</td>';
+						echo '<td>'.$cus->DESKRIPSI_PELATIHAN_TYPE.'</td>';
 						echo '<td>'.$cus->NO_PROPOSAL.'</td>'; 
 						echo '<td>'.$cus->TITLE.'</td>';
 						echo '<td>'.$cus->TANGGAL_MULAI.'</td>';
 						echo '<td>'.$cus->TANGGAL_SELESAI.'</td>';
-						echo '<td>'.$cus->REGIONAL_MEKAAR.'</td>';
-						echo '<td>'.$cus->AREA_MEKAAR.'</td>';
-						echo '<td>'.$cus->CABANG_MEKAAR.'</td>';
 						echo '<td>'.$cus->CABANG_ULAMM.'</td>';
 						echo '<td>'.$cus->UNIT_ULAMM.'</td>'; 
+						echo '<td>'.$cus->STATUS.'</td>'; 						
 						echo '<td><button type="button" class="btn btn-primary modaldhistory" href="#" data-toggle="modal" data-target="#modaldhistory" 
 								data-pelatihanid="'.$cus->ID.'"
 								data-pelatihantype="'.$cus->ID_TIPE.'"

@@ -8,7 +8,7 @@ public function select_ms_user()
 }
 public function select_ms_cabang_ulamm()
 {
-		$query = $this->db->query("select * from MS_CABANG_ULAMM  ");
+		$query = $this->db->query("select * from MS_CABANG_ULAMM where KODE_CABANG in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." )  ");
 		return $query->result();
 }
 

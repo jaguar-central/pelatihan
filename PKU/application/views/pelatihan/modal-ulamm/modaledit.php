@@ -136,9 +136,10 @@
 					</div-->                          
 				
 					<label class="col-sm-2">Anggaran <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="anggaran_edit" name="anggaran_edit" />
-					</div>                      
+					<div class="input-group col-sm-4">
+						<span class="input-group-addon">Rp</span>
+						<input type="text" class="form-control"  required="" id="anggaran_edit" name="anggaran_edit" />				
+					</div>  					      
 				</div>
 
 				<div class="form-group row">
@@ -316,6 +317,10 @@
     });		
 		
 	$(document).ready(function() {		
+
+
+		new AutoNumeric("#anggaran_edit","commaDecimalCharDotSeparator");	
+
 		var durasi = function () {
 			var start 	= $('#timeawal').val();
 		    var end 	= $('#timeakhir').val();
