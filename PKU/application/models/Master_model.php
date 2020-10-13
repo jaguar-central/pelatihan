@@ -91,7 +91,8 @@ public function select_dw_nasabah_ulamm_jenis_program()
 		return $query->result();
 }		
 	
-public function notification(){
+public function notification(){	
+
 	if ($this->session->userdata('sess_user_id_user_group')=='2'){
 		$approval = "'''',''Kadiv''";				
 		return $this->db->query(" EXEC [GET_NOTIF] @APPROVAL='".$approval."',@IDUSER='".$this->session->userdata('sess_user_id')."',@IDBINIS='".$this->session->userdata('sess_user_id_bisnis')."' ")->result();				
@@ -102,7 +103,8 @@ public function notification(){
 	}			
 	else if	($this->session->userdata('sess_user_id_user_group')=='4'){
 		$approval = "''PIC Pusat''";
-		return $this->db->query(" EXEC [GET_NOTIF] @APPROVAL='".$approval."' ")->result();
+		// return $this->db->query(" EXEC [GET_NOTIF] @APPROVAL='".$approval."' ")->result();
+		return $this->db->query(" EXEC [GET_NOTIF] @APPROVAL='".$approval."',@IDUSER='".$this->session->userdata('sess_user_id')."',@IDBINIS='".$this->session->userdata('sess_user_id_bisnis')."' ")->result();
 	}
 	else if	($this->session->userdata('sess_user_id_user_group')=='5'){
 		$approval = "''Kabag''";
@@ -130,7 +132,8 @@ public function notification_count(){
 	}		
 	else if ($this->session->userdata('sess_user_id_user_group')=='4'){
 		$approval = "''PIC Pusat''";
-		return $this->db->query("EXEC [GET_NOTIF] @APPROVAL='".$approval."',@COUNT=1 ")->result()[0]->COUNT_NOTIF;
+		// return $this->db->query("EXEC [GET_NOTIF] @APPROVAL='".$approval."',@COUNT=1 ")->result()[0]->COUNT_NOTIF;
+		return $this->db->query(" EXEC [GET_NOTIF] @APPROVAL='".$approval."',@IDUSER='".$this->session->userdata('sess_user_id')."',@IDBINIS='".$this->session->userdata('sess_user_id_bisnis')."',@COUNT=1 ")->result()[0]->COUNT_NOTIF;
 	}
 	else if ($this->session->userdata('sess_user_id_user_group')=='5'){
 		$approval = "''Kabag''";

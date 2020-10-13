@@ -9,6 +9,8 @@
 <body class="animsition">
 <div class="page-wrapper">
 
+
+
 <?php $this->load->view("layout/navigasi"); ?>
 
 <?php $this->load->view($view); ?>

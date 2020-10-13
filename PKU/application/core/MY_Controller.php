@@ -12,6 +12,8 @@ class MY_Controller extends CI_Controller
 		parent::__construct();
 		
 		$data_global['notification'] = $this->Master_model->notification();
+
+		// var_dump($this->db->last_query());die();
 		
 		$data_global['notification_count'] = $this->Master_model->notification_count();
 
