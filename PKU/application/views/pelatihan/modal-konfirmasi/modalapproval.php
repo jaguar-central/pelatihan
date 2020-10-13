@@ -36,26 +36,7 @@
 							<option value="">--pilih grade--</option>								
 						</select>	
 					</div>
-				</div>				
-				
-				<div class="form-group row">
-					<label class="col-sm-2">Grade <span class="text-danger">*</span></label>
-					<div class="col-sm-8">
-						<select class="form-control select_tag" required="" id="grading" name="grading">
-							<option value="">--pilih grade--</option>
-
-							<?php 
-								foreach ($grade_approval as $data_grade){ 
-									if ($data_grade->ID==1){
-										echo '<option value="'.$data_grade->ID.'" selected>'.$data_grade->GRADING_DESKRIPSI.'</option>';
-									}else{
-										echo '<option value="'.$data_grade->ID.'">'.$data_grade->GRADING_DESKRIPSI.'</option>';                                                                    
-									}
-								}
-								?>										
-						</select>	
-					</div>
-				</div>
+				</div>								
 
 				<div class="form-group row">
 

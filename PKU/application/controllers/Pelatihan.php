@@ -119,8 +119,7 @@ class Pelatihan extends MY_Controller
 
 		$data["menu"] 			= $this->Menu_model->select_ms_menu();
 		$data["pelatihan_type"] = $this->Pelatihan_model->select_ms_pelatihan_type_mekaar();
-		$data["grade_mekaar"] 	= $this->Master_model->select_ms_grading();
-		// $data["pelatihan"] 		= $this->Pelatihan_model->select_t_pelatihan_mekaar_by_status(array('draft','approved','lpj_approved','lpj_draft'));
+		$data["grade_mekaar"] 	= $this->Master_model->select_ms_grading();		
 		$data["cabang"] 		= $this->Master_model->select_ms_cabang_ulamm();		
 		$data["region"] 		= $this->Master_model->select_ms_region_mekaar();
 		$data["sektor_ekonomi"]	= $this->Master_model->select_dw_nasabah_ulamm_sektor_ekonomi();
@@ -204,7 +203,6 @@ class Pelatihan extends MY_Controller
 								);
 								
         
-		// $data["grade_approval"] = $this->Master_model->select_ms_grade_approval();
         $data["menu"] = $this->Menu_model->select_ms_menu();
 		
 		if ($this->session->userdata('sess_user_id_user_group')=='2'){
