@@ -129,7 +129,7 @@
 				
 		$.ajax({
 			url: "<?php echo base_url()?>pelatihan/get_rab",
-			data: "pelatihanid="+$(this).data("pelatihanid"),
+			data: "pelatihanid="+$(this).data("pelatihanid")+"&tipe_modal=details",
 			cache: false,
 			success: function(data){				         
 				$('#table_rab_details').html(data);    

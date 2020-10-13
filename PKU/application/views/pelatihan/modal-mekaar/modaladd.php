@@ -114,9 +114,19 @@
 
 					<div class="col-sm-4">
 
-						 <div class="input-group">										
+						 <div class="input-group">
+
+						 <!-- <input type="text" class="form-control input-limit-datepicker" id="input-limit-datepicker" required />																				 -->
 							
-							<input type="text" class="form-control input-limit-datepicker" id="input-limit-datepicker" required />																				
+							<div class='input-group date'>
+								<span class="input-group-addon">
+								<span class="fas fa-calendar"></span>
+								</span>
+								<input type='text' class="form-control" id='timeawal' />
+								<span class="input-group-addon bg-custom b-0">s/d</span>
+								<input type='text' class="form-control" id='timeakhir' />
+							</div>											
+																											
 							<input type="hidden" id="inputStartTglPelaksanaan" name="inputStartTglPelaksanaan" />
 							
 							<input type="hidden" id="inputStartTimePelaksanaan" name="inputStartTimePelaksanaan" />
@@ -309,35 +319,68 @@
 </div>
 <script type="text/javascript">
 
-	$(document).ready(function() {	
+	$(document).ready(function() {
+
 		new AutoNumeric("#anggaran","commaDecimalCharDotSeparator");
 	
-		$('.input-limit-datepicker').daterangepicker({
-		  timePicker: true
-		  ,locale: {
-			format: 'DD MMMM YYYY hh:mm A'           
-		  }
-		}, function(start, end, label) {						
+		//$('.input-limit-datepicker').daterangepicker({
+		//  timePicker: true
+		//  ,locale: {
+		//	format: 'DD MMMM YYYY hh:mm A'           
+		//}
+		//}, function(start, end, label) {						
 			
-		  $("#inputStartTglPelaksanaan").val(start.format('YYYY-MM-DD'));
-		  $("#inputAkhirTglPelaksanaan").val(end.format('YYYY-MM-DD'));
-		  $("#inputStartTimePelaksanaan").val(start.format('hh:mm A'));
-		  $("#inputEndTimePelaksanaan").val(end.format('hh:mm A'));
+		//$("#inputStartTglPelaksanaan").val(start.format('YYYY-MM-DD'));
+		//$("#inputAkhirTglPelaksanaan").val(end.format('YYYY-MM-DD'));
+		//$("#inputStartTimePelaksanaan").val(start.format('hh:mm A'));
+		//$("#inputEndTimePelaksanaan").val(end.format('hh:mm A'));
 		  
 
-		  var diff =  Math.abs(new Date(end) - new Date(start));
-		  var seconds = Math.floor(diff/1000);
-		  var minutes = Math.floor(seconds/60); 
-		  seconds = seconds % 60;
-		  var hours = Math.floor(minutes/60);
-		  minutes = minutes % 60;
-		  var total = 0
-		  total = minutes + (hours*60)
-		  console.log("Diff = " + hours + ":" + minutes + ":" + seconds);
-		  $("#durasi_pelatihan").val(total);
+		//var diff =  Math.abs(new Date(end) - new Date(start));
+		//var seconds = Math.floor(diff/1000);
+		//var minutes = Math.floor(seconds/60); 
+		//seconds = seconds % 60;
+		//var hours = Math.floor(minutes/60);
+		//minutes = minutes % 60;
+		//var total = 0
+		//total = minutes + (hours*60)
+		//console.log("Diff = " + hours + ":" + minutes + ":" + seconds);
+		//$("#durasi_pelatihan").val(total);
 		  // console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-		});
+		//});
 
+		var durasi = function () {
+			var start 	= $('#timeawal').val();
+		    var end 	= $('#timeakhir').val();
+
+	     	var diff =  Math.abs(new Date(end) - new Date(start));
+			var seconds = Math.floor(diff/1000);
+			var minutes = Math.floor(seconds/60); 
+			seconds = seconds % 60;
+			var hours = Math.floor(minutes/60);
+			minutes = minutes % 60;
+			var total = 0
+			total = minutes + (hours*60)
+			console.log("Diff = " + hours + ":" + minutes + ":" + seconds);
+			$("#durasi_pelatihan").val(total);
+		};		
+
+		$('#timeawal').datetimepicker();
+		$('#timeakhir').datetimepicker(
+			// {useCurrent: false /*Important! See issue #1075*/}
+		);
+		$("#timeawal").on("dp.change", function (e) {
+		   $('#timeakhir').data("DateTimePicker").minDate(e.date);
+		   $("#inputStartTglPelaksanaan").val(e.date.format('YYYY-MM-DD'));
+		   $("#inputStartTimePelaksanaan").val(e.date.format('hh:mm A'));
+		   durasi();		   
+        });
+        $("#timeakhir").on("dp.change", function (e) {
+		   $('#timeawal').data("DateTimePicker").maxDate(e.date);
+		   $("#inputAkhirTglPelaksanaan").val(e.date.format('YYYY-MM-DD'));
+		   $("#inputEndTimePelaksanaan").val(e.date.format('hh:mm A'));	
+		   durasi();
+        });
 
 
 		$(".select").select2({

@@ -72,7 +72,7 @@
 
 					<label class="col-sm-2">Grade <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-					<select class="form-control select_tag" required="" id="grading" name="grading">
+						<select class="form-control select_tag" required="" id="grading" name="grading">
 							<option value="">--pilih grade--</option>
 
 							<?php 

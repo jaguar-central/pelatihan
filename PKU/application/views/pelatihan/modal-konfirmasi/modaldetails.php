@@ -106,16 +106,11 @@
 					</div>						
 				</div>
 
-				<div class="form-group row">
-					<!--label class="col-sm-2">Modul <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="modul" name="modul" />
-					</div-->                          
-				
+				<div class="form-group row">				
 					<label class="col-sm-2">Anggaran <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control"  required="" id="anggaran_details" name="anggaran_details" disabled />
-					</div>                      
+					</div>
 				</div>
 
 				<div class="form-group row">
