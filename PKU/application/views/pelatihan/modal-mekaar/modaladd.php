@@ -18,7 +18,7 @@
 			<div class="modal-body">
 
 				<div class="form-group row">
-					<input type="hidden" class="form-control" id="bisnis_pelatihan" name="bisnis_pelatihan" value="MEKAAR" />
+					<input type="hidden" class="form-control" id="id_bisnis_pelatihan" name="id_bisnis_pelatihan" value="2" />
 					
 					<label class="col-sm-2">Tipe Pelatihan <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
