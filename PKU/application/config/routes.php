@@ -74,12 +74,14 @@ $route['nasabah/mekaar'] 		= 'nasabah/nasabah_mekaar';
 $route['nasabah/non_nasabah'] 	= 'nasabah/non_nasabah_ulamm';
 
 /* MASTER */
-$route['master/user'] 	        = 'Master/user';
-$route['master/user_group']     = 'Master/user_group';
-$route['master/cabang_ulamm'] 	= 'Master/cabang_ulamm';
-$route['master/area_mekaar'] 	= 'Master/area';
-$route['master/unit_ulamm'] 	= 'Master/unit';
-$route['master/post_user'] 		= 'Master/post_user';
+$route['master/user'] 	            = 'Master/user';
+$route['master/user_group']         = 'Master/user_group';
+$route['master/cabang_ulamm'] 	    = 'Master/cabang_ulamm';
+$route['master/area_mekaar'] 	    = 'Master/area';
+$route['master/unit_ulamm'] 	    = 'Master/unit';
+$route['master/post_user'] 		    = 'Master/post_user';
+$route['master/post_user_group'] 	= 'Master/post_user_group';
+
 
 /* USER */
 $route['check_user'] 	= 'User/cek_authorization';

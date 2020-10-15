@@ -186,6 +186,11 @@ public function insert_ms_user_cabang_region($data)
 {
 	$this->db->insert('MS_USER_CABANG_REGION', $data);
 }	
+
+public function insert_ms_user_group($data)
+{
+	$this->db->insert('MS_USER_GROUP', $data);
+}
 	
 public function select_ms_grading()
 {

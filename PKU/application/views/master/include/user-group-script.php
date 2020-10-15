@@ -49,5 +49,62 @@
 		
 	});
 
-     
+	$("#form-user-group").submit(function(e){	
+
+		e.preventDefault();        	
+		var formURL = "<?php echo base_url('master/post_user_group'); ?>";
+		var frmdata = new FormData(this);
+					
+		var xhr = $.ajax({
+			url: formURL,
+			type: 'POST',
+			data: frmdata,
+			processData: false,
+			contentType: false
+		});
+		xhr.done(function(data) {
+			var obj = $.parseJSON(data);
+			
+			console.log(data);
+			
+			if(obj.result == 'OK')
+			{
+				Swal.fire({
+				position: 'center',
+				icon: 'success',
+				title: 'User Group telah di simpan',
+				showConfirmButton: false,
+				timer: 1500
+				})
+				setTimeout(function () {
+					window.location.href = '<?php echo base_url(); ?>master/user_group';
+				}, 1600);
+			}
+			if(obj.result == 'UP')
+			{
+				console.log(data);
+				Swal.fire({
+				position: 'center',
+				icon: 'error',
+				title: obj.msg,
+				showConfirmButton: false,
+				timer: 1500
+				})					
+			}
+			if(obj.result == 'NG')
+			{
+				Swal.fire({
+				position: 'center',
+				icon: 'error',
+				title: obj.msg,
+				showConfirmButton: false,
+				timer: 1500
+				})	
+			}
+		});
+		xhr.fail(function() {
+			$("#loader_container").hide();
+			var failMsg = "Something error happened! as";
+		});	
+	});	
 </script>       
