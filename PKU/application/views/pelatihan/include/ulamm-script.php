@@ -148,11 +148,21 @@
 		$('#pelatihan_type_edit').html('<option value="'+$(this).data('pelatihantype')+'">'+$(this).data('pelatihantiddeskripsi')+'</option>');		
 		$('#grading_edit').val($(this).data('pelatihangrading'));		
 		$('#cabang_ulamm_edit').val($(this).data('cabangulamm'));		
-		$('#cabang_ulamm_edit').trigger('change');								
+		// $('#cabang_ulamm_edit').trigger('change');					
+		$('#unit_ulamm_edit').val($(this).data('unitulamm'));				
 		$('#judul_pelatihan_edit').val($(this).data('pelatihantitle'));		
 		$('#deskripsi_pelatihan_edit').val($(this).data('pelatihandeskripsi'));		
-		$('#timeawal_edit').val($(this).data('pelatihantanggalmulai'));		
-		$('#timeakhir_edit').val($(this).data('pelatihantanggalselesai'));		
+
+		var dateawal = moment($(this).data('pelatihantanggalmulai'));
+		var dateakhir = moment($(this).data('pelatihantanggalselesai'));
+		$('#timeawal_edit').val(dateawal.format('YYYY-MM-DD hh:mm A'));	
+		$('#timeakhir_edit').val(dateakhir.format('YYYY-MM-DD hh:mm A'));
+
+		$('#inputStartTglPelaksanaan_edit').val(dateawal.format('YYYY-MM-DD'));
+		$('#inputStartTimePelaksanaan_edit').val(dateawal.format('hh:mm A'));
+		$('#inputAkhirTglPelaksanaan_edit').val(dateawal.format('YYYY-MM-DD'));
+		$('#inputEndTimePelaksanaan_edit').val(dateawal.format('hh:mm A'));
+								
 		$('#durasi_pelatihan_edit').val($(this).data('pelatihandurasi'));		
 		$('#kuota_peserta_edit').val($(this).data('pelatihankuota'));				
 		$('#anggaran_edit').val($(this).data('pelatihananggaran'));		
@@ -177,7 +187,6 @@
 				calculate_grand_total_edit();
 			}
 		});	
-
 						
 	});
 

@@ -459,18 +459,18 @@ class Pelatihan extends MY_Controller
 		$this->is_logged();	
 		
         $pelatihan_id   	= trim($this->security->xss_clean(strip_image_tags($this->input->post('id_pelatihan'))));
-        $bisnis_pelatihan   = trim($this->security->xss_clean(strip_image_tags($this->input->post('bisnis_pelatihan_edit'))));
+        $id_bisnis		    = trim($this->security->xss_clean(strip_image_tags($this->input->post('id_bisnis_edit'))));
         $pelatihan_type     = trim($this->security->xss_clean(strip_image_tags($this->input->post('pelatihan_type_edit'))));
 		$judul_pelatihan    = trim($this->security->xss_clean(strip_image_tags($this->input->post('judul_pelatihan_edit'))));
 		$grading   			= trim($this->security->xss_clean(strip_image_tags($this->input->post('grading_edit'))));
 
-		$cabang_ulamm		= trim($this->security->xss_clean(strip_image_tags($this->input->post('cabang_ulamm_edit'))));
-		$unit_ulamm         = $this->security->xss_clean(strip_image_tags($this->input->post('unit_ulamm_edit')));
+		// $cabang_ulamm		= trim($this->security->xss_clean(strip_image_tags($this->input->post('cabang_ulamm_edit'))));
+		// $unit_ulamm         = $this->security->xss_clean(strip_image_tags($this->input->post('unit_ulamm_edit')));
 		// $regional_mekaar			= trim($this->security->xss_clean(strip_image_tags($this->input->post('regional_mekaar'))));       
 		// $area_mekaar				= trim($this->security->xss_clean(strip_image_tags($this->input->post('area_mekaar'))));        
 		// $cabang_mekaar   			= $this->security->xss_clean(strip_image_tags($this->input->post('cabang_mekaar')));							
-        $deskripsi_pelatihan = trim($this->security->xss_clean(strip_image_tags($this->input->post('deskripsi_pelatihan_edit'))));
-        $durasi_pelatihan    = trim($this->security->xss_clean(strip_image_tags($this->input->post('durasi_pelatihan_edit'))));
+        $deskripsi_pelatihan 		= trim($this->security->xss_clean(strip_image_tags($this->input->post('deskripsi_pelatihan_edit'))));
+        $durasi_pelatihan    		= trim($this->security->xss_clean(strip_image_tags($this->input->post('durasi_pelatihan_edit'))));
         $inputStartTglPelaksanaan   = trim($this->security->xss_clean(strip_image_tags($this->input->post('inputStartTglPelaksanaan_edit'))));
         $inputStartTimePelaksanaan  = trim($this->security->xss_clean(strip_image_tags($this->input->post('inputStartTimePelaksanaan_edit'))));
         $inputAkhirTglPelaksanaan   = trim($this->security->xss_clean(strip_image_tags($this->input->post('inputAkhirTglPelaksanaan_edit'))));
@@ -506,11 +506,11 @@ class Pelatihan extends MY_Controller
 				'ID_TIPE' 			=> $pelatihan_type,
 				'ID_GRADING'		=> $grading,
 				'TITLE' 			=> $judul_pelatihan,
-				'TIPE_BISNIS'		=> $bisnis_pelatihan,
+				'ID_BISNIS'			=> $id_bisnis,
 				// 'REGIONAL_MEKAAR'	=> $regional_mekaar,
 				// 'AREA_MEKAAR' 		=> $area_mekaar,
 				// 'CABANG_MEKAAR'		=> $data_cabang_mekaar,
-				'CABANG_ULAMM' 		=> $cabang_ulamm,
+				// 'CABANG_ULAMM' 		=> $cabang_ulamm,
 				// 'UNIT_ULAMM'		=> $data_unit_ulamm,
 				'DESKRIPSI' 		=> $deskripsi_pelatihan,
 				'DURASI_PELATIHAN' 	=> $durasi_pelatihan,

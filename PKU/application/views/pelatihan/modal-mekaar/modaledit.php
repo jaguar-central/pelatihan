@@ -18,6 +18,9 @@
 		<div class="modal-body">
 	
 				<div class="form-group row">
+					<input type="hidden" class="form-control" id="id_pelatihan" name="id_pelatihan" />					
+					<input type="hidden" class="form-control" id="id_bisnis_edit" name="id_bisnis_edit" value="2" />
+
 					<label class="col-sm-2">Tipe Pelatihan <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
 						<select class="form-control" required="" id="pelatihan_type_edit" name="pelatihan_type_edit">
@@ -25,14 +28,14 @@
 						</select>																	
 					</div>
 					
-					<label class="col-sm-2">Cabang <span class="text-danger">*</span></label>
+					<label class="col-sm-2">Region <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<select class="form-control" required="" id="cabang_pelatihan_edit" name="cabang_pelatihan_edit">
-							<option value="">--pilih cabang--</option>			
+						<select class="form-control" required="" id="regional_mekaar_edit" name="regional_mekaar_edit" disabled="">
+							<option value="">--pilih region--</option>			
 
 								<?php 
-								foreach ($cabang as $data_cabang){
-									echo '<option value="'.$data_cabang->KODE_CABANG.'">'.$data_cabang->KODE_CABANG.' - '.$data_cabang->DESKRIPSI.'</option>';                                                                    
+								foreach ($region as $data_region){
+									echo '<option value="'.$data_region->KODE_REGION.'">'.$data_region->KODE_REGION.' - '.$data_region->DESKRIPSI.'</option>';                                                                    
 								}
 								?>										
 						</select>																	
@@ -45,12 +48,10 @@
 						<input type="text" class="form-control"  required="" id="judul_pelatihan_edit" name="judul_pelatihan_edit" />
 					</div>							
 				
-					<label class="col-sm-2">Unit <span class="text-danger">*</span></label>
+					<label class="col-sm-2">Area <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<select class="form-control select" required="" id="unit_pelatihan_edit" name="unit_pelatihan_edit[]" multiple="multiple">
-							<option value="">--pilih unit--</option>											
-						</select>																	
-					</div>							
+						<input type="text" class="form-control"  required="" id="area_mekaar_edit" name="area_mekaar_edit" disabled=""/>																
+					</div>						
 				</div>								
 
 				<div class="form-group row">
@@ -59,8 +60,26 @@
 						<input type="text" class="form-control"  required="" id="deskripsi_pelatihan_edit" name="deskripsi_pelatihan_edit" />
 					</div>							
 				
-
+					<label class="col-sm-2">Cabang <span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control"  required="" id="cabang_mekaar_edit" name="cabang_mekaar_edit" disabled="" />
+					</div>
 				</div>	
+
+				<div class="form-group row">
+					<label class="col-sm-2">Grade <span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+					<select class="form-control" required="" id="grading_edit" name="grading_edit">
+							<option value="">--pilih grade--</option>
+
+							<?php 
+								foreach ($grade_mekaar as $data_grade){
+									echo '<option value="'.$data_grade->ID.'">'.$data_grade->GRADING_DESKRIPSI.'</option>';                                                                    
+								}
+								?>										
+						</select>	
+					</div>
+				</div>				
 				
 				<div class="form-group row">
 
@@ -70,7 +89,17 @@
 
 						 <div class="input-group">										
 							
-							<input type="text" class="form-control input-limit-datepicker-edit" id="input-limit-datepicker-edit" required />																				
+							<!-- <input type="text" class="form-control input-limit-datepicker" id="input-limit-datepicker" required />																				 -->
+							
+							<div class='input-group date'>
+								<span class="input-group-addon">
+								<span class="fas fa-calendar"></span>
+								</span>
+								<input type='text' class="form-control" id='timeawal_edit' />
+								<span class="input-group-addon bg-custom b-0">s/d</span>
+								<input type='text' class="form-control" id='timeakhir_edit' />
+							</div>							
+
 							<input type="hidden" id="inputStartTglPelaksanaan_edit" name="inputStartTglPelaksanaan_edit" />
 							
 							<input type="hidden" id="inputStartTimePelaksanaan_edit" name="inputStartTimePelaksanaan_edit" />
@@ -110,9 +139,10 @@
 					</div-->                          
 				
 					<label class="col-sm-2">Anggaran <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="anggaran_edit" name="anggaran_edit" />
-					</div>                      
+					<div class="input-group col-sm-4">
+						<span class="input-group-addon">Rp</span>
+						<input type="text" class="form-control"  required="" id="anggaran_edit" name="anggaran_edit" />				
+					</div>  					      
 				</div>
 
 				<div class="form-group row">
@@ -166,7 +196,7 @@
 				<div class="form-group row">
 					<label class="col-sm-2">Lokasi Pelatihan <span class="text-danger">*</span></label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control"  required="" id="lokasi_pelatihan_edit" name="lokasi_pelatihan" />
+						<input type="text" class="form-control"  required="" id="lokasi_pelatihan_edit" name="lokasi_pelatihan_edit" />
 					</div>                                
 				</div>
 
@@ -175,16 +205,16 @@
 					<label class="col-sm-4">Latitude <span class="text-danger">*</span></label>
 					<label class="col-sm-4">Longitude <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="radius_edit" name="radius" />
+						<input type="text" class="form-control"  required="" id="radius_edit" name="radius_edit" />
 					</div>               
 					
 					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="latitude_edit" name="latitude" />
+						<input type="text" class="form-control"  required="" id="latitude_edit" name="latitude_edit" />
 					</div>                          
 				
 					
 					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="longitude_edit" name="longitude" />
+						<input type="text" class="form-control"  required="" id="longitude_edit" name="longitude_edit" />
 					</div>                      
 				</div>
 
@@ -238,7 +268,7 @@
 								
 								
 								</br>
-								<a class="table-add-modaledit btn btn-outline-primary" href="#" ><i class="fas fa-plus"></i></a>                                                           
+								<a class="table-add-edit btn btn-outline-primary" href="#" ><i class="fas fa-plus"></i></a>                                                           
 							  </div>
 							</div>
 						  </div>
@@ -259,3 +289,179 @@
 	</div>
  </div>
 </div>
+<script>
+
+
+$('#us_edit').locationpicker({
+        location: {
+              latitude: <?php echo $this->session->userdata('sess_user_latitude'); ?>,
+              longitude: <?php echo $this->session->userdata('sess_user_longitude'); ?>
+		},
+        radius: 50,
+        inputBinding: {
+            latitudeInput: $('#latitude_edit'),
+            longitudeInput: $('#longitude_edit'),
+            radiusInput: $('#radius_edit'),
+            locationNameInput: $('#lokasi_pelatihan_edit')
+        },
+        enableAutocomplete: true,
+        onchanged: function (currentLocation, radius, isMarkerDropped) {
+  
+        }
+    });		
+		
+	$(document).ready(function() {		
+
+		new AutoNumeric("#anggaran_edit","commaDecimalCharDotSeparator");	
+
+		var durasi = function () {
+			var start 	= $('#timeawal_edit').val();
+		    var end 	= $('#timeakhir_edit').val();
+
+	     	var diff =  Math.abs(new Date(end) - new Date(start));
+			var seconds = Math.floor(diff/1000);
+			var minutes = Math.floor(seconds/60); 
+			seconds = seconds % 60;
+			var hours = Math.floor(minutes/60);
+			minutes = minutes % 60;
+			var total = 0
+			total = minutes + (hours*60)
+			console.log("Diff = " + hours + ":" + minutes + ":" + seconds);
+			$("#durasi_pelatihan_edit").val(total);
+		};
+		
+		
+		$('#timeawal_edit').datetimepicker();
+		$('#timeakhir_edit').datetimepicker(
+			// {useCurrent: false /*Important! See issue #1075*/}
+		);
+		$("#timeawal_edit").on("dp.change", function (e) {
+		   $('#timeakhir_edit').data("DateTimePicker").minDate(e.date);
+		   $("#inputStartTglPelaksanaan_edit").val(e.date.format('YYYY-MM-DD'));
+		   $("#inputStartTimePelaksanaan_edit").val(e.date.format('hh:mm A'));
+		   durasi();		   
+        });
+        $("#timeakhir_edit").on("dp.change", function (e) {
+		   $('#timeawal_edit').data("DateTimePicker").maxDate(e.date);
+		   $("#inputAkhirTglPelaksanaan_edit").val(e.date.format('YYYY-MM-DD'));
+		   $("#inputEndTimePelaksanaan_edit").val(e.date.format('hh:mm A'));	
+		   durasi();
+        });
+				
+	});
+	
+	
+	//* TABLE RAB js start*//			
+
+	$('.table-add-edit').click(function () {
+		console.log('modaledit');
+		var $clone = $('#table_rab_edit').find('tr.d-none').clone(true).removeClass('d-none');  
+		$('#table_rab_edit').find('tbody').append($clone);
+		calculate_grand_total_edit();
+	});
+	
+	$('#tbody_rab_edit').delegate('.table-remove-edit','click',function () {		
+		$(this).parents('tr').detach();
+		calculate_grand_total_edit();
+	});	
+
+	$('#tbody_rab_edit').delegate('.table-up-edit','click',function () {        
+		var $row = $(this).parents('tbody tr');
+		if ($row.index() === 1) return;
+		$row.prev().before($row.get(0));
+	});
+
+	$('#tbody_rab_edit').delegate('.table-down-edit','click',function () {
+		var $row = $(this).parents('tbody tr');
+		$row.next().after($row.get(0));
+	});
+
+
+	$('#tbody_rab_edit').delegate('tr','keyup',function () {            
+		var index = parseInt($(this).index());
+		var jumlah_rab = $("#table_rab_edit tbody tr:eq("+index+")").find("#jumlah_rab_edit").val(); 
+		var unit_cost_rab = $("#table_rab_edit tbody tr:eq("+index+")").find("#unit_cost_rab_edit").val();
+		sum = parseInt(jumlah_rab) * parseInt(unit_cost_rab);                
+
+
+		$("#table_rab_edit tbody tr:eq("+index+")").find("#total_cost_rab_edit").val(sum);
+
+		calculate_grand_total_edit();
+
+	})
+
+	function calculate_grand_total_edit(){
+		var total = 0;
+		$('tr #total_cost_rab_edit').each(function () {            
+			var total_cost_rab = $(this).val();
+			if (!isNaN(total_cost_rab) && total_cost_rab.length !== 0) {
+				total += parseFloat(total_cost_rab);
+			}
+		});
+
+		var rowCount = $('tr #total_cost_rab_edit').length;
+		// $("#PelatihanRabCount").val(rowCount);        
+
+		$("#total_cost_rab_akhir_edit").val(total);			
+		
+	}			  	  	
+	//* TABLE RAB js end*//	 	
+	
+	$("#edit_pelatihan").submit(function(e){
+		e.preventDefault();        	
+		var formURL = "<?php echo base_url('pelatihan/update_pelatihan'); ?>";
+		var frmdata = new FormData(this);
+					
+		var xhr = $.ajax({
+			url: formURL,
+			type: 'POST',
+			data: frmdata,
+			processData: false,
+			contentType: false
+		});
+		xhr.done(function(data) {
+			var obj = $.parseJSON(data);
+			
+			console.log(data);
+			
+			if(obj.result == 'OK')
+			{
+				Swal.fire({
+				  position: 'center',
+				  icon: 'success',
+				  title: 'Pelatihan telah di simpan',
+				  showConfirmButton: false,
+				  timer: 1500
+				})
+				setTimeout(function () {
+					window.location.href = '<?php echo base_url(); ?>pelatihan/mekaar';
+				}, 1600);
+			}
+			if(obj.result == 'UP')
+			{
+				console.log(data);
+				Swal.fire({
+				  position: 'center',
+				  icon: 'error',
+				  title: obj.msg,
+				  showConfirmButton: false,
+				  timer: 1500
+				})					
+			}
+			if(obj.result == 'NG')
+			{
+				Swal.fire({
+				  position: 'center',
+				  icon: 'error',
+				  title: obj.msg,
+				  showConfirmButton: false,
+				  timer: 1500
+				})	
+			}
+		});
+		xhr.fail(function() {
+			$("#loader_container").hide();
+			var failMsg = "Something error happened! as";
+		});	
+	});		
+</script>

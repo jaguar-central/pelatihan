@@ -141,27 +141,52 @@
 
 	$(document).on("click", ".pelatihan_edit", function () {			
 				
-		$('#pelatihan_type').html('<option value="'+$(this).data('pelatihantype')+'">'+$(this).data('pelatihantitle')+'</option>');		
-		$('#cabang_pelatihan').val($(this).data('pelatihancabang'));		
-		$('#cabang_pelatihan').trigger('change');							
-		$('#unit_pelatihan').val($(this).data('pelatihanunit'));		
-		$('#judul_pelatihan').val($(this).data('pelatihantitle'));		
-		$('#deskripsi_pelatihan').val($(this).data('pelatihandeskripsi'));		
-		$('#input-limit-datepicker').val($(this).data('pelatihantanggal'));		
-		$('#durasi_pelatihan').val($(this).data('pelatihandurasi'));		
-		$('#kuota_peserta').val($(this).data('pelatihankuota'));		
-		$('#anggaran').val($(this).data('pelatihananggaran'));		
-		$('#provinsi').val($(this).data('pelatihanprovinsi'));		
-		$('#alamat_tempat_pelatihan').val($(this).data('pelatihanalamat'));		
-		$('#lokasi_pelatihan').val($(this).data('pelatihanlokasi'));		
-		$('#radius').val($(this).data('pelatihanlradius'));		
-		$('#latitude').val($(this).data('pelatihanlongitude'));		
-		$('#longitude').val($(this).data('pelatihanlatitude'));				
+		$('#id_pelatihan').val($(this).data('pelatihanid'));	
+		$('#pelatihan_type_edit').html('<option value="'+$(this).data('pelatihantype')+'">'+$(this).data('pelatihantiddeskripsi')+'</option>');		
+		$('#regional_mekaar_edit').val($(this).data('pelatihanregion'));		
+		// $('#cabang_pelatihan').trigger('change');							
+		// $('#unit_pelatihan').val($(this).data('pelatihanunit'));		
+		$('#judul_pelatihan_edit').val($(this).data('pelatihantitle'));		
+		$('#area_mekaar_edit').val($(this).data('pelatihanarea'));	
+		$('#deskripsi_pelatihan_edit').val($(this).data('pelatihandeskripsi'));	
+		$('#cabang_mekaar_edit').val($(this).data('pelatihancabang'));
+		
+		var dateawal = moment($(this).data('pelatihantanggalmulai'));
+		var dateakhir = moment($(this).data('pelatihantanggalselesai'));
+		$('#timeawal_edit').val(dateawal.format('YYYY-MM-DD hh:mm A'));	
+		$('#timeakhir_edit').val(dateakhir.format('YYYY-MM-DD hh:mm A'));
+
+		$('#inputStartTglPelaksanaan_edit').val(dateawal.format('YYYY-MM-DD'));
+		$('#inputStartTimePelaksanaan_edit').val(dateawal.format('hh:mm A'));
+		$('#inputAkhirTglPelaksanaan_edit').val(dateawal.format('YYYY-MM-DD'));
+		$('#inputEndTimePelaksanaan_edit').val(dateawal.format('hh:mm A'));
+							
+		$('#anggaran_edit').val($(this).data('pelatihananggaran'));	
+		new AutoNumeric("#anggaran_edit","commaDecimalCharDotSeparator");	
+		$('#grading_edit').val($(this).data('pelatihangrading'));	
+		$('#pembicara_pelatihan_edit').val($(this).data('pelatihanpembicara'));		
+		$('#durasi_pelatihan_edit').val($(this).data('pelatihandurasi'));		
+		$('#kuota_peserta_edit').val($(this).data('pelatihankuota'));		
+		$('#anggaran_edit').val($(this).data('pelatihananggaran'));		
+		$('#provinsi_edit').val($(this).data('pelatihanprovinsi'));		
+		$('#alamat_tempat_pelatihan_edit').val($(this).data('pelatihanalamat'));		
+		$('#lokasi_pelatihan_edit').val($(this).data('pelatihanlokasi'));		
+		$('#radius_edit').val($(this).data('pelatihanlradius'));		
+		$('#latitude_edit').val($(this).data('pelatihanlongitude'));		
+		$('#longitude_edit').val($(this).data('pelatihanlatitude'));				
 		
 		$("#add_pelatihan :input").prop("disabled", false);				
 		
-		$("#tbody_rab").html('<tr class="d-none"><td ><input type="text" class="form-control" id="deskripsi_rab" name="deskripsi_rab[]" value=""></td><td ><input type="number" class="form-control" id="jumlah_rab" name="jumlah_rab[]"></td><td ><input type="text" class="form-control" id="unit_rab" name="unit_rab[]" value=""></td><td ><input type="number" class="form-control" id="unit_cost_rab" name="unit_cost_rab[]" value=""></td><td ><input type="number" class="form-control" id="total_cost_rab" name="total_cost_rab[]" value="" readonly=""></td><td><a class="table-remove btn btn-outline-primary btn-sm" href="#"><i class="fas fa-trash"></i></a></td><td>                            <a class="table-up btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-up"></i></a>   <a class="table-down btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-down"></i></a></td></tr>');
-
+		$.ajax({
+			url: "<?php echo base_url()?>pelatihan/get_rab",
+			data: "pelatihanid="+$(this).data("pelatihanid")+"&tipe_modal=edit",
+			cache: false,
+			success: function(data){				         
+				$('#tbody_rab_edit').html('<tr class="d-none"><td ><input type="text" class="form-control" id="deskripsi_rab_edit" name="deskripsi_rab_edit[]" value=""></td><td ><input type="number" class="form-control" id="jumlah_rab_edit" name="jumlah_rab_edit[]"></td><td ><input type="text" class="form-control" id="unit_rab_edit" name="unit_rab_edit[]" value=""></td><td ><input type="number" class="form-control" id="unit_cost_rab_edit" name="unit_cost_rab_edit[]" value=""></td><td ><input type="number" class="form-control" id="total_cost_rab_edit" name="total_cost_rab_edit[]" value="" readonly=""></td><td><a class="table-remove-edit btn btn-outline-primary btn-sm" href="#"><i class="fas fa-trash"></i></a></td><td><a class="table-up-edit btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-up"></i></a><a class="table-down-edit btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-down"></i></a></td></tr> ');
+				$('#tbody_rab_edit').append(data);    
+				calculate_grand_total_edit();
+			}
+		});	
 						
 	});
 
@@ -242,7 +267,7 @@
 					  {
 						tombol_action +='<a class="dropdown-item pelatihan_details" href="#" data-toggle="modal" data-target="#modaldetails" '
 						+'data-pelatihanid="'+row.ID+'" '
-						+'data-pelatihantype="'+row.ID_TIPE+'" '
+						+'data-pelatihantype="'+row.ID_TIPE+'" '						
 						+'data-pelatihantitle="'+row.TITLE+'" '
 						+'data-pelatihanregion="'+row.REGIONAL_MEKAAR+'" '
 						+'data-pelatihanarea="'+row.AREA_MEKAAR+'" '
@@ -264,6 +289,8 @@
 						+'data-target="#modaledit" '
 						+'data-pelatihanid="'+row.ID+'" '
 						+'data-pelatihantype="'+row.ID_TIPE+'" '
+						+'data-pelatihantiddeskripsi="'+row.ID_TIPE_DESKRIPSI+'" '						
+						+'data-pelatihangrading="'+row.ID_GRADING+'" '
 						+'data-pelatihantitle="'+row.TITLE+'" '
 						+'data-pelatihanregion="'+row.REGIONAL_MEKAAR+'" '
 						+'data-pelatihanarea="'+row.AREA_MEKAAR+'" '

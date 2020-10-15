@@ -19,19 +19,19 @@
 	
 				<div class="form-group row">
 					<input type="hidden" class="form-control" id="id_pelatihan" name="id_pelatihan" />					
-					<input type="hidden" class="form-control" id="bisnis_pelatihan_edit" name="bisnis_pelatihan_edit" value="ULAMM" />
+					<input type="hidden" class="form-control" id="id_bisnis_edit" name="id_bisnis_edit" value="1" />
 					
 				
 					<label class="col-sm-2">Tipe Pelatihan <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<select class="form-control" required="" id="pelatihan_type_edit" name="pelatihan_type_edit">
+						<select class="form-control" required="" id="pelatihan_type_edit" name="pelatihan_type_edit" readonly="">
 							<option value="">--pilih tipe--</option>										
 						</select>																	
 					</div>
 					
 					<label class="col-sm-2">Cabang <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<select class="form-control" required="" id="cabang_ulamm_edit" name="cabang_ulamm_edit">
+						<select class="form-control" required="" id="cabang_ulamm_edit" name="cabang_ulamm_edit" disabled="">
 							<option value="">--pilih cabang--</option>			
 
 								<?php 
@@ -51,8 +51,9 @@
 				
 					<label class="col-sm-2">Unit <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<select class="form-control select" required="" id="unit_ulamm_edit" name="unit_ulamm_edit[]" multiple="multiple">
-							<option value="">--pilih unit--</option>											
+						<!-- <select class="form-control " required="" id="unit_ulamm_edit" name="unit_ulamm_edit[]" multiple="multiple" disabled=""> -->
+						<input type="text" class="form-control"  required="" id="unit_ulamm_edit" name="unit_ulamm_edit" disabled />
+							<!-- <option value="">--pilih unit--</option>											 -->
 						</select>																	
 					</div>							
 				</div>								
@@ -193,7 +194,7 @@
 				<div class="form-group row">
 					<label class="col-sm-2">Lokasi Pelatihan <span class="text-danger">*</span></label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control"  required="" id="lokasi_pelatihan_edit" name="lokasi_pelatihan" />
+						<input type="text" class="form-control"  required="" id="lokasi_pelatihan_edit" name="lokasi_pelatihan_edit" />
 					</div>                                
 				</div>
 
@@ -202,16 +203,16 @@
 					<label class="col-sm-4">Latitude <span class="text-danger">*</span></label>
 					<label class="col-sm-4">Longitude <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="radius_edit" name="radius" />
+						<input type="text" class="form-control"  required="" id="radius_edit" name="radius_edit" />
 					</div>               
 					
 					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="latitude_edit" name="latitude" />
+						<input type="text" class="form-control"  required="" id="latitude_edit" name="latitude_edit" />
 					</div>                          
 				
 					
 					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="longitude_edit" name="longitude" />
+						<input type="text" class="form-control"  required="" id="longitude_edit" name="longitude_edit" />
 					</div>                      
 				</div>
 
@@ -322,8 +323,8 @@
 		new AutoNumeric("#anggaran_edit","commaDecimalCharDotSeparator");	
 
 		var durasi = function () {
-			var start 	= $('#timeawal').val();
-		    var end 	= $('#timeakhir').val();
+			var start 	= $('#timeawal_edit').val();
+		    var end 	= $('#timeakhir_edit').val();
 
 	     	var diff =  Math.abs(new Date(end) - new Date(start));
 			var seconds = Math.floor(diff/1000);
@@ -334,7 +335,7 @@
 			var total = 0
 			total = minutes + (hours*60)
 			console.log("Diff = " + hours + ":" + minutes + ":" + seconds);
-			$("#durasi_pelatihan").val(total);
+			$("#durasi_pelatihan_edit").val(total);
 		};
 		
 		
