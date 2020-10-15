@@ -44,24 +44,27 @@
 															  <span class="caret"></span>
 															  </button>
 															  <div class="dropdown-menu">
-																<a class="dropdown-item pelatihan_details" href="#" data-toggle="modal" data-target="#modaldetails" 
-																data-pelatihanid="'.$data->ID.'"
-																data-pelatihantype="'.$data->ID_TIPE.'"
-																data-pelatihantitle="'.$data->TITLE.'"
-																data-pelatihancabang="'.$data->CABANG_ULAMM.'"
-																data-pelatihanunit="'.$data->UNIT_ULAMM.'"
-																data-pelatihandeskripsi="'.$data->DESKRIPSI.'"
-																data-pelatihantanggal="'.$data->TANGGAL_MULAI.' - '.$data->TANGGAL_SELESAI.'"
-																data-pelatihandurasi="'.$data->DURASI_PELATIHAN.'"
-																data-pelatihankuota="'.$data->KUOTA_PESERTA.'"
-																data-pelatihananggaran="'.$data->BUDGET.'"
-																data-pelatihanprovinsi="'.$data->PROVINSI.'"
-																data-pelatihanalamat="'.$data->ALAMAT.'"
-																data-pelatihanlokasi="'.$data->LOKASI.'"
-																data-pelatihanlradius="'.$data->RADIUS.'"
-																data-pelatihanlongitude="'.$data->LONGITUDE.'"
-																data-pelatihanlatitude="'.$data->LATITUDE.'"
-																> Details</a>
+                                                                
+                                                                <a class="dropdown-item pelatihan_details" href="#" data-toggle="modal" data-target="#modaldetails"
+                                                                data-pelatihanid="'.$data->ID.'"
+                                                                data-pelatihantype="'.$data->ID_TIPE.'"
+						                                        data-pelatihantiddeskripsi="'.$data->DESKRIPSI_PELATIHAN_TYPE.'" 
+						                                        data-pelatihantitle="'.$data->TITLE.'"
+						                                        data-pelatihancabang="'.$data->CABANG_ULAMM.'"
+						                                        data-pelatihanunit="'.$data->UNIT_ULAMM.'"
+						                                        data-pelatihandeskripsi="'.$data->DESKRIPSI.'" 
+						                                        data-pelatihantanggal="'.$data->TANGGAL_MULAI.' - '.$data->TANGGAL_SELESAI.'" 
+						                                        data-pelatihandurasi="'.$data->DURASI_PELATIHAN.'" 
+						                                        data-pelatihankuota="'.$data->KUOTA_PESERTA.'" 
+						                                        data-pelatihananggaran="'.$data->BUDGET.'"
+						                                        data-pelatihanprovinsi="'.$data->PROVINSI.'" 
+						                                        data-pelatihanalamat="'.$data->ALAMAT.'"
+						                                        data-pelatihanlokasi="'.$data->LOKASI.'"
+						                                        data-pelatihanlradius="'.$data->RADIUS.'"
+						                                        data-pelatihanlongitude="'.$data->LONGITUDE.'"
+						                                        data-pelatihanlatitude="'.$data->LATITUDE.'"
+                                                                data-pelatihanpembicara="'.$data->PEMBICARA.'"
+                                                                > Details</a>
 																<a class= "dropdown-item" target="_blank" href="'.$this->config->item("jasper_report").'Pelatihan.pdf?ID='.$data->ID.'"> Unduh Proposal</a>				
 																<a class= "dropdown-item pelatihan_approval" href="#" data-toggle="modal" data-target="#modalapproval" data-pelatihanid="'.$data->ID.'" data-gradingid="'.$data->ID_GRADING.'" > Verify</a>				
 															  </div>
