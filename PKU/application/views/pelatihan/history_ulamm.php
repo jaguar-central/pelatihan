@@ -38,7 +38,7 @@
 						echo '<td>'.$cus->CABANG_ULAMM.'</td>';
 						echo '<td>'.$cus->UNIT_ULAMM.'</td>'; 
 						echo '<td>'.$cus->STATUS.'</td>'; 						
-						echo '<td><button type="button" class="btn btn-primary modaldhistory" href="#" data-toggle="modal" data-target="#modaldhistory" 
+						echo '<td><button type="button" class="btn btn-outline-info modaldhistory" href="#" data-toggle="modal" data-target="#modaldhistory" 
 								data-pelatihanid="'.$cus->ID.'"
 								data-pelatihantype="'.$cus->ID_TIPE.'"
 								data-pelatihantitle="'.$cus->TITLE.'"

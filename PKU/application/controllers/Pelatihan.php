@@ -700,7 +700,6 @@ class Pelatihan extends MY_Controller
 			$data = array(
 				'ID_PELATIHAN' 		=> $id_pelatihan,
 				'TIPE_APPROVAL' 	=> 'PROPOSAL',
-				'ID_GRADING'		=> $id_grading,
 				'URUTAN_APPROVAL'	=> $urutan_approval,
 				'USERNAME'			=> $username,	
 				'TTD'				=> base_url()."assets/images/tandatangan/".$username,
@@ -715,6 +714,7 @@ class Pelatihan extends MY_Controller
 			
 			
 			$data_update 	= array(
+				'ID_GRADING'		=> $id_grading,				
 				'STATUS'			=> $status_approval,
 				'APPROVAL' 			=> $tingkat_approval,
 				'UPDATED_BY' 		=> $id_user,
