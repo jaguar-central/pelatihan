@@ -10,7 +10,7 @@
 					            </div>
                                 <div class="table-style">
                                     <div class="p-3">
-                                        <a href="#"  data-toggle="modal" data-target="#add_user" class="btn btn-primary">
+                                        <a href="#"  data-toggle="modal" data-target="#add_user" class="btn btn-outline-primary">
                                         <span class="btn-label"><i class="fa fa-plus"></i></span> Tambah User
                                         </a>
                                     </div>                                  
@@ -29,11 +29,11 @@
                                             foreach ($t_user as $otw){
                                                 echo '<tr>';
                                                 echo '<td>'.$otw->USERNAME.'</td>';
-                                                echo '<td>'.$otw->IDBISNIS.'</td>'; 
-                                                echo '<td>'.$otw->IDGROUP.'</td>';
+                                                echo '<td>'.$otw->BISNIS_DESKRIPSI.'</td>'; 
+                                                echo '<td>'.$otw->USER_GROUP_DESKRIPSI.'</td>';
                                                 echo '<td>'.$otw->LOKASI.'</td>';
                                                 echo '<td>
-                                                        <button type="button" class="btn btn-danger">Delete</button>
+                                                        <button type="button" class="btn btn-outline-danger">Delete</button>
                                                     </td>'; 
                                                 echo '</tr>';
 
