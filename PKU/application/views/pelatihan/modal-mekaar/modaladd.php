@@ -291,7 +291,7 @@
 									<label>Grand Total </label>
 								  <div>
 								  <div class="col-md-12">    
-									<input type="text" class="form-control money" id="total_cost_rab_akhir" name="total_cost_rab_akhir" data-a-sign="Rp. " value="" readonly="" required>
+									<input style="text-align:right" type="text" class="form-control money" id="total_cost_rab_akhir" name="total_cost_rab_akhir" data-a-sign="Rp. " value="" readonly="" required>
 								  </div>
 								
 								

@@ -15,9 +15,8 @@
 						<table id="datatable" class="table table-bordered table-striped">
 							<thead>
 								<tr>
-									<th>TITLE</th>
-									<th>AKTIF</th>
-									<th>ACTION</th>
+									<th class="text-center">TITLE</th>
+									<th class="text-center">ACTION</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -27,26 +26,23 @@
 									if ($this->session->userdata('sess_user_id_user_group')!=3){ //kecuali pic pusat									
 										echo '<tr>';
 										echo '<td>'.$cus->TITLE.'</td>'; 
-										echo '<td>'.$cus->AKTIF.'</td>'; 
-										echo '<td>';										
-											echo '<button type="button" class="btn btn-primary view_pelatihan" data-pelatihantype="'.$cus->ID.'" data-pelatihanbisnis="MEKAAR" ><span class="btn-label"><i class="fa fa-eye"></i></span> View</button>';										
+										echo '<td class="text-center">';										
+											echo '<button type="button" class="btn btn-outline-info col-md-4 view_pelatihan" data-pelatihantype="'.$cus->ID.'" data-pelatihanbisnis="MEKAAR" ><span class="btn-label"><i class="fa fa-eye"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;View</button>&nbsp;&nbsp;';										
 										if (in_array($cus->ID,$klasterisasi)){
-											echo '<button type="button" class="btn btn-success add_pelatihan_project_charter" data-toggle="modal" data-target="#modaladd" data-pelatihantype="'.$cus->ID.'" data-pelatihantitle="'.$cus->TITLE.'"><span class="btn-label"><i class="fas fa-pencil-alt fa-fw"></i></span> Add</button></td>'; 										
+											echo '<button type="button" class="btn btn-outline-success col-md-4 add_pelatihan_project_charter" data-toggle="modal" data-target="#modaladd" data-pelatihantype="'.$cus->ID.'" data-pelatihantitle="'.$cus->TITLE.'"><span class="btn-label"><i class="fas fa-pencil-alt fa-fw"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add</button></td>'; 										
 										}else{
-											echo '<button type="button" class="btn btn-success add_pelatihan" data-toggle="modal" data-target="#modaladd" data-pelatihantype="'.$cus->ID.'" data-pelatihantitle="'.$cus->TITLE.'"><span class="btn-label"><i class="fas fa-pencil-alt fa-fw"></i></span> Add</button></td>'; 											
+											echo '<button type="button" class="btn btn-outline-success col-md-4 add_pelatihan" data-toggle="modal" data-target="#modaladd" data-pelatihantype="'.$cus->ID.'" data-pelatihantitle="'.$cus->TITLE.'"><span class="btn-label"><i class="fas fa-pencil-alt fa-fw"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add</button></td>'; 											
 										echo '</tr>';
 										}
 									}else if ($this->session->userdata('sess_user_id_user_group')==3 && in_array($cus->ID,$klasterisasi)){ //untuk pic pusat
 										echo '<tr>';
-										echo '<td>'.$cus->TITLE.'</td>'; 
-										echo '<td>'.$cus->AKTIF.'</td>'; 									
-										echo '<td>';										
-										echo '<button type="button" class="btn btn-success project_charter" data-toggle="modal" data-target="#modaladdklasterisasi" data-pelatihantype="'.$cus->ID.'" data-pelatihantitle="'.$cus->TITLE.'"><span class="btn-label"><i class="fas fa-pencil-alt fa-fw"></i></span> Add Project Charter</button></td>'; 																				
+										echo '<td>'.$cus->TITLE.'</td>'; 									
+										echo '<td class="text-center">';										
+										echo '<button type="button" class="btn btn-outline-success col-md-6 project_charter" data-toggle="modal" data-target="#modaladdklasterisasi" data-pelatihantype="'.$cus->ID.'" data-pelatihantitle="'.$cus->TITLE.'"><span class="btn-label"><i class="fas fa-pencil-alt fa-fw"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add Project Charter</button></td>'; 																				
 										echo '</tr>';
 									}
 								}
 								?>
-
 							</tbody>
 						</table>
 					</div>

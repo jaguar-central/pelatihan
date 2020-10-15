@@ -40,7 +40,7 @@
                                                 echo '<td>'.$data->LOKASI.'</td>';                                             
 												echo '<td> 
 															<div class="dropdown">
-															  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Action
+															  <button class="btn btn-outline-info dropdown-toggle" type="button" data-toggle="dropdown">Action
 															  <span class="caret"></span>
 															  </button>
 															  <div class="dropdown-menu">
