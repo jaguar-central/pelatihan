@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Master_model extends CI_Model {
 public function select_ms_user()
 {
-		$query = $this->db->query("select * from MS_USER  ");
+		$query = $this->db->query("select *,dbo.DESKRIPSI_USER_GROUP(IDGROUP) as USER_GROUP_DESKRIPSI,dbo.DESKRIPSI_BISNIS(IDBISNIS) as BISNIS_DESKRIPSI from MS_USER  ");
 		return $query->result();
 }
 public function select_ms_cabang_ulamm()
@@ -186,6 +186,11 @@ public function insert_ms_user_cabang_region($data)
 {
 	$this->db->insert('MS_USER_CABANG_REGION', $data);
 }	
+
+public function insert_ms_user_group($data)
+{
+	$this->db->insert('MS_USER_GROUP', $data);
+}
 	
 public function select_ms_grading()
 {

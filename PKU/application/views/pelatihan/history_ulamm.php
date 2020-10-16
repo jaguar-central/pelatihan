@@ -38,13 +38,13 @@
 						echo '<td>'.$cus->CABANG_ULAMM.'</td>';
 						echo '<td>'.$cus->UNIT_ULAMM.'</td>'; 
 						echo '<td>'.$cus->STATUS.'</td>'; 						
-						echo '<td><button type="button" class="btn btn-outline-info modaldhistory" href="#" data-toggle="modal" data-target="#modaldhistory" 
+						echo '<td>
+							<div class="dropdown"><button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown">Action<span class="caret"></span></button><div class="dropdown-menu">
+								<a class="dropdown-item modaldetails" href="#" data-toggle="modal" data-target="#modaldetails" 
 								data-pelatihanid="'.$cus->ID.'"
 								data-pelatihantype="'.$cus->ID_TIPE.'"
+								data-pelatihantypedeskripsi="'.$cus->DESKRIPSI_PELATIHAN_TYPE.'"								
 								data-pelatihantitle="'.$cus->TITLE.'"
-								data-pelatihancabang="'.$cus->REGIONAL_MEKAAR.'"
-								data-pelatihancabang="'.$cus->AREA_MEKAAR.'"
-								data-pelatihancabang="'.$cus->CABANG_MEKAAR.'"
 								data-pelatihancabang="'.$cus->CABANG_ULAMM.'"
 								data-pelatihanunit="'.$cus->UNIT_ULAMM.'"
 								data-pelatihandeskripsi="'.$cus->DESKRIPSI.'"
@@ -58,7 +58,15 @@
 								data-pelatihanlradius="'.$cus->RADIUS.'"
 								data-pelatihanlongitude="'.$cus->LONGITUDE.'"
 								data-pelatihanlatitude="'.$cus->LATITUDE.'"
-								><span class="btn-label"><i class="fa fa-eye"></i></span> Details</button></td>'; 
+								data-pelatihanpembicara="'.$cus->PEMBICARA.'"	
+								> Details</a>'; 
+						if ($cus->STATUS=='approved'){
+						echo '<a class= "dropdown-item" target="_blank" href="'.$this->config->item('jasper_report').'Pelatihan.pdf?ID='.$cus->ID.'"> Unduh Proposal</a>';
+						}
+						if ($cus->STATUS=='lpj_approved'){
+						echo '<a class= "dropdown-item" target="_blank" href="'.$this->config->item('jasper_report').'Lpj.pdf?ID='.$cus->ID.'"> Unduh Lpj</a>';
+						}
+						echo '</div></div> </td>';
 						echo '</tr>';
 
 					}

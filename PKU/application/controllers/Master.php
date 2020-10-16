@@ -15,9 +15,9 @@ class Master extends MY_Controller
         $data["view"] 	= "master/user";
 		$data["script"] = "master/include/user-script";
 		
-        $data["menu"] = $this->Menu_model->select_ms_menu();
-        $data["t_user"] = $this->Master_model->select_ms_user();
-        $data["user_group"] = $this->Master_model->select_ms_user_group();
+        $data["menu"]		 	= $this->Menu_model->select_ms_menu();
+        $data["t_user"] 		= $this->Master_model->select_ms_user();
+        $data["user_group"] 	= $this->Master_model->select_ms_user_group();
 		$data["cabang"] 		= $this->Master_model->select_ms_cabang_ulamm();
 		$data["region"] 		= $this->Master_model->select_ms_region_mekaar();
         
@@ -354,6 +354,38 @@ class Master extends MY_Controller
 	}
 
 
+
+	public function post_user_group(){
+		$nama   	= trim($this->security->xss_clean(strip_image_tags($this->input->post('nama'))));
+		$id_user	= $this->session->userdata('sess_user_idsdm');	
+		
+		$output = array(
+			'result'  	=> 'OK',
+			'msg'		=> ''
+		);		
+
+		try
+		{
+			$data = array(
+				'NAMA' 			=> $nama,
+				'AKTIF' 		=> '1',
+				'CREATED_BY' 	=> $id_user,
+				'CREATED_DATE' 	=> date('Y-m-d H:i:s')			
+			);
+
+			$this->Master_model->insert_ms_user_group($data);
+		}
+		catch (Exception $e)
+		{
+			$output = array(
+				'result'  	=> 'NG',
+				'msg'		=> $e->getMessage()
+			);
+		}		
+
+		echo json_encode($output);
+		exit;		
+	}
 
 
 	public function get_grading(){

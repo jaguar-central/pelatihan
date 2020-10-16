@@ -124,8 +124,8 @@ input [type="date"] {
 			</div>    
 	
 			<div class="modal-footer">
-				<?php echo form_submit('submit', 'Submit', 'class="btn btn-primary submit"'); ?>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<?php echo form_submit('submit', 'Submit', 'class="btn btn-outline-primary submit"'); ?>
+				<button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
 			</div>
 	  
 		<?php echo form_close(); ?>
