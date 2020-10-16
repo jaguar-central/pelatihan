@@ -56,13 +56,12 @@
 
 <script type="text/javascript">
 
-    $(document).on("click", ".modaldhistory", function () {		
+    $(document).on("click", ".modaldetails", function () {		
 
 				
-				$('#pelatihan_type_details').html('<option value="'+$(this).data('pelatihantype')+'">'+$(this).data('pelatihantitle')+'</option>');
-                $('#cabang_pelatihan_details').html('<option value="'+$(this).data('pelatihancabang')+'">'+$(this).data('pelatihancabang')+'</option>');		
-				//$('#cabang_pelatihan_details').val($(this).data('pelatihancabang'));
-                //$('#cabang_pelatihan_details').trigger('change');		
+				$('#pelatihan_type_details').html('<option value="'+$(this).data('pelatihantype')+'">'+$(this).data('pelatihantypedeskripsi')+'</option>');
+                $('#cabang_pelatihan_details').val($(this).data('pelatihancabang'));	
+                $('#cabang_pelatihan_details').trigger('change');		
 				$('#judul_pelatihan_details').val($(this).data('pelatihantitle'));							
 				$('#unit_pelatihan_details').val($(this).data('pelatihanunit'));				
 				$('#deskripsi_pelatihan_details').val($(this).data('pelatihandeskripsi'));		
@@ -72,10 +71,11 @@
                 $('#anggaran_details').val($(this).data('pelatihananggaran'));		
 				$('#provinsi_details').val($(this).data('pelatihanprovinsi'));		
 				$('#alamat_tempat_pelatihan_details').val($(this).data('pelatihanalamat'));		
-				$('#lokasi_pelatihan_details_details').val($(this).data('pelatihanlokasi'));		
+				$('#lokasi_pelatihan_details').val($(this).data('pelatihanlokasi'));		
 				$('#radius_details').val($(this).data('pelatihanlradius'));		
 				$('#latitude_details').val($(this).data('pelatihanlatitude'));		
-				$('#longitude_details').val($(this).data('pelatihanlongitude'));				
+				$('#longitude_details').val($(this).data('pelatihanlongitude'));	
+				$('#pembicara_pelatihan_details').val($(this).data('pelatihanpembicara'));			
 				
 				$("#add_pelatihan :input").prop("disabled", false);				
 				
@@ -86,8 +86,16 @@
 					data: "pelatihanid="+$(this).data("pelatihanid")+"&tipe_modal=details",
 					cache: false,
 					success: function(data){				         
-					$('#table_rab_details').html(data);    
-					calculate_grand_total_history();
+						$('#table_rab_details').html(data);    
+						var total = 0;
+						$('tr #total_cost_rab_details').each(function () {            
+						var total_cost_rab = $(this).val();			
+						if (!isNaN(total_cost_rab) && total_cost_rab.length !== 0) {
+							total += parseFloat(total_cost_rab);
+						}
+						});
+						var rowCount = $('tr #total_cost_rab_details').length;
+						$("#total_cost_rab_akhir_details").val(total);
 					}	
 				});	
 								

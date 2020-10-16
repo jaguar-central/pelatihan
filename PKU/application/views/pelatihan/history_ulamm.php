@@ -38,13 +38,11 @@
 						echo '<td>'.$cus->CABANG_ULAMM.'</td>';
 						echo '<td>'.$cus->UNIT_ULAMM.'</td>'; 
 						echo '<td>'.$cus->STATUS.'</td>'; 						
-						echo '<td><button type="button" class="btn btn-outline-info modaldhistory" href="#" data-toggle="modal" data-target="#modaldhistory" 
+						echo '<td><button type="button" class="btn btn-outline-info modaldetails" href="#" data-toggle="modal" data-target="#modaldetails" 
 								data-pelatihanid="'.$cus->ID.'"
 								data-pelatihantype="'.$cus->ID_TIPE.'"
+								data-pelatihantypedeskripsi="'.$cus->DESKRIPSI_PELATIHAN_TYPE.'"								
 								data-pelatihantitle="'.$cus->TITLE.'"
-								data-pelatihancabang="'.$cus->REGIONAL_MEKAAR.'"
-								data-pelatihancabang="'.$cus->AREA_MEKAAR.'"
-								data-pelatihancabang="'.$cus->CABANG_MEKAAR.'"
 								data-pelatihancabang="'.$cus->CABANG_ULAMM.'"
 								data-pelatihanunit="'.$cus->UNIT_ULAMM.'"
 								data-pelatihandeskripsi="'.$cus->DESKRIPSI.'"
@@ -58,6 +56,7 @@
 								data-pelatihanlradius="'.$cus->RADIUS.'"
 								data-pelatihanlongitude="'.$cus->LONGITUDE.'"
 								data-pelatihanlatitude="'.$cus->LATITUDE.'"
+								data-pelatihanpembicara="'.$cus->PEMBICARA.'"	
 								><span class="btn-label"><i class="fa fa-eye"></i></span> Details</button></td>'; 
 						echo '</tr>';
 

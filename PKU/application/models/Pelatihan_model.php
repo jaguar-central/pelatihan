@@ -1,11 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Pelatihan_model extends CI_Model {
-public function select_t_pelatihan()
-{
-		$query = $this->db->query("select * from T_PELATIHAN  ");
-		return $query->result();
-}
+
 public function select_ms_pelatihan_type()
 {
 		$query = $this->db->query("select * from MS_PELATIHAN_TYPE  ");
@@ -57,7 +53,9 @@ public function select_t_pelatihan_ulamm_by_status($status)
         {
                 $query = $this->db->select('*,dbo.DESKRIPSI_PELATIHAN_TYPE(ID_TIPE) as DESKRIPSI_PELATIHAN_TYPE')->from('T_PELATIHAN')->
 				where('ID_BISNIS','1')->
+				where(" CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ")->
 				where_in('STATUS',$status)->get();				
+				
                 return $query->result();
         }
 		
@@ -65,6 +63,7 @@ public function select_t_pelatihan_mekaar_by_status($status)
         {
                 $query = $this->db->select('*,dbo.DESKRIPSI_PELATIHAN_TYPE(ID_TIPE) as DESKRIPSI_PELATIHAN_TYPE')->from('T_PELATIHAN')->
 				where('ID_BISNIS','2')->
+				where(" CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ")->
 				where_in('STATUS',$status)->get();				
                 return $query->result();
         }

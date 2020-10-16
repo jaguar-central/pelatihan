@@ -125,7 +125,8 @@
 		$('#radius_details').val($(this).data('pelatihanlradius'));		
 		$('#latitude_details').val($(this).data('pelatihanlongitude'));		
 		$('#longitude_details').val($(this).data('pelatihanlatitude'));						
-		$('#pembicara_pelatihan_details').val($(this).data('pelatihanpembicara'));						
+		$('#pembicara_pelatihan_details').val($(this).data('pelatihanpembicara'));	
+		$('#input-limit-datepicker').val($(this).data('pelatihantanggal'));							
 				
 		$.ajax({
 			url: "<?php echo base_url()?>pelatihan/get_rab",
@@ -133,7 +134,15 @@
 			cache: false,
 			success: function(data){				         
 				$('#table_rab_details').html(data);    
-				calculate_grand_total_details();
+				var total = 0;
+				$('tr #total_cost_rab_details').each(function () {            
+				var total_cost_rab = $(this).val();			
+				if (!isNaN(total_cost_rab) && total_cost_rab.length !== 0) {
+					total += parseFloat(total_cost_rab);
+				}
+				});
+				var rowCount = $('tr #total_cost_rab_details').length;
+				$("#total_cost_rab_akhir_details").val(total);
 			}
 		});	
 						
@@ -312,7 +321,7 @@
 					  }
 					  
 					  if (row.STATUS=='draft'){	
-						tombol_action +='<a id="submit_proposal" class="dropdown-item submit_proposal" data-idpelatihan="'+row.ID+'" data-judulpelatihan="'+row.TITLE+'"  href="#" > Submit Proposal</a></div></div> ';
+						tombol_action +='<div class="dropdown-divider"></div> <a id="submit_proposal" class="dropdown-item submit_proposal" data-idpelatihan="'+row.ID+'" data-judulpelatihan="'+row.TITLE+'"  href="#" > Submit Proposal</a></div></div> ';
 					  }
 					  
 					  if (row.STATUS=='approved' || row.STATUS=='lpj_draft'){		

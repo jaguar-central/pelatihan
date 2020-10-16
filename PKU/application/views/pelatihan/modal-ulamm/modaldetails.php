@@ -235,7 +235,7 @@
 			</div>  
 			 
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
 			</div>
 	  
 		<?php echo form_close(); ?>
@@ -261,20 +261,5 @@
         onchanged: function (currentLocation, radius, isMarkerDropped) {
   
         }
-    });
-	
-	
-	function calculate_grand_total_details(){		
-		var total = 0;
-		$('tr #total_cost_rab_details').each(function () {            
-			var total_cost_rab = $(this).val();			
-			if (!isNaN(total_cost_rab) && total_cost_rab.length !== 0) {
-				total += parseFloat(total_cost_rab);
-			}
-		});
-
-		var rowCount = $('tr #total_cost_rab_details').length;
-
-		$("#total_cost_rab_akhir_details").val(total);
-	}	
+    });	
 </script>

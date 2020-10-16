@@ -140,12 +140,12 @@ class Pelatihan extends MY_Controller
 		
         $data["content"] 	= "Pelatihan";
         $data["view"] 		= "pelatihan/history_ulamm";
-		$data["script"] 	= "pelatihan/include/history-script";
-		$data["modal"] 		= array( "pelatihan/modal-ulamm/modaldhistory"); 
+		$data["script"] 	= "pelatihan/include/history-ulamm-script";
+		$data["modal"] 		= array( "pelatihan/modal-ulamm/modaldetails"); 
 
         $data["menu"] 		= $this->Menu_model->select_ms_menu();
 		$data["pelatihan"] 	= $this->Pelatihan_model->select_t_pelatihan_ulamm_by_status(array('draft','submitted','approved','lpj_draft','lpj_submitted','lpj_approved'));
-		
+		$data["cabang"] 	= $this->Master_model->select_ms_cabang_ulamm();	
 		
         $this->load->view('layout/gabung', $data);
 	}
@@ -156,12 +156,13 @@ class Pelatihan extends MY_Controller
 		
         $data["content"] 	= "Pelatihan";
         $data["view"] 		= "pelatihan/history_mekaar";
-		$data["script"] 	= "pelatihan/include/history-script";
-		$data["modal"] 		= array( "pelatihan/modal-mekaar/modaldhistory"); 
+		$data["script"] 	= "pelatihan/include/history-mekaar-script";
+		$data["modal"] 		= array( "pelatihan/modal-mekaar/modaldetails"); 
 
         $data["menu"] 		= $this->Menu_model->select_ms_menu();
 		$data["pelatihan"] 	= $this->Pelatihan_model->select_t_pelatihan_mekaar_by_status(array('draft','submitted','approved','lpj_draft','lpj_submitted','lpj_approved'));
-		
+		$data["cabang"] 	= $this->Master_model->select_ms_cabang_ulamm();		
+		$data["region"] 	= $this->Master_model->select_ms_region_mekaar();
 		
         $this->load->view('layout/gabung', $data);
 	}
