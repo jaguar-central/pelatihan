@@ -264,8 +264,10 @@ class Pelatihan extends MY_Controller
     {
 		$this->is_logged();				
 		
-        $id_bisnis_pelatihan   		= trim($this->security->xss_clean(strip_image_tags($this->input->post('id_bisnis_pelatihan'))));
-        $klasterisasi   			= trim($this->security->xss_clean(strip_image_tags($this->input->post('klasterisasi'))));
+
+		$id_pelatihan_project_charter= trim($this->security->xss_clean(strip_image_tags($this->input->post('judul_project_charter'))));
+
+        $id_bisnis_pelatihan   		= trim($this->security->xss_clean(strip_image_tags($this->input->post('id_bisnis_pelatihan'))));        
         $pelatihan_type     		= trim($this->security->xss_clean(strip_image_tags($this->input->post('pelatihan_type'))));
 		$judul_pelatihan    		= trim($this->security->xss_clean(strip_image_tags($this->input->post('judul_pelatihan'))));
 		$grading   				= trim($this->security->xss_clean(strip_image_tags($this->input->post('grading'))));
@@ -394,34 +396,34 @@ class Pelatihan extends MY_Controller
 		
 		try{
 			$data = array(
-				'ID_TIPE' 			=> $pelatihan_type,
-				'NO_PROPOSAL' 		=> $no_proposal,
-				'NO_TRX' 			=> $no_trx,
-				'ID_KLASTERISASI' 	=> $klasterisasi,
-				'ID_GRADING'		=> $grading,
-				'TITLE' 			=> $judul_pelatihan,
-				'ID_BISNIS'			=> $id_bisnis_pelatihan,
-				'REGIONAL_MEKAAR'	=> $regional_mekaar,
-				'AREA_MEKAAR' 		=> $area_mekaar,
-				'CABANG_MEKAAR'		=> $data_cabang_mekaar,
-				'CABANG_ULAMM' 		=> $cabang_ulamm,
-				'UNIT_ULAMM'		=> $data_unit_ulamm,
-				'DESKRIPSI' 		=> $deskripsi_pelatihan,
-				'DURASI_PELATIHAN' 	=> $durasi_pelatihan,
-				'TANGGAL_MULAI' 	=> $inputStartTglPelaksanaan.' '.date("H:i", strtotime($inputStartTimePelaksanaan)),
-				'TANGGAL_SELESAI' 	=> $inputAkhirTglPelaksanaan.' '.date("H:i", strtotime($inputEndTimePelaksanaan)),
-				'KUOTA_PESERTA' 	=> $kuota_peserta,
-				'BUDGET' 			=> $anggaran,
-				'STATUS' 			=> 'draft',
-				'PROVINSI' 			=> $provinsi,
-				'ALAMAT' 			=> $alamat_tempat_pelatihan,
-				'LOKASI' 			=> $lokasi_pelatihan,
-				'RADIUS' 			=> $radius,
-				'LATITUDE' 			=> $latitude,
-				'LONGITUDE' 		=> $longitude,
-				'PEMBICARA'			=> $pembicara_pelatihan,
-				'CREATED_BY' 		=> $id_user,
-				'CREATED_DATE' 		=> date('Y-m-d H:i:s')			
+				'ID_TIPE' 				=> $pelatihan_type,
+				'NO_PROPOSAL' 			=> $no_proposal,
+				'NO_TRX' 				=> $no_trx,
+				'ID_PROJECT_CHARTER'	=> $id_pelatihan_project_charter,
+				'ID_GRADING'			=> $grading,
+				'TITLE' 				=> $judul_pelatihan,
+				'ID_BISNIS'				=> $id_bisnis_pelatihan,
+				'REGIONAL_MEKAAR'		=> $regional_mekaar,
+				'AREA_MEKAAR' 			=> $area_mekaar,
+				'CABANG_MEKAAR'			=> $data_cabang_mekaar,
+				'CABANG_ULAMM' 			=> $cabang_ulamm,
+				'UNIT_ULAMM'			=> $data_unit_ulamm,
+				'DESKRIPSI' 			=> $deskripsi_pelatihan,
+				'DURASI_PELATIHAN' 		=> $durasi_pelatihan,
+				'TANGGAL_MULAI' 		=> $inputStartTglPelaksanaan.' '.date("H:i", strtotime($inputStartTimePelaksanaan)),
+				'TANGGAL_SELESAI' 		=> $inputAkhirTglPelaksanaan.' '.date("H:i", strtotime($inputEndTimePelaksanaan)),
+				'KUOTA_PESERTA' 		=> $kuota_peserta,
+				'BUDGET' 				=> $anggaran,
+				'STATUS' 				=> 'draft',
+				'PROVINSI' 				=> $provinsi,
+				'ALAMAT' 				=> $alamat_tempat_pelatihan,
+				'LOKASI' 				=> $lokasi_pelatihan,
+				'RADIUS' 				=> $radius,
+				'LATITUDE' 				=> $latitude,
+				'LONGITUDE' 			=> $longitude,
+				'PEMBICARA'				=> $pembicara_pelatihan,
+				'CREATED_BY' 			=> $id_user,
+				'CREATED_DATE' 			=> date('Y-m-d H:i:s')			
 			);
 			
 			$this->Pelatihan_model->insert_t_pelatihan($data);
@@ -442,6 +444,20 @@ class Pelatihan extends MY_Controller
 					'CREATED_DATE' 		=> date('Y-m-d H:i:s')
 				);							
 				$this->Pelatihan_model->insert_t_rab($rab);
+			}
+
+			/*nonaktifkan pelatihan project charter yang telah terpakai*/
+			if ($id_pelatihan_project_charter){
+
+				$data_update = array(
+					'AKTIF' 		=> '0',
+					'UPDATED_BY'	=> $id_user,
+					'UPDATED_DATE' 	=> date('Y-m-d H:i:s')
+				);
+
+				$where_update	= array('ID' 	=> $id_pelatihan_project_charter);
+
+				$this->Pelatihan_model->update_project_charter($data_update,$where_update);
 			}
 		}		
 		catch (Exception $e)
@@ -1356,14 +1372,18 @@ class Pelatihan extends MY_Controller
 
 
 
-	public function get_project_charter(){
+	public function get_list_project_charter(){
 		$tipe = $_GET['tipepelatihan'];
-		$project_charter = $this->Pelatihan_model->select_t_project_charter_by_tipe($tipe);					
 		
-		$return= '';
+		$project_charter = $this->Pelatihan_model->select_t_project_charter_by_tipe($tipe);					
+		$return= "<option value=''>--pilih tema project charter--</option>";
 			
-		foreach ($project_charter as $data) {
-			$return .="<option value='$data->ID_PROJECT_CHARTER' >$data->TEMA_PROJECT_CHARTER</option>";
+		if ($project_charter){
+			foreach ($project_charter as $data) {
+				$return .="<option value='$data->ID_PROJECT_CHARTER' >$data->TEMA_PROJECT_CHARTER</option>";
+			}
+		}else{
+			$return = "<option value=''>--project charter belum di input--</option>";
 		}
 
 		// echo '<pre>';
@@ -1372,5 +1392,35 @@ class Pelatihan extends MY_Controller
 		echo $return;	
 	}
 
+
+	public function get_data_project_charter(){
+		$id = $_GET['id_project_charter'];
+
+		$project_charter = $this->Pelatihan_model->select_t_project_charter_by_id_project_charter($id);	
+
+		$return= "<option value=''>--pilih judul project charter--</option>";
+			
+		if ($project_charter){
+			foreach ($project_charter as $data) {
+				$return .="<option value='$data->ID' >$data->JUDUL_PELATIHAN</option>";
+			}
+		}else{
+			$return = "<option value=''>--project charter belum di input--</option>";
+		}
+
+		// echo '<pre>';
+		// print_r($project_charter);
+		// echo '</pre>';die;
+		echo $return;		
+	}
+
+
+	public function get_pelatihan_project_charter(){
+		$id = $_GET['id'];
+
+		$data["data"] = $this->Pelatihan_model->select_t_project_charter_by_id($id)[0];	
+		
+		echo json_encode($data);				
+	}
 
 }

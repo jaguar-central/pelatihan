@@ -121,4 +121,6 @@ $route['pelatihan/post_change_status_pelatihan/(:any)/(:any)']  = 'pelatihan/pos
 $route['pelatihan/get_paging_pelatihan/(:any)/(:any)']  		= 'pelatihan/get_paging_pelatihan/$1/$2';
 
 $route['pelatihan/post_project_charter']                        = 'pelatihan/post_project_charter';
-$route['pelatihan/get_project_charter']                         = 'pelatihan/get_project_charter';
+$route['pelatihan/get_list_project_charter']                    = 'pelatihan/get_list_project_charter';
+$route['pelatihan/get_data_project_charter']                    = 'pelatihan/get_data_project_charter';
+$route['pelatihan/get_pelatihan_project_charter']               = 'pelatihan/get_pelatihan_project_charter';

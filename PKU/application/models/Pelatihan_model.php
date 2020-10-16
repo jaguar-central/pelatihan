@@ -233,9 +233,25 @@ public function paging_t_pelatihan($param)
 
 public function select_t_project_charter_by_tipe($tipe)
 {
-	$query = $this->db->query("select * from T_PROJECT_CHARTER where ID_TIPE_PELATIHAN='".$tipe."' ");
+	$query = $this->db->query("select * from T_PROJECT_CHARTER where ID_TIPE_PELATIHAN='".$tipe."' and AKTIF=1 ");
 	return $query->result();
 }
+
+public function select_t_project_charter_by_id_project_charter($id)
+{
+	$query = $this->db->query("select * from T_PROJECT_CHARTER where ID_PROJECT_CHARTER='".$id."' and AKTIF=1 ");
+	return $query->result();
+}
+
+public function select_t_project_charter_by_id($id)
+{
+	$query = $this->db->query("select * from T_PROJECT_CHARTER where ID='".$id."' and AKTIF=1 ");
+	return $query->result();
+}
+
+public function update_project_charter($data,$where){
+	$this->db->update('T_PROJECT_CHARTER', $data,$where);
+}	
 
 public function select_trx_no_reject_find_no_trx_reject($param)
 {

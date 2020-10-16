@@ -85,7 +85,8 @@
 		$("#add_pelatihan :input").prop("disabled", false);
 		$('#pelatihan_type').html('<option value="'+pelatihantype+'">'+pelatihantitle+'</option>');		
 		$('.select_project_charter').hide();  
-		$("#pilih_project_charter").prop('required',false);
+		$("#tema_project_charter").prop('required',false);
+		$("#judul_project_charter").prop('required',false);
 	});					
 
 	$(document).on("click", ".add_pelatihan_project_charter", function () {
@@ -96,9 +97,10 @@
 		$("#add_pelatihan :input").prop("disabled", false);
 		$('#pelatihan_type').html('<option value="'+pelatihantype+'">'+pelatihantitle+'</option>');			  
 		$('.select_project_charter').show();  
-		$("#pilih_project_charter").prop('required',true);
+		$("#tema_project_charter").prop('required',true);
+		$("#judul_project_charter").prop('required',true);
 
-		$.get("<?php echo base_url() ?>pelatihan/get_project_charter",{ tipepelatihan:pelatihantype }, function(data, status){
+		$.get("<?php echo base_url() ?>pelatihan/get_list_project_charter",{ tipepelatihan:pelatihantype }, function(data, status){
 			if (data){
 				$('#pilih_project_charter').html(data);	
 			}

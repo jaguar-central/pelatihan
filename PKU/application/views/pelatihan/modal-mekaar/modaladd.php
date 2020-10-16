@@ -17,6 +17,26 @@
 			?>	
 			<div class="modal-body">
 
+				<div class="form-group card text-white bg-info select_project_charter">
+					<div class="card-header">Project Charter</div>
+					<div class="card-body row">
+					<label class="col-sm-2">Pilih Tema <span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+						<select class="form-control tema_project_charter" required="" id="tema_project_charter" name="tema_project_charter">
+							<option value="">-- pilih tema project charter --</option>																
+						</select>																	
+					</div>
+
+
+					<label class="col-sm-2">Pilih Pelatihan <span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+						<select class="form-control judul_project_charter" required="" id="judul_project_charter" name="judul_project_charter">
+							<option value="">-- tentukan tema project charter --</option>																
+						</select>																	
+					</div>
+					</div>
+				</div>			
+
 				<div class="form-group row">
 					<input type="hidden" class="form-control" id="id_bisnis_pelatihan" name="id_bisnis_pelatihan" value="2" />
 					
@@ -39,16 +59,7 @@
 								?>										
 						</select>																	
 					</div>
-				</div>		
-				
-				<div class="form-group row select_project_charter">
-					<label class="col-sm-2">Pilih Project Charter <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<select class="form-control" required="" id="pilih_project_charter" name="pilih_project_charter">
-							<option value="">--project charter belum di input--</option>																
-						</select>																	
-					</div>
-				</div>					
+				</div>											
 				
 				<div class="form-group row">
 					<label class="col-sm-2">Judul <span class="text-danger">*</span></label>
@@ -421,6 +432,44 @@
 			});
 			
 		});		
+
+
+
+		$('#tema_project_charter').on('change', function (e) {	
+			console.log($('#tema_project_charter').val());
+
+			$.ajax({
+				url: "<?php echo base_url()?>pelatihan/get_data_project_charter",
+				data: "id_project_charter="+$("#tema_project_charter").val(),
+				cache: false,
+				success: function(data){	
+					$('#judul_project_charter').html(data);	        
+				}
+			});
+		});		
+
+		$('#judul_project_charter').on('change', function (e) {
+
+			$.ajax({
+				url: "<?php echo base_url()?>pelatihan/get_pelatihan_project_charter",
+				data: "id="+$("#judul_project_charter").val(),
+				cache: false,
+				success: function(data){											
+					var mydata = JSON.parse(data);
+					// console.log(mydata.data.JUDUL_PELATIHAN);
+					$('#judul_pelatihan').val(mydata.data.JUDUL_PELATIHAN);
+					$('#anggaran').val(mydata.data.BUDGET);
+					new AutoNumeric("#anggaran","commaDecimalCharDotSeparator");
+
+					var dateawal = moment(mydata.data.TANGGAL);
+					$('#timeawal').val(dateawal.format('YYYY-MM-DD'));	
+					$('#inputStartTglPelaksanaan').val(dateawal.format('YYYY-MM-DD'));	
+					$('#inputStartTimePelaksanaan').val(dateawal.format('hh:mm A'));				
+					
+				
+				}
+			});
+		});				
 	});		
 
 	$('#us_add').locationpicker({
