@@ -1,5 +1,5 @@
 <style>
-[type="date"]::-webkit-inner-spin-button {
+/* [type="date"]::-webkit-inner-spin-button {
   display: none;
 }
 [type="date"]::-webkit-calendar-picker-indicator {
@@ -12,7 +12,7 @@ input [type="date"] {
   padding: 3px 5px;
   box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
   width: 190px;
-}
+} */
 </style>
 
 
@@ -76,7 +76,7 @@ input [type="date"] {
 						<table id="table_charter_modaladd"  class="table">
 								<thead class=" text-primary col-md-12">
 									<th class="col-md-2">Judul</th>
-									<th class="col-md-2">Tanggal</th>
+									<th class="col-md-5">Tanggal</th>
 									<th class="col-md-2">Tempat</th>
 									<th class="col-md-2">Budget</th>
 									<th></th>
@@ -88,6 +88,7 @@ input [type="date"] {
 									<td>									  
 									<div class='input-group'>
 										<input type="date" class="form-control" id="tanggal_pelatihan" name="tanggal_pelatihan[]">
+										<input type="time" class="form-control" id="time_pelatihan" name="time_pelatihan[]">
 										<span class="input-group-addon">
 											<span class="fa fa-calendar"></span>
 										</span>

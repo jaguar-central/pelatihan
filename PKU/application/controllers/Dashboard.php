@@ -15,15 +15,13 @@ class Dashboard extends MY_Controller
     	
         $data["content"] = "Dashboard";
 		$data["view"] = "dashboard/index";	
-		//$data["script"] = "pelatihan/include/list-script";
+		$data["script"] = "dashboard/include/dashboard-script";
 		
         $data["menu"] = $this->Menu_model->select_ms_menu();
         $data["latihan"] = $this->Dashboard_model->select_t_pelatihan();
         $data["kehadiran"] = $this->Dashboard_model->select_t_kehadiran();
         $data["nasabah"] = $this->Dashboard_model->select_t_jumlah_nasabah();
-        $data["non_nasabah"] = $this->Dashboard_model->select_t_non_nasabah();		
-		
-        //$data["nasabah"] = $this->Dashboard_model->trpelatihanparticipant();
+        $data["non_nasabah"] = $this->Dashboard_model->select_t_non_nasabah();				        
 
         //echo '<pre>';
 		//print_r($data['menu']);

@@ -24,7 +24,7 @@
                                             </div>
                                         </div>
                                         <div class="overview-chart">
-                                            <canvas id="widgetChart1"></canvas>
+                                            <canvas id="dashboard_pelatihan"></canvas>
                                         </div>
                                     </div>
                                 </div>

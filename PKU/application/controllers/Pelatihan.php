@@ -1329,6 +1329,7 @@ class Pelatihan extends MY_Controller
 
 		$judul_pelatihan    = $this->security->xss_clean(strip_image_tags($this->input->post('judul_pelatihan')));
 		$tanggal_pelatihan  = $this->security->xss_clean(strip_image_tags($this->input->post('tanggal_pelatihan')));
+		$time_pelatihan  = $this->security->xss_clean(strip_image_tags($this->input->post('time_pelatihan')));
 		$tempat_pelatihan   = $this->security->xss_clean(strip_image_tags($this->input->post('tempat_pelatihan')));
 		$budget_pelatihan   = $this->security->xss_clean(strip_image_tags($this->input->post('budget_pelatihan')));
 		
@@ -1347,7 +1348,7 @@ class Pelatihan extends MY_Controller
 					'TEMA_PROJECT_CHARTER' 	=> $tema_project_charter,
 					'FILE' 					=> '',
 					'JUDUL_PELATIHAN' 		=> $judul_pelatihan[$i],
-					'TANGGAL' 				=> $tanggal_pelatihan[$i],
+					'TANGGAL' 				=> $tanggal_pelatihan[$i].' '.$time_pelatihan[$i],
 					'TEMPAT' 				=> $tempat_pelatihan[$i],
 					'BUDGET' 				=> $budget_pelatihan[$i],
 					'AKTIF'					=> '1',
