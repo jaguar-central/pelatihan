@@ -102,7 +102,7 @@
 
 		$.get("<?php echo base_url() ?>pelatihan/get_list_project_charter",{ tipepelatihan:pelatihantype }, function(data, status){
 			if (data){
-				$('#pilih_project_charter').html(data);	
+				$('#tema_project_charter').html(data);	
 			}
 		});
 	});	
