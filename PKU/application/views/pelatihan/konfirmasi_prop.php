@@ -39,13 +39,8 @@
                                                 echo '<td>'.$data->DESKRIPSI.'</td>';
                                                 echo '<td>'.$data->LOKASI.'</td>';                                             
 												echo '<td> 
-															<div class="dropdown">
-															  <button class="btn btn-outline-info dropdown-toggle" type="button" data-toggle="dropdown">Action
-															  <span class="caret"></span>
-															  </button>
-															  <div class="dropdown-menu">
-                                                                
-                                                                <a class="dropdown-item pelatihan_details" href="#" data-toggle="modal" data-target="#modaldetails"
+                                                <div class="dropdown"><button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown">Action<span class="caret"></span></button><div class="dropdown-menu">
+                                                <a class="dropdown-item pelatihan_details" href="#" data-toggle="modal" data-target="#modaldetails"
                                                                 data-pelatihanid="'.$data->ID.'"
                                                                 data-pelatihantype="'.$data->ID_TIPE.'"
 						                                        data-pelatihantiddeskripsi="'.$data->DESKRIPSI_PELATIHAN_TYPE.'" 
@@ -65,6 +60,7 @@
 						                                        data-pelatihanlatitude="'.$data->LATITUDE.'"
                                                                 data-pelatihanpembicara="'.$data->PEMBICARA.'"
                                                                 > Details</a>
+                                                                
 																<a class= "dropdown-item" target="_blank" href="'.$this->config->item("jasper_report").'Pelatihan.pdf?ID='.$data->ID.'"> Unduh Proposal</a>				
 																<a class= "dropdown-item pelatihan_approval" href="#" data-toggle="modal" data-target="#modalapproval" data-pelatihanid="'.$data->ID.'" data-gradingid="'.$data->ID_GRADING.'" > Verify</a>				
 															  </div>
