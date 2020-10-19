@@ -56,6 +56,16 @@
 
 <script type="text/javascript">
 
+	$(document).ready(function() {	
+		$('#datatable').DataTable({
+			"aaSorting" : [],	
+			"paging": true,
+			"processing": true,
+			"serverSide": false,			
+			"dom": "<'dom_datable'f>rt<'dom_datable col-md-6'i>"
+		});																
+	});
+
     $(document).on("click", ".modaldetails", function () {		
 
 				
