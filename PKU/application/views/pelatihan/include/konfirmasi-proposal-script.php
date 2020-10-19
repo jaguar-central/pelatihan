@@ -62,6 +62,49 @@
 		});								
 	});
 
+	$(document).on("click", ".pelatihan_details", function () {			
+				
+				$('#pelatihan_type_details').html('<option value="'+$(this).data('pelatihantype')+'">'+$(this).data('pelatihantiddeskripsi')+'</option>');		
+				$('#cabang_pelatihan_details').val($(this).data('pelatihancabang'));		
+				$('#cabang_pelatihan_details').trigger('change');							
+				$('#unit_pelatihan_details').val($(this).data('pelatihanunit'));		
+				$('#judul_pelatihan_details').val($(this).data('pelatihantitle'));		
+				$('#deskripsi_pelatihan_details').val($(this).data('pelatihandeskripsi'));		
+				$('#input-limit-datepicker_details').val($(this).data('pelatihantanggal'));		
+				$('#durasi_pelatihan_details').val($(this).data('pelatihandurasi'));		
+				$('#kuota_peserta_details').val($(this).data('pelatihankuota'));		
+				$('#anggaran_details').val($(this).data('pelatihananggaran'));		
+				$('#provinsi_details').val($(this).data('pelatihanprovinsi'));		
+				$('#alamat_tempat_pelatihan_details').val($(this).data('pelatihanalamat'));		
+				$('#lokasi_pelatihan_details').val($(this).data('pelatihanlokasi'));		
+				$('#radius_details').val($(this).data('pelatihanlradius'));		
+				$('#latitude_details').val($(this).data('pelatihanlongitude'));		
+				$('#longitude_details').val($(this).data('pelatihanlatitude'));						
+				$('#pembicara_pelatihan_details').val($(this).data('pelatihanpembicara'));		
+				$('#input-limit-datepicker').val($(this).data('pelatihantanggal'));									
+										
+						
+				$.ajax({
+					url: "<?php echo base_url()?>pelatihan/get_rab",
+					data: "pelatihanid="+$(this).data("pelatihanid")+"&tipe_modal=details",
+					cache: false,
+					success: function(data){				         
+						$('#table_rab_details').html(data);  
+		
+						var total = 0;
+						$('tr #total_cost_rab_details').each(function () {            
+						var total_cost_rab = $(this).val();			
+						if (!isNaN(total_cost_rab) && total_cost_rab.length !== 0) {
+							total += parseFloat(total_cost_rab);
+						}
+						});
+						var rowCount = $('tr #total_cost_rab_details').length;
+						$("#total_cost_rab_akhir_details").val(total);
+					}
+				});	
+								
+			});
+
 
 	$(document).on("click", ".pelatihan_approval", function () {			
 		var pelatihanid = $(this).data('pelatihanid');	

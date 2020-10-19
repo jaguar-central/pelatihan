@@ -117,7 +117,6 @@ class Pelatihan extends MY_Controller
 			
 								);
 
-		$data["menu"] 			= $this->Menu_model->select_ms_menu();
 		$data["pelatihan_type"] = $this->Pelatihan_model->select_ms_pelatihan_type_mekaar();
 		$data["grade_mekaar"] 	= $this->Master_model->select_ms_grading();		
 		$data["cabang"] 		= $this->Master_model->select_ms_cabang_ulamm();		
