@@ -76,15 +76,16 @@ input [type="date"] {
 								<table id="table_charter_modaladd"  class="table">
 								  <thead class=" text-primary col-md-12">
 									  <th class="col-md-2">Judul</th>
-									  <th class="col-md-5">Tanggal</th>
-									  <th class="col-md-2">Tempat</th>
+									  <th class="col-md-3">Tanggal</th>
+									  <th class="col-md-2">Cabang</th>
+									  <th class="col-md-2">Alamat</th>
 									  <th class="col-md-2">Budget</th>
 									  <th></th>
 									  <th></th>
 								  </thead>    
 								  <tbody id="tbody_charter_modaladd">
 								  <tr class="d-none">									
-									<td><input type="text" class="form-control" id="judul_pelatihan" name="judul_pelatihan[]" value=""></td>
+									<td><input type="text" class="form-control" id="judul_pelatihan" name="judul_pelatihan[]" ></td>
 									<td>									  
 									<div class='input-group'>
 										<input type="date" class="form-control" id="tanggal_pelatihan" name="tanggal_pelatihan[]">
@@ -94,7 +95,18 @@ input [type="date"] {
 										</span>																				
 									</div>
 									</td>									  
-									<td ><input type="text" class="form-control" id="tempat_pelatihan" name="tempat_pelatihan[]" value=""></td>
+									<td >
+										<select class="form-control" id="cabang_ulamm" name="cabang_ulamm[]">
+											<option value="">--pilih cabang--</option>			
+
+												<?php 
+												foreach ($cabang as $data_cabang){
+													echo '<option value="'.$data_cabang->KODE_CABANG.'">'.$data_cabang->KODE_CABANG.' - '.$data_cabang->DESKRIPSI.'</option>';                                                                    
+												}
+												?>										
+										</select>
+									</td>
+									<td ><input type="text" class="form-control" id="alamat_pelatihan" name="alamat_pelatihan[]" value=""></td>
 									<td ><input type="text" class="form-control" id="budget_pelatihan" name="budget_pelatihan[]" value=""></td>
 									<td>                            
 									<a class="table-remove-modaladd btn btn-outline-primary btn-sm" href="#"><i class="fas fa-trash"></i></a>   

@@ -47,25 +47,17 @@
 <script src="<?php echo base_url(); ?>assets/js/bootstrap-datetimepicker.js"></script>
 
 
-<script src="<?php echo base_url() ?>assets/js/googlejs.js"></script>
+<!-- <script src="<?php echo base_url() ?>assets/js/googlejs.js"></script> -->
 
-<script src="<?php echo base_url() ?>assets/js/locationpicker.jquery.min.js"></script>
+<!-- <script src="<?php echo base_url() ?>assets/js/locationpicker.jquery.min.js"></script> -->
 
 
 <script src="<?php echo base_url() ?>assets/js/autoNumeric.js"></script>
 
-<script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places&key=AIzaSyCwGoo1jtr3HgU66bulwQ6qDI4CJqpgJjU"></script>
+<!-- <script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places&key=AIzaSyCwGoo1jtr3HgU66bulwQ6qDI4CJqpgJjU"></script> -->
 
 
-<script type="text/javascript">	
-	
-	$(document).on("click", ".project_charter", function () {	
-		var pelatihantype = $(this).data('pelatihantype');	
-		var pelatihantitle = $(this).data('pelatihantitle');    										
-		$('#type_klasterisasi').html('<option value="'+pelatihantype+'">'+pelatihantitle+'</option>');			
-		$('#modaladdklasterisasi').modal('show');
-	});		
-
+<script type="text/javascript">			
 
     $(document).ready(function() {	
 		$('#datatable').DataTable({
@@ -94,6 +86,8 @@
 		$('#add_pelatihan').trigger("reset");
 		var pelatihantype = $(this).data('pelatihantype');	
 		var pelatihantitle = $(this).data('pelatihantitle');
+		var cabang_ulamm = '<?php echo $this->session->userdata('sess_user_cabang'); ?>';
+		
 		
 		$("#add_pelatihan :input").prop("disabled", false);
 		$('#pelatihan_type').html('<option value="'+pelatihantype+'">'+pelatihantitle+'</option>');			  
@@ -101,7 +95,7 @@
 		$("#tema_project_charter").prop('required',true);
 		$("#judul_project_charter").prop('required',true);
 
-		$.get("<?php echo base_url() ?>pelatihan/get_list_project_charter",{ tipepelatihan:pelatihantype }, function(data, status){
+		$.get("<?php echo base_url() ?>pelatihan/get_list_project_charter",{ tipepelatihan:pelatihantype,cabang_ulamm:cabang_ulamm }, function(data, status){
 			if (data){
 				$('#tema_project_charter').html(data);	
 			}
@@ -124,11 +118,9 @@
 		$('#kuota_peserta_details').val($(this).data('pelatihankuota'));		
 		$('#anggaran_details').val($(this).data('pelatihananggaran'));		
 		$('#provinsi_details').val($(this).data('pelatihanprovinsi'));		
+		$('#kabkot_details').val($(this).data('pelatihankabkot'));		
+		$('#kecamatan_details').val($(this).data('pelatihankecamatan'));						
 		$('#alamat_tempat_pelatihan_details').val($(this).data('pelatihanalamat'));		
-		$('#lokasi_pelatihan_details').val($(this).data('pelatihanlokasi'));		
-		$('#radius_details').val($(this).data('pelatihanlradius'));		
-		$('#latitude_details').val($(this).data('pelatihanlongitude'));		
-		$('#longitude_details').val($(this).data('pelatihanlatitude'));						
 		$('#pembicara_pelatihan_details').val($(this).data('pelatihanpembicara'));		
 		$('#input-limit-datepicker').val($(this).data('pelatihantanggal'));									
 								
@@ -179,12 +171,28 @@
 		$('#kuota_peserta_edit').val($(this).data('pelatihankuota'));				
 		$('#anggaran_edit').val($(this).data('pelatihananggaran'));		
 		new AutoNumeric("#anggaran_edit","commaDecimalCharDotSeparator");
-		$('#provinsi_edit').val($(this).data('pelatihanprovinsi'));		
+		$('#provinsi_edit').val($(this).data('pelatihanprovinsi'));			
+
+		$.ajax({
+			url: "<?php echo base_url()?>master/get_kabkot",
+			data: "kode_provinsi="+$(this).data('pelatihanprovinsi')+"&select="+$(this).data('pelatihankabkot'),
+			cache: false,
+			success: function(data){				         
+				$('#kabkot_edit').html(data);					
+			}
+		});		
+
+		$.ajax({
+			url: "<?php echo base_url()?>master/get_kecamatan",
+			data: "kode_kabkot="+$(this).data('pelatihankabkot')+"&select="+$(this).data('pelatihankecamatan'),
+			cache: false,
+			success: function(data){				         
+				$('#kecamatan_edit').html(data)           
+			}
+		});		
+
+					
 		$('#alamat_tempat_pelatihan_edit').val($(this).data('pelatihanalamat'));		
-		$('#lokasi_pelatihan_edit').val($(this).data('pelatihanlokasi'));		
-		$('#radius_edit').val($(this).data('pelatihanlradius'));		
-		$('#latitude_edit').val($(this).data('pelatihanlongitude'));		
-		$('#longitude_edit').val($(this).data('pelatihanlatitude'));	
 		$('#pembicara_pelatihan_edit').val($(this).data('pelatihanpembicara'));			
 		
 		$("#add_pelatihan :input").prop("disabled", false);				
@@ -289,12 +297,10 @@
 						+'data-pelatihandurasi="'+row.DURASI_PELATIHAN+'" '
 						+'data-pelatihankuota="'+row.KUOTA_PESERTA+'" '
 						+'data-pelatihananggaran="'+row.BUDGET+'" '
-						+'data-pelatihanprovinsi="'+row.PROVINSI+'" '
 						+'data-pelatihanalamat="'+row.ALAMAT+'" '
-						+'data-pelatihanlokasi="'+row.LOKASI+'" '
-						+'data-pelatihanlradius="'+row.RADIUS+'" '
-						+'data-pelatihanlongitude="'+row.LONGITUDE+'" '
-						+'data-pelatihanlatitude="'+row.LATITUDE+'" '
+						+'data-pelatihanprovinsi="'+row.PROVINSI+'" '						
+						+'data-pelatihankabkot="'+row.KABKOT+'" '
+						+'data-pelatihankecamatan="'+row.KECAMATAN+'" '
 						+'data-pelatihanpembicara="'+row.PEMBICARA+'"> Details</a>';
 						tombol_action +='<a class="dropdown-item pelatihan_edit" href="#" data-toggle="modal" data-target="#modaledit" '
 						+'data-pelatihanid="'+row.ID+'" '
@@ -310,12 +316,10 @@
 						+'data-pelatihandurasi="'+row.DURASI_PELATIHAN+'" '
 						+'data-pelatihankuota="'+row.KUOTA_PESERTA+'" '
 						+'data-pelatihananggaran="'+row.BUDGET+'" '
-						+'data-pelatihanprovinsi="'+row.PROVINSI+'" '
 						+'data-pelatihanalamat="'+row.ALAMAT+'" '
-						+'data-pelatihanlokasi="'+row.LOKASI+'" '
-						+'data-pelatihanlradius="'+row.RADIUS+'" '
-						+'data-pelatihanlongitude="'+row.LONGITUDE+'" '
-						+'data-pelatihanlatitude="'+row.LATITUDE+'" '
+						+'data-pelatihanprovinsi="'+row.PROVINSI+'" '						
+						+'data-pelatihankabkot="'+row.KABKOT+'" '
+						+'data-pelatihankecamatan="'+row.KECAMATAN+'" '
 						+'data-pelatihanpembicara="'+row.PEMBICARA+'"> Edit</a>';
 						tombol_action += '<a class= "dropdown-item" target="_blank" href="<?php echo $this->config->item('jasper_report').'Pelatihan.pdf?ID=' ?>'+row.ID+'"> Unduh Proposal</a>';
 					  }
@@ -340,12 +344,10 @@
 						+'data-pelatihandurasi="'+row.DURASI_PELATIHAN+'" '
 						+'data-pelatihankuota="'+row.KUOTA_PESERTA+'" '
 						+'data-pelatihananggaran="'+row.BUDGET+'" '
-						+'data-pelatihanprovinsi="'+row.PROVINSI+'" '
 						+'data-pelatihanalamat="'+row.ALAMAT+'" '
-						+'data-pelatihanlokasi="'+row.LOKASI+'" '
-						+'data-pelatihanlradius="'+row.RADIUS+'" '
-						+'data-pelatihanlongitude="'+row.LONGITUDE+'" '
-						+'data-pelatihanlatitude="'+row.LATITUDE+'" > Details</a>';
+						+'data-pelatihanprovinsi="'+row.PROVINSI+'" '						
+						+'data-pelatihankabkot="'+row.KABKOT+'" '
+						+'data-pelatihankecamatan="'+row.KECAMATAN+'"> Details</a> ';
 						
 						tombol_action += '<a class= "dropdown-item" target="_blank" href="<?php echo $this->config->item('jasper_report').'Pelatihan.pdf?ID=' ?>'+row.ID+'"> Unduh Proposal Approved</a>';
 						

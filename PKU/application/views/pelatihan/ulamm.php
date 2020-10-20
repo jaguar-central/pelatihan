@@ -29,7 +29,7 @@
 										echo '<td class="text-center">';	
 										echo '<button type="button" class="btn btn-outline-info col-md-4 view_pelatihan" data-pelatihantype="'.$cus->ID.'" data-pelatihanbisnis="ULAMM" ><span class="btn-label"><i class="fa fa-eye"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;View</button>&nbsp;&nbsp;';																			
 										if (in_array($cus->ID,$klasterisasi)){
-											echo '<button type="button" class="btn btn-outline-success col-md-4 add_pelatihan_project_charter" data-toggle="modal" data-target="#modaladd" data-pelatihantype="'.$cus->ID.'" data-pelatihantitle="'.$cus->TITLE.'"><span class="btn-label"><i class="fas fa-pencil-alt fa-fw"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add</button>'; 										
+											echo '<button type="button" class="btn btn-outline-success col-md-4 add_pelatihan_project_charter" data-toggle="modal" data-target="#modaladd" data-pelatihantype="'.$cus->ID.'" data-pelatihantitle="'.$cus->TITLE.' "><span class="btn-label"><i class="fas fa-pencil-alt fa-fw"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add</button>'; 										
 										}else{										
 											echo '<button type="button" class="btn btn-outline-success col-md-4 add_pelatihan" data-toggle="modal" data-target="#modaladd" data-pelatihantype="'.$cus->ID.'" data-pelatihantitle="'.$cus->TITLE.'"><span class="btn-label"><i class="fas fa-pencil-alt fa-fw"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add</button>'; 					
 										}

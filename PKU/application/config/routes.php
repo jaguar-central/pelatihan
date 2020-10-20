@@ -101,6 +101,8 @@ $route['master/get_unit_ulamm']                 = 'master/get_unit_ulamm';
 $route['master/get_area_mekaar']                = 'master/get_area_mekaar';
 $route['master/get_cabang_mekaar']              = 'master/get_cabang_mekaar';
 $route['master/get_grading']              		= 'master/get_grading';
+$route['master/get_kabkot']              		= 'master/get_kabkot';
+$route['master/get_kecamatan']              	= 'master/get_kecamatan';
 
 /* API DATA PELATIHAN*/
 $route['pelatihan/post_pelatihan']                              = 'pelatihan/post_pelatihan_proposal';

@@ -118,41 +118,11 @@
 					<label class="col-sm-2">Provinsi <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
 						<select class="form-control" required="" id="provinsi_details" name="provinsi_details" disabled >
-							<option value="">- Pilih Provinsi -</option>
-							<option value="ACEH">ACEH</option>
-							<option value="BALI">BALI</option>
-							<option value="BANTEN">BANTEN</option>
-							<option value="BENGKULU">BENGKULU</option>
-							<option value="DAERAH ISTIMEWA YOGYAKARTA">DAERAH ISTIMEWA YOGYAKARTA</option>
-							<option value="DKI JAKARTA">DKI JAKARTA</option>
-							<option value="GORONTALO">GORONTALO</option>
-							<option value="JAMBI">JAMBI</option>
-							<option value="JAWA BARAT">JAWA BARAT</option>
-							<option value="JAWA TENGAH">JAWA TENGAH</option>
-							<option value="JAWA TIMUR">JAWA TIMUR</option>
-							<option value="KALIMANTAN BARAT">KALIMANTAN BARAT</option>
-							<option value="KALIMANTAN SELATAN">KALIMANTAN SELATAN</option>
-							<option value="KALIMANTAN TENGAH">KALIMANTAN TENGAH</option>
-							<option value="KALIMANTAN TIMUR">KALIMANTAN TIMUR</option>
-							<option value="KALIMANTAN UTARA">KALIMANTAN UTARA</option>
-							<option value="KEPULAUAN BANGKA BELITUNG">KEPULAUAN BANGKA BELITUNG</option>
-							<option value="KEPULAUAN RIAU">KEPULAUAN RIAU</option>
-							<option value="LAMPUNG">LAMPUNG</option>
-							<option value="MALUKU">MALUKU</option>
-							<option value="MALUKU UTARA">MALUKU UTARA</option>
-							<option value="NUSA TENGGARA BARAT">NUSA TENGGARA BARAT</option>
-							<option value="NUSA TENGGARA TIMUR">NUSA TENGGARA TIMUR</option>
-							<option value="PAPUA">PAPUA</option>
-							<option value="PAPUA BARAT">PAPUA BARAT</option>
-							<option value="RIAU">RIAU</option>
-							<option value="SULAWESI BARAT">SULAWESI BARAT</option>
-							<option value="SULAWESI SELATAN">SULAWESI SELATAN</option>
-							<option value="SULAWESI TENGAH">SULAWESI TENGAH</option>
-							<option value="SULAWESI TENGGARA">SULAWESI TENGGARA</option>
-							<option value="SULAWESI UTARA">SULAWESI UTARA</option>
-							<option value="SUMATERA BARAT">SUMATERA BARAT</option>
-							<option value="SUMATERA SELATAN">SUMATERA SELATAN</option>
-							<option value="SUMATERA UTARA">SUMATERA UTARA</option>
+							<?php 
+							foreach ($provinsi as $data_provinsi){
+								echo '<option value="'.$data_provinsi->MS_KODE_PROVINSI.'">'.$data_provinsi->MS_PROVINSI.'</option>';                                                                    
+							}
+							?>	
 						</select>
 					</div>                          
 				
@@ -163,33 +133,28 @@
 				</div>
 
 				<div class="form-group row">
-					<label class="col-sm-2">Lokasi Pelatihan <span class="text-danger">*</span></label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control"  required="" id="lokasi_pelatihan_details" name="lokasi_pelatihan_details" disabled />
-					</div>                                
-				</div>
+					<label class="col-sm-2">Kabupaten / Kota <span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+						<select class="form-control" required="" id="kabkot_details" name="kabkot_details" disabled>
+						<?php 
+							foreach ($kabkot as $data_kabkot){
+								echo '<option value="'.$data_kabkot->MS_KODE_KABKOT.'">'.$data_kabkot->MS_KABKOT.'</option>';                                                                    
+							}
+							?>							
+						</select>
+					</div>              
 
-				<div class="form-group row">
-					<label class="col-sm-4" >Radius <span class="text-danger">*</span></label>
-					<label class="col-sm-4">Latitude <span class="text-danger">*</span></label>
-					<label class="col-sm-4">Longitude <span class="text-danger">*</span></label>
+					<label class="col-sm-2">Kecamatan <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="radius_details" name="radius_details" disabled />
-					</div>               
-					
-					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="latitude_details" name="latitude_details" disabled />
-					</div>                          
-				
-					
-					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="longitude_details" name="longitude_details" disabled />
-					</div>                      
-				</div>
-
-				<div class="col-xs-12" style="margin-bottom:30px;">
-						<div id="us_details" style="width:100%; height: 400px;" disabled ></div>
-				</div>
+						<select class="form-control" required="" id="kecamatan_details" name="kecamatan_details" disabled>
+						<?php 
+							foreach ($kecamatan as $data_kecamatan){
+								echo '<option value="'.$data_kecamatan->MS_KODE_KECAMATAN.'">'.$data_kecamatan->MS_KECAMATAN.'</option>';                                                                    
+							}
+							?>								
+						</select>
+					</div>              					                  
+				</div>					
 
 				<div class="container-fluid">
 				  <div class="row">
@@ -218,8 +183,8 @@
 								  <div class="col-md-12"></div>
 									<label>Grand Total </label>
 								  <div>
-								  <div class="col-md-12">    
-									<input type="text" class="form-control money" id="total_cost_rab_akhir_details" name="total_cost_rab_akhir_details" data-a-sign="Rp. " value="" readonly="" required>
+								  <div class="col-md-11">    
+									<input style="text-align:right" type="text" class="form-control money" id="total_cost_rab_akhir_details" name="total_cost_rab_akhir_details" data-a-sign="Rp. " value="" readonly="" required>
 								  </div>
 								
 								
@@ -244,22 +209,3 @@
 	</div>
  </div>
 </div>
-<script>
-	$('#us_details').locationpicker({
-        location: {
-              latitude: <?php echo $this->session->userdata('sess_user_latitude'); ?>,
-              longitude: <?php echo $this->session->userdata('sess_user_longitude'); ?>
-		},
-        radius: 50,
-        inputBinding: {
-            latitudeInput: $('#latitude_add'),
-            longitudeInput: $('#longitude_add'),
-            radiusInput: $('#radius_add'),
-            locationNameInput: $('#lokasi_pelatihan_add')
-        },
-        enableAutocomplete: true,
-        onchanged: function (currentLocation, radius, isMarkerDropped) {
-  
-        }
-    });	
-</script>

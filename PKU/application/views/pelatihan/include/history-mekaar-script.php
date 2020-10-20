@@ -47,11 +47,11 @@
 <script src="<?php echo base_url(); ?>assets/js/bootstrap-datetimepicker.js"></script>
 
 
-<script src="<?php echo base_url() ?>assets/js/googlejs.js"></script>
+<!-- <script src="<?php echo base_url() ?>assets/js/googlejs.js"></script>
 
 <script src="<?php echo base_url() ?>assets/js/locationpicker.jquery.min.js"></script>
 
-<script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places&key=AIzaSyCwGoo1jtr3HgU66bulwQ6qDI4CJqpgJjU"></script>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places&key=AIzaSyCwGoo1jtr3HgU66bulwQ6qDI4CJqpgJjU"></script> -->
 
 
 <script type="text/javascript">
@@ -82,11 +82,9 @@
 				$('#kuota_peserta_details').val($(this).data('pelatihankuota'));
                 $('#anggaran_details').val($(this).data('pelatihananggaran'));		
 				$('#provinsi_details').val($(this).data('pelatihanprovinsi'));		
-				$('#alamat_tempat_pelatihan_details').val($(this).data('pelatihanalamat'));		
-				$('#lokasi_pelatihan_details').val($(this).data('pelatihanlokasi'));		
-				$('#radius_details').val($(this).data('pelatihanlradius'));		
-				$('#latitude_details').val($(this).data('pelatihanlatitude'));		
-                $('#longitude_details').val($(this).data('pelatihanlongitude'));	
+				$('#kabkot_details').val($(this).data('pelatihankabkot'));		
+				$('#kecamatan_details').val($(this).data('pelatihankecamatan'));	
+				$('#alamat_tempat_pelatihan_details').val($(this).data('pelatihanalamat'));						
                 $('#pembicara_pelatihan_details').val($(this).data('pelatihanpembicara'));				
 				
 				$("#add_pelatihan :input").prop("disabled", false);				

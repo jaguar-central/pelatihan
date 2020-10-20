@@ -24,6 +24,7 @@
 						<th>AREA</th>
 						<th>CABANG</th>
 						<th>STATUS</th>
+						<th>APPROVAL</th>
 						<th>ACTION</th>
 					</tr>
 				</thead>
@@ -40,6 +41,7 @@
 						echo '<td>'.$cus->AREA_MEKAAR.'</td>';
 						echo '<td>'.$cus->CABANG_MEKAAR.'</td>';
 						echo '<td>'.$cus->STATUS.'</td>'; 	
+						echo '<td>'.$cus->APPROVAL.'</td>'; 		
 						echo '<td>
 							<div class="dropdown"><button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown">Action<span class="caret"></span></button><div class="dropdown-menu">
 								<a class="dropdown-item modaldetails" href="#" data-toggle="modal" data-target="#modaldetails" 
@@ -56,11 +58,9 @@
 								data-pelatihankuota="'.$cus->KUOTA_PESERTA.'"
 								data-pelatihananggaran="'.$cus->BUDGET.'"
 								data-pelatihanprovinsi="'.$cus->PROVINSI.'"
+								data-pelatihankabkot="'.$cus->KABKOT.'"
+								data-pelatihankecamatan="'.$cus->KECAMATAN.'"								
 								data-pelatihanalamat="'.$cus->ALAMAT.'"
-								data-pelatihanlokasi="'.$cus->LOKASI.'"
-								data-pelatihanlradius="'.$cus->RADIUS.'"
-								data-pelatihanlongitude="'.$cus->LONGITUDE.'"
-								data-pelatihanlatitude="'.$cus->LATITUDE.'"
 								data-pelatihanpembicara="'.$cus->PEMBICARA.'"								
 								> Details</a>'; 
 						if ($cus->STATUS=='approved'){

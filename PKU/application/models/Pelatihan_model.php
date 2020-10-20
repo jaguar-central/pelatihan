@@ -50,14 +50,14 @@ public function update_t_pelatihan($data,$where){
 }	
 
 public function select_t_pelatihan_ulamm_by_status($status)
-        {
-                $query = $this->db->select('*,dbo.DESKRIPSI_PELATIHAN_TYPE(ID_TIPE) as DESKRIPSI_PELATIHAN_TYPE')->from('T_PELATIHAN')->
-				where('ID_BISNIS','1')->
-				where(" CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ")->
-				where_in('STATUS',$status)->get();				
-				
-                return $query->result();
-        }
+{
+		$query = $this->db->select('*,dbo.DESKRIPSI_PELATIHAN_TYPE(ID_TIPE) as DESKRIPSI_PELATIHAN_TYPE')->from('T_PELATIHAN')->
+		where('ID_BISNIS','1')->
+		where(" CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ")->
+		where_in('STATUS',$status)->get();				
+		
+		return $query->result();
+}
 		
 public function select_t_pelatihan_mekaar_by_status($status)
         {
@@ -231,9 +231,9 @@ public function paging_t_pelatihan($param)
 	return $query->result();
 }		
 
-public function select_t_project_charter_by_tipe($tipe)
+public function select_t_project_charter_where($where)
 {
-	$query = $this->db->query("select * from T_PROJECT_CHARTER where ID_TIPE_PELATIHAN='".$tipe."' and AKTIF=1 ");
+	$query = $this->db->get_where('T_PROJECT_CHARTER',$where);	
 	return $query->result();
 }
 

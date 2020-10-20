@@ -180,6 +180,41 @@ class Master extends MY_Controller
 	}	
 
 
+	public function get_kabkot()
+	{			
+		$kode_provinsi = $_GET['kode_provinsi'];
+		$select = $_GET['select'];
+		$kabkot = $this->Master_model->select_ms_kabkot_by_id_provinsi($kode_provinsi);		
+		$data= '<option value="">--pilih kabupaten/kota--</option>';
+		
+		foreach ($kabkot as $data_kabkot) {
+			if ($select==$data_kabkot->MS_KODE_KABKOT){
+				$data .= "<option value='".$data_kabkot->MS_KODE_KABKOT."' selected >".$data_kabkot->MS_KABKOT." </option>";
+			}else{
+				$data .= "<option value='".$data_kabkot->MS_KODE_KABKOT."' >".$data_kabkot->MS_KABKOT." </option>";
+			}
+		} 	
+				
+		echo $data;
+	}		
+
+	public function get_kecamatan()
+	{			
+		$kode_kabkot = $_GET['kode_kabkot'];
+		$select = $_GET['select'];
+		$kecamatan = $this->Master_model->select_ms_kecamatan_by_id_kabkot($kode_kabkot);		
+		$data= '<option value="">--pilih kecamatan--</option>';
+		
+		foreach ($kecamatan as $data_kecamatan) {
+			if ($select==$data_kecamatan->MS_KODE_KECAMATAN){
+				$data .= "<option value='".$data_kecamatan->MS_KODE_KECAMATAN."' selected >".$data_kecamatan->MS_KECAMATAN." </option>";
+			}else{
+				$data .= "<option value='".$data_kecamatan->MS_KODE_KECAMATAN."' >".$data_kecamatan->MS_KECAMATAN." </option>";
+			}
+		} 	
+				
+		echo $data;
+	}			
 
 	
 	public function get_sso_karyawan()
