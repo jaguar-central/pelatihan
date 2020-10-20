@@ -17,7 +17,7 @@ input [type="date"] {
 
 
 <!-- Modal -->
-<div id="modaladdklasterisasi" class="modal fade" role="dialog">
+<div id="modaladdprojectcharter" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">
 
 	<!-- Modal content-->

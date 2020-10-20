@@ -58,6 +58,14 @@
 
 <script type="text/javascript">	
 
+	$(document).on("click", ".add_project_charter", function () {	
+		console.log('project_charter');
+		var pelatihantype = $(this).data('pelatihantype');	
+		var pelatihantitle = $(this).data('pelatihantitle');    										
+		$('#type_klasterisasi').html('<option value="'+pelatihantype+'">'+pelatihantitle+'</option>');			
+		$('#modaladdprojectcharter').modal('show');
+	});	
+
     $(document).ready(function() {	
 		$('#datatable').DataTable({
             "aaSorting" : [],	
@@ -88,7 +96,7 @@
 		var cabang_ulamm = '<?php echo $this->session->userdata('sess_user_cabang'); ?>';
 		
 		$("#add_pelatihan :input").prop("disabled", false);
-		$('#pelatihan_type').html('<option value="'+pelatihantype+'">'+pelatihantitle+'</option>');			  
+		$('#type_klasterisasi').html('<option value="'+pelatihantype+'">'+pelatihantitle+'</option>');			  
 		$('.select_project_charter').show();  
 		$("#tema_project_charter").prop('required',true);
 		$("#judul_project_charter").prop('required',true);
