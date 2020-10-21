@@ -20,6 +20,8 @@ class MY_Controller extends CI_Controller
 		if ($data_global['notification_count']==''){
 			$data_global['notification_count'] = 0;
 		}
+
+		// var_dump($data_global);die();
 		
 		$this->load->vars($data_global);
 	}		

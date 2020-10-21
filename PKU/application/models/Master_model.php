@@ -117,7 +117,7 @@ class Master_model extends CI_Model {
 		else if	($this->session->userdata('sess_user_id_user_group')=='7'){
 			$approval = "''Kadiv''";
 			return $this->db->query(" EXEC [GET_NOTIF] @APPROVAL='".$approval."' ")->result();
-		}            
+		}           
 				
 	}
 
@@ -146,7 +146,7 @@ class Master_model extends CI_Model {
 		else if ($this->session->userdata('sess_user_id_user_group')=='7'){
 			$approval = "''Kadiv''";
 			return $this->db->query("EXEC [GET_NOTIF] @APPROVAL='".$approval."',@COUNT=1 ")->result()[0]->COUNT_NOTIF;
-		}        
+		}
 				
 	}
 
