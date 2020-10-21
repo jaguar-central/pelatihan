@@ -135,6 +135,10 @@ class Pelatihan extends MY_Controller
 		$data["script"]  = "pelatihan/include/lpj-script";
 		$data["menu"] 	 = $this->Menu_model->select_ms_menu();
 		// $data["modal"] 	 = array('pelatihan/modal-lpj/modallistkehadiran');
+
+		$data['provinsi'] 		= $this->Master_model->select_ms_provinsi();
+		$data['kabkot'] 		= $this->Master_model->select_ms_kabkot();
+		$data['kecamatan'] 		= $this->Master_model->select_ms_kecamatan();
         
 		$data["cabang"] 		= $this->Master_model->select_ms_cabang_ulamm();
 		$data["sektor_ekonomi"]	= $this->Master_model->select_dw_nasabah_ulamm_sektor_ekonomi();
@@ -162,9 +166,9 @@ class Pelatihan extends MY_Controller
 									'pelatihan/modal-konfirmasi/modalapproval'
 								);
 
-		$data['provinsi'] 	= $this->Master_model->select_ms_provinsi();
-		$data['kabkot'] 	= $this->Master_model->select_ms_kabkot();
-		$data['kecamatan'] 	= $this->Master_model->select_ms_kecamatan();
+		//$data['provinsi'] 	= $this->Master_model->select_ms_provinsi();
+		//$data['kabkot'] 	= $this->Master_model->select_ms_kabkot();
+		//$data['kecamatan'] 	= $this->Master_model->select_ms_kecamatan();
 								
         
         $data["menu"] = $this->Menu_model->select_ms_menu();
