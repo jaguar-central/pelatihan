@@ -126,3 +126,6 @@ $route['pelatihan/post_project_charter']                        = 'pelatihan/pos
 $route['pelatihan/get_list_project_charter']                    = 'pelatihan/get_list_project_charter';
 $route['pelatihan/get_data_project_charter']                    = 'pelatihan/get_data_project_charter';
 $route['pelatihan/get_pelatihan_project_charter']               = 'pelatihan/get_pelatihan_project_charter';
+$route['pelatihan/get_paging_project_charter/(:any)']           = 'pelatihan/get_paging_project_charter/$1';
+
+$route['pelatihan/get_project_charter']                         = 'pelatihan/get_project_charter';

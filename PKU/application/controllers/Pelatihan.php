@@ -21,8 +21,9 @@ class Pelatihan extends MY_Controller
 									'pelatihan/modal-ulamm/modaldetails',
 									'pelatihan/modal-ulamm/modaledit',
 									'pelatihan/modal-ulamm/modalunggah',
-									'pelatihan/modal-ulamm/modaladdprojectcharter'								
-									
+									'pelatihan/modal-ulamm/modaladdprojectcharter',					
+									'pelatihan/modal-ulamm/modalviewprojectcharter',
+									'pelatihan/modal-ulamm/modaleditprojectcharter'		
 								);
 		
         $data["menu"] 			= $this->Menu_model->select_ms_menu();
@@ -61,8 +62,9 @@ class Pelatihan extends MY_Controller
 									'pelatihan/modal-mekaar/modaldetails',
 									'pelatihan/modal-mekaar/modaledit',
 									'pelatihan/modal-mekaar/modalunggah',
-									'pelatihan/modal-mekaar/modaladdprojectcharter'								
-			
+									'pelatihan/modal-mekaar/modaladdprojectcharter',								
+									'pelatihan/modal-mekaar/modalviewprojectcharter',
+									'pelatihan/modal-mekaar/modaleditprojectcharter'		
 								);
 
 		$data["pelatihan_type"] = $this->Pelatihan_model->select_ms_pelatihan_type_mekaar();
@@ -606,7 +608,9 @@ class Pelatihan extends MY_Controller
 
 		$status_approval = $this->Pelatihan_model->check_bwmp_approval_proposal($id_pelatihan,$tingkat_approval);
 		
-		$tingkat_approval = $status_approval=='approved' ? '' : $tingkat_approval;
+		// $tingkat_approval = $status_approval=='approved' ? '' : $tingkat_approval;
+
+		$final_approval = $status_approval=='approved' ? '1' : '0';
 		
 		switch ($this->session->userdata('sess_user_id_user_group')) {
 		  case "2":
@@ -644,6 +648,7 @@ class Pelatihan extends MY_Controller
 				'USERNAME'			=> $username,	
 				'TTD'				=> base_url()."assets/images/tandatangan/".$username,
 				'APPROVAL'			=> $tingkat_approval,
+				'FINAL_APPROVAL'	=> $final_approval,
 				'KETERANGAN'		=> $keterangan,
 				'AKTIF' 			=> '1',
 				'CREATED_BY' 		=> $id_user,
@@ -781,7 +786,9 @@ class Pelatihan extends MY_Controller
 		
 		$status_approval = $this->Pelatihan_model->check_bwmp_approval_lpj($id_pelatihan,$tingkat_approval);		
 		
-		$tingkat_approval = $status_approval=='approved' ? '' : $tingkat_approval;
+		// $tingkat_approval = $status_approval=='approved' ? '' : $tingkat_approval;
+
+		$final_approval = $status_approval=='approved' ? '1' : '0';
 		
 		switch ($this->session->userdata('sess_user_id_user_group')) {
 		  case "2":
@@ -817,6 +824,7 @@ class Pelatihan extends MY_Controller
 				'URUTAN_APPROVAL'	=> $urutan_approval,
 				'USERNAME'			=> $username,				
 				'APPROVAL'			=> $tingkat_approval,
+				'FINAL_APPROVAL'	=> $final_approval,
 				'TTD'				=> base_url()."assets/images/tandatangan/".$username,
 				'KETERANGAN'		=> $keterangan,				
 				'AKTIF' 			=> '1',
@@ -1063,6 +1071,8 @@ class Pelatihan extends MY_Controller
 
 		// var_dump($this->input->post());die();
 
+		$id_project_charter 	= trim($this->security->xss_clean(strip_image_tags($this->input->post('id_project_charter'))));
+
 		$id_user 				= $this->session->userdata('sess_user_idsdm');
 		$bisnis_pelatihan   	= trim($this->security->xss_clean(strip_image_tags($this->input->post('bisnis_pelatihan'))));
         $type_klasterisasi		= trim($this->security->xss_clean(strip_image_tags($this->input->post('type_klasterisasi'))));
@@ -1101,7 +1111,18 @@ class Pelatihan extends MY_Controller
 					'CREATED_DATE' 			=> date('Y-m-d H:i:s')			
 				);
 				
-				$this->Pelatihan_model->insert_t_project_charter($data);	
+
+				$where = array(
+					'ID_PROJECT_CHARTER'=> $id_project_charter,
+					'AKTIF'=> '1',
+				);
+				
+				$project_charter = $this->Pelatihan_model->select_t_project_charter_where($where);	
+
+				if ($project_charter){
+					$this->Pelatihan_model->update_project_charter(array('AKTIF'=>'0'),$where);
+				}
+				$this->Pelatihan_model->insert_t_project_charter($data);					
 			}
 		}
 		catch (Exception $e)
@@ -1124,8 +1145,7 @@ class Pelatihan extends MY_Controller
 		$tipe_modal = $_GET['tipe_modal'];
 		$rab = $this->Pelatihan_model->select_t_rab_by_id($id_pelatihan);					
 		
-		$data= '';
-		
+		$data= '';		
 		
 		foreach ($rab as $data_rab) {
 			$data .= '
@@ -1149,6 +1169,64 @@ class Pelatihan extends MY_Controller
 			
 		echo $data;	
 	}
+
+	public function get_project_charter()
+	{
+		$id = $_GET['idprojectcharter'];
+
+		$where = array(
+			'ID_PROJECT_CHARTER'=> $id,
+			'AKTIF'=> '1',
+		);
+		
+		$project_charter = $this->Pelatihan_model->select_t_project_charter_where($where);		
+		
+		$cabang = $this->Master_model->select_ms_cabang_ulamm();
+
+		$data= '';		
+		
+		foreach ($project_charter as $data_project_charter) {
+			$data .= '
+			<tr class="">
+			<td><input type="text" class="form-control" id="judul_pelatihan_edit" name="judul_pelatihan[]" value="'.$data_project_charter->JUDUL_PELATIHAN.'" ></td>
+			<td>									  
+			<div class="input-group">
+				<input type="date" class="form-control" id="tanggal_pelatihan_edit" name="tanggal_pelatihan[]" >
+				<input type="time" class="form-control" id="time_pelatihan_edit" name="time_pelatihan[]" >
+				<span class="input-group-addon">
+					<span class="fa fa-calendar"></span>
+				</span>																				
+			</div>
+			</td>									  
+			<td >
+				<select class="form-control" id="cabang_ulamm_edit" name="cabang_ulamm[]">
+					<option value="">--pilih cabang--</option>';
+			foreach ($cabang as $data_cabang){
+				if ($data_project_charter->CABANG_ULAMM==$data_cabang->KODE_CABANG){
+					$data .= '<option value="'.$data_cabang->KODE_CABANG.'" selected >'.$data_cabang->KODE_CABANG.' - '.$data_cabang->DESKRIPSI.'</option>';                                                                    
+				}else{
+					$data .= '<option value="'.$data_cabang->KODE_CABANG.'">'.$data_cabang->KODE_CABANG.' - '.$data_cabang->DESKRIPSI.'</option>';                                                                    
+				}
+			}					
+			$data .='	
+				</select>
+			</td>
+			<td ><input type="text" class="form-control" id="alamat_pelatihan_edit" name="alamat_pelatihan[]" value="'.$data_project_charter->ALAMAT.'"></td>
+			<td ><input type="text" class="form-control" id="budget_pelatihan_edit" name="budget_pelatihan[]" value="'.$data_project_charter->BUDGET.'"></td>
+			<td>                            
+			<a class="table-remove-modaladd btn btn-outline-primary btn-sm" href="#"><i class="fas fa-trash"></i></a>   
+			</td>
+			<td>                            
+			<a class="table-up-modaladd btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-up"></i></a>   
+			<a class="table-down-modaladd btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-down"></i></a>                               
+			</td>
+			</tr>
+			';
+			
+		} 
+			
+		echo $data;	
+	}	
 
 	public function get_kehadiran($idpelatihan)
 	{						
@@ -1344,6 +1422,24 @@ class Pelatihan extends MY_Controller
 		echo json_encode($data);				
 	}
 
+
+	public function get_paging_project_charter($tipe)
+	{
+		$param["start"] = isset($_GET["start"]) ? $_GET["start"] : 0;
+		$param["limit"] = isset($_GET["length"]) ? $_GET["length"] : 10;		
+		$param["tipe_pelatihan"] 	= isset($tipe) ? $tipe : NULL ;				
+		$param["search"] 			= isset($_GET["search"]["value"]) ? $_GET["search"]["value"] : NULL ;			
+		$param['count'] = 0;						
+
+		$data["data"] = $this->Pelatihan_model->paging_t_project_charter($param);				
+		$param['count'] = 1;				
+		$total = COUNT($data["data"]);				
+		$data["recordsTotal"] = $total;	
+		$data["recordsFiltered"] = $total;		
+		
+		echo json_encode($data);			
+
+	}
 /*-------------------------------------CTRL API DELETE-------------------------------------*/	
 	public function delete_kehadiran()
 	{
