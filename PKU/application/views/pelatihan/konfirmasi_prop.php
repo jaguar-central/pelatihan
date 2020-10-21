@@ -22,7 +22,6 @@
                                                 <th>TANGGAL SELESAI</th>
                                                 <th>DURASI PELATIHAN</th>
                                                 <th>DESKRIPSI</th>
-                                                <th>LOKASI</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -37,7 +36,7 @@
                                                 echo '<td>'.$data->TANGGAL_SELESAI.'</td>';
                                                 echo '<td>'.$data->DURASI_PELATIHAN.'</td>';
                                                 echo '<td>'.$data->DESKRIPSI.'</td>';
-                                                echo '<td>'.$data->LOKASI.'</td>';                                             
+                                                //echo '<td>'.$data->LOKASI.'</td>';                                             
 												echo '<td> 
                                                 <div class="dropdown"><button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown">Action<span class="caret"></span></button><div class="dropdown-menu">
                                                 <a class="dropdown-item pelatihan_details" href="#" data-toggle="modal" data-target="#modaldetails"
@@ -54,10 +53,7 @@
 						                                        data-pelatihananggaran="'.$data->BUDGET.'"
 						                                        data-pelatihanprovinsi="'.$data->PROVINSI.'" 
 						                                        data-pelatihanalamat="'.$data->ALAMAT.'"
-						                                        data-pelatihanlokasi="'.$data->LOKASI.'"
-						                                        data-pelatihanlradius="'.$data->RADIUS.'"
-						                                        data-pelatihanlongitude="'.$data->LONGITUDE.'"
-						                                        data-pelatihanlatitude="'.$data->LATITUDE.'"
+						                                        
                                                                 data-pelatihanpembicara="'.$data->PEMBICARA.'"
                                                                 > Details</a>
                                                                 

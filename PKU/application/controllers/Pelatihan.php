@@ -597,7 +597,8 @@ class Pelatihan extends MY_Controller
 		$id_user					= $this->session->userdata('sess_user_idsdm');
 		$tingkat_approval			= $this->session->userdata('sess_user_group');		
 		$username					= $this->session->userdata('sess_user_username');
-		$id_grading					= $this->session->userdata('grading');					
+		$id_grading					= $this->session->userdata('grading');
+							
 
 		$status_approval = $this->Pelatihan_model->check_bwmp_approval_proposal($id_pelatihan,$tingkat_approval);
 		
