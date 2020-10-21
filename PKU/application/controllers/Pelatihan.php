@@ -253,12 +253,12 @@ class Pelatihan extends MY_Controller
         $kuota_peserta              = trim($this->security->xss_clean(strip_image_tags($this->input->post('kuota_peserta'))));
 
         $anggaran               	= str_replace(array('.',',00'),'',trim($this->security->xss_clean(strip_image_tags($this->input->post('anggaran')))));
-        $provinsi               	= trim($this->security->xss_clean(strip_image_tags($this->input->post('provinsi'))));
+        //$provinsi               	= trim($this->security->xss_clean(strip_image_tags($this->input->post('provinsi'))));
 		$alamat_tempat_pelatihan    = trim($this->security->xss_clean(strip_image_tags($this->input->post('alamat_tempat_pelatihan'))));
 		
-		//$provinsi    				= trim($this->security->xss_clean(strip_image_tags($this->input->post('provinsi'))));
-		//$kabkot    					= trim($this->security->xss_clean(strip_image_tags($this->input->post('kabkot'))));
-		//$kecamatan    				= trim($this->security->xss_clean(strip_image_tags($this->input->post('kecamatan'))));
+		$provinsi    				= trim($this->security->xss_clean(strip_image_tags($this->input->post('provinsi'))));
+		$kabkot    					= trim($this->security->xss_clean(strip_image_tags($this->input->post('kabkot'))));
+		$kecamatan    				= trim($this->security->xss_clean(strip_image_tags($this->input->post('kecamatan'))));
         // $lokasi_pelatihan        = trim($this->security->xss_clean(strip_image_tags($this->input->post('lokasi_pelatihan'))));
         // $radius               	= trim($this->security->xss_clean(strip_image_tags($this->input->post('radius'))));
         // $latitude               	= trim($this->security->xss_clean(strip_image_tags($this->input->post('latitude'))));
