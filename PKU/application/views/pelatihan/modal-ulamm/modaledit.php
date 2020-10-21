@@ -66,7 +66,7 @@
 				
 					<label class="col-sm-2">Grade <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-					<select class="form-control select_tag_edit" required="" id="grading_edit" name="grading_edit">
+					<select class="form-control" required="" id="grading_edit" name="grading_edit">
 							<option value="">--pilih grade--</option>
 
 							<?php 
