@@ -379,4 +379,108 @@
 		}); 
 		
 	});		
+
+
+
+
+
+
+	$(document).on("click", ".view_project_charter", function () {
+		var pelatihantype 	= $(this).data('pelatihantype');						
+		
+		$('#datatable_modalviewprojectcharter_ulamm').DataTable().clear();
+		$('#datatable_modalviewprojectcharter_ulamm').DataTable().destroy();
+
+		$('#datatable_modalviewprojectcharter_ulamm').DataTable({			
+			"paging": true,
+			"processing": true,
+			"serverSide": true,
+			"ajax": {
+			"url" : '<?php echo base_url('pelatihan/get_paging_project_charter/'); ?>'+pelatihantype,
+			"type" :'GET'                      
+			},
+			"columns" : [
+				{ "data": "TEMA_PROJECT_CHARTER" },  
+				{ "data": "ID", render: function (data, type, row)   
+					{
+					  var tombol_action = '<td>';   
+
+					  tombol_action +='<button type="button" class="btn btn-outline-info project_charter_edit" href="#" data-toggle="modal" data-target="#modaleditprojectcharter" '
+						+'data-tema="'+row.TEMA_PROJECT_CHARTER+'" '
+						// +'data-judul="'+row.JUDUL_PELATIHAN+'" '
+						// +'data-tanggal="'+row.TANGGAL+'" '
+						// +'data-cabang="'+row.CABANG_ULAMM+'" '
+						// +'data-alamat="'+row.ALAMAT+'" '
+						// +'data-budget="'+row.BUDGET+'" '
+						+'data-idtipepelatihan="'+row.ID_TIPE_PELATIHAN+'" '
+						+'data-tipedeskripsipelatihan="'+row.ID_TIPE_DESKRIPSI+'" '												
+						+'data-idprojectcharter="'+row.ID_PROJECT_CHARTER+'"> Edit</button>';
+
+					  tombol_action += '</td>';					  
+					  return tombol_action;
+					} 
+				},  					  
+
+			],
+			"dom": "<'dom_datable'f>rt<'dom_datable col-md-6'i>"
+		});	
+				
+										
+		$('#modalviewprojectcharter').modal({
+			show: true
+		}); 
+		
+	});
+	
+	
+
+	$(document).on("click", ".project_charter_edit", function () {			
+		
+		$('#type_klasterisasi_edit').html('<option value="'+$(this).data('idtipepelatihan')+'">'+$(this).data('tipedeskripsipelatihan')+'</option>');		
+		$('#tema_project_charter_edit').val($(this).data('tema'));	
+		$('#id_project_charter').val($(this).data('idprojectcharter'));	
+		
+		
+		
+		$.ajax({
+			url: "<?php echo base_url()?>pelatihan/get_project_charter",
+			data: "idprojectcharter="+$(this).data("idprojectcharter"),
+			cache: false,
+			success: function(data){				         
+				$('#tbody_charter_modaledit').html('<tr class="d-none">'+
+				'<td><input type="text" class="form-control" id="judul_pelatihan_edit" name="judul_pelatihan[]" ></td>'+
+				'<td>'+
+				'<div class="input-group">'+
+										'<input type="date" class="form-control" id="tanggal_pelatihan_edit" name="tanggal_pelatihan[]">'+
+										'<input type="time" class="form-control" id="time_pelatihan_edit" name="time_pelatihan[]">'+
+										'<span class="input-group-addon">'+
+											'<span class="fa fa-calendar"></span>'+
+										'</span>'+
+									'</div>'+
+									'</td>'+								  
+									'<td >'+
+										'<select class="form-control" id="cabang_ulamm_edit" name="cabang_ulamm[]">'+
+											'<option value="">--pilih cabang--</option>'+
+												'<?php 
+												foreach ($cabang as $data_cabang){
+													echo '<option value="'.$data_cabang->KODE_CABANG.'">'.$data_cabang->KODE_CABANG.' - '.$data_cabang->DESKRIPSI.'</option>';                                                                    
+												}
+												?>'+										
+										'</select>'+
+									'</td>'+
+									'<td ><input type="text" class="form-control" id="alamat_pelatihan_edit" name="alamat_pelatihan[]" value=""></td>'+
+									'<td ><input type="text" class="form-control" id="budget_pelatihan_edit" name="budget_pelatihan[]" value=""></td>'+
+									'<td>'+
+									'<a class="table-remove-modaledit btn btn-outline-primary btn-sm" href="#"><i class="fas fa-trash"></i></a>'+
+									'</td>'+
+									'<td>'+                         
+									'<a class="table-up-modaledit btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-up"></i></a>'+   
+									'<a class="table-down-modaledit btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-down"></i></a>'+              
+									'</td>'+
+								'</tr>    ');
+				$('#tbody_charter_modaledit').append(data);    
+			}
+		});	
+						
+	});	
 </script>       

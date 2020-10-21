@@ -155,20 +155,19 @@ $(".custom-file-input").on("change", function() {
   $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 });
 
+
 var $TABLE = $('#table_charter_modaladd');
 
 $('.table-add-modaladd').click(function () {
 	console.log('modaladd');
 	var $clone = $TABLE.find('tr.d-none').clone(true).removeClass('d-none');
 	$TABLE.find('tbody').append($clone);	
-	calculate_grand_total();
 });
 
 
 $('.table-remove-modaladd').click(function () {		
 	console.log('modalklaster')
 	$(this).parents('tr').detach();
-	calculate_grand_total();
 });
 
 $('.table-up-modaladd').click(function () {        
@@ -182,34 +181,6 @@ $('.table-down-modaladd').click(function () {
 	$row.next().after($row.get(0));
 });
 
-
-$('#table_charter_modaladd tbody tr').keyup(function () {            
-	var index = parseInt($(this).index());
-	var jumlah_rab = $("#table_charter_modaladd tbody tr:eq("+index+")").find("#jumlah_rab").val(); 
-	var unit_cost_rab = $("#table_charter_modaladd tbody tr:eq("+index+")").find("#unit_cost_rab").val();
-	sum = parseInt(jumlah_rab) * parseInt(unit_cost_rab);                
-
-
-	$("#table_charter_modaladd tbody tr:eq("+index+")").find("#total_cost_rab").val(sum);
-
-	calculate_grand_total();
-
-})
-
-function calculate_grand_total(){
-	var total = 0;
-	$('tr #total_cost_rab').each(function () {            
-		var total_cost_rab = $(this).val();
-		if (!isNaN(total_cost_rab) && total_cost_rab.length !== 0) {
-			total += parseFloat(total_cost_rab);
-		}
-	});
-
-	var rowCount = $('tr #total_cost_rab').length;
-	$("#PelatihanRabCount").val(rowCount);        
-
-	$("#total_cost_rab_akhir").val(total);
-}			  	  
 
 
 $("#add_project_charter").submit(function(e){

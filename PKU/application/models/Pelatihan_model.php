@@ -231,6 +231,15 @@ public function paging_t_pelatihan($param)
 	return $query->result();
 }		
 
+public function paging_t_project_charter($param)
+{
+	$query = $this->db->query("EXEC GET_PROJECT_CHARTER @START = '".$param["start"]."',@LIMIT = '".$param["limit"]."',@SEARCH = '".$param["search"]."'
+	,@TIPE = '".$param["tipe_pelatihan"]."'
+	,@IDUSER = '".$this->session->userdata('sess_user_id')."'
+	");
+	return $query->result();
+}	
+
 public function select_t_project_charter_where($where)
 {
 	$query = $this->db->get_where('T_PROJECT_CHARTER',$where);	
