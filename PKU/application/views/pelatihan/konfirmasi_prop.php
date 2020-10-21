@@ -51,9 +51,10 @@
 						                                        data-pelatihandurasi="'.$data->DURASI_PELATIHAN.'" 
 						                                        data-pelatihankuota="'.$data->KUOTA_PESERTA.'" 
 						                                        data-pelatihananggaran="'.$data->BUDGET.'"
-						                                        data-pelatihanprovinsi="'.$data->PROVINSI.'" 
+                                                                data-pelatihanprovinsi="'.$data->PROVINSI.'"
+                                                                data-pelatihankabkot="'.$data->KABKOT.'"
+								                                data-pelatihankecamatan="'.$data->KECAMATAN.'" 
 						                                        data-pelatihanalamat="'.$data->ALAMAT.'"
-						                                        
                                                                 data-pelatihanpembicara="'.$data->PEMBICARA.'"
                                                                 > Details</a>
                                                                 

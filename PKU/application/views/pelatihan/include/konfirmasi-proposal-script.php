@@ -75,13 +75,15 @@
 				$('#kuota_peserta_details').val($(this).data('pelatihankuota'));		
 				$('#anggaran_details').val($(this).data('pelatihananggaran'));		
 				$('#provinsi_details').val($(this).data('pelatihanprovinsi'));		
-				$('#alamat_tempat_pelatihan_details').val($(this).data('pelatihanalamat'));		
-				$('#lokasi_pelatihan_details').val($(this).data('pelatihanlokasi'));		
-				$('#radius_details').val($(this).data('pelatihanlradius'));		
-				$('#latitude_details').val($(this).data('pelatihanlongitude'));		
-				$('#longitude_details').val($(this).data('pelatihanlatitude'));						
+				$('#alamat_tempat_pelatihan_details').val($(this).data('pelatihanalamat'));
+				$('#kabkot_details').val($(this).data('pelatihankabkot'));		
+				$('#kecamatan_details').val($(this).data('pelatihankecamatan'));		
+				//$('#lokasi_pelatihan_details').val($(this).data('pelatihanlokasi'));		
+				//$('#radius_details').val($(this).data('pelatihanlradius'));		
+				//$('#latitude_details').val($(this).data('pelatihanlongitude'));		
+				//$('#longitude_details').val($(this).data('pelatihanlatitude'));						
 				$('#pembicara_pelatihan_details').val($(this).data('pelatihanpembicara'));		
-				$('#input-limit-datepicker').val($(this).data('pelatihantanggal'));									
+				$('#input-limit-datepicker').val($(this).data('pelatihantanggal'));
 										
 						
 				$.ajax({

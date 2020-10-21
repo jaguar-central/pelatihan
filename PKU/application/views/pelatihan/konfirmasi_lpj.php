@@ -21,8 +21,7 @@
                                                 <th>TANGGAL MULAI</th>
                                                 <th>TANGGAL SELESAI</th>
                                                 <th>DURASI PELATIHAN</th>
-                                                <th>DESKRIPSI</th>
-                                                <th>LOKASI</th>                                            
+                                                <th>DESKRIPSI</th>                                           
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -36,8 +35,7 @@
                                                 echo '<td>'.$data->TANGGAL_MULAI.'</td>';
                                                 echo '<td>'.$data->TANGGAL_SELESAI.'</td>';
                                                 echo '<td>'.$data->DURASI_PELATIHAN.'</td>';
-                                                echo '<td>'.$data->DESKRIPSI.'</td>';
-                                                echo '<td>'.$data->LOKASI.'</td>';                                                                                
+                                                echo '<td>'.$data->DESKRIPSI.'</td>';                                                                               
 												echo '<td> 
 															<div class="dropdown">
 															  <button class="btn btn-outline-info dropdown-toggle" type="button" data-toggle="dropdown">Action
@@ -57,10 +55,6 @@
 																data-pelatihananggaran="'.$data->BUDGET.'"
 																data-pelatihanprovinsi="'.$data->PROVINSI.'"
 																data-pelatihanalamat="'.$data->ALAMAT.'"
-																data-pelatihanlokasi="'.$data->LOKASI.'"
-																data-pelatihanlradius="'.$data->RADIUS.'"
-																data-pelatihanlongitude="'.$data->LONGITUDE.'"
-																data-pelatihanlatitude="'.$data->LATITUDE.'"
 																> Details</a>
 																<a class= "dropdown-item" target="_blank" href="'.$this->config->item("jasper_report").'Pelatihan.pdf?ID='.$data->ID.'"> Unduh Proposal</a>				
 																<a class= "dropdown-item pelatihan_approval_lpj" href="#" data-toggle="modal" data-target="#modalapprovallpj" data-pelatihanid="'.$data->ID.'"> Verify</a>				
