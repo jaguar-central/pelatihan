@@ -57,7 +57,14 @@
 <!-- <script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places&key=AIzaSyCwGoo1jtr3HgU66bulwQ6qDI4CJqpgJjU"></script> -->
 
 
-<script type="text/javascript">			
+<script type="text/javascript">		
+
+	$(document).on("click", ".add_project_charter", function () {	
+		var pelatihantype = $(this).data('pelatihantype');	
+		var pelatihantitle = $(this).data('pelatihantitle');    										
+		$('#type_klasterisasi').html('<option value="'+pelatihantype+'">'+pelatihantitle+'</option>');			
+		$('#modaladdprojectcharter').modal('show');
+	});	
 
     $(document).ready(function() {	
 		$('#datatable').DataTable({

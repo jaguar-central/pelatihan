@@ -38,7 +38,7 @@
 										echo '<tr>';
 										echo '<td>'.$cus->TITLE.'</td>'; 									
 										echo '<td class="text-center">';										
-										echo '<button type="button" class="btn btn-outline-success col-md-6 project_charter" data-toggle="modal" data-target="#modaladdklasterisasi" data-pelatihantype="'.$cus->ID.'" data-pelatihantitle="'.$cus->TITLE.'"><span class="btn-label"><i class="fas fa-pencil-alt fa-fw"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add Project Charter</button></td>'; 																				
+										echo '<button type="button" class="btn btn-outline-success col-md-6 add_project_charter" data-toggle="modal" data-target="#modaladdklasterisasi" data-pelatihantype="'.$cus->ID.'" data-pelatihantitle="'.$cus->TITLE.'"><span class="btn-label"><i class="fas fa-pencil-alt fa-fw"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add Project Charter</button></td>'; 																				
 										echo '</tr>';
 									}
 								}
