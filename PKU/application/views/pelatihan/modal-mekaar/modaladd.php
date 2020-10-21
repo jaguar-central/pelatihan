@@ -152,7 +152,8 @@
 					
 					<label class="col-sm-2">Durasi <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="durasi_pelatihan" name="durasi_pelatihan" readonly="" />
+					<input type="text" class="form-control"  required="" id="durasi_tampilan" readonly="" />
+						<input type="hidden" class="form-control"  required="" id="durasi_pelatihan" name="durasi_pelatihan" />
 					</div>														
 
 				</div>			
@@ -328,6 +329,7 @@
 			var total = 0
 			total = minutes + (hours*60)
 			console.log("Diff = " + hours + ":" + minutes + ":" + seconds);
+			$("#durasi_tampilan").val(hours+" jam "+minutes+" menit ");
 			$("#durasi_pelatihan").val(total);
 		};		
 
