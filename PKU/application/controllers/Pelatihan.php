@@ -749,6 +749,7 @@ class Pelatihan extends MY_Controller
 
 			$data_update 	= array(
 				'STATUS'			=> 'lpj_submitted',
+				'APPROVAL'			=> '',
 				'UPDATED_BY' 		=> $id_user,
 				'UPDATED_DATE' 		=> date('Y-m-d H:i:s')			
 				);
