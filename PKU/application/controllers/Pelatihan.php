@@ -647,14 +647,22 @@ class Pelatihan extends MY_Controller
 					
 			$this->Pelatihan_model->insert_t_approval($data);
 			
-			
-			$data_update 	= array(
-				'ID_GRADING'		=> $id_grading,				
-				'STATUS'			=> $status_approval,
-				'APPROVAL' 			=> $tingkat_approval,
-				'UPDATED_BY' 		=> $id_user,
-				'UPDATED_DATE' 		=> date('Y-m-d H:i:s')			
-				);
+			if ($this->session->userdata('sess_user_id_user_group')=='3'){
+				$data_update 	= array(
+					'ID_GRADING'		=> $id_grading,				
+					'STATUS'			=> $status_approval,
+					'APPROVAL' 			=> $tingkat_approval,
+					'UPDATED_BY' 		=> $id_user,
+					'UPDATED_DATE' 		=> date('Y-m-d H:i:s')			
+					);
+			}else{
+				$data_update 	= array(		
+					'STATUS'			=> $status_approval,
+					'APPROVAL' 			=> $tingkat_approval,
+					'UPDATED_BY' 		=> $id_user,
+					'UPDATED_DATE' 		=> date('Y-m-d H:i:s')			
+					);	
+			}
 			$where_update	= array(
 				'ID' 	=> $id_pelatihan
 				);

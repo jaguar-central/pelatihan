@@ -28,7 +28,7 @@
 					
 
                 </div>				
-
+<?php if ($this->session->userdata('sess_user_id_user_group')=='3'){ ?>
 				<div class="form-group row">
 					<label class="col-sm-2">Grade <span class="text-danger">*</span></label>
 					<div class="col-sm-8">
@@ -37,6 +37,7 @@
 						</select>	
 					</div>
 				</div>								
+<?php } ?>
 
 				<div class="form-group row">
 
