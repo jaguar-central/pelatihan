@@ -162,33 +162,18 @@
 				</div>
 
 				<div class="form-group row">
-					<label class="col-sm-2">Lokasi Pelatihan <span class="text-danger">*</span></label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control"  required="" id="lokasi_pelatihan_details" name="lokasi_pelatihan_details" disabled />
-					</div>                                
-				</div>
+					<label class="col-sm-2">Kabupaten / Kota <span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+						<select class="form-control select_tag" required="" id="kabkot" name="kabkot">
+						</select>
+					</div>              
 
-				<div class="form-group row">
-					<label class="col-sm-4" >Radius <span class="text-danger">*</span></label>
-					<label class="col-sm-4">Latitude <span class="text-danger">*</span></label>
-					<label class="col-sm-4">Longitude <span class="text-danger">*</span></label>
+					<label class="col-sm-2">Kecamatan <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="radius_details" name="radius_details" disabled />
-					</div>               
-					
-					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="latitude_details" name="latitude_details" disabled />
-					</div>                          
-				
-					
-					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="longitude_details" name="longitude_details" disabled />
-					</div>                      
-				</div>
-
-				<div class="col-xs-12" style="margin-bottom:30px;">
-						<div id="us_details" style="width:100%; height: 400px;" disabled ></div>
-				</div>
+						<select class="form-control select_tag" required="" id="kecamatan" name="kecamatan">
+						</select>
+					</div>              					                  
+				</div>	
 
 				<div class="container-fluid">
 				  <div class="row">
