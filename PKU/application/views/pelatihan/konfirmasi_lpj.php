@@ -12,16 +12,16 @@
                         <div class="row">
                             <div class="col-lg-12">
 								<div class="table-style">
-									<table id="datatable" class="table table-bordered table-striped table-responsive">
+									<table id="datatable" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
                                                 <th>JENIS PELATIHAN</th>
-                                                <th>NO PROPOSAL</th>
+                                                <th>NO MEMO</th>
                                                 <th>TITLE</th>
                                                 <th>TANGGAL MULAI</th>
                                                 <th>TANGGAL SELESAI</th>
                                                 <th>DURASI PELATIHAN</th>
-                                                <th>DESKRIPSI</th>                                           
+                                                <th>DESKRIPSI</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -34,7 +34,7 @@
                                                 echo '<td>'.$data->TITLE.'</td>';
                                                 echo '<td>'.$data->TANGGAL_MULAI.'</td>';
                                                 echo '<td>'.$data->TANGGAL_SELESAI.'</td>';
-                                                echo '<td>'.$data->DURASI_PELATIHAN.'</td>';
+                                                echo '<td>'.$data->JAM_MENIT.'</td>';
                                                 echo '<td>'.$data->DESKRIPSI.'</td>';                                                                               
 												echo '<td> 
 															<div class="dropdown">

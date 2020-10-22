@@ -441,4 +441,20 @@ class Master extends MY_Controller
 				
 		echo $data;
 	}
+
+	public function get_list_grading(){
+		$id = $_GET['id_jenis_nasabah'];
+
+		$where = array(
+			'ID_JENIS_NASABAH' => $id
+		);
+
+		$data = $this->Master_model->select_ms_grading_where($where);
+		$return = '';
+		foreach ($data as $value) {
+			$return .="<option value='$value->ID' >$value->GRADING_DESKRIPSI</option>";
+		}
+
+		echo $return;		
+	}	
 }

@@ -28,7 +28,7 @@ class Pelatihan extends MY_Controller
 		
         $data["menu"] 			= $this->Menu_model->select_ms_menu();
 		$data["pelatihan_type"] = $this->Pelatihan_model->select_ms_pelatihan_type_ulamm();
-		$data["grade_ulamm"] 	= $this->Master_model->select_ms_grading();        
+		// $data["grade_ulamm"] 	= $this->Master_model->select_ms_grading();        
 		$data["cabang"] 		= $this->Master_model->select_ms_cabang_ulamm();
 		$data["sektor_ekonomi"]	= $this->Master_model->select_dw_nasabah_ulamm_sektor_ekonomi();
 		$data["jenis_pinjaman"]	= $this->Master_model->select_dw_nasabah_ulamm_jenis_pinjaman();
@@ -37,7 +37,8 @@ class Pelatihan extends MY_Controller
 		$data['provinsi'] 		= $this->Master_model->select_ms_provinsi();
 		$data['kabkot'] 		= $this->Master_model->select_ms_kabkot();
 		$data['kecamatan'] 		= $this->Master_model->select_ms_kecamatan();
-        
+		
+		$data['nasabah_grading'] = $this->Master_model->select_ms_nasabah_grading();				
 
         // echo '<pre>';
 		// print_r($data['kecamatan']);
@@ -68,7 +69,7 @@ class Pelatihan extends MY_Controller
 								);
 
 		$data["pelatihan_type"] = $this->Pelatihan_model->select_ms_pelatihan_type_mekaar();
-		$data["grade_mekaar"] 	= $this->Master_model->select_ms_grading();		
+		// $data["grade_mekaar"] 	= $this->Master_model->select_ms_grading();		
 		$data["cabang"] 		= $this->Master_model->select_ms_cabang_ulamm();		
 		$data["region"] 		= $this->Master_model->select_ms_region_mekaar();
 		$data["sektor_ekonomi"]	= $this->Master_model->select_dw_nasabah_ulamm_sektor_ekonomi();
@@ -78,6 +79,8 @@ class Pelatihan extends MY_Controller
 		$data['provinsi'] 		= $this->Master_model->select_ms_provinsi();
 		$data['kabkot'] 		= $this->Master_model->select_ms_kabkot();
 		$data['kecamatan'] 		= $this->Master_model->select_ms_kecamatan();
+
+		$data['nasabah_grading'] = $this->Master_model->select_ms_nasabah_grading();			
         // echo '<pre>';
 		// print_r($data['kecamatan']);
 		// echo '</pre>';die;
@@ -189,6 +192,7 @@ class Pelatihan extends MY_Controller
 			$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('');
 		}			
 		
+		$data['nasabah_grading'] = $this->Master_model->select_ms_nasabah_grading();	
 		// var_dump($this->db->last_query());die();
 
         $this->load->view('layout/gabung', $data);
@@ -1445,6 +1449,29 @@ class Pelatihan extends MY_Controller
 		echo json_encode($data);			
 
 	}
+
+
+
+	public function get_ket_approval()
+	{
+		$id = $_GET['idpelatihan'];
+
+		$where = array(
+			'ID_PELATIHAN' => $id
+		);
+
+		$ket_approval = $this->Pelatihan_model->select_t_approval_where($where);
+		$return= "<table class='table table-bordered table-striped' ><th>Tipe</th><th>Approval</th><th>Catatan</th><tbody>";
+		foreach ($ket_approval as $data) {
+			$return .= '<tr><td>'.$data->TIPE_APPROVAL.'</td><td>'.$data->APPROVAL.'</td><td>'.$data->KETERANGAN.'</td></tr>' ;
+		}
+
+		$return .='</tbody></table>';
+
+		echo $return;	
+	}
+
+
 /*-------------------------------------CTRL API DELETE-------------------------------------*/	
 	public function delete_kehadiran()
 	{
@@ -1497,3 +1524,4 @@ class Pelatihan extends MY_Controller
 	}
 
 }
+

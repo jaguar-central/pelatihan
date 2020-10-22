@@ -90,21 +90,6 @@
 				</div>
 
 				<div class="form-group row">
-					<label class="col-sm-2">Grade <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-					<select class="form-control select_tag" required="" id="grading" name="grading">
-							<option value="">--pilih grade--</option>
-
-							<?php 
-								foreach ($grade_mekaar as $data_grade){
-									echo '<option value="'.$data_grade->ID.'">'.$data_grade->GRADING_DESKRIPSI.'</option>';                                                                    
-								}
-								?>										
-						</select>	
-					</div>
-				</div>
-
-				<div class="form-group row">
 					<label class="col-sm-2 offset-sm-6">Cabang Ulamm <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
 					<select class="form-control select" required="" id="cabang_ulamm" name="cabang_ulamm">
@@ -119,6 +104,32 @@
 					</div>							
 				</div>	
 				
+				<div class="form-group card grading_system">
+				<div class="card-header"><h4>Grading System</h4></div>
+				<div class="card-body row">
+					<label class="col-sm-2">Jenis Nasabah <span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+						<select class="form-control" required="" id="jenis_nasabah_grading">
+							<option value="">--pilih jenis nasabah--</option>
+
+							<?php 
+								foreach ($nasabah_grading as $data_nasabah_grading){
+									echo '<option value="'.$data_nasabah_grading->ID.'" >'.$data_nasabah_grading->JENIS_NASABAH.'</option>';                                                                    
+								}
+								?>										
+						</select>	
+					</div>	
+
+					<label class="col-sm-2">Grade <span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+						<select class="form-control" required="" id="grading" name="grading">
+							<option value="">--pilih grade--</option>
+									
+						</select>	
+					</div>								
+				</div>		
+				</div>		
+
 				<div class="form-group row">
 
 					<label class="col-sm-2">Tanggal <span class="text-danger">*</span></label>
@@ -413,6 +424,35 @@
 			});
 			
 		});	
+
+		$('#jenis_nasabah_grading').on('change', function (e) {		
+			console.log($(this).val());
+			$.ajax({
+				url: "<?php echo base_url()?>master/get_list_grading",
+				data: "id_jenis_nasabah="+$(this).val(),
+				cache: false,
+				success: function(data){				         
+					$('#grading').html(data)           
+				}
+			});
+			if ($(this).val()==1){				
+				$('.grading_system').addClass('bg-danger text-white');
+				$(".grading_system").removeClass('bg-warning bg-success bg-info');
+			}else if ($(this).val()==2){
+				$('.grading_system').addClass('bg-warning');
+				$(".grading_system").removeClass('bg-danger bg-success bg-info text-white');
+			}else if ($(this).val()==3){
+				$('.grading_system').addClass('bg-success text-white');
+				$(".grading_system").removeClass('bg-danger bg-warning bg-info');
+			}else if ($(this).val()==4){
+				$('.grading_system').addClass('bg-info text-white');
+				$(".grading_system").removeClass('bg-danger bg-warning bg-success');
+			}else{
+				$('.grading_system').addClass('bg-default');
+				$(".grading_system").removeClass('bg-danger bg-warning bg-success bg-info text-white');
+			}
+			
+		});				
 
 		$('#tema_project_charter').on('change', function (e) {	
 			console.log($('#tema_project_charter').val());

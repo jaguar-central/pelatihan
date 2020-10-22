@@ -103,6 +103,9 @@ $route['master/get_cabang_mekaar']              = 'master/get_cabang_mekaar';
 $route['master/get_grading']              		= 'master/get_grading';
 $route['master/get_kabkot']              		= 'master/get_kabkot';
 $route['master/get_kecamatan']              	= 'master/get_kecamatan';
+$route['master/get_list_grading']              	= 'master/get_list_grading';
+
+
 
 /* API DATA PELATIHAN*/
 $route['pelatihan/post_pelatihan']                              = 'pelatihan/post_pelatihan_proposal';
@@ -129,3 +132,5 @@ $route['pelatihan/get_pelatihan_project_charter']               = 'pelatihan/get
 $route['pelatihan/get_paging_project_charter/(:any)']           = 'pelatihan/get_paging_project_charter/$1';
 
 $route['pelatihan/get_project_charter']                         = 'pelatihan/get_project_charter';
+$route['pelatihan/get_ket_approval']                            = 'pelatihan/get_ket_approval';
+

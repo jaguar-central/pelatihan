@@ -25,7 +25,10 @@
 					
 					</div>
 
-                </div>			
+                </div>
+
+				<div class="form-group row keterangan col-md-8 offset-md-2">	
+				</div>								
 
 				<div class="form-group row">
 

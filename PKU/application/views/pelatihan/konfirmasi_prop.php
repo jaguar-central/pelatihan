@@ -34,7 +34,7 @@
                                                 echo '<td>'.$data->TITLE.'</td>';
                                                 echo '<td>'.$data->TANGGAL_MULAI.'</td>';
                                                 echo '<td>'.$data->TANGGAL_SELESAI.'</td>';
-                                                echo '<td>'.$data->DURASI_PELATIHAN.'</td>';
+                                                echo '<td>'.$data->JAM_MENIT.'</td>';
                                                 echo '<td>'.$data->DESKRIPSI.'</td>';
                                                 //echo '<td>'.$data->LOKASI.'</td>';                                             
 												echo '<td> 

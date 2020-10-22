@@ -198,6 +198,18 @@ class Master_model extends CI_Model {
 		return $query->result();
 	}	
 
+	public function select_ms_grading_where($where)
+	{
+		$query = $this->db->get_where('MS_GRADING',$where);	
+		return $query->result();		
+	}	
+
+	public function select_ms_nasabah_grading()
+	{
+		$query = $this->db->query("select * from MS_NASABAH_GRADING ");
+		return $query->result();
+	}		
+
 	public function select_ms_provinsi()
 	{
 		$query = $this->db->query("select * from MS_PROVINSI ");
