@@ -174,7 +174,13 @@
 		$('#inputAkhirTglPelaksanaan_edit').val(dateawal.format('YYYY-MM-DD'));
 		$('#inputEndTimePelaksanaan_edit').val(dateawal.format('hh:mm A'));
 								
-		$('#durasi_pelatihan_edit').val($(this).data('pelatihandurasi'));		
+		$('#durasi_pelatihan_edit').val($(this).data('pelatihandurasi'));	
+
+		var hours = Math.floor($(this).data('pelatihandurasi')/60);
+		var minutes = $(this).data('pelatihandurasi') % 60;
+		console.log("Diff = " + hours + ":" + minutes);
+		$("#durasi_tampilan_edit").val(hours+" jam "+minutes+" menit ");
+
 		$('#kuota_peserta_edit').val($(this).data('pelatihankuota'));				
 		$('#anggaran_edit').val($(this).data('pelatihananggaran'));		
 		new AutoNumeric("#anggaran_edit","commaDecimalCharDotSeparator");

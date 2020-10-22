@@ -117,41 +117,11 @@
 					<label class="col-sm-2">Provinsi <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
 						<select class="form-control" required="" id="provinsi_details" name="provinsi_details" disabled >
-							<option value="">- Pilih Provinsi -</option>
-							<option value="ACEH">ACEH</option>
-							<option value="BALI">BALI</option>
-							<option value="BANTEN">BANTEN</option>
-							<option value="BENGKULU">BENGKULU</option>
-							<option value="DAERAH ISTIMEWA YOGYAKARTA">DAERAH ISTIMEWA YOGYAKARTA</option>
-							<option value="DKI JAKARTA">DKI JAKARTA</option>
-							<option value="GORONTALO">GORONTALO</option>
-							<option value="JAMBI">JAMBI</option>
-							<option value="JAWA BARAT">JAWA BARAT</option>
-							<option value="JAWA TENGAH">JAWA TENGAH</option>
-							<option value="JAWA TIMUR">JAWA TIMUR</option>
-							<option value="KALIMANTAN BARAT">KALIMANTAN BARAT</option>
-							<option value="KALIMANTAN SELATAN">KALIMANTAN SELATAN</option>
-							<option value="KALIMANTAN TENGAH">KALIMANTAN TENGAH</option>
-							<option value="KALIMANTAN TIMUR">KALIMANTAN TIMUR</option>
-							<option value="KALIMANTAN UTARA">KALIMANTAN UTARA</option>
-							<option value="KEPULAUAN BANGKA BELITUNG">KEPULAUAN BANGKA BELITUNG</option>
-							<option value="KEPULAUAN RIAU">KEPULAUAN RIAU</option>
-							<option value="LAMPUNG">LAMPUNG</option>
-							<option value="MALUKU">MALUKU</option>
-							<option value="MALUKU UTARA">MALUKU UTARA</option>
-							<option value="NUSA TENGGARA BARAT">NUSA TENGGARA BARAT</option>
-							<option value="NUSA TENGGARA TIMUR">NUSA TENGGARA TIMUR</option>
-							<option value="PAPUA">PAPUA</option>
-							<option value="PAPUA BARAT">PAPUA BARAT</option>
-							<option value="RIAU">RIAU</option>
-							<option value="SULAWESI BARAT">SULAWESI BARAT</option>
-							<option value="SULAWESI SELATAN">SULAWESI SELATAN</option>
-							<option value="SULAWESI TENGAH">SULAWESI TENGAH</option>
-							<option value="SULAWESI TENGGARA">SULAWESI TENGGARA</option>
-							<option value="SULAWESI UTARA">SULAWESI UTARA</option>
-							<option value="SUMATERA BARAT">SUMATERA BARAT</option>
-							<option value="SUMATERA SELATAN">SUMATERA SELATAN</option>
-							<option value="SUMATERA UTARA">SUMATERA UTARA</option>
+						<?php 
+							foreach ($provinsi as $data_provinsi){
+								echo '<option value="'.$data_provinsi->MS_KODE_PROVINSI.'">'.$data_provinsi->MS_PROVINSI.'</option>';                                                                    
+							}
+							?>
 						</select>
 					</div>                          
 				
@@ -164,13 +134,23 @@
 				<div class="form-group row">
 					<label class="col-sm-2">Kabupaten / Kota <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<select class="form-control select_tag" required="" id="kabkot" name="kabkot">
+						<select class="form-control select_tag" required="" id="kabkot" name="kabkot" disabled>
+						<?php 
+							foreach ($kabkot as $data_kabkot){
+								echo '<option value="'.$data_kabkot->MS_KODE_KABKOT.'">'.$data_kabkot->MS_KABKOT.'</option>';                                                                    
+							}
+							?>						
 						</select>
 					</div>              
 
 					<label class="col-sm-2">Kecamatan <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<select class="form-control select_tag" required="" id="kecamatan" name="kecamatan">
+						<select class="form-control select_tag" required="" id="kecamatan" name="kecamatan" disabled>
+						<?php 
+							foreach ($kecamatan as $data_kecamatan){
+								echo '<option value="'.$data_kecamatan->MS_KODE_KECAMATAN.'">'.$data_kecamatan->MS_KECAMATAN.'</option>';                                                                    
+							}
+							?>							
 						</select>
 					</div>              					                  
 				</div>	

@@ -166,9 +166,9 @@ class Pelatihan extends MY_Controller
 									'pelatihan/modal-konfirmasi/modalapproval'
 								);
 
-		//$data['provinsi'] 	= $this->Master_model->select_ms_provinsi();
-		//$data['kabkot'] 	= $this->Master_model->select_ms_kabkot();
-		//$data['kecamatan'] 	= $this->Master_model->select_ms_kecamatan();
+		$data['provinsi'] 	= $this->Master_model->select_ms_provinsi();
+		$data['kabkot'] 	= $this->Master_model->select_ms_kabkot();
+		$data['kecamatan'] 	= $this->Master_model->select_ms_kecamatan();
 								
         
         $data["menu"] = $this->Menu_model->select_ms_menu();
