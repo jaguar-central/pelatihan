@@ -13,17 +13,17 @@ class Pelatihan extends MY_Controller
 		$this->is_logged();		
     	
         $data["content"] 		= "Pelatihan";
-        $data["view"] 			= "pelatihan/ulamm";
-		$data["script"] 		= "pelatihan/include/ulamm-script";
+        $data["view"] 			= "pelatihan/pelatihan_ulamm/ulamm";
+		$data["script"] 		= "pelatihan/pelatihan_ulamm/include/ulamm-script";
 		$data["modal"] 			= array(
-									'pelatihan/modal-ulamm/modalview',
-									'pelatihan/modal-ulamm/modaladd',									
-									'pelatihan/modal-ulamm/modaldetails',
-									'pelatihan/modal-ulamm/modaledit',
-									'pelatihan/modal-ulamm/modalunggah',
-									'pelatihan/modal-ulamm/modaladdprojectcharter',					
-									'pelatihan/modal-ulamm/modalviewprojectcharter',
-									'pelatihan/modal-ulamm/modaleditprojectcharter'		
+									'pelatihan/pelatihan_ulamm/modal/modalview',
+									'pelatihan/pelatihan_ulamm/modal/modaladd',									
+									'pelatihan/pelatihan_ulamm/modal/modaldetails',
+									'pelatihan/pelatihan_ulamm/modal/modaledit',
+									'pelatihan/pelatihan_ulamm/modal/modalunggah',
+									'pelatihan/pelatihan_ulamm/modal/modaladdprojectcharter',					
+									'pelatihan/pelatihan_ulamm/modal/modalviewprojectcharter',
+									'pelatihan/pelatihan_ulamm/modal/modaleditprojectcharter'		
 								);
 		
         $data["menu"] 			= $this->Menu_model->select_ms_menu();
@@ -54,18 +54,18 @@ class Pelatihan extends MY_Controller
 		
     	
         $data["content"] = "Pelatihan";
-        $data["view"] 	 = "pelatihan/mekaar";
-		$data["script"]  = "pelatihan/include/mekaar-script";
+        $data["view"] 	 = "pelatihan/pelatihan_mekaar/mekaar";
+		$data["script"]  = "pelatihan/pelatihan_mekaar/include/mekaar-script";
 		$data["menu"] 	 = $this->Menu_model->select_ms_menu();
 		$data["modal"] 	 = array(
-									'pelatihan/modal-mekaar/modalview',
-									'pelatihan/modal-mekaar/modaladd',									
-									'pelatihan/modal-mekaar/modaldetails',
-									'pelatihan/modal-mekaar/modaledit',
-									'pelatihan/modal-mekaar/modalunggah',
-									'pelatihan/modal-mekaar/modaladdprojectcharter',								
-									'pelatihan/modal-mekaar/modalviewprojectcharter',
-									'pelatihan/modal-mekaar/modaleditprojectcharter'		
+									'pelatihan/pelatihan_mekaar/modal/modalview',
+									'pelatihan/pelatihan_mekaar/modal/modaladd',									
+									'pelatihan/pelatihan_mekaar/modal/modaldetails',
+									'pelatihan/pelatihan_mekaar/modal/modaledit',
+									'pelatihan/pelatihan_mekaar/modal/modalunggah',
+									'pelatihan/pelatihan_mekaar/modal/modaladdprojectcharter',								
+									'pelatihan/pelatihan_mekaar/modal/modalviewprojectcharter',
+									'pelatihan/pelatihan_mekaar/modal/modaleditprojectcharter'		
 								);
 
 		$data["pelatihan_type"] = $this->Pelatihan_model->select_ms_pelatihan_type_mekaar();
@@ -93,9 +93,9 @@ class Pelatihan extends MY_Controller
 		$this->is_logged();				
 		
         $data["content"] 	= "Pelatihan";
-        $data["view"] 		= "pelatihan/history_ulamm";
-		$data["script"] 	= "pelatihan/include/history-ulamm-script";
-		$data["modal"] 		= array( "pelatihan/modal-ulamm/modaldetails"); 
+        $data["view"] 		= "pelatihan/history_ulamm/history_ulamm";
+		$data["script"] 	= "pelatihan/history_ulamm/include/history-ulamm-script";
+		$data["modal"] 		= array( "pelatihan/history_ulamm/modal/modaldetails"); 
 
         $data["menu"] 		= $this->Menu_model->select_ms_menu();
 		$data["pelatihan"] 	= $this->Pelatihan_model->select_t_pelatihan_ulamm_by_status(array('draft','submitted','approved','lpj_draft','lpj_submitted','lpj_approved'));
@@ -113,9 +113,9 @@ class Pelatihan extends MY_Controller
 		$this->is_logged();				
 		
         $data["content"] 	= "Pelatihan";
-        $data["view"] 		= "pelatihan/history_mekaar";
-		$data["script"] 	= "pelatihan/include/history-mekaar-script";
-		$data["modal"] 		= array( "pelatihan/modal-mekaar/modaldetails"); 
+        $data["view"] 		= "pelatihan/history_mekaar/history_mekaar";
+		$data["script"] 	= "pelatihan/history_mekaar/include/history-mekaar-script";
+		$data["modal"] 		= array( "pelatihan/history_mekaar/modal/modaldetails"); 
 
         $data["menu"] 		= $this->Menu_model->select_ms_menu();
 		$data["pelatihan"] 	= $this->Pelatihan_model->select_t_pelatihan_mekaar_by_status(array('draft','submitted','approved','lpj_draft','lpj_submitted','lpj_approved'));
@@ -134,8 +134,8 @@ class Pelatihan extends MY_Controller
 		$this->is_logged();						
     	
         $data["content"] = "Pelatihan";
-        $data["view"] 	 = "pelatihan/lpj";
-		$data["script"]  = "pelatihan/include/lpj-script";
+        $data["view"] 	 = "pelatihan/lpj/lpj";
+		$data["script"]  = "pelatihan/lpj/include/lpj-script";
 		$data["menu"] 	 = $this->Menu_model->select_ms_menu();
 		// $data["modal"] 	 = array('pelatihan/modal-lpj/modallistkehadiran');
 
@@ -162,11 +162,11 @@ class Pelatihan extends MY_Controller
 		$this->is_logged();				
 		
         $data["content"] 	= "Pelatihan";
-        $data["view"] 		= "pelatihan/konfirmasi_prop";
-        $data["script"] 	= "pelatihan/include/konfirmasi-proposal-script";
+        $data["view"] 		= "pelatihan/konfirmasi/konfirmasi_prop";
+        $data["script"] 	= "pelatihan/konfirmasi/include/konfirmasi-proposal-script";
 		$data["modal"] 		= array(
-									'pelatihan/modal-konfirmasi/modaldetails',
-									'pelatihan/modal-konfirmasi/modalapproval'
+									'pelatihan/konfirmasi/modal/modaldetails',
+									'pelatihan/konfirmasi/modal/modalapproval'
 								);
 
 		$data['provinsi'] 	= $this->Master_model->select_ms_provinsi();
@@ -203,11 +203,11 @@ class Pelatihan extends MY_Controller
 		$this->is_logged();				
 		
         $data["content"] 			= "Pelatihan";
-        $data["view"] 				= "pelatihan/konfirmasi_lpj";
-        $data["script"] 			= "pelatihan/include/konfirmasi-lpj-script";
+        $data["view"] 				= "pelatihan/konfirmasi/konfirmasi_lpj";
+        $data["script"] 			= "pelatihan/konfirmasi/include/konfirmasi-lpj-script";
 		$data["modal"] 				= array(
-										'pelatihan/modal-konfirmasi/modaldetails',
-										'pelatihan/modal-konfirmasi/modalapprovallpj'
+										'pelatihan/konfirmasi/modal/modaldetails',
+										'pelatihan/konfirmasi/modal/modalapprovallpj'
 									);			
 			
         $data["menu"] 				= $this->Menu_model->select_ms_menu();

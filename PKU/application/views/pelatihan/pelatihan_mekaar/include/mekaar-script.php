@@ -308,6 +308,7 @@
 						+'data-pelatihankabkot="'+row.KABKOT+'" '
 						+'data-pelatihankecamatan="'+row.KECAMATAN+'" '
 						+'data-pelatihanpembicara="'+row.PEMBICARA+'"> Details</a>';
+						if (row.STATUS!='approved'){
 						tombol_action +='<a class="dropdown-item pelatihan_edit" href="#" data-toggle="modal" '
 						+'data-target="#modaledit" '
 						+'data-pelatihanid="'+row.ID+'" '
@@ -329,6 +330,7 @@
 						+'data-pelatihankecamatan="'+row.KECAMATAN+'" '
 						+'data-pelatihanalamat="'+row.ALAMAT+'" '
 						+'data-pelatihanpembicara="'+row.PEMBICARA+'"> Edit</a>';
+						}
 						tombol_action += '<a class= "dropdown-item" target="_blank" href="<?php echo $this->config->item('jasper_report').'Pelatihan.pdf?ID=' ?>'+row.ID+'"> Unduh Proposal</a>';
 					  }
 					  
