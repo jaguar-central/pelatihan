@@ -171,10 +171,12 @@ class Pelatihan extends MY_Controller
 								        
         $data["menu"] = $this->Menu_model->select_ms_menu();
 		
-		if ($this->session->userdata('sess_user_id_user_group')=='2'){
+		if ($this->session->userdata('sess_user_id_user_group')=='2'){ //pinca
 			$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('');			
-		}else if ($this->session->userdata('sess_user_id_user_group')=='3'){
-			$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('Pinca');			
+		}else if ($this->session->userdata('sess_user_id_user_group')=='3' and $this->session->userdata('sess_user_id_bisnis')=='1'){ //pic pusat ulamm
+			$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('Pinca');
+		}else if ($this->session->userdata('sess_user_id_user_group')=='3' and $this->session->userdata('sess_user_id_bisnis')=='2'){ //pic pusat mekaar
+			$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('');			
 		}else if ($this->session->userdata('sess_user_id_user_group')=='4'){
 			$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('PIC Pusat');
 		}else if ($this->session->userdata('sess_user_id_user_group')=='5'){
@@ -214,10 +216,12 @@ class Pelatihan extends MY_Controller
 			
         $data["menu"] 				= $this->Menu_model->select_ms_menu();
 				
-		if ($this->session->userdata('sess_user_id_user_group')=='2'){
+		if ($this->session->userdata('sess_user_id_user_group')=='2'){ //pinca
 			$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('');
-		}else if ($this->session->userdata('sess_user_id_user_group')=='3'){
-			$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('Pinca');			
+		}else if ($this->session->userdata('sess_user_id_user_group')=='3' and $this->session->userdata('sess_user_id_bisnis')=='1'){ //pic pusat ulamm
+			$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('Pinca');	
+		}else if ($this->session->userdata('sess_user_id_user_group')=='3' and $this->session->userdata('sess_user_id_bisnis')=='2'){ //pic pusat mekaar
+			$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('');				
 		}else if ($this->session->userdata('sess_user_id_user_group')=='4'){
 			$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('PIC Pusat');
 		}else if ($this->session->userdata('sess_user_id_user_group')=='5'){
