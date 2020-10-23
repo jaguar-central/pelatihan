@@ -424,15 +424,19 @@ class Master extends MY_Controller
 
 
 	public function get_grading(){
-		$id = $_GET['id_grading'] ? (int)$_GET['id_grading'] : 0;
-		
-		
-		$grading = $this->Master_model->select_ms_grading();	
+		$idjenisnasabah = $_GET['idjenisnasabah'] ? (int)$_GET['idjenisnasabah'] : 0;
+		$idgrading = $_GET['idgrading'] ? (int)$_GET['idgrading'] : 0;
+
+		$where = array(
+			'ID_JENIS_NASABAH' => $idjenisnasabah
+		);				
+				
+		$grading = $this->Master_model->select_ms_grading_where($where);
 
 		$data= '<option value="">--pilih grade--</option>';
 		
 		foreach ($grading as $data_grade) {
-			if ($data_grade->ID==$id){
+			if ($data_grade->ID==$idgrading){
 				$data .= "<option value='".$data_grade->ID."' selected>".$data_grade->GRADING_DESKRIPSI." </option>";
 			}else{
 				$data .= "<option value='".$data_grade->ID."' >".$data_grade->GRADING_DESKRIPSI." </option>";
@@ -442,7 +446,7 @@ class Master extends MY_Controller
 		echo $data;
 	}
 
-	public function get_list_grading(){
+	public function get_list_nasabah_grading(){
 		$id = $_GET['id_jenis_nasabah'];
 
 		$where = array(

@@ -59,7 +59,7 @@
                                                                 > Details</a>
                                                                 
 																<a class= "dropdown-item" target="_blank" href="'.$this->config->item("jasper_report").'Pelatihan.pdf?ID='.$data->ID.'"> Unduh Proposal</a>				
-																<a class= "dropdown-item pelatihan_approval" href="#" data-toggle="modal" data-target="#modalapproval" data-pelatihanid="'.$data->ID.'" data-gradingid="'.$data->ID_GRADING.'" > Verify</a>				
+																<a class= "dropdown-item pelatihan_approval" href="#" data-toggle="modal" data-target="#modalapproval" data-pelatihanid="'.$data->ID.'" data-gradingid="'.$data->ID_GRADING.'" data-idjenisnasabah="'.$data->ID_JENIS_NASABAH.'"  > Verify</a>				
 															  </div>
 															</div> 
 													</td>'; 

@@ -107,19 +107,22 @@
 	$(document).on("click", ".pelatihan_approval", function () {			
 		var pelatihanid = $(this).data('pelatihanid');	
 		var gradingid = $(this).data('gradingid');	
+		var idjenisnasabah = $(this).data('idjenisnasabah');	
+		
 		
 		$('#id_pelatihan').val(pelatihanid);
 		$('#draft_proposal').html('<iframe style="width: 100%;height: 550px;"  src="<?php echo $this->config->item("jasper_report"); ?>Pelatihan.html?ID='+pelatihanid+'" title="PDF in an i-Frame" frameborder="1" scrolling="auto"></iframe>');		
 		
+			
+		$('#jenis_nasabah_grading').val(idjenisnasabah).trigger('change');        
 		$.ajax({
 			url: "<?php echo base_url()?>master/get_grading",
-			data: "id_grading="+gradingid,
+			data: "idjenisnasabah="+idjenisnasabah+"&idgrading="+gradingid,
 			cache: false,
-			success: function(data){				         
-				$('#grading').html(data)           
+			success: function(data){				 				
+				$('#grading').html(data);
 			}
 		});
-
 
 		$.ajax({
 			url: "<?php echo base_url()?>pelatihan/get_ket_approval",

@@ -103,7 +103,7 @@ $route['master/get_cabang_mekaar']              = 'master/get_cabang_mekaar';
 $route['master/get_grading']              		= 'master/get_grading';
 $route['master/get_kabkot']              		= 'master/get_kabkot';
 $route['master/get_kecamatan']              	= 'master/get_kecamatan';
-$route['master/get_list_grading']              	= 'master/get_list_grading';
+$route['master/get_list_nasabah_grading']       = 'master/get_list_nasabah_grading';
 
 
 

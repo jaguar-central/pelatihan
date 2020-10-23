@@ -30,18 +30,8 @@
                 </div>		
 
 <?php if ($this->session->userdata('sess_user_id_user_group')=='3'){ ?>
-				<!-- <div class="form-group row">
-					<label class="col-sm-2">Grade <span class="text-danger">*</span></label>
-					<div class="col-sm-8">
-						<select class="form-control" required="" id="grading" name="grading">
-							<option value="">--pilih grade--</option>								
-						</select>	
-					</div>
-				</div>		 -->
 
-
-
-				<div class="form-group card col-md-8 offset-md-2 grading_system">
+				<div class="form-group card grading_system">
 				<div class="card-header"><h4>Grading System</h4></div>
 				<div class="card-body row">
 					<label class="col-sm-2">Jenis Nasabah <span class="text-danger">*</span></label>
@@ -70,7 +60,7 @@
 
 <?php } ?>
 
-				<div class="form-group row keterangan col-md-8 offset-md-2">	
+				<div class="form-group row keterangan col-md-10 offset-md-1">	
 				</div>	
 
 				<div class="form-group row">
@@ -172,7 +162,7 @@
 	$('#jenis_nasabah_grading').on('change', function (e) {		
 			console.log($(this).val());
 			$.ajax({
-				url: "<?php echo base_url()?>master/get_list_grading",
+				url: "<?php echo base_url()?>master/get_list_nasabah_grading",
 				data: "id_jenis_nasabah="+$(this).val(),
 				cache: false,
 				success: function(data){				         

@@ -404,7 +404,7 @@
 		$('#jenis_nasabah_grading').on('change', function (e) {		
 			console.log($(this).val());
 			$.ajax({
-				url: "<?php echo base_url()?>master/get_list_grading",
+				url: "<?php echo base_url()?>master/get_list_nasabah_grading",
 				data: "id_jenis_nasabah="+$(this).val(),
 				cache: false,
 				success: function(data){				         

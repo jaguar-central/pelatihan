@@ -192,11 +192,11 @@ class Master_model extends CI_Model {
 		$this->db->insert('MS_USER_GROUP', $data);
 	}
 		
-	public function select_ms_grading()
-	{
-		$query = $this->db->query("select * from MS_GRADING ");
-		return $query->result();
-	}	
+	// public function select_ms_grading()
+	// {
+	// 	$query = $this->db->query("select * from MS_GRADING ");
+	// 	return $query->result();
+	// }	
 
 	public function select_ms_grading_where($where)
 	{
