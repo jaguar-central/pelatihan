@@ -62,22 +62,34 @@
 					<label class="col-sm-2">Deskripsi <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control"  required="" id="deskripsi_pelatihan_edit" name="deskripsi_pelatihan_edit" />
-					</div>							
-				
-					<label class="col-sm-2">Grade <span class="text-danger">*</span></label>
+					</div>													
+				</div>	
+
+				<div class="form-group card grading_system_edit">
+				<div class="card-header"><h4>Grading System</h4></div>
+				<div class="card-body row">
+					<label class="col-sm-2">Jenis Nasabah <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-					<select class="form-control" required="" id="grading_edit" name="grading_edit">
-							<option value="">--pilih grade--</option>
+						<select class="form-control" required="" id="jenis_nasabah_grading_edit">
+							<option value="">--pilih jenis nasabah--</option>
 
 							<?php 
-								foreach ($grade_ulamm as $data_grade){
-									echo '<option value="'.$data_grade->ID.'">'.$data_grade->GRADING_DESKRIPSI.'</option>';                                                                    
+								foreach ($nasabah_grading as $data_nasabah_grading){
+									echo '<option value="'.$data_nasabah_grading->ID.'" >'.$data_nasabah_grading->JENIS_NASABAH.'</option>';                                                                    
 								}
 								?>										
 						</select>	
-					</div>				
+					</div>	
 
-				</div>	
+					<label class="col-sm-2">Grade <span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+						<select class="form-control" required="" id="grading_edit" name="grading">
+							<option value="">--pilih grade--</option>
+									
+						</select>	
+					</div>								
+				</div>		
+				</div>						
 				
 				<div class="form-group row">
 
@@ -255,6 +267,36 @@
 			}
 		});		
 	});
+
+
+	$('#jenis_nasabah_grading_edit').on('change', function (e) {		
+			console.log($(this).val());
+			$.ajax({
+				url: "<?php echo base_url()?>master/get_list_nasabah_grading",
+				data: "id_jenis_nasabah="+$(this).val(),
+				cache: false,
+				success: function(data){				         
+					$('#grading_edit').html(data)           
+				}
+			});
+			if ($(this).val()==1){				
+				$('.grading_system_edit').addClass('bg-danger text-white');
+				$(".grading_system_edit").removeClass('bg-warning bg-success bg-info');
+			}else if ($(this).val()==2){
+				$('.grading_system_edit').addClass('bg-warning');
+				$(".grading_system_edit").removeClass('bg-danger bg-success bg-info text-white');
+			}else if ($(this).val()==3){
+				$('.grading_system_edit').addClass('bg-success text-white');
+				$(".grading_system_edit").removeClass('bg-danger bg-warning bg-info');
+			}else if ($(this).val()==4){
+				$('.grading_system_edit').addClass('bg-info text-white');
+				$(".grading_system_edit").removeClass('bg-danger bg-warning bg-success');
+			}else{
+				$('.grading_system_edit').addClass('bg-default');
+				$(".grading_system_edit").removeClass('bg-danger bg-warning bg-success bg-info text-white');
+			}
+			
+		});		
 
 	var provinsi_change = $('#provinsi_edit').on('change', function (e) {			
 		$.ajax({
