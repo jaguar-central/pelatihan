@@ -123,6 +123,11 @@ $(document).ready(function() {
 			"type" :'GET'                      
 			},
 			"columns" : [
+			  { "data": "nasabahid", render: function (data, type, row) 
+                {
+                  return '<input type="hidden" class="form-control" id="id_nasabah" name="id_nasabah[]" value="'+row.nasabahid+'">'+row.nasabahid;
+                } 
+              },				
               { "data": "ktp", render: function (data, type, row) 
                 {
                   return '<input type="hidden" class="form-control" id="bisnis" name="bisnis[]" value="ULAMM"><input type="hidden" class="form-control" id="ktp" name="ktp[]" value="'+row.ktp+'">'+row.ktp;
@@ -194,6 +199,11 @@ $(document).ready(function() {
 			"type" :'GET'                      
 			},
 			"columns" : [
+			  { "data": "NasabahId", render: function (data, type, row) 
+                {
+                  return '<input type="hidden" class="form-control" id="id_nasabah" name="id_nasabah[]" value="'+row.id_nasabah+'">'+row.id_nasabah;
+                } 
+              },				
               { "data": "noktp", render: function (data, type, row) 
                 {
                   return '<input type="hidden" class="form-control" id="bisnis" name="bisnis[]" value="MEKAAR"><input type="hidden" class="form-control" id="ktp" name="ktp[]" value="'+row.noktp+'">'+row.noktp;
@@ -425,6 +435,7 @@ $(document).ready(function() {
 	$(document).on("click", ".add-kehadiran-ulamm", function () {					
 		var index = parseInt($(this).index());				
 		
+		var id_nasabah 		= $("tr.add-kehadiran-ulamm:eq("+index+") #id_nasabah").val();
 		var bisnis 			= $("tr.add-kehadiran-ulamm:eq("+index+") #bisnis").val();
 		var ktp 			= $("tr.add-kehadiran-ulamm:eq("+index+") #ktp").val();
 		var nama_nasabah 	= $("tr.add-kehadiran-ulamm:eq("+index+") #nama_nasabah").val();				
@@ -436,6 +447,7 @@ $(document).ready(function() {
 		$.post("<?php echo base_url('pelatihan/post_kehadiran'); ?>",
 		{	
 			id_pelatihan	: '<?php echo $this->uri->segment(3); ?>',
+			id_nasabah		: id_nasabah,
 			bisnis			: bisnis,
 			ktp				: ktp,
 			nama_nasabah	: nama_nasabah,
@@ -456,6 +468,7 @@ $(document).ready(function() {
 	$(document).on("click", ".add-kehadiran-mekaar", function () {					
 		var index = parseInt($(this).index());				
 		
+		var id_nasabah 		= $("tr.add-kehadiran-mekaar:eq("+index+") #id_nasabah").val();
 		var bisnis 			= $("tr.add-kehadiran-mekaar:eq("+index+") #bisnis").val();
 		var ktp 			= $("tr.add-kehadiran-mekaar:eq("+index+") #ktp").val();
 		var nama_nasabah 	= $("tr.add-kehadiran-mekaar:eq("+index+") #nama_nasabah").val();				
@@ -467,6 +480,7 @@ $(document).ready(function() {
 		$.post("<?php echo base_url('pelatihan/post_kehadiran'); ?>",
 		{	
 			id_pelatihan	: '<?php echo $this->uri->segment(3); ?>',
+			id_nasabah		: id_nasabah,			
 			bisnis			: bisnis,
 			ktp				: ktp,
 			nama_nasabah	: nama_nasabah,

@@ -887,8 +887,10 @@ class Pelatihan extends MY_Controller
         $id_pelatihan   = trim($this->security->xss_clean(strip_image_tags($this->input->post('id_pelatihan'))));
         $bisnis         = trim($this->security->xss_clean(strip_image_tags($this->input->post('bisnis'))));
         $ktp           	= trim($this->security->xss_clean(strip_image_tags($this->input->post('ktp'))));
-        $nama_nasabah	= trim($this->security->xss_clean(strip_image_tags($this->input->post('nama_nasabah'))));
+		$id_nasabah		= trim($this->security->xss_clean(strip_image_tags($this->input->post('id_nasabah'))));
+		$nama_nasabah	= trim($this->security->xss_clean(strip_image_tags($this->input->post('nama_nasabah'))));
 		$no_hp          = trim($this->security->xss_clean(strip_image_tags($this->input->post('no_hp'))));
+		
 		
         $kolektibilitas = $this->security->xss_clean(strip_image_tags($this->input->post('kolektibilitas')));
         $cabang        	= trim($this->security->xss_clean(strip_image_tags($this->input->post('cabang'))));
@@ -919,6 +921,7 @@ class Pelatihan extends MY_Controller
 				'ID_PELATIHAN' 		=> $id_pelatihan,
 				'BISNIS' 			=> $bisnis,
 				'KTP' 				=> $ktp,
+				'ID_NASABAH'		=> $id_nasabah,
 				'NAMA' 				=> $nama_nasabah,
 				'NASABAH_TIPE' 		=> $nasabah_type,
 				'AKTIF' 			=> '1',

@@ -9,7 +9,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="overview-wrap">
-						<h2 class="title-2">Pelatihan Ulamm LPJ</h2>
+						<h2 class="title-2">Pelatihan LPJ</h2>
 					</div>
 				</div>
 			</div>		
@@ -376,6 +376,7 @@
 					<table id="datatable_kehadiran_ulamm" class="table table-hover">                                     
 					<thead>
 						<tr>
+							<th>ID NASABAH</th>
 							<th>KTP</th>
 							<th>NAMA NASABAH</th>
 							<th>NO. HANDPHONE</th>
