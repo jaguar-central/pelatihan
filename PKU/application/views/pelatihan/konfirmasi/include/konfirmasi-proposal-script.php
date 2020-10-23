@@ -65,9 +65,24 @@
 	$(document).on("click", ".pelatihan_details", function () {			
 				
 		$('#pelatihan_type_details').html('<option value="'+$(this).data('pelatihantype')+'">'+$(this).data('pelatihantiddeskripsi')+'</option>');		
-		$('#cabang_pelatihan_details').val($(this).data('pelatihancabang'));		
-		$('#cabang_pelatihan_details').trigger('change');							
-		$('#unit_pelatihan_details').val($(this).data('pelatihanunit'));		
+
+		$('#cabang_ulamm_details').val($(this).data('pelatihancabangulamm'));		
+		// $('#cabang_ulamm_details').trigger('change');							
+		$('#unit_ulamm_details').val($(this).data('pelatihanunitulamm'));		
+
+		$('#region_mekaar_details').val($(this).data('pelatihanregionmekaar'));		
+		// $('#region_mekaar_details').trigger('change');	
+		$('#area_mekaar_details').val($(this).data('pelatihanareamekaar'));									
+		$('#cabang_mekaar_details').val($(this).data('pelatihancabangmekaar'));	
+		
+		if ($(this).data('pelatihanidbisnis')==1){
+			$('.bisnis_mekaar').hide();
+			$('.bisnis_ulamm').show();
+		}else{
+			$('.bisnis_mekaar').show();
+			$('.bisnis_ulamm').hide();
+		}		
+
 		$('#judul_pelatihan_details').val($(this).data('pelatihantitle'));		
 		$('#deskripsi_pelatihan_details').val($(this).data('pelatihandeskripsi'));		
 		$('#input-limit-datepicker_details').val($(this).data('pelatihantanggal'));		
@@ -79,7 +94,6 @@
 		$('#kabkot_details').val($(this).data('pelatihankabkot'));		
 		$('#kecamatan_details').val($(this).data('pelatihankecamatan'));							
 		$('#pembicara_pelatihan_details').val($(this).data('pelatihanpembicara'));		
-		$('#input-limit-datepicker').val($(this).data('pelatihantanggal'));
 								
 				
 		$.ajax({
@@ -101,7 +115,7 @@
 			}
 		});	
 						
-	});
+	});	
 
 
 	$(document).on("click", ".pelatihan_approval", function () {			
