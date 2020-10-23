@@ -168,12 +168,7 @@ class Pelatihan extends MY_Controller
 									'pelatihan/konfirmasi/modal/modaldetails',
 									'pelatihan/konfirmasi/modal/modalapproval'
 								);
-
-		$data['provinsi'] 	= $this->Master_model->select_ms_provinsi();
-		$data['kabkot'] 	= $this->Master_model->select_ms_kabkot();
-		$data['kecamatan'] 	= $this->Master_model->select_ms_kecamatan();
-								
-        
+								        
         $data["menu"] = $this->Menu_model->select_ms_menu();
 		
 		if ($this->session->userdata('sess_user_id_user_group')=='2'){
@@ -192,6 +187,13 @@ class Pelatihan extends MY_Controller
 			$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('');
 		}			
 		
+		$data["cabang"] 		= $this->Master_model->select_ms_cabang_ulamm();		
+		$data["region"] 		= $this->Master_model->select_ms_region_mekaar();
+
+		$data['provinsi'] 		= $this->Master_model->select_ms_provinsi();
+		$data['kabkot'] 		= $this->Master_model->select_ms_kabkot();
+		$data['kecamatan'] 		= $this->Master_model->select_ms_kecamatan();
+
 		$data['nasabah_grading'] = $this->Master_model->select_ms_nasabah_grading();	
 		// var_dump($this->db->last_query());die();
 
@@ -227,6 +229,13 @@ class Pelatihan extends MY_Controller
 		}else{
 			$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('');
 		}								
+
+		$data["cabang"] 		= $this->Master_model->select_ms_cabang_ulamm();		
+		$data["region"] 		= $this->Master_model->select_ms_region_mekaar();
+
+		$data['provinsi'] 		= $this->Master_model->select_ms_provinsi();
+		$data['kabkot'] 		= $this->Master_model->select_ms_kabkot();
+		$data['kecamatan'] 		= $this->Master_model->select_ms_kecamatan();		
 
         $this->load->view('layout/gabung', $data);
     }

@@ -43,11 +43,16 @@
 															  </button>
 															  <div class="dropdown-menu">
 																<a class="dropdown-item pelatihan_details" href="#" data-toggle="modal" data-target="#modaldetails" 
-																data-pelatihanid="'.$data->ID.'"
-																data-pelatihantype="'.$data->ID_TIPE.'"
-																data-pelatihantitle="'.$data->TITLE.'"
-																data-pelatihancabang="'.$data->CABANG_MEKAAR.'"
-																data-pelatihanunit="'.$data->UNIT_ULAMM.'"
+                                                                data-pelatihanid="'.$data->ID.'"
+                                                                data-pelatihanidbisnis="'.$data->ID_BISNIS.'"
+                                                                data-pelatihantype="'.$data->ID_TIPE.'"
+                                                                data-pelatihantiddeskripsi="'.$data->DESKRIPSI_PELATIHAN_TYPE.'"
+                                                                data-pelatihantitle="'.$data->TITLE.'"
+																data-pelatihanregionmekaar="'.$data->REGIONAL_MEKAAR.'"
+                                                                data-pelatihanareamekaar="'.$data->AREA_MEKAAR.'"                                                                
+																data-pelatihancabangmekaar="'.$data->CABANG_MEKAAR.'"                                                                                                                                
+																data-pelatihancabangulamm="'.$data->CABANG_ULAMM.'"
+																data-pelatihanunitulamm="'.$data->UNIT_ULAMM.'"
 																data-pelatihandeskripsi="'.$data->DESKRIPSI.'"
 																data-pelatihantanggal="'.$data->TANGGAL_MULAI.' - '.$data->TANGGAL_SELESAI.'"
 																data-pelatihandurasi="'.$data->DURASI_PELATIHAN.'"
@@ -56,7 +61,8 @@
                                                                 data-pelatihanprovinsi="'.$data->PROVINSI.'"
                                                                 data-pelatihankabkot="'.$data->KABKOT.'"
 								                                data-pelatihankecamatan="'.$data->KECAMATAN.'" 
-																data-pelatihanalamat="'.$data->ALAMAT.'"
+                                                                data-pelatihanalamat="'.$data->ALAMAT.'"
+                                                                data-pelatihanpembicara="'.$data->PEMBICARA.'"                                                                
 																> Details</a>
 																<a class= "dropdown-item" target="_blank" href="'.$this->config->item("jasper_report").'Pelatihan.pdf?ID='.$data->ID.'"> Unduh Proposal</a>				
 																<a class= "dropdown-item pelatihan_approval_lpj" href="#" data-toggle="modal" data-target="#modalapprovallpj" data-pelatihanid="'.$data->ID.'"> Verify</a>				

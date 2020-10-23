@@ -24,10 +24,20 @@
 							<option value="">--pilih tipe--</option>										
 						</select>																	
 					</div>
+
+					<label class="col-sm-2">Judul <span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control"  required="" id="judul_pelatihan_details" name="judul_pelatihan_details" disabled />
+					</div>											
+				
+				</div>	
 					
+				
+				<div class="form-group row bisnis_mekaar">
+						
 					<label class="col-sm-2">Region <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<select class="form-control" required="" id="region_pelatihan_details" name="region_pelatihan_details" disabled>
+						<select class="form-control" required="" id="region_mekaar_details" name="region_mekaar_details" disabled>
 							<option value="">--pilih region--</option>			
 
 								<?php 
@@ -36,33 +46,49 @@
 								}
 								?>										
 						</select>																	
-					</div>
-				</div>		
-				
-				<div class="form-group row">
-					<label class="col-sm-2">Judul <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="judul_pelatihan_details" name="judul_pelatihan_details" disabled />
-					</div>							
+					</div>						
 				
 					<label class="col-sm-2">Area <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control"  required="" id="area_pelatihan_details" name="area_pelatihan_details" disabled />
 																						
-					</div>							
+					</div>					
+			
 				</div>								
+
+				<div class="form-group row bisnis_mekaar">
+					<label class="col-sm-2">Cabang <span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control"  required="" id="cabang_mekaar_details" name="cabang_mekaar_details" disabled />
+																						
+					</div>	
+				</div>	
+
+				<div class="form-group row bisnis_ulamm">				
+					<label class="col-sm-2">Cabang <span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+						<select class="form-control" required="" id="cabang_ulamm_details" name="cabang_ulamm_details" disabled>
+								<?php 
+								foreach ($cabang as $data_cabang){
+									echo '<option value="'.$data_cabang->KODE_CABANG.'">'.$data_cabang->KODE_CABANG.' - '.$data_cabang->DESKRIPSI.'</option>';                                                                    
+								}
+								?>										
+						</select>																	
+					</div>		
+
+					<label class="col-sm-2">Unit <span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control"  required="" id="unit_ulamm_details" name="unit_ulamm_details" disabled />
+																								
+					</div>										
+				</div>
 
 				<div class="form-group row">
 					<label class="col-sm-2">Deskripsi <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control"  required="" id="deskripsi_pelatihan_details" name="deskripsi_pelatihan_details" disabled />
 					</div>							
-				
-					<label class="col-sm-2">Cabang <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="cabang_pelatihan_details" name="cabang_pelatihan_details" disabled />
-																						
-					</div>	
+
 				</div>	
 				
 				<div class="form-group row">
@@ -73,7 +99,7 @@
 
 						 <div class="input-group">										
 							
-							<input type="text" class="form-control input-limit-datepicker" id="input-limit-datepicker" disabled  />																				
+							<input type="text" class="form-control input-limit-datepicker" id="input-limit-datepicker_details" disabled  />																				
 							<input type="hidden" id="inputStartTglPelaksanaan" name="inputStartTglPelaksanaan" />
 							
 							<input type="hidden" id="inputStartTimePelaksanaan" name="inputStartTimePelaksanaan" />
@@ -134,7 +160,7 @@
 				<div class="form-group row">
 					<label class="col-sm-2">Kabupaten / Kota <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<select class="form-control select_tag" required="" id="kabkot" name="kabkot" disabled>
+						<select class="form-control select_tag" required="" id="kabkot_details" name="kabkot_details" disabled>
 						<?php 
 							foreach ($kabkot as $data_kabkot){
 								echo '<option value="'.$data_kabkot->MS_KODE_KABKOT.'">'.$data_kabkot->MS_KABKOT.'</option>';                                                                    
@@ -145,7 +171,7 @@
 
 					<label class="col-sm-2">Kecamatan <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<select class="form-control select_tag" required="" id="kecamatan" name="kecamatan" disabled>
+						<select class="form-control select_tag" required="" id="kecamatan_details" name="kecamatan_details" disabled>
 						<?php 
 							foreach ($kecamatan as $data_kecamatan){
 								echo '<option value="'.$data_kecamatan->MS_KODE_KECAMATAN.'">'.$data_kecamatan->MS_KECAMATAN.'</option>';                                                                    
@@ -208,25 +234,7 @@
 	</div>
  </div>
 </div>
-<script>
-	$('#us_details').locationpicker({
-        location: {
-              latitude: -0.9470831999999999,
-              longitude: 100.417181   
-		},
-        radius: 50,
-        inputBinding: {
-            latitudeInput: $('#latitude_add'),
-            longitudeInput: $('#longitude_add'),
-            radiusInput: $('#radius_add'),
-            locationNameInput: $('#lokasi_pelatihan_add')
-        },
-        enableAutocomplete: true,
-        onchanged: function (currentLocation, radius, isMarkerDropped) {
-  
-        }
-    });
-	
+<script>	
 	
 	function calculate_grand_total_details(){		
 		var total = 0;
