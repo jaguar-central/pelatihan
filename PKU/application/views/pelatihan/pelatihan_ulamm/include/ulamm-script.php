@@ -288,8 +288,8 @@
 				{ "data": "ID_TIPE_DESKRIPSI" },
 				{ "data": "CABANG_ULAMM" },
 				{ "data": "UNIT_ULAMM" },
-				{ "data": "CREATED_DATE" },    
-				{ "data": "TANGGAL_MULAI" },    
+				{ "data": "TANGGAL_PEMBUATAN" },    
+				{ "data": "TANGGAL_PELATIHAN" },    
 				{ "data": "STATUS" },    
 				{ "data": "STATUS", render: function (data, type, row) 
 					{

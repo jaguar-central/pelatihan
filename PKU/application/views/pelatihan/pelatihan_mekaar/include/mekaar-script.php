@@ -279,7 +279,7 @@
 				{ "data": "REGIONAL_MEKAAR" },
 				{ "data": "AREA_MEKAAR" },    
 				{ "data": "CABANG_MEKAAR" },    
-				{ "data": "TANGGAL_MULAI" },    
+				{ "data": "TANGGAL_PELATIHAN" },    
 				{ "data": "STATUS" },    
 				{ "data": "STATUS", render: function (data, type, row) 
 					{

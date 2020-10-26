@@ -51,7 +51,7 @@ public function update_t_pelatihan($data,$where){
 
 public function select_t_pelatihan_ulamm_by_status($status)
 {
-		$query = $this->db->select('*,dbo.DESKRIPSI_PELATIHAN_TYPE(ID_TIPE) as DESKRIPSI_PELATIHAN_TYPE')->from('T_PELATIHAN')->
+		$query = $this->db->select('*,CONVERT(VARCHAR(17),TANGGAL_MULAI,113) as MULAI,CONVERT(VARCHAR(17),TANGGAL_SELESAI,113) as SELESAI,dbo.DESKRIPSI_PELATIHAN_TYPE(ID_TIPE) as DESKRIPSI_PELATIHAN_TYPE')->from('T_PELATIHAN')->
 		where('ID_BISNIS','1')->
 		where(" CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ")->
 		where_in('STATUS',$status)->get();				
@@ -61,7 +61,7 @@ public function select_t_pelatihan_ulamm_by_status($status)
 		
 public function select_t_pelatihan_mekaar_by_status($status)
         {
-                $query = $this->db->select('*,dbo.DESKRIPSI_PELATIHAN_TYPE(ID_TIPE) as DESKRIPSI_PELATIHAN_TYPE')->from('T_PELATIHAN')->
+                $query = $this->db->select('*,CONVERT(VARCHAR(17),TANGGAL_MULAI,113) as MULAI,CONVERT(VARCHAR(17),TANGGAL_SELESAI,113) as SELESAI,dbo.DESKRIPSI_PELATIHAN_TYPE(ID_TIPE) as DESKRIPSI_PELATIHAN_TYPE')->from('T_PELATIHAN')->
 				where('ID_BISNIS','2')->
 				where(" CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ")->
 				where_in('STATUS',$status)->get();				
@@ -220,9 +220,9 @@ public function paging_t_pelatihan($param)
 	$query = $this->db->query("EXEC GET_PELATIHAN @START = '".$param["start"]."',@LIMIT = '".$param["limit"]."',@SEARCH = '".$param["search"]."'
 	,@TIPEPELATIHAN = '".$param["tipe_pelatihan"]."'
 	,@TIPEBISNIS = '".$param["tipe_bisnis"]."'
-	,@COUNT = '".$param["count"]."'
 	,@IDUSER = '".$this->session->userdata('sess_user_id')."'
 	");
+
 	return $query->result();
 }		
 

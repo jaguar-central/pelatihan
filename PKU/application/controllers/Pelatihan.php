@@ -1375,12 +1375,10 @@ class Pelatihan extends MY_Controller
 		$param["limit"] = isset($_GET["length"]) ? $_GET["length"] : 10;		
 		$param["tipe_pelatihan"] 	= isset($tipe) ? $tipe : NULL ;			
 		$param["tipe_bisnis"] 		= isset($bisnis) ? $bisnis : NULL ;			
-		$param["search"] 			= isset($_GET["search"]["value"]) ? $_GET["search"]["value"] : NULL ;			
-		$param['count'] = 0;						
+		$param["search"] 			= isset($_GET["search"]["value"]) ? $_GET["search"]["value"] : NULL ;								
 
 		$data["data"] = $this->Pelatihan_model->paging_t_pelatihan($param);				
-		$param['count'] = 1;				
-		$total = $this->Pelatihan_model->paging_t_pelatihan($param)[0]->COUNT_DATA;				
+		$total = COUNT($data["data"]);
 		$data["recordsTotal"] = $total;	
 		$data["recordsFiltered"] = $total;		
 		
