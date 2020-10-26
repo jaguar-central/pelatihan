@@ -91,6 +91,8 @@ $route['logout'] 		= 'User/process_signout';
 $route['report/agenda_klasterisasi'] 		= 'Report/agenda_klasterisasi';
 $route['report/report_detail_ulamm'] 		= 'Report/report_detail_ulamm';
 $route['report/report_detail_mekaar'] 		= 'Report/report_detail_mekaar';
+$route['report/report_rekap_ulamm'] 		= 'Report/report_rekap_ulamm';
+$route['report/report_rekap_mekaar'] 		= 'Report/report_rekap_mekaar';
 
 
 

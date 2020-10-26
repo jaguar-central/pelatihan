@@ -61,4 +61,32 @@ class Report extends MY_Controller
 
         $this->load->view('layout/gabung', $data);
     }     
+
+    public function report_rekap_ulamm()    	    
+    {
+        $this->is_logged();	
+
+        $data["content"] = "Report";
+		$data["view"] = "report/rekap_ulamm/rekap_ulamm";	
+        $data["script"] = "report/rekap_ulamm/include/rekap-ulamm-script";     
+        
+        $data["menu"] = $this->Menu_model->select_ms_menu();
+        $data["report"] = $this->Report_model->report_rekap_ulamm();        
+
+        $this->load->view('layout/gabung', $data);
+    }      
+
+    public function report_rekap_mekaar()    	    
+    {
+        $this->is_logged();	
+
+        $data["content"] = "Report";
+		$data["view"] = "report/rekap_mekaar/rekap_mekaar";	
+        $data["script"] = "report/rekap_mekaar/include/rekap-mekaar-script";     
+        
+        $data["menu"] = $this->Menu_model->select_ms_menu();
+        $data["report"] = $this->Report_model->report_rekap_mekaar();        
+
+        $this->load->view('layout/gabung', $data);
+    }      
 }
