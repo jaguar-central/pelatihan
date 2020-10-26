@@ -12,6 +12,12 @@ class Master_model extends CI_Model {
 			return $query->result();
 	}
 
+	public function select_all_ms_cabang_ulamm()
+	{
+		$query = $this->db->query("select * from MS_CABANG_ULAMM ");
+		return $query->result();		
+	}
+
 	public function select_ms_cabang_mekaar_by_id($area)
 	{
 			$query = $this->db->query("select * from MS_CABANG_MEKAAR where KODE_AREA='$area' ");

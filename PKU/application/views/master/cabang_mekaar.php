@@ -31,7 +31,7 @@
                                                 echo '<td>'.$opn->KODE_AREA.'</td>';
                                                 echo '<td>'.$opn->KODE_CABANG.'</td>';
                                                 echo '<td>'.$opn->DESKRIPSI.'</td>'; 
-                                                echo '<td><button type="button" class="btn btn-primary">Primary</button> <button type="button" class="btn btn-danger">Delete</button></td>'; 
+                                                echo '<td><button type="button" class="btn btn-outline-danger">Delete</button></td>'; 
                                                 echo '</tr>';
 
                                             }
