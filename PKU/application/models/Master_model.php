@@ -139,7 +139,11 @@ class Master_model extends CI_Model {
 			return $this->db->query(" EXEC [GET_NOTIF] @APPROVAL='".$approval."',@IDUSER='".$this->session->userdata('sess_user_id')."',@IDBINIS='".$this->session->userdata('sess_user_id_bisnis')."',@COUNT=1 ")->result()[0]->COUNT_NOTIF;			
 		}
 		else if ($this->session->userdata('sess_user_id_user_group')=='3'){
-			$approval = "''Pinca''";
+			if ($this->session->userdata('sess_user_id_bisnis')=='1'){
+				$approval = "''Pinca''";
+			}else{
+				$approval = "''''";
+			}
 			return $this->db->query(" EXEC [GET_NOTIF] @APPROVAL='".$approval."',@IDUSER='".$this->session->userdata('sess_user_id')."',@IDBINIS='".$this->session->userdata('sess_user_id_bisnis')."',@COUNT=1 ")->result()[0]->COUNT_NOTIF;
 		}		
 		else if ($this->session->userdata('sess_user_id_user_group')=='4'){
