@@ -64,7 +64,7 @@
                                                                 data-pelatihanalamat="'.$data->ALAMAT.'"
                                                                 data-pelatihanpembicara="'.$data->PEMBICARA.'"                                                                
 																> Details</a>
-																<a class= "dropdown-item" target="_blank" href="'.$this->config->item("jasper_report").'Pelatihan.pdf?ID='.$data->ID.'"> Unduh Proposal</a>				
+																<a class= "dropdown-item" target="_blank" href="'.$this->config->item("jasper_report").'Lpj.pdf?ID='.$data->ID.'"> Unduh Proposal</a>				
 																<a class= "dropdown-item pelatihan_approval_lpj" href="#" data-toggle="modal" data-target="#modalapprovallpj" data-pelatihanid="'.$data->ID.'"> Verify</a>				
 															  </div>
 															</div> 

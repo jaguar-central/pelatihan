@@ -94,9 +94,10 @@
 		var pelatihantype = $(this).data('pelatihantype');	
 		var pelatihantitle = $(this).data('pelatihantitle');
 		var cabang_ulamm = '<?php echo $this->session->userdata('sess_user_cabang'); ?>';
+		console.log(pelatihantitle);
 		
 		$("#add_pelatihan :input").prop("disabled", false);
-		$('#type_klasterisasi').html('<option value="'+pelatihantype+'">'+pelatihantitle+'</option>');			  
+		$('#pelatihan_type').html('<option value="'+pelatihantype+'">'+pelatihantitle+'</option>');			  
 		$('.select_project_charter').show();  
 		$("#tema_project_charter").prop('required',true);
 		$("#judul_project_charter").prop('required',true);
