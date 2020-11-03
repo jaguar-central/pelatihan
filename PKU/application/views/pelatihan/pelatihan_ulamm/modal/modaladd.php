@@ -75,7 +75,36 @@
 							<option value="">--pilih unit--</option>											
 						</select>																	
 					</div>							
-				</div>								
+				</div>						
+
+
+				<div class="form-group row">
+					<label class="col-sm-2">Provinsi <span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+						<select class="form-control select_tag" required="" id="provinsi" name="provinsi">
+							<option value="">- Pilih Provinsi -</option>
+								<?php 
+								foreach ($provinsi as $data_provinsi){
+									echo '<option value="'.$data_provinsi->MS_KODE_PROVINSI.'">'.$data_provinsi->MS_PROVINSI.'</option>';                                                                    
+								}
+								?>	
+						</select>
+					</div>   						
+				</div>	
+
+				<div class="form-group row">
+					<label class="col-sm-2">Kabupaten / Kota <span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+						<select class="form-control select_tag" required="" id="kabkot" name="kabkot">
+						</select>
+					</div>              
+
+					<label class="col-sm-2">Kecamatan <span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+						<select class="form-control select_tag" required="" id="kecamatan" name="kecamatan">
+						</select>
+					</div>              					                  
+				</div>					
 
 				<div class="form-group row">
 					<label class="col-sm-2">Deskripsi <span class="text-danger">*</span></label>
@@ -164,11 +193,11 @@
 					</div>						
 				</div>
 
-				<div class="form-group row">
-					<!--label class="col-sm-2">Modul <span class="text-danger">*</span></label>
+				<div class="form-group row">              
+					<label class="col-sm-2">Alamat Pelatihan <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="modul" name="modul" />
-					</div-->                          
+						<input type="text" class="form-control"  required="" id="alamat_tempat_pelatihan" name="alamat_tempat_pelatihan" />
+					</div> 					         
 				
 					<label class="col-sm-2">Anggaran <span class="text-danger">*</span></label>
 					<div class="input-group col-sm-4">
@@ -176,39 +205,7 @@
 						<input type="text" class="form-control"  required="" id="anggaran" name="anggaran" />				
 					</div>             	
 				</div>
-
-				<div class="form-group row">
-					<label class="col-sm-2">Provinsi <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<select class="form-control select_tag" required="" id="provinsi" name="provinsi">
-							<option value="">- Pilih Provinsi -</option>
-								<?php 
-								foreach ($provinsi as $data_provinsi){
-									echo '<option value="'.$data_provinsi->MS_KODE_PROVINSI.'">'.$data_provinsi->MS_PROVINSI.'</option>';                                                                    
-								}
-								?>	
-						</select>
-					</div>                          
-				
-					<label class="col-sm-2">Alamat Pelatihan <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="alamat_tempat_pelatihan" name="alamat_tempat_pelatihan" />
-					</div>                      
-				</div>
-
-				<div class="form-group row">
-					<label class="col-sm-2">Kabupaten / Kota <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<select class="form-control select_tag" required="" id="kabkot" name="kabkot">
-						</select>
-					</div>              
-
-					<label class="col-sm-2">Kecamatan <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<select class="form-control select_tag" required="" id="kecamatan" name="kecamatan">
-						</select>
-					</div>              					                  
-				</div>				
+			
 
 				<!-- <div class="form-group row">
 					<label class="col-sm-2">Lokasi Pelatihan <span class="text-danger">*</span></label>
