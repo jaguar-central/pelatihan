@@ -314,10 +314,10 @@ class Pelatihan extends MY_Controller
 				// $no_trx_reject .= ','.$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value);
 				
 				if (!$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)){
-					$no_trx = ','.$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->NO_TRX;					
+					$no_trx .= ','.$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->NO_TRX;					
 					$this->Pelatihan_model->update_aktif_trx_reject($this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->ID);
 				}else{
-					$no_trx = ','.$this->create_trx_no($param);
+					$no_trx .= ','.$this->create_trx_no($param);
 				}
 				$data_unit_ulamm .= ','.$value;
 			}
@@ -377,7 +377,9 @@ class Pelatihan extends MY_Controller
 
 		
 		
-		$no_trx = substr($no_trx,1,strlen($no_trx));				
+		$no_trx = substr($no_trx,1,strlen($no_trx));	
+		
+
 		
 		$output = array(
 			'result'  	=> 'OK',
