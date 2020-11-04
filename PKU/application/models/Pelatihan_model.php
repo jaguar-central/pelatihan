@@ -35,6 +35,11 @@ public function insert_t_rab($data)
 		$this->db->insert('T_RAB', $data);
 }	
 
+public function delete_t_rab($id)
+{
+		$this->db->delete('T_RAB', $id);
+}
+
 public function select_t_rab_by_id($id)
 {
 		$query = $this->db->query("select * from T_RAB where ID_PELATIHAN = '".$id."'");

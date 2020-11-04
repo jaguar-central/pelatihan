@@ -495,7 +495,6 @@ class Pelatihan extends MY_Controller
 		$total_cost_rab       		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab_edit')));
 		$total_cost_rab_akhir 		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab_akhir_edit')));		
 
-
 		$output = array(
 			'result'  	=> 'OK',
 			'msg'		=> ''
@@ -524,6 +523,26 @@ class Pelatihan extends MY_Controller
 			);			
 			$where_update	= array('ID' 	=> $pelatihan_id);
 			$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
+
+			$where_rab = array('ID_PELATIHAN' 	=> $pelatihan_id);
+			$this->Pelatihan_model->delete_t_rab($where_rab);
+
+			for ($i=1;$i<count($deskripsi_rab);$i++){
+				$rab = array(
+					'ID_PELATIHAN' 		=> $pelatihan_id,
+					'ID_BISNIS' 		=> $id_bisnis,
+					'URAIAN' 			=> $deskripsi_rab[$i],
+					'JUMLAH' 			=> $jumlah_rab[$i],
+					'SATUAN' 			=> $unit_rab[$i],
+					'UNIT_COST' 		=> $unit_cost_rab[$i],
+					'SUB_TOTAL_COST' 	=> $total_cost_rab[$i],
+					'GRAND_TOTAL' 		=> $total_cost_rab_akhir,
+					'CREATED_BY' 		=> $id_user,
+					'CREATED_DATE' 		=> date('Y-m-d H:i:s')
+				);							
+				$this->Pelatihan_model->insert_t_rab($rab);				
+			}
+
 		}		
 		catch (Exception $e)
 		{
@@ -1175,11 +1194,11 @@ class Pelatihan extends MY_Controller
 		foreach ($rab as $data_rab) {
 			$data .= '
 			<tr class="">
-			<td><input type="text" class="form-control" id="deskripsi_rab_'.$tipe_modal.'" name="deskripsi_rab[]" value="'.$data_rab->URAIAN.'" disabled=""></td>
-			<td><input type="number" class="form-control" id="jumlah_rab_'.$tipe_modal.'" name="jumlah_rab[]" disabled="" value="'.$data_rab->JUMLAH.'"></td>
-			<td><input type="text" class="form-control" id="unit_rab_'.$tipe_modal.'" name="unit_rab[]" value="'.$data_rab->SATUAN.'" disabled=""></td>
-			<td><input type="number" class="form-control" id="unit_cost_rab_'.$tipe_modal.'" name="unit_cost_rab[]" value="'.$data_rab->UNIT_COST.'" disabled=""></td>
-			<td><input type="number" class="form-control" id="total_cost_rab_'.$tipe_modal.'" name="total_cost_rab[]" value="'.$data_rab->SUB_TOTAL_COST.'" readonly="" disabled=""></td>
+			<td><input type="text" class="form-control" id="deskripsi_rab_'.$tipe_modal.'" name="deskripsi_rab_'.$tipe_modal.'[]" value="'.$data_rab->URAIAN.'" ></td>
+			<td><input type="number" class="form-control" id="jumlah_rab_'.$tipe_modal.'" name="jumlah_rab_'.$tipe_modal.'[]"  value="'.$data_rab->JUMLAH.'"></td>
+			<td><input type="text" class="form-control" id="unit_rab_'.$tipe_modal.'" name="unit_rab_'.$tipe_modal.'[]" value="'.$data_rab->SATUAN.'" ></td>
+			<td><input type="number" class="form-control" id="unit_cost_rab_'.$tipe_modal.'" name="unit_cost_rab_'.$tipe_modal.'[]" value="'.$data_rab->UNIT_COST.'" ></td>
+			<td><input type="number" class="form-control" id="total_cost_rab_'.$tipe_modal.'" name="total_cost_rab_'.$tipe_modal.'[]" value="'.$data_rab->SUB_TOTAL_COST.'" readonly="" ></td>
 			<td>                            
 				<a class="table-remove-'.$tipe_modal.' btn btn-outline-primary btn-sm" href="#"><i class="fas fa-trash"></i></a>   
 			</td>
