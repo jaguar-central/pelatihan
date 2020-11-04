@@ -202,7 +202,17 @@ $("#add_project_charter").submit(function(e){
 			
 			if(obj.result == 'OK')
 			{
-				window.location.href = '<?php echo base_url(); ?>pelatihan/<?php echo $this->uri->segment(2); ?>';
+
+				Swal.fire({
+				  position: 'center',
+				  icon: 'success',
+				  title: 'Project Charter telah di simpan',
+				  showConfirmButton: false,
+				  timer: 1500
+				})
+				setTimeout(function () {
+					window.location.href = '<?php echo base_url(); ?>pelatihan/<?php echo $this->uri->segment(2); ?>';
+				}, 1600);								
 			}
 			if(obj.result == 'UP')
 			{

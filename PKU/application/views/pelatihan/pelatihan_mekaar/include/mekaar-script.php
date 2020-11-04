@@ -94,9 +94,10 @@
 		var pelatihantype = $(this).data('pelatihantype');	
 		var pelatihantitle = $(this).data('pelatihantitle');
 		var cabang_ulamm = '<?php echo $this->session->userdata('sess_user_cabang'); ?>';
+		console.log(pelatihantitle);
 		
 		$("#add_pelatihan :input").prop("disabled", false);
-		$('#type_klasterisasi').html('<option value="'+pelatihantype+'">'+pelatihantitle+'</option>');			  
+		$('#pelatihan_type').html('<option value="'+pelatihantype+'">'+pelatihantitle+'</option>');			  
 		$('.select_project_charter').show();  
 		$("#tema_project_charter").prop('required',true);
 		$("#judul_project_charter").prop('required',true);
@@ -279,7 +280,7 @@
 				{ "data": "REGIONAL_MEKAAR" },
 				{ "data": "AREA_MEKAAR" },    
 				{ "data": "CABANG_MEKAAR" },    
-				{ "data": "TANGGAL_MULAI" },    
+				{ "data": "TANGGAL_PELATIHAN" },    
 				{ "data": "STATUS" },    
 				{ "data": "STATUS", render: function (data, type, row) 
 					{
@@ -364,7 +365,7 @@
 						
 						tombol_action += '<a class= "dropdown-item" target="_blank" href="<?php echo $this->config->item('jasper_report').'Pelatihan.pdf?ID=' ?>'+row.ID+'"> Unduh Proposal Approved</a>';
 						
-						tombol_action += '<a class= "dropdown-item" target="_blank" href="<?php echo $this->config->item('jasper_report').'Pelatihan.pdf?ID=' ?>'+row.ID+'"> Unduh LPJ Approved</a>';
+						tombol_action += '<a class= "dropdown-item" target="_blank" href="<?php echo $this->config->item('jasper_report').'Lpj.pdf?ID=' ?>'+row.ID+'"> Unduh LPJ Approved</a>';
 					}
 					
 					

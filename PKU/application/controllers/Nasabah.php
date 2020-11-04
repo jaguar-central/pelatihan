@@ -120,10 +120,13 @@ class Nasabah extends MY_Controller
 			$debitur = $this->elastic->call('_search?from='.$param["start"].'&size='.$param["limit"].'&filter_path=hits.hits.*,aggregations.*');
 			$debitur_count = $this->elastic->call('_count');
 		}				
+
 		
+		// var_dump($debitur);exit();
 		if (isset($debitur->hits->hits)){
 			for ($i=0;$i<count($debitur->hits->hits);$i++){
 				$data["data"][$i] = $debitur->hits->hits[$i]->_source;
+				
 			}	
 			$data["recordsTotal"] = $debitur_count->count;	
 			$data["recordsFiltered"] = $debitur_count->count;			

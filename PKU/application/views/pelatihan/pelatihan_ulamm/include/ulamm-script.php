@@ -288,8 +288,8 @@
 				{ "data": "ID_TIPE_DESKRIPSI" },
 				{ "data": "CABANG_ULAMM" },
 				{ "data": "UNIT_ULAMM" },
-				{ "data": "CREATED_DATE" },    
-				{ "data": "TANGGAL_MULAI" },    
+				{ "data": "TANGGAL_PEMBUATAN" },    
+				{ "data": "TANGGAL_PELATIHAN" },    
 				{ "data": "STATUS" },    
 				{ "data": "STATUS", render: function (data, type, row) 
 					{
@@ -366,7 +366,7 @@
 						
 						tombol_action += '<a class= "dropdown-item" target="_blank" href="<?php echo $this->config->item('jasper_report').'Pelatihan.pdf?ID=' ?>'+row.ID+'"> Unduh Proposal Approved</a>';
 						
-						tombol_action += '<a class= "dropdown-item" target="_blank" href="<?php echo $this->config->item('jasper_report').'Pelatihan.pdf?ID=' ?>'+row.ID+'"> Unduh LPJ Approved</a>';
+						tombol_action += '<a class= "dropdown-item" target="_blank" href="<?php echo $this->config->item('jasper_report').'Lpj.pdf?ID=' ?>'+row.ID+'"> Unduh LPJ Approved</a>';
 					}
 					
 					
@@ -450,6 +450,7 @@
 		
 		
 		
+		
 		$.ajax({
 			url: "<?php echo base_url()?>pelatihan/get_project_charter",
 			data: "idprojectcharter="+$(this).data("idprojectcharter"),
@@ -491,4 +492,4 @@
 		});	
 						
 	});	
-</script>       
+</script>     

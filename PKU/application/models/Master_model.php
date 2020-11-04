@@ -12,6 +12,12 @@ class Master_model extends CI_Model {
 			return $query->result();
 	}
 
+	public function select_all_ms_cabang_ulamm()
+	{
+		$query = $this->db->query("select * from MS_CABANG_ULAMM ");
+		return $query->result();		
+	}
+
 	public function select_ms_cabang_mekaar_by_id($area)
 	{
 			$query = $this->db->query("select * from MS_CABANG_MEKAAR where KODE_AREA='$area' ");
@@ -98,12 +104,15 @@ class Master_model extends CI_Model {
 			return $this->db->query(" EXEC [GET_NOTIF] @APPROVAL='".$approval."',@IDUSER='".$this->session->userdata('sess_user_id')."',@IDBINIS='".$this->session->userdata('sess_user_id_bisnis')."' ")->result();				
 		}
 		else if	($this->session->userdata('sess_user_id_user_group')=='3'){
-			$approval = "''Pinca''";
+			if ($this->session->userdata('sess_user_id_bisnis')=='1'){
+				$approval = "''Pinca''";
+			}else{
+				$approval = "''''";
+			}
 			return $this->db->query(" EXEC [GET_NOTIF] @APPROVAL='".$approval."',@IDUSER='".$this->session->userdata('sess_user_id')."',@IDBINIS='".$this->session->userdata('sess_user_id_bisnis')."' ")->result();
 		}			
 		else if	($this->session->userdata('sess_user_id_user_group')=='4'){
 			$approval = "''PIC Pusat''";
-			// return $this->db->query(" EXEC [GET_NOTIF] @APPROVAL='".$approval."' ")->result();
 			return $this->db->query(" EXEC [GET_NOTIF] @APPROVAL='".$approval."',@IDUSER='".$this->session->userdata('sess_user_id')."',@IDBINIS='".$this->session->userdata('sess_user_id_bisnis')."' ")->result();
 		}
 		else if	($this->session->userdata('sess_user_id_user_group')=='5'){
@@ -117,7 +126,10 @@ class Master_model extends CI_Model {
 		else if	($this->session->userdata('sess_user_id_user_group')=='7'){
 			$approval = "''Kadiv''";
 			return $this->db->query(" EXEC [GET_NOTIF] @APPROVAL='".$approval."' ")->result();
-		}           
+		}
+		else if ($this->session->userdata('sess_user_id_user_group')=='1'){
+			return $this->db->query("EXEC [GET_NOTIF] @IDUSER='".$this->session->userdata('sess_user_id')."',@COUNT=0 ")->result();			
+		}
 				
 	}
 
@@ -127,12 +139,15 @@ class Master_model extends CI_Model {
 			return $this->db->query(" EXEC [GET_NOTIF] @APPROVAL='".$approval."',@IDUSER='".$this->session->userdata('sess_user_id')."',@IDBINIS='".$this->session->userdata('sess_user_id_bisnis')."',@COUNT=1 ")->result()[0]->COUNT_NOTIF;			
 		}
 		else if ($this->session->userdata('sess_user_id_user_group')=='3'){
-			$approval = "''Pinca''";
+			if ($this->session->userdata('sess_user_id_bisnis')=='1'){
+				$approval = "''Pinca''";
+			}else{
+				$approval = "''''";
+			}
 			return $this->db->query(" EXEC [GET_NOTIF] @APPROVAL='".$approval."',@IDUSER='".$this->session->userdata('sess_user_id')."',@IDBINIS='".$this->session->userdata('sess_user_id_bisnis')."',@COUNT=1 ")->result()[0]->COUNT_NOTIF;
 		}		
 		else if ($this->session->userdata('sess_user_id_user_group')=='4'){
 			$approval = "''PIC Pusat''";
-			// return $this->db->query("EXEC [GET_NOTIF] @APPROVAL='".$approval."',@COUNT=1 ")->result()[0]->COUNT_NOTIF;
 			return $this->db->query(" EXEC [GET_NOTIF] @APPROVAL='".$approval."',@IDUSER='".$this->session->userdata('sess_user_id')."',@IDBINIS='".$this->session->userdata('sess_user_id_bisnis')."',@COUNT=1 ")->result()[0]->COUNT_NOTIF;
 		}
 		else if ($this->session->userdata('sess_user_id_user_group')=='5'){
@@ -146,6 +161,9 @@ class Master_model extends CI_Model {
 		else if ($this->session->userdata('sess_user_id_user_group')=='7'){
 			$approval = "''Kadiv''";
 			return $this->db->query("EXEC [GET_NOTIF] @APPROVAL='".$approval."',@COUNT=1 ")->result()[0]->COUNT_NOTIF;
+		}
+		else if ($this->session->userdata('sess_user_id_user_group')=='1'){
+			return $this->db->query("EXEC [GET_NOTIF] @IDUSER='".$this->session->userdata('sess_user_id')."',@COUNT=1 ")->result()[0]->COUNT_NOTIF;
 		}
 				
 	}

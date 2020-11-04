@@ -75,7 +75,36 @@
 							<option value="">--pilih unit--</option>											
 						</select>																	
 					</div>							
-				</div>								
+				</div>						
+
+
+				<div class="form-group row">
+					<label class="col-sm-2">Provinsi <span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+						<select class="form-control select_tag" required="" id="provinsi" name="provinsi">
+							<option value="">- Pilih Provinsi -</option>
+								<?php 
+								foreach ($provinsi as $data_provinsi){
+									echo '<option value="'.$data_provinsi->MS_KODE_PROVINSI.'">'.$data_provinsi->MS_PROVINSI.'</option>';                                                                    
+								}
+								?>	
+						</select>
+					</div>   						
+				</div>	
+
+				<div class="form-group row">
+					<label class="col-sm-2">Kabupaten / Kota <span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+						<select class="form-control select_tag" required="" id="kabkot" name="kabkot">
+						</select>
+					</div>              
+
+					<label class="col-sm-2">Kecamatan <span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+						<select class="form-control select_tag" required="" id="kecamatan" name="kecamatan">
+						</select>
+					</div>              					                  
+				</div>					
 
 				<div class="form-group row">
 					<label class="col-sm-2">Deskripsi <span class="text-danger">*</span></label>
@@ -164,11 +193,11 @@
 					</div>						
 				</div>
 
-				<div class="form-group row">
-					<!--label class="col-sm-2">Modul <span class="text-danger">*</span></label>
+				<div class="form-group row">              
+					<label class="col-sm-2">Alamat Pelatihan <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="modul" name="modul" />
-					</div-->                          
+						<input type="text" class="form-control"  required="" id="alamat_tempat_pelatihan" name="alamat_tempat_pelatihan" />
+					</div> 					         
 				
 					<label class="col-sm-2">Anggaran <span class="text-danger">*</span></label>
 					<div class="input-group col-sm-4">
@@ -176,39 +205,7 @@
 						<input type="text" class="form-control"  required="" id="anggaran" name="anggaran" />				
 					</div>             	
 				</div>
-
-				<div class="form-group row">
-					<label class="col-sm-2">Provinsi <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<select class="form-control select_tag" required="" id="provinsi" name="provinsi">
-							<option value="">- Pilih Provinsi -</option>
-								<?php 
-								foreach ($provinsi as $data_provinsi){
-									echo '<option value="'.$data_provinsi->MS_KODE_PROVINSI.'">'.$data_provinsi->MS_PROVINSI.'</option>';                                                                    
-								}
-								?>	
-						</select>
-					</div>                          
-				
-					<label class="col-sm-2">Alamat Pelatihan <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="alamat_tempat_pelatihan" name="alamat_tempat_pelatihan" />
-					</div>                      
-				</div>
-
-				<div class="form-group row">
-					<label class="col-sm-2">Kabupaten / Kota <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<select class="form-control select_tag" required="" id="kabkot" name="kabkot">
-						</select>
-					</div>              
-
-					<label class="col-sm-2">Kecamatan <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<select class="form-control select_tag" required="" id="kecamatan" name="kecamatan">
-						</select>
-					</div>              					                  
-				</div>				
+			
 
 				<!-- <div class="form-group row">
 					<label class="col-sm-2">Lokasi Pelatihan <span class="text-danger">*</span></label>
@@ -310,8 +307,8 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {	
-
-		new AutoNumeric("#anggaran","commaDecimalCharDotSeparator");		
+		
+		new AutoNumeric("#anggaran","commaDecimalCharDotSeparator");				
 
 		var durasi = function () {
 			var start 	= $('#timeawal').val();
@@ -454,10 +451,9 @@
 					var mydata = JSON.parse(data);
 					// console.log(mydata.data.JUDUL_PELATIHAN);
 					$('#judul_pelatihan').val(mydata.data.JUDUL_PELATIHAN);
-					$('#alamat_tempat_pelatihan').val(mydata.data.ALAMAT);
+					$('#alamat_tempat_pelatihan').val(mydata.data.ALAMAT);					
 					$('#anggaran').val(mydata.data.BUDGET);
-					new AutoNumeric("#anggaran","commaDecimalCharDotSeparator");
-
+					// AutoNumeric("#anggaran","commaDecimalCharDotSeparator");
 					var dateawal = moment(mydata.data.TANGGAL);
 					$('#timeawal').val(dateawal.format('MM/DD/YYYY hh:mm A'));	
 					$('#inputStartTglPelaksanaan').val(dateawal.format('YYYY-MM-DD'));	

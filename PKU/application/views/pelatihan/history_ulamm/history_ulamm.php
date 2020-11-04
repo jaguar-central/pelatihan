@@ -34,8 +34,8 @@
 						echo '<td>'.$cus->DESKRIPSI_PELATIHAN_TYPE.'</td>';
 						echo '<td>'.$cus->NO_PROPOSAL.'</td>'; 
 						echo '<td>'.$cus->TITLE.'</td>';
-						echo '<td>'.$cus->TANGGAL_MULAI.'</td>';
-						echo '<td>'.$cus->TANGGAL_SELESAI.'</td>';
+						echo '<td>'.$cus->MULAI.'</td>';
+						echo '<td>'.$cus->SELESAI.'</td>';
 						echo '<td>'.$cus->CABANG_ULAMM.'</td>';
 						echo '<td>'.$cus->UNIT_ULAMM.'</td>'; 
 						echo '<td>'.$cus->STATUS.'</td>'; 						

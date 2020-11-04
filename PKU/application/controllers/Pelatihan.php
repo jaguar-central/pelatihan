@@ -171,10 +171,12 @@ class Pelatihan extends MY_Controller
 								        
         $data["menu"] = $this->Menu_model->select_ms_menu();
 		
-		if ($this->session->userdata('sess_user_id_user_group')=='2'){
+		if ($this->session->userdata('sess_user_id_user_group')=='2'){ //pinca
 			$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('');			
-		}else if ($this->session->userdata('sess_user_id_user_group')=='3'){
-			$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('Pinca');			
+		}else if ($this->session->userdata('sess_user_id_user_group')=='3' and $this->session->userdata('sess_user_id_bisnis')=='1'){ //pic pusat ulamm
+			$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('Pinca');
+		}else if ($this->session->userdata('sess_user_id_user_group')=='3' and $this->session->userdata('sess_user_id_bisnis')=='2'){ //pic pusat mekaar
+			$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('');			
 		}else if ($this->session->userdata('sess_user_id_user_group')=='4'){
 			$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('PIC Pusat');
 		}else if ($this->session->userdata('sess_user_id_user_group')=='5'){
@@ -214,10 +216,12 @@ class Pelatihan extends MY_Controller
 			
         $data["menu"] 				= $this->Menu_model->select_ms_menu();
 				
-		if ($this->session->userdata('sess_user_id_user_group')=='2'){
+		if ($this->session->userdata('sess_user_id_user_group')=='2'){ //pinca
 			$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('');
-		}else if ($this->session->userdata('sess_user_id_user_group')=='3'){
-			$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('Pinca');			
+		}else if ($this->session->userdata('sess_user_id_user_group')=='3' and $this->session->userdata('sess_user_id_bisnis')=='1'){ //pic pusat ulamm
+			$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('Pinca');	
+		}else if ($this->session->userdata('sess_user_id_user_group')=='3' and $this->session->userdata('sess_user_id_bisnis')=='2'){ //pic pusat mekaar
+			$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('');				
 		}else if ($this->session->userdata('sess_user_id_user_group')=='4'){
 			$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('PIC Pusat');
 		}else if ($this->session->userdata('sess_user_id_user_group')=='5'){
@@ -310,10 +314,10 @@ class Pelatihan extends MY_Controller
 				// $no_trx_reject .= ','.$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value);
 				
 				if (!$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)){
-					$no_trx = ','.$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->NO_TRX;					
+					$no_trx .= ','.$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->NO_TRX;					
 					$this->Pelatihan_model->update_aktif_trx_reject($this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->ID);
 				}else{
-					$no_trx = ','.$this->create_trx_no($param);
+					$no_trx .= ','.$this->create_trx_no($param);
 				}
 				$data_unit_ulamm .= ','.$value;
 			}
@@ -349,10 +353,10 @@ class Pelatihan extends MY_Controller
 				// $this->Pelatihan_model->update_aktif_trx_reject($this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->ID);
 				
 				if (!$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)){
-					$no_trx = ','.$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->NO_TRX;					
+					$no_trx .= ','.$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->NO_TRX;					
 					$this->Pelatihan_model->update_aktif_trx_reject($this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->ID);
 				}else{
-					$no_trx = ','.$this->create_trx_no($param);
+					$no_trx .= ','.$this->create_trx_no($param);
 				}
 				
 				$data_cabang_mekaar .= ','.$value;
@@ -373,7 +377,9 @@ class Pelatihan extends MY_Controller
 
 		
 		
-		$no_trx = substr($no_trx,1,strlen($no_trx));				
+		$no_trx = substr($no_trx,1,strlen($no_trx));	
+		
+
 		
 		$output = array(
 			'result'  	=> 'OK',
@@ -491,7 +497,6 @@ class Pelatihan extends MY_Controller
 		$total_cost_rab       		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab_edit')));
 		$total_cost_rab_akhir 		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab_akhir_edit')));		
 
-
 		$output = array(
 			'result'  	=> 'OK',
 			'msg'		=> ''
@@ -520,6 +525,26 @@ class Pelatihan extends MY_Controller
 			);			
 			$where_update	= array('ID' 	=> $pelatihan_id);
 			$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
+
+			$where_rab = array('ID_PELATIHAN' 	=> $pelatihan_id);
+			$this->Pelatihan_model->delete_t_rab($where_rab);
+
+			for ($i=1;$i<count($deskripsi_rab);$i++){
+				$rab = array(
+					'ID_PELATIHAN' 		=> $pelatihan_id,
+					'ID_BISNIS' 		=> $id_bisnis,
+					'URAIAN' 			=> $deskripsi_rab[$i],
+					'JUMLAH' 			=> $jumlah_rab[$i],
+					'SATUAN' 			=> $unit_rab[$i],
+					'UNIT_COST' 		=> $unit_cost_rab[$i],
+					'SUB_TOTAL_COST' 	=> $total_cost_rab[$i],
+					'GRAND_TOTAL' 		=> $total_cost_rab_akhir,
+					'CREATED_BY' 		=> $id_user,
+					'CREATED_DATE' 		=> date('Y-m-d H:i:s')
+				);							
+				$this->Pelatihan_model->insert_t_rab($rab);				
+			}
+
 		}		
 		catch (Exception $e)
 		{
@@ -1171,11 +1196,11 @@ class Pelatihan extends MY_Controller
 		foreach ($rab as $data_rab) {
 			$data .= '
 			<tr class="">
-			<td><input type="text" class="form-control" id="deskripsi_rab_'.$tipe_modal.'" name="deskripsi_rab[]" value="'.$data_rab->URAIAN.'" disabled=""></td>
-			<td><input type="number" class="form-control" id="jumlah_rab_'.$tipe_modal.'" name="jumlah_rab[]" disabled="" value="'.$data_rab->JUMLAH.'"></td>
-			<td><input type="text" class="form-control" id="unit_rab_'.$tipe_modal.'" name="unit_rab[]" value="'.$data_rab->SATUAN.'" disabled=""></td>
-			<td><input type="number" class="form-control" id="unit_cost_rab_'.$tipe_modal.'" name="unit_cost_rab[]" value="'.$data_rab->UNIT_COST.'" disabled=""></td>
-			<td><input type="number" class="form-control" id="total_cost_rab_'.$tipe_modal.'" name="total_cost_rab[]" value="'.$data_rab->SUB_TOTAL_COST.'" readonly="" disabled=""></td>
+			<td><input type="text" class="form-control" id="deskripsi_rab_'.$tipe_modal.'" name="deskripsi_rab_'.$tipe_modal.'[]" value="'.$data_rab->URAIAN.'" ></td>
+			<td><input type="number" class="form-control" id="jumlah_rab_'.$tipe_modal.'" name="jumlah_rab_'.$tipe_modal.'[]"  value="'.$data_rab->JUMLAH.'"></td>
+			<td><input type="text" class="form-control" id="unit_rab_'.$tipe_modal.'" name="unit_rab_'.$tipe_modal.'[]" value="'.$data_rab->SATUAN.'" ></td>
+			<td><input type="number" class="form-control" id="unit_cost_rab_'.$tipe_modal.'" name="unit_cost_rab_'.$tipe_modal.'[]" value="'.$data_rab->UNIT_COST.'" ></td>
+			<td><input type="number" class="form-control" id="total_cost_rab_'.$tipe_modal.'" name="total_cost_rab_'.$tipe_modal.'[]" value="'.$data_rab->SUB_TOTAL_COST.'" readonly="" ></td>
 			<td>                            
 				<a class="table-remove-'.$tipe_modal.' btn btn-outline-primary btn-sm" href="#"><i class="fas fa-trash"></i></a>   
 			</td>
@@ -1212,8 +1237,8 @@ class Pelatihan extends MY_Controller
 			<td><input type="text" class="form-control" id="judul_pelatihan_edit" name="judul_pelatihan[]" value="'.$data_project_charter->JUDUL_PELATIHAN.'" ></td>
 			<td>									  
 			<div class="input-group">
-				<input type="date" class="form-control" id="tanggal_pelatihan_edit" name="tanggal_pelatihan[]" >
-				<input type="time" class="form-control" id="time_pelatihan_edit" name="time_pelatihan[]" >
+				<input type="date" class="form-control" id="tanggal_pelatihan_edit" name="tanggal_pelatihan[]" value="'.date("Y-m-d",strtotime($data_project_charter->TANGGAL)).'" >
+				<input type="time" class="form-control" id="time_pelatihan_edit" name="time_pelatihan[]" value="'.date("H:i",strtotime($data_project_charter->TANGGAL)).'" >
 				<span class="input-group-addon">
 					<span class="fa fa-calendar"></span>
 				</span>																				
@@ -1371,12 +1396,10 @@ class Pelatihan extends MY_Controller
 		$param["limit"] = isset($_GET["length"]) ? $_GET["length"] : 10;		
 		$param["tipe_pelatihan"] 	= isset($tipe) ? $tipe : NULL ;			
 		$param["tipe_bisnis"] 		= isset($bisnis) ? $bisnis : NULL ;			
-		$param["search"] 			= isset($_GET["search"]["value"]) ? $_GET["search"]["value"] : NULL ;			
-		$param['count'] = 0;						
+		$param["search"] 			= isset($_GET["search"]["value"]) ? $_GET["search"]["value"] : NULL ;								
 
 		$data["data"] = $this->Pelatihan_model->paging_t_pelatihan($param);				
-		$param['count'] = 1;				
-		$total = $this->Pelatihan_model->paging_t_pelatihan($param)[0]->COUNT_DATA;				
+		$total = COUNT($data["data"]);
 		$data["recordsTotal"] = $total;	
 		$data["recordsFiltered"] = $total;		
 		

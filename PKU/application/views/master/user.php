@@ -53,7 +53,7 @@
 
 <!-- Modal -->
 <div id="add_user" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-md">
+  <div class="modal-dialog modal-lg">
 
     <div class="modal-content">
         <div class="modal-header">
@@ -72,11 +72,12 @@
 					<input type="hidden" class="form-control" name="profile_idsdm" id="profile_idsdm" required />
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-3">Username <span class="text-danger">*</span></label>
+						<label class="col-sm-3">User <span class="text-danger">*</span></label>
 						<div class="col-sm-9">
 							<input type="text" class="form-control" name="username" id="username" required readonly />
 						</div>
 					</div>
+				
 					<div class="form-group row">
 						<label class="col-sm-3">Role <span class="text-danger">*</span></label>
 						<div class="col-sm-9">							
@@ -94,7 +95,7 @@
 					</div>	
 										
 					<div class="form-group row bisnis">
-									<label class="col-sm-3">bisnis <span class="text-danger">*</span></label>
+						<label class="col-sm-3">bisnis <span class="text-danger">*</span></label>
 						<div class="col-sm-9">							
 							<select class="form-control select2" required name="bisnis" id="bisnis" >
 							<option value="0">- Pilih -</option>
@@ -106,9 +107,9 @@
 					</div>					
 					
 					<div class="form-group row cabang_ulamm">
-						<label class="col-sm-3">Cabang Ulamm</label>
+						<label class="col-sm-3">Cabang </label>
 						<div class="col-sm-9">
-							<select class="form-control select2" required name="cabang_ulamm" id="cabang_ulamm" >
+							<select class="form-control select" required name="cabang_ulamm[]" id="cabang_ulamm" multiple="multiple">
 							<option value="0">- Pilih Cabang -</option>
 							<?php
 							
@@ -117,22 +118,7 @@
 								}
 							
 							?>													
-							</select>
-						</div>
-					</div>	
-					<div class="form-group row region_mekaar">
-						<label class="col-sm-3">Region Mekaar</label>
-						<div class="col-sm-9">
-							<select class="form-control select2" required name="region_mekaar" id="region_mekaar" >
-							<option value="0">- Pilih Region -</option>
-							<?php
-							
-								foreach($region as $mekaar){
-									echo '<option value="'.$mekaar->KODE_REGION.'">'.$mekaar->DESKRIPSI.'</option>';
-								}
-							
-							?>													
-							</select>
+							</select>																													
 						</div>
 					</div>					
 					<div class="form-group row">

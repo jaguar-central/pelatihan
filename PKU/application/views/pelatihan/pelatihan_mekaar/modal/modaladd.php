@@ -90,9 +90,20 @@
 				</div>
 
 				<div class="form-group row">
-					<label class="col-sm-2 offset-sm-6">Cabang Ulamm <span class="text-danger">*</span></label>
+				<label class="col-sm-2">Provinsi <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-					<select class="form-control select" required="" id="cabang_ulamm" name="cabang_ulamm">
+						<select class="form-control select_tag" required="" id="provinsi" name="provinsi">
+						<?php 
+								foreach ($provinsi as $data_provinsi){
+									echo '<option value="'.$data_provinsi->MS_KODE_PROVINSI.'">'.$data_provinsi->MS_PROVINSI.'</option>';                                                                    
+								}
+								?>	
+						</select>
+					</div>   		
+
+					<label class="col-sm-2">Cabang Ulamm <span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+					<select class="form-control" required="" id="cabang_ulamm" name="cabang_ulamm">
 							<option value="">--pilih cabang--</option>									
 						
 						<?php 
@@ -103,6 +114,20 @@
 						</select>			
 					</div>							
 				</div>	
+
+				<div class="form-group row">
+					<label class="col-sm-2">Kabupaten / Kota <span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+						<select class="form-control select_tag" required="" id="kabkot" name="kabkot">
+						</select>
+					</div>              
+
+					<label class="col-sm-2">Kecamatan <span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+						<select class="form-control select_tag" required="" id="kecamatan" name="kecamatan">
+						</select>
+					</div>              					                  
+				</div>					
 				
 				<div class="form-group card grading_system">
 				<div class="card-header"><h4>Grading System</h4></div>
@@ -197,16 +222,7 @@
 				</div>
 
 				<div class="form-group row">
-					<label class="col-sm-2">Provinsi <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<select class="form-control select_tag" required="" id="provinsi" name="provinsi">
-						<?php 
-								foreach ($provinsi as $data_provinsi){
-									echo '<option value="'.$data_provinsi->MS_KODE_PROVINSI.'">'.$data_provinsi->MS_PROVINSI.'</option>';                                                                    
-								}
-								?>	
-						</select>
-					</div>                          
+                       
 				
 					<label class="col-sm-2">Alamat Pelatihan <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
@@ -214,19 +230,7 @@
 					</div>                      
 				</div>
 
-				<div class="form-group row">
-					<label class="col-sm-2">Kabupaten / Kota <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<select class="form-control select_tag" required="" id="kabkot" name="kabkot">
-						</select>
-					</div>              
 
-					<label class="col-sm-2">Kecamatan <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<select class="form-control select_tag" required="" id="kecamatan" name="kecamatan">
-						</select>
-					</div>              					                  
-				</div>	
 
 				<div class="container-fluid">
 				  <div class="row">
@@ -479,7 +483,7 @@
 					$('#judul_pelatihan').val(mydata.data.JUDUL_PELATIHAN);
 					$('#alamat_tempat_pelatihan').val(mydata.data.ALAMAT);
 					$('#anggaran').val(mydata.data.BUDGET);
-					new AutoNumeric("#anggaran","commaDecimalCharDotSeparator");
+					// new AutoNumeric("#anggaran","commaDecimalCharDotSeparator");
 
 					var dateawal = moment(mydata.data.TANGGAL);
 					$('#timeawal').val(dateawal.format('MM/DD/YYYY hh:mm A'));	

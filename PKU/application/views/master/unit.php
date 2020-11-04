@@ -30,7 +30,7 @@
                                                 echo '<td>'.$dta->KODE_CABANG.'</td>';
                                                 echo '<td>'.$dta->KODE_UNIT.'</td>'; 
                                                 echo '<td>'.$dta->DESKRIPSI.'</td>'; 
-                                                echo '<td><button type="button" class="btn btn-primary">Add</button> <button type="button" class="btn btn-danger">Delete</button></td>'; 
+                                                echo '<td><button type="button" class="btn btn-outline-danger">Delete</button></td>'; 
                                                 echo '</tr>';
 
                                             }
