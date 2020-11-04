@@ -450,6 +450,7 @@
 		
 		
 		
+		
 		$.ajax({
 			url: "<?php echo base_url()?>pelatihan/get_project_charter",
 			data: "idprojectcharter="+$(this).data("idprojectcharter"),

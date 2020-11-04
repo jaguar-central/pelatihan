@@ -483,7 +483,7 @@
 					$('#judul_pelatihan').val(mydata.data.JUDUL_PELATIHAN);
 					$('#alamat_tempat_pelatihan').val(mydata.data.ALAMAT);
 					$('#anggaran').val(mydata.data.BUDGET);
-					new AutoNumeric("#anggaran","commaDecimalCharDotSeparator");
+					// new AutoNumeric("#anggaran","commaDecimalCharDotSeparator");
 
 					var dateawal = moment(mydata.data.TANGGAL);
 					$('#timeawal').val(dateawal.format('MM/DD/YYYY hh:mm A'));	

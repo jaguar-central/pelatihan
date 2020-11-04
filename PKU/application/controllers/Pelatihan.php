@@ -1216,8 +1216,8 @@ class Pelatihan extends MY_Controller
 			<td><input type="text" class="form-control" id="judul_pelatihan_edit" name="judul_pelatihan[]" value="'.$data_project_charter->JUDUL_PELATIHAN.'" ></td>
 			<td>									  
 			<div class="input-group">
-				<input type="date" class="form-control" id="tanggal_pelatihan_edit" name="tanggal_pelatihan[]" >
-				<input type="time" class="form-control" id="time_pelatihan_edit" name="time_pelatihan[]" >
+				<input type="date" class="form-control" id="tanggal_pelatihan_edit" name="tanggal_pelatihan[]" value="'.date("Y-m-d",strtotime($data_project_charter->TANGGAL)).'" >
+				<input type="time" class="form-control" id="time_pelatihan_edit" name="time_pelatihan[]" value="'.date("H:i",strtotime($data_project_charter->TANGGAL)).'" >
 				<span class="input-group-addon">
 					<span class="fa fa-calendar"></span>
 				</span>																				

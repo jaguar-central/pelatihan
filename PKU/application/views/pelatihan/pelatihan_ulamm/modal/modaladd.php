@@ -307,8 +307,8 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {	
-
-		new AutoNumeric("#anggaran","commaDecimalCharDotSeparator");		
+		
+		new AutoNumeric("#anggaran","commaDecimalCharDotSeparator");				
 
 		var durasi = function () {
 			var start 	= $('#timeawal').val();
@@ -451,10 +451,9 @@
 					var mydata = JSON.parse(data);
 					// console.log(mydata.data.JUDUL_PELATIHAN);
 					$('#judul_pelatihan').val(mydata.data.JUDUL_PELATIHAN);
-					$('#alamat_tempat_pelatihan').val(mydata.data.ALAMAT);
+					$('#alamat_tempat_pelatihan').val(mydata.data.ALAMAT);					
 					$('#anggaran').val(mydata.data.BUDGET);
-					new AutoNumeric("#anggaran","commaDecimalCharDotSeparator");
-
+					// AutoNumeric("#anggaran","commaDecimalCharDotSeparator");
 					var dateawal = moment(mydata.data.TANGGAL);
 					$('#timeawal').val(dateawal.format('MM/DD/YYYY hh:mm A'));	
 					$('#inputStartTglPelaksanaan').val(dateawal.format('YYYY-MM-DD'));	
