@@ -44,7 +44,7 @@
                                 echo '<td>'.$data->NASABAH_TIPE.'</td>';
                                 echo '<td>'.$data->ID_NASABAH.'</td>';
                                 echo '<td>'.$data->NAMA.'</td>';
-                                echo '<td></td>';
+                                echo '<td>'.$data->WILAYAH.'</td>';
                                 echo '<td>'.$data->CABANG_ULAMM.'</td>';
                                 echo '<td>'.$data->UNIT_ULAMM.'</td>';
                                 echo '<td>'.$data->TIPE_PELATIHAN_DESKRIPSI.'</td>';
