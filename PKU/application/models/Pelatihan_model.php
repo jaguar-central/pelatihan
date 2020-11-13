@@ -128,11 +128,11 @@ public function select_t_pelatihan_lpj_by_approval($approval)
 				
             return $query->result();			
         }
-
-public function insert_t_kehadiran($data)
+		
+		public function insert_temp_kehadiran($data)
         {
-                $this->db->insert('T_KEHADIRAN', $data);
-        }
+                $this->db->insert('TEMP_KEHADIRAN', $data);
+        }		
 
 public function paging_select_kehadiran($param)
         {							

@@ -962,23 +962,8 @@ class Pelatihan extends MY_Controller
 				'CREATED_DATE' 		=> date('Y-m-d H:i:s')			
 			);
 			
-			$this->Pelatihan_model->insert_t_kehadiran($data);
-			
-			// $cek_kehadiran = $this->Pelatihan_model->select_t_kehadiran_by_idpelatihan($id_pelatihan)->num_rows();
-			
-			// if ($cek_kehadiran > 0){
-				// $data_update 	= array(
-					// 'STATUS' 		=> 'lpj_draft',
-					// 'UPDATED_BY' 	=> $id_user,
-					// 'UPDATED_DATE' 	=> date('Y-m-d H:i:s')			
-					// );
-				// $where_update	= array(
-					// 'ID' 	=> $id_pelatihan
-					// );
-				// $this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
-			// }			
-			
-			
+			$this->Pelatihan_model->insert_temp_kehadiran($data);
+		
 		}		
 		catch (Exception $e)
 		{
