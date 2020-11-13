@@ -165,6 +165,7 @@
 <div class="page-container">
             <!-- HEADER DESKTOP-->
             <header class="header-desktop">
+            <!-- <i class="fas fa-angle-double-left"></i> -->
                 <div class="section__content section__content--p30">
                     <span>Sistem Informasi Manajemen Pelatihan</span>
                 </div>
