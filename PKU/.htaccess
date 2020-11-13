@@ -1,0 +1,27 @@
+#start mod_rewrite
+RewriteEngine On
+
+#redirect non www to www
+#RewriteCond %{HTTP_HOST} !^www\.
+#RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+
+#base path or folder for localhost
+RewriteBase /pku/
+
+#base path or folder for hosting
+#RewriteBase /
+
+#rewrite system
+RewriteCond %{REQUEST_URI} ^system.*
+RewriteRule ^(.*)$ /index.php?/$1 [L]
+
+#rewrite application
+RewriteCond %{REQUEST_URI} ^application.*
+RewriteRule ^(.*)$ /index.php?/$1 [L]
+
+#rewrite file
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+#rewrite index
+RewriteRule ^(.*)$ index.php?/$1 [L]

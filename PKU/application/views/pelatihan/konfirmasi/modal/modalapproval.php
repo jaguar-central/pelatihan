@@ -81,6 +81,7 @@
 			<?php if (in_array($this->session->userdata('sess_user_id_user_group'),$group_id)){ ?>
 			<?php echo form_submit('submit', 'Verification', 'class="btn btn-primary submit"'); ?>							
 									
+											
 			<?php }else{ ?>
 				<?php echo form_submit('submit', 'Approve', 'class="btn btn-primary submit"'); ?>
 				<a href="#" class="btn btn-danger reject">Reject</a>
