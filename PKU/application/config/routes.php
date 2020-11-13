@@ -114,7 +114,7 @@ $route['master/get_list_nasabah_grading']       = 'master/get_list_nasabah_gradi
 
 /* API DATA PELATIHAN*/
 $route['pelatihan/post_pelatihan']                              = 'pelatihan/post_pelatihan_proposal';
-$route['pelatihan/update_pelatihan']                              = 'pelatihan/update_pelatihan_proposal';
+$route['pelatihan/update_pelatihan']                            = 'pelatihan/update_pelatihan_proposal';
 $route['pelatihan/get_rab']                                     = 'pelatihan/get_rab';
 $route['pelatihan/post_konfirmasi_proposal']                    = 'pelatihan/post_konfirmasi_proposal';
 $route['pelatihan/post_pelatihan_lpj']                          = 'pelatihan/post_pelatihan_lpj';
