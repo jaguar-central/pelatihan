@@ -143,9 +143,9 @@ public function paging_select_kehadiran($param)
                 return $query->result();
         }
         
-public function delete_t_kehadiran($data)
+public function delete_temp_kehadiran($data)
         {
-                $this->db->delete('T_KEHADIRAN', $data);
+                $this->db->delete('TEMP_KEHADIRAN', $data);
         }
 
 
@@ -162,9 +162,9 @@ public function paging_kehadiran_select_nasabah_ulamm($param)
 				");
                 return $query->result();
         }
-public function select_t_kehadiran_by_idpelatihan($idpelatihan)
+public function select_temp_kehadiran_by_idpelatihan($idpelatihan)
         {
-                $query = $this->db->query("select * from T_KEHADIRAN where ID_PELATIHAN='".$idpelatihan."' ");
+                $query = $this->db->query("select * from TEMP_KEHADIRAN where ID_PELATIHAN='".$idpelatihan."' ");
                 return $query;
         }
         

@@ -1522,9 +1522,9 @@ class Pelatihan extends MY_Controller
 				'KTP' 				=> $ktp
 			);
 			
-			$this->Pelatihan_model->delete_t_kehadiran($data);
+			$this->Pelatihan_model->delete_temp_kehadiran($data);
 			
-			$cek_kehadiran = $this->Pelatihan_model->select_t_kehadiran_by_idpelatihan($id_pelatihan)->num_rows();
+			$cek_kehadiran = $this->Pelatihan_model->select_temp_kehadiran_by_idpelatihan($id_pelatihan)->num_rows();
 			
 			if ($cek_kehadiran == 0){
 				$data_update 	= array(
