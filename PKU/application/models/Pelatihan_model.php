@@ -208,7 +208,7 @@ public function check_bwmp_approval_proposal($idpelatihan,$tingkat_approval)
 public function check_bwmp_approval_lpj($idpelatihan,$tingkat_approval)
 {
 	$query = $this->db->query("
-	IF EXISTS (SELECT 'approved' as APPROVAL FROM T_PELATIHAN A WHERE A.ID=$idpelatihan AND A.BUDGET BETWEEN (SELECT MIN_RAB FROM MS_BWMP WHERE APPROVAL='$tingkat_approval') AND (SELECT MAX_RAB FROM MS_BWMP WHERE APPROVAL='$tingkat_approval'))
+	IF EXISTS (SELECT 'approved' as APPROVAL FROM T_PELATIHAN_LPJ A WHERE A.ID_PELATIHAN=$idpelatihan AND A.JUMLAH_ANGGARAN BETWEEN (SELECT MIN_RAB FROM MS_BWMP WHERE APPROVAL='$tingkat_approval') AND (SELECT MAX_RAB FROM MS_BWMP WHERE APPROVAL='$tingkat_approval'))
 	BEGIN
 		SELECT 'lpj_approved' as APPROVAL 
 	END 

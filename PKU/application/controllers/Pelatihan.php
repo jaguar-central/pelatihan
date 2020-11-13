@@ -768,6 +768,7 @@ class Pelatihan extends MY_Controller
 				'ID_PELATIHAN' 			=> $id_pelatihan,
 				'LINK_LAMPIRAN' 		=> $lampiran,
 				'TANGGAL_REALISASI' 	=> $tanggal_realisasi,
+				'JUMLAH_ANGGARAN'		=> $total_cost_rab_akhir,
 				'CSI_FINAL' 			=> $csi_final,
 				'CATATAN_TAMBAHAN' 		=> $catatan_tambahan,
 				'AKTIF' 				=> '1',
