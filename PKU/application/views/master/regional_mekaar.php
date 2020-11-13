@@ -27,7 +27,7 @@
                                                 echo '<tr>';
                                                 echo '<td>'.$opn->KODE_REGION.'</td>';
                                                 echo '<td>'.$opn->DESKRIPSI.'</td>'; 
-                                                echo '<td><button type="button" class="btn btn-primary">Primary</button> <button type="button" class="btn btn-danger">Delete</button></td>'; 
+                                                echo '<td><button type="button" class="btn btn-outline-danger">Delete</button></td>'; 
                                                 echo '</tr>';
 
                                             }

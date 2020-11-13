@@ -7,22 +7,23 @@ class Elastic {
     public $ci;
 
     function __construct(){
-        $this->ci = &get_instance();	        
-        $this->server = $this->ci->config->item('elastic_server');        			
+        $this->ci = &get_instance();
+        $this->server = $this->ci->config->item('elastic_server');
     }
-	
-	function call($path, $method = 'GET', $data = NULL)
-    {        
-        $this->index = $this->ci->config->item('elastic_index');
-        if (!$this->index) throw new Exception('$index needs a value');			
 
+	function call($path, $method = 'GET', $data = NULL)
+    {
+        $this->index = $this->ci->config->item('elastic_index');
+        if (!$this->index) throw new Exception('$index needs a value');
+
+        // $url = 'http://10.61.3.245:8080/get?data=' . $this->index . '/' . str_replace(' ','%20',$path);
         $url = $this->server . '/' . $this->index . '/' . str_replace(' ','%20',$path);
 
         $headers = array(
             'Accept: application/json',
             'Content-Type: application/json',
         );
-        
+
         $ch = curl_init();
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 60);
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -48,15 +49,23 @@ class Elastic {
                 break;
         }
 
-        $response = curl_exec($ch);
-        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);        
-        
-        return json_decode($response);
+
+        // if ($method=='GET'){
+        //     $opts = array('http'=>array('header' => "User-Agent:MyAgent/1.0\r\n")); 
+        //     $context = stream_context_create($opts);
+        //     $html = file_get_contents($url,false,$context);
+
+        //     return json_decode($html);
+        // }else{
+            $response = curl_exec($ch);
+            $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            return json_decode($response);
+        // }
     }
 
     /**
      * create a index with mapping or not
-     * 
+     *
      * @param json $map
      */
 
@@ -71,7 +80,7 @@ class Elastic {
 
     /**
      * get status
-     * 
+     *
      * @return array
      */
 
@@ -82,9 +91,9 @@ class Elastic {
 
     /**
      * count how many indexes it exists
-     * 
+     *
      * @param string $type
-     * 
+     *
      * @return array
      */
 
@@ -95,10 +104,10 @@ class Elastic {
 
     /**
      * set the mapping for the index
-     * 
+     *
      * @param string $type
      * @param json   $data
-     * 
+     *
      * @return array
      */
 
@@ -109,11 +118,11 @@ class Elastic {
 
     /**
      * set the mapping for the index
-     * 
+     *
      * @param type $type
      * @param type $id
      * @param type $data
-     * 
+     *
      * @return type
      */
 
@@ -124,11 +133,11 @@ class Elastic {
 
     /**
      * delete a index
-     * 
-     * @param type $type 
-     * @param type $id 
-     * 
-     * @return type 
+     *
+     * @param type $type
+     * @param type $id
+     *
+     * @return type
      */
 
     public function delete($type, $id)
@@ -138,10 +147,10 @@ class Elastic {
 
     /**
      * make a simple search query
-     * 
+     *
      * @param type $type
      * @param type $q
-     * 
+     *
      * @return type
      */
 
@@ -152,10 +161,10 @@ class Elastic {
 
     /**
      * make a advanced search query with json data to send
-     * 
+     *
      * @param type $type
      * @param type $query
-     * 
+     *
      * @return type
      */
 
@@ -166,11 +175,11 @@ class Elastic {
 
     /**
      * make a search query with result sized set
-     * 
+     *
      * @param string  $type  what kind of type of index you want to search
      * @param string  $query the query as a string
      * @param integer $size  The size of the results
-     * 
+     *
      * @return array
      */
 
@@ -181,10 +190,10 @@ class Elastic {
 
     /**
      * get one index via the id
-     * 
+     *
      * @param string  $type The index type
      * @param integer $id   the indentifier for a index
-     * 
+     *
      * @return type
      */
 
@@ -195,9 +204,9 @@ class Elastic {
 
     /**
      * Query the whole server
-     * 
+     *
      * @param type $query
-     * 
+     *
      * @return type
      */
 
@@ -208,13 +217,13 @@ class Elastic {
 
     /**
      * get similar indexes for one index specified by id - send data to add filters or more
-     * 
+     *
      * @param string  $type
      * @param integer $id
      * @param string  $fields
-     * @param string  $data 
-     * 
-     * @return array 
+     * @param string  $data
+     *
+     * @return array
      */
 
     public function morelikethis($type, $id, $fields = false, $data = false)
@@ -232,10 +241,10 @@ class Elastic {
 
     /**
      * make a search query with result sized set
-     * 
+     *
      * @param type $query
      * @param type $size
-     * 
+     *
      * @return type
      */
     public function query_all_wresultSize($query, $size = 999)
@@ -245,9 +254,9 @@ class Elastic {
 
     /**
      * make a suggest query based on similar looking terms
-     * 
+     *
      * @param type $query
-     * 
+     *
      * @return array
      */
     public function suggest($query)
@@ -255,5 +264,5 @@ class Elastic {
         return $this -> call('_suggest', 'POST', $query);
     }
 
-	
+
 }

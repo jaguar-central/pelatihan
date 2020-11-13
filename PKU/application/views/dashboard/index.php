@@ -1,91 +1,104 @@
- <!-- MAIN CONTENT-->
-            <div class="main-content">
-                <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="overview-wrap">
-                                    <h2 class="title-2">Dashboard</h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row m-t-25">
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c1">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                            <i class="fas fa-edit"></i>
-                                            </div>
+<style>
+/* Start statis */
 
-                                            <div class="text">
-                                                <h2> <?php echo $latihan;?> </h2>
-                                                <span>PELATIHAN</span>
-                                            </div>
-                                        </div>
+.statis {
+  color: #EEE;
+  margin-top: 15px;
+}
+.statis .box {
+  position: relative;
+  padding: 15px;
+  overflow: hidden;
+  border-radius: 3px;
+  margin-bottom: 25px;
+}
+.statis .box h3:after {
+  content: "";
+  height: 2px;
+  width: 70%;
+  margin: auto;
+  background-color: rgba(255, 255, 255, 0.12);
+  display: block;
+  margin-top: 10px;
+}
+.statis .box i {
+  position: absolute;
+  height: 70px;
+  width: 70px;
+  font-size: 22px;
+  padding: 15px;
+  top: -25px;
+  left: -25px;
+  background-color: rgba(255, 255, 255, 0.15);
+  line-height: 60px;
+  text-align: right;
+  border-radius: 50%;
+}
+
+</style>
+
+ <!-- MAIN CONTENT-->
+<div class="main-content">
+    <div class="welcome">
+        <div class="container-fluid">
+            <div class="row">
+            <div class="col-md-12">
+                <div class="content">
+                <h2>Welcome to Dashboard</h2>
+                <p>Data Realisasi Pelatihan dan Kehadiran Nasabah</p>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <section class='statis text-center text-white'>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="box bg-primary">
+            <i class="fas fa-edit"></i>
+              <h3 class="text-white"><?php echo $pelatihan;?></h3>
+              <p class="lead">Pelatihan</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="box bg-danger">
+            <i class="far fa-user"></i>
+            <h3 class="text-white"><?php echo $nasabah_ulamm;?></h3>
+              <p class="lead">Nasabah Ulamm</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="box bg-info">
+            <i class="far fa-user"></i>
+            <h3 class="text-white"><?php echo $nasabah_mekaar;?></h3>
+              <p class="lead">Nasabah Mekaar</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="box bg-success">
+            <i class="fas fa-address-card"></i>
+            <h3 class="text-white"><?php echo $non_nasabah;?></h3>
+              <p class="lead">Non Nasabah</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+                            <!-- <div class="col-sm-12 col-lg-12">
+                                <div class="overview-item overview-item--c1">
+                                    <div class="overview__inner">                                        
                                         <div class="overview-chart">
                                             <canvas id="dashboard_pelatihan"></canvas>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
 
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c2">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="far fa-user"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2> <?php echo $nasabah;?> </h2>
-                                                <span>NASABAH</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart2"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c3">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="far fa-user"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2> <?php echo $non_nasabah;?> </h2>
-                                                <span>NON NASABAH</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart3"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6 col-lg-3">
-                                <div class="overview-item overview-item--c2">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="fas fa-address-card"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2> <?php echo $kehadiran;?> </h2>
-                                                <span>KEHADIRAH</span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart4"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-            <!-- END MAIN CONTENT-->
+</div>
+<!-- END MAIN CONTENT-->

@@ -20,6 +20,8 @@ class MY_Controller extends CI_Controller
 		if ($data_global['notification_count']==''){
 			$data_global['notification_count'] = 0;
 		}
+
+		// var_dump($data_global);die();
 		
 		$this->load->vars($data_global);
 	}		
@@ -44,9 +46,9 @@ class MY_Controller extends CI_Controller
 	
 	public function create_trx_no($param)
 	{			
-		$no = isset($this->Master_model->select_trx_no_by_param($param)->result_array()[0]->INC_PELATIHAN) ?
-		$this->Master_model->select_trx_no_by_param($param)->result_array()[0]->INC_PELATIHAN : 0;
-	
+		$no = isset($this->Master_model->select_trx_no_by_param($param)->result()[0]->INC_PELATIHAN) ?
+		$this->Master_model->select_trx_no_by_param($param)->result()[0]->INC_PELATIHAN : 0;
+		
 		if ($no==0){
 			$this->Master_model->insert_trx_no($param);
 			$no = $this->Master_model->select_trx_no_by_param($param)->result()[0]->NO;

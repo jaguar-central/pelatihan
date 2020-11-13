@@ -44,6 +44,15 @@
 
     $(document).ready(function() {	
 
+		$(".select").select2({
+			tags: true,
+			tokenSeparators: [',', ' '],
+			createTag: function () {
+			// Disable tagging
+			return null;
+			}
+		})	
+
 		$('#user_table').DataTable({"dom": "<'dom_datable offset-md-6'f>rt<'dom_datable col-md-6'i><'dom_datable col-md-6'p>"});
 		
 		
@@ -81,20 +90,19 @@
 			$('#user_sso').modal('hide');			
 		});
 		
-		$(".bisnis").hide();
-		$(".cabang_ulamm").hide();
-		$(".region_mekaar").hide();
+		// $(".bisnis").hide();
 		
 		$('#role').on('change', function (e) {			
 			var role = $("#role").val();
 			
-			if (role>3){
+			if (role>=5){
 				$(".bisnis").hide();				
+				$(".cabang_ulamm").hide();
 			}else{
 				$(".bisnis").show();
-			}
-			$(".region_mekaar").hide();
-			$(".cabang_ulamm").hide();
+				$(".cabang_ulamm").show();
+			}			
+			
 		});
 		
 		$('#bisnis').on('change', function (e) {			
@@ -112,9 +120,8 @@
 	});
 	
 	$("#form-add-user").submit(function(e){
-		e.preventDefault();
-		
-		var formURL = "<?php echo site_url('post_user'); ?>";
+		e.preventDefault();		
+		var formURL = "<?php echo base_url('master/post_user'); ?>";
 		var formDatas = new FormData(this);						
 		$("#loader").show();
 		var xhr = $.ajax({

@@ -18,11 +18,10 @@ class Master extends MY_Controller
         $data["menu"]		 	= $this->Menu_model->select_ms_menu();
         $data["t_user"] 		= $this->Master_model->select_ms_user();
         $data["user_group"] 	= $this->Master_model->select_ms_user_group();
-		$data["cabang"] 		= $this->Master_model->select_ms_cabang_ulamm();
-		$data["region"] 		= $this->Master_model->select_ms_region_mekaar();
+		$data["cabang"] 		= $this->Master_model->select_all_ms_cabang_ulamm();
         
         // echo '<pre>';
-		// print_r($data['user_group']);
+		// print_r($data['cabang']);
 		// echo '</pre>';die;
         $this->load->view('layout/gabung', $data);
 
@@ -55,7 +54,7 @@ class Master extends MY_Controller
         $data["script"] = "master/include/cabang-script";
         
         $data["menu"] = $this->Menu_model->select_ms_menu();
-        $data["t_cabang_ulamm"] = $this->Master_model->select_ms_cabang_ulamm();
+        $data["t_cabang_ulamm"] = $this->Master_model->select_all_ms_cabang_ulamm();
         
         //echo '<pre>';
         //print_r($data['menu']);
@@ -180,6 +179,41 @@ class Master extends MY_Controller
 	}	
 
 
+	public function get_kabkot()
+	{			
+		$kode_provinsi = $_GET['kode_provinsi'];
+		$select = $_GET['select'];
+		$kabkot = $this->Master_model->select_ms_kabkot_by_id_provinsi($kode_provinsi);		
+		$data= '<option value="">--pilih kabupaten/kota--</option>';
+		
+		foreach ($kabkot as $data_kabkot) {
+			if ($select==$data_kabkot->MS_KODE_KABKOT){
+				$data .= "<option value='".$data_kabkot->MS_KODE_KABKOT."' selected >".$data_kabkot->MS_KABKOT." </option>";
+			}else{
+				$data .= "<option value='".$data_kabkot->MS_KODE_KABKOT."' >".$data_kabkot->MS_KABKOT." </option>";
+			}
+		} 	
+				
+		echo $data;
+	}		
+
+	public function get_kecamatan()
+	{			
+		$kode_kabkot = $_GET['kode_kabkot'];
+		$select = $_GET['select'];
+		$kecamatan = $this->Master_model->select_ms_kecamatan_by_id_kabkot($kode_kabkot);		
+		$data= '<option value="">--pilih kecamatan--</option>';
+		
+		foreach ($kecamatan as $data_kecamatan) {
+			if ($select==$data_kecamatan->MS_KODE_KECAMATAN){
+				$data .= "<option value='".$data_kecamatan->MS_KODE_KECAMATAN."' selected >".$data_kecamatan->MS_KECAMATAN." </option>";
+			}else{
+				$data .= "<option value='".$data_kecamatan->MS_KODE_KECAMATAN."' >".$data_kecamatan->MS_KECAMATAN." </option>";
+			}
+		} 	
+				
+		echo $data;
+	}			
 
 	
 	public function get_sso_karyawan()
@@ -204,10 +238,6 @@ class Master extends MY_Controller
 
 	    curl_setopt($curl_handle, CURLOPT_URL, $url.'?app_code=MPLT');
 
-        //curl_setopt($curl_handle, CURLOPT_URL, 'http://182.23.52.249/Dummy/WebService/SSO_Mobile/getSSObyAppCode.php?app_code=event');
-
-	    /*curl_setopt($curl_handle, CURLOPT_URL, 'http://182.23.52.249/Dummy/WebService/SSO_Mobile/get_all_karyawan.php');*/
-
 	    curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
 
 	    curl_setopt($curl_handle, CURLOPT_POST, 1);
@@ -227,18 +257,18 @@ class Master extends MY_Controller
 	     
 
 	    $result = json_decode($buffer);
-
 		//count total data
-
 		$total = 0;
+		$data = [];
 
 		foreach ($result->profile[0]->data as $row) {
-
-		    $total ++;
-
+			$check = $this->Master_model->select_ms_user_by_username($row->profile_username);
+			if (!$check){
+				$data[$total] = $row;
+				$total ++;
+			}
+		    
 		};
-
-
 
 		//sent data to datatables
 
@@ -250,7 +280,9 @@ class Master extends MY_Controller
 
 					'recordsFiltered' 	=> $total,
 
-					'data'				=> $result->profile[0]->data
+					// 'data'				=> $result->profile[0]->data
+
+					'data'				=> $data
 
 			);
 
@@ -267,9 +299,8 @@ class Master extends MY_Controller
 	public function post_user(){
 		$username   	= trim($this->security->xss_clean(strip_image_tags($this->input->post('username'))));
         $role     		= trim($this->security->xss_clean(strip_image_tags($this->input->post('role'))));
-        $bisnis     	= trim($this->security->xss_clean(strip_image_tags($this->input->post('bisnis'))));
-        $cabang_ulamm   = trim($this->security->xss_clean(strip_image_tags($this->input->post('cabang_ulamm'))));
-        $region_mekaar  = trim($this->security->xss_clean(strip_image_tags($this->input->post('region_mekaar'))));
+        $bisnis     	= trim($this->security->xss_clean(strip_image_tags($this->input->post('bisnis'))));       
+		$cabang_ulamm   = $this->security->xss_clean(strip_image_tags($this->input->post('cabang_ulamm')));
         $aktif     		= trim($this->security->xss_clean(strip_image_tags($this->input->post('aktif'))));
 		$id_user		= $this->session->userdata('sess_user_idsdm');
 		
@@ -308,9 +339,7 @@ class Master extends MY_Controller
 			$menu_user = 'APPROVAL';
 			$lokasi = 'PUSAT';
 			break;			
-		}
-		
-		$kode_cabang_region = ($bisnis==1) ? $cabang_ulamm : $region_mekaar;					
+		}		
 		
 		try
 		{
@@ -327,19 +356,20 @@ class Master extends MY_Controller
 			
 			$this->Master_model->insert_ms_user($data_user);
 			
-			$id_user = $this->db->insert_id(); //last id yang di insert				
+			$last_id_user = $this->db->insert_id(); //last id yang di insert				
 			
-			$data_cabang_region = array(
-				'ID_USER' 				=> $username,
-				'ID_GROUP' 				=> $bisnis,
-				'ID_BISNIS' 			=> $role,
-				'KODE_CABANG_REGION' 	=> $kode_cabang_region,
-				'AKTIF' 				=> '1',
-				'CREATED_BY' 			=> $id_user,
-				'CREATED_DATE' 			=> date('Y-m-d H:i:s')			
-			);		
-			$this->Master_model->insert_ms_user_cabang_region($data_cabang_region);
-			
+			for ($i=1;$i<count($cabang_ulamm);$i++){
+				$data_cabang = array(
+					'ID_USER' 				=> $last_id_user,
+					'ID_GROUP' 				=> $bisnis,
+					'ID_BISNIS' 			=> $role,
+					'KODE_CABANG_REGION' 	=> $cabang_ulamm[$i],
+					'AKTIF' 				=> '1',
+					'CREATED_BY' 			=> $id_user,
+					'CREATED_DATE' 			=> date('Y-m-d H:i:s')			
+				);		
+				$this->Master_model->insert_ms_user_cabang_region($data_cabang);
+			}
 		}
 		catch (Exception $e)
 		{
@@ -389,15 +419,19 @@ class Master extends MY_Controller
 
 
 	public function get_grading(){
-		$id = $_GET['id_grading'] ? (int)$_GET['id_grading'] : 0;
-		
-		
-		$grading = $this->Master_model->select_ms_grading();	
+		$idjenisnasabah = $_GET['idjenisnasabah'] ? (int)$_GET['idjenisnasabah'] : 0;
+		$idgrading = $_GET['idgrading'] ? (int)$_GET['idgrading'] : 0;
+
+		$where = array(
+			'ID_JENIS_NASABAH' => $idjenisnasabah
+		);				
+				
+		$grading = $this->Master_model->select_ms_grading_where($where);
 
 		$data= '<option value="">--pilih grade--</option>';
 		
 		foreach ($grading as $data_grade) {
-			if ($data_grade->ID==$id){
+			if ($data_grade->ID==$idgrading){
 				$data .= "<option value='".$data_grade->ID."' selected>".$data_grade->GRADING_DESKRIPSI." </option>";
 			}else{
 				$data .= "<option value='".$data_grade->ID."' >".$data_grade->GRADING_DESKRIPSI." </option>";
@@ -406,4 +440,20 @@ class Master extends MY_Controller
 				
 		echo $data;
 	}
+
+	public function get_list_nasabah_grading(){
+		$id = $_GET['id_jenis_nasabah'];
+
+		$where = array(
+			'ID_JENIS_NASABAH' => $id
+		);
+
+		$data = $this->Master_model->select_ms_grading_where($where);
+		$return = '';
+		foreach ($data as $value) {
+			$return .="<option value='$value->ID' >Kelas $value->KELAS - $value->GRADING_DESKRIPSI</option>";
+		}
+
+		echo $return;		
+	}	
 }

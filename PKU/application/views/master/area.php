@@ -28,7 +28,7 @@
                                                 echo '<tr>';
                                                 echo '<td>'.$nma->KODE_AREA.'</td>';
                                                 echo '<td>'.$nma->DESKRIPSI.'</td>'; 
-                                                echo '<td><button type="button" class="btn btn-primary">Primary</button> <button type="button" class="btn btn-danger">Delete</button></td>'; 
+                                                echo '<td><button type="button" class="btn btn-outline-danger">Delete</button></td>'; 
                                                 echo '</tr>';
 
                                             }

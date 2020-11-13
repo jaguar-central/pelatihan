@@ -18,10 +18,10 @@ class Dashboard extends MY_Controller
 		$data["script"] = "dashboard/include/dashboard-script";
 		
         $data["menu"] = $this->Menu_model->select_ms_menu();
-        $data["latihan"] = $this->Dashboard_model->select_t_pelatihan();
-        $data["kehadiran"] = $this->Dashboard_model->select_t_kehadiran();
-        $data["nasabah"] = $this->Dashboard_model->select_t_jumlah_nasabah();
-        $data["non_nasabah"] = $this->Dashboard_model->select_t_non_nasabah();				        
+        $data["pelatihan"] = $this->Dashboard_model->select_t_pelatihan();
+        $data["nasabah_ulamm"] = $this->Dashboard_model->select_nasabah_ulamm();
+        $data["nasabah_mekaar"] = $this->Dashboard_model->select_nasabah_mekaar();
+        $data["non_nasabah"] = $this->Dashboard_model->select_non_nasabah();				        
 
         //echo '<pre>';
 		//print_r($data['menu']);

@@ -89,6 +89,11 @@ $route['logout'] 		= 'User/process_signout';
 
 /* REPORT */
 $route['report/agenda_klasterisasi'] 		= 'Report/agenda_klasterisasi';
+$route['report/report_detail_ulamm'] 		= 'Report/report_detail_ulamm';
+$route['report/report_detail_mekaar'] 		= 'Report/report_detail_mekaar';
+$route['report/report_rekap_ulamm'] 		= 'Report/report_rekap_ulamm';
+$route['report/report_rekap_mekaar'] 		= 'Report/report_rekap_mekaar';
+
 
 
 
@@ -101,6 +106,11 @@ $route['master/get_unit_ulamm']                 = 'master/get_unit_ulamm';
 $route['master/get_area_mekaar']                = 'master/get_area_mekaar';
 $route['master/get_cabang_mekaar']              = 'master/get_cabang_mekaar';
 $route['master/get_grading']              		= 'master/get_grading';
+$route['master/get_kabkot']              		= 'master/get_kabkot';
+$route['master/get_kecamatan']              	= 'master/get_kecamatan';
+$route['master/get_list_nasabah_grading']       = 'master/get_list_nasabah_grading';
+
+
 
 /* API DATA PELATIHAN*/
 $route['pelatihan/post_pelatihan']                              = 'pelatihan/post_pelatihan_proposal';
@@ -124,3 +134,8 @@ $route['pelatihan/post_project_charter']                        = 'pelatihan/pos
 $route['pelatihan/get_list_project_charter']                    = 'pelatihan/get_list_project_charter';
 $route['pelatihan/get_data_project_charter']                    = 'pelatihan/get_data_project_charter';
 $route['pelatihan/get_pelatihan_project_charter']               = 'pelatihan/get_pelatihan_project_charter';
+$route['pelatihan/get_paging_project_charter/(:any)']           = 'pelatihan/get_paging_project_charter/$1';
+
+$route['pelatihan/get_project_charter']                         = 'pelatihan/get_project_charter';
+$route['pelatihan/get_ket_approval']                            = 'pelatihan/get_ket_approval';
+
