@@ -21,17 +21,42 @@
 			<div class = "table-style" style = "padding : 25px">
 				<div class="form-group">				
 					<input type="hidden" class="form-control" id="id_pelatihan" name="id_pelatihan" value="<?php echo $this->uri->segment(3); ?>"/>		
-					<div class="form-group row">
-						<label class="col-sm-2">Link Lampiran <span class="text-danger"></span></label>
-						<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="lampiran" name="lampiran" />													
-						</div>
-			
-						<label class="col-sm-2">Tanggal Realisasi <span class="text-danger"></span></label>
+					<div class="form-group row">			
+						<!-- <label class="col-sm-2">Tanggal Realisasi <span class="text-danger"></span></label>
 						<div class="col-sm-4">
 						<input type="text" class="form-control"  required="" id="tanggal_realisasi" name="tanggal_realisasi" />		
-						</div>
+						</div> -->
+						<label class="col-sm-2">Tanggal <span class="text-danger">*</span></label>
+						<div class="col-sm-4">
+							<div class="input-group">																										
+								<div class='input-group date'>
+									<span class="input-group-addon">
+									<span class="fas fa-calendar"></span>
+									</span>
+									<input type='text' class="form-control" id='timeawal' />
+									<span class="input-group-addon bg-custom b-0">s/d</span>
+									<input type='text' class="form-control" id='timeakhir' />
+								</div>							
+								<input type="hidden" id="inputStartTglPelaksanaan" name="inputStartTglPelaksanaan" />						
+								<input type="hidden" id="inputStartTimePelaksanaan" name="inputStartTimePelaksanaan" />
+								<input type="hidden" id="inputAkhirTglPelaksanaan" name="inputAkhirTglPelaksanaan"/>								
+								<input type="hidden" id="inputEndTimePelaksanaan" name="inputEndTimePelaksanaan" />
+							</div>
+						</div>		
+
+						<label class="col-sm-2">Durasi <span class="text-danger">*</span></label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control"  required="" id="durasi_tampilan" readonly="" />
+							<input type="hidden" class="form-control"  required="" id="durasi_pelatihan" name="durasi_pelatihan" />
+						</div>										
 					</div>		
+
+					<div class="form-group row">					
+						<label class="col-sm-2">Link Lampiran <span class="text-danger"></span></label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control"  required="" id="lampiran" name="lampiran" />													
+						</div>					
+					</div>						
 					
 					<div class="form-group row">
 						<label class="col-sm-2">CSI Final <span class="text-danger"></span></label>
