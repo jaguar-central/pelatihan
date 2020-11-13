@@ -56,7 +56,7 @@
 								echo '<td>'.$data->TITLE.'</td>';
 								echo '<td></td>';
                                 echo '<td>'.$data->TANGGAL_MULAI.'</td>';
-                                echo '<td>'.$data->TANGGAL_REALISASI.'</td>';
+                                echo '<td>'.$data->TANGGAL_REALISASI_MULAI.'</td>';
                                 echo '<td>'.$data->BUDGET.'</td>';
                                 echo '<td>'.$data->GRADING.'</td>';
 								echo '<td>'.$data->KELAS_WARNA.'</td>';
