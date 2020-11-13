@@ -234,15 +234,10 @@ $(document).ready(function() {
 			"url" : '<?php echo base_url('pelatihan/get_paging_kehadiran_nasabah_mekaar/'.$this->uri->segment(3)); ?>',
 			"type" :'GET'                      
 			},
-			"columns" : [
-			  { "data": "NasabahId", render: function (data, type, row) 
-                {
-                  return '<input type="hidden" class="form-control" id="id_nasabah" name="id_nasabah[]" value="'+row.id_nasabah+'">'+row.id_nasabah;
-                } 
-              },				
+			"columns" : [			
               { "data": "noktp", render: function (data, type, row) 
                 {
-                  return '<input type="hidden" class="form-control" id="bisnis" name="bisnis[]" value="MEKAAR"><input type="hidden" class="form-control" id="ktp" name="ktp[]" value="'+row.noktp+'">'+row.noktp;
+                  return '<input type="hidden" class="form-control" id="bisnis" name="bisnis[]" value="MEKAAR"><input type="hidden" class="form-control" id="id_nasabah" name="id_nasabah[]" value="'+row.nasabahid+'"><input type="hidden" class="form-control" id="ktp" name="ktp[]" value="'+row.noktp+'">'+row.noktp;
                 } 
               },
               { "data": "nama", render: function (data, type, row) 
