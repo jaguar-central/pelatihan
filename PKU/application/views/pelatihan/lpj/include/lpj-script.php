@@ -216,14 +216,8 @@ $(document).ready(function() {
 			table_kehadiran_ulamm.column(3).search( cabang=='0' ? '' : cabang   );
 			table_kehadiran_ulamm.column(4).search( unit=='0' ? '' : unit   );
 
-			table_kehadiran_ulamm.clear().draw();
+			table_kehadiran_ulamm.clear().draw(false);
 		});		
-
-
-
-
-
-
 
 
 		var table_kehadiran_mekaar = $('#datatable_kehadiran_mekaar').DataTable({	
@@ -234,7 +228,7 @@ $(document).ready(function() {
 			"url" : '<?php echo base_url('pelatihan/get_paging_kehadiran_nasabah_mekaar/'.$this->uri->segment(3)); ?>',
 			"type" :'GET'                      
 			},
-			"columns" : [			
+			"columns" : [										
               { "data": "noktp", render: function (data, type, row) 
                 {
                   return '<input type="hidden" class="form-control" id="bisnis" name="bisnis[]" value="MEKAAR"><input type="hidden" class="form-control" id="id_nasabah" name="id_nasabah[]" value="'+row.nasabahid+'"><input type="hidden" class="form-control" id="ktp" name="ktp[]" value="'+row.noktp+'">'+row.noktp;
@@ -273,7 +267,6 @@ $(document).ready(function() {
 			}
 		});
 
-
 		$("#add_non_nasabah").submit(function(e){
 			e.preventDefault();        	
 			var formURL = "<?php echo base_url('pelatihan/post_non_nasabah'); ?>";
@@ -293,7 +286,7 @@ $(document).ready(function() {
 				
 				if(obj.result == 'OK')
 				{
-			table_kehadiran_non_nasabah.clear().draw();
+				table_kehadiran_non_nasabah.clear().draw(false);
 				}
 				if(obj.result == 'UP')
 				{
@@ -488,8 +481,8 @@ $(document).ready(function() {
 			unit			: unit
 		},
 		function(data, status){
-			$('#datatable_listkehadiran').DataTable().draw();
-			$('#datatable_kehadiran_ulamm').DataTable().draw();
+			$('#datatable_listkehadiran').DataTable().draw(false);
+			$('#datatable_kehadiran_ulamm').DataTable().draw(false);
 			console.log("Data: " + data + "\nStatus: " + status);
 		});
 
@@ -521,8 +514,8 @@ $(document).ready(function() {
 			area			: area
 		},
 		function(data, status){
-			$('#datatable_listkehadiran').DataTable().draw();
-			$('#datatable_kehadiran_mekaar').DataTable().draw();
+			$('#datatable_listkehadiran').DataTable().draw(false);
+			$('#datatable_kehadiran_mekaar').DataTable().draw(false);
 			console.log("Data: " + data + "\nStatus: " + status);
 		});
 
@@ -553,8 +546,8 @@ $(document).ready(function() {
 			unit			: unit
 		},
 		function(data, status){
-			$('#datatable_listkehadiran').DataTable().draw();
-			$('#datatable_kehadiran_ulamm').DataTable().draw();
+			$('#datatable_listkehadiran').DataTable().draw(false);
+			$('#datatable_kehadiran_ulamm').DataTable().draw(false);
 			console.log("Data: " + data + "\nStatus: " + status);
 		});
 
@@ -571,8 +564,9 @@ $(document).ready(function() {
 			ktp : ktp
 		},
 		function(data, status){
-			$('#datatable_listkehadiran').DataTable().draw();
-			$('#datatable_kehadiran_ulamm').DataTable().draw();
+			$('#datatable_listkehadiran').DataTable().draw(false);
+			$('#datatable_kehadiran_ulamm').DataTable().draw(false);
+			$('#datatable_kehadiran_mekaar').DataTable().draw(false);
 			console.log("Data: " + data + "\nStatus: " + status);
 		});		
 		

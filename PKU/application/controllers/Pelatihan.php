@@ -947,30 +947,30 @@ class Pelatihan extends MY_Controller
 			$nasabah_type = 'NASABAH';
 		}
 		
-		
-		
-		try{
-			$data = array(
-				'ID_PELATIHAN' 		=> $id_pelatihan,
-				'BISNIS' 			=> $bisnis,
-				'KTP' 				=> $ktp,
-				'ID_NASABAH'		=> $id_nasabah,
-				'NAMA' 				=> $nama_nasabah,
-				'NASABAH_TIPE' 		=> $nasabah_type,
-				'AKTIF' 			=> '1',
-				'CREATED_BY' 		=> $id_user,
-				'CREATED_DATE' 		=> date('Y-m-d H:i:s')			
-			);
+		if ($id_nasabah!='undefined'){			
+			try{
+				$data = array(
+					'ID_PELATIHAN' 		=> $id_pelatihan,
+					'BISNIS' 			=> $bisnis,
+					'KTP' 				=> $ktp,
+					'ID_NASABAH'		=> $id_nasabah,
+					'NAMA' 				=> $nama_nasabah,
+					'NASABAH_TIPE' 		=> $nasabah_type,
+					'AKTIF' 			=> '1',
+					'CREATED_BY' 		=> $id_user,
+					'CREATED_DATE' 		=> date('Y-m-d H:i:s')			
+				);
+				
+				$this->Pelatihan_model->insert_temp_kehadiran($data);
 			
-			$this->Pelatihan_model->insert_temp_kehadiran($data);
-		
-		}		
-		catch (Exception $e)
-		{
-			$output = array(
-				'result'  	=> 'NG',
-				'msg'		=> $e->getMessage()
-			);
+			}		
+			catch (Exception $e)
+			{
+				$output = array(
+					'result'  	=> 'NG',
+					'msg'		=> $e->getMessage()
+				);
+			}
 		}
         
 		echo json_encode($output);
@@ -1317,12 +1317,29 @@ class Pelatihan extends MY_Controller
 		}else{						
 			$debitur = $this->elastic->call('_search?from='.$param["start"].'&size='.$param["limit"].'&filter_path=hits.hits.*,aggregations.*');
 			$debitur_count = $this->elastic->call('_count');
-		}				
+		}		
+		
+		
+		$hide_debitur = $this->Pelatihan_model->select_temp_kehadiran($idpelatihan);
+		$hide_array = array_map (function($value){
+			return $value['ID_NASABAH'];
+		} , $hide_debitur);
+
 		
 		if (isset($debitur->hits->hits)){
 			for ($i=0;$i<count($debitur->hits->hits);$i++){
 				$data["data"][$i] = $debitur->hits->hits[$i]->_source;
 			}	
+
+			for ($i=0;$i<count($debitur->hits->hits);$i++){
+				if (!in_array($debitur->hits->hits[$i]->_source->nasabahid, $hide_array)) 
+				{ 
+					$data["data"][$i] = $debitur->hits->hits[$i]->_source;					
+				}else{
+					$data["data"][$i] = (object) array('nasabahid' => '-','ktp' => '-','nama_nasabah'=>'-','no_hp'=>'-','kolektibilitas'=>'-','cabang'=>'-','unit'=>'-');					
+				}				
+			}	
+
 			$data["recordsTotal"] = $debitur_count->count;	
 			$data["recordsFiltered"] = $debitur_count->count;			
 		}else{
@@ -1349,12 +1366,22 @@ class Pelatihan extends MY_Controller
 		}else{						
 			$debitur = $this->elastic->call('_search?from='.$param["start"].'&size='.$param["limit"].'&filter_path=hits.hits.*,aggregations.*');
 			$debitur_count = $this->elastic->call('_count');
-		}				
+		}						
+
+		$hide_debitur = $this->Pelatihan_model->select_temp_kehadiran($idpelatihan);
+		$hide_array = array_map (function($value){
+			return $value['ID_NASABAH'];
+		} , $hide_debitur);
 		
 		if (isset($debitur->hits->hits)){
 			for ($i=0;$i<count($debitur->hits->hits);$i++){
-				$data["data"][$i] = $debitur->hits->hits[$i]->_source;
-			}	
+				if (!in_array($debitur->hits->hits[$i]->_source->nasabahid, $hide_array)) 
+				{ 
+					$data["data"][$i] = $debitur->hits->hits[$i]->_source;					
+				}else{
+					$data["data"][$i] = (object) array('noktp' => '-','nama' => '-','alamat'=>'-','produk'=>'-','region'=>'-','area'=>'-');					
+				}				
+			}			
 			$data["recordsTotal"] = $debitur_count->count;	
 			$data["recordsFiltered"] = $debitur_count->count;			
 		}else{

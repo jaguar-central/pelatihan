@@ -132,7 +132,15 @@ public function select_t_pelatihan_lpj_by_approval($approval)
 		public function insert_temp_kehadiran($data)
         {
                 $this->db->insert('TEMP_KEHADIRAN', $data);
-        }		
+		}	
+		
+		public function select_temp_kehadiran($id_pelatihan)
+		{
+			$query = $this->db->query("select ID_NASABAH from TEMP_KEHADIRAN where ID_PELATIHAN=$id_pelatihan ");
+
+			return $query->result_array();
+			
+		}
 
 public function paging_select_kehadiran($param)
         {							
