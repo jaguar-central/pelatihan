@@ -947,7 +947,7 @@ class Pelatihan extends MY_Controller
 			$nasabah_type = 'NASABAH';
 		}
 		
-		if ($id_nasabah!='undefined'){			
+		if ($id_nasabah!='-'){			
 			try{
 				$data = array(
 					'ID_PELATIHAN' 		=> $id_pelatihan,
@@ -1379,7 +1379,7 @@ class Pelatihan extends MY_Controller
 				{ 
 					$data["data"][$i] = $debitur->hits->hits[$i]->_source;					
 				}else{
-					$data["data"][$i] = (object) array('noktp' => '-','nama' => '-','alamat'=>'-','produk'=>'-','region'=>'-','area'=>'-');					
+					$data["data"][$i] = (object) array('nasabahid' => '-','noktp' => '-','nama' => '-','alamat'=>'-','produk'=>'-','region'=>'-','area'=>'-');					
 				}				
 			}			
 			$data["recordsTotal"] = $debitur_count->count;	
