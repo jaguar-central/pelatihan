@@ -1312,8 +1312,8 @@ class Pelatihan extends MY_Controller
 			$debitur = $this->elastic->call('/_search?q=kode_unit:'.$param["kode_unit"].'&filter_path=hits.hits.*,aggregations.*');
 			$debitur_count = $this->elastic->call('_count?q=kode_unit:'.$param["kode_unit"]);									
 		}else if ($param["search"]!=NULL){
-			$debitur = $this->elastic->call('/_search?q=nama:'.$param["search"].'&filter_path=hits.hits.*,aggregations.*');
-			$debitur_count = $this->elastic->call('_count?q=nama:'.$param["search"]);			
+			$debitur = $this->elastic->call('/_search?q=nama_nasabah:'.$param["search"].'&filter_path=hits.hits.*,aggregations.*');
+			$debitur_count = $this->elastic->call('_count?q=nama_nasabah:'.$param["search"]);			
 		}else{						
 			$debitur = $this->elastic->call('_search?from='.$param["start"].'&size='.$param["limit"].'&filter_path=hits.hits.*,aggregations.*');
 			$debitur_count = $this->elastic->call('_count');

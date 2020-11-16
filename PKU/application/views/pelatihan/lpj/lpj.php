@@ -121,17 +121,27 @@
 						  </div>
 						</div>
 					</div>
-				</div>  															
-				<div class="col-sm-12">
-					<button type="button" class="btn btn-outline-primary" data-toggle="collapse" data-target="#list_kehadiran" > Cek Kehadiran</button>	
-					<button type="button" class="btn btn-outline-danger" data-toggle="collapse" data-target="#detail_pelatihan" >Cek Pelatihan Pengajuan</button>
-					<?php echo form_submit('submit', 'Submit LPJ', 'class="btn btn-outline-success float-right submit"'); ?>					
-				</div>								
+					<div class="col-sm-12">
+						<?php echo form_submit('submit', 'Submit LPJ', 'class="btn btn-outline-success float-right submit"'); ?>					
+					</div>					
+				</div>  																							
 			</div>
 			<?php echo form_close(); ?>
 
+			<!-- Nav tabs -->
+			<ul class="nav nav-tabs">
+			<li class="nav-item">
+				<a class="nav-link active" data-toggle="tab" href="#list_kehadiran">List Kehadiran</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" data-toggle="tab" href="#detail_pelatihan">Pelatihan Pengajuan</a>
+			</ul>	
 
-			<div id="list_kehadiran" class="collapse">
+
+			<div class="tab-content">	
+
+
+			<div id="list_kehadiran" class="tab-pane active">
 			<div class = "table-style" style = "padding : 25px">
 			<div class="section__content section__content--p10">
 				<div class="container-fluid">
@@ -161,13 +171,13 @@
 			</div>
 			</div>
 
-			<div id="detail_pelatihan" class="collapse" >
+			<div id="detail_pelatihan" class="tab-pane" >
 			<div class = "table-style" style = "padding : 25px">
 				<div class="form-group row">
 					<label class="col-sm-2">Tipe Pelatihan <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
 						<select class="form-control" disabled>
-							<option value=""><?php echo $pelatihan->ID_TIPE; ?></option>										
+							<option value=""><?php echo $pelatihan->DESKRIPSI_TIPE; ?></option>										
 						</select>																	
 					</div>
 					
@@ -310,13 +320,8 @@
 				</div>  
 
 			</div>  
-
-
 				
-
-
-
-
+			</div>	
 			</div>	
 			</div>	
 
@@ -324,232 +329,222 @@
 
 
 
-		
-			<!-- NASABAH ULAMM START-->
-			<div class="row">
-				<div class="col-md-12">
-					<div class="overview-wrap">
-						<h2 class="title-2"><button type="button" class="btn btn-outline-success" data-toggle="collapse" data-target="#kehadiran_ulamm">Nasabah Ulamm</button></h2>						
-					</div>
-				</div>
-			</div>
-			<div id="kehadiran_ulamm" class="collapse ">
-			<div class = "table-style" style = "padding : 25px">
-				<div class="form-group row">															
-					<label class="col-sm-2">Sektor Ekonomi </label>
-					<div class="col-sm-4">
-						<select class="form-control" id="sektor_ekonomi" name="sektor_ekonomi">
-							<option value="">--pilih sektor ekonomi--</option>							
-								<?php 
-								foreach ($sektor_ekonomi as $data_sektor_ekonomi){
-									echo '<option value="'.$data_sektor_ekonomi->SEKTOR_EKONOMI.'">'.$data_sektor_ekonomi->SEKTOR_EKONOMI.'</option>';                                                                    
-								}
-								?>	
-						</select>																	
-					</div>		
+			<!-- Nav tabs -->
+			<ul class="nav nav-tabs">
+			<li class="nav-item">
+				<a class="nav-link active" data-toggle="tab" href="#kehadiran_ulamm">Nasabah Ulamm</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" data-toggle="tab" href="#kehadiran_mekaar">Nasabah Mekaar</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" data-toggle="tab" href="#non_nasabah">Non Nasabah</a>
+			</li>
+			</ul>
 
-					<label class="col-sm-2">Jenis Pinjaman </label>
-					<div class="col-sm-4">
-						<select class="form-control" id="jenis_pinjaman" name="jenis_pinjaman">
-							<option value="">--pilih pinjaman--</option>	
-								<?php 
-								foreach ($jenis_pinjaman as $data_jenis_pinjaman){
-									echo '<option value="'.$data_jenis_pinjaman->Jenis_pinjaman.'">'.$data_jenis_pinjaman->Jenis_pinjaman.'</option>';                                                                    
-								}
-								?>								
-						</select>																	
-					</div>										
-				</div>		
-				<div class="form-group row">
-					<label class="col-sm-2">Jenis Program </label>
-					<div class="col-sm-4">
-						<select class="form-control" id="jenis_program" name="jenis_program">
-							<option value="">--pilih program--</option>	
-								<?php 
-								foreach ($jenis_program as $data_jenis_program){
-									echo '<option value="'.$data_jenis_program->Jenis_program.'">'.$data_jenis_program->Jenis_program.'</option>';                                                                    
-								}
-								?>							
-						</select>																	
-					</div>	
-						
-				</div>	
-				<div class="form-group row">	
-								<label class="col-sm-2">Cabang </label>
-					<div class="col-sm-4">
-						<select class="form-control" id="cabang_kehadiran" name="cabang_kehadiran">
-							<option value="">--pilih cabang--</option>	
-								<?php 
-								foreach ($cabang as $data_cabang){
-									echo '<option value="'.$data_cabang->KODE_CABANG.'">'.$data_cabang->DESKRIPSI.'</option>';                                                                    
-								}
-								?>								
-						</select>																	
-					</div>	
-					<label class="col-sm-2">Unit </label>
-					<div class="col-sm-4">
-						<select class="form-control" id="unit_kehadiran" name="unit_kehadiran">
-							<option value="">--pilih unit--</option>										
-						</select>																	
-					</div>
-				</div>
-			</div>
-			
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="table-style">
-					<table id="datatable_kehadiran_ulamm" class="table table-hover">                                     
-					<thead>
-						<tr>
-							<th>ID NASABAH</th>
-							<th>KTP</th>
-							<th>NAMA NASABAH</th>
-							<th>NO. HANDPHONE</th>
-							<th>KOLEKTIBILITAS</th>
-							<th>CABANG</th>
-							<th>UNIT</th>
-						</tr>
-					</thead>
-					<tbody>
+			<!-- Tab panes -->
+			<div class="tab-content">
+				<div id="kehadiran_ulamm" class="tab-pane active">
 
-					</tbody>
-						</table>
-					
-					</div>
-				</div>
-			</div>												
-			</div>	
-			<!-- NASABAH ULAMM END-->
+						<div class = "table-style" style = "padding : 25px">
+							<div class="form-group row">															
+								<label class="col-sm-2">Sektor Ekonomi </label>
+								<div class="col-sm-4">
+									<select class="form-control" id="sektor_ekonomi" name="sektor_ekonomi">
+										<option value="">--pilih sektor ekonomi--</option>							
+											<?php 
+											foreach ($sektor_ekonomi as $data_sektor_ekonomi){
+												echo '<option value="'.$data_sektor_ekonomi->SEKTOR_EKONOMI.'">'.$data_sektor_ekonomi->SEKTOR_EKONOMI.'</option>';                                                                    
+											}
+											?>	
+									</select>																	
+								</div>		
 
-			<!-- NASABAH MEKAAR START-->
-			<div class="row">
-				<div class="col-md-12">
-					<div class="overview-wrap">
-						<h2 class="title-2"><button type="button" class="btn btn-outline-danger" data-toggle="collapse" data-target="#kehadiran_mekaar">Nasabah Mekaar</button></h2>						
-					</div>
-				</div>
-			</div>
-			<div id="kehadiran_mekaar" class="collapse ">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="table-style">
-						<table id="datatable_kehadiran_mekaar" class="table table-hover">                                     
-						<thead>
-							<tr>
-								<th>KTP</th>
-								<th>NAMA NASABAH</th>
-								<th>ALAMAT</th>
-								<th>PRODUK</th>
-								<th>REGION</th>
-								<th>AREA</th>
-							</tr>
-						</thead>
-						<tbody>
-
-						</tbody>
-							</table>
-						
+								<label class="col-sm-2">Jenis Pinjaman </label>
+								<div class="col-sm-4">
+									<select class="form-control" id="jenis_pinjaman" name="jenis_pinjaman">
+										<option value="">--pilih pinjaman--</option>	
+											<?php 
+											foreach ($jenis_pinjaman as $data_jenis_pinjaman){
+												echo '<option value="'.$data_jenis_pinjaman->Jenis_pinjaman.'">'.$data_jenis_pinjaman->Jenis_pinjaman.'</option>';                                                                    
+											}
+											?>								
+									</select>																	
+								</div>										
+							</div>		
+							<div class="form-group row">
+								<label class="col-sm-2">Jenis Program </label>
+								<div class="col-sm-4">
+									<select class="form-control" id="jenis_program" name="jenis_program">
+										<option value="">--pilih program--</option>	
+											<?php 
+											foreach ($jenis_program as $data_jenis_program){
+												echo '<option value="'.$data_jenis_program->Jenis_program.'">'.$data_jenis_program->Jenis_program.'</option>';                                                                    
+											}
+											?>							
+									</select>																	
+								</div>	
+									
+							</div>	
+							<div class="form-group row">	
+											<label class="col-sm-2">Cabang </label>
+								<div class="col-sm-4">
+									<select class="form-control" id="cabang_kehadiran" name="cabang_kehadiran">
+										<option value="">--pilih cabang--</option>	
+											<?php 
+											foreach ($cabang as $data_cabang){
+												echo '<option value="'.$data_cabang->KODE_CABANG.'">'.$data_cabang->DESKRIPSI.'</option>';                                                                    
+											}
+											?>								
+									</select>																	
+								</div>	
+								<label class="col-sm-2">Unit </label>
+								<div class="col-sm-4">
+									<select class="form-control" id="unit_kehadiran" name="unit_kehadiran">
+										<option value="">--pilih unit--</option>										
+									</select>																	
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>												
-			</div>	
-			<!-- NASABAH MEKAAR END-->
+						
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="table-style">
+								<table id="datatable_kehadiran_ulamm" class="table table-hover">                                     
+								<thead>
+									<tr>
+										<th>ID NASABAH</th>
+										<th>KTP</th>
+										<th>NAMA NASABAH</th>
+										<th>NO. HANDPHONE</th>
+										<th>KOLEKTIBILITAS</th>
+										<th>CABANG</th>
+										<th>UNIT</th>
+									</tr>
+								</thead>
+								<tbody>
+
+								</tbody>
+									</table>
+								
+								</div>
+							</div>
+						</div>												
 
 
 
 
-			<!--  NON NASABAH START-->
-			<div class="row">
-				<div class="col-md-12">
-					<div class="overview-wrap">
-						<h2 class="title-2"><button type="button" class="btn btn-outline-warning" data-toggle="collapse" data-target="#non_nasabah">Non Nasabah</button></h2>						
-					</div>
 				</div>
+				<div id="kehadiran_mekaar" class="tab-pane fade">
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="table-style">
+									<table id="datatable_kehadiran_mekaar" class="table table-hover">                                     
+									<thead>
+										<tr>
+											<th>KTP</th>
+											<th>NAMA NASABAH</th>
+											<th>ALAMAT</th>
+											<th>PRODUK</th>
+											<th>REGION</th>
+											<th>AREA</th>
+										</tr>
+									</thead>
+									<tbody>
+
+									</tbody>
+										</table>
+									
+									</div>
+								</div>
+							</div>												
+				</div>
+				<div id="non_nasabah" class="tab-pane fade">
+						<div class = "table-style" style = "padding : 25px">
+
+						<?php 
+
+						$attrib = array('class' => 'form-horizontal','id'=>'add_non_nasabah','name'=>'add_non_nasabah','enctype'=>'multipart/form-data','onkeydown'=>"return event.key != 'Enter';");
+						echo form_open('',$attrib); 
+						?>	
+						<div class="form-group row">
+						<div class="modal-header">
+							<div id="judul_modal">
+							<h4>Input Non Nasabah</h4>
+							</div>
+						</div>
+						</div>
+						
+							<div class="form-group row">															
+								<label class="col-sm-2"> KTP </label>
+								<div class="col-sm-4">
+								<input type="text" class="form-control"  required="" id="ktp" name="ktp" />															
+								</div>
+
+								<label class="col-sm-2"> No Hp <span class="text-danger"></span></label>
+								<div class="col-sm-4">
+								<input type="text" class="form-control"  required="" id="no_hp" name="no_hp" />
+								</div>											
+							</div>
+
+							<div class="form-group row">
+								<label class="col-sm-2"> Nama </label>
+								<div class="col-sm-4">
+								<input type="text" class="form-control"  required="" id="nama" name="nama" />																
+								</div>
+
+								<label class="col-sm-2"> Lokasi PNM <span class="text-danger"></span></label>
+								<div class="col-sm-4">
+								<input type="text" class="form-control"  required="" id="lokasi_pnm" name="lokasi_pnm" />
+								</div>				
+							</div>
+
+							<div class="form-group row">	
+								<label class="col-sm-2"> Alamat </label>
+								<div class="col-sm-4">
+								<input type="text" class="form-control"  required="" id="alamat" name="alamat" />													
+								</div>
+
+								<label class="col-sm-2"> Catatan <span class="text-danger"></span></label>
+								<div class="col-sm-4">					
+								<textarea class="form-control rounded-0" id="catatan" name="catatan" rows="3"></textarea>
+								</div>				
+							</div>	
+
+							<div class="modal-footer">
+							<?php echo form_submit('submit', 'Simpan', 'class="btn btn-primary submit"'); ?>
+							</div>
+							<?php echo form_close(); ?>
+
+						</div>
+				
+						
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="table-style">
+								<table id="datatable_kehadiran_non_nasabah" class="table table-hover">                                     
+									<thead>
+										<tr>
+											<th>KTP</th>
+											<th>NAMA NASABAH</th>
+											<th>NO. HANDPHONE</th>
+											<th>ALAMAT</th>
+											<th>CABANG</th>
+											<th>UNIT</th>
+										</tr>
+									</thead>
+									<tbody>
+
+									</tbody>
+								</table>
+								
+								</div>
+							</div>
+						</div>												
+						</div>	
 			</div>
-			<div id="non_nasabah" class="collapse ">
-			<div class = "table-style" style = "padding : 25px">
 
-			<?php 
 
-			$attrib = array('class' => 'form-horizontal','id'=>'add_non_nasabah','name'=>'add_non_nasabah','enctype'=>'multipart/form-data','onkeydown'=>"return event.key != 'Enter';");
-			echo form_open('',$attrib); 
-			?>	
-			<div class="form-group row">
-			<div class="modal-header">
-				<div id="judul_modal">
-				<h4>Input Non Nasabah</h4>
-				</div>
-			</div>
-			</div>
-			
-				<div class="form-group row">															
-					<label class="col-sm-2"> KTP </label>
-					<div class="col-sm-4">
-					<input type="text" class="form-control"  required="" id="ktp" name="ktp" />															
-					</div>
-
-					<label class="col-sm-2"> No Hp <span class="text-danger"></span></label>
-					<div class="col-sm-4">
-					<input type="text" class="form-control"  required="" id="no_hp" name="no_hp" />
-					</div>											
-				</div>
-
-				<div class="form-group row">
-					<label class="col-sm-2"> Nama </label>
-					<div class="col-sm-4">
-					<input type="text" class="form-control"  required="" id="nama" name="nama" />																
-					</div>
-
-					<label class="col-sm-2"> Lokasi PNM <span class="text-danger"></span></label>
-					<div class="col-sm-4">
-					<input type="text" class="form-control"  required="" id="lokasi_pnm" name="lokasi_pnm" />
-					</div>				
-				</div>
-
-				<div class="form-group row">	
-					<label class="col-sm-2"> Alamat </label>
-					<div class="col-sm-4">
-					<input type="text" class="form-control"  required="" id="alamat" name="alamat" />													
-					</div>
-
-					<label class="col-sm-2"> Catatan <span class="text-danger"></span></label>
-					<div class="col-sm-4">					
-					<textarea class="form-control rounded-0" id="catatan" name="catatan" rows="3"></textarea>
-					</div>				
-				</div>	
-
-				<div class="modal-footer">
-				<?php echo form_submit('submit', 'Simpan', 'class="btn btn-primary submit"'); ?>
-				</div>
-				<?php echo form_close(); ?>
-
-			</div>
-	
-			
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="table-style">
-					<table id="datatable_kehadiran_non_nasabah" class="table table-hover">                                     
-						<thead>
-							<tr>
-								<th>KTP</th>
-								<th>NAMA NASABAH</th>
-								<th>NO. HANDPHONE</th>
-								<th>ALAMAT</th>
-								<th>CABANG</th>
-								<th>UNIT</th>
-							</tr>
-						</thead>
-						<tbody>
-
-						</tbody>
-					</table>
-					
-					</div>
-				</div>
-			</div>												
-			</div>	
-			<!-- NON NASABAH END-->			
 		</div>
 	</div>
 </div>			

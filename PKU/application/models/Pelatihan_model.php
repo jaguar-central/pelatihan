@@ -283,7 +283,7 @@ public function insert_trx_no_reject($data)
 
 public function select_t_pelatihan_by_id($id)
 {
-        $query = $this->db->select("*")->from("T_PELATIHAN")->where("ID",$id);
+        $query = $this->db->select("*,dbo.DESKRIPSI_PELATIHAN_TYPE(ID_TIPE) as DESKRIPSI_TIPE")->from("T_PELATIHAN")->where("ID",$id);
         return $query->get();     
 }
 

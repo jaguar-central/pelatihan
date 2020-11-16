@@ -326,7 +326,7 @@
 	$(document).ready(function() {		
 
 
-		new AutoNumeric("#anggaran_edit","commaDecimalCharDotSeparator");	
+		// new AutoNumeric("#anggaran_edit","commaDecimalCharDotSeparator");	
 
 		var durasi = function () {
 			var start 	= $('#timeawal_edit').val();

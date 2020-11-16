@@ -277,7 +277,7 @@
 									<label>Grand Total </label>
 								  <div>
 								  <div class="col-md-12">    
-									<input style="text-align:right" type="text" class="form-control money" id="total_cost_rab_akhir" name="total_cost_rab_akhir" data-a-sign="Rp. " value="" readonly="" required>
+									<input style="text-align:right" type="text" class="form-control money" id="total_cost_rab_akhir" name="total_cost_rab_akhir" data-a-sign="Rp. " value="" readonly="" required="" >
 								  </div>
 								
 								
@@ -549,57 +549,68 @@
 		e.preventDefault();        	
 		var formURL = "<?php echo base_url('pelatihan/post_pelatihan'); ?>";
 		var frmdata = new FormData(this);
-					
-		var xhr = $.ajax({
-			url: formURL,
-			type: 'POST',
-			data: frmdata,
-			processData: false,
-			contentType: false
-		});
-		xhr.done(function(data) {
-			var obj = $.parseJSON(data);
-			
-			console.log(data);
-			
-			if(obj.result == 'OK')
-			{
-				Swal.fire({
-				  position: 'center',
-				  icon: 'success',
-				  title: 'Pelatihan telah di simpan',
-				  showConfirmButton: false,
-				  timer: 1500
-				})
-				setTimeout(function () {
-					window.location.href = '<?php echo base_url(); ?>pelatihan/ulamm';
-				}, 1600);
-			}
-			if(obj.result == 'UP')
-			{
+
+		
+		if ($('#total_cost_rab_akhir').val()!='') {		
+			var xhr = $.ajax({
+				url: formURL,
+				type: 'POST',
+				data: frmdata,
+				processData: false,
+				contentType: false
+			});
+			xhr.done(function(data) {
+				var obj = $.parseJSON(data);
+				
 				console.log(data);
-				Swal.fire({
-				  position: 'center',
-				  icon: 'error',
-				  title: obj.msg,
-				  showConfirmButton: false,
-				  timer: 1500
-				})					
-			}
-			if(obj.result == 'NG')
-			{
-				Swal.fire({
-				  position: 'center',
-				  icon: 'error',
-				  title: obj.msg,
-				  showConfirmButton: false,
-				  timer: 1500
-				})	
-			}
-		});
-		xhr.fail(function() {
-			$("#loader_container").hide();
-			var failMsg = "Something error happened! as";
-		});	
+				
+				if(obj.result == 'OK')
+				{
+					Swal.fire({
+					position: 'center',
+					icon: 'success',
+					title: 'Pelatihan telah di simpan',
+					showConfirmButton: false,
+					timer: 1500
+					})
+					setTimeout(function () {
+						window.location.href = '<?php echo base_url(); ?>pelatihan/ulamm';
+					}, 1600);
+				}
+				if(obj.result == 'UP')
+				{
+					console.log(data);
+					Swal.fire({
+					position: 'center',
+					icon: 'error',
+					title: obj.msg,
+					showConfirmButton: false,
+					timer: 1500
+					})					
+				}
+				if(obj.result == 'NG')
+				{
+					Swal.fire({
+					position: 'center',
+					icon: 'error',
+					title: obj.msg,
+					showConfirmButton: false,
+					timer: 1500
+					})	
+				}
+			});
+			xhr.fail(function() {
+				$("#loader_container").hide();
+				var failMsg = "Something error happened! as";
+			});	
+		}else{
+			Swal.fire({
+			position: 'center',
+			icon: 'error',
+			title: 'Rencana Anggaran Biaya tidak boleh kosong',
+			showConfirmButton: false,
+			timer: 1500
+			})	
+		}
 	});	
 </script>

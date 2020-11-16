@@ -260,8 +260,8 @@ $(document).ready(function() {
                 } 
               },                         
 			],			
-			"dom": "<'dom_datable'f>rt<'dom_datable col-md-6'i><'dom_datable col-md-6'p>",
-			"pagingType": "simple",
+			"dom": "<'dom_datable'f>rt<'dom_datable col-md-6'i><'dom_datable col-md-6'p>",			
+			// "pagingType": "simple",
 			"createdRow" : function (row, data, index) {
 				$(row).addClass("add-kehadiran-mekaar");      
 			}
