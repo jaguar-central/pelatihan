@@ -180,27 +180,60 @@
 							<option value=""><?php echo $pelatihan->DESKRIPSI_TIPE; ?></option>										
 						</select>																	
 					</div>
-					
-					<label class="col-sm-2">Cabang <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<select class="form-control" disabled>	
-							<option value=""><?php echo $pelatihan->CABANG_ULAMM; ?></option>									
-						</select>																	
-					</div>
-				</div>		
-				
-				<div class="form-group row">
+
 					<label class="col-sm-2">Judul <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" value="<?php echo $pelatihan->TITLE; ?>" disabled />
-					</div>							
+					</div>						
+					
+
+				</div>		
+				
+				<?php if ($pelatihan->ID_BISNIS==1){ ?>
+				<div class="form-group row">
+					<label class="col-sm-2">Cabang Ulamm<span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+						<select class="form-control" disabled>	
+							<option value=""><?php echo $pelatihan->DESKRIPSI_CABANG_ULAMM; ?></option>									
+						</select>																	
+					</div>						
 				
 					<label class="col-sm-2">Unit <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" value="<?php echo $pelatihan->UNIT_ULAMM; ?>" disabled />
+						<input type="text" class="form-control" value="<?php echo $pelatihan->DESKRIPSI_UNIT; ?>" disabled />
 																						
 					</div>							
-				</div>								
+				</div>				
+				<?php }else{ ?>	
+				<div class="form-group row">
+					<label class="col-sm-2">Region <span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+						<select class="form-control" disabled>	
+							<option value=""><?php echo $pelatihan->DESKRIPSI_REGION; ?></option>									
+						</select>																	
+					</div>						
+				
+					<label class="col-sm-2">Area <span class="text-danger">*</span></label>
+					<div class="col-sm-4">			
+						<select class="form-control" disabled>	
+							<option value=""><?php echo $pelatihan->DESKRIPSI_AREA; ?></option>									
+						</select>	
+					</div>	
+												
+				</div>		
+				<div class="form-group row">
+					<label class="col-sm-2">Cabang Mekaar<span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" value="<?php echo $pelatihan->DESKRIPSI_CABANG_MEKAAR; ?>" disabled />																						
+					</div>			
+					<label class="col-sm-2">Cabang Ulamm<span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+						<select class="form-control" disabled>	
+							<option value=""><?php echo $pelatihan->DESKRIPSI_CABANG_ULAMM; ?></option>									
+						</select>																	
+					</div>															
+				</div>							
+				<?php } ?>				
 
 				<div class="form-group row">
 					<label class="col-sm-2">Deskripsi <span class="text-danger">*</span></label>
@@ -255,7 +288,7 @@
 					<label class="col-sm-2">Provinsi <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
 						<select class="form-control" required="" id="provinsi_details" name="provinsi_details" disabled >							
-							<option value=""><?php echo $pelatihan->PROVINSI; ?></option>						
+							<option value=""><?php echo $pelatihan->DESKRIPSI_PROVINSI; ?></option>						
 						</select>
 					</div>                          
 				

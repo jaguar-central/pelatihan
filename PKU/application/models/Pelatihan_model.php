@@ -283,7 +283,13 @@ public function insert_trx_no_reject($data)
 
 public function select_t_pelatihan_by_id($id)
 {
-        $query = $this->db->select("*,dbo.DESKRIPSI_PELATIHAN_TYPE(ID_TIPE) as DESKRIPSI_TIPE")->from("T_PELATIHAN")->where("ID",$id);
+		$query = $this->db->select("*,dbo.DESKRIPSI_PELATIHAN_TYPE(ID_TIPE) as DESKRIPSI_TIPE,dbo.DESKRIPSI_PROVINSI(PROVINSI) as DESKRIPSI_PROVINSI
+		,dbo.DESKRIPSI_REGION(REGIONAL_MEKAAR) as DESKRIPSI_REGION
+		,dbo.DESKRIPSI_AREA(AREA_MEKAAR) as DESKRIPSI_AREA
+		,dbo.DESKRIPSI_CABANG_MEKAAR(CABANG_MEKAAR) as DESKRIPSI_CABANG_MEKAAR
+		,dbo.DESKRIPSI_CABANG_ULAMM(CABANG_ULAMM) as DESKRIPSI_CABANG_ULAMM
+		,dbo.DESKRIPSI_UNIT(UNIT_ULAMM) as DESKRIPSI_UNIT
+		")->from("T_PELATIHAN")->where("ID",$id);
         return $query->get();     
 }
 
