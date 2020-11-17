@@ -307,8 +307,8 @@ class Master extends MY_Controller
 		$output = array(
 			'result'  	=> 'OK',
 			'msg'		=> ''
-		);
-		
+		);		
+
 
 		switch ($role) {
 		  case "1":
@@ -358,7 +358,7 @@ class Master extends MY_Controller
 			
 			$last_id_user = $this->db->insert_id(); //last id yang di insert				
 			
-			for ($i=1;$i<count($cabang_ulamm);$i++){
+			for ($i=0;$i<count($cabang_ulamm);$i++){
 				$data_cabang = array(
 					'ID_USER' 				=> $last_id_user,
 					'ID_GROUP' 				=> $bisnis,

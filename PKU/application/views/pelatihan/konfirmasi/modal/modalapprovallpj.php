@@ -47,9 +47,7 @@
 		<div class="modal-footer">
 			<?php $group_id = array('2','3'); ?>
 			<?php if (in_array($this->session->userdata('sess_user_id_user_group'),$group_id)){ ?>
-			<?php echo form_submit('submit_approve', 'Verification', 'class="btn btn-primary submit"'); ?>																		
-
-			<?php echo form_submit('submit_approve', 'Verification', 'class="btn btn-primary submit"'); ?>							
+			<?php echo form_submit('submit_approve', 'Verification', 'class="btn btn-primary submit"'); ?>																								
 											
 			<?php }else{ ?>
 				<?php echo form_submit('submit', 'Approve', 'class="btn btn-primary submit"'); ?>

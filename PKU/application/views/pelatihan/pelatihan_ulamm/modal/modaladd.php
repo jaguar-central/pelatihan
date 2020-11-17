@@ -66,7 +66,7 @@
 				<div class="form-group row">
 					<label class="col-sm-2">Judul <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="judul_pelatihan" name="judul_pelatihan" />
+						<input type="text" class="form-control"  required="" id="judul_pelatihan" name="judul_pelatihan" maxlength="150" />
 					</div>							
 				
 					<label class="col-sm-2">Unit <span class="text-danger">*</span></label>
@@ -156,18 +156,18 @@
 								<span class="input-group-addon">
 								<span class="fas fa-calendar"></span>
 								</span>
-								<input type='text' class="form-control" id='timeawal' />
+								<input type='text' class="form-control" id='timeawal' required=""/>
 								<span class="input-group-addon bg-custom b-0">s/d</span>
-								<input type='text' class="form-control" id='timeakhir' />
+								<input type='text' class="form-control" id='timeakhir' required="" />
 							</div>							
 
-							<input type="hidden" id="inputStartTglPelaksanaan" name="inputStartTglPelaksanaan" />
+							<input type="hidden" id="inputStartTglPelaksanaan" name="inputStartTglPelaksanaan" required=""/>
 							
-							<input type="hidden" id="inputStartTimePelaksanaan" name="inputStartTimePelaksanaan" />
+							<input type="hidden" id="inputStartTimePelaksanaan" name="inputStartTimePelaksanaan" required=""/>
 
-							<input type="hidden" id="inputAkhirTglPelaksanaan" name="inputAkhirTglPelaksanaan"/>
+							<input type="hidden" id="inputAkhirTglPelaksanaan" name="inputAkhirTglPelaksanaan" required=""/>
 							
-							<input type="hidden" id="inputEndTimePelaksanaan" name="inputEndTimePelaksanaan" />
+							<input type="hidden" id="inputEndTimePelaksanaan" name="inputEndTimePelaksanaan" required=""/>
 
 						</div>
 
@@ -277,7 +277,7 @@
 									<label>Grand Total </label>
 								  <div>
 								  <div class="col-md-12">    
-									<input style="text-align:right" type="text" class="form-control money" id="total_cost_rab_akhir" name="total_cost_rab_akhir" data-a-sign="Rp. " value="" readonly="" required="" >
+									<input style="text-align:right" type="text" class="form-control money" id="total_cost_rab_akhir" name="total_cost_rab_akhir" data-a-sign="Rp. " value="0" readonly="" required="" >
 								  </div>
 								
 								
@@ -551,7 +551,7 @@
 		var frmdata = new FormData(this);
 
 		
-		if ($('#total_cost_rab_akhir').val()!='') {		
+		if ($('#total_cost_rab_akhir').val()>0) {		
 			var xhr = $.ajax({
 				url: formURL,
 				type: 'POST',

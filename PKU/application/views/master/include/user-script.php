@@ -103,19 +103,7 @@
 				$(".cabang_ulamm").show();
 			}			
 			
-		});
-		
-		$('#bisnis').on('change', function (e) {			
-			var bisnis = $("#bisnis").val();
-			
-			if (bisnis==1){
-				$(".cabang_ulamm").show();
-				$(".region_mekaar").hide();
-			}else{
-				$(".region_mekaar").show();
-				$(".cabang_ulamm").hide();
-			}
-		});		
+		});	
 		
 	});
 	

@@ -274,7 +274,6 @@ class Pelatihan extends MY_Controller
         $kuota_peserta              = trim($this->security->xss_clean(strip_image_tags($this->input->post('kuota_peserta'))));
 
         $anggaran               	= str_replace(array('.',',00'),'',trim($this->security->xss_clean(strip_image_tags($this->input->post('anggaran')))));
-        //$provinsi               	= trim($this->security->xss_clean(strip_image_tags($this->input->post('provinsi'))));
 		$alamat_tempat_pelatihan    = trim($this->security->xss_clean(strip_image_tags($this->input->post('alamat_tempat_pelatihan'))));
 		
 		$provinsi    				= trim($this->security->xss_clean(strip_image_tags($this->input->post('provinsi'))));
@@ -417,7 +416,10 @@ class Pelatihan extends MY_Controller
 				'CREATED_DATE' 			=> date('Y-m-d H:i:s')			
 			);
 			
+
+			// $this->db->trans_start(TRUE);
 			$this->Pelatihan_model->insert_t_pelatihan($data);
+			
 			
 			$id_pelatihan = $this->db->insert_id(); //last id yang di insert		
 			
@@ -450,6 +452,15 @@ class Pelatihan extends MY_Controller
 
 				$this->Pelatihan_model->update_project_charter($data_update,$where_update);
 			}
+
+			// $db_error = $this->db->error();
+
+			// if (!empty($db_error)) {
+			// 	$output = array(
+			// 		'result'  	=> 'NG',
+			// 		'msg'		=> $db_error['message']
+			// 	);
+			// }
 		}		
 		catch (Exception $e)
 		{

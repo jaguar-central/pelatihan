@@ -389,37 +389,47 @@ $(document).ready(function() {
 		var formURL = "<?php echo base_url('pelatihan/post_pelatihan_lpj'); ?>";
 		var frmdata = new FormData(this);
 					
-		var xhr = $.ajax({
-			url: formURL,
-			type: 'POST',
-			data: frmdata,
-			processData: false,
-			contentType: false
-		});
-		xhr.done(function(data) {
-			var obj = $.parseJSON(data);
-			
-			console.log(data);
-			
-			if(obj.result == 'OK')
-			{
-				window.location.href = '<?php echo base_url(); ?>pelatihan/<?php echo $this->uri->segment(4); ?>';
-			}
-			if(obj.result == 'UP')
-			{
+		
+		if ($('#total_cost_rab_akhir_modallpj').val()>0) {	
+			var xhr = $.ajax({
+				url: formURL,
+				type: 'POST',
+				data: frmdata,
+				processData: false,
+				contentType: false
+			});
+			xhr.done(function(data) {
+				var obj = $.parseJSON(data);
+				
 				console.log(data);
-			}
-			if(obj.result == 'NG')
-			{
-				$("#m-ap-cab").html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a> '+obj.msg+'</div>');
-			}
-		});
-		xhr.fail(function() {
-			$("#loader_container").hide();
-			var failMsg = "Something error happened! as";
-		});	
+				
+				if(obj.result == 'OK')
+				{
+					window.location.href = '<?php echo base_url(); ?>pelatihan/<?php echo $this->uri->segment(4); ?>';
+				}
+				if(obj.result == 'UP')
+				{
+					console.log(data);
+				}
+				if(obj.result == 'NG')
+				{
+					$("#m-ap-cab").html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a> '+obj.msg+'</div>');
+				}
+			});
+			xhr.fail(function() {
+				$("#loader_container").hide();
+				var failMsg = "Something error happened! as";
+			});	
+		}else{
+			Swal.fire({
+			position: 'center',
+			icon: 'error',
+			title: 'Realisasi Anggaran Biaya tidak boleh kosong',
+			showConfirmButton: false,
+			timer: 1500
+			})	
+		}
 	});	
-
 
 
 

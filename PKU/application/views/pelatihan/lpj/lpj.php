@@ -110,7 +110,7 @@
 									<label>Grand Total </label>
 								  <div>
 								  <div class="col-md-12">    
-									<input type="text" class="form-control money" id="total_cost_rab_akhir_modallpj" name="total_cost_rab_akhir" data-a-sign="Rp. " value="" readonly="" required>
+									<input type="text" class="form-control money" id="total_cost_rab_akhir_modallpj" name="total_cost_rab_akhir" data-a-sign="Rp. " value="0" readonly="" required>
 								  </div>
 								
 								
