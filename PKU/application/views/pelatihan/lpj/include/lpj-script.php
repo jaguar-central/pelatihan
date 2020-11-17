@@ -231,7 +231,7 @@ $(document).ready(function() {
 			"columns" : [										
               { "data": "noktp", render: function (data, type, row) 
                 {
-                  return '<input type="hidden" class="form-control" id="bisnis" name="bisnis[]" value="MEKAAR"><input type="hidden" class="form-control" id="id_nasabah" name="id_nasabah[]" value="'+row.nasabahid+'"><input type="hidden" class="form-control" id="ktp" name="ktp[]" value="'+row.noktp+'">'+row.noktp;
+                  return '<input type="hidden" class="form-control" id="sektor_ekonomi" name="sektor_ekonomi[]" value="'+row.sektor_ekonomi+'"><input type="hidden" class="form-control" id="bisnis" name="bisnis[]" value="MEKAAR"><input type="hidden" class="form-control" id="id_nasabah" name="id_nasabah[]" value="'+row.nasabahid+'"><input type="hidden" class="form-control" id="ktp" name="ktp[]" value="'+row.noktp+'">'+row.noktp;
                 } 
               },
               { "data": "nama", render: function (data, type, row) 
@@ -258,7 +258,7 @@ $(document).ready(function() {
                 {
                   return '<input type="hidden" class="form-control" id="area" name="area[]" value="'+row.area+'">'+row.area;
                 } 
-              },                         
+			  },    			                       
 			],			
 			"dom": "<'dom_datable'f>rt<'dom_datable col-md-6'i><'dom_datable col-md-6'p>",			
 			// "pagingType": "simple",
@@ -266,6 +266,16 @@ $(document).ready(function() {
 				$(row).addClass("add-kehadiran-mekaar");      
 			}
 		});
+
+
+		$(document).on("change", "#sektor_ekonomi_mekaar", function () {			
+			var sektor_ekonomi_mekaar 	= $('#sektor_ekonomi_mekaar').val();			
+					
+			table_kehadiran_mekaar.clear();
+			table_kehadiran_mekaar.column(0).search( sektor_ekonomi_mekaar=='0' ? '' : sektor_ekonomi_mekaar   );
+
+			table_kehadiran_mekaar.clear().draw(false);
+		});				
 
 		$("#add_non_nasabah").submit(function(e){
 			e.preventDefault();        	

@@ -150,6 +150,9 @@ class Pelatihan extends MY_Controller
 		$data["pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_by_id($idpelatihan)->row();
 		$data["rab"] = $this->Pelatihan_model->select_t_rab_by_id($idpelatihan);
 
+		$data["sektor_ekonomi_mekaar"]	= $this->Master_model->select_dw_nasabah_mekaar_sektor_ekonomi();
+		
+
         // echo '<pre>';
 		// print_r($data['rab']);
 		// echo '</pre>';die;
@@ -1368,10 +1371,16 @@ class Pelatihan extends MY_Controller
 	{									
 		$param["start"] = isset($_GET["start"]) ? $_GET["start"] : 0;
 		$param["limit"] = isset($_GET["length"]) ? $_GET["length"] : 10;		
-		$param["search"] = isset($_GET["search"]["value"]) ? $_GET["search"]["value"] : NULL ;			
+		$param["search"] = isset($_GET["search"]["value"]) ? $_GET["search"]["value"] : NULL ;		
+		
+		$param['sektor_ekonomi'] 	= isset($_GET["columns"][0]['search']['value']) ? $_GET["columns"][0]['search']['value'] : NULL;
 
 		$this->config->set_item('elastic_index', 'debitur');		
-		if ($param["search"]!=NULL){
+
+		if ($param['sektor_ekonomi']!=NULL){
+			$debitur = $this->elastic->call('/_search?q=sektor_ekonomi:'.$param["sektor_ekonomi"].'&filter_path=hits.hits.*,aggregations.*');
+			$debitur_count = $this->elastic->call('_count?q=sektor_ekonomi:'.$param["sektor_ekonomi"]);
+		}else if ($param["search"]!=NULL){
 			$debitur = $this->elastic->call('/_search?q=nama:'.$param["search"].'&filter_path=hits.hits.*,aggregations.*');
 			$debitur_count = $this->elastic->call('_count?q=nama:'.$param["search"]);			
 		}else{						

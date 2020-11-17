@@ -469,6 +469,23 @@
 
 				</div>
 				<div id="kehadiran_mekaar" class="tab-pane fade">
+
+					<div class = "table-style" style = "padding : 25px">
+							<div class="form-group row">															
+								<label class="col-sm-2">Sektor Ekonomi </label>
+								<div class="col-sm-4">
+									<select class="form-control" id="sektor_ekonomi_mekaar" name="sektor_ekonomi_mekaar">
+										<option value="">--pilih sektor ekonomi--</option>							
+											<?php 
+											foreach ($sektor_ekonomi_mekaar as $data_sektor_ekonomi_mekaar){
+												echo '<option value="'.$data_sektor_ekonomi_mekaar->ID_SUB_SEKTOR.'">'.$data_sektor_ekonomi_mekaar->SEKTOR.' - '.$data_sektor_ekonomi_mekaar->SUB_SEKTOR.'</option>';                                                                    
+											}
+											?>	
+									</select>																	
+								</div>											
+							</div>					
+						</div>
+
 							<div class="row">
 								<div class="col-lg-12">
 									<div class="table-style">
@@ -575,9 +592,7 @@
 							</div>
 						</div>												
 						</div>	
-			</div>
-
-
+				</div>
 		</div>
 	</div>
 </div>			

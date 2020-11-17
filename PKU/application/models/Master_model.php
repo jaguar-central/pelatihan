@@ -85,6 +85,13 @@ class Master_model extends CI_Model {
 			return $query->result();
 	}
 
+
+	public function select_dw_nasabah_mekaar_sektor_ekonomi()
+	{
+			$query = $this->db->query("SELECT * FROM MS_SEKTOR_MEKAAR ");
+			return $query->result();
+	}	
+
 	public function select_dw_nasabah_ulamm_jenis_pinjaman()
 	{
 			$query = $this->db->query("SELECT DISTINCT Jenis_pinjaman FROM [ITD_DW].dbo.nasabah_data_vdp WHERE ISNULL(Jenis_pinjaman,'')<>'' order by Jenis_pinjaman");
