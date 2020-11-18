@@ -117,7 +117,7 @@
 	
 	$(".return").click(function(){
 		var id_pelatihan = $("#id_pelatihan").val();
-	  $.post("<?php echo base_url('pelatihan/post_change_status_pelatihan/"+id_pelatihan+"/draft') ?>", function(data, status){
+	  $.post("<?php echo base_url('pelatihan/post_change_status_pelatihan/"+id_pelatihan+"/lpj_draft') ?>", function(data, status){
 		window.location.href = '<?php echo base_url(); ?>pelatihan/konfirmasi_lpj';
 	  });
 	});			
