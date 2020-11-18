@@ -108,13 +108,15 @@ $(document).ready(function() {
 			"processing": true,
 			"serverSide": true,
 			"ajax": {
-			"url" : '<?php echo base_url('pelatihan/get_paging_kehadiran_non_nasabah/'); ?>',
+			"url" : '<?php echo base_url('pelatihan/get_paging_kehadiran_non_nasabah/'.$this->uri->segment(3)); ?>',
 			"type" :'GET'                      
 			},
 			"columns" : [
 				{ "data": "NO_KTP", render: function (data, type, row) 
                 {
-                  return '<input type="hidden" class="form-control" id="bisnis" name="bisnis[]" value="NON_NASABAH"><input type="hidden" class="form-control" id="ktp" name="ktp[]" value="'+row.NO_KTP+'">'+row.NO_KTP;
+				  return '<input type="hidden" class="form-control" id="bisnis" name="bisnis[]" value="NON_NASABAH">'
+				  		+'<input type="hidden" class="form-control" id="id_non_nasabah" name="id_non_nasabah[]" value="'+row.ID+'">'
+				  		+'<input type="hidden" class="form-control" id="ktp" name="ktp[]" value="'+row.NO_KTP+'">'+row.NO_KTP;
                 } 
               },
               { "data": "NAMA", render: function (data, type, row) 
@@ -231,7 +233,11 @@ $(document).ready(function() {
 			"columns" : [										
               { "data": "noktp", render: function (data, type, row) 
                 {
-                  return '<input type="hidden" class="form-control" id="sektor_ekonomi" name="sektor_ekonomi[]" value="'+row.sektor_ekonomi+'"><input type="hidden" class="form-control" id="bisnis" name="bisnis[]" value="MEKAAR"><input type="hidden" class="form-control" id="id_nasabah" name="id_nasabah[]" value="'+row.nasabahid+'"><input type="hidden" class="form-control" id="ktp" name="ktp[]" value="'+row.noktp+'">'+row.noktp;
+				  return '<input type="hidden" class="form-control" id="sektor_ekonomi" name="sektor_ekonomi[]" value="'+row.sektor_ekonomi+'">'
+				  +'<input type="hidden" class="form-control" id="bisnis" name="bisnis[]" value="MEKAAR">'
+				  +'<input type="hidden" class="form-control" id="id_nasabah" name="id_nasabah[]" value="'+row.nasabahid+'">'
+				  +'<input type="hidden" class="form-control" id="regionid" name="regionid[]" value="'+row.regionid+'">'
+				  +'<input type="hidden" class="form-control" id="ktp" name="ktp[]" value="'+row.noktp+'">'+row.noktp;
                 } 
               },
               { "data": "nama", render: function (data, type, row) 
@@ -544,7 +550,8 @@ $(document).ready(function() {
 
 	$(document).on("click", ".add-kehadiran-non-nasabah", function () {					
 		var index = parseInt($(this).index());				
-		
+
+		var id_non_nasabah 	= $("tr.add-kehadiran-non-nasabah:eq("+index+") #id_non_nasabah").val();
 		var ktp 			= $("tr.add-kehadiran-non-nasabah:eq("+index+") #ktp").val();
 		var bisnis 			= $("tr.add-kehadiran-non-nasabah:eq("+index+") #bisnis").val();
 		var nama_nasabah 	= $("tr.add-kehadiran-non-nasabah:eq("+index+") #nama_nasabah").val();
@@ -557,6 +564,7 @@ $(document).ready(function() {
 		$.post("<?php echo base_url('pelatihan/post_kehadiran'); ?>",
 		{	
 			id_pelatihan	: '<?php echo $this->uri->segment(3); ?>',
+			id_nasabah		: id_non_nasabah,
 			ktp				: ktp,
 			bisnis			: bisnis,
 			nama_nasabah	: nama_nasabah,
@@ -567,7 +575,7 @@ $(document).ready(function() {
 		},
 		function(data, status){
 			$('#datatable_listkehadiran').DataTable().draw(false);
-			$('#datatable_kehadiran_ulamm').DataTable().draw(false);
+			$('#datatable_kehadiran_non_nasabah').DataTable().draw(false);
 			console.log("Data: " + data + "\nStatus: " + status);
 		});
 
@@ -587,6 +595,7 @@ $(document).ready(function() {
 			$('#datatable_listkehadiran').DataTable().draw(false);
 			$('#datatable_kehadiran_ulamm').DataTable().draw(false);
 			$('#datatable_kehadiran_mekaar').DataTable().draw(false);
+			$('#datatable_kehadiran_non_nasabah').DataTable().draw(false);
 			console.log("Data: " + data + "\nStatus: " + status);
 		});		
 		
