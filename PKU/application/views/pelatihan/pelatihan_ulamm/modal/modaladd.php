@@ -449,11 +449,12 @@
 				cache: false,
 				success: function(data){											
 					var mydata = JSON.parse(data);
-					// console.log(mydata.data.JUDUL_PELATIHAN);
 					$('#judul_pelatihan').val(mydata.data.JUDUL_PELATIHAN);
 					$('#alamat_tempat_pelatihan').val(mydata.data.ALAMAT);					
-					$('#anggaran').val(mydata.data.BUDGET);
-					// AutoNumeric("#anggaran","commaDecimalCharDotSeparator");
+
+					const element = AutoNumeric.getAutoNumericElement('#anggaran')
+  					element.set(mydata.data.BUDGET);
+
 					var dateawal = moment(mydata.data.TANGGAL);
 					$('#timeawal').val(dateawal.format('MM/DD/YYYY hh:mm A'));	
 					$('#inputStartTglPelaksanaan').val(dateawal.format('YYYY-MM-DD'));	
