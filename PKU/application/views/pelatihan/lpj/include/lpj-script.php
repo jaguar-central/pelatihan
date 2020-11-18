@@ -348,6 +348,7 @@ $(document).ready(function() {
 		var $clone = $TABLE_LPJ.find('tr.d-none').clone(true).removeClass('d-none');  
 		$TABLE_LPJ.find('tbody').append($clone);
 		calculate_grand_total_modallpj();
+		return false;
 	});
 
 	
@@ -355,17 +356,23 @@ $(document).ready(function() {
 
 		$(this).parents('tr').detach();
 		calculate_grand_total_modallpj();
+
+		return false;
 	});
 
 	$('.table-up-modallpj').click(function () {        
 		var $row = $(this).parents('tbody tr');
 		if ($row.index() === 1) return;
 		$row.prev().before($row.get(0));
+
+		return false;
 	});
 
 	$('.table-down-modallpj').click(function () {
 		var $row = $(this).parents('tbody tr');
 		$row.next().after($row.get(0));
+
+		return false;
 	});
 
 

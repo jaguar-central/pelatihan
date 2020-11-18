@@ -128,6 +128,7 @@
 			</div>
 			<?php echo form_close(); ?>
 
+
 			<!-- Nav tabs -->
 			<ul class="nav nav-tabs">
 			<li class="nav-item">
