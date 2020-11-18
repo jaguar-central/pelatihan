@@ -111,14 +111,14 @@
 	$(".reject").click(function(){
 		var id_pelatihan = $("#id_pelatihan").val();
 	  $.post("<?php echo base_url('pelatihan/post_change_status_pelatihan/"+id_pelatihan+"/reject') ?>", function(data, status){
-		alert("Data: " + data + "\nStatus: " + status);
+		window.location.href = '<?php echo base_url(); ?>pelatihan/konfirmasi_lpj';
 	  });
 	});	
 	
 	$(".return").click(function(){
 		var id_pelatihan = $("#id_pelatihan").val();
 	  $.post("<?php echo base_url('pelatihan/post_change_status_pelatihan/"+id_pelatihan+"/draft') ?>", function(data, status){
-		alert("Data: " + data + "\nStatus: " + status);
+		window.location.href = '<?php echo base_url(); ?>pelatihan/konfirmasi_lpj';
 	  });
 	});			
 </script>

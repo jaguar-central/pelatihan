@@ -173,7 +173,13 @@
 										<?php }else{ ?>
 											<span class="quantity" style="background:black;" ><?php echo $notification_count; ?></span>
 										<?php } ?>
+
+                                        
+                                        <?php if ($notification_count>=3){ ?>
                                         <div class="notifi-dropdown js-dropdown" style=" height:500px;overflow-y: scroll;">                                            
+                                        <?php }else{ ?>
+                                        <div class="notifi-dropdown js-dropdown" >                                            
+                                        <?php } ?>
                                             <div class="notifi__title">
 											<?php if (isset($notification)){ ?>
                                                 <p>Kamu memiliki <?php echo $notification_count; ?> Notifikasi</p>
