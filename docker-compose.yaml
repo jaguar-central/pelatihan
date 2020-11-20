@@ -2,21 +2,13 @@ version: '3.3'
 
 services:  
   aplikasi:
-<<<<<<< HEAD
-    image: 10.63.8.69/fzainal0707/pelatihan:v.1.0.0
-    ports:
-      - "30003:80"
-    networks:
-      - frontend  
-=======
     image: 10.63.8.69/fzainal0707/pelatihan
     ports:
       - "30003:80"
-    networks:
-      - frontend      
->>>>>>> d5a23e73c8c5f423f4a6477d7cc01c2f1fa54d2c
-networks:
-  frontend:
+#     networks:
+#       - frontend      
+# networks:
+#   frontend:
       
 
 

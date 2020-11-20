@@ -155,10 +155,7 @@
 <div class="page-container">
             <!-- HEADER DESKTOP-->
             <header class="header-desktop d-none d-lg-block bg-success text-white">
-
-            
-
-                <div class="section__content section__content--p30 ">
+                <div class="section__content section__content--p30 ">                
                     <span>Sistem Informasi Manajemen Pelatihan</span>
                 </div>
                 <div class="section__content section__content--p30">
@@ -173,7 +170,7 @@
 										<?php }else{ ?>
 											<span class="quantity" style="background:black;" ><?php echo $notification_count; ?></span>
 										<?php } ?>
-
+                                        
                                         
                                         <?php if ($notification_count>=3){ ?>
                                         <div class="notifi-dropdown js-dropdown" style=" height:500px;overflow-y: scroll;">                                            
