@@ -1,16 +1,17 @@
-version: '3.3'
+version: '3.8'
 
 services:  
   aplikasi:
     image: 10.63.8.69/fzainal0707/pelatihan
     ports:
-      - "30003:80"
-#     networks:
-#       - frontend      
-# networks:
-#   frontend:
+      - "30003:80"    
+    networks:
+      hostnet: {}
       
-
+networks:
+  hostnet:
+    external: true
+    name: host      
 
     # ports:
     #   - target: 80

@@ -37,7 +37,7 @@
 					</div>
 				</div>			
 
-				<div class="form-group row">
+				<div class="form-group row" id="select_tag_region">
 					<input type="hidden" class="form-control" id="id_bisnis_pelatihan" name="id_bisnis_pelatihan" value="2" />
 					
 					<label class="col-sm-2">Tipe Pelatihan <span class="text-danger">*</span></label>
@@ -49,7 +49,7 @@
 		
 					<label class="col-sm-2">Region <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<select class="form-control select_tag" required="" id="regional_mekaar" name="regional_mekaar">
+						<select class="form-control select_tag_region" required="" id="regional_mekaar" name="regional_mekaar">
 							<option value="">--pilih region--</option>			
 
 								<?php 
@@ -61,7 +61,7 @@
 					</div>
 				</div>											
 				
-				<div class="form-group row">
+				<div class="form-group row" id="select_tag_area">
 					<label class="col-sm-2">Judul <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control"  required="" id="judul_pelatihan" name="judul_pelatihan" maxlength="150" />
@@ -69,7 +69,7 @@
 				
 					<label class="col-sm-2">Area <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<select class="form-control select_tag" required="" id="area_mekaar" name="area_mekaar">
+						<select class="form-control select_tag_area" required="" id="area_mekaar" name="area_mekaar">
 							<option value="">--pilih area--</option>										
 						</select>																	
 					</div>							
@@ -89,10 +89,10 @@
 					</div>
 				</div>
 
-				<div class="form-group row">
+				<div class="form-group row" id="select_tag_provinsi">
 				<label class="col-sm-2">Provinsi <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<select class="form-control select_tag" required="" id="provinsi" name="provinsi">
+						<select class="form-control select_tag_provinsi" required="" id="provinsi" name="provinsi">
 						<?php 
 								foreach ($provinsi as $data_provinsi){
 									echo '<option value="'.$data_provinsi->MS_KODE_PROVINSI.'">'.$data_provinsi->MS_PROVINSI.'</option>';                                                                    
@@ -115,16 +115,16 @@
 					</div>							
 				</div>	
 
-				<div class="form-group row">
+				<div class="form-group row" id="select_tag_kabupaten">
 					<label class="col-sm-2">Kabupaten / Kota <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<select class="form-control select_tag" required="" id="kabkot" name="kabkot">
+						<select class="form-control select_tag_kabupaten" required="" id="kabkot" name="kabkot">
 						</select>
 					</div>              
 
 					<label class="col-sm-2">Kecamatan <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<select class="form-control select_tag" required="" id="kecamatan" name="kecamatan">
+						<select class="form-control select_tag_kecamatan" required="" id="kecamatan" name="kecamatan">
 						</select>
 					</div>              					                  
 				</div>					
@@ -375,8 +375,24 @@
 			}
 		})		
 		
-		$(".select_tag").select2({
-			dropdownParent: $("#modaladd")
+		$(".select_tag_region").select2({
+			dropdownParent: $("#select_tag_region")
+		});	
+
+		$(".select_tag_area").select2({
+			dropdownParent: $("#select_tag_area")
+		});				
+		
+		$(".select_tag_provinsi").select2({
+			dropdownParent: $("#select_tag_provinsi")
+		});		
+
+		$(".select_tag_kabupaten").select2({
+			dropdownParent: $("#select_tag_kabupaten")
+		});				
+
+		$(".select_tag_kecamatan").select2({
+			dropdownParent: $("#select_tag_kabupaten")
 		});		
 		
 		
