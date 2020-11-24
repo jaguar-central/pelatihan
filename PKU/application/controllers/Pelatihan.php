@@ -151,10 +151,15 @@ class Pelatihan extends MY_Controller
 		$data["rab"] = $this->Pelatihan_model->select_t_rab_by_id($idpelatihan);
 
 		$data["sektor_ekonomi_mekaar"]	= $this->Master_model->select_dw_nasabah_mekaar_sektor_ekonomi();
+		$data["regional_mekaar"]	= $this->Master_model->select_ms_regional_mekaar();
+		$data["area_mekaar"]	= $this->Master_model->select_ms_area_mekaar();
+		
+		
+
 		
 
         // echo '<pre>';
-		// print_r($data['rab']);
+		// print_r($data['regional_mekaar']);
 		// echo '</pre>';die;
         $this->load->view('layout/gabung', $data);
 
@@ -1366,8 +1371,10 @@ class Pelatihan extends MY_Controller
 
 		$search 		= ($_GET["search"]["value"]!='') ? 'nama:'.$_GET["search"]["value"] : NULL ;				
 		$sektor_ekonomi = ($_GET["columns"][0]['search']['value']!='') ? 'sektor_ekonomi:'.$_GET["columns"][0]['search']['value'] : NULL;
+		$regionid 		= ($_GET["columns"][1]['search']['value']!='') ? 'regionid:'.$_GET["columns"][1]['search']['value'] : NULL;
+		$areaid 		= ($_GET["columns"][2]['search']['value']!='') ? 'areaid:'.$_GET["columns"][2]['search']['value'] : NULL;
 
-		$searching = array($sektor_ekonomi,$search);	
+		$searching = array($sektor_ekonomi,$regionid,$areaid,$search);	
 
 		$this->config->set_item('elastic_index', 'debitur');	
 		

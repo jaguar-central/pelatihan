@@ -54,6 +54,8 @@
 $(document).ready(function() {
 	
 
+		$(".select2").select2();
+
 		var durasi = function () {
 			var start 	= $('#timeawal').val();
 		    var end 	= $('#timeakhir').val();
@@ -274,11 +276,15 @@ $(document).ready(function() {
 		});
 
 
-		$(document).on("change", "#sektor_ekonomi_mekaar", function () {			
+		$(document).on("change", "#sektor_ekonomi_mekaar,#regional_mekaar,#area_mekaar", function () {			
 			var sektor_ekonomi_mekaar 	= $('#sektor_ekonomi_mekaar').val();			
+			var regional_mekaar 		= $('#regional_mekaar').val();			
+			var area_mekaar 			= $('#area_mekaar').val();			
 					
 			table_kehadiran_mekaar.clear();
 			table_kehadiran_mekaar.column(0).search( sektor_ekonomi_mekaar=='0' ? '' : sektor_ekonomi_mekaar   );
+			table_kehadiran_mekaar.column(1).search( regional_mekaar=='0' ? '' : regional_mekaar   );
+			table_kehadiran_mekaar.column(2).search( area_mekaar=='0' ? '' : area_mekaar   );
 
 			table_kehadiran_mekaar.clear().draw(false);
 		});				
@@ -606,5 +612,17 @@ $(document).ready(function() {
 			console.log("Data: " + data + "\nStatus: " + status);
 		});		
 		
+	});
+
+	$('#regional_mekaar').on('change', function (e) {			
+			$.ajax({
+				url: "<?php echo base_url()?>master/get_area_mekaar",
+				data: "kode_region="+$("#regional_mekaar").val(),
+				cache: false,
+				success: function(data){				         
+					$('#area_mekaar').html(data)           
+				}
+			});
+			
 	});
 </script>       

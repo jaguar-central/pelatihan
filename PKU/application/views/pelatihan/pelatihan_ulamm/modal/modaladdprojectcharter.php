@@ -79,7 +79,7 @@ input [type="date"] {
 									  <th class="col-md-3">Tanggal</th>
 									  <th class="col-md-2">Cabang</th>
 									  <th class="col-md-2">Alamat</th>
-									  <th class="col-md-2">Budget</th>
+									  <th class="col-md-2">Anggaran</th>
 									  <th></th>
 									  <th></th>
 								  </thead>    

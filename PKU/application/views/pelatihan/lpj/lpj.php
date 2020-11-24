@@ -384,7 +384,7 @@
 							<div class="form-group row">															
 								<label class="col-sm-2">Sektor Ekonomi </label>
 								<div class="col-sm-4">
-									<select class="form-control" id="sektor_ekonomi" name="sektor_ekonomi">
+									<select class="form-control select2" id="sektor_ekonomi" name="sektor_ekonomi">
 										<option value="">--pilih sektor ekonomi--</option>							
 											<?php 
 											foreach ($sektor_ekonomi as $data_sektor_ekonomi){
@@ -396,7 +396,7 @@
 
 								<label class="col-sm-2">Jenis Pinjaman </label>
 								<div class="col-sm-4">
-									<select class="form-control" id="jenis_pinjaman" name="jenis_pinjaman">
+									<select class="form-control select2" id="jenis_pinjaman" name="jenis_pinjaman">
 										<option value="">--pilih pinjaman--</option>	
 											<?php 
 											foreach ($jenis_pinjaman as $data_jenis_pinjaman){
@@ -409,7 +409,7 @@
 							<div class="form-group row">
 								<label class="col-sm-2">Jenis Program </label>
 								<div class="col-sm-4">
-									<select class="form-control" id="jenis_program" name="jenis_program">
+									<select class="form-control select2" id="jenis_program" name="jenis_program">
 										<option value="">--pilih program--</option>	
 											<?php 
 											foreach ($jenis_program as $data_jenis_program){
@@ -423,7 +423,7 @@
 							<div class="form-group row">	
 											<label class="col-sm-2">Cabang </label>
 								<div class="col-sm-4">
-									<select class="form-control" id="cabang_kehadiran" name="cabang_kehadiran">
+									<select class="form-control select2" id="cabang_kehadiran" name="cabang_kehadiran">
 										<option value="">--pilih cabang--</option>	
 											<?php 
 											foreach ($cabang as $data_cabang){
@@ -434,7 +434,7 @@
 								</div>	
 								<label class="col-sm-2">Unit </label>
 								<div class="col-sm-4">
-									<select class="form-control" id="unit_kehadiran" name="unit_kehadiran">
+									<select class="form-control select2" id="unit_kehadiran" name="unit_kehadiran">
 										<option value="">--pilih unit--</option>										
 									</select>																	
 								</div>
@@ -475,7 +475,7 @@
 							<div class="form-group row">															
 								<label class="col-sm-2">Sektor Ekonomi </label>
 								<div class="col-sm-4">
-									<select class="form-control" id="sektor_ekonomi_mekaar" name="sektor_ekonomi_mekaar">
+									<select class="form-control select2" id="sektor_ekonomi_mekaar" name="sektor_ekonomi_mekaar">
 										<option value="">--pilih sektor ekonomi--</option>							
 											<?php 
 											foreach ($sektor_ekonomi_mekaar as $data_sektor_ekonomi_mekaar){
@@ -483,8 +483,28 @@
 											}
 											?>	
 									</select>																	
-								</div>											
-							</div>					
+								</div>																											
+							</div>	
+
+							<div class="form-group row">															
+								<label class="col-sm-2">Region </label>
+								<div class="col-sm-4">
+									<select class="form-control select2" id="regional_mekaar" name="regional_mekaar">
+										<option value="">--pilih region--</option>							
+											<?php 
+											foreach ($regional_mekaar as $data_regional_mekaar){
+												echo '<option value="'.$data_regional_mekaar->KODE_REGION.'">'.$data_regional_mekaar->DESKRIPSI.'</option>';                                                                    
+											}
+											?>	
+									</select>																	
+								</div>	
+
+								<label class="col-sm-2">Area </label>
+								<div class="col-sm-4">
+									<select class="form-control" id="area_mekaar" name="area_mekaar">
+									</select>																	
+								</div>																																				
+							</div>												
 						</div>
 
 							<div class="row">

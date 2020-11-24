@@ -89,21 +89,17 @@
 					</div>
 				</div>
 
-				<div class="form-group row" id="select_tag_provinsi">
-				<label class="col-sm-2">Provinsi <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<select class="form-control select_tag_provinsi" required="" id="provinsi" name="provinsi">
-						<?php 
-								foreach ($provinsi as $data_provinsi){
-									echo '<option value="'.$data_provinsi->MS_KODE_PROVINSI.'">'.$data_provinsi->MS_PROVINSI.'</option>';                                                                    
-								}
-								?>	
-						</select>
-					</div>   		
+				<div class="form-group row">	
+
+					<label class="col-sm-2">Anggaran <span class="text-danger">*</span></label>
+					<div class="input-group col-sm-4">
+						<span class="input-group-addon">Rp</span>
+						<input type="text" class="form-control"  required="" id="anggaran" name="anggaran" />				
+					</div>   				
 
 					<label class="col-sm-2">Cabang Ulamm <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-					<select class="form-control" required="" id="cabang_ulamm" name="cabang_ulamm">
+						<select class="form-control" required="" id="cabang_ulamm" name="cabang_ulamm">
 							<option value="">--pilih cabang--</option>									
 						
 						<?php 
@@ -114,47 +110,7 @@
 						</select>			
 					</div>							
 				</div>	
-
-				<div class="form-group row" id="select_tag_kabupaten">
-					<label class="col-sm-2">Kabupaten / Kota <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<select class="form-control select_tag_kabupaten" required="" id="kabkot" name="kabkot">
-						</select>
-					</div>              
-
-					<label class="col-sm-2">Kecamatan <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<select class="form-control select_tag_kecamatan" required="" id="kecamatan" name="kecamatan">
-						</select>
-					</div>              					                  
-				</div>					
 				
-				<div class="form-group card grading_system">
-				<div class="card-header"><h4>Grading System</h4></div>
-				<div class="card-body row">
-					<label class="col-sm-2">Jenis Nasabah <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<select class="form-control" required="" id="jenis_nasabah_grading">
-							<option value="">--pilih jenis nasabah--</option>
-
-							<?php 
-								foreach ($nasabah_grading as $data_nasabah_grading){
-									echo '<option value="'.$data_nasabah_grading->ID.'" >'.$data_nasabah_grading->JENIS_NASABAH.'</option>';                                                                    
-								}
-								?>										
-						</select>	
-					</div>	
-
-					<label class="col-sm-2">Grade <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<select class="form-control" required="" id="grading" name="grading">
-							<option value="">--pilih grade--</option>
-									
-						</select>	
-					</div>								
-				</div>		
-				</div>		
-
 				<div class="form-group row">
 
 					<label class="col-sm-2">Tanggal <span class="text-danger">*</span></label>
@@ -207,28 +163,79 @@
 					</div>						
 				</div>
 
-				<div class="form-group row">
-					<!--label class="col-sm-2">Modul <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="modul" name="modul" />
-					</div-->                          
-				
-					<label class="col-sm-2">Anggaran <span class="text-danger">*</span></label>
-					<div class="input-group col-sm-4">
-						<span class="input-group-addon">Rp</span>
-						<input type="text" class="form-control"  required="" id="anggaran" name="anggaran" />				
-					</div>             	
-                    
-				</div>
 
-				<div class="form-group row">
-                       
-				
-					<label class="col-sm-2">Alamat Pelatihan <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="alamat_tempat_pelatihan" name="alamat_tempat_pelatihan" />
-					</div>                      
-				</div>
+				<div class="form-group card">
+					<div class="card-header"><h4>Lokasi Pelatihan</h4></div>
+					<div class="card-body">
+						<div id="radio_lokasi" class="form-group row">
+							<div class="radio offset-sm-4 col-sm-2">
+							<label  ><input type="radio" name="radio_lokasi" value="onsite" checked> On-site</label>
+							</div>
+							<div class="radio col-sm-2">
+							<label  ><input type="radio" name="radio_lokasi" value="online"> Online</label>
+							</div>
+						</div>				
+						<div class="form-group row" id="select_tag_provinsi">
+							<label class="col-sm-2">Provinsi <span class="text-danger">*</span></label>
+							<div class="col-sm-4">
+								<select class="form-control select_tag_provinsi" required="" id="provinsi" name="provinsi">
+									<option value="">- Pilih Provinsi -</option>
+										<?php 
+										foreach ($provinsi as $data_provinsi){
+											echo '<option value="'.$data_provinsi->MS_KODE_PROVINSI.'">'.$data_provinsi->MS_PROVINSI.'</option>';                                                                    
+										}
+										?>	
+								</select>
+							</div>   	
+
+							<label class="col-sm-2">Kecamatan <span class="text-danger">*</span></label>
+							<div class="col-sm-4">
+								<select class="form-control select_tag_kecamatan" required="" id="kecamatan" name="kecamatan">
+								</select>
+							</div>  													
+						</div>	
+
+						<div class="form-group row" id="select_tag_kabupaten">           
+							<label class="col-sm-2">Kabupaten / Kota <span class="text-danger">*</span></label>
+							<div class="col-sm-4">
+								<select class="form-control select_tag_kabupaten" required="" id="kabkot" name="kabkot">								
+								</select>
+							</div>   
+
+							<label class="col-sm-2">Alamat Pelatihan <span class="text-danger">*</span></label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control"  required="" id="alamat_tempat_pelatihan" name="alamat_tempat_pelatihan" />
+							</div> 									            					                  
+						</div>					
+					</div>					
+				</div>			
+
+
+				<div class="form-group card grading_system">
+					<div class="card-header"><h4>Grading System</h4></div>
+					<div class="card-body row">
+						<label class="col-sm-2">Jenis Nasabah <span class="text-danger">*</span></label>
+						<div class="col-sm-4">
+							<select class="form-control" required="" id="jenis_nasabah_grading">
+								<option value="">--pilih jenis nasabah--</option>
+
+								<?php 
+									foreach ($nasabah_grading as $data_nasabah_grading){
+										echo '<option value="'.$data_nasabah_grading->ID.'" >'.$data_nasabah_grading->JENIS_NASABAH.'</option>';                                                                    
+									}
+									?>										
+							</select>	
+						</div>	
+
+						<label class="col-sm-2">Grade <span class="text-danger">*</span></label>
+						<div class="col-sm-4">
+							<select class="form-control" required="" id="grading" name="grading">
+								<option value="">--pilih grade--</option>
+										
+							</select>	
+						</div>								
+					</div>		
+				</div>							
 
 
 
@@ -302,6 +309,35 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {
+
+        $('#radio_lokasi').change(function(){			
+			selected_value = $("input[name='radio_lokasi']:checked").val();
+			if (selected_value=='online'){
+				$('#provinsi').val('0');
+				$('#kabkot').val('0');
+				$('#kecamatan').val('0');
+
+				$('#kabkot').html('<option value="0">online</option>');
+				$('#kecamatan').html('<option value="0">online</option>');
+
+				$("#select_tag_provinsi").hide();
+				$("#select_tag_kabupaten").hide();
+
+				$("#alamat_tempat_pelatihan").val('online');
+			}else{
+				$('#provinsi').val('');
+				$('#kabkot').val('');
+				$('#kecamatan').val('');
+
+				$('#kabkot').html('');
+				$('#kecamatan').html('');		
+
+				$("#select_tag_provinsi").show();
+				$("#select_tag_kabupaten").show();		
+				
+				$("#alamat_tempat_pelatihan").val('');
+			}
+        });		
 
 		new AutoNumeric("#anggaran","commaDecimalCharDotSeparator");
 	
