@@ -1,3 +1,4 @@
+
  <!-- MAIN CONTENT-->
  <div class="main-content">
 	<div class="section__content section__content--p20">
@@ -52,10 +53,16 @@
 					</div>		
 
 					<div class="form-group row">					
-						<label class="col-sm-2">Link Lampiran <span class="text-danger"></span></label>
+						<!-- <label class="col-sm-2">Link Lampiran <span class="text-danger"></span></label>
 						<div class="col-sm-4">
-							<input type="text" class="form-control"  required="" id="lampiran" name="lampiran" />													
-						</div>					
+							<input type="text" class="form-control"  required="" id="lampiran" name="lampiran" />	
+						</div>	 -->
+
+
+						<label class="col-sm-2" for="lampiran">Lampiran</label>
+						<div class="col-sm-4">
+						<input type="file" class="form-control-file" id="lampiran" name="lampiran">										
+						</div>						
 					</div>						
 					
 					<div class="form-group row">

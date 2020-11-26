@@ -394,7 +394,7 @@ class Pelatihan extends MY_Controller
 		);		
 		
 		
-		try{
+		try{			
 			$data = array(
 				'ID_TIPE' 				=> $pelatihan_type,
 				'NO_PROPOSAL' 			=> $no_proposal,
@@ -424,8 +424,7 @@ class Pelatihan extends MY_Controller
 				'CREATED_DATE' 			=> date('Y-m-d H:i:s')			
 			);
 			
-
-			// $this->db->trans_start(TRUE);
+			
 			$this->Pelatihan_model->insert_t_pelatihan($data);
 			
 			
@@ -446,7 +445,6 @@ class Pelatihan extends MY_Controller
 				);							
 				$this->Pelatihan_model->insert_t_rab($rab);
 			}
-
 			/*nonaktifkan pelatihan project charter yang telah terpakai*/
 			if ($id_pelatihan_project_charter){
 
@@ -461,14 +459,14 @@ class Pelatihan extends MY_Controller
 				$this->Pelatihan_model->update_project_charter($data_update,$where_update);
 			}
 
-			// $db_error = $this->db->error();
+			$db_error = $this->db->error();
 
-			// if (!empty($db_error)) {
-			// 	$output = array(
-			// 		'result'  	=> 'NG',
-			// 		'msg'		=> $db_error['message']
-			// 	);
-			// }
+			if (!empty($db_error)) {
+				$output = array(
+					'result'  	=> 'NG',
+					'msg'		=> $db_error['message']
+				);
+			}
 		}		
 		catch (Exception $e)
 		{
@@ -564,6 +562,15 @@ class Pelatihan extends MY_Controller
 				$this->Pelatihan_model->insert_t_rab($rab);				
 			}
 
+			$db_error = $this->db->error();
+
+			if (!empty($db_error)) {
+				$output = array(
+					'result'  	=> 'NG',
+					'msg'		=> $db_error['message']
+				);
+			}
+			
 		}		
 		catch (Exception $e)
 		{
@@ -631,6 +638,15 @@ class Pelatihan extends MY_Controller
 					);
 				$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
 				
+				$db_error = $this->db->error();
+
+				if (!empty($db_error)) {
+					$output = array(
+						'result'  	=> 'NG',
+						'msg'		=> $db_error['message']
+					);
+				}
+
 			}		
 			catch (Exception $e)
 			{
@@ -739,6 +755,14 @@ class Pelatihan extends MY_Controller
 				);
 			$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
 			
+			$db_error = $this->db->error();
+
+			if (!empty($db_error)) {
+				$output = array(
+					'result'  	=> 'NG',
+					'msg'		=> $db_error['message']
+				);
+			}			
 			
 		}
 		catch (Exception $e)
@@ -786,57 +810,91 @@ class Pelatihan extends MY_Controller
 			'result'  	=> 'OK',
 			'msg'		=> ''
 		);		
+
+		$config['upload_path']	= './assets/dokumen/lampiran_lpj';
+		$config['allowed_types']	= 'docx|jpg|jpeg|png|pdf';
+		$config['max_size']	= '8000';
+		$config['overwrite']	= TRUE;
+
+		$nama_file	= base64_encode($id_pelatihan.'_'.date('Ymd').'at'.date('His'));
+		$config['file_name']	= $nama_file;
+		$this->upload->initialize($config);
+
+		if($this->upload->do_upload('lampiran'))
+		{
+			// $this->upload->data();
+
+			$zdata = ['upload_data' => $this->upload->data()]; // get data
+			$zfile = $zdata['upload_data']['full_path']; // get file path
+			chmod($zfile,0777);
 		
-		try{
-			$data = array(
-				'ID_PELATIHAN' 			   => $id_pelatihan,
-				'LINK_LAMPIRAN' 	   	   => $lampiran,
-				'TANGGAL_REALISASI_MULAI'  => $inputStartTglPelaksanaan.' '.date("H:i", strtotime($inputStartTimePelaksanaan)),
-				'TANGGAL_REALISASI_SELESAI'=> $inputAkhirTglPelaksanaan.' '.date("H:i", strtotime($inputEndTimePelaksanaan)),
-				'DURASI_PELATIHAN' 		   => $durasi_pelatihan,				
-				'JUMLAH_ANGGARAN'		   => $total_cost_rab_akhir,
-				'CSI_FINAL' 			   => $csi_final,
-				'CATATAN_TAMBAHAN' 		   => $catatan_tambahan,
-				'AKTIF' 				   => '1',
-				'CREATED_BY' 			   => $id_user,
-				'CREATED_DATE' 			   => date('Y-m-d H:i:s')			
-			);
-			
-			$this->Pelatihan_model->insert_t_pelatihan_lpj($data);
-					
-			
-			for ($i=1;$i<count($deskripsi_rab);$i++){
-				$rab = array(
-					'ID_PELATIHAN' 		=> $id_pelatihan,
-					'URAIAN' 			=> $deskripsi_rab[$i],
-					'JUMLAH' 			=> $jumlah_rab[$i],
-					'SATUAN' 			=> $unit_rab[$i],
-					'UNIT_COST' 		=> $unit_cost_rab[$i],
-					'SUB_TOTAL_COST' 	=> $total_cost_rab[$i],
-					'GRAND_TOTAL' 		=> $total_cost_rab_akhir,
-					'CREATED_BY' 		=> $id_user,
-					'CREATED_DATE' 		=> date('Y-m-d H:i:s')
-				);							
-				$this->Pelatihan_model->insert_t_rab_lpj($rab);
+			try{
+				$data = array(
+					'ID_PELATIHAN' 			   => $id_pelatihan,
+					'LINK_LAMPIRAN' 	   	   => 'dokumen/lampiran_lpj/'.$nama_file,
+					'TANGGAL_REALISASI_MULAI'  => $inputStartTglPelaksanaan.' '.date("H:i", strtotime($inputStartTimePelaksanaan)),
+					'TANGGAL_REALISASI_SELESAI'=> $inputAkhirTglPelaksanaan.' '.date("H:i", strtotime($inputEndTimePelaksanaan)),
+					'DURASI_PELATIHAN' 		   => $durasi_pelatihan,				
+					'JUMLAH_ANGGARAN'		   => $total_cost_rab_akhir,
+					'CSI_FINAL' 			   => $csi_final,
+					'CATATAN_TAMBAHAN' 		   => $catatan_tambahan,
+					'AKTIF' 				   => '1',
+					'CREATED_BY' 			   => $id_user,
+					'CREATED_DATE' 			   => date('Y-m-d H:i:s')			
+				);
+				
+				$this->Pelatihan_model->insert_t_pelatihan_lpj($data);
+						
+				
+				for ($i=1;$i<count($deskripsi_rab);$i++){
+					$rab = array(
+						'ID_PELATIHAN' 		=> $id_pelatihan,
+						'URAIAN' 			=> $deskripsi_rab[$i],
+						'JUMLAH' 			=> $jumlah_rab[$i],
+						'SATUAN' 			=> $unit_rab[$i],
+						'UNIT_COST' 		=> $unit_cost_rab[$i],
+						'SUB_TOTAL_COST' 	=> $total_cost_rab[$i],
+						'GRAND_TOTAL' 		=> $total_cost_rab_akhir,
+						'CREATED_BY' 		=> $id_user,
+						'CREATED_DATE' 		=> date('Y-m-d H:i:s')
+					);							
+					$this->Pelatihan_model->insert_t_rab_lpj($rab);
+				}
+
+				$data_update 	= array(
+					'STATUS'			=> 'lpj_submitted',
+					'APPROVAL'			=> '',
+					'UPDATED_BY' 		=> $id_user,
+					'UPDATED_DATE' 		=> date('Y-m-d H:i:s')			
+					);
+				$where_update	= array(
+					'ID' 	=> $id_pelatihan
+					);
+				$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
+
+				$db_error = $this->db->error();
+
+				if (!empty($db_error)) {
+					$output = array(
+						'result'  	=> 'NG',
+						'msg'		=> $db_error['message']
+					);
+				}
+
 			}
 
-			$data_update 	= array(
-				'STATUS'			=> 'lpj_submitted',
-				'APPROVAL'			=> '',
-				'UPDATED_BY' 		=> $id_user,
-				'UPDATED_DATE' 		=> date('Y-m-d H:i:s')			
+			catch (Exception $e)
+			{
+				$output = array(
+					'result'  	=> 'NG',
+					'msg'		=> $e->getMessage()
 				);
-			$where_update	= array(
-				'ID' 	=> $id_pelatihan
-				);
-			$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
-		}
-
-		catch (Exception $e)
+			}
+		}else
 		{
 			$output = array(
 				'result'  	=> 'NG',
-				'msg'		=> $e->getMessage()
+				'msg'		=> $this->upload->display_errors()
 			);
 		}
         
@@ -916,6 +974,14 @@ class Pelatihan extends MY_Controller
 				);
 			$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
 			
+			$db_error = $this->db->error();
+
+			if (!empty($db_error)) {
+				$output = array(
+					'result'  	=> 'NG',
+					'msg'		=> $db_error['message']
+				);
+			}			
 			
 		}
 		catch (Exception $e)
@@ -982,6 +1048,15 @@ class Pelatihan extends MY_Controller
 				
 				$this->Pelatihan_model->insert_temp_kehadiran($data);
 			
+				$db_error = $this->db->error();
+
+				if (!empty($db_error)) {
+					$output = array(
+						'result'  	=> 'NG',
+						'msg'		=> $db_error['message']
+					);
+				}				
+
 			}		
 			catch (Exception $e)
 			{
@@ -1028,6 +1103,15 @@ class Pelatihan extends MY_Controller
 			);
 			
 			$this->Pelatihan_model->insert_t_non_nasabah($data);
+
+			$db_error = $this->db->error();
+
+			if (!empty($db_error)) {
+				$output = array(
+					'result'  	=> 'NG',
+					'msg'		=> $db_error['message']
+				);
+			}			
 			
 		}		
 		catch (Exception $e)
@@ -1065,7 +1149,26 @@ class Pelatihan extends MY_Controller
 			
 		try
 		{	
-		$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
+			$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
+
+			$db_error = $this->db->error();
+
+			if (!empty($db_error)) {
+				$output = array(
+					'result'  	=> 'NG',
+					'msg'		=> $db_error['message']
+				);
+			}
+
+			$db_error = $this->db->error();
+
+			if (!empty($db_error)) {
+				$output = array(
+					'result'  	=> 'NG',
+					'msg'		=> $db_error['message']
+				);
+			}
+
 		}
 		catch (Exception $e)
 		{
@@ -1181,6 +1284,16 @@ class Pelatihan extends MY_Controller
 				}
 				$this->Pelatihan_model->insert_t_project_charter($data);					
 			}
+
+			$db_error = $this->db->error();
+
+			if (!empty($db_error)) {
+				$output = array(
+					'result'  	=> 'NG',
+					'msg'		=> $db_error['message']
+				);
+			}			
+
 		}
 		catch (Exception $e)
 		{
@@ -1372,7 +1485,7 @@ class Pelatihan extends MY_Controller
 		$search 		= ($_GET["search"]["value"]!='') ? 'nama:'.$_GET["search"]["value"] : NULL ;				
 		$sektor_ekonomi = ($_GET["columns"][0]['search']['value']!='') ? 'sektor_ekonomi:'.$_GET["columns"][0]['search']['value'] : NULL;
 		$regionid 		= ($_GET["columns"][1]['search']['value']!='') ? 'regionid:'.$_GET["columns"][1]['search']['value'] : NULL;
-		$areaid 		= ($_GET["columns"][2]['search']['value']!='') ? 'areaid:'.$_GET["columns"][2]['search']['value'] : NULL;
+		$areaid 		= ($_GET["columns"][2]['search']['value']!='' && $_GET["columns"][2]['search']['value']!='null') ? 'areaid:'.$_GET["columns"][2]['search']['value'] : NULL;
 
 		$searching = array($sektor_ekonomi,$regionid,$areaid,$search);	
 
@@ -1382,23 +1495,20 @@ class Pelatihan extends MY_Controller
 		$query='';
 
 		foreach ($searching as $searching_value){
+
 			if($searching_value!=NULL){
 				$query .= ($query=='') ? 'q=':' AND ';
 				$query .= $searching_value;
 			}
 		}	
-
 		
-
 		$debitur = $this->elastic->call('/_search?'.$query.$start.$limit.$filter_path);
 		$debitur_count = $this->elastic->call('_count?'.$query);					
-
-
 
 		$hide_debitur = $this->Pelatihan_model->select_temp_kehadiran($idpelatihan);
 		$hide_array = array_map (function($value){
 			return $value['ID_NASABAH'];
-		} , $hide_debitur);
+		} , $hide_debitur);		
 		
 		if (isset($debitur->hits->hits)){
 			for ($i=0;$i<count($debitur->hits->hits);$i++){
@@ -1609,6 +1719,15 @@ class Pelatihan extends MY_Controller
 					'ID' 	=> $id_pelatihan
 					);
 				$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
+			}			
+
+			$db_error = $this->db->error();
+
+			if (!empty($db_error)) {
+				$output = array(
+					'result'  	=> 'NG',
+					'msg'		=> $db_error['message']
+				);
 			}			
 			
 		}		

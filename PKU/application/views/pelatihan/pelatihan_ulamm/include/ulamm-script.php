@@ -268,7 +268,7 @@
 					  icon: 'error',
 					  title: obj.msg,
 					  showConfirmButton: false,
-					  timer: 1500
+					  timer: 2000
 					})					
 				}			
 			});	

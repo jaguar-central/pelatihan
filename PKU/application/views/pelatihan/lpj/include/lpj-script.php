@@ -442,7 +442,13 @@ $(document).ready(function() {
 				}
 				if(obj.result == 'NG')
 				{
-					$("#m-ap-cab").html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a> '+obj.msg+'</div>');
+					Swal.fire({
+					position: 'center',
+					icon: 'error',
+					title: obj.msg,
+					showConfirmButton: false,
+					timer: 3000
+					})	
 				}
 			});
 			xhr.fail(function() {
