@@ -20,10 +20,10 @@ class Report extends MY_Controller
         
 
         $data["menu"] = $this->Menu_model->select_ms_menu();
-        $data["latihan"] = $this->Dashboard_model->select_t_pelatihan();
-        $data["kehadiran"] = $this->Dashboard_model->select_t_kehadiran();
-        $data["nasabah"] = $this->Dashboard_model->select_t_jumlah_nasabah();
-        $data["non_nasabah"] = $this->Dashboard_model->select_t_non_nasabah();        
+        // $data["latihan"] = $this->Dashboard_model->select_t_pelatihan();
+        // $data["kehadiran"] = $this->Dashboard_model->select_t_kehadiran();
+        // $data["nasabah"] = $this->Dashboard_model->select_t_jumlah_nasabah();
+        // $data["non_nasabah"] = $this->Dashboard_model->select_t_non_nasabah();        
         $data["project_charter"] =$this->Report_model->select_project_charter();
 
         // echo '<pre>';

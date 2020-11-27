@@ -16,6 +16,7 @@ class Elastic {
         $this->index = $this->ci->config->item('elastic_index');
         if (!$this->index) throw new Exception('$index needs a value');
 
+        // $url = 'http://10.61.3.245:8080/get?data=' . $this->index . '/' . str_replace(' ','%20',$path);
         $url = $this->server . '/' . $this->index . '/' . str_replace(' ','%20',$path);
 
         $headers = array(
@@ -50,8 +51,11 @@ class Elastic {
 
 
         // if ($method=='GET'){
-        //     $d = file_get_contents($url);
-        //     return json_decode($d);
+        //     $opts = array('http'=>array('header' => "User-Agent:MyAgent/1.0\r\n")); 
+        //     $context = stream_context_create($opts);
+        //     $html = file_get_contents($url,false,$context);
+
+        //     return json_decode($html);
         // }else{
             $response = curl_exec($ch);
             $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);

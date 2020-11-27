@@ -740,19 +740,24 @@ class Pelatihan extends MY_Controller
     {
 		$this->is_logged();				
 		
-		$id_pelatihan           = trim($this->security->xss_clean(strip_image_tags($this->input->post('id_pelatihan'))));
-        $lampiran	            = trim($this->security->xss_clean(strip_image_tags($this->input->post('lampiran'))));
-        $tanggal_realisasi		= trim($this->security->xss_clean(strip_image_tags($this->input->post('tanggal_realisasi'))));
-        $csi_final            	= trim($this->security->xss_clean(strip_image_tags($this->input->post('csi_final'))));
-		$catatan_tambahan       = trim($this->security->xss_clean(strip_image_tags($this->input->post('catatan_tambahan'))));
-		$id_user				= $this->session->userdata('sess_user_idsdm');
+		$id_pelatihan           	= trim($this->security->xss_clean(strip_image_tags($this->input->post('id_pelatihan'))));
+        $lampiran	            	= trim($this->security->xss_clean(strip_image_tags($this->input->post('lampiran'))));
+        $csi_final            		= trim($this->security->xss_clean(strip_image_tags($this->input->post('csi_final'))));
+		$catatan_tambahan       	= trim($this->security->xss_clean(strip_image_tags($this->input->post('catatan_tambahan'))));
+		$id_user					= $this->session->userdata('sess_user_idsdm');
+		$durasi_pelatihan           = trim($this->security->xss_clean(strip_image_tags($this->input->post('durasi_pelatihan'))));
+
+		$inputStartTglPelaksanaan   = trim($this->security->xss_clean(strip_image_tags($this->input->post('inputStartTglPelaksanaan'))));
+        $inputStartTimePelaksanaan  = trim($this->security->xss_clean(strip_image_tags($this->input->post('inputStartTimePelaksanaan'))));
+        $inputAkhirTglPelaksanaan   = trim($this->security->xss_clean(strip_image_tags($this->input->post('inputAkhirTglPelaksanaan'))));
+        $inputEndTimePelaksanaan    = trim($this->security->xss_clean(strip_image_tags($this->input->post('inputEndTimePelaksanaan'))));
         
-		$deskripsi_rab        = $this->security->xss_clean(strip_image_tags($this->input->post('deskripsi_rab')));
-		$jumlah_rab           = $this->security->xss_clean(strip_image_tags($this->input->post('jumlah_rab')));
-		$unit_rab             = $this->security->xss_clean(strip_image_tags($this->input->post('unit_rab')));
-		$unit_cost_rab        = $this->security->xss_clean(strip_image_tags($this->input->post('unit_cost_rab')));
-		$total_cost_rab       = $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab')));
-		$total_cost_rab_akhir = $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab_akhir')));				
+		$deskripsi_rab        		= $this->security->xss_clean(strip_image_tags($this->input->post('deskripsi_rab')));
+		$jumlah_rab           		= $this->security->xss_clean(strip_image_tags($this->input->post('jumlah_rab')));
+		$unit_rab             		= $this->security->xss_clean(strip_image_tags($this->input->post('unit_rab')));
+		$unit_cost_rab        		= $this->security->xss_clean(strip_image_tags($this->input->post('unit_cost_rab')));
+		$total_cost_rab       		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab')));
+		$total_cost_rab_akhir 		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab_akhir')));				
 		
 		// var_dump(date("H:i", strtotime($inputStartTimePelaksanaan)));die();
 		// var_dump($inputStartTglPelaksanaan);die();
@@ -765,14 +770,17 @@ class Pelatihan extends MY_Controller
 		
 		try{
 			$data = array(
-				'ID_PELATIHAN' 			=> $id_pelatihan,
-				'LINK_LAMPIRAN' 		=> $lampiran,
-				'TANGGAL_REALISASI' 	=> $tanggal_realisasi,
-				'CSI_FINAL' 			=> $csi_final,
-				'CATATAN_TAMBAHAN' 		=> $catatan_tambahan,
-				'AKTIF' 				=> '1',
-				'CREATED_BY' 			=> $id_user,
-				'CREATED_DATE' 			=> date('Y-m-d H:i:s')			
+				'ID_PELATIHAN' 			   => $id_pelatihan,
+				'LINK_LAMPIRAN' 	   	   => $lampiran,
+				'TANGGAL_REALISASI_MULAI'  => $inputStartTglPelaksanaan.' '.date("H:i", strtotime($inputStartTimePelaksanaan)),
+				'TANGGAL_REALISASI_SELESAI'=> $inputAkhirTglPelaksanaan.' '.date("H:i", strtotime($inputEndTimePelaksanaan)),
+				'DURASI_PELATIHAN' 		   => $durasi_pelatihan,				
+				'JUMLAH_ANGGARAN'		   => $total_cost_rab_akhir,
+				'CSI_FINAL' 			   => $csi_final,
+				'CATATAN_TAMBAHAN' 		   => $catatan_tambahan,
+				'AKTIF' 				   => '1',
+				'CREATED_BY' 			   => $id_user,
+				'CREATED_DATE' 			   => date('Y-m-d H:i:s')			
 			);
 			
 			$this->Pelatihan_model->insert_t_pelatihan_lpj($data);
@@ -954,23 +962,8 @@ class Pelatihan extends MY_Controller
 				'CREATED_DATE' 		=> date('Y-m-d H:i:s')			
 			);
 			
-			$this->Pelatihan_model->insert_t_kehadiran($data);
-			
-			// $cek_kehadiran = $this->Pelatihan_model->select_t_kehadiran_by_idpelatihan($id_pelatihan)->num_rows();
-			
-			// if ($cek_kehadiran > 0){
-				// $data_update 	= array(
-					// 'STATUS' 		=> 'lpj_draft',
-					// 'UPDATED_BY' 	=> $id_user,
-					// 'UPDATED_DATE' 	=> date('Y-m-d H:i:s')			
-					// );
-				// $where_update	= array(
-					// 'ID' 	=> $id_pelatihan
-					// );
-				// $this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
-			// }			
-			
-			
+			$this->Pelatihan_model->insert_temp_kehadiran($data);
+		
 		}		
 		catch (Exception $e)
 		{

@@ -52,6 +52,42 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
+	
+
+		var durasi = function () {
+			var start 	= $('#timeawal').val();
+		    var end 	= $('#timeakhir').val();
+
+	     	var diff =  Math.abs(new Date(end) - new Date(start));
+			var seconds = Math.floor(diff/1000);
+			var minutes = Math.floor(seconds/60); 
+			seconds = seconds % 60;
+			var hours = Math.floor(minutes/60);
+			minutes = minutes % 60;
+			var total = 0
+			total = minutes + (hours*60)
+			console.log("Diff = " + hours + ":" + minutes + ":" + seconds);
+			$("#durasi_tampilan").val(hours+" jam "+minutes+" menit ");
+			$("#durasi_pelatihan").val(total);
+		};		
+
+		$('#timeawal').datetimepicker();
+		$('#timeakhir').datetimepicker(
+			// {useCurrent: false /*Important! See issue #1075*/}
+		);
+		$("#timeawal").on("dp.change", function (e) {
+		   $('#timeakhir').data("DateTimePicker").minDate(e.date);
+		   $("#inputStartTglPelaksanaan").val(e.date.format('YYYY-MM-DD'));
+		   $("#inputStartTimePelaksanaan").val(e.date.format('hh:mm A'));
+		   durasi();		   
+        });
+        $("#timeakhir").on("dp.change", function (e) {
+		   $('#timeawal').data("DateTimePicker").maxDate(e.date);
+		   $("#inputAkhirTglPelaksanaan").val(e.date.format('YYYY-MM-DD'));
+		   $("#inputEndTimePelaksanaan").val(e.date.format('hh:mm A'));	
+		   durasi();
+        });
+
 
 
 		$('.submit_lpj').prop('disabled', true);
@@ -198,15 +234,10 @@ $(document).ready(function() {
 			"url" : '<?php echo base_url('pelatihan/get_paging_kehadiran_nasabah_mekaar/'.$this->uri->segment(3)); ?>',
 			"type" :'GET'                      
 			},
-			"columns" : [
-			  { "data": "NasabahId", render: function (data, type, row) 
-                {
-                  return '<input type="hidden" class="form-control" id="id_nasabah" name="id_nasabah[]" value="'+row.id_nasabah+'">'+row.id_nasabah;
-                } 
-              },				
+			"columns" : [			
               { "data": "noktp", render: function (data, type, row) 
                 {
-                  return '<input type="hidden" class="form-control" id="bisnis" name="bisnis[]" value="MEKAAR"><input type="hidden" class="form-control" id="ktp" name="ktp[]" value="'+row.noktp+'">'+row.noktp;
+                  return '<input type="hidden" class="form-control" id="bisnis" name="bisnis[]" value="MEKAAR"><input type="hidden" class="form-control" id="id_nasabah" name="id_nasabah[]" value="'+row.nasabahid+'"><input type="hidden" class="form-control" id="ktp" name="ktp[]" value="'+row.noktp+'">'+row.noktp;
                 } 
               },
               { "data": "nama", render: function (data, type, row) 

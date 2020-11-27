@@ -220,6 +220,19 @@
 				calculate_grand_total_edit();
 			}
 		});	
+
+
+		var gradingid = $(this).data('gradingid');	
+		var idjenisnasabah = $(this).data('idjenisnasabah');	
+		$('#jenis_nasabah_grading_edit').val(idjenisnasabah).trigger('change');      
+		$.ajax({
+			url: "<?php echo base_url()?>master/get_grading",
+			data: "idjenisnasabah="+idjenisnasabah+"&idgrading="+gradingid,
+			cache: false,
+			success: function(data){				 				
+				$('#grading_edit').html(data);
+			}
+		});
 						
 	});
 
@@ -330,11 +343,13 @@
 						+'data-pelatihandurasi="'+row.DURASI_PELATIHAN+'" '
 						+'data-pelatihankuota="'+row.KUOTA_PESERTA+'" '
 						+'data-pelatihananggaran="'+row.BUDGET+'" '
+						+'data-idjenisnasabah="'+row.JENIS_NASABAH+'" '
+						+'data-gradingid="'+row.ID_GRADING+'" '
 						+'data-pelatihanalamat="'+row.ALAMAT+'" '
 						+'data-pelatihanprovinsi="'+row.PROVINSI+'" '						
 						+'data-pelatihankabkot="'+row.KABKOT+'" '
 						+'data-pelatihankecamatan="'+row.KECAMATAN+'" '
-						+'data-pelatihanpembicara="'+row.PEMBICARA+'"> Edit</a>';
+						+'data-pelatihanpembicara="'+row.PEMBICARA+'"> Edit</a>';	
 						}
 						tombol_action += '<a class= "dropdown-item" target="_blank" href="<?php echo $this->config->item('jasper_report').'Pelatihan.pdf?ID=' ?>'+row.ID+'"> Unduh Proposal</a>';
 					  }

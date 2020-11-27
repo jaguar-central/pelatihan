@@ -25,8 +25,8 @@
                                     <th class="text-center" rowspan="1" colspan="2">Klasterisasi Teritorial</th>
                                     <th class="text-center" rowspan="1" colspan="2">Pameran</th>
                                     <th class="text-center" rowspan="1" colspan="2">PKU Akbar</th>
-                                    <th class="text-center" rowspan="1" colspan="2">PKU Akbar (Wilayah)</th>
-                                    <th class="text-center" rowspan="1" colspan="2">PKU Akbar (Nasional)</th>
+                                    <!-- <th class="text-center" rowspan="1" colspan="2">PKU Akbar (Wilayah)</th>
+                                    <th class="text-center" rowspan="1" colspan="2">PKU Akbar (Nasional)</th> -->
                                     <th class="text-center" rowspan="1" colspan="2">Realisasi Pelatihan</th>
                                     <th class="text-center" rowspan="1" colspan="2">Realisasi Peserta</th>
 								</tr>
@@ -43,10 +43,10 @@
                                     <th class="text-center" rowspan="1">Realisasi Peserta</th>
                                     <th class="text-center" rowspan="1">Realisasi Pelatihan</th>
                                     <th class="text-center" rowspan="1">Realisasi Peserta</th>
-                                    <th class="text-center" rowspan="1">Realisasi Pelatihan</th>
+                                    <!-- <th class="text-center" rowspan="1">Realisasi Pelatihan</th>
                                     <th class="text-center" rowspan="1">Realisasi Peserta</th>
                                     <th class="text-center" rowspan="1">Realisasi Pelatihan</th>
-                                    <th class="text-center" rowspan="1">Realisasi Peserta</th>
+                                    <th class="text-center" rowspan="1">Realisasi Peserta</th> -->
                                     <th class="text-center" rowspan="1">Realisasi Bulan Berjalan</th>
                                     <th class="text-center" rowspan="1">Akumulasi Realisasi s/d Bulan Berjalan</th>
                                     <th class="text-center" rowspan="1">Realisasi Bulan Berjalan</th>
@@ -70,10 +70,10 @@
                                 echo '<td>'.$data->PAMERAN_PESERTA.'</td>';
                                 echo '<td>'.$data->AKBAR_PELATIHAN.'</td>';
                                 echo '<td>'.$data->AKBAR_PESERTA.'</td>';
-                                echo '<td>'.$data->AKBAR_W_PELATIHAN.'</td>';
-                                echo '<td>'.$data->AKBAR_W_PESERTA.'</td>';
-                                echo '<td>'.$data->AKBAR_N_PELATIHAN.'</td>';
-                                echo '<td>'.$data->AKBAR_N_PESERTA.'</td>';        
+                                // echo '<td>'.$data->AKBAR_W_PELATIHAN.'</td>';
+                                // echo '<td>'.$data->AKBAR_W_PESERTA.'</td>';
+                                // echo '<td>'.$data->AKBAR_N_PELATIHAN.'</td>';
+                                // echo '<td>'.$data->AKBAR_N_PESERTA.'</td>';        
                                 echo '<td>'.$data->REALISASI_BERJALAN_PELATIHAN.'</td>';
                                 echo '<td>'.$data->REALISASI_AKUMULASI_PELATIHAN.'</td>';
                                 echo '<td>'.$data->REALISASI_BERJALAN_PESERTA.'</td>';
