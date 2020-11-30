@@ -58,7 +58,94 @@
 			"processing": true,
 			"serverSide": false,			
 			"dom": "<'dom_datable'f>Brt<'dom_datable col-md-6'i>",
-			"buttons": ['copy', 'csv', 'excel', 'pdf', 'print'],
+			"buttons": [
+				{
+					extend: 'excelHtml5',				
+					customize: function (xlsx){						
+						var sheet = xlsx.xl.worksheets['sheet1.xml'];						
+						var downrows = 2;
+						var clRow = $('row', sheet);
+
+						
+						//update Row
+						clRow.each(function () {
+							var attr = $(this).attr('r');
+							var ind = parseInt(attr);
+							ind = ind + downrows;
+							$(this).attr("r",ind);
+						});
+				
+						// Update  row > c
+						$('row c ', sheet).each(function () {
+							var attr = $(this).attr('r');
+							var pre = attr.substring(0, 1);
+							var ind = parseInt(attr.substring(1, attr.length));
+							ind = ind + downrows;
+							$(this).attr("r", pre + ind);
+						});
+				
+						// function Addrow(index,data) {
+						function Addrow(index,data) {	
+							msg='<row r="'+index+'">'
+							for(i=0;i<data.length;i++){
+								var key=data[i].k;
+								var value=data[i].v;
+								msg += '<c t="inlineStr" r="' + key + index + '" >';
+								msg += '<is>';
+								msg +=  '<t>'+value+'</t>';
+								msg+=  '</is>';
+								msg+='</c>';
+							}
+							msg += '</row>';
+							return msg;
+						}
+
+				
+						//insert
+
+
+						var r1 = Addrow(1, [{ k: 'A', v: '' }]);
+						var r2 = Addrow(2, [
+							{ k: 'B', v: 'TUNM' }
+							,{ k: 'C', v: 'TUNM' }
+							,{ k: 'D', v: 'PPNM' }
+							,{ k: 'E', v: 'PPNM' }
+							,{ k: 'F', v: 'Klasterisasi Sektoral' }
+							,{ k: 'G', v: 'Klasterisasi Sektoral' }
+							,{ k: 'H', v: 'Klasterisasi Teritorial' }
+							,{ k: 'I', v: 'Klasterisasi Teritorial' }
+							,{ k: 'J', v: 'Klasterisasi Sinergi' }
+							,{ k: 'K', v: 'Klasterisasi Sinergi' }
+							,{ k: 'L', v: 'Realisasi Pelatihan' }
+							,{ k: 'M', v: 'Realisasi Pelatihan' }
+							,{ k: 'N', v: 'Realisasi Peserta' }
+							,{ k: 'O', v: 'Realisasi Peserta' }
+						]);
+						
+						sheet.childNodes[0].childNodes[1].innerHTML = r1+ r2 + sheet.childNodes[0].childNodes[1].innerHTML;
+
+						
+						$('row c[r^="B2"]', sheet).attr( 's', '2' );
+           				$('row c[r^="C2"]', sheet).attr( 's', '2' );
+           				$('row c[r^="D2"]', sheet).attr( 's', '2' );
+           				$('row c[r^="E2"]', sheet).attr( 's', '2' );
+           				$('row c[r^="F2"]', sheet).attr( 's', '2' );
+           				$('row c[r^="G2"]', sheet).attr( 's', '2' );
+           				$('row c[r^="H2"]', sheet).attr( 's', '2' );
+           				$('row c[r^="I2"]', sheet).attr( 's', '2' );
+           				$('row c[r^="J2"]', sheet).attr( 's', '2' );
+           				$('row c[r^="K2"]', sheet).attr( 's', '2' );
+           				$('row c[r^="L2"]', sheet).attr( 's', '2' );
+           				$('row c[r^="M2"]', sheet).attr( 's', '2' );
+           				$('row c[r^="N2"]', sheet).attr( 's', '2' );
+           				$('row c[r^="O2"]', sheet).attr( 's', '2' );
+						
+
+
+					}
+				
+				}
+			]
 		});																
 	});
 	
