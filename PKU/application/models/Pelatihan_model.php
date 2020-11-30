@@ -293,6 +293,12 @@ public function select_t_pelatihan_by_id($id)
         return $query->get();     
 }
 
+public function select_t_lpj_by_id($id)
+{
+		$query = $this->db->select("*")->from("T_PELATIHAN_LPJ")->where("ID_PELATIHAN",$id);
+		return $query->get();     
+}
+
 public function update_aktif_trx_reject($id){
 	$this->db->update('TRX_NO_REJECT',array("AKTIF"=>"0"),array("ID"=>$id));
 }	

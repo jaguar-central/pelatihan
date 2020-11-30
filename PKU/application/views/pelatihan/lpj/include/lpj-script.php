@@ -52,7 +52,7 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-	
+		
 
 		$(".select2").select2();
 
@@ -69,9 +69,17 @@ $(document).ready(function() {
 			var total = 0
 			total = minutes + (hours*60)
 			console.log("Diff = " + hours + ":" + minutes + ":" + seconds);
+
+			if (isNaN(hours)){
+				hours = 0;
+				minutes = 0;
+			}
+
 			$("#durasi_tampilan").val(hours+" jam "+minutes+" menit ");
 			$("#durasi_pelatihan").val(total);
-		};		
+		};	
+		
+		durasi();
 
 		$('#timeawal').datetimepicker();
 		$('#timeakhir').datetimepicker(

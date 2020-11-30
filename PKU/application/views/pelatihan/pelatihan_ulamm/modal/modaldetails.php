@@ -166,16 +166,15 @@
 						<div class="card-body">
 						  <div class="table">                
 							<table id="table_rab_details"  class="table">
-								  <thead class=" text-primary col-md-12">
-									  <th class="col-md-2">Uraian</th>
-									  <th class="col-md-2">Jumlah</th>
-									  <th class="col-md-2">Unit</th>
+								  <thead class=" text-primary">
+									  <th class="col-md-6">Uraian</th>
+									  <th class="col-md-2">Volume</th>
 									  <th class="col-md-2">Unit Cost</th>
 									  <th class="col-md-2">Sub Total Cost</th>
 									  <th></th>
 									  <th></th>
 								  </thead>    
-								  <tbody id="tbody_rab">
+								  <tbody id="tbody_rab_details">
                      
 								  </tbody>                                                                      
 								</table>  

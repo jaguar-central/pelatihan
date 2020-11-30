@@ -153,13 +153,23 @@ class Pelatihan extends MY_Controller
 		$data["sektor_ekonomi_mekaar"]	= $this->Master_model->select_dw_nasabah_mekaar_sektor_ekonomi();
 		$data["regional_mekaar"]	= $this->Master_model->select_ms_regional_mekaar();
 		$data["area_mekaar"]	= $this->Master_model->select_ms_area_mekaar();
-		
-		
+
+		$pelatihan_lpj = $this->Pelatihan_model->select_t_lpj_by_id($idpelatihan)->row();
+
+		$data["timeawal"] 					= (isset($pelatihan_lpj->TANGGAL_REALISASI_MULAI)) ? date('m/d/Y H:i:s',strtotime($pelatihan_lpj->TANGGAL_REALISASI_MULAI)) : '';
+		$data["inputStartTglPelaksanaan"] 	= (isset($pelatihan_lpj->TANGGAL_REALISASI_MULAI)) ? date('Y-m-d',strtotime($pelatihan_lpj->TANGGAL_REALISASI_MULAI)) : '';
+		$data["inputStartTimePelaksanaan"] 	= (isset($pelatihan_lpj->TANGGAL_REALISASI_MULAI)) ? date('H:i A',strtotime($pelatihan_lpj->TANGGAL_REALISASI_MULAI)) : '';
+		$data["timeakhir"] 					= (isset($pelatihan_lpj->TANGGAL_REALISASI_SELESAI)) ? date('m/d/Y H:i:s',strtotime($pelatihan_lpj->TANGGAL_REALISASI_SELESAI)) : '';
+		$data["inputAkhirTglPelaksanaan"] 	= (isset($pelatihan_lpj->TANGGAL_REALISASI_SELESAI)) ? date('Y-m-d',strtotime($pelatihan_lpj->TANGGAL_REALISASI_SELESAI)) : '';
+		$data["inputEndTimePelaksanaan"] 	= (isset($pelatihan_lpj->TANGGAL_REALISASI_SELESAI)) ? date('H:i A',strtotime($pelatihan_lpj->TANGGAL_REALISASI_SELESAI)) : '';
+
+		$data["csi_final"] 					= (isset($pelatihan_lpj->CSI_FINAL)) ? $pelatihan_lpj->CSI_FINAL : '';
+		$data["catatan_tambahan"] 			= (isset($pelatihan_lpj->CATATAN_TAMBAHAN)) ? $pelatihan_lpj->CATATAN_TAMBAHAN : '';
+
 
 		
-
         // echo '<pre>';
-		// print_r($data['regional_mekaar']);
+		// print_r( date('m/d/Y H:i:s',strtotime($data['pelatihan_lpj']->TANGGAL_REALISASI_MULAI)) );
 		// echo '</pre>';die;
         $this->load->view('layout/gabung', $data);
 
@@ -295,8 +305,7 @@ class Pelatihan extends MY_Controller
 		
 				
 		$deskripsi_rab        		= $this->security->xss_clean(strip_image_tags($this->input->post('deskripsi_rab')));
-		$jumlah_rab           		= $this->security->xss_clean(strip_image_tags($this->input->post('jumlah_rab')));
-		$unit_rab             		= $this->security->xss_clean(strip_image_tags($this->input->post('unit_rab')));
+		$volume_rab           		= $this->security->xss_clean(strip_image_tags($this->input->post('volume_rab')));
 		$unit_cost_rab        		= $this->security->xss_clean(strip_image_tags($this->input->post('unit_cost_rab')));
 		$total_cost_rab       		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab')));
 		$total_cost_rab_akhir 		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab_akhir')));				
@@ -435,8 +444,7 @@ class Pelatihan extends MY_Controller
 					'ID_PELATIHAN' 		=> $id_pelatihan,
 					'ID_BISNIS' 		=> $id_bisnis_pelatihan,
 					'URAIAN' 			=> $deskripsi_rab[$i],
-					'JUMLAH' 			=> $jumlah_rab[$i],
-					'SATUAN' 			=> $unit_rab[$i],
+					'VOLUME' 			=> $volume_rab[$i],
 					'UNIT_COST' 		=> $unit_cost_rab[$i],
 					'SUB_TOTAL_COST' 	=> $total_cost_rab[$i],
 					'GRAND_TOTAL' 		=> $total_cost_rab_akhir,
@@ -461,7 +469,7 @@ class Pelatihan extends MY_Controller
 
 			$db_error = $this->db->error();
 
-			if (!empty($db_error)) {
+			if (!empty($db_error['message'])) {
 				$output = array(
 					'result'  	=> 'NG',
 					'msg'		=> $db_error['message']
@@ -562,9 +570,9 @@ class Pelatihan extends MY_Controller
 				$this->Pelatihan_model->insert_t_rab($rab);				
 			}
 
-			$db_error = $this->db->error();
+			$db_error = $this->db->error();			
 
-			if (!empty($db_error)) {
+			if (!empty($db_error['message'])) {
 				$output = array(
 					'result'  	=> 'NG',
 					'msg'		=> $db_error['message']
@@ -640,7 +648,7 @@ class Pelatihan extends MY_Controller
 				
 				$db_error = $this->db->error();
 
-				if (!empty($db_error)) {
+				if (!empty($db_error['message'])) {
 					$output = array(
 						'result'  	=> 'NG',
 						'msg'		=> $db_error['message']
@@ -757,7 +765,7 @@ class Pelatihan extends MY_Controller
 			
 			$db_error = $this->db->error();
 
-			if (!empty($db_error)) {
+			if (!empty($db_error['message'])) {
 				$output = array(
 					'result'  	=> 'NG',
 					'msg'		=> $db_error['message']
@@ -862,7 +870,7 @@ class Pelatihan extends MY_Controller
 				}
 
 				$data_update 	= array(
-					'STATUS'			=> 'lpj_submitted',
+					'STATUS'			=> 'lpj_draft',
 					'APPROVAL'			=> '',
 					'UPDATED_BY' 		=> $id_user,
 					'UPDATED_DATE' 		=> date('Y-m-d H:i:s')			
@@ -874,7 +882,7 @@ class Pelatihan extends MY_Controller
 
 				$db_error = $this->db->error();
 
-				if (!empty($db_error)) {
+				if (!empty($db_error['message'])) {
 					$output = array(
 						'result'  	=> 'NG',
 						'msg'		=> $db_error['message']
@@ -976,7 +984,7 @@ class Pelatihan extends MY_Controller
 			
 			$db_error = $this->db->error();
 
-			if (!empty($db_error)) {
+			if (!empty($db_error['message'])) {
 				$output = array(
 					'result'  	=> 'NG',
 					'msg'		=> $db_error['message']
@@ -1050,7 +1058,7 @@ class Pelatihan extends MY_Controller
 			
 				$db_error = $this->db->error();
 
-				if (!empty($db_error)) {
+				if (!empty($db_error['message'])) {
 					$output = array(
 						'result'  	=> 'NG',
 						'msg'		=> $db_error['message']
@@ -1106,7 +1114,7 @@ class Pelatihan extends MY_Controller
 
 			$db_error = $this->db->error();
 
-			if (!empty($db_error)) {
+			if (!empty($db_error['message'])) {
 				$output = array(
 					'result'  	=> 'NG',
 					'msg'		=> $db_error['message']
@@ -1126,7 +1134,7 @@ class Pelatihan extends MY_Controller
 		exit;
 	}
 
-	public function post_submit_proposal()
+	public function post_submit()
 	{
 		$this->is_logged();		
 
@@ -1136,10 +1144,11 @@ class Pelatihan extends MY_Controller
 		);
 		
 		$pelatihanid	= trim($this->security->xss_clean(strip_image_tags($this->input->post('pelatihanid'))));
+		$status			= trim($this->security->xss_clean(strip_image_tags($this->input->post('status'))));
 		$id_user 		= $this->session->userdata('sess_user_idsdm');
 
 		$data_update 	= array(
-			'STATUS' => 'submitted',
+			'STATUS' => $status,
 			'UPDATED_BY' => $id_user,
 			'UPDATED_DATE' => date('Y-m-d H:i:s')			
 			);
@@ -1153,16 +1162,7 @@ class Pelatihan extends MY_Controller
 
 			$db_error = $this->db->error();
 
-			if (!empty($db_error)) {
-				$output = array(
-					'result'  	=> 'NG',
-					'msg'		=> $db_error['message']
-				);
-			}
-
-			$db_error = $this->db->error();
-
-			if (!empty($db_error)) {
+			if (!empty($db_error['message'])) {
 				$output = array(
 					'result'  	=> 'NG',
 					'msg'		=> $db_error['message']
@@ -1182,6 +1182,7 @@ class Pelatihan extends MY_Controller
 		exit;
 		
 	}
+
 
 	public function post_change_status_pelatihan($idpelatihan,$status)
 	{		
@@ -1287,7 +1288,7 @@ class Pelatihan extends MY_Controller
 
 			$db_error = $this->db->error();
 
-			if (!empty($db_error)) {
+			if (!empty($db_error['message'])) {
 				$output = array(
 					'result'  	=> 'NG',
 					'msg'		=> $db_error['message']
@@ -1321,8 +1322,7 @@ class Pelatihan extends MY_Controller
 			$data .= '
 			<tr class="">
 			<td><input type="text" class="form-control" id="deskripsi_rab_'.$tipe_modal.'" name="deskripsi_rab_'.$tipe_modal.'[]" value="'.$data_rab->URAIAN.'" ></td>
-			<td><input type="number" class="form-control" id="jumlah_rab_'.$tipe_modal.'" name="jumlah_rab_'.$tipe_modal.'[]"  value="'.$data_rab->JUMLAH.'"></td>
-			<td><input type="text" class="form-control" id="unit_rab_'.$tipe_modal.'" name="unit_rab_'.$tipe_modal.'[]" value="'.$data_rab->SATUAN.'" ></td>
+			<td><input type="number" class="form-control" id="volume_rab_'.$tipe_modal.'" name="volume_rab_'.$tipe_modal.'[]"  value="'.$data_rab->VOLUME.'"></td>
 			<td><input type="number" class="form-control" id="unit_cost_rab_'.$tipe_modal.'" name="unit_cost_rab_'.$tipe_modal.'[]" value="'.$data_rab->UNIT_COST.'" ></td>
 			<td><input type="number" class="form-control" id="total_cost_rab_'.$tipe_modal.'" name="total_cost_rab_'.$tipe_modal.'[]" value="'.$data_rab->SUB_TOTAL_COST.'" readonly="" ></td>
 			<td>                            
@@ -1723,7 +1723,7 @@ class Pelatihan extends MY_Controller
 
 			$db_error = $this->db->error();
 
-			if (!empty($db_error)) {
+			if (!empty($db_error['message'])) {
 				$output = array(
 					'result'  	=> 'NG',
 					'msg'		=> $db_error['message']

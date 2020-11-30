@@ -34,14 +34,14 @@
 									<span class="input-group-addon">
 									<span class="fas fa-calendar"></span>
 									</span>
-									<input type='text' class="form-control" id='timeawal' />
+									<input type='text' class="form-control" id='timeawal' value="<?php echo $timeawal;  ?>" />
 									<span class="input-group-addon bg-custom b-0">s/d</span>
-									<input type='text' class="form-control" id='timeakhir' />
+									<input type='text' class="form-control" id='timeakhir' value="<?php echo $timeakhir; ?>" />
 								</div>							
-								<input type="hidden" id="inputStartTglPelaksanaan" name="inputStartTglPelaksanaan" />						
-								<input type="hidden" id="inputStartTimePelaksanaan" name="inputStartTimePelaksanaan" />
-								<input type="hidden" id="inputAkhirTglPelaksanaan" name="inputAkhirTglPelaksanaan"/>								
-								<input type="hidden" id="inputEndTimePelaksanaan" name="inputEndTimePelaksanaan" />
+								<input type="hidden" id="inputStartTglPelaksanaan" name="inputStartTglPelaksanaan" value="<?php echo $inputStartTglPelaksanaan; ?>" />						
+								<input type="hidden" id="inputStartTimePelaksanaan" name="inputStartTimePelaksanaan" value="<?php echo $inputStartTimePelaksanaan;  ?>" />
+								<input type="hidden" id="inputAkhirTglPelaksanaan" name="inputAkhirTglPelaksanaan" value="<?php echo $inputAkhirTglPelaksanaan;  ?>" />								
+								<input type="hidden" id="inputEndTimePelaksanaan" name="inputEndTimePelaksanaan" value="<?php echo $inputEndTimePelaksanaan;  ?>" />
 							</div>
 						</div>		
 
@@ -68,12 +68,14 @@
 					<div class="form-group row">
 						<label class="col-sm-2">CSI Final <span class="text-danger"></span></label>
 						<div class="col-sm-4">
-							<input type="number" class="form-control"  required="" id="csi_final" name="csi_final" />
-						</div			>							
+							<input type="number" class="form-control"  required="" id="csi_final" name="csi_final" value="<?php echo $csi_final;?>" />
+						</div>							
 					
 						<label class="col-sm-2">Catatan Tambahan <span class="text-danger"></span></label>
 						<div class="col-sm-4">
-						<textarea class="form-control rounded-0" id="catatan_tambahan" name="catatan_tambahan" rows="3"></textarea>																	
+						<textarea class="form-control rounded-0" id="catatan_tambahan" name="catatan_tambahan" rows="3">
+						<?php echo $catatan_tambahan; ?>
+						</textarea>																	
 						</div>							
 					</div>								
 				</div>	
@@ -508,7 +510,7 @@
 
 								<label class="col-sm-2">Area </label>
 								<div class="col-sm-4">
-									<select class="form-control" id="area_mekaar" name="area_mekaar">
+									<select class="form-control select2" id="area_mekaar" name="area_mekaar">
 									</select>																	
 								</div>																																				
 							</div>												

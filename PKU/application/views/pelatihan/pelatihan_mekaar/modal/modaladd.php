@@ -250,9 +250,8 @@
 						  <div class="table">                
 							<table id="table_rab_modaladd"  class="table">
 								  <thead class=" text-primary col-md-12">
-									  <th class="col-md-2">Uraian</th>
-									  <th class="col-md-2">Jumlah</th>
-									  <th class="col-md-2">Unit</th>
+									  <th class="col-md-6">Uraian</th>
+									  <th class="col-md-2">Volume</th>
 									  <th class="col-md-2">Unit Cost</th>
 									  <th class="col-md-2">Sub Total Cost</th>
 									  <th></th>
@@ -261,8 +260,7 @@
 								  <tbody id="tbody_rab_modaladd">
 									<tr class="d-none">
 									  <td ><input type="text" class="form-control" id="deskripsi_rab" name="deskripsi_rab[]" value=""></td>
-									  <td ><input type="number" class="form-control" id="jumlah_rab" name="jumlah_rab[]"></td>
-									  <td ><input type="text" class="form-control" id="unit_rab" name="unit_rab[]" value=""></td>
+									  <td ><input type="number" class="form-control" id="volume_rab" name="volume_rab[]"></td>
 									  <td ><input type="number" class="form-control" id="unit_cost_rab" name="unit_cost_rab[]" value=""></td>
 									  <td ><input type="number" class="form-control" id="total_cost_rab" name="total_cost_rab[]" value="" readonly=""></td>
 									  <td>                            
@@ -578,9 +576,9 @@
 
 	$('#table_rab_modaladd tbody tr').keyup(function () {            
 		var index = parseInt($(this).index());
-		var jumlah_rab = $("#table_rab_modaladd tbody tr:eq("+index+")").find("#jumlah_rab").val(); 
+		var volume_rab = $("#table_rab_modaladd tbody tr:eq("+index+")").find("#volume_rab").val(); 
 		var unit_cost_rab = $("#table_rab_modaladd tbody tr:eq("+index+")").find("#unit_cost_rab").val();
-		sum = parseInt(jumlah_rab) * parseInt(unit_cost_rab);                
+		sum = parseInt(volume_rab) * parseInt(unit_cost_rab);                
 
 
 		$("#table_rab_modaladd tbody tr:eq("+index+")").find("#total_cost_rab").val(sum);

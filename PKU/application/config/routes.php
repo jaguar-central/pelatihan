@@ -127,7 +127,8 @@ $route['pelatihan/get_paging_kehadiran_nasabah_ulamm/(:any)']   = 'pelatihan/get
 $route['pelatihan/get_paging_kehadiran_nasabah_mekaar/(:any)']  = 'pelatihan/get_paging_kehadiran_nasabah_mekaar/$1';
 $route['pelatihan/get_paging_kehadiran_non_nasabah']            = 'pelatihan/get_paging_kehadiran_non_nasabah';
 $route['pelatihan/post_non_nasabah'] 	                        = 'pelatihan/post_non_nasabah';
-$route['pelatihan/post_submit_proposal']                        = 'pelatihan/post_submit_proposal';
+$route['pelatihan/post_submit']                                 = 'pelatihan/post_submit';
+
 $route['pelatihan/post_change_status_pelatihan/(:any)/(:any)']  = 'pelatihan/post_change_status_pelatihan/$1/$2';
 $route['pelatihan/get_paging_pelatihan/(:any)/(:any)']  		= 'pelatihan/get_paging_pelatihan/$1/$2';
 

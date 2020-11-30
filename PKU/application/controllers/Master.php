@@ -451,7 +451,7 @@ class Master extends MY_Controller
 		$data = $this->Master_model->select_ms_grading_where($where);
 		$return = '';
 		foreach ($data as $value) {
-			$return .="<option value='$value->ID' >Kelas $value->KELAS - $value->GRADING_DESKRIPSI</option>";
+			$return .="<option value='$value->ID' >Kelas $value->KELAS - ( $value->KATEGORI_STAR_MODEL ) - $value->TEMA_PELATIHAN </option>";
 		}
 
 		echo $return;		
