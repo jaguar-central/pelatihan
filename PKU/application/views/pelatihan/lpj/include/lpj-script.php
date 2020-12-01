@@ -173,7 +173,8 @@ $(document).ready(function() {
 			"columns" : [
 			  { "data": "nasabahid", render: function (data, type, row) 
                 {
-                  return '<input type="hidden" class="form-control" id="id_nasabah" name="id_nasabah[]" value="'+row.nasabahid+'">'+row.nasabahid;
+				  return '<input type="hidden" class="form-control" id="sektor_ekonomi" name="sektor_ekonomi[]" value="'+row.sektorekonomi+'">'			
+                  +'<input type="hidden" class="form-control" id="id_nasabah" name="id_nasabah[]" value="'+row.nasabahid+'">'+row.nasabahid;
                 } 
               },				
               { "data": "ktp", render: function (data, type, row) 
@@ -205,7 +206,20 @@ $(document).ready(function() {
                 {
                   return '<input type="hidden" class="form-control" id="unit" name="unit[]" value="'+row.unit+'">'+row.unit;
                 } 
-              },                         
+			  },   
+              { "data": "tipe_kredit", render: function (data, type, row) 
+                {
+				  var desk_tipe_kredit;	
+				  if (row.tipe_kredit==1){
+					desk_tipe_kredit='Baru';
+				  }else if (row.tipe_kredit==2){
+					desk_tipe_kredit='Top Up';
+  				  }else if (row.tipe_kredit==3){
+					desk_tipe_kredit='3R';
+				  }
+                  return '<input type="hidden" class="form-control" id="tipe_kredit" name="tipe_kredit[]" value="'+row.tipe_kredit+'">'+desk_tipe_kredit;
+                } 
+              },  			                        
 			],			
 			"dom": "<'dom_datable'f>rt<'dom_datable col-md-6'i><'dom_datable col-md-6'p>",
 			"createdRow" : function (row, data, index) {
@@ -214,12 +228,14 @@ $(document).ready(function() {
 		});			
 		
 
-		$(document).on("change", "#sektor_ekonomi, #jenis_pinjaman, #jenis_program, #cabang_kehadiran, #unit_kehadiran", function () {			
+		$(document).on("change", "#sektor_ekonomi, #jenis_pinjaman, #jenis_program, #cabang_kehadiran, #unit_kehadiran, #tipe_kredit", function () {			
 			var sektor_ekonomi 	= $('#sektor_ekonomi').val();			
 			var jenis_pinjaman 	= $('#jenis_pinjaman').val();			
 			var jenis_program 	= $('#jenis_program').val();			
 			var cabang 			= $('#cabang_kehadiran').val();			
-			var unit 			= $('#unit_kehadiran').val();			
+			var unit 			= $('#unit_kehadiran').val();	
+			var tipe_kredit 	= $('#tipe_kredit').val();	
+					
 			
 			table_kehadiran_ulamm.clear();
 			table_kehadiran_ulamm.column(0).search( sektor_ekonomi=='0' ? '' : sektor_ekonomi   );
@@ -227,6 +243,7 @@ $(document).ready(function() {
 			table_kehadiran_ulamm.column(2).search( jenis_program=='0' ? '' : jenis_program   );
 			table_kehadiran_ulamm.column(3).search( cabang=='0' ? '' : cabang   );
 			table_kehadiran_ulamm.column(4).search( unit=='0' ? '' : unit   );
+			table_kehadiran_ulamm.column(5).search( tipe_kredit=='0' ? '' : tipe_kredit   );
 
 			table_kehadiran_ulamm.clear().draw(false);
 		});		
@@ -274,7 +291,14 @@ $(document).ready(function() {
                 {
                   return '<input type="hidden" class="form-control" id="area" name="area[]" value="'+row.area+'">'+row.area;
                 } 
-			  },    			                       
+			  },    
+              { "data": "siklus", render: function (data, type, row) 
+                {
+				  var desk_siklus;					  
+				  desk_siklus='Siklus '+row.siklus;				  
+                  return '<input type="hidden" class="form-control" id="siklus_kredit" name="siklus_kredit[]" value="'+row.siklus+'">'+desk_siklus;
+                } 
+			  }, 			  				  			  			  
 			],			
 			"dom": "<'dom_datable'f>rt<'dom_datable col-md-6'i><'dom_datable col-md-6'p>",			
 			// "pagingType": "simple",
@@ -284,15 +308,17 @@ $(document).ready(function() {
 		});
 
 
-		$(document).on("change", "#sektor_ekonomi_mekaar,#regional_mekaar,#area_mekaar", function () {			
+		$(document).on("change", "#sektor_ekonomi_mekaar,#regional_mekaar,#area_mekaar,#siklus_kredit", function () {			
 			var sektor_ekonomi_mekaar 	= $('#sektor_ekonomi_mekaar').val();			
 			var regional_mekaar 		= $('#regional_mekaar').val();			
 			var area_mekaar 			= $('#area_mekaar').val();			
+			var siklus_kredit 			= $('#siklus_kredit').val();			
 					
 			table_kehadiran_mekaar.clear();
 			table_kehadiran_mekaar.column(0).search( sektor_ekonomi_mekaar=='0' ? '' : sektor_ekonomi_mekaar   );
 			table_kehadiran_mekaar.column(1).search( regional_mekaar=='0' ? '' : regional_mekaar   );
 			table_kehadiran_mekaar.column(2).search( area_mekaar=='0' ? '' : area_mekaar   );
+			table_kehadiran_mekaar.column(3).search( siklus_kredit=='0' ? '' : siklus_kredit   );
 
 			table_kehadiran_mekaar.clear().draw(false);
 		});				
@@ -521,6 +547,10 @@ $(document).ready(function() {
 		var cabang 			= $("tr.add-kehadiran-ulamm:eq("+index+") #cabang").val();				
 		var unit 			= $("tr.add-kehadiran-ulamm:eq("+index+") #unit").val();				
 
+
+		var sektor_ekonomi 	= $("tr.add-kehadiran-ulamm:eq("+index+") #sektor_ekonomi").val();				
+		var tipe_kredit 	= $("tr.add-kehadiran-ulamm:eq("+index+") #tipe_kredit").val();	
+
 		$.post("<?php echo base_url('pelatihan/post_kehadiran'); ?>",
 		{	
 			id_pelatihan	: '<?php echo $this->uri->segment(3); ?>',
@@ -531,7 +561,9 @@ $(document).ready(function() {
 			no_hp			: no_hp,
 			kolektibilitas	: kolektibilitas,
 			cabang			: cabang,
-			unit			: unit
+			unit			: unit,
+			sektor_ekonomi	: sektor_ekonomi,
+			tipe_kredit		: tipe_kredit			
 		},
 		function(data, status){
 			$('#datatable_listkehadiran').DataTable().draw(false);
@@ -552,7 +584,10 @@ $(document).ready(function() {
 		var no_hp 			= $("tr.add-kehadiran-mekaar:eq("+index+") #no_hp").val();				
 		var produk		 	= $("tr.add-kehadiran-mekaar:eq("+index+") #produk").val();				
 		var region 			= $("tr.add-kehadiran-mekaar:eq("+index+") #Region").val();				
-		var area 			= $("tr.add-kehadiran-mekaar:eq("+index+") #Area").val();				
+		var area 			= $("tr.add-kehadiran-mekaar:eq("+index+") #Area").val();	
+		
+		var sektor_ekonomi 	= $("tr.add-kehadiran-mekaar:eq("+index+") #sektor_ekonomi").val();				
+		var siklus_kredit 	= $("tr.add-kehadiran-mekaar:eq("+index+") #siklus_kredit").val();	
 
 		$.post("<?php echo base_url('pelatihan/post_kehadiran'); ?>",
 		{	
@@ -564,7 +599,9 @@ $(document).ready(function() {
 			no_hp			: no_hp,
 			produk			: produk,
 			region			: region,
-			area			: area
+			area			: area,
+			sektor_ekonomi	: sektor_ekonomi,
+			siklus_kredit	: siklus_kredit
 		},
 		function(data, status){
 			$('#datatable_listkehadiran').DataTable().draw(false);

@@ -1077,8 +1077,20 @@ class Pelatihan extends MY_Controller
 		$region         = trim($this->security->xss_clean(strip_image_tags($this->input->post('Region'))));
 		$area		    = trim($this->security->xss_clean(strip_image_tags($this->input->post('Area'))));
 		$id_user		= $this->session->userdata('sess_user_idsdm');					
+
+		$sektor_ekonomi	= trim($this->security->xss_clean(strip_image_tags($this->input->post('sektor_ekonomi'))));
+		$tipe_kredit    = trim($this->security->xss_clean(strip_image_tags($this->input->post('tipe_kredit'))));
+		$siklus_kredit  = trim($this->security->xss_clean(strip_image_tags($this->input->post('siklus_kredit'))));
+		$id_tipe_kredit = '';
 		
-		
+
+
+		if ($bisnis=='ULAMM'){ 
+			$id_tipe_kredit = $tipe_kredit;
+		}else{ //MEKAAR
+			$id_tipe_kredit = $siklus_kredit;
+		}
+	
 		$output = array(
 			'result'  	=> 'OK',
 			'msg'		=> ''
@@ -1099,6 +1111,8 @@ class Pelatihan extends MY_Controller
 					'ID_NASABAH'		=> $id_nasabah,
 					'NAMA' 				=> $nama_nasabah,
 					'NASABAH_TIPE' 		=> $nasabah_type,
+					'ID_SEKTOR_EKONOMI' => $sektor_ekonomi,
+					'ID_TIPE_KREDIT' 	=> $id_tipe_kredit,
 					'AKTIF' 			=> '1',
 					'CREATED_BY' 		=> $id_user,
 					'CREATED_DATE' 		=> date('Y-m-d H:i:s')			
@@ -1455,9 +1469,10 @@ class Pelatihan extends MY_Controller
 		$jenis_program	= ($_GET["columns"][2]['search']['value']!='') ? 'jenis_program:'.$_GET["columns"][2]['search']['value'] : NULL;
 		$kode_cabang 	= ($_GET["columns"][3]['search']['value']!='') ? 'kode_cabang:'.$_GET["columns"][3]['search']['value'] : NULL;
 		$kode_unit 		= ($_GET["columns"][4]['search']['value']!='') ? 'kode_unit:'.$_GET["columns"][4]['search']['value'] : NULL;
+		$tipe_kredit	= ($_GET["columns"][5]['search']['value']!='') ? 'tipe_kredit:'.$_GET["columns"][5]['search']['value'] : NULL;
 		$search 		= ($_GET["search"]["value"]!='') ? 'nama_nasabah:'.$_GET["search"]["value"] : NULL ;	
 
-		$searching = array($sektor_ekonomi,$jenis_pinjaman,$jenis_program,$kode_cabang,$kode_unit,$search);		
+		$searching = array($sektor_ekonomi,$jenis_pinjaman,$jenis_program,$kode_cabang,$kode_unit,$tipe_kredit,$search);		
 		
 		$start = isset($_GET["start"]) ? '&from='.$_GET["start"] : 0;
 		$limit = isset($_GET["length"]) ? '&size='.$_GET["length"] : 10;		
@@ -1516,10 +1531,11 @@ class Pelatihan extends MY_Controller
 
 		$search 		= ($_GET["search"]["value"]!='') ? 'nama:'.$_GET["search"]["value"] : NULL ;				
 		$sektor_ekonomi = ($_GET["columns"][0]['search']['value']!='') ? 'sektor_ekonomi:'.$_GET["columns"][0]['search']['value'] : NULL;
-		$regionid 		= ($_GET["columns"][1]['search']['value']!='') ? 'regionid:'.$_GET["columns"][1]['search']['value'] : NULL;
+		$regionid 		= ($_GET["columns"][1]['search']['value']!='') ? 'regionid:'.$_GET["columns"][1]['search']['value'] : NULL;		
 		$areaid 		= ($_GET["columns"][2]['search']['value']!='' && $_GET["columns"][2]['search']['value']!='null') ? 'areaid:'.$_GET["columns"][2]['search']['value'] : NULL;
+		$siklus 		= ($_GET["columns"][3]['search']['value']!='') ? 'siklus:'.$_GET["columns"][3]['search']['value'] : NULL;
 
-		$searching = array($sektor_ekonomi,$regionid,$areaid,$search);	
+		$searching = array($sektor_ekonomi,$regionid,$areaid,$search,$siklus);	
 
 		$this->config->set_item('elastic_index', 'debitur');	
 		

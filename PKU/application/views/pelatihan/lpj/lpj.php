@@ -427,6 +427,16 @@
 											?>							
 									</select>																	
 								</div>	
+
+								<label class="col-sm-2">Tipe Kredit </label>
+								<div class="col-sm-4">
+									<select class="form-control select2" id="tipe_kredit" name="tipe_kredit">
+										<option value="">--pilih program--</option>	
+										<option value="1">Baru</option>	
+										<option value="2">Top Up</option>	
+										<option value="3">3R</option>								
+									</select>																	
+								</div>									
 									
 							</div>	
 							<div class="form-group row">	
@@ -463,6 +473,7 @@
 										<th>KOLEKTIBILITAS</th>
 										<th>CABANG</th>
 										<th>UNIT</th>
+										<th>TIPE KREDIT</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -492,7 +503,24 @@
 											}
 											?>	
 									</select>																	
-								</div>																											
+								</div>		
+
+								<label class="col-sm-2">Siklus Kredit </label>
+								<div class="col-sm-4">
+									<select class="form-control select2" id="siklus_kredit" name="siklus_kredit">
+										<option value="">--pilih siklus--</option>							
+										<option value="1">Siklus 1</option>							
+										<option value="2">Siklus 2</option>							
+										<option value="3">Siklus 3</option>								
+										<option value="4">Siklus 4</option>								
+										<option value="5">Siklus 5</option>								
+										<option value="6">Siklus 6</option>								
+										<option value="7">Siklus 7</option>								
+										<option value="8">Siklus 8</option>								
+										<option value="9">Siklus 9</option>								
+										<option value="10">Siklus 10</option>								
+									</select>																	
+								</div>																																		
 							</div>	
 
 							<div class="form-group row">															
@@ -528,6 +556,7 @@
 											<th>PRODUK</th>
 											<th>REGION</th>
 											<th>AREA</th>
+											<th>SIKLUS</th>
 										</tr>
 									</thead>
 									<tbody>

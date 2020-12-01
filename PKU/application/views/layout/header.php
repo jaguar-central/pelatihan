@@ -41,18 +41,7 @@
 	
     <link href="<?php echo base_url() ?>assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 
-    <style>
-        @media (max-width: 767px) {
-            .table-responsive .dropdown-menu {
-                position: static !important;
-            }
-        }
-        @media (min-width: 768px) {
-            .table-responsive {
-                overflow: inherit;
-            }
-        }
-    </style>
+
 
 
     
