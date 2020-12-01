@@ -45,11 +45,9 @@
 <script src="<?php echo base_url(); ?>assets/plugins/timepicker/bootstrap-timepicker.min.js"></script>
 
 
-<script src="<?php echo base_url() ?>assets/js/googlejs.js"></script>
 
-<script src="<?php echo base_url() ?>assets/js/locationpicker.jquery.min.js"></script>
 
-<script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places&key=AIzaSyCwGoo1jtr3HgU66bulwQ6qDI4CJqpgJjU"></script>
+
 
 
 <script type="text/javascript">

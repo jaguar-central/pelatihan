@@ -98,7 +98,7 @@ class Pelatihan extends MY_Controller
 		$data["modal"] 		= array( "pelatihan/history_ulamm/modal/modaldetails"); 
 
         $data["menu"] 		= $this->Menu_model->select_ms_menu();
-		$data["pelatihan"] 	= $this->Pelatihan_model->select_t_pelatihan_ulamm_by_status(array('draft','submitted','approved','lpj_draft','lpj_submitted','lpj_approved'));
+		$data["pelatihan"] 	= $this->Pelatihan_model->select_t_pelatihan_ulamm_by_status(array('draft','submitted','approved','reject','lpj_draft','lpj_submitted','lpj_approved'));
 		$data["cabang"] 	= $this->Master_model->select_ms_cabang_ulamm();	
 
 		$data['provinsi'] 		= $this->Master_model->select_ms_provinsi();
@@ -118,7 +118,7 @@ class Pelatihan extends MY_Controller
 		$data["modal"] 		= array( "pelatihan/history_mekaar/modal/modaldetails"); 
 
         $data["menu"] 		= $this->Menu_model->select_ms_menu();
-		$data["pelatihan"] 	= $this->Pelatihan_model->select_t_pelatihan_mekaar_by_status(array('draft','submitted','approved','lpj_draft','lpj_submitted','lpj_approved'));
+		$data["pelatihan"] 	= $this->Pelatihan_model->select_t_pelatihan_mekaar_by_status(array('draft','submitted','approved','reject','lpj_draft','lpj_submitted','lpj_approved'));
 		$data["cabang"] 	= $this->Master_model->select_ms_cabang_ulamm();		
 		$data["region"] 	= $this->Master_model->select_ms_region_mekaar();
 
@@ -681,7 +681,7 @@ class Pelatihan extends MY_Controller
 
 	public function post_konfirmasi_proposal()
     {
-		$this->is_logged();						
+		$this->is_logged();		
 		
         $id_pelatihan           	= trim($this->security->xss_clean(strip_image_tags($this->input->post('id_pelatihan'))));
 		$keterangan           		= trim($this->security->xss_clean(strip_image_tags($this->input->post('keterangan'))));		
@@ -689,13 +689,17 @@ class Pelatihan extends MY_Controller
 		$tingkat_approval			= $this->session->userdata('sess_user_group');		
 		$username					= $this->session->userdata('sess_user_username');
 		$id_grading					= trim($this->security->xss_clean(strip_image_tags($this->input->post('grading'))));
+		$status_result				= trim($this->security->xss_clean(strip_image_tags($this->input->post('result'))));
 							
 
-		$status_approval = $this->Pelatihan_model->check_bwmp_approval_proposal($id_pelatihan,$tingkat_approval);
-		
-		// $tingkat_approval = $status_approval=='approved' ? '' : $tingkat_approval;
+		$status_approval = $this->Pelatihan_model->check_bwmp_approval_proposal($id_pelatihan,$tingkat_approval); //kolom status di T_PELATIHAN				
 
 		$final_approval = $status_approval=='approved' ? '1' : '0';
+
+
+		if ($status_result=='reject'){	 //kolom RESULT di T_APPROVAL, jika reject status_approval = status_result
+			$status_approval = $status_result;
+		}
 		
 		switch ($this->session->userdata('sess_user_id_user_group')) {
 		  case "2":
@@ -733,6 +737,7 @@ class Pelatihan extends MY_Controller
 				'USERNAME'			=> $username,	
 				'TTD'				=> base_url()."assets/images/tandatangan/".$username,
 				'APPROVAL'			=> $tingkat_approval,
+				'RESULT'			=> $status_result,
 				'FINAL_APPROVAL'	=> $final_approval,
 				'KETERANGAN'		=> $keterangan,
 				'AKTIF' 			=> '1',
@@ -762,6 +767,27 @@ class Pelatihan extends MY_Controller
 				'ID' 	=> $id_pelatihan
 				);
 			$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
+
+
+			// jika status reject NO_TRX disimpan di table TRX_NO_REJECT
+			if ($status_result=='reject'){		
+			
+				$NO_TRX = $this->Pelatihan_model->select_t_pelatihan_by_id($id_pelatihan)->row()->NO_TRX;
+
+				$ARRAY_NO_TRX = explode(",",$NO_TRX);
+
+				foreach ($ARRAY_NO_TRX as $NO){
+					$data = array(
+						'NO_TRX' 		=> $NO,
+						'AKTIF' 		=> '1',
+						'CREATED_BY' 	=> $id_user,
+						'CREATED_DATE' 	=> date('Y-m-d H:i:s')			
+					);			
+
+					$this->Pelatihan_model->insert_trx_no_reject($data);
+				}
+			}
+
 			
 			$db_error = $this->db->error();
 
@@ -919,12 +945,15 @@ class Pelatihan extends MY_Controller
 		$id_user					= $this->session->userdata('sess_user_idsdm');
 		$tingkat_approval			= $this->session->userdata('sess_user_group');	
 		$username					= $this->session->userdata('sess_user_username');	
+		$status_result				= trim($this->security->xss_clean(strip_image_tags($this->input->post('result'))));
 		
-		$status_approval = $this->Pelatihan_model->check_bwmp_approval_lpj($id_pelatihan,$tingkat_approval);		
-		
-		// $tingkat_approval = $status_approval=='approved' ? '' : $tingkat_approval;
+		$status_approval = $this->Pelatihan_model->check_bwmp_approval_lpj($id_pelatihan,$tingkat_approval);				
 
 		$final_approval = $status_approval=='approved' ? '1' : '0';
+
+		if ($status_result=='reject'){	 //kolom RESULT di T_APPROVAL, jika reject status_approval = status_result
+			$status_approval = $status_result;
+		}
 		
 		switch ($this->session->userdata('sess_user_id_user_group')) {
 		  case "2":
@@ -960,6 +989,7 @@ class Pelatihan extends MY_Controller
 				'URUTAN_APPROVAL'	=> $urutan_approval,
 				'USERNAME'			=> $username,				
 				'APPROVAL'			=> $tingkat_approval,
+				'RESULT'			=> $status_result,
 				'FINAL_APPROVAL'	=> $final_approval,
 				'TTD'				=> base_url()."assets/images/tandatangan/".$username,
 				'KETERANGAN'		=> $keterangan,				
@@ -981,6 +1011,25 @@ class Pelatihan extends MY_Controller
 				'ID' 	=> $id_pelatihan
 				);
 			$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
+
+			// jika status reject NO_TRX disimpan di table TRX_NO_REJECT
+			if ($status_result=='reject'){		
+			
+				$NO_TRX = $this->Pelatihan_model->select_t_pelatihan_by_id($id_pelatihan)->row()->NO_TRX;
+
+				$ARRAY_NO_TRX = explode(",",$NO_TRX);
+
+				foreach ($ARRAY_NO_TRX as $NO){
+					$data = array(
+						'NO_TRX' 		=> $NO,
+						'AKTIF' 		=> '1',
+						'CREATED_BY' 	=> $id_user,
+						'CREATED_DATE' 	=> date('Y-m-d H:i:s')			
+					);			
+
+					$this->Pelatihan_model->insert_trx_no_reject($data);
+				}
+			}
 			
 			$db_error = $this->db->error();
 
@@ -1189,6 +1238,7 @@ class Pelatihan extends MY_Controller
 		$id_user = $this->session->userdata('sess_user_idsdm');	
 		$approval = $this->session->userdata('sess_user_group');
 		
+		
 		$data_update 	= array(
 			'STATUS' => $status,
 			'APPROVAL' => $approval,
@@ -1199,25 +1249,6 @@ class Pelatihan extends MY_Controller
 			'ID' 	=> $idpelatihan
 			);
 		$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);	
-
-		// jika status reject NO_TRX disimpan di table TRX_NO_REJECT
-		if ($status=='reject'){			
-
-			$NO_TRX = $this->Pelatihan_model->select_t_pelatihan_by_id($idpelatihan)->row()->NO_TRX;
-
-			$ARRAY_NO_TRX = explode(",",$NO_TRX);
-
-			foreach ($ARRAY_NO_TRX as $NO){
-				$data = array(
-					'NO_TRX' 		=> $NO,
-					'AKTIF' 		=> '1',
-					'CREATED_BY' 	=> $id_user,
-					'CREATED_DATE' 	=> date('Y-m-d H:i:s')			
-				);			
-
-				$this->Pelatihan_model->insert_trx_no_reject($data);
-			}
-		}
 		
 	}
 
