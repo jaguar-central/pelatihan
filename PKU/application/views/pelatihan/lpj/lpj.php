@@ -159,13 +159,14 @@
 						<div class="col-lg-12">
 							<!--h2 class="title-1 m-b-25">Earnings By Items</h2-->
 							<div class="table-style">
-								<table id="datatable_listkehadiran" class="table table-hover"> 
+								<table id="datatable_listkehadiran" class="table table-hover table-responsive"> 
 									<thead>
 										<tr>
+											<th>ID Nasabah</th>											
 											<th>KTP</th>											
 											<th>Bisnis</th>
 											<th>Nama</th>
-											<th>Tipe Nasabah</th>												
+											<th>Tipe Nasabah</th>																																											
 										</tr>
 									</thead>
 									<tbody>
@@ -324,8 +325,7 @@
 							<table class="table">
 								  <thead class=" text-primary col-md-12">
 									  <th class="col-md-2">Uraian</th>
-									  <th class="col-md-2">Jumlah</th>
-									  <th class="col-md-2">Unit</th>
+									  <th class="col-md-2">Volume</th>
 									  <th class="col-md-2">Unit Cost</th>
 									  <th class="col-md-2">Sub Total Cost</th>
 									  <th></th>
@@ -334,8 +334,7 @@
 								  <?php foreach($rab as $data_rab){ ?>
 									<tr>
 									  <td ><input type="text" class="form-control" value="<?= $data_rab->URAIAN; ?>" disabled></td>
-									  <td ><input type="number" class="form-control" value="<?= $data_rab->JUMLAH; ?>" disabled></td>
-									  <td ><input type="text" class="form-control"  value="<?= $data_rab->SATUAN; ?>" disabled></td>
+									  <td ><input type="number" class="form-control" value="<?= $data_rab->VOLUME; ?>" disabled></td>
 									  <td ><input type="number" class="form-control"  value="<?= $data_rab->UNIT_COST; ?>" disabled></td>
 									  <td ><input type="number" class="form-control" value="<?= $data_rab->SUB_TOTAL_COST; ?>" disabled></td>							
 									</tr>                        
@@ -463,7 +462,7 @@
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="table-style">
-								<table id="datatable_kehadiran_ulamm" class="table table-hover">                                     
+								<table id="datatable_kehadiran_ulamm" class="table table-hover table-responsive">                                     
 								<thead>
 									<tr>
 										<th>ID NASABAH</th>
@@ -547,7 +546,7 @@
 							<div class="row">
 								<div class="col-lg-12">
 									<div class="table-style">
-									<table id="datatable_kehadiran_mekaar" class="table table-hover">                                     
+									<table id="datatable_kehadiran_mekaar" class="table table-hover table-responsive">                                     
 									<thead>
 										<tr>
 											<th>KTP</th>
@@ -631,7 +630,7 @@
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="table-style">
-								<table id="datatable_kehadiran_non_nasabah" class="table table-hover">                                     
+								<table id="datatable_kehadiran_non_nasabah" class="table table-hover table-responsive">                                     
 									<thead>
 										<tr>
 											<th>KTP</th>

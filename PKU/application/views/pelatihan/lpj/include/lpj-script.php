@@ -121,6 +121,9 @@ $(document).ready(function() {
 			"url" : '<?php echo base_url('pelatihan/get_paging_kehadiran_non_nasabah/'.$this->uri->segment(3)); ?>',
 			"type" :'GET'                      
 			},
+			"columnDefs": [
+    			{ "className": "col-md-2", targets: "_all" },
+			],			
 			"columns" : [
 				{ "data": "NO_KTP", render: function (data, type, row) 
                 {
@@ -170,6 +173,9 @@ $(document).ready(function() {
 			"url" : '<?php echo base_url('pelatihan/get_paging_kehadiran_nasabah_ulamm/'.$this->uri->segment(3)); ?>',
 			"type" :'GET'                      
 			},
+			"columnDefs": [
+    			{ "className": "col-md-2", targets: "_all" },
+			],			
 			"columns" : [
 			  { "data": "nasabahid", render: function (data, type, row) 
                 {
@@ -257,6 +263,9 @@ $(document).ready(function() {
 			"url" : '<?php echo base_url('pelatihan/get_paging_kehadiran_nasabah_mekaar/'.$this->uri->segment(3)); ?>',
 			"type" :'GET'                      
 			},
+			"columnDefs": [
+    			{ "className": "col-md-2", targets: "_all" },
+			],			
 			"columns" : [										
               { "data": "noktp", render: function (data, type, row) 
                 {
@@ -518,7 +527,11 @@ $(document).ready(function() {
 			"url" : '<?php echo base_url('pelatihan/get_kehadiran/'.$this->uri->segment(3)); ?>',
 			"type" :'GET'                      
 			},
+			"columnDefs": [
+    			{ "className": "col-md-2", targets: "_all" },
+			],				
 			"columns" : [
+				{ "data": "ID_NASABAH" },
 				{ "data": "KTP", render: function (data, type, row)
 				    {
 						return '<input type="hidden" class="form-control" id="ktp" name="ktp[]" value="'+row.KTP+'">'+row.KTP;
@@ -527,6 +540,7 @@ $(document).ready(function() {
 				{ "data": "BISNIS" },
 				{ "data": "NAMA" },
 				{ "data": "NASABAH_TIPE" },				
+				// { "data": "ID_TIPE_KREDIT"},					
 			],
 			"dom": "<'dom_datable'f>rt<'dom_datable col-md-6'i><'dom_datable col-md-6'p>",
 			"createdRow" : function (row, data, index) {

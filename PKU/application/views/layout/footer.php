@@ -36,8 +36,17 @@ var watchId = 0;
 $(document).ready(function() {
     // $('#startMonitoring').on('click', getLocation);
     // $('#stopMonitoring').on('click', endWatch);
-    getLocation();
-    setTimeout(function(){endWatch()}, 3000);
+
+    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+        // true for mobile device
+        console.log("mobile device");
+        getLocation();
+        setTimeout(function(){endWatch()}, 3000);
+    }else{
+        // false for not mobile device
+        console.log("bukan mobile device");
+    }
+
 });
 
 function supportsGeolocation() {
