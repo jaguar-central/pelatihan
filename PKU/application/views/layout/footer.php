@@ -27,22 +27,85 @@
 
 
 <!-- end document-->
+
+
+<!-- START CHECK GEOLOCATION -->
 <script>
-  var x = document.getElementById("posisition_device");
-  getLocation();
+var watchId = 0;
 
-  function getLocation() {  
-    if (navigator.geolocation) {
+$(document).ready(function() {
+    // $('#startMonitoring').on('click', getLocation);
+    // $('#stopMonitoring').on('click', endWatch);
+    getLocation();
+    setTimeout(function(){endWatch()}, 3000);
+});
 
-      navigator.geolocation.getCurrentPosition(showPosition);
-    } else { 
-      x.innerHTML = "Geolocation is not supported by this browser.";
+function supportsGeolocation() {
+    return 'geolocation' in navigator;
+}
+
+function showMessage(message) {
+    // $('#message').html(message);    
+    console.log(message);    
+}
+
+function getLocation() {
+    if (supportsGeolocation()) {
+        var options = { enableHighAccuracy: true };
+        watchId = navigator.geolocation.watchPosition(showPosition, showError, options);
+    } else {
+        showMessage("Geolocation isn't supported by your browser");
     }
-  }
+}
 
-  function showPosition(position) {
-    console.log(position);
-    x.innerHTML = "Latitude: " + position.coords.latitude + 
-    "<br>Longitude: " + position.coords.longitude;
-  }
+function endWatch() {
+    // if (watchId != 0) {
+        navigator.geolocation.clearWatch(watchId);
+        watchId = 0;
+        showMessage("Monitoring ended.");
+    // }
+}
+
+function showPosition(position) {
+    var datetime = new Date(position.timestamp).toLocaleString();
+    showMessage('Latitude: ' + position.coords.latitude + '<br>' +
+        'Longitude: ' + position.coords.longitude + '<br>' +
+        'Timestamp: ' + datetime);   
+
+	//simpan latitude  longitude
+    var formURL = "<?php echo base_url('master/post_geolocation'); ?>";
+    var frmdata = new FormData();
+
+    frmdata.append('latitude',position.coords.latitude);
+    frmdata.append('longititude',position.coords.longitude);
+    
+    var xhr = $.ajax({
+        url: formURL,
+        type: 'POST',
+        data: frmdata,
+        processData: false,
+        contentType: false
+    });
+
+}
+
+function showError(error) {
+    switch (error.code) {
+        case error.PERMISSION_DENIED:
+            showMessage("User denied Geolocation access request."); 
+            window.location.href = '<?php echo base_url(); ?>/404';           
+            break;
+        case error.POSITION_UNAVAILABLE:
+            showMessage("Location Information unavailable.");
+            break;
+        case error.TIMEOUT:
+            showMessage("Get user location request timed out.");
+            break;
+        case error.UNKNOWN_ERROR:
+            showMessage("An unknown error occurred.");
+            break;
+    }
+}
+ 
 </script>
+<!-- END CHECK GEOLOCATION -->

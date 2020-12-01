@@ -265,6 +265,19 @@ class Master_model extends CI_Model {
 		return $query->result();	
 	}
 
+	public function insert_trx_geolocation($data)
+	{
+		$this->db->insert('TRX_GEOLOCATION', $data);
+	}	
+
+	public function select_trx_geolocation($where){
+		$query = $this->db->get_where('TRX_GEOLOCATION',$where);	
+		return $query->result();			
+	}
+
+	public function update_trx_geolocation($data,$where){
+		$this->db->update('TRX_GEOLOCATION', $data,$where);
+	}		
 
 }
 ?>

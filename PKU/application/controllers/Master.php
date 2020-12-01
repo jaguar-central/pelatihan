@@ -456,4 +456,29 @@ class Master extends MY_Controller
 
 		echo $return;		
 	}	
+
+	public function post_geolocation(){
+		$latitude     = $this->security->xss_clean(strip_image_tags($this->input->post('latitude')));
+        $longititude  = $this->security->xss_clean(strip_image_tags($this->input->post('longititude')));
+		$username	  = $this->session->userdata('sess_user_username');	
+		
+		$data = array(
+			'USERNAME' => $username,
+			'LATITUDE' => $latitude,
+			'LONGITITUDE' => $longititude,
+			'TIMESTAMP' => date('Y-m-d H:i:s'),
+		);
+
+		$where = array(
+			'USERNAME' => $username
+		);
+
+		$check = $this->Master_model->select_trx_geolocation($where);
+
+		if (count($check)==0){
+			$this->Master_model->insert_trx_geolocation($data);
+		}else{
+			$this->Master_model->update_trx_geolocation($data,$where);
+		}
+	}
 }
