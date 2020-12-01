@@ -1,4 +1,6 @@
 <script type="text/javascript">	
+
+
 $(document).ready(function() {	
     var ctx_pelatihan = document.getElementById("dashboard_pelatihan");
     if (ctx_pelatihan) {

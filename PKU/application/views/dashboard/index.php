@@ -45,7 +45,7 @@
             <div class="col-md-12">
                 <div class="content">
                 <h2>Welcome to Dashboard</h2>
-                <p>Data Realisasi Pelatihan dan Kehadiran Nasabah</p>
+                <p>Data Realisasi Pelatihan dan Kehadiran Nasabah</p>                
                 </div>
             </div>
             </div>
@@ -98,7 +98,8 @@
                                     </div>
                                 </div>
                             </div> -->
-
+                            
 
 </div>
+<p id="posisition_device"></p>
 <!-- END MAIN CONTENT-->
