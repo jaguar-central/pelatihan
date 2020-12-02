@@ -14,7 +14,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="table-style">
-						<table id="datatable" class="table table-bordered table-striped">                                    
+						<table id="datatable" class="table table-bordered table-striped table-responsive">                                    
 							<thead>
 								<tr>
 									<th>KTP</th>

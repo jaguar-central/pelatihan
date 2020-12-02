@@ -1,18 +1,27 @@
 <style>
-/* [type="date"]::-webkit-inner-spin-button {
-  display: none;
+@media (max-width: 767px) {
+    #judul_pelatihan{
+        width: 400px;
+    }
+	#tanggal_pelatihan{
+		width: 150px;
+	}
+	#time_pelatihan{
+		width: 150px;
+	}
+	#cabang_ulamm{
+		width: 150px;
+	}
+	#cabang_ulamm{
+		width: 150px;
+	}
+	#alamat_pelatihan{
+		width: 150px;
+	}
+	#budget_pelatihan{
+		width: 150px;
+	}
 }
-[type="date"]::-webkit-calendar-picker-indicator {
-  opacity: 0;
-}
-input [type="date"] {
-  border: 1px solid #c4c4c4;
-  border-radius: 5px;
-  background-color: #fff;
-  padding: 3px 5px;
-  box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
-  width: 190px;
-} */
 </style>
 
 

@@ -28,6 +28,63 @@
 
 <!-- end document-->
 
+<style>
+@media (max-width: 767px) {
+    #deskripsi_rab{
+        width: 400px;
+    }
+    #volume_rab{
+        width: 150px;
+    }
+    #unit_cost_rab{
+        width: 150px;
+    }
+    #total_cost_rab{
+        width: 150px;
+    }
+
+    #deskripsi_rab_details{
+        width: 400px;
+    }
+    #volume_rab_details{
+        width: 150px;
+    }
+    #unit_cost_rab_details{
+        width: 150px;
+    }
+    #total_cost_rab_details{
+        width: 150px;
+    }
+
+    #deskripsi_rab_edit{
+        width: 400px;
+    }
+    #volume_rab_edit{
+        width: 150px;
+    }
+    #unit_cost_rab_edit{
+        width: 150px;
+    }
+    #total_cost_rab_edit{
+        width: 150px;
+    }    
+
+    
+    #deskripsi_rab_modallpj{
+        width: 400px;
+    }
+    #volume_rab_modallpj{
+        width: 150px;
+    }
+    #unit_cost_rab_modallpj{
+        width: 150px;
+    }
+    #total_cost_rab_modallpj{
+        width: 150px;
+    }        
+}
+</style>
+
 
 <!-- START CHECK GEOLOCATION -->
 <script>

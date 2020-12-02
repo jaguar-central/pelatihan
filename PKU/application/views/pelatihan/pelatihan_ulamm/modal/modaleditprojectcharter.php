@@ -1,3 +1,28 @@
+<style>
+@media (max-width: 767px) {
+    #judul_pelatihan_edit{
+        width: 400px;
+    }
+	#tanggal_pelatihan_edit{
+		width: 150px;
+	}
+	#time_pelatihan_edit{
+		width: 150px;
+	}
+	#cabang_ulamm_edit{
+		width: 150px;
+	}
+	#cabang_ulamm_edit{
+		width: 150px;
+	}
+	#alamat_pelatihan_edit{
+		width: 150px;
+	}
+	#budget_pelatihan_edit{
+		width: 150px;
+	}
+}
+</style>
 
 <!-- Modal -->
 <div id="modaleditprojectcharter" class="modal fade" role="dialog">
@@ -56,7 +81,7 @@
 						</div>
 						<div class="card-body">
 						  <div class="table">                
-								<table id="table_charter_modaledit"  class="table">
+								<table id="table_charter_modaledit"  class="table table-responsive">
 								  <thead class=" text-primary col-md-12">
 									  <th class="col-md-2">Judul</th>
 									  <th class="col-md-3">Tanggal</th>

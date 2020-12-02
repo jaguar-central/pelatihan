@@ -87,7 +87,7 @@
 						</div>
 						<div class="card-body">
 						  <div class="table">                
-							<table id="table_rab_modallpj"  class="table">
+							<table id="table_rab_modallpj"  class="table table-responsive">
 								  <thead class=" text-primary col-md-12">
 									  <th class="col-md-2">Uraian</th>
 									  <th class="col-md-2">Jumlah</th>
@@ -322,7 +322,7 @@
 						</div>
 						<div class="card-body">
 						  <div class="table">                
-							<table class="table">
+							<table class="table table-responsive">
 								  <thead class=" text-primary col-md-12">
 									  <th class="col-md-2">Uraian</th>
 									  <th class="col-md-2">Volume</th>
@@ -333,10 +333,10 @@
 								  </thead>    
 								  <?php foreach($rab as $data_rab){ ?>
 									<tr>
-									  <td ><input type="text" class="form-control" value="<?= $data_rab->URAIAN; ?>" disabled></td>
-									  <td ><input type="number" class="form-control" value="<?= $data_rab->VOLUME; ?>" disabled></td>
-									  <td ><input type="number" class="form-control"  value="<?= $data_rab->UNIT_COST; ?>" disabled></td>
-									  <td ><input type="number" class="form-control" value="<?= $data_rab->SUB_TOTAL_COST; ?>" disabled></td>							
+									  <td ><input type="text" class="form-control" id="deskripsi_rab_details" value="<?= $data_rab->URAIAN; ?>" disabled></td>
+									  <td ><input type="number" class="form-control" id="volumerab_details" value="<?= $data_rab->VOLUME; ?>" disabled></td>
+									  <td ><input type="number" class="form-control" id="unit_cost_rab_details" value="<?= $data_rab->UNIT_COST; ?>" disabled></td>
+									  <td ><input type="number" class="form-control" id="total_cost_rab_details" value="<?= $data_rab->SUB_TOTAL_COST; ?>" disabled></td>							
 									</tr>                        
 								  <?php } ?>
 								  </tbody>                                                                      

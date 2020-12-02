@@ -165,7 +165,7 @@
 						</div>
 						<div class="card-body">
 						  <div class="table">                
-							<table id="table_rab_details"  class="table">
+							<table id="table_rab_details"  class="table table-responsive">
 								  <thead class=" text-primary">
 									  <th class="col-md-6">Uraian</th>
 									  <th class="col-md-2">Volume</th>
