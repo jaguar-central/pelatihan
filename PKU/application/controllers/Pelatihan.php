@@ -1464,12 +1464,12 @@ class Pelatihan extends MY_Controller
 	{					
 		$this->config->set_item('elastic_index', 'nasabah');	
 
-		$sektor_ekonomi = ($_GET["columns"][0]['search']['value']!='') ? 'sektorekonomi:'.$_GET["columns"][0]['search']['value'] : NULL;
-		$jenis_pinjaman	= ($_GET["columns"][1]['search']['value']!='') ? 'jenis_pinjaman:'.$_GET["columns"][1]['search']['value'] : NULL;
+		$sektor_ekonomi = ($_GET["columns"][0]['search']['value']!='') ? 'sid_sektor_ekonomi:'.$_GET["columns"][0]['search']['value'] : NULL;
+		$jenis_pinjaman	= ($_GET["columns"][1]['search']['value']!='') ? 'kodeproduk:'.$_GET["columns"][1]['search']['value'] : NULL;
 		$jenis_program	= ($_GET["columns"][2]['search']['value']!='') ? 'jenis_program:'.$_GET["columns"][2]['search']['value'] : NULL;
-		$kode_cabang 	= ($_GET["columns"][3]['search']['value']!='') ? 'kode_cabang:'.$_GET["columns"][3]['search']['value'] : NULL;
-		$kode_unit 		= ($_GET["columns"][4]['search']['value']!='') ? 'kode_unit:'.$_GET["columns"][4]['search']['value'] : NULL;
-		$tipe_kredit	= ($_GET["columns"][5]['search']['value']!='') ? 'tipe_kredit:'.$_GET["columns"][5]['search']['value'] : NULL;
+		$kode_cabang 	= ($_GET["columns"][3]['search']['value']!='') ? 'namacabang:'.$_GET["columns"][3]['search']['value'] : NULL;
+		$kode_unit 		= ($_GET["columns"][4]['search']['value']!='') ? 'namaunit:'.$_GET["columns"][4]['search']['value'] : NULL;
+		$tipe_kredit	= ($_GET["columns"][5]['search']['value']!='') ? 'tipekredit:'.$_GET["columns"][5]['search']['value'] : NULL;
 		$search 		= ($_GET["search"]["value"]!='') ? 'nama_nasabah:'.$_GET["search"]["value"] : NULL ;	
 
 		$searching = array($sektor_ekonomi,$jenis_pinjaman,$jenis_program,$kode_cabang,$kode_unit,$tipe_kredit,$search);		
@@ -1502,11 +1502,11 @@ class Pelatihan extends MY_Controller
 			}	
 
 			for ($i=0;$i<count($debitur->hits->hits);$i++){
-				if (!in_array($debitur->hits->hits[$i]->_source->nasabahid, $hide_array)) 
+				if (!in_array($debitur->hits->hits[$i]->_source->nasabah_id, $hide_array)) 
 				{ 
 					$data["data"][$i] = $debitur->hits->hits[$i]->_source;					
 				}else{
-					$data["data"][$i] = (object) array('nasabahid' => '-','ktp' => '-','nama_nasabah'=>'-','no_hp'=>'-','kolektibilitas'=>'-','cabang'=>'-','unit'=>'-');					
+					$data["data"][$i] = (object) array('nasabah_id' => '-','noid_ktp' => '-','namanasabah'=>'-','no_hp'=>'-','kolektibilitas'=>'-','namacabang'=>'-','namaunit'=>'-');					
 				}				
 			}	
 

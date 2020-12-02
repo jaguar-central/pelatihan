@@ -86,7 +86,9 @@
         </div>
       </div>
     </section>
-
+<!-- <div style="padding:1%">
+    <iframe style="width: 100%;height: 600px;"  src="http://192.168.10.219/QvAJAXZfc/opendoc.htm?document=dashboard%20pku.qvw&host=QVS%40hqtraining2" title="PDF in an i-Frame" frameborder="1" scrolling="auto"></iframe>
+</div>     -->
 
 
                             <!-- <div class="col-sm-12 col-lg-12">

@@ -177,20 +177,20 @@ $(document).ready(function() {
     			{ "className": "col-md-2", targets: "_all" },
 			],			
 			"columns" : [
-			  { "data": "nasabahid", render: function (data, type, row) 
+			  { "data": "nasabah_id", render: function (data, type, row) 
                 {
-				  return '<input type="hidden" class="form-control" id="sektor_ekonomi" name="sektor_ekonomi[]" value="'+row.sektorekonomi+'">'			
-                  +'<input type="hidden" class="form-control" id="id_nasabah" name="id_nasabah[]" value="'+row.nasabahid+'">'+row.nasabahid;
+				  return '<input type="hidden" class="form-control" id="sektor_ekonomi" name="sektor_ekonomi[]" value="'+row.sid_sektor_ekonomi+'">'			
+                  +'<input type="hidden" class="form-control" id="id_nasabah" name="id_nasabah[]" value="'+row.nasabah_id+'">'+row.nasabah_id;
                 } 
               },				
-              { "data": "ktp", render: function (data, type, row) 
+              { "data": "noid_ktp", render: function (data, type, row) 
                 {
-                  return '<input type="hidden" class="form-control" id="bisnis" name="bisnis[]" value="ULAMM"><input type="hidden" class="form-control" id="ktp" name="ktp[]" value="'+row.ktp+'">'+row.ktp;
+                  return '<input type="hidden" class="form-control" id="bisnis" name="bisnis[]" value="ULAMM"><input type="hidden" class="form-control" id="ktp" name="ktp[]" value="'+row.noid_ktp+'">'+row.noid_ktp;
                 } 
               },
-              { "data": "nama_nasabah", render: function (data, type, row) 
+              { "data": "namanasabah", render: function (data, type, row) 
                 {
-                  return '<input type="hidden" class="form-control" id="nama_nasabah" name="nama_nasabah[]" value="'+row.nama_nasabah+'">'+row.nama_nasabah;
+                  return '<input type="hidden" class="form-control" id="nama_nasabah" name="nama_nasabah[]" value="'+row.namanasabah+'">'+row.namanasabah;
                 } 
               },
               { "data": "no_hp", render: function (data, type, row) 
@@ -203,27 +203,19 @@ $(document).ready(function() {
                   return '<input type="hidden" class="form-control" id="kolektibilitas" name="kolektibilitas[]" value="'+row.kolektibilitas+'">'+row.kolektibilitas;
                 }  
               },    
-              { "data": "cabang", render: function (data, type, row) 
+              { "data": "namacabang", render: function (data, type, row) 
                 {
-                  return '<input type="hidden" class="form-control" id="cabang" name="cabang[]" value="'+row.cabang+'">'+row.cabang;
+                  return '<input type="hidden" class="form-control" id="cabang" name="cabang[]" value="'+row.namacabang+'">'+row.namacabang;
                 }  
               },    
-              { "data": "unit", render: function (data, type, row) 
+              { "data": "namaunit", render: function (data, type, row) 
                 {
-                  return '<input type="hidden" class="form-control" id="unit" name="unit[]" value="'+row.unit+'">'+row.unit;
+                  return '<input type="hidden" class="form-control" id="unit" name="unit[]" value="'+row.namaunit+'">'+row.namaunit;
                 } 
 			  },   
-              { "data": "tipe_kredit", render: function (data, type, row) 
+              { "data": "tipekredit", render: function (data, type, row) 
                 {
-				  var desk_tipe_kredit;	
-				  if (row.tipe_kredit==1){
-					desk_tipe_kredit='Baru';
-				  }else if (row.tipe_kredit==2){
-					desk_tipe_kredit='Top Up';
-  				  }else if (row.tipe_kredit==3){
-					desk_tipe_kredit='3R';
-				  }
-                  return '<input type="hidden" class="form-control" id="tipe_kredit" name="tipe_kredit[]" value="'+row.tipe_kredit+'">'+desk_tipe_kredit;
+                  return '<input type="hidden" class="form-control" id="tipe_kredit" name="tipe_kredit[]" value="'+row.tipekredit+'">'+row.tipekredit;
                 } 
               },  			                        
 			],			

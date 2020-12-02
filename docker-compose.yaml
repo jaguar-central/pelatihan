@@ -5,13 +5,13 @@ services:
     image: 10.63.8.69/fzainal0707/pelatihan
     ports:
       - "30003:80"    
-    networks:
-      hostnet: {}
+#     networks:
+#       hostnet: {}
       
-networks:
-  hostnet:
-    external: true
-    name: host      
+# networks:
+#   hostnet:
+#     external: true
+#     name: host      
 
     # ports:
     #   - target: 80
