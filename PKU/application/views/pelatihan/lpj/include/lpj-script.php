@@ -38,7 +38,7 @@
 
 <script src="<?php echo base_url(); ?>assets/plugins/moment/moment.js"></script>
 
-<script src="http://cdn.datatables.net/plug-ins/1.10.13/dataRender/datetime.js"></script>
+<!-- <script src="http://cdn.datatables.net/plug-ins/1.10.13/dataRender/datetime.js"></script> -->
 
 
 <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
@@ -532,7 +532,7 @@ $(document).ready(function() {
 				{ "data": "BISNIS" },
 				{ "data": "NAMA" },
 				{ "data": "NASABAH_TIPE" },				
-				// { "data": "ID_TIPE_KREDIT"},					
+				{ "data": "ID_TIPE_KREDIT"},					
 			],
 			"dom": "<'dom_datable'f>rt<'dom_datable col-md-6'i><'dom_datable col-md-6'p>",
 			"createdRow" : function (row, data, index) {

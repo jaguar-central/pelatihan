@@ -167,6 +167,7 @@
 											<th>Bisnis</th>
 											<th>Nama</th>
 											<th>Tipe Nasabah</th>																																											
+											<th>Tipe Kredit / Siklus</th>																																											
 										</tr>
 									</thead>
 									<tbody>
