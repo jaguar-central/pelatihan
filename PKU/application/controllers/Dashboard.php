@@ -22,10 +22,12 @@ class Dashboard extends MY_Controller
         $data["nasabah_ulamm"] = $this->Dashboard_model->select_nasabah_ulamm();
         $data["nasabah_mekaar"] = $this->Dashboard_model->select_nasabah_mekaar();
         $data["non_nasabah"] = $this->Dashboard_model->select_non_nasabah();				        
-
-        //echo '<pre>';
-		//print_r($data['menu']);
-		//echo '</pre>';die;
+        $data["top_ten_sub_sektor"] = $this->Dashboard_model->select_top_ten_sektor($this->session->userdata('sess_user_cabang'));				        
+        
+        
+        // echo '<pre>';
+		// print_r($data['top_ten_sub_sektor']);
+		// echo '</pre>';die;
         $this->load->view('layout/gabung', $data);
     }
 }

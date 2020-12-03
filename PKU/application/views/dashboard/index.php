@@ -100,8 +100,72 @@
                                     </div>
                                 </div>
                             </div> -->
-                            
+
+<hr>
+
+
+<?php if (COUNT($top_ten_sub_sektor)>0){ ?>
+<div class="welcome">
+      <div class="container-fluid">
+          <div class="row">
+          <div class="col-md-12">
+              <div class="content">
+              <p>Sektor Usaha Mekaar</p> 
+              </div>
+          </div>
+          </div>
+      </div>
+</div>
+
+<?php $branch='';$x=0; ?>
+<section class='statis text-center text-white'>
+  <div class="container-fluid">
+    <div class="row">
+      <?php foreach($top_ten_sub_sektor as $data1){ ?>		      
+      <?php 
+      if ($branch==''){
+        $branch=$data1['branch'];
+      }else if ($data1['branch']==$branch){        
+        continue;              
+      }else if ($data1['branch']!=$branch){
+        $branch=$data1['branch'];                  
+      }           
+      
+      $class = array(
+       'box bg-primary','box bg-danger','box bg-info','box bg-success','box bg-secondary','box bg-warning'
+      ,'box bg-primary','box bg-danger','box bg-info','box bg-success','box bg-secondary','box bg-warning'
+      ,'box bg-primary','box bg-danger','box bg-info','box bg-success','box bg-secondary','box bg-warning'
+      ,'box bg-primary','box bg-danger','box bg-info','box bg-success','box bg-secondary','box bg-warning'
+      ,'box bg-primary','box bg-danger','box bg-info','box bg-success','box bg-secondary','box bg-warning'
+      );	
+
+      ?>       
+      <div class="col-md-4" >
+        <div class="<?php echo $class[$x];$x++; ?>" data-toggle="collapse" data-target="#<?php echo 'sektor_usaha'.$x; ?>">  
+        <i class="fas fa-address-book"></i>
+          <h3 class="text-white"><?php echo $data1['DESKRIPSI']; ?></h3>      
+          <div id="<?php echo 'sektor_usaha'.$x; ?>" class="collapse">
+          <?php foreach($top_ten_sub_sektor as $data2){ ?>
+            <?php if ($data2['branch']==$data1['branch']){ ?>	            
+            <p class="lead"><?php echo $data2['SUB_SEKTOR'].' '.$data2['JML']; ?></p>            
+            <?php } ?>  
+          <?php } ?>  
+          </div>
+        </div>
+      </div> 
+      <?php } ?>  
+    </div>
+  </div>
+</section>
+
+<?php } ?>
 
 </div>
-<p id="posisition_device"></p>
+
+
+
+
+
+
+
 <!-- END MAIN CONTENT-->

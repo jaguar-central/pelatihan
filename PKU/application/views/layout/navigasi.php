@@ -240,7 +240,7 @@
                                                 
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#"><?php echo $this->session->userdata('sess_user_nama').'</br> ('.ucfirst(strtolower($this->session->userdata('sess_user_group'))).' - '.$this->session->userdata('sess_user_lokasi').')'; ?></a>													
+                                                        <a href="#"><?php echo $this->session->userdata('sess_user_nama').'</br> ('.ucfirst(strtolower($this->session->userdata('sess_user_group'))).' - '.$this->session->userdata('sess_user_lokasi').') </br> '.$this->session->userdata('sess_user_cabang'); ?></a>													
                                                     </h5>
                                                     <!--span class="email">johndoe@example.com</span-->
                                                 </div>

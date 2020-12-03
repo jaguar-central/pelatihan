@@ -308,7 +308,7 @@ class Pelatihan extends MY_Controller
 		$volume_rab           		= $this->security->xss_clean(strip_image_tags($this->input->post('volume_rab')));
 		$unit_cost_rab        		= $this->security->xss_clean(strip_image_tags($this->input->post('unit_cost_rab')));
 		$total_cost_rab       		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab')));
-		$total_cost_rab_akhir 		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab_akhir')));				
+		$total_cost_rab_akhir 		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab_akhir')));
 		
 		$no_trx='';		
 		$no_trx_reject='';

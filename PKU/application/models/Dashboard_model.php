@@ -37,6 +37,12 @@ class Dashboard_model extends CI_Model {
                 $query = $this->db->query("select count(*) as jumlah_kehadiran from T_KEHADIRAN where BISNIS = 'MEKAAR' and ID_PELATIHAN in (SELECT ID FROM T_PELATIHAN WHERE CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ) ");
                 return $query->row()->jumlah_kehadiran;
         }        
+
+        public function select_top_ten_sektor($kode_cabang)
+        {
+                $query = $this->db->query("EXEC dbo.GET_TOP_SUBSEKTOR_MEKAAR_BY_KODE_CABANG_ULAMM '".$kode_cabang."' ");
+                return $query->result_array();                
+        }        
      
 }
 ?>
