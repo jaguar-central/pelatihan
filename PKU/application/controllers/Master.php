@@ -432,9 +432,9 @@ class Master extends MY_Controller
 		
 		foreach ($grading as $data_grade) {
 			if ($data_grade->ID==$idgrading){
-				$data .= "<option value='".$data_grade->ID."' selected>".$data_grade->GRADING_DESKRIPSI." </option>";
+				$data .="<option value='$data_grade->ID' selected>Kelas $data_grade->KELAS - ( $data_grade->KATEGORI_STAR_MODEL ) - $data_grade->TEMA_PELATIHAN </option>";
 			}else{
-				$data .= "<option value='".$data_grade->ID."' >".$data_grade->GRADING_DESKRIPSI." </option>";
+				$data .="<option value='$data_grade->ID' >Kelas $data_grade->KELAS - ( $data_grade->KATEGORI_STAR_MODEL ) - $data_grade->TEMA_PELATIHAN </option>";				
 			}	
 		} 	
 				
