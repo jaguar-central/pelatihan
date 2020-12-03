@@ -396,23 +396,11 @@
 										<option value="">--pilih sektor ekonomi--</option>							
 											<?php 
 											foreach ($sektor_ekonomi as $data_sektor_ekonomi){
-												echo '<option value="'.$data_sektor_ekonomi->SEKTOR_EKONOMI.'">'.$data_sektor_ekonomi->SEKTOR_EKONOMI.'</option>';                                                                    
+												echo '<option value="'.$data_sektor_ekonomi->SID_SEKTOR_EKONOMI.'">'.$data_sektor_ekonomi->Deskripsi_Bidang_Usaha.'</option>';                                                                    
 											}
 											?>	
 									</select>																	
-								</div>		
-
-								<label class="col-sm-2">Jenis Pinjaman </label>
-								<div class="col-sm-4">
-									<select class="form-control select2" id="jenis_pinjaman" name="jenis_pinjaman">
-										<option value="">--pilih pinjaman--</option>	
-											<?php 
-											foreach ($jenis_pinjaman as $data_jenis_pinjaman){
-												echo '<option value="'.$data_jenis_pinjaman->Jenis_pinjaman.'">'.$data_jenis_pinjaman->Jenis_pinjaman.'</option>';                                                                    
-											}
-											?>								
-									</select>																	
-								</div>										
+								</div>																			
 							</div>		
 							<div class="form-group row">
 								<label class="col-sm-2">Jenis Program </label>
@@ -431,9 +419,9 @@
 								<div class="col-sm-4">
 									<select class="form-control select2" id="tipe_kredit" name="tipe_kredit">
 										<option value="">--pilih program--</option>	
-										<option value="1">Baru</option>	
-										<option value="2">Top Up</option>	
-										<option value="3">3R</option>								
+										<option value="BARU">Baru</option>	
+										<option value="TOP UP">Top Up</option>	
+										<option value="3R">3R</option>								
 									</select>																	
 								</div>									
 									

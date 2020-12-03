@@ -145,7 +145,7 @@ class Master extends MY_Controller
 		
 		foreach ($unit as $data_unit) {
             //$data .= "<option value='".$data_unit->inisial_unit."' >".$data_unit->NAMA_UNIT." </option>";
-            $data .= "<option value='".$data_unit->KODE_UNIT."' >".$data_unit->DESKRIPSI." </option>";
+            $data .= "<option value='".$data_unit->MS_UNIT_INITIAL_MM."' >".$data_unit->DESKRIPSI." </option>";
 		} 	
 				
 		echo $data;

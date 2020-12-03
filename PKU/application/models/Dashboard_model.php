@@ -38,7 +38,7 @@ class Dashboard_model extends CI_Model {
                 return $query->row()->jumlah_kehadiran;
         }        
 
-        public function select_top_ten_sektor($kode_cabang)
+        public function select_top_ten_sektor_mekaar($kode_cabang)
         {
                 $query = $this->db->query("EXEC dbo.GET_TOP_SUBSEKTOR_MEKAAR_BY_KODE_CABANG_ULAMM '".$kode_cabang."' ");
                 return $query->result_array();                

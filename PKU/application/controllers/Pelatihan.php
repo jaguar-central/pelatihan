@@ -27,11 +27,8 @@ class Pelatihan extends MY_Controller
 								);
 		
         $data["menu"] 			= $this->Menu_model->select_ms_menu();
-		$data["pelatihan_type"] = $this->Pelatihan_model->select_ms_pelatihan_type_ulamm();
-		// $data["grade_ulamm"] 	= $this->Master_model->select_ms_grading();        
+		$data["pelatihan_type"] = $this->Pelatihan_model->select_ms_pelatihan_type_ulamm();       
 		$data["cabang"] 		= $this->Master_model->select_ms_cabang_ulamm();
-		$data["sektor_ekonomi"]	= $this->Master_model->select_dw_nasabah_ulamm_sektor_ekonomi();
-		$data["jenis_pinjaman"]	= $this->Master_model->select_dw_nasabah_ulamm_jenis_pinjaman();
 		$data["jenis_program"]	= $this->Master_model->select_dw_nasabah_ulamm_jenis_program();
 
 		$data['provinsi'] 		= $this->Master_model->select_ms_provinsi();
@@ -69,11 +66,8 @@ class Pelatihan extends MY_Controller
 								);
 
 		$data["pelatihan_type"] = $this->Pelatihan_model->select_ms_pelatihan_type_mekaar();
-		// $data["grade_mekaar"] 	= $this->Master_model->select_ms_grading();		
 		$data["cabang"] 		= $this->Master_model->select_ms_cabang_ulamm();		
 		$data["region"] 		= $this->Master_model->select_ms_region_mekaar();
-		$data["sektor_ekonomi"]	= $this->Master_model->select_dw_nasabah_ulamm_sektor_ekonomi();
-		$data["jenis_pinjaman"]	= $this->Master_model->select_dw_nasabah_ulamm_jenis_pinjaman();
 		$data["jenis_program"]	= $this->Master_model->select_dw_nasabah_ulamm_jenis_program();
         
 		$data['provinsi'] 		= $this->Master_model->select_ms_provinsi();
@@ -144,8 +138,7 @@ class Pelatihan extends MY_Controller
 		$data['kecamatan'] 		= $this->Master_model->select_ms_kecamatan();
         
 		$data["cabang"] 		= $this->Master_model->select_ms_cabang_ulamm();
-		$data["sektor_ekonomi"]	= $this->Master_model->select_dw_nasabah_ulamm_sektor_ekonomi();
-		$data["jenis_pinjaman"]	= $this->Master_model->select_dw_nasabah_ulamm_jenis_pinjaman();
+		$data["sektor_ekonomi"]	= $this->Master_model->select_ms_sektor_ulamm();
 		$data["jenis_program"]	= $this->Master_model->select_dw_nasabah_ulamm_jenis_program();
 		$data["pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_by_id($idpelatihan)->row();
 		$data["rab"] = $this->Pelatihan_model->select_t_rab_by_id($idpelatihan);
@@ -1467,8 +1460,8 @@ class Pelatihan extends MY_Controller
 		$sektor_ekonomi = ($_GET["columns"][0]['search']['value']!='') ? 'sid_sektor_ekonomi:'.$_GET["columns"][0]['search']['value'] : NULL;
 		$jenis_pinjaman	= ($_GET["columns"][1]['search']['value']!='') ? 'kodeproduk:'.$_GET["columns"][1]['search']['value'] : NULL;
 		$jenis_program	= ($_GET["columns"][2]['search']['value']!='') ? 'jenis_program:'.$_GET["columns"][2]['search']['value'] : NULL;
-		$kode_cabang 	= ($_GET["columns"][3]['search']['value']!='') ? 'namacabang:'.$_GET["columns"][3]['search']['value'] : NULL;
-		$kode_unit 		= ($_GET["columns"][4]['search']['value']!='') ? 'namaunit:'.$_GET["columns"][4]['search']['value'] : NULL;
+		$kode_cabang 	= ($_GET["columns"][3]['search']['value']!='') ? 'inisialcab:'.$_GET["columns"][3]['search']['value'] : NULL;
+		$kode_unit 		= ($_GET["columns"][4]['search']['value']!='') ? 'kodeunit:'.$_GET["columns"][4]['search']['value'] : NULL;
 		$tipe_kredit	= ($_GET["columns"][5]['search']['value']!='') ? 'tipekredit:'.$_GET["columns"][5]['search']['value'] : NULL;
 		$search 		= ($_GET["search"]["value"]!='') ? 'nama_nasabah:'.$_GET["search"]["value"] : NULL ;	
 

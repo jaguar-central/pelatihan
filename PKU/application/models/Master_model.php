@@ -79,9 +79,9 @@ class Master_model extends CI_Model {
 			return $query->result();
 	}	
 
-	public function select_dw_nasabah_ulamm_sektor_ekonomi()
+	public function select_ms_sektor_ulamm()
 	{
-			$query = $this->db->query("SELECT DISTINCT SEKTOR_EKONOMI FROM [ITD_DW].dbo.nasabah_data_vdp WHERE ISNULL(SEKTOR_EKONOMI,'')<>'' order by SEKTOR_EKONOMI");
+			$query = $this->db->query("SELECT SID_SEKTOR_EKONOMI,Deskripsi_Bidang_Usaha FROM MS_SEKTOR_ULAMM WHERE ISNULL(Deskripsi_Bidang_Usaha,'')!='' ORDER BY SID_SEKTOR_EKONOMI");
 			return $query->result();
 	}
 
@@ -91,12 +91,6 @@ class Master_model extends CI_Model {
 			$query = $this->db->query("SELECT * FROM MS_SEKTOR_MEKAAR ");
 			return $query->result();
 	}	
-
-	public function select_dw_nasabah_ulamm_jenis_pinjaman()
-	{
-			$query = $this->db->query("SELECT DISTINCT Jenis_pinjaman FROM [ITD_DW].dbo.nasabah_data_vdp WHERE ISNULL(Jenis_pinjaman,'')<>'' order by Jenis_pinjaman");
-			return $query->result();
-	}
 
 	public function select_dw_nasabah_ulamm_jenis_program()
 	{

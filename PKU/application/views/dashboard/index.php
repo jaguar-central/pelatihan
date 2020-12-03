@@ -104,7 +104,7 @@
 <hr>
 
 
-<?php if (COUNT($top_ten_sub_sektor)>0){ ?>
+<?php if (COUNT($top_ten_sub_sektor_mekaar)>0){ ?>
 <div class="welcome">
       <div class="container-fluid">
           <div class="row">
@@ -121,7 +121,7 @@
 <section class='statis text-center text-white'>
   <div class="container-fluid">
     <div class="row">
-      <?php foreach($top_ten_sub_sektor as $data1){ ?>		      
+      <?php foreach($top_ten_sub_sektor_mekaar as $data1){ ?>		      
       <?php 
       if ($branch==''){
         $branch=$data1['branch'];
@@ -137,6 +137,7 @@
       ,'box bg-primary','box bg-danger','box bg-info','box bg-success','box bg-secondary','box bg-warning'
       ,'box bg-primary','box bg-danger','box bg-info','box bg-success','box bg-secondary','box bg-warning'
       ,'box bg-primary','box bg-danger','box bg-info','box bg-success','box bg-secondary','box bg-warning'
+      ,'box bg-primary','box bg-danger','box bg-info','box bg-success','box bg-secondary','box bg-warning'
       );	
 
       ?>       
@@ -145,7 +146,7 @@
         <i class="fas fa-address-book"></i>
           <h3 class="text-white"><?php echo $data1['DESKRIPSI']; ?></h3>      
           <div id="<?php echo 'sektor_usaha'.$x; ?>" class="collapse">
-          <?php foreach($top_ten_sub_sektor as $data2){ ?>
+          <?php foreach($top_ten_sub_sektor_mekaar as $data2){ ?>
             <?php if ($data2['branch']==$data1['branch']){ ?>	            
             <p class="lead"><?php echo $data2['SUB_SEKTOR'].' '.$data2['JML']; ?></p>            
             <?php } ?>  
