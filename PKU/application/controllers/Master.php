@@ -137,7 +137,7 @@ class Master extends MY_Controller
 
 
 
-	public function get_unit_ulamm()
+	public function get_unit_inisial_ulamm()
 	{			
 		$kode_cabang = $_GET['kode_cabang'];
 		$unit = $this->Master_model->select_ms_unit_ulamm_by_kode_cabang($kode_cabang);		
@@ -150,6 +150,22 @@ class Master extends MY_Controller
 				
 		echo $data;
 	}
+
+	public function get_unit_ulamm()
+	{			
+		$kode_cabang = $_GET['kode_cabang'];
+		$unit = $this->Master_model->select_ms_unit_ulamm_by_kode_cabang($kode_cabang);		
+		$data= '<option value="">--pilih unit--</option>';
+		
+		foreach ($unit as $data_unit) {
+            //$data .= "<option value='".$data_unit->inisial_unit."' >".$data_unit->NAMA_UNIT." </option>";
+            $data .= "<option value='".$data_unit->KODE_UNIT."' >".$data_unit->DESKRIPSI." </option>";
+		} 	
+				
+		echo $data;
+	}	
+
+		
 	
 	
 	public function get_area_mekaar()

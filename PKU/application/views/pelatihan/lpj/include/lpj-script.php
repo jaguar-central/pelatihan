@@ -104,7 +104,7 @@ $(document).ready(function() {
 	
 		$('#cabang_kehadiran').on('change', function (e) {			
 			$.ajax({
-				url: "<?php echo base_url()?>master/get_unit_ulamm",
+				url: "<?php echo base_url()?>master/get_unit_inisial_ulamm",
 				data: "kode_cabang="+$("#cabang_kehadiran").val(),
 				cache: false,
 				success: function(data){				         

@@ -323,10 +323,8 @@ class Pelatihan extends MY_Controller
 					'PARAM1' => $value,
 					'PARAM2' => ''
 				);
-
-				// $no_trx_reject .= ','.$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value);
-				
-				if (!$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)){
+								
+				if (COUNT($this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->result_array())>0){
 					$no_trx .= ','.$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->NO_TRX;					
 					$this->Pelatihan_model->update_aktif_trx_reject($this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->ID);
 				}else{
@@ -345,6 +343,7 @@ class Pelatihan extends MY_Controller
 			
 			$no_proposal = $this->create_trx_no($param);
 		}	
+
 		
 		if ($id_bisnis_pelatihan=='2'){	
 			$data_unit_ulamm = '';
@@ -357,15 +356,9 @@ class Pelatihan extends MY_Controller
 					'PARAMETER' => $PARAMETER,
 					'PARAM1' => $value,
 					'PARAM2' => ''
-				);	
+				);					
 				
-				// $no_trx_reject .= ','.$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->NO_TRX;
-												
-				// $no_trx = ($no_trx_reject) ? $no_trx_reject : ','.$this->create_trx_no($param);	
-				
-				// $this->Pelatihan_model->update_aktif_trx_reject($this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->ID);
-				
-				if (!$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)){
+				if (COUNT($this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->result_array())>0){
 					$no_trx .= ','.$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->NO_TRX;					
 					$this->Pelatihan_model->update_aktif_trx_reject($this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->ID);
 				}else{
