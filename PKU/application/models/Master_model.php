@@ -99,74 +99,11 @@ class Master_model extends CI_Model {
 	}		
 		
 	public function notification(){	
-
-		if ($this->session->userdata('sess_user_id_user_group')=='2'){
-			$approval = "'''',''Kadiv''";				
-			return $this->db->query(" EXEC [GET_NOTIF] @APPROVAL='".$approval."',@IDUSER='".$this->session->userdata('sess_user_id')."',@IDBINIS='".$this->session->userdata('sess_user_id_bisnis')."' ")->result();				
-		}
-		else if	($this->session->userdata('sess_user_id_user_group')=='3'){
-			if ($this->session->userdata('sess_user_id_bisnis')=='1'){
-				$approval = "''Pinca''";
-			}else{
-				$approval = "''''";
-			}
-			return $this->db->query(" EXEC [GET_NOTIF] @APPROVAL='".$approval."',@IDUSER='".$this->session->userdata('sess_user_id')."',@IDBINIS='".$this->session->userdata('sess_user_id_bisnis')."' ")->result();
-		}			
-		else if	($this->session->userdata('sess_user_id_user_group')=='4'){
-			$approval = "''PIC Pusat''";
-			return $this->db->query(" EXEC [GET_NOTIF] @APPROVAL='".$approval."',@IDUSER='".$this->session->userdata('sess_user_id')."',@IDBINIS='".$this->session->userdata('sess_user_id_bisnis')."' ")->result();
-		}
-		else if	($this->session->userdata('sess_user_id_user_group')=='5'){
-			$approval = "''Kabag''";
-			return $this->db->query(" EXEC [GET_NOTIF] @APPROVAL='".$approval."' ")->result();
-		}
-		else if	($this->session->userdata('sess_user_id_user_group')=='6'){
-			$approval = "''Wakadiv''";
-			return $this->db->query(" EXEC [GET_NOTIF] @APPROVAL='".$approval."' ")->result();
-		}
-		else if	($this->session->userdata('sess_user_id_user_group')=='7'){
-			$approval = "''Kadiv''";
-			return $this->db->query(" EXEC [GET_NOTIF] @APPROVAL='".$approval."' ")->result();
-		}
-		else if ($this->session->userdata('sess_user_id_user_group')=='1'){
-			return $this->db->query("EXEC [GET_NOTIF] @IDUSER='".$this->session->userdata('sess_user_id')."',@COUNT=0 ")->result();			
-		}
-				
+		return $this->db->query(" EXEC [GET_NOTIF] @IDUSER='".$this->session->userdata('sess_user_id')."' ")->result();									
 	}
 
-	public function notification_count(){
-		if ($this->session->userdata('sess_user_id_user_group')=='2'){
-			$approval = "'''',''Kadiv''";			
-			return $this->db->query(" EXEC [GET_NOTIF] @APPROVAL='".$approval."',@IDUSER='".$this->session->userdata('sess_user_id')."',@IDBINIS='".$this->session->userdata('sess_user_id_bisnis')."',@COUNT=1 ")->result()[0]->COUNT_NOTIF;			
-		}
-		else if ($this->session->userdata('sess_user_id_user_group')=='3'){
-			if ($this->session->userdata('sess_user_id_bisnis')=='1'){
-				$approval = "''Pinca''";
-			}else{
-				$approval = "''''";
-			}
-			return $this->db->query(" EXEC [GET_NOTIF] @APPROVAL='".$approval."',@IDUSER='".$this->session->userdata('sess_user_id')."',@IDBINIS='".$this->session->userdata('sess_user_id_bisnis')."',@COUNT=1 ")->result()[0]->COUNT_NOTIF;
-		}		
-		else if ($this->session->userdata('sess_user_id_user_group')=='4'){
-			$approval = "''PIC Pusat''";
-			return $this->db->query(" EXEC [GET_NOTIF] @APPROVAL='".$approval."',@IDUSER='".$this->session->userdata('sess_user_id')."',@IDBINIS='".$this->session->userdata('sess_user_id_bisnis')."',@COUNT=1 ")->result()[0]->COUNT_NOTIF;
-		}
-		else if ($this->session->userdata('sess_user_id_user_group')=='5'){
-			$approval = "''Kabag''";
-			return $this->db->query("EXEC [GET_NOTIF] @APPROVAL='".$approval."',@COUNT=1 ")->result()[0]->COUNT_NOTIF;
-		}
-		else if ($this->session->userdata('sess_user_id_user_group')=='6'){
-			$approval = "''Wakadiv''";
-			return $this->db->query("EXEC [GET_NOTIF] @APPROVAL='".$approval."',@COUNT=1 ")->result()[0]->COUNT_NOTIF;
-		}
-		else if ($this->session->userdata('sess_user_id_user_group')=='7'){
-			$approval = "''Kadiv''";
-			return $this->db->query("EXEC [GET_NOTIF] @APPROVAL='".$approval."',@COUNT=1 ")->result()[0]->COUNT_NOTIF;
-		}
-		else if ($this->session->userdata('sess_user_id_user_group')=='1'){
-			return $this->db->query("EXEC [GET_NOTIF] @IDUSER='".$this->session->userdata('sess_user_id')."',@COUNT=1 ")->result()[0]->COUNT_NOTIF;
-		}
-				
+	public function notification_count(){	
+		return $this->db->query(" EXEC [GET_NOTIF] @IDUSER='".$this->session->userdata('sess_user_id')."',@COUNT=1 ")->result()[0]->COUNT_NOTIF;							
 	}
 
 	public function select_trx_no_by_param($param){
