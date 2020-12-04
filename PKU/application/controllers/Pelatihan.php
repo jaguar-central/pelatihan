@@ -150,8 +150,16 @@ class Pelatihan extends MY_Controller
 		$data["pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_by_id($idpelatihan)->row();
 		$data["rab"] = $this->Pelatihan_model->select_t_rab_by_id($idpelatihan);
 
+		$data["sektor_ekonomi_mekaar"]	= $this->Master_model->select_dw_nasabah_mekaar_sektor_ekonomi();
+		$data["regional_mekaar"]	= $this->Master_model->select_ms_regional_mekaar();
+		$data["area_mekaar"]	= $this->Master_model->select_ms_area_mekaar();
+		
+		
+
+		
+
         // echo '<pre>';
-		// print_r($data['rab']);
+		// print_r($data['regional_mekaar']);
 		// echo '</pre>';die;
         $this->load->view('layout/gabung', $data);
 
@@ -274,7 +282,6 @@ class Pelatihan extends MY_Controller
         $kuota_peserta              = trim($this->security->xss_clean(strip_image_tags($this->input->post('kuota_peserta'))));
 
         $anggaran               	= str_replace(array('.',',00'),'',trim($this->security->xss_clean(strip_image_tags($this->input->post('anggaran')))));
-        //$provinsi               	= trim($this->security->xss_clean(strip_image_tags($this->input->post('provinsi'))));
 		$alamat_tempat_pelatihan    = trim($this->security->xss_clean(strip_image_tags($this->input->post('alamat_tempat_pelatihan'))));
 		
 		$provinsi    				= trim($this->security->xss_clean(strip_image_tags($this->input->post('provinsi'))));
@@ -387,7 +394,7 @@ class Pelatihan extends MY_Controller
 		);		
 		
 		
-		try{
+		try{			
 			$data = array(
 				'ID_TIPE' 				=> $pelatihan_type,
 				'NO_PROPOSAL' 			=> $no_proposal,
@@ -417,7 +424,9 @@ class Pelatihan extends MY_Controller
 				'CREATED_DATE' 			=> date('Y-m-d H:i:s')			
 			);
 			
+			
 			$this->Pelatihan_model->insert_t_pelatihan($data);
+			
 			
 			$id_pelatihan = $this->db->insert_id(); //last id yang di insert		
 			
@@ -436,7 +445,6 @@ class Pelatihan extends MY_Controller
 				);							
 				$this->Pelatihan_model->insert_t_rab($rab);
 			}
-
 			/*nonaktifkan pelatihan project charter yang telah terpakai*/
 			if ($id_pelatihan_project_charter){
 
@@ -449,6 +457,15 @@ class Pelatihan extends MY_Controller
 				$where_update	= array('ID' 	=> $id_pelatihan_project_charter);
 
 				$this->Pelatihan_model->update_project_charter($data_update,$where_update);
+			}
+
+			$db_error = $this->db->error();
+
+			if (!empty($db_error)) {
+				$output = array(
+					'result'  	=> 'NG',
+					'msg'		=> $db_error['message']
+				);
 			}
 		}		
 		catch (Exception $e)
@@ -545,6 +562,15 @@ class Pelatihan extends MY_Controller
 				$this->Pelatihan_model->insert_t_rab($rab);				
 			}
 
+			$db_error = $this->db->error();
+
+			if (!empty($db_error)) {
+				$output = array(
+					'result'  	=> 'NG',
+					'msg'		=> $db_error['message']
+				);
+			}
+			
 		}		
 		catch (Exception $e)
 		{
@@ -612,6 +638,15 @@ class Pelatihan extends MY_Controller
 					);
 				$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
 				
+				$db_error = $this->db->error();
+
+				if (!empty($db_error)) {
+					$output = array(
+						'result'  	=> 'NG',
+						'msg'		=> $db_error['message']
+					);
+				}
+
 			}		
 			catch (Exception $e)
 			{
@@ -720,6 +755,14 @@ class Pelatihan extends MY_Controller
 				);
 			$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
 			
+			$db_error = $this->db->error();
+
+			if (!empty($db_error)) {
+				$output = array(
+					'result'  	=> 'NG',
+					'msg'		=> $db_error['message']
+				);
+			}			
 			
 		}
 		catch (Exception $e)
@@ -767,57 +810,91 @@ class Pelatihan extends MY_Controller
 			'result'  	=> 'OK',
 			'msg'		=> ''
 		);		
+
+		$config['upload_path']	= './assets/dokumen/lampiran_lpj';
+		$config['allowed_types']	= 'docx|jpg|jpeg|png|pdf';
+		$config['max_size']	= '8000';
+		$config['overwrite']	= TRUE;
+
+		$nama_file	= base64_encode($id_pelatihan.'_'.date('Ymd').'at'.date('His'));
+		$config['file_name']	= $nama_file;
+		$this->upload->initialize($config);
+
+		if($this->upload->do_upload('lampiran'))
+		{
+			// $this->upload->data();
+
+			$zdata = ['upload_data' => $this->upload->data()]; // get data
+			$zfile = $zdata['upload_data']['full_path']; // get file path
+			chmod($zfile,0777);
 		
-		try{
-			$data = array(
-				'ID_PELATIHAN' 			   => $id_pelatihan,
-				'LINK_LAMPIRAN' 	   	   => $lampiran,
-				'TANGGAL_REALISASI_MULAI'  => $inputStartTglPelaksanaan.' '.date("H:i", strtotime($inputStartTimePelaksanaan)),
-				'TANGGAL_REALISASI_SELESAI'=> $inputAkhirTglPelaksanaan.' '.date("H:i", strtotime($inputEndTimePelaksanaan)),
-				'DURASI_PELATIHAN' 		   => $durasi_pelatihan,				
-				'JUMLAH_ANGGARAN'		   => $total_cost_rab_akhir,
-				'CSI_FINAL' 			   => $csi_final,
-				'CATATAN_TAMBAHAN' 		   => $catatan_tambahan,
-				'AKTIF' 				   => '1',
-				'CREATED_BY' 			   => $id_user,
-				'CREATED_DATE' 			   => date('Y-m-d H:i:s')			
-			);
-			
-			$this->Pelatihan_model->insert_t_pelatihan_lpj($data);
-					
-			
-			for ($i=1;$i<count($deskripsi_rab);$i++){
-				$rab = array(
-					'ID_PELATIHAN' 		=> $id_pelatihan,
-					'URAIAN' 			=> $deskripsi_rab[$i],
-					'JUMLAH' 			=> $jumlah_rab[$i],
-					'SATUAN' 			=> $unit_rab[$i],
-					'UNIT_COST' 		=> $unit_cost_rab[$i],
-					'SUB_TOTAL_COST' 	=> $total_cost_rab[$i],
-					'GRAND_TOTAL' 		=> $total_cost_rab_akhir,
-					'CREATED_BY' 		=> $id_user,
-					'CREATED_DATE' 		=> date('Y-m-d H:i:s')
-				);							
-				$this->Pelatihan_model->insert_t_rab_lpj($rab);
+			try{
+				$data = array(
+					'ID_PELATIHAN' 			   => $id_pelatihan,
+					'LINK_LAMPIRAN' 	   	   => 'dokumen/lampiran_lpj/'.$nama_file,
+					'TANGGAL_REALISASI_MULAI'  => $inputStartTglPelaksanaan.' '.date("H:i", strtotime($inputStartTimePelaksanaan)),
+					'TANGGAL_REALISASI_SELESAI'=> $inputAkhirTglPelaksanaan.' '.date("H:i", strtotime($inputEndTimePelaksanaan)),
+					'DURASI_PELATIHAN' 		   => $durasi_pelatihan,				
+					'JUMLAH_ANGGARAN'		   => $total_cost_rab_akhir,
+					'CSI_FINAL' 			   => $csi_final,
+					'CATATAN_TAMBAHAN' 		   => $catatan_tambahan,
+					'AKTIF' 				   => '1',
+					'CREATED_BY' 			   => $id_user,
+					'CREATED_DATE' 			   => date('Y-m-d H:i:s')			
+				);
+				
+				$this->Pelatihan_model->insert_t_pelatihan_lpj($data);
+						
+				
+				for ($i=1;$i<count($deskripsi_rab);$i++){
+					$rab = array(
+						'ID_PELATIHAN' 		=> $id_pelatihan,
+						'URAIAN' 			=> $deskripsi_rab[$i],
+						'JUMLAH' 			=> $jumlah_rab[$i],
+						'SATUAN' 			=> $unit_rab[$i],
+						'UNIT_COST' 		=> $unit_cost_rab[$i],
+						'SUB_TOTAL_COST' 	=> $total_cost_rab[$i],
+						'GRAND_TOTAL' 		=> $total_cost_rab_akhir,
+						'CREATED_BY' 		=> $id_user,
+						'CREATED_DATE' 		=> date('Y-m-d H:i:s')
+					);							
+					$this->Pelatihan_model->insert_t_rab_lpj($rab);
+				}
+
+				$data_update 	= array(
+					'STATUS'			=> 'lpj_submitted',
+					'APPROVAL'			=> '',
+					'UPDATED_BY' 		=> $id_user,
+					'UPDATED_DATE' 		=> date('Y-m-d H:i:s')			
+					);
+				$where_update	= array(
+					'ID' 	=> $id_pelatihan
+					);
+				$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
+
+				$db_error = $this->db->error();
+
+				if (!empty($db_error)) {
+					$output = array(
+						'result'  	=> 'NG',
+						'msg'		=> $db_error['message']
+					);
+				}
+
 			}
 
-			$data_update 	= array(
-				'STATUS'			=> 'lpj_submitted',
-				'APPROVAL'			=> '',
-				'UPDATED_BY' 		=> $id_user,
-				'UPDATED_DATE' 		=> date('Y-m-d H:i:s')			
+			catch (Exception $e)
+			{
+				$output = array(
+					'result'  	=> 'NG',
+					'msg'		=> $e->getMessage()
 				);
-			$where_update	= array(
-				'ID' 	=> $id_pelatihan
-				);
-			$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
-		}
-
-		catch (Exception $e)
+			}
+		}else
 		{
 			$output = array(
 				'result'  	=> 'NG',
-				'msg'		=> $e->getMessage()
+				'msg'		=> $this->upload->display_errors()
 			);
 		}
         
@@ -897,6 +974,14 @@ class Pelatihan extends MY_Controller
 				);
 			$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
 			
+			$db_error = $this->db->error();
+
+			if (!empty($db_error)) {
+				$output = array(
+					'result'  	=> 'NG',
+					'msg'		=> $db_error['message']
+				);
+			}			
 			
 		}
 		catch (Exception $e)
@@ -947,30 +1032,39 @@ class Pelatihan extends MY_Controller
 			$nasabah_type = 'NASABAH';
 		}
 		
-		
-		
-		try{
-			$data = array(
-				'ID_PELATIHAN' 		=> $id_pelatihan,
-				'BISNIS' 			=> $bisnis,
-				'KTP' 				=> $ktp,
-				'ID_NASABAH'		=> $id_nasabah,
-				'NAMA' 				=> $nama_nasabah,
-				'NASABAH_TIPE' 		=> $nasabah_type,
-				'AKTIF' 			=> '1',
-				'CREATED_BY' 		=> $id_user,
-				'CREATED_DATE' 		=> date('Y-m-d H:i:s')			
-			);
+		if ($id_nasabah!='-'){			
+			try{
+				$data = array(
+					'ID_PELATIHAN' 		=> $id_pelatihan,
+					'BISNIS' 			=> $bisnis,
+					'KTP' 				=> $ktp,
+					'ID_NASABAH'		=> $id_nasabah,
+					'NAMA' 				=> $nama_nasabah,
+					'NASABAH_TIPE' 		=> $nasabah_type,
+					'AKTIF' 			=> '1',
+					'CREATED_BY' 		=> $id_user,
+					'CREATED_DATE' 		=> date('Y-m-d H:i:s')			
+				);
+				
+				$this->Pelatihan_model->insert_temp_kehadiran($data);
 			
-			$this->Pelatihan_model->insert_temp_kehadiran($data);
-		
-		}		
-		catch (Exception $e)
-		{
-			$output = array(
-				'result'  	=> 'NG',
-				'msg'		=> $e->getMessage()
-			);
+				$db_error = $this->db->error();
+
+				if (!empty($db_error)) {
+					$output = array(
+						'result'  	=> 'NG',
+						'msg'		=> $db_error['message']
+					);
+				}				
+
+			}		
+			catch (Exception $e)
+			{
+				$output = array(
+					'result'  	=> 'NG',
+					'msg'		=> $e->getMessage()
+				);
+			}
 		}
         
 		echo json_encode($output);
@@ -980,14 +1074,13 @@ class Pelatihan extends MY_Controller
 	public function post_non_nasabah()
     {
 		$this->is_logged();				
-		
-        $ktp   		= trim($this->security->xss_clean(strip_image_tags($this->input->post('ktp'))));
-        $no_hp      = trim($this->security->xss_clean(strip_image_tags($this->input->post('no_hp'))));
-        $nama       = trim($this->security->xss_clean(strip_image_tags($this->input->post('nama'))));
-        $lokasi_pnm	= trim($this->security->xss_clean(strip_image_tags($this->input->post('lokasi_pnm'))));
-        $alamat     = trim($this->security->xss_clean(strip_image_tags($this->input->post('alamat'))));
-        $catatan 	= $this->security->xss_clean(strip_image_tags($this->input->post('catatan')));
-		$id_user	= $this->session->userdata('sess_user_idsdm');					
+        $ktp   			= trim($this->security->xss_clean(strip_image_tags($this->input->post('ktp'))));
+        $no_hp      	= trim($this->security->xss_clean(strip_image_tags($this->input->post('no_hp'))));
+        $nama       	= trim($this->security->xss_clean(strip_image_tags($this->input->post('nama'))));
+        $lokasi_pnm		= trim($this->security->xss_clean(strip_image_tags($this->input->post('lokasi_pnm'))));
+		$alamat     	= trim($this->security->xss_clean(strip_image_tags($this->input->post('alamat'))));				
+        $catatan 		= $this->security->xss_clean(strip_image_tags($this->input->post('catatan')));
+		$id_user		= $this->session->userdata('sess_user_idsdm');					
 		
 		
 		$output = array(
@@ -1010,6 +1103,15 @@ class Pelatihan extends MY_Controller
 			);
 			
 			$this->Pelatihan_model->insert_t_non_nasabah($data);
+
+			$db_error = $this->db->error();
+
+			if (!empty($db_error)) {
+				$output = array(
+					'result'  	=> 'NG',
+					'msg'		=> $db_error['message']
+				);
+			}			
 			
 		}		
 		catch (Exception $e)
@@ -1047,7 +1149,26 @@ class Pelatihan extends MY_Controller
 			
 		try
 		{	
-		$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
+			$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
+
+			$db_error = $this->db->error();
+
+			if (!empty($db_error)) {
+				$output = array(
+					'result'  	=> 'NG',
+					'msg'		=> $db_error['message']
+				);
+			}
+
+			$db_error = $this->db->error();
+
+			if (!empty($db_error)) {
+				$output = array(
+					'result'  	=> 'NG',
+					'msg'		=> $db_error['message']
+				);
+			}
+
 		}
 		catch (Exception $e)
 		{
@@ -1163,6 +1284,16 @@ class Pelatihan extends MY_Controller
 				}
 				$this->Pelatihan_model->insert_t_project_charter($data);					
 			}
+
+			$db_error = $this->db->error();
+
+			if (!empty($db_error)) {
+				$output = array(
+					'result'  	=> 'NG',
+					'msg'		=> $db_error['message']
+				);
+			}			
+
 		}
 		catch (Exception $e)
 		{
@@ -1285,44 +1416,53 @@ class Pelatihan extends MY_Controller
 
 	public function get_paging_kehadiran_nasabah_ulamm($idpelatihan)
 	{					
-		$param['sektor_ekonomi'] 	= isset($_GET["columns"][0]['search']['value']) ? $_GET["columns"][0]['search']['value'] : NULL;
-		$param['jenis_pinjaman'] 	= isset($_GET["columns"][1]['search']['value']) ? $_GET["columns"][1]['search']['value'] : NULL;
-		$param['jenis_program'] 	= isset($_GET["columns"][2]['search']['value']) ? $_GET["columns"][2]['search']['value'] : NULL;
-		$param['kode_cabang'] 		= isset($_GET["columns"][3]['search']['value']) ? $_GET["columns"][3]['search']['value'] : NULL;
-		$param['kode_unit'] 		= isset($_GET["columns"][4]['search']['value']) ? $_GET["columns"][4]['search']['value'] : NULL;
-		
-		$param["start"] = isset($_GET["start"]) ? $_GET["start"] : 0;
-		$param["limit"] = isset($_GET["length"]) ? $_GET["length"] : 10;		
-		$param["search"] = isset($_GET["search"]["value"]) ? $_GET["search"]["value"] : NULL ;
-
 		$this->config->set_item('elastic_index', 'nasabah');	
-		if ($param['sektor_ekonomi']!=NULL){
-			$debitur = $this->elastic->call('/_search?q=sektorekonomi:'.$param["sektor_ekonomi"].'&filter_path=hits.hits.*,aggregations.*');
-			$debitur_count = $this->elastic->call('_count?q=sektorekonomi:'.$param["sektor_ekonomi"]);
-		}else if ($param['jenis_pinjaman']!=NULL){
-				$debitur = $this->elastic->call('/_search?q=jenis_pinjaman:'.$param["jenis_pinjaman"].'&filter_path=hits.hits.*,aggregations.*');
-				$debitur_count = $this->elastic->call('_count?q=jenis_pinjaman:'.$param["jenis_pinjaman"]);			
-		}else if ($param['jenis_program']!=NULL){
-			$debitur = $this->elastic->call('/_search?q=jenis_program:'.$param["jenis_program"].'&filter_path=hits.hits.*,aggregations.*');
-			$debitur_count = $this->elastic->call('_count?q=jenis_program:'.$param["jenis_program"]);			
-		}else if ($param['kode_cabang']!=NULL){
-			$debitur = $this->elastic->call('/_search?q=kode_cabang:'.$param["kode_cabang"].'&filter_path=hits.hits.*,aggregations.*');
-			$debitur_count = $this->elastic->call('_count?q=kode_cabang:'.$param["kode_cabang"]);
-		}else if ($param['kode_unit']!=NULL){
-			$debitur = $this->elastic->call('/_search?q=kode_unit:'.$param["kode_unit"].'&filter_path=hits.hits.*,aggregations.*');
-			$debitur_count = $this->elastic->call('_count?q=kode_unit:'.$param["kode_unit"]);									
-		}else if ($param["search"]!=NULL){
-			$debitur = $this->elastic->call('/_search?q=nama:'.$param["search"].'&filter_path=hits.hits.*,aggregations.*');
-			$debitur_count = $this->elastic->call('_count?q=nama:'.$param["search"]);			
-		}else{						
-			$debitur = $this->elastic->call('_search?from='.$param["start"].'&size='.$param["limit"].'&filter_path=hits.hits.*,aggregations.*');
-			$debitur_count = $this->elastic->call('_count');
-		}				
+
+		$sektor_ekonomi = ($_GET["columns"][0]['search']['value']!='') ? 'sektorekonomi:'.$_GET["columns"][0]['search']['value'] : NULL;
+		$jenis_pinjaman	= ($_GET["columns"][1]['search']['value']!='') ? 'jenis_pinjaman:'.$_GET["columns"][1]['search']['value'] : NULL;
+		$jenis_program	= ($_GET["columns"][2]['search']['value']!='') ? 'jenis_program:'.$_GET["columns"][2]['search']['value'] : NULL;
+		$kode_cabang 	= ($_GET["columns"][3]['search']['value']!='') ? 'kode_cabang:'.$_GET["columns"][3]['search']['value'] : NULL;
+		$kode_unit 		= ($_GET["columns"][4]['search']['value']!='') ? 'kode_unit:'.$_GET["columns"][4]['search']['value'] : NULL;
+		$search 		= ($_GET["search"]["value"]!='') ? 'nama_nasabah:'.$_GET["search"]["value"] : NULL ;	
+
+		$searching = array($sektor_ekonomi,$jenis_pinjaman,$jenis_program,$kode_cabang,$kode_unit,$search);		
+		
+		$start = isset($_GET["start"]) ? '&from='.$_GET["start"] : 0;
+		$limit = isset($_GET["length"]) ? '&size='.$_GET["length"] : 10;		
+		$filter_path 	= '&filter_path=hits.hits.*,aggregations.*';
+							
+		$query='';
+
+		foreach ($searching as $searching_value){
+			if($searching_value!=NULL){
+				$query .= ($query=='') ? 'q=':' AND ';
+				$query .= $searching_value;
+			}
+		}		
+
+		$debitur = $this->elastic->call('/_search?'.$query.$start.$limit.$filter_path);
+		$debitur_count = $this->elastic->call('_count?'.$query);
+				
+		$hide_debitur = $this->Pelatihan_model->select_temp_kehadiran($idpelatihan);
+		$hide_array = array_map (function($value){
+			return $value['ID_NASABAH'];
+		} , $hide_debitur);
+
 		
 		if (isset($debitur->hits->hits)){
 			for ($i=0;$i<count($debitur->hits->hits);$i++){
 				$data["data"][$i] = $debitur->hits->hits[$i]->_source;
 			}	
+
+			for ($i=0;$i<count($debitur->hits->hits);$i++){
+				if (!in_array($debitur->hits->hits[$i]->_source->nasabahid, $hide_array)) 
+				{ 
+					$data["data"][$i] = $debitur->hits->hits[$i]->_source;					
+				}else{
+					$data["data"][$i] = (object) array('nasabahid' => '-','ktp' => '-','nama_nasabah'=>'-','no_hp'=>'-','kolektibilitas'=>'-','cabang'=>'-','unit'=>'-');					
+				}				
+			}	
+
 			$data["recordsTotal"] = $debitur_count->count;	
 			$data["recordsFiltered"] = $debitur_count->count;			
 		}else{
@@ -1338,23 +1478,47 @@ class Pelatihan extends MY_Controller
 	
 	public function get_paging_kehadiran_nasabah_mekaar($idpelatihan)
 	{									
-		$param["start"] = isset($_GET["start"]) ? $_GET["start"] : 0;
-		$param["limit"] = isset($_GET["length"]) ? $_GET["length"] : 10;		
-		$param["search"] = isset($_GET["search"]["value"]) ? $_GET["search"]["value"] : NULL ;			
+		$start = isset($_GET["start"]) ? '&from='.$_GET["start"] : 0;
+		$limit = isset($_GET["length"]) ? '&size='.$_GET["length"] : 10;		
+		$filter_path 	= '&filter_path=hits.hits.*,aggregations.*';
 
-		$this->config->set_item('elastic_index', 'debitur');		
-		if ($param["search"]!=NULL){
-			$debitur = $this->elastic->call('/_search?q=nama:'.$param["search"].'&filter_path=hits.hits.*,aggregations.*');
-			$debitur_count = $this->elastic->call('_count?q=nama:'.$param["search"]);			
-		}else{						
-			$debitur = $this->elastic->call('_search?from='.$param["start"].'&size='.$param["limit"].'&filter_path=hits.hits.*,aggregations.*');
-			$debitur_count = $this->elastic->call('_count');
-		}				
+		$search 		= ($_GET["search"]["value"]!='') ? 'nama:'.$_GET["search"]["value"] : NULL ;				
+		$sektor_ekonomi = ($_GET["columns"][0]['search']['value']!='') ? 'sektor_ekonomi:'.$_GET["columns"][0]['search']['value'] : NULL;
+		$regionid 		= ($_GET["columns"][1]['search']['value']!='') ? 'regionid:'.$_GET["columns"][1]['search']['value'] : NULL;
+		$areaid 		= ($_GET["columns"][2]['search']['value']!='' && $_GET["columns"][2]['search']['value']!='null') ? 'areaid:'.$_GET["columns"][2]['search']['value'] : NULL;
+
+		$searching = array($sektor_ekonomi,$regionid,$areaid,$search);	
+
+		$this->config->set_item('elastic_index', 'debitur');	
+		
+		
+		$query='';
+
+		foreach ($searching as $searching_value){
+
+			if($searching_value!=NULL){
+				$query .= ($query=='') ? 'q=':' AND ';
+				$query .= $searching_value;
+			}
+		}	
+		
+		$debitur = $this->elastic->call('/_search?'.$query.$start.$limit.$filter_path);
+		$debitur_count = $this->elastic->call('_count?'.$query);					
+
+		$hide_debitur = $this->Pelatihan_model->select_temp_kehadiran($idpelatihan);
+		$hide_array = array_map (function($value){
+			return $value['ID_NASABAH'];
+		} , $hide_debitur);		
 		
 		if (isset($debitur->hits->hits)){
 			for ($i=0;$i<count($debitur->hits->hits);$i++){
-				$data["data"][$i] = $debitur->hits->hits[$i]->_source;
-			}	
+				if (!in_array($debitur->hits->hits[$i]->_source->nasabahid, $hide_array)) 
+				{ 
+					$data["data"][$i] = $debitur->hits->hits[$i]->_source;					
+				}else{
+					$data["data"][$i] = (object) array('nasabahid' => '-','noktp' => '-','nama' => '-','alamat'=>'-','produk'=>'-','region'=>'-','area'=>'-');					
+				}				
+			}			
 			$data["recordsTotal"] = $debitur_count->count;	
 			$data["recordsFiltered"] = $debitur_count->count;			
 		}else{
@@ -1367,13 +1531,32 @@ class Pelatihan extends MY_Controller
 		echo json_encode($data);		
 	}
 
-	public function get_paging_kehadiran_non_nasabah()
+	public function get_paging_kehadiran_non_nasabah($idpelatihan)
 	{										
 		$param["start"] = isset($_GET["start"]) ? $_GET["start"] : 0;
 		$param["limit"] = isset($_GET["length"]) ? $_GET["length"] : 10;		
 		$param["search"] = isset($_GET["search"]["value"]) ? $_GET["search"]["value"] : NULL ;			
-		$param['count'] = 0;						
-		$data["data"] = $this->Pelatihan_model->paging_kehadiran_non_nasabah($param);				
+		$param['count'] = 0;		
+		
+		
+		$hide_debitur = $this->Pelatihan_model->select_temp_kehadiran($idpelatihan);
+		$hide_array = array_map (function($value){
+			return $value['ID_NASABAH'];
+		} , $hide_debitur);
+		
+
+		$debitur = $this->Pelatihan_model->paging_kehadiran_non_nasabah($param);	
+
+		for ($i=0;$i<count($debitur);$i++){
+			if (!in_array($debitur[$i]->ID, $hide_array)) 
+			{ 
+				$debitur[$i] = $debitur[$i];					
+			}else{
+				$debitur[$i] = (object) array('ID' => '-','NO_KTP' => '-','NAMA' => '-','NO_HP'=>'-','ALAMAT'=>'-','CABANG'=>'-','UNIT'=>'-');
+			}				
+		}	
+			
+		$data["data"] = $debitur;
 		$param['count'] = 1;				
 		$total = $this->Pelatihan_model->paging_kehadiran_non_nasabah($param)[0]->COUNT_DATA;				
 		$data["recordsTotal"] = $total;	
@@ -1522,9 +1705,9 @@ class Pelatihan extends MY_Controller
 				'KTP' 				=> $ktp
 			);
 			
-			$this->Pelatihan_model->delete_t_kehadiran($data);
+			$this->Pelatihan_model->delete_temp_kehadiran($data);
 			
-			$cek_kehadiran = $this->Pelatihan_model->select_t_kehadiran_by_idpelatihan($id_pelatihan)->num_rows();
+			$cek_kehadiran = $this->Pelatihan_model->select_temp_kehadiran_by_idpelatihan($id_pelatihan)->num_rows();
 			
 			if ($cek_kehadiran == 0){
 				$data_update 	= array(
@@ -1536,6 +1719,15 @@ class Pelatihan extends MY_Controller
 					'ID' 	=> $id_pelatihan
 					);
 				$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
+			}			
+
+			$db_error = $this->db->error();
+
+			if (!empty($db_error)) {
+				$output = array(
+					'result'  	=> 'NG',
+					'msg'		=> $db_error['message']
+				);
 			}			
 			
 		}		

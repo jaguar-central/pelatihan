@@ -54,6 +54,8 @@
 $(document).ready(function() {
 	
 
+		$(".select2").select2();
+
 		var durasi = function () {
 			var start 	= $('#timeawal').val();
 		    var end 	= $('#timeakhir').val();
@@ -108,13 +110,15 @@ $(document).ready(function() {
 			"processing": true,
 			"serverSide": true,
 			"ajax": {
-			"url" : '<?php echo base_url('pelatihan/get_paging_kehadiran_non_nasabah/'); ?>',
+			"url" : '<?php echo base_url('pelatihan/get_paging_kehadiran_non_nasabah/'.$this->uri->segment(3)); ?>',
 			"type" :'GET'                      
 			},
 			"columns" : [
 				{ "data": "NO_KTP", render: function (data, type, row) 
                 {
-                  return '<input type="hidden" class="form-control" id="bisnis" name="bisnis[]" value="NON_NASABAH"><input type="hidden" class="form-control" id="ktp" name="ktp[]" value="'+row.NO_KTP+'">'+row.NO_KTP;
+				  return '<input type="hidden" class="form-control" id="bisnis" name="bisnis[]" value="NON_NASABAH">'
+				  		+'<input type="hidden" class="form-control" id="id_non_nasabah" name="id_non_nasabah[]" value="'+row.ID+'">'
+				  		+'<input type="hidden" class="form-control" id="ktp" name="ktp[]" value="'+row.NO_KTP+'">'+row.NO_KTP;
                 } 
               },
               { "data": "NAMA", render: function (data, type, row) 
@@ -216,14 +220,8 @@ $(document).ready(function() {
 			table_kehadiran_ulamm.column(3).search( cabang=='0' ? '' : cabang   );
 			table_kehadiran_ulamm.column(4).search( unit=='0' ? '' : unit   );
 
-			table_kehadiran_ulamm.clear().draw();
+			table_kehadiran_ulamm.clear().draw(false);
 		});		
-
-
-
-
-
-
 
 
 		var table_kehadiran_mekaar = $('#datatable_kehadiran_mekaar').DataTable({	
@@ -234,10 +232,14 @@ $(document).ready(function() {
 			"url" : '<?php echo base_url('pelatihan/get_paging_kehadiran_nasabah_mekaar/'.$this->uri->segment(3)); ?>',
 			"type" :'GET'                      
 			},
-			"columns" : [			
+			"columns" : [										
               { "data": "noktp", render: function (data, type, row) 
                 {
-                  return '<input type="hidden" class="form-control" id="bisnis" name="bisnis[]" value="MEKAAR"><input type="hidden" class="form-control" id="id_nasabah" name="id_nasabah[]" value="'+row.nasabahid+'"><input type="hidden" class="form-control" id="ktp" name="ktp[]" value="'+row.noktp+'">'+row.noktp;
+				  return '<input type="hidden" class="form-control" id="sektor_ekonomi" name="sektor_ekonomi[]" value="'+row.sektor_ekonomi+'">'
+				  +'<input type="hidden" class="form-control" id="bisnis" name="bisnis[]" value="MEKAAR">'
+				  +'<input type="hidden" class="form-control" id="id_nasabah" name="id_nasabah[]" value="'+row.nasabahid+'">'
+				  +'<input type="hidden" class="form-control" id="regionid" name="regionid[]" value="'+row.regionid+'">'
+				  +'<input type="hidden" class="form-control" id="ktp" name="ktp[]" value="'+row.noktp+'">'+row.noktp;
                 } 
               },
               { "data": "nama", render: function (data, type, row) 
@@ -264,15 +266,28 @@ $(document).ready(function() {
                 {
                   return '<input type="hidden" class="form-control" id="area" name="area[]" value="'+row.area+'">'+row.area;
                 } 
-              },                         
+			  },    			                       
 			],			
-			"dom": "<'dom_datable'f>rt<'dom_datable col-md-6'i><'dom_datable col-md-6'p>",
-			"pagingType": "simple",
+			"dom": "<'dom_datable'f>rt<'dom_datable col-md-6'i><'dom_datable col-md-6'p>",			
+			// "pagingType": "simple",
 			"createdRow" : function (row, data, index) {
 				$(row).addClass("add-kehadiran-mekaar");      
 			}
 		});
 
+
+		$(document).on("change", "#sektor_ekonomi_mekaar,#regional_mekaar,#area_mekaar", function () {			
+			var sektor_ekonomi_mekaar 	= $('#sektor_ekonomi_mekaar').val();			
+			var regional_mekaar 		= $('#regional_mekaar').val();			
+			var area_mekaar 			= $('#area_mekaar').val();			
+					
+			table_kehadiran_mekaar.clear();
+			table_kehadiran_mekaar.column(0).search( sektor_ekonomi_mekaar=='0' ? '' : sektor_ekonomi_mekaar   );
+			table_kehadiran_mekaar.column(1).search( regional_mekaar=='0' ? '' : regional_mekaar   );
+			table_kehadiran_mekaar.column(2).search( area_mekaar=='0' ? '' : area_mekaar   );
+
+			table_kehadiran_mekaar.clear().draw(false);
+		});				
 
 		$("#add_non_nasabah").submit(function(e){
 			e.preventDefault();        	
@@ -293,7 +308,7 @@ $(document).ready(function() {
 				
 				if(obj.result == 'OK')
 				{
-			table_kehadiran_non_nasabah.clear().draw();
+				table_kehadiran_non_nasabah.clear().draw(false);
 				}
 				if(obj.result == 'UP')
 				{
@@ -339,6 +354,7 @@ $(document).ready(function() {
 		var $clone = $TABLE_LPJ.find('tr.d-none').clone(true).removeClass('d-none');  
 		$TABLE_LPJ.find('tbody').append($clone);
 		calculate_grand_total_modallpj();
+		return false;
 	});
 
 	
@@ -346,17 +362,23 @@ $(document).ready(function() {
 
 		$(this).parents('tr').detach();
 		calculate_grand_total_modallpj();
+
+		return false;
 	});
 
 	$('.table-up-modallpj').click(function () {        
 		var $row = $(this).parents('tbody tr');
 		if ($row.index() === 1) return;
 		$row.prev().before($row.get(0));
+
+		return false;
 	});
 
 	$('.table-down-modallpj').click(function () {
 		var $row = $(this).parents('tbody tr');
 		$row.next().after($row.get(0));
+
+		return false;
 	});
 
 
@@ -396,37 +418,53 @@ $(document).ready(function() {
 		var formURL = "<?php echo base_url('pelatihan/post_pelatihan_lpj'); ?>";
 		var frmdata = new FormData(this);
 					
-		var xhr = $.ajax({
-			url: formURL,
-			type: 'POST',
-			data: frmdata,
-			processData: false,
-			contentType: false
-		});
-		xhr.done(function(data) {
-			var obj = $.parseJSON(data);
-			
-			console.log(data);
-			
-			if(obj.result == 'OK')
-			{
-				window.location.href = '<?php echo base_url(); ?>pelatihan/<?php echo $this->uri->segment(4); ?>';
-			}
-			if(obj.result == 'UP')
-			{
+		
+		if ($('#total_cost_rab_akhir_modallpj').val()>0) {	
+			var xhr = $.ajax({
+				url: formURL,
+				type: 'POST',
+				data: frmdata,
+				processData: false,
+				contentType: false
+			});
+			xhr.done(function(data) {
+				var obj = $.parseJSON(data);
+				
 				console.log(data);
-			}
-			if(obj.result == 'NG')
-			{
-				$("#m-ap-cab").html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a> '+obj.msg+'</div>');
-			}
-		});
-		xhr.fail(function() {
-			$("#loader_container").hide();
-			var failMsg = "Something error happened! as";
-		});	
+				
+				if(obj.result == 'OK')
+				{
+					window.location.href = '<?php echo base_url(); ?>pelatihan/<?php echo $this->uri->segment(4); ?>';
+				}
+				if(obj.result == 'UP')
+				{
+					console.log(data);
+				}
+				if(obj.result == 'NG')
+				{
+					Swal.fire({
+					position: 'center',
+					icon: 'error',
+					title: obj.msg,
+					showConfirmButton: false,
+					timer: 3000
+					})	
+				}
+			});
+			xhr.fail(function() {
+				$("#loader_container").hide();
+				var failMsg = "Something error happened! as";
+			});	
+		}else{
+			Swal.fire({
+			position: 'center',
+			icon: 'error',
+			title: 'Realisasi Anggaran Biaya tidak boleh kosong',
+			showConfirmButton: false,
+			timer: 1500
+			})	
+		}
 	});	
-
 
 
 
@@ -488,8 +526,8 @@ $(document).ready(function() {
 			unit			: unit
 		},
 		function(data, status){
-			$('#datatable_listkehadiran').DataTable().draw();
-			$('#datatable_kehadiran_ulamm').DataTable().draw();
+			$('#datatable_listkehadiran').DataTable().draw(false);
+			$('#datatable_kehadiran_ulamm').DataTable().draw(false);
 			console.log("Data: " + data + "\nStatus: " + status);
 		});
 
@@ -521,8 +559,8 @@ $(document).ready(function() {
 			area			: area
 		},
 		function(data, status){
-			$('#datatable_listkehadiran').DataTable().draw();
-			$('#datatable_kehadiran_mekaar').DataTable().draw();
+			$('#datatable_listkehadiran').DataTable().draw(false);
+			$('#datatable_kehadiran_mekaar').DataTable().draw(false);
 			console.log("Data: " + data + "\nStatus: " + status);
 		});
 
@@ -531,7 +569,8 @@ $(document).ready(function() {
 
 	$(document).on("click", ".add-kehadiran-non-nasabah", function () {					
 		var index = parseInt($(this).index());				
-		
+
+		var id_non_nasabah 	= $("tr.add-kehadiran-non-nasabah:eq("+index+") #id_non_nasabah").val();
 		var ktp 			= $("tr.add-kehadiran-non-nasabah:eq("+index+") #ktp").val();
 		var bisnis 			= $("tr.add-kehadiran-non-nasabah:eq("+index+") #bisnis").val();
 		var nama_nasabah 	= $("tr.add-kehadiran-non-nasabah:eq("+index+") #nama_nasabah").val();
@@ -544,6 +583,7 @@ $(document).ready(function() {
 		$.post("<?php echo base_url('pelatihan/post_kehadiran'); ?>",
 		{	
 			id_pelatihan	: '<?php echo $this->uri->segment(3); ?>',
+			id_nasabah		: id_non_nasabah,
 			ktp				: ktp,
 			bisnis			: bisnis,
 			nama_nasabah	: nama_nasabah,
@@ -553,8 +593,8 @@ $(document).ready(function() {
 			unit			: unit
 		},
 		function(data, status){
-			$('#datatable_listkehadiran').DataTable().draw();
-			$('#datatable_kehadiran_ulamm').DataTable().draw();
+			$('#datatable_listkehadiran').DataTable().draw(false);
+			$('#datatable_kehadiran_non_nasabah').DataTable().draw(false);
 			console.log("Data: " + data + "\nStatus: " + status);
 		});
 
@@ -571,10 +611,24 @@ $(document).ready(function() {
 			ktp : ktp
 		},
 		function(data, status){
-			$('#datatable_listkehadiran').DataTable().draw();
-			$('#datatable_kehadiran_ulamm').DataTable().draw();
+			$('#datatable_listkehadiran').DataTable().draw(false);
+			$('#datatable_kehadiran_ulamm').DataTable().draw(false);
+			$('#datatable_kehadiran_mekaar').DataTable().draw(false);
+			$('#datatable_kehadiran_non_nasabah').DataTable().draw(false);
 			console.log("Data: " + data + "\nStatus: " + status);
 		});		
 		
+	});
+
+	$('#regional_mekaar').on('change', function (e) {			
+			$.ajax({
+				url: "<?php echo base_url()?>master/get_area_mekaar",
+				data: "kode_region="+$("#regional_mekaar").val(),
+				cache: false,
+				success: function(data){				         
+					$('#area_mekaar').html(data)           
+				}
+			});
+			
 	});
 </script>       

@@ -110,9 +110,7 @@
 	});	
 	  
 	$(document).on("click", ".pelatihan_details", function () {			
-				
-		$('#pelatihan_type_details').html('<option value="'+$(this).data('pelatihantype')+'">'+$(this).data('pelatihantiddeskripsi')+'</option>');		
-				
+		$('#pelatihan_type_details').html('<option value="'+$(this).data('pelatihantype')+'">'+$(this).data('pelatihantiddeskripsi')+'</option>');						
 		$('#cabang_pelatihan_details').trigger('change');							
 		$('#region_pelatihan_details').val($(this).data('pelatihanregion'));		
 		$('#area_pelatihan_details').val($(this).data('pelatihanarea'));		
@@ -362,10 +360,11 @@
 						+'data-target="#modaldetails" '
 						+'data-pelatihanid="'+row.ID+'" '
 						+'data-pelatihantype="'+row.ID_TIPE+'" '
+						+'data-pelatihantiddeskripsi="'+row.ID_TIPE_DESKRIPSI+'" '														
 						+'data-pelatihantitle="'+row.TITLE+'" '
 						+'data-pelatihanregion="'+row.REGIONAL_MEKAAR+'" '
 						+'data-pelatihanarea="'+row.AREA_MEKAAR+'" '
-						+'data-pelatihancabang="'+row.CABANG_MEKAAR+'" '						
+						+'data-pelatihancabang="'+row.CABANG_MEKAAR+'" '
 						+'data-pelatihancabangulamm="'+row.CABANG_ULAMM+'" '
 						+'data-pelatihandeskripsi="'+row.DESKRIPSI+'" '
 						+'data-pelatihantanggal="'+row.TANGGAL_MULAI+' - '+row.TANGGAL_SELESAI+'" '
@@ -375,7 +374,8 @@
 						+'data-pelatihanalamat="'+row.ALAMAT+'" '
 						+'data-pelatihanprovinsi="'+row.PROVINSI+'" '
 						+'data-pelatihankabkot="'+row.KABKOT+'" '
-						+'data-pelatihankecamatan="'+row.KECAMATAN+'"> Details</a>';
+						+'data-pelatihankecamatan="'+row.KECAMATAN+'" '
+						+'data-pelatihanpembicara="'+row.PEMBICARA+'"> Details</a>';
 						
 						tombol_action += '<a class= "dropdown-item" target="_blank" href="<?php echo $this->config->item('jasper_report').'Pelatihan.pdf?ID=' ?>'+row.ID+'"> Unduh Proposal Approved</a>';
 						

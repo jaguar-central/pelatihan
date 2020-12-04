@@ -37,7 +37,7 @@
 					</div>
 				</div>
 
-				<div class="form-group row">
+				<div class="form-group row" id="select_tag_cabang">
 					<input type="hidden" class="form-control" id="id_bisnis_pelatihan" name="id_bisnis_pelatihan" value="1" /> <!--ULAMM-->
 								
 					<label class="col-sm-2">Tipe Pelatihan <span class="text-danger">*</span></label>
@@ -49,7 +49,7 @@
 		
 					<label class="col-sm-2">Cabang <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<select class="form-control select_tag" required="" id="cabang_ulamm" name="cabang_ulamm">
+						<select class="form-control select_tag_cabang" required="" id="cabang_ulamm" name="cabang_ulamm">
 							<option value="">--pilih cabang--</option>			
 
 								<?php 
@@ -60,13 +60,15 @@
 						</select>																	
 					</div>
 				</div>		
+
+
 				
 		
 				
 				<div class="form-group row">
 					<label class="col-sm-2">Judul <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="judul_pelatihan" name="judul_pelatihan" />
+						<input type="text" class="form-control"  required="" id="judul_pelatihan" name="judul_pelatihan" maxlength="150" />
 					</div>							
 				
 					<label class="col-sm-2">Unit <span class="text-danger">*</span></label>
@@ -78,33 +80,8 @@
 				</div>						
 
 
-				<div class="form-group row">
-					<label class="col-sm-2">Provinsi <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<select class="form-control select_tag" required="" id="provinsi" name="provinsi">
-							<option value="">- Pilih Provinsi -</option>
-								<?php 
-								foreach ($provinsi as $data_provinsi){
-									echo '<option value="'.$data_provinsi->MS_KODE_PROVINSI.'">'.$data_provinsi->MS_PROVINSI.'</option>';                                                                    
-								}
-								?>	
-						</select>
-					</div>   						
-				</div>	
 
-				<div class="form-group row">
-					<label class="col-sm-2">Kabupaten / Kota <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<select class="form-control select_tag" required="" id="kabkot" name="kabkot">
-						</select>
-					</div>              
-
-					<label class="col-sm-2">Kecamatan <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<select class="form-control select_tag" required="" id="kecamatan" name="kecamatan">
-						</select>
-					</div>              					                  
-				</div>					
+			
 
 				<div class="form-group row">
 					<label class="col-sm-2">Deskripsi <span class="text-danger">*</span></label>
@@ -116,31 +93,7 @@
 				</div>												
 
 
-				<div class="form-group card grading_system">
-				<div class="card-header"><h4>Grading System</h4></div>
-				<div class="card-body row">
-					<label class="col-sm-2">Jenis Nasabah <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<select class="form-control" required="" id="jenis_nasabah_grading">
-							<option value="">--pilih jenis nasabah--</option>
-
-							<?php 
-								foreach ($nasabah_grading as $data_nasabah_grading){
-									echo '<option value="'.$data_nasabah_grading->ID.'" >'.$data_nasabah_grading->JENIS_NASABAH.'</option>';                                                                    
-								}
-								?>										
-						</select>	
-					</div>	
-
-					<label class="col-sm-2">Grade <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<select class="form-control" required="" id="grading" name="grading">
-							<option value="">--pilih grade--</option>
-									
-						</select>	
-					</div>								
-				</div>		
-				</div>				
+		
 				
 				<div class="form-group row">
 
@@ -156,18 +109,18 @@
 								<span class="input-group-addon">
 								<span class="fas fa-calendar"></span>
 								</span>
-								<input type='text' class="form-control" id='timeawal' />
+								<input type='text' class="form-control" id='timeawal' required=""/>
 								<span class="input-group-addon bg-custom b-0">s/d</span>
-								<input type='text' class="form-control" id='timeakhir' />
+								<input type='text' class="form-control" id='timeakhir' required="" />
 							</div>							
 
-							<input type="hidden" id="inputStartTglPelaksanaan" name="inputStartTglPelaksanaan" />
+							<input type="hidden" id="inputStartTglPelaksanaan" name="inputStartTglPelaksanaan" required=""/>
 							
-							<input type="hidden" id="inputStartTimePelaksanaan" name="inputStartTimePelaksanaan" />
+							<input type="hidden" id="inputStartTimePelaksanaan" name="inputStartTimePelaksanaan" required=""/>
 
-							<input type="hidden" id="inputAkhirTglPelaksanaan" name="inputAkhirTglPelaksanaan"/>
+							<input type="hidden" id="inputAkhirTglPelaksanaan" name="inputAkhirTglPelaksanaan" required=""/>
 							
-							<input type="hidden" id="inputEndTimePelaksanaan" name="inputEndTimePelaksanaan" />
+							<input type="hidden" id="inputEndTimePelaksanaan" name="inputEndTimePelaksanaan" required=""/>
 
 						</div>
 
@@ -193,18 +146,86 @@
 					</div>						
 				</div>
 
-				<div class="form-group row">              
-					<label class="col-sm-2">Alamat Pelatihan <span class="text-danger">*</span></label>
-					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="alamat_tempat_pelatihan" name="alamat_tempat_pelatihan" />
-					</div> 					         
-				
+				<div class="form-group row">              			         				
 					<label class="col-sm-2">Anggaran <span class="text-danger">*</span></label>
 					<div class="input-group col-sm-4">
 						<span class="input-group-addon">Rp</span>
 						<input type="text" class="form-control"  required="" id="anggaran" name="anggaran" />				
 					</div>             	
 				</div>
+
+
+				<div class="form-group card">
+					<div class="card-header"><h4>Lokasi Pelatihan</h4></div>
+					<div class="card-body">
+						<div id="radio_lokasi" class="form-group row">
+							<div class="radio offset-sm-4 col-sm-2">
+							<label  ><input type="radio" name="radio_lokasi" value="onsite" checked> On-site</label>
+							</div>
+							<div class="radio col-sm-2">
+							<label  ><input type="radio" name="radio_lokasi" value="online"> Online</label>
+							</div>
+						</div>				
+						<div class="form-group row" id="select_tag_provinsi">
+							<label class="col-sm-2">Provinsi <span class="text-danger">*</span></label>
+							<div class="col-sm-4">
+								<select class="form-control select_tag_provinsi" required="" id="provinsi" name="provinsi">
+									<option value="">- Pilih Provinsi -</option>
+										<?php 
+										foreach ($provinsi as $data_provinsi){
+											echo '<option value="'.$data_provinsi->MS_KODE_PROVINSI.'">'.$data_provinsi->MS_PROVINSI.'</option>';                                                                    
+										}
+										?>	
+								</select>
+							</div>   	
+
+							<label class="col-sm-2">Kecamatan <span class="text-danger">*</span></label>
+							<div class="col-sm-4">
+								<select class="form-control select_tag_kecamatan" required="" id="kecamatan" name="kecamatan">
+								</select>
+							</div>  													
+						</div>	
+
+						<div class="form-group row" id="select_tag_kabupaten">           
+							<label class="col-sm-2">Kabupaten / Kota <span class="text-danger">*</span></label>
+							<div class="col-sm-4">
+								<select class="form-control select_tag_kabupaten" required="" id="kabkot" name="kabkot">								
+								</select>
+							</div>   
+
+							<label class="col-sm-2">Alamat Pelatihan <span class="text-danger">*</span></label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control"  required="" id="alamat_tempat_pelatihan" name="alamat_tempat_pelatihan" />
+							</div> 									            					                  
+						</div>					
+					</div>					
+				</div>						
+
+				<div class="form-group card grading_system">
+				<div class="card-header"><h4>Grading System</h4></div>
+				<div class="card-body row">
+					<label class="col-sm-2">Jenis Nasabah <span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+						<select class="form-control" required="" id="jenis_nasabah_grading">
+							<option value="">--pilih jenis nasabah--</option>
+
+							<?php 
+								foreach ($nasabah_grading as $data_nasabah_grading){
+									echo '<option value="'.$data_nasabah_grading->ID.'" >'.$data_nasabah_grading->JENIS_NASABAH.'</option>';                                                                    
+								}
+								?>										
+						</select>	
+					</div>	
+
+					<label class="col-sm-2">Grade <span class="text-danger">*</span></label>
+					<div class="col-sm-4">
+						<select class="form-control" required="" id="grading" name="grading">
+							<option value="">--pilih grade--</option>
+									
+						</select>	
+					</div>								
+				</div>		
+				</div>						
 			
 
 				<!-- <div class="form-group row">
@@ -277,7 +298,7 @@
 									<label>Grand Total </label>
 								  <div>
 								  <div class="col-md-12">    
-									<input style="text-align:right" type="text" class="form-control money" id="total_cost_rab_akhir" name="total_cost_rab_akhir" data-a-sign="Rp. " value="" readonly="" required>
+									<input style="text-align:right" type="text" class="form-control money" id="total_cost_rab_akhir" name="total_cost_rab_akhir"  value="0" readonly="" required="" >
 								  </div>
 								
 								
@@ -307,8 +328,38 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {	
+
+
+        $('#radio_lokasi').change(function(){			
+			selected_value = $("input[name='radio_lokasi']:checked").val();
+			if (selected_value=='online'){
+				$('#provinsi').val('0');
+				$('#kabkot').val('0');
+				$('#kecamatan').val('0');
+
+				$('#kabkot').html('<option value="0">online</option>');
+				$('#kecamatan').html('<option value="0">online</option>');
+
+				$("#select_tag_provinsi").hide();
+				$("#select_tag_kabupaten").hide();
+
+				$("#alamat_tempat_pelatihan").val('online');
+			}else{
+				$('#provinsi').val('');
+				$('#kabkot').val('');
+				$('#kecamatan').val('');
+
+				$('#kabkot').html('');
+				$('#kecamatan').html('');		
+
+				$("#select_tag_provinsi").show();
+				$("#select_tag_kabupaten").show();		
+				
+				$("#alamat_tempat_pelatihan").val('');
+			}
+        });
 		
-		new AutoNumeric("#anggaran","commaDecimalCharDotSeparator");				
+		new AutoNumeric("#anggaran","commaDecimalCharDotSeparator");													
 
 		var durasi = function () {
 			var start 	= $('#timeawal').val();
@@ -354,9 +405,21 @@
 			}
 		})		
 		
-		$(".select_tag").select2({
-			dropdownParent: $("#modaladd")
+		$(".select_tag_cabang").select2({
+			dropdownParent: $("#select_tag_cabang")
 		});	
+		
+		$(".select_tag_provinsi").select2({
+			dropdownParent: $("#select_tag_provinsi")
+		});		
+
+		$(".select_tag_kabupaten").select2({
+			dropdownParent: $("#select_tag_kabupaten")
+		});				
+
+		$(".select_tag_kecamatan").select2({
+			dropdownParent: $("#select_tag_kabupaten")
+		});				
 		
 		
 		
@@ -449,11 +512,12 @@
 				cache: false,
 				success: function(data){											
 					var mydata = JSON.parse(data);
-					// console.log(mydata.data.JUDUL_PELATIHAN);
 					$('#judul_pelatihan').val(mydata.data.JUDUL_PELATIHAN);
 					$('#alamat_tempat_pelatihan').val(mydata.data.ALAMAT);					
-					$('#anggaran').val(mydata.data.BUDGET);
-					// AutoNumeric("#anggaran","commaDecimalCharDotSeparator");
+
+					const element = AutoNumeric.getAutoNumericElement('#anggaran')
+  					element.set(mydata.data.BUDGET);
+
 					var dateawal = moment(mydata.data.TANGGAL);
 					$('#timeawal').val(dateawal.format('MM/DD/YYYY hh:mm A'));	
 					$('#inputStartTglPelaksanaan').val(dateawal.format('YYYY-MM-DD'));	
@@ -549,57 +613,68 @@
 		e.preventDefault();        	
 		var formURL = "<?php echo base_url('pelatihan/post_pelatihan'); ?>";
 		var frmdata = new FormData(this);
-					
-		var xhr = $.ajax({
-			url: formURL,
-			type: 'POST',
-			data: frmdata,
-			processData: false,
-			contentType: false
-		});
-		xhr.done(function(data) {
-			var obj = $.parseJSON(data);
-			
-			console.log(data);
-			
-			if(obj.result == 'OK')
-			{
-				Swal.fire({
-				  position: 'center',
-				  icon: 'success',
-				  title: 'Pelatihan telah di simpan',
-				  showConfirmButton: false,
-				  timer: 1500
-				})
-				setTimeout(function () {
-					window.location.href = '<?php echo base_url(); ?>pelatihan/ulamm';
-				}, 1600);
-			}
-			if(obj.result == 'UP')
-			{
+
+		
+		if ($('#total_cost_rab_akhir').val()>0) {		
+			var xhr = $.ajax({
+				url: formURL,
+				type: 'POST',
+				data: frmdata,
+				processData: false,
+				contentType: false
+			});
+			xhr.done(function(data) {
+				var obj = $.parseJSON(data);
+				
 				console.log(data);
-				Swal.fire({
-				  position: 'center',
-				  icon: 'error',
-				  title: obj.msg,
-				  showConfirmButton: false,
-				  timer: 1500
-				})					
-			}
-			if(obj.result == 'NG')
-			{
-				Swal.fire({
-				  position: 'center',
-				  icon: 'error',
-				  title: obj.msg,
-				  showConfirmButton: false,
-				  timer: 1500
-				})	
-			}
-		});
-		xhr.fail(function() {
-			$("#loader_container").hide();
-			var failMsg = "Something error happened! as";
-		});	
+				
+				if(obj.result == 'OK')
+				{
+					Swal.fire({
+					position: 'center',
+					icon: 'success',
+					title: 'Pelatihan telah di simpan',
+					showConfirmButton: false,
+					timer: 1500
+					})
+					setTimeout(function () {
+						window.location.href = '<?php echo base_url(); ?>pelatihan/ulamm';
+					}, 1600);
+				}
+				if(obj.result == 'UP')
+				{
+					console.log(data);
+					Swal.fire({
+					position: 'center',
+					icon: 'error',
+					title: obj.msg,
+					showConfirmButton: false,
+					timer: 1500
+					})					
+				}
+				if(obj.result == 'NG')
+				{
+					Swal.fire({
+					position: 'center',
+					icon: 'error',
+					title: obj.msg,
+					showConfirmButton: false,
+					timer: 1500
+					})	
+				}
+			});
+			xhr.fail(function() {
+				$("#loader_container").hide();
+				var failMsg = "Something error happened! as";
+			});	
+		}else{
+			Swal.fire({
+			position: 'center',
+			icon: 'error',
+			title: 'Rencana Anggaran Biaya tidak boleh kosong',
+			showConfirmButton: false,
+			timer: 1500
+			})	
+		}
 	});	
 </script>

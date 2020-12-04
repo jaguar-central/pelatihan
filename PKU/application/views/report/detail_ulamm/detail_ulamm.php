@@ -27,6 +27,7 @@
                                     <th class="text-center" rowspan="2">Tema Pelatihan</th>
                                     <th class="text-center" rowspan="2">Judul Pelatihan</th>
                                     <th class="text-center" rowspan="2">Sektor Usaha</th>
+                                    <th class="text-center" rowspan="2">Tipe Kredit</th>
                                     <th class="text-center" rowspan="2">Tanggal Pelatihan</th>
                                     <th class="text-center" rowspan="2">Tanggal LPJ</th>
                                     <th class="text-center" rowspan="2">Realisasi Anggaran</th>

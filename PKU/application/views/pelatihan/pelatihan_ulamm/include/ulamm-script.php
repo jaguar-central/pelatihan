@@ -268,7 +268,7 @@
 					  icon: 'error',
 					  title: obj.msg,
 					  showConfirmButton: false,
-					  timer: 1500
+					  timer: 2000
 					})					
 				}			
 			});	
@@ -364,8 +364,8 @@
 					  
 					if (row.STATUS=='lpj_approved'){
 						tombol_action +='<a class="dropdown-item pelatihan_details" href="#" data-toggle="modal" data-target="#modaldetails" '
-						+'data-pelatihanid="'+row.ID+'" '
-						+'data-pelatihantype="'+row.ID_TIPE+'" '
+						+'data-pelatihanid="'+row.ID+'"data-pelatihantype="'+row.ID_TIPE+'" '
+						+'data-pelatihantiddeskripsi="'+row.ID_TIPE_DESKRIPSI+'" '
 						+'data-pelatihantitle="'+row.TITLE+'" '
 						+'data-pelatihancabang="'+row.CABANG_ULAMM+'" '
 						+'data-pelatihanunit="'+row.UNIT_ULAMM+'" '
@@ -377,7 +377,8 @@
 						+'data-pelatihanalamat="'+row.ALAMAT+'" '
 						+'data-pelatihanprovinsi="'+row.PROVINSI+'" '						
 						+'data-pelatihankabkot="'+row.KABKOT+'" '
-						+'data-pelatihankecamatan="'+row.KECAMATAN+'"> Details</a> ';
+						+'data-pelatihankecamatan="'+row.KECAMATAN+'" '
+						+'data-pelatihanpembicara="'+row.PEMBICARA+'"> Details</a>';
 						
 						tombol_action += '<a class= "dropdown-item" target="_blank" href="<?php echo $this->config->item('jasper_report').'Pelatihan.pdf?ID=' ?>'+row.ID+'"> Unduh Proposal Approved</a>';
 						

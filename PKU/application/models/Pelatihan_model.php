@@ -132,7 +132,15 @@ public function select_t_pelatihan_lpj_by_approval($approval)
 		public function insert_temp_kehadiran($data)
         {
                 $this->db->insert('TEMP_KEHADIRAN', $data);
-        }		
+		}	
+		
+		public function select_temp_kehadiran($id_pelatihan)
+		{
+			$query = $this->db->query("select ID_NASABAH from TEMP_KEHADIRAN where ID_PELATIHAN=$id_pelatihan ");
+
+			return $query->result_array();
+			
+		}
 
 public function paging_select_kehadiran($param)
         {							
@@ -143,9 +151,9 @@ public function paging_select_kehadiran($param)
                 return $query->result();
         }
         
-public function delete_t_kehadiran($data)
+public function delete_temp_kehadiran($data)
         {
-                $this->db->delete('T_KEHADIRAN', $data);
+                $this->db->delete('TEMP_KEHADIRAN', $data);
         }
 
 
@@ -162,9 +170,9 @@ public function paging_kehadiran_select_nasabah_ulamm($param)
 				");
                 return $query->result();
         }
-public function select_t_kehadiran_by_idpelatihan($idpelatihan)
+public function select_temp_kehadiran_by_idpelatihan($idpelatihan)
         {
-                $query = $this->db->query("select * from T_KEHADIRAN where ID_PELATIHAN='".$idpelatihan."' ");
+                $query = $this->db->query("select * from TEMP_KEHADIRAN where ID_PELATIHAN='".$idpelatihan."' ");
                 return $query;
         }
         
@@ -275,7 +283,13 @@ public function insert_trx_no_reject($data)
 
 public function select_t_pelatihan_by_id($id)
 {
-        $query = $this->db->select("*")->from("T_PELATIHAN")->where("ID",$id);
+		$query = $this->db->select("*,dbo.DESKRIPSI_PELATIHAN_TYPE(ID_TIPE) as DESKRIPSI_TIPE,dbo.DESKRIPSI_PROVINSI(PROVINSI) as DESKRIPSI_PROVINSI
+		,dbo.DESKRIPSI_REGION(REGIONAL_MEKAAR) as DESKRIPSI_REGION
+		,dbo.DESKRIPSI_AREA(AREA_MEKAAR) as DESKRIPSI_AREA
+		,dbo.DESKRIPSI_CABANG_MEKAAR(CABANG_MEKAAR) as DESKRIPSI_CABANG_MEKAAR
+		,dbo.DESKRIPSI_CABANG_ULAMM(CABANG_ULAMM) as DESKRIPSI_CABANG_ULAMM
+		,dbo.DESKRIPSI_UNIT(UNIT_ULAMM) as DESKRIPSI_UNIT
+		")->from("T_PELATIHAN")->where("ID",$id);
         return $query->get();     
 }
 
