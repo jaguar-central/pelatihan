@@ -83,6 +83,12 @@
         width: 150px;
     }        
 }
+
+
+.custom-file-label{
+	margin: 0 15px;
+}
+
 </style>
 
 
