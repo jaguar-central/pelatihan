@@ -3,10 +3,6 @@
  <div class="main-content">
 	<div class="section__content section__content--p20">
 		<div class="container-fluid">
-
-
-
-
 			<div class="row">
 				<div class="col-md-12">
 					<div class="overview-wrap">
@@ -23,10 +19,7 @@
 				<div class="form-group">				
 					<input type="hidden" class="form-control" id="id_pelatihan" name="id_pelatihan" value="<?php echo $this->uri->segment(3); ?>"/>		
 					<div class="form-group row">			
-						<!-- <label class="col-sm-2">Tanggal Realisasi <span class="text-danger"></span></label>
-						<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="tanggal_realisasi" name="tanggal_realisasi" />		
-						</div> -->
+
 						<label class="col-sm-2">Tanggal <span class="text-danger">*</span></label>
 						<div class="col-sm-4">
 							<div class="input-group">																										
@@ -52,19 +45,7 @@
 						</div>										
 					</div>		
 
-					<div class="form-group row">					
-						<!-- <label class="col-sm-2">Link Lampiran <span class="text-danger"></span></label>
-						<div class="col-sm-4">
-							<input type="text" class="form-control"  required="" id="lampiran" name="lampiran" />	
-						</div>	 -->
-
-
-						<label class="col-sm-2" for="lampiran">Lampiran</label>
-						<div class="col-sm-4">
-						<input type="file" class="form-control-file" id="lampiran" name="lampiran">										
-						</div>						
-					</div>						
-					
+														
 					<div class="form-group row">
 						<label class="col-sm-2">CSI Final <span class="text-danger"></span></label>
 						<div class="col-sm-4">
@@ -77,7 +58,17 @@
 						<?php echo $catatan_tambahan; ?>
 						</textarea>																	
 						</div>							
-					</div>								
+					</div>	
+
+
+					<div class="form-group row">
+						<label class="col-sm-2">Lampiran <span class="text-danger">*</span></label>
+						<div class="col-sm-4">
+							<input type="file" class="custom-file-input" id="lampiran" name="lampiran">
+							<label class="custom-file-label" for="lampiran">Pilih file</label>
+						</div>
+					</div>						
+
 				</div>	
 				<div class="row">
 					<div class="col-md-12">
