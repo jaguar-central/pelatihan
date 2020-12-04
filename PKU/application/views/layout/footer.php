@@ -91,6 +91,9 @@
 var watchId = 0;
 
 $(document).ready(function() {
+
+
+    
     // $('#startMonitoring').on('click', getLocation);
     // $('#stopMonitoring').on('click', endWatch);
 

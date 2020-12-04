@@ -1,3 +1,6 @@
+<style>
+</style>
+
  <!-- MAIN CONTENT-->
 <div class="main-content">
 	<div class="section__content section__content--p20">
@@ -12,7 +15,7 @@
 			<div class="row">
 				<div class="col-lg-12">					
 					<div class="table-style">
-						<table id="datatable" class="table table-bordered table-striped table-responsive">
+						<table id="datatable" class="table table-bordered table-striped">
 							<thead>
 								<tr>
 									<th class="text-center">TITLE</th>
@@ -26,7 +29,7 @@
 									if ($this->session->userdata('sess_user_id_user_group')!=3){ //untuk pic cabang
 										echo '<tr>';
 										echo '<td>'.$cus->TITLE.'</td>'; 								
-										echo '<td class="text-center">';	
+										echo '<td class="text-center ">';	
 										echo '<button type="button" class="btn btn-outline-info col-md-4 view_pelatihan" data-pelatihantype="'.$cus->ID.'" data-pelatihanbisnis="ULAMM" ><span class="btn-label"><i class="fa fa-eye"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;View</button>&nbsp;&nbsp;';																			
 										if (in_array($cus->ID,$klasterisasi)){
 											echo '<button type="button" class="btn btn-outline-success col-md-4 add_pelatihan_project_charter" data-toggle="modal" data-target="#modaladd" data-pelatihantype="'.$cus->ID.'" data-pelatihantitle="'.$cus->TITLE.'" ><span class="btn-label"><i class="fas fa-pencil-alt fa-fw"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add</button>'; 										
