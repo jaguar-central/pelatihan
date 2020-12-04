@@ -77,6 +77,15 @@
 	});	
 
     $(document).ready(function() {	
+
+
+		if (screen.width<660){
+			$("#datatable").addClass("table-responsive"); 
+		}else{
+			$("#datatable").removeClass("table-responsive"); 
+		}
+
+
 		$('#datatable').DataTable({
 			"aaSorting" : [],	
 			"paging": true,
