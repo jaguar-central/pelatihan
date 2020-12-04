@@ -106,10 +106,12 @@ class User extends MY_Controller {
 
 		$foto 				=$json['login'][0]['data'][0]['foto'];
 						
+
+		
+
 		if($username){
 			$data = $this->Master_model->select_ms_user_by_username($username)[0];
 			
-			$lokasi = $data->LOKASI;
 											
 			//Set session userdata
 
@@ -119,7 +121,7 @@ class User extends MY_Controller {
 
 							'sess_user_idsdm'			=> $idsdm,
 							
-							'sess_user_lokasi'			=> $lokasi,
+							'sess_user_lokasi'			=> $data->LOKASI,
 							
 							'sess_menu_user'			=> $data->MENU_USER,
 

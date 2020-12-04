@@ -88,11 +88,18 @@ public function select_t_approval_where($where)
 	
 public function select_t_pelatihan_by_approval($status)
         {					
+			if ($this->session->userdata('sess_user_id_bisnis')==0){
+				$BISNIS = " in (SELECT BISNIS FROM MS_FLOW_APPROVAL WHERE ID_GROUP=".$this->session->userdata('sess_user_id_user_group').")";				
+			}else{
+				$BISNIS = " = ".$this->session->userdata('sess_user_id_bisnis');
+			}
+
+
 			$query = $this->db->query("select *,dbo.ID_JENIS_NASABAH(ID_GRADING) as ID_JENIS_NASABAH
 			,dbo.MENIT_TO_JAM(DURASI_PELATIHAN) as JAM_MENIT
 			,dbo.DESKRIPSI_PELATIHAN_TYPE(ID_TIPE) as DESKRIPSI_PELATIHAN_TYPE 
 			from T_PELATIHAN 
-			where ID_BISNIS in (SELECT BISNIS FROM MS_FLOW_APPROVAL WHERE ID_GROUP=".$this->session->userdata('sess_user_id_user_group').") 
+			where ID_BISNIS $BISNIS 
 			and STATUS='$status' 
 			and ISNULL(APPROVAL,'') in (SELECT APPROVAL_BY FROM MS_FLOW_APPROVAL WHERE ID_GROUP=".$this->session->userdata('sess_user_id_user_group').") 
 			and CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ");																
