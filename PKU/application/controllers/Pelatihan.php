@@ -27,11 +27,8 @@ class Pelatihan extends MY_Controller
 								);
 		
         $data["menu"] 			= $this->Menu_model->select_ms_menu();
-		$data["pelatihan_type"] = $this->Pelatihan_model->select_ms_pelatihan_type_ulamm();
-		// $data["grade_ulamm"] 	= $this->Master_model->select_ms_grading();        
+		$data["pelatihan_type"] = $this->Pelatihan_model->select_ms_pelatihan_type_ulamm();       
 		$data["cabang"] 		= $this->Master_model->select_ms_cabang_ulamm();
-		$data["sektor_ekonomi"]	= $this->Master_model->select_dw_nasabah_ulamm_sektor_ekonomi();
-		$data["jenis_pinjaman"]	= $this->Master_model->select_dw_nasabah_ulamm_jenis_pinjaman();
 		$data["jenis_program"]	= $this->Master_model->select_dw_nasabah_ulamm_jenis_program();
 
 		$data['provinsi'] 		= $this->Master_model->select_ms_provinsi();
@@ -69,11 +66,8 @@ class Pelatihan extends MY_Controller
 								);
 
 		$data["pelatihan_type"] = $this->Pelatihan_model->select_ms_pelatihan_type_mekaar();
-		// $data["grade_mekaar"] 	= $this->Master_model->select_ms_grading();		
 		$data["cabang"] 		= $this->Master_model->select_ms_cabang_ulamm();		
 		$data["region"] 		= $this->Master_model->select_ms_region_mekaar();
-		$data["sektor_ekonomi"]	= $this->Master_model->select_dw_nasabah_ulamm_sektor_ekonomi();
-		$data["jenis_pinjaman"]	= $this->Master_model->select_dw_nasabah_ulamm_jenis_pinjaman();
 		$data["jenis_program"]	= $this->Master_model->select_dw_nasabah_ulamm_jenis_program();
         
 		$data['provinsi'] 		= $this->Master_model->select_ms_provinsi();
@@ -98,7 +92,7 @@ class Pelatihan extends MY_Controller
 		$data["modal"] 		= array( "pelatihan/history_ulamm/modal/modaldetails"); 
 
         $data["menu"] 		= $this->Menu_model->select_ms_menu();
-		$data["pelatihan"] 	= $this->Pelatihan_model->select_t_pelatihan_ulamm_by_status(array('draft','submitted','approved','lpj_draft','lpj_submitted','lpj_approved'));
+		$data["pelatihan"] 	= $this->Pelatihan_model->select_t_pelatihan_ulamm_by_status(array('draft','submitted','approved','reject','lpj_draft','lpj_submitted','lpj_approved'));
 		$data["cabang"] 	= $this->Master_model->select_ms_cabang_ulamm();	
 
 		$data['provinsi'] 		= $this->Master_model->select_ms_provinsi();
@@ -118,7 +112,7 @@ class Pelatihan extends MY_Controller
 		$data["modal"] 		= array( "pelatihan/history_mekaar/modal/modaldetails"); 
 
         $data["menu"] 		= $this->Menu_model->select_ms_menu();
-		$data["pelatihan"] 	= $this->Pelatihan_model->select_t_pelatihan_mekaar_by_status(array('draft','submitted','approved','lpj_draft','lpj_submitted','lpj_approved'));
+		$data["pelatihan"] 	= $this->Pelatihan_model->select_t_pelatihan_mekaar_by_status(array('draft','submitted','approved','reject','lpj_draft','lpj_submitted','lpj_approved'));
 		$data["cabang"] 	= $this->Master_model->select_ms_cabang_ulamm();		
 		$data["region"] 	= $this->Master_model->select_ms_region_mekaar();
 
@@ -144,8 +138,7 @@ class Pelatihan extends MY_Controller
 		$data['kecamatan'] 		= $this->Master_model->select_ms_kecamatan();
         
 		$data["cabang"] 		= $this->Master_model->select_ms_cabang_ulamm();
-		$data["sektor_ekonomi"]	= $this->Master_model->select_dw_nasabah_ulamm_sektor_ekonomi();
-		$data["jenis_pinjaman"]	= $this->Master_model->select_dw_nasabah_ulamm_jenis_pinjaman();
+		$data["sektor_ekonomi"]	= $this->Master_model->select_ms_sektor_ulamm();
 		$data["jenis_program"]	= $this->Master_model->select_dw_nasabah_ulamm_jenis_program();
 		$data["pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_by_id($idpelatihan)->row();
 		$data["rab"] = $this->Pelatihan_model->select_t_rab_by_id($idpelatihan);
@@ -153,13 +146,23 @@ class Pelatihan extends MY_Controller
 		$data["sektor_ekonomi_mekaar"]	= $this->Master_model->select_dw_nasabah_mekaar_sektor_ekonomi();
 		$data["regional_mekaar"]	= $this->Master_model->select_ms_regional_mekaar();
 		$data["area_mekaar"]	= $this->Master_model->select_ms_area_mekaar();
-		
-		
+
+		$pelatihan_lpj = $this->Pelatihan_model->select_t_lpj_by_id($idpelatihan)->row();
+
+		$data["timeawal"] 					= (isset($pelatihan_lpj->TANGGAL_REALISASI_MULAI)) ? date('m/d/Y H:i:s',strtotime($pelatihan_lpj->TANGGAL_REALISASI_MULAI)) : '';
+		$data["inputStartTglPelaksanaan"] 	= (isset($pelatihan_lpj->TANGGAL_REALISASI_MULAI)) ? date('Y-m-d',strtotime($pelatihan_lpj->TANGGAL_REALISASI_MULAI)) : '';
+		$data["inputStartTimePelaksanaan"] 	= (isset($pelatihan_lpj->TANGGAL_REALISASI_MULAI)) ? date('H:i A',strtotime($pelatihan_lpj->TANGGAL_REALISASI_MULAI)) : '';
+		$data["timeakhir"] 					= (isset($pelatihan_lpj->TANGGAL_REALISASI_SELESAI)) ? date('m/d/Y H:i:s',strtotime($pelatihan_lpj->TANGGAL_REALISASI_SELESAI)) : '';
+		$data["inputAkhirTglPelaksanaan"] 	= (isset($pelatihan_lpj->TANGGAL_REALISASI_SELESAI)) ? date('Y-m-d',strtotime($pelatihan_lpj->TANGGAL_REALISASI_SELESAI)) : '';
+		$data["inputEndTimePelaksanaan"] 	= (isset($pelatihan_lpj->TANGGAL_REALISASI_SELESAI)) ? date('H:i A',strtotime($pelatihan_lpj->TANGGAL_REALISASI_SELESAI)) : '';
+
+		$data["csi_final"] 					= (isset($pelatihan_lpj->CSI_FINAL)) ? $pelatihan_lpj->CSI_FINAL : '';
+		$data["catatan_tambahan"] 			= (isset($pelatihan_lpj->CATATAN_TAMBAHAN)) ? $pelatihan_lpj->CATATAN_TAMBAHAN : '';
+
 
 		
-
         // echo '<pre>';
-		// print_r($data['regional_mekaar']);
+		// print_r( date('m/d/Y H:i:s',strtotime($data['pelatihan_lpj']->TANGGAL_REALISASI_MULAI)) );
 		// echo '</pre>';die;
         $this->load->view('layout/gabung', $data);
 
@@ -295,11 +298,14 @@ class Pelatihan extends MY_Controller
 		
 				
 		$deskripsi_rab        		= $this->security->xss_clean(strip_image_tags($this->input->post('deskripsi_rab')));
-		$jumlah_rab           		= $this->security->xss_clean(strip_image_tags($this->input->post('jumlah_rab')));
-		$unit_rab             		= $this->security->xss_clean(strip_image_tags($this->input->post('unit_rab')));
+		$volume_rab           		= $this->security->xss_clean(strip_image_tags($this->input->post('volume_rab')));
 		$unit_cost_rab        		= $this->security->xss_clean(strip_image_tags($this->input->post('unit_cost_rab')));
 		$total_cost_rab       		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab')));
-		$total_cost_rab_akhir 		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab_akhir')));				
+		$total_cost_rab_akhir 		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab_akhir')));
+
+		$nama_krm			 		= trim($this->security->xss_clean(strip_image_tags($this->input->post('nama_krm'))));
+		$no_rek_krm 				= trim($this->security->xss_clean(strip_image_tags($this->input->post('no_rek_krm'))));
+
 		
 		$no_trx='';		
 		$no_trx_reject='';
@@ -317,10 +323,8 @@ class Pelatihan extends MY_Controller
 					'PARAM1' => $value,
 					'PARAM2' => ''
 				);
-
-				// $no_trx_reject .= ','.$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value);
-				
-				if (!$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)){
+								
+				if (COUNT($this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->result_array())>0){
 					$no_trx .= ','.$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->NO_TRX;					
 					$this->Pelatihan_model->update_aktif_trx_reject($this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->ID);
 				}else{
@@ -339,6 +343,7 @@ class Pelatihan extends MY_Controller
 			
 			$no_proposal = $this->create_trx_no($param);
 		}	
+
 		
 		if ($id_bisnis_pelatihan=='2'){	
 			$data_unit_ulamm = '';
@@ -351,15 +356,9 @@ class Pelatihan extends MY_Controller
 					'PARAMETER' => $PARAMETER,
 					'PARAM1' => $value,
 					'PARAM2' => ''
-				);	
+				);					
 				
-				// $no_trx_reject .= ','.$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->NO_TRX;
-												
-				// $no_trx = ($no_trx_reject) ? $no_trx_reject : ','.$this->create_trx_no($param);	
-				
-				// $this->Pelatihan_model->update_aktif_trx_reject($this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->ID);
-				
-				if (!$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)){
+				if (COUNT($this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->result_array())>0){
 					$no_trx .= ','.$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->NO_TRX;					
 					$this->Pelatihan_model->update_aktif_trx_reject($this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->ID);
 				}else{
@@ -394,7 +393,23 @@ class Pelatihan extends MY_Controller
 		);		
 		
 		
-		try{			
+		try{	
+			
+			if ($id_bisnis_pelatihan==2){
+				$data_krm = array(
+					'KRM' 					=> $nama_krm,
+					'NO_REKENING'			=> $no_rek_krm,
+					'CREATED_BY' 			=> $id_user,
+					'CREATED_DATE' 			=> date('Y-m-d H:i:s')			
+				);
+
+				$this->Master_model->insert_ms_krm($data_krm);
+
+				$id_krm = $this->db->insert_id(); //last id yang di insert		
+			}else{
+				$id_krm = 0;
+			}
+			
 			$data = array(
 				'ID_TIPE' 				=> $pelatihan_type,
 				'NO_PROPOSAL' 			=> $no_proposal,
@@ -414,12 +429,14 @@ class Pelatihan extends MY_Controller
 				'TANGGAL_SELESAI' 		=> $inputAkhirTglPelaksanaan.' '.date("H:i", strtotime($inputEndTimePelaksanaan)),
 				'KUOTA_PESERTA' 		=> $kuota_peserta,
 				'BUDGET' 				=> $anggaran,
+				'JUMLAH_ANGGARAN'		=> $total_cost_rab_akhir,
 				'STATUS' 				=> 'draft',
 				'PROVINSI' 				=> $provinsi,
 				'KABKOT' 				=> $kabkot,
 				'KECAMATAN'				=> $kecamatan,								
 				'ALAMAT' 				=> $alamat_tempat_pelatihan,
 				'PEMBICARA'				=> $pembicara_pelatihan,
+				'ID_KRM'				=> $id_krm,
 				'CREATED_BY' 			=> $id_user,
 				'CREATED_DATE' 			=> date('Y-m-d H:i:s')			
 			);
@@ -435,8 +452,7 @@ class Pelatihan extends MY_Controller
 					'ID_PELATIHAN' 		=> $id_pelatihan,
 					'ID_BISNIS' 		=> $id_bisnis_pelatihan,
 					'URAIAN' 			=> $deskripsi_rab[$i],
-					'JUMLAH' 			=> $jumlah_rab[$i],
-					'SATUAN' 			=> $unit_rab[$i],
+					'VOLUME' 			=> $volume_rab[$i],
 					'UNIT_COST' 		=> $unit_cost_rab[$i],
 					'SUB_TOTAL_COST' 	=> $total_cost_rab[$i],
 					'GRAND_TOTAL' 		=> $total_cost_rab_akhir,
@@ -461,7 +477,7 @@ class Pelatihan extends MY_Controller
 
 			$db_error = $this->db->error();
 
-			if (!empty($db_error)) {
+			if (!empty($db_error['message'])) {
 				$output = array(
 					'result'  	=> 'NG',
 					'msg'		=> $db_error['message']
@@ -512,7 +528,10 @@ class Pelatihan extends MY_Controller
 		$unit_rab             		= $this->security->xss_clean(strip_image_tags($this->input->post('unit_rab_edit')));
 		$unit_cost_rab        		= $this->security->xss_clean(strip_image_tags($this->input->post('unit_cost_rab_edit')));
 		$total_cost_rab       		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab_edit')));
-		$total_cost_rab_akhir 		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab_akhir_edit')));		
+		$total_cost_rab_akhir 		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab_akhir_edit')));
+		
+		$nama_krm			 		= trim($this->security->xss_clean(strip_image_tags($this->input->post('nama_krm'))));
+		$no_rek_krm 				= trim($this->security->xss_clean(strip_image_tags($this->input->post('no_rek_krm'))));		
 
 		$output = array(
 			'result'  	=> 'OK',
@@ -520,6 +539,22 @@ class Pelatihan extends MY_Controller
 		);	
 
 		try{
+
+			if ($id_bisnis_pelatihan==2){
+				$data_krm = array(
+					'KRM' 					=> $nama_krm,
+					'NO_REKENING'			=> $no_rek_krm,
+					'CREATED_BY' 			=> $id_user,
+					'CREATED_DATE' 			=> date('Y-m-d H:i:s')			
+				);
+
+				$this->Master_model->insert_ms_krm($data_krm);
+
+				$id_krm = $this->db->insert_id(); //last id yang di insert		
+			}else{
+				$id_krm = 0;
+			}			
+
 			$data_update = array(
 				'ID_TIPE' 			=> $pelatihan_type,
 				'ID_GRADING'		=> $grading,
@@ -537,6 +572,7 @@ class Pelatihan extends MY_Controller
 				'KECAMATAN'			=> $kecamatan,
 				'ALAMAT' 			=> $alamat_tempat_pelatihan,
 				'PEMBICARA'			=> $pembicara_pelatihan,
+				'ID_KRM'			=> $id_krm,
 				'CREATED_BY' 		=> $id_user,
 				'CREATED_DATE' 		=> date('Y-m-d H:i:s')			
 			);			
@@ -562,9 +598,9 @@ class Pelatihan extends MY_Controller
 				$this->Pelatihan_model->insert_t_rab($rab);				
 			}
 
-			$db_error = $this->db->error();
+			$db_error = $this->db->error();			
 
-			if (!empty($db_error)) {
+			if (!empty($db_error['message'])) {
 				$output = array(
 					'result'  	=> 'NG',
 					'msg'		=> $db_error['message']
@@ -640,7 +676,7 @@ class Pelatihan extends MY_Controller
 				
 				$db_error = $this->db->error();
 
-				if (!empty($db_error)) {
+				if (!empty($db_error['message'])) {
 					$output = array(
 						'result'  	=> 'NG',
 						'msg'		=> $db_error['message']
@@ -673,7 +709,7 @@ class Pelatihan extends MY_Controller
 
 	public function post_konfirmasi_proposal()
     {
-		$this->is_logged();						
+		$this->is_logged();		
 		
         $id_pelatihan           	= trim($this->security->xss_clean(strip_image_tags($this->input->post('id_pelatihan'))));
 		$keterangan           		= trim($this->security->xss_clean(strip_image_tags($this->input->post('keterangan'))));		
@@ -681,13 +717,17 @@ class Pelatihan extends MY_Controller
 		$tingkat_approval			= $this->session->userdata('sess_user_group');		
 		$username					= $this->session->userdata('sess_user_username');
 		$id_grading					= trim($this->security->xss_clean(strip_image_tags($this->input->post('grading'))));
+		$status_result				= trim($this->security->xss_clean(strip_image_tags($this->input->post('result'))));
 							
 
-		$status_approval = $this->Pelatihan_model->check_bwmp_approval_proposal($id_pelatihan,$tingkat_approval);
-		
-		// $tingkat_approval = $status_approval=='approved' ? '' : $tingkat_approval;
+		$status_approval = $this->Pelatihan_model->check_bwmp_approval_proposal($id_pelatihan,$tingkat_approval); //kolom status di T_PELATIHAN				
 
 		$final_approval = $status_approval=='approved' ? '1' : '0';
+
+
+		if ($status_result=='reject'){	 //kolom RESULT di T_APPROVAL, jika reject status_approval = status_result
+			$status_approval = $status_result;
+		}
 		
 		switch ($this->session->userdata('sess_user_id_user_group')) {
 		  case "2":
@@ -725,6 +765,7 @@ class Pelatihan extends MY_Controller
 				'USERNAME'			=> $username,	
 				'TTD'				=> base_url()."assets/images/tandatangan/".$username,
 				'APPROVAL'			=> $tingkat_approval,
+				'RESULT'			=> $status_result,
 				'FINAL_APPROVAL'	=> $final_approval,
 				'KETERANGAN'		=> $keterangan,
 				'AKTIF' 			=> '1',
@@ -754,10 +795,31 @@ class Pelatihan extends MY_Controller
 				'ID' 	=> $id_pelatihan
 				);
 			$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
+
+
+			// jika status reject NO_TRX disimpan di table TRX_NO_REJECT
+			if ($status_result=='reject'){		
+			
+				$NO_TRX = $this->Pelatihan_model->select_t_pelatihan_by_id($id_pelatihan)->row()->NO_TRX;
+
+				$ARRAY_NO_TRX = explode(",",$NO_TRX);
+
+				foreach ($ARRAY_NO_TRX as $NO){
+					$data = array(
+						'NO_TRX' 		=> $NO,
+						'AKTIF' 		=> '1',
+						'CREATED_BY' 	=> $id_user,
+						'CREATED_DATE' 	=> date('Y-m-d H:i:s')			
+					);			
+
+					$this->Pelatihan_model->insert_trx_no_reject($data);
+				}
+			}
+
 			
 			$db_error = $this->db->error();
 
-			if (!empty($db_error)) {
+			if (!empty($db_error['message'])) {
 				$output = array(
 					'result'  	=> 'NG',
 					'msg'		=> $db_error['message']
@@ -796,7 +858,7 @@ class Pelatihan extends MY_Controller
         $inputEndTimePelaksanaan    = trim($this->security->xss_clean(strip_image_tags($this->input->post('inputEndTimePelaksanaan'))));
         
 		$deskripsi_rab        		= $this->security->xss_clean(strip_image_tags($this->input->post('deskripsi_rab')));
-		$jumlah_rab           		= $this->security->xss_clean(strip_image_tags($this->input->post('jumlah_rab')));
+		$volume_rab           		= $this->security->xss_clean(strip_image_tags($this->input->post('volume_rab')));
 		$unit_rab             		= $this->security->xss_clean(strip_image_tags($this->input->post('unit_rab')));
 		$unit_cost_rab        		= $this->security->xss_clean(strip_image_tags($this->input->post('unit_cost_rab')));
 		$total_cost_rab       		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab')));
@@ -850,8 +912,7 @@ class Pelatihan extends MY_Controller
 					$rab = array(
 						'ID_PELATIHAN' 		=> $id_pelatihan,
 						'URAIAN' 			=> $deskripsi_rab[$i],
-						'JUMLAH' 			=> $jumlah_rab[$i],
-						'SATUAN' 			=> $unit_rab[$i],
+						'VOLUME' 			=> $volume_rab[$i],
 						'UNIT_COST' 		=> $unit_cost_rab[$i],
 						'SUB_TOTAL_COST' 	=> $total_cost_rab[$i],
 						'GRAND_TOTAL' 		=> $total_cost_rab_akhir,
@@ -862,7 +923,7 @@ class Pelatihan extends MY_Controller
 				}
 
 				$data_update 	= array(
-					'STATUS'			=> 'lpj_submitted',
+					'STATUS'			=> 'lpj_draft',
 					'APPROVAL'			=> '',
 					'UPDATED_BY' 		=> $id_user,
 					'UPDATED_DATE' 		=> date('Y-m-d H:i:s')			
@@ -874,7 +935,7 @@ class Pelatihan extends MY_Controller
 
 				$db_error = $this->db->error();
 
-				if (!empty($db_error)) {
+				if (!empty($db_error['message'])) {
 					$output = array(
 						'result'  	=> 'NG',
 						'msg'		=> $db_error['message']
@@ -911,12 +972,15 @@ class Pelatihan extends MY_Controller
 		$id_user					= $this->session->userdata('sess_user_idsdm');
 		$tingkat_approval			= $this->session->userdata('sess_user_group');	
 		$username					= $this->session->userdata('sess_user_username');	
+		$status_result				= trim($this->security->xss_clean(strip_image_tags($this->input->post('result'))));
 		
-		$status_approval = $this->Pelatihan_model->check_bwmp_approval_lpj($id_pelatihan,$tingkat_approval);		
-		
-		// $tingkat_approval = $status_approval=='approved' ? '' : $tingkat_approval;
+		$status_approval = $this->Pelatihan_model->check_bwmp_approval_lpj($id_pelatihan,$tingkat_approval);				
 
 		$final_approval = $status_approval=='approved' ? '1' : '0';
+
+		if ($status_result=='reject'){	 //kolom RESULT di T_APPROVAL, jika reject status_approval = status_result
+			$status_approval = $status_result;
+		}
 		
 		switch ($this->session->userdata('sess_user_id_user_group')) {
 		  case "2":
@@ -952,6 +1016,7 @@ class Pelatihan extends MY_Controller
 				'URUTAN_APPROVAL'	=> $urutan_approval,
 				'USERNAME'			=> $username,				
 				'APPROVAL'			=> $tingkat_approval,
+				'RESULT'			=> $status_result,
 				'FINAL_APPROVAL'	=> $final_approval,
 				'TTD'				=> base_url()."assets/images/tandatangan/".$username,
 				'KETERANGAN'		=> $keterangan,				
@@ -973,10 +1038,29 @@ class Pelatihan extends MY_Controller
 				'ID' 	=> $id_pelatihan
 				);
 			$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
+
+			// jika status reject NO_TRX disimpan di table TRX_NO_REJECT
+			if ($status_result=='reject'){		
+			
+				$NO_TRX = $this->Pelatihan_model->select_t_pelatihan_by_id($id_pelatihan)->row()->NO_TRX;
+
+				$ARRAY_NO_TRX = explode(",",$NO_TRX);
+
+				foreach ($ARRAY_NO_TRX as $NO){
+					$data = array(
+						'NO_TRX' 		=> $NO,
+						'AKTIF' 		=> '1',
+						'CREATED_BY' 	=> $id_user,
+						'CREATED_DATE' 	=> date('Y-m-d H:i:s')			
+					);			
+
+					$this->Pelatihan_model->insert_trx_no_reject($data);
+				}
+			}
 			
 			$db_error = $this->db->error();
 
-			if (!empty($db_error)) {
+			if (!empty($db_error['message'])) {
 				$output = array(
 					'result'  	=> 'NG',
 					'msg'		=> $db_error['message']
@@ -1019,8 +1103,20 @@ class Pelatihan extends MY_Controller
 		$region         = trim($this->security->xss_clean(strip_image_tags($this->input->post('Region'))));
 		$area		    = trim($this->security->xss_clean(strip_image_tags($this->input->post('Area'))));
 		$id_user		= $this->session->userdata('sess_user_idsdm');					
+
+		$sektor_ekonomi	= trim($this->security->xss_clean(strip_image_tags($this->input->post('sektor_ekonomi'))));
+		$tipe_kredit    = trim($this->security->xss_clean(strip_image_tags($this->input->post('tipe_kredit'))));
+		$siklus_kredit  = trim($this->security->xss_clean(strip_image_tags($this->input->post('siklus_kredit'))));
+		$id_tipe_kredit = '';
 		
-		
+
+
+		if ($bisnis=='ULAMM'){ 
+			$id_tipe_kredit = $tipe_kredit;
+		}else{ //MEKAAR
+			$id_tipe_kredit = $siklus_kredit;
+		}
+	
 		$output = array(
 			'result'  	=> 'OK',
 			'msg'		=> ''
@@ -1041,6 +1137,8 @@ class Pelatihan extends MY_Controller
 					'ID_NASABAH'		=> $id_nasabah,
 					'NAMA' 				=> $nama_nasabah,
 					'NASABAH_TIPE' 		=> $nasabah_type,
+					'ID_SEKTOR_EKONOMI' => $sektor_ekonomi,
+					'ID_TIPE_KREDIT' 	=> $id_tipe_kredit,
 					'AKTIF' 			=> '1',
 					'CREATED_BY' 		=> $id_user,
 					'CREATED_DATE' 		=> date('Y-m-d H:i:s')			
@@ -1050,7 +1148,7 @@ class Pelatihan extends MY_Controller
 			
 				$db_error = $this->db->error();
 
-				if (!empty($db_error)) {
+				if (!empty($db_error['message'])) {
 					$output = array(
 						'result'  	=> 'NG',
 						'msg'		=> $db_error['message']
@@ -1106,7 +1204,7 @@ class Pelatihan extends MY_Controller
 
 			$db_error = $this->db->error();
 
-			if (!empty($db_error)) {
+			if (!empty($db_error['message'])) {
 				$output = array(
 					'result'  	=> 'NG',
 					'msg'		=> $db_error['message']
@@ -1126,7 +1224,7 @@ class Pelatihan extends MY_Controller
 		exit;
 	}
 
-	public function post_submit_proposal()
+	public function post_submit()
 	{
 		$this->is_logged();		
 
@@ -1136,10 +1234,11 @@ class Pelatihan extends MY_Controller
 		);
 		
 		$pelatihanid	= trim($this->security->xss_clean(strip_image_tags($this->input->post('pelatihanid'))));
+		$status			= trim($this->security->xss_clean(strip_image_tags($this->input->post('status'))));
 		$id_user 		= $this->session->userdata('sess_user_idsdm');
 
 		$data_update 	= array(
-			'STATUS' => 'submitted',
+			'STATUS' => $status,
 			'UPDATED_BY' => $id_user,
 			'UPDATED_DATE' => date('Y-m-d H:i:s')			
 			);
@@ -1153,16 +1252,7 @@ class Pelatihan extends MY_Controller
 
 			$db_error = $this->db->error();
 
-			if (!empty($db_error)) {
-				$output = array(
-					'result'  	=> 'NG',
-					'msg'		=> $db_error['message']
-				);
-			}
-
-			$db_error = $this->db->error();
-
-			if (!empty($db_error)) {
+			if (!empty($db_error['message'])) {
 				$output = array(
 					'result'  	=> 'NG',
 					'msg'		=> $db_error['message']
@@ -1183,10 +1273,12 @@ class Pelatihan extends MY_Controller
 		
 	}
 
+
 	public function post_change_status_pelatihan($idpelatihan,$status)
 	{		
 		$id_user = $this->session->userdata('sess_user_idsdm');	
 		$approval = $this->session->userdata('sess_user_group');
+		
 		
 		$data_update 	= array(
 			'STATUS' => $status,
@@ -1198,25 +1290,6 @@ class Pelatihan extends MY_Controller
 			'ID' 	=> $idpelatihan
 			);
 		$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);	
-
-		// jika status reject NO_TRX disimpan di table TRX_NO_REJECT
-		if ($status=='reject'){			
-
-			$NO_TRX = $this->Pelatihan_model->select_t_pelatihan_by_id($idpelatihan)->row()->NO_TRX;
-
-			$ARRAY_NO_TRX = explode(",",$NO_TRX);
-
-			foreach ($ARRAY_NO_TRX as $NO){
-				$data = array(
-					'NO_TRX' 		=> $NO,
-					'AKTIF' 		=> '1',
-					'CREATED_BY' 	=> $id_user,
-					'CREATED_DATE' 	=> date('Y-m-d H:i:s')			
-				);			
-
-				$this->Pelatihan_model->insert_trx_no_reject($data);
-			}
-		}
 		
 	}
 
@@ -1287,7 +1360,7 @@ class Pelatihan extends MY_Controller
 
 			$db_error = $this->db->error();
 
-			if (!empty($db_error)) {
+			if (!empty($db_error['message'])) {
 				$output = array(
 					'result'  	=> 'NG',
 					'msg'		=> $db_error['message']
@@ -1321,8 +1394,7 @@ class Pelatihan extends MY_Controller
 			$data .= '
 			<tr class="">
 			<td><input type="text" class="form-control" id="deskripsi_rab_'.$tipe_modal.'" name="deskripsi_rab_'.$tipe_modal.'[]" value="'.$data_rab->URAIAN.'" ></td>
-			<td><input type="number" class="form-control" id="jumlah_rab_'.$tipe_modal.'" name="jumlah_rab_'.$tipe_modal.'[]"  value="'.$data_rab->JUMLAH.'"></td>
-			<td><input type="text" class="form-control" id="unit_rab_'.$tipe_modal.'" name="unit_rab_'.$tipe_modal.'[]" value="'.$data_rab->SATUAN.'" ></td>
+			<td><input type="number" class="form-control" id="volume_rab_'.$tipe_modal.'" name="volume_rab_'.$tipe_modal.'[]"  value="'.$data_rab->VOLUME.'"></td>
 			<td><input type="number" class="form-control" id="unit_cost_rab_'.$tipe_modal.'" name="unit_cost_rab_'.$tipe_modal.'[]" value="'.$data_rab->UNIT_COST.'" ></td>
 			<td><input type="number" class="form-control" id="total_cost_rab_'.$tipe_modal.'" name="total_cost_rab_'.$tipe_modal.'[]" value="'.$data_rab->SUB_TOTAL_COST.'" readonly="" ></td>
 			<td>                            
@@ -1418,14 +1490,15 @@ class Pelatihan extends MY_Controller
 	{					
 		$this->config->set_item('elastic_index', 'nasabah');	
 
-		$sektor_ekonomi = ($_GET["columns"][0]['search']['value']!='') ? 'sektorekonomi:'.$_GET["columns"][0]['search']['value'] : NULL;
-		$jenis_pinjaman	= ($_GET["columns"][1]['search']['value']!='') ? 'jenis_pinjaman:'.$_GET["columns"][1]['search']['value'] : NULL;
+		$sektor_ekonomi = ($_GET["columns"][0]['search']['value']!='') ? 'sid_sektor_ekonomi:'.$_GET["columns"][0]['search']['value'] : NULL;
+		$jenis_pinjaman	= ($_GET["columns"][1]['search']['value']!='') ? 'kodeproduk:'.$_GET["columns"][1]['search']['value'] : NULL;
 		$jenis_program	= ($_GET["columns"][2]['search']['value']!='') ? 'jenis_program:'.$_GET["columns"][2]['search']['value'] : NULL;
-		$kode_cabang 	= ($_GET["columns"][3]['search']['value']!='') ? 'kode_cabang:'.$_GET["columns"][3]['search']['value'] : NULL;
-		$kode_unit 		= ($_GET["columns"][4]['search']['value']!='') ? 'kode_unit:'.$_GET["columns"][4]['search']['value'] : NULL;
+		$kode_cabang 	= ($_GET["columns"][3]['search']['value']!='') ? 'inisialcab:'.$_GET["columns"][3]['search']['value'] : NULL;
+		$kode_unit 		= ($_GET["columns"][4]['search']['value']!='') ? 'kodeunit:'.$_GET["columns"][4]['search']['value'] : NULL;
+		$tipe_kredit	= ($_GET["columns"][5]['search']['value']!='') ? 'tipekredit:'.$_GET["columns"][5]['search']['value'] : NULL;
 		$search 		= ($_GET["search"]["value"]!='') ? 'nama_nasabah:'.$_GET["search"]["value"] : NULL ;	
 
-		$searching = array($sektor_ekonomi,$jenis_pinjaman,$jenis_program,$kode_cabang,$kode_unit,$search);		
+		$searching = array($sektor_ekonomi,$jenis_pinjaman,$jenis_program,$kode_cabang,$kode_unit,$tipe_kredit,$search);		
 		
 		$start = isset($_GET["start"]) ? '&from='.$_GET["start"] : 0;
 		$limit = isset($_GET["length"]) ? '&size='.$_GET["length"] : 10;		
@@ -1455,11 +1528,11 @@ class Pelatihan extends MY_Controller
 			}	
 
 			for ($i=0;$i<count($debitur->hits->hits);$i++){
-				if (!in_array($debitur->hits->hits[$i]->_source->nasabahid, $hide_array)) 
+				if (!in_array($debitur->hits->hits[$i]->_source->nasabah_id, $hide_array)) 
 				{ 
 					$data["data"][$i] = $debitur->hits->hits[$i]->_source;					
 				}else{
-					$data["data"][$i] = (object) array('nasabahid' => '-','ktp' => '-','nama_nasabah'=>'-','no_hp'=>'-','kolektibilitas'=>'-','cabang'=>'-','unit'=>'-');					
+					$data["data"][$i] = (object) array('nasabah_id' => '-','noid_ktp' => '-','namanasabah'=>'-','no_hp'=>'-','kolektibilitas'=>'-','namacabang'=>'-','namaunit'=>'-','tipekredit'=>'-');					
 				}				
 			}	
 
@@ -1484,10 +1557,11 @@ class Pelatihan extends MY_Controller
 
 		$search 		= ($_GET["search"]["value"]!='') ? 'nama:'.$_GET["search"]["value"] : NULL ;				
 		$sektor_ekonomi = ($_GET["columns"][0]['search']['value']!='') ? 'sektor_ekonomi:'.$_GET["columns"][0]['search']['value'] : NULL;
-		$regionid 		= ($_GET["columns"][1]['search']['value']!='') ? 'regionid:'.$_GET["columns"][1]['search']['value'] : NULL;
+		$regionid 		= ($_GET["columns"][1]['search']['value']!='') ? 'regionid:'.$_GET["columns"][1]['search']['value'] : NULL;		
 		$areaid 		= ($_GET["columns"][2]['search']['value']!='' && $_GET["columns"][2]['search']['value']!='null') ? 'areaid:'.$_GET["columns"][2]['search']['value'] : NULL;
+		$siklus 		= ($_GET["columns"][3]['search']['value']!='') ? 'siklus:'.$_GET["columns"][3]['search']['value'] : NULL;
 
-		$searching = array($sektor_ekonomi,$regionid,$areaid,$search);	
+		$searching = array($sektor_ekonomi,$regionid,$areaid,$search,$siklus);	
 
 		$this->config->set_item('elastic_index', 'debitur');	
 		
@@ -1516,7 +1590,7 @@ class Pelatihan extends MY_Controller
 				{ 
 					$data["data"][$i] = $debitur->hits->hits[$i]->_source;					
 				}else{
-					$data["data"][$i] = (object) array('nasabahid' => '-','noktp' => '-','nama' => '-','alamat'=>'-','produk'=>'-','region'=>'-','area'=>'-');					
+					$data["data"][$i] = (object) array('nasabahid' => '-','noktp' => '-','nama' => '-','alamat'=>'-','produk'=>'-','region'=>'-','area'=>'-','siklus'=>'-');					
 				}				
 			}			
 			$data["recordsTotal"] = $debitur_count->count;	
@@ -1723,7 +1797,7 @@ class Pelatihan extends MY_Controller
 
 			$db_error = $this->db->error();
 
-			if (!empty($db_error)) {
+			if (!empty($db_error['message'])) {
 				$output = array(
 					'result'  	=> 'NG',
 					'msg'		=> $db_error['message']

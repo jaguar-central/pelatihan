@@ -152,7 +152,7 @@
 						<span class="input-group-addon">Rp</span>
 						<input type="text" class="form-control"  required="" id="anggaran" name="anggaran" />				
 					</div>             	
-				</div>
+				</div>				
 
 
 				<div class="form-group card">
@@ -203,7 +203,7 @@
 
 				<div class="form-group card grading_system">
 				<div class="card-header"><h4>Grading System</h4></div>
-				<div class="card-body row">
+				<div class="card-body row" >
 					<label class="col-sm-2">Jenis Nasabah <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
 						<select class="form-control" required="" id="jenis_nasabah_grading">
@@ -216,10 +216,11 @@
 								?>										
 						</select>	
 					</div>	
-
+				<!-- </div>	
+				<div class="card-body row" id="grading_list"> -->
 					<label class="col-sm-2">Grade <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<select class="form-control" required="" id="grading" name="grading">
+						<select class="form-control grading" required="" id="grading" name="grading">
 							<option value="">--pilih grade--</option>
 									
 						</select>	
@@ -266,23 +267,23 @@
 						</div>
 						<div class="card-body">
 						  <div class="table">                
-							<table id="table_rab_modaladd"  class="table">
-								  <thead class=" text-primary col-md-12">
-									  <th class="col-md-2">Uraian</th>
-									  <th class="col-md-2">Jumlah</th>
-									  <th class="col-md-2">Unit</th>
-									  <th class="col-md-2">Unit Cost</th>
-									  <th class="col-md-2">Sub Total Cost</th>
-									  <th></th>
-									  <th></th>
+							<table id="table_rab_modaladd"  class="table table-responsive">
+								  <thead class=" text-primary">
+								  	  <tr>
+										<th class="col-md-6">Uraian</th>
+										<th class="col-md-2">Volume</th>
+										<th class="col-md-2">Unit Cost</th>
+										<th class="col-md-2">Sub Total Cost</th>
+										<th ></th>
+										<th ></th>
+									  </tr>
 								  </thead>    
 								  <tbody id="tbody_rab_modaladd">
 									<tr class="d-none">
-									  <td ><input type="text" class="form-control" id="deskripsi_rab" name="deskripsi_rab[]" value=""></td>
-									  <td ><input type="number" class="form-control" id="jumlah_rab" name="jumlah_rab[]"></td>
-									  <td ><input type="text" class="form-control" id="unit_rab" name="unit_rab[]" value=""></td>
-									  <td ><input type="number" class="form-control" id="unit_cost_rab" name="unit_cost_rab[]" value=""></td>
-									  <td ><input type="number" class="form-control" id="total_cost_rab" name="total_cost_rab[]" value="" readonly=""></td>
+									  <td><input type="text" class="form-control" id="deskripsi_rab" name="deskripsi_rab[]" value=""></td>
+									  <td><input type="number" class="form-control" id="volume_rab" name="volume_rab[]"></td>
+									  <td><input type="number" class="form-control" id="unit_cost_rab" name="unit_cost_rab[]" value=""></td>
+									  <td><input type="number" class="form-control" id="total_cost_rab" name="total_cost_rab[]" value="" readonly=""></td>
 									  <td>                            
 										<a class="table-remove-modaladd btn btn-outline-primary btn-sm" href="#"><i class="fas fa-trash"></i></a>   
 									  </td>
@@ -298,7 +299,7 @@
 									<label>Grand Total </label>
 								  <div>
 								  <div class="col-md-12">    
-									<input style="text-align:right" type="text" class="form-control money" id="total_cost_rab_akhir" name="total_cost_rab_akhir"  value="0" readonly="" required="" >
+									<input style="text-align:right;" type="text" class="form-control money" id="total_cost_rab_akhir" name="total_cost_rab_akhir"  value="0" readonly="" required="" >
 								  </div>
 								
 								
@@ -419,7 +420,11 @@
 
 		$(".select_tag_kecamatan").select2({
 			dropdownParent: $("#select_tag_kabupaten")
-		});				
+		});		
+		
+		// $(".grading").select2({
+		// 	dropdownParent: $("#grading_list")
+		// });		
 		
 		
 		
@@ -579,9 +584,9 @@
 
 	$('#table_rab_modaladd tbody tr').keyup(function () {            
 		var index = parseInt($(this).index());
-		var jumlah_rab = $("#table_rab_modaladd tbody tr:eq("+index+")").find("#jumlah_rab").val(); 
+		var volume_rab = $("#table_rab_modaladd tbody tr:eq("+index+")").find("#volume_rab").val(); 
 		var unit_cost_rab = $("#table_rab_modaladd tbody tr:eq("+index+")").find("#unit_cost_rab").val();
-		sum = parseInt(jumlah_rab) * parseInt(unit_cost_rab);                
+		sum = parseInt(volume_rab) * parseInt(unit_cost_rab);                
 
 
 		$("#table_rab_modaladd tbody tr:eq("+index+")").find("#total_cost_rab").val(sum);

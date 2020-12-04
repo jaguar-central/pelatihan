@@ -1,3 +1,15 @@
+<style>
+        @media (max-width: 767px) {
+            .table-responsive .dropdown-menu {
+                position: static !important;
+            }
+        }
+        @media (min-width: 768px) {
+            .table-responsive {
+                overflow: inherit;
+            }
+        }
+</style>
 <!-- Modal -->
 <div id="modalview" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">
@@ -18,7 +30,7 @@
 							<div class="col-lg-12">
 								<!--h2 class="title-1 m-b-25">Earnings By Items</h2-->
 								<div class="table-style">
-									<table id="datatable_modalview" class="table table-bordered table-striped"> 
+									<table id="datatable_modalview" class="table table-bordered table-striped table-responsive"> 
 										<thead>
 											<tr>
 												<th>JENIS PELATIHAN</th>

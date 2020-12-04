@@ -38,7 +38,7 @@
 
 <script src="<?php echo base_url(); ?>assets/plugins/moment/moment.js"></script>
 
-<script src="http://cdn.datatables.net/plug-ins/1.10.13/dataRender/datetime.js"></script>
+<!-- <script src="http://cdn.datatables.net/plug-ins/1.10.13/dataRender/datetime.js"></script> -->
 
 
 <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
@@ -67,6 +67,13 @@
 	});	
 
     $(document).ready(function() {	
+
+		if (screen.width<660){
+			$("#datatable").addClass("table-responsive"); 
+		}else{
+			$("#datatable").removeClass("table-responsive"); 
+		}		
+
 		$('#datatable').DataTable({
             "aaSorting" : [],	
 			"paging": true,
@@ -133,7 +140,7 @@
 			data: "pelatihanid="+$(this).data("pelatihanid")+"&tipe_modal=details",
 			cache: false,
 			success: function(data){				         
-				$('#table_rab_details').html(data);    
+				$('#tbody_rab_details').html(data);    
 				var total = 0;
 				$('tr #total_cost_rab_details').each(function () {            
 				var total_cost_rab = $(this).val();			
@@ -178,7 +185,19 @@
 		$('#anggaran_edit').val($(this).data('pelatihananggaran'));					
 		$('#alamat_tempat_pelatihan_edit').val($(this).data('pelatihanalamat'));		
 		$('#provinsi_edit').val($(this).data('pelatihanprovinsi'));	
+
 		
+		$.ajax({
+			url: "<?php echo base_url()?>master/get_krm",
+			data: "id_krm="+$(this).data('pelatihanidkrm'),
+			cache: false,
+			success: function(data){	
+				var obj = $.parseJSON(data);
+				$('#nama_krm_edit').val(obj.KRM);								         
+				$('#no_rek_krm_edit').val(obj.NO_REKENING);	
+				console.log(obj);
+			}
+		});					
 
 		$.ajax({
 			url: "<?php echo base_url()?>master/get_kabkot",
@@ -205,7 +224,7 @@
 			data: "pelatihanid="+$(this).data("pelatihanid")+"&tipe_modal=edit",
 			cache: false,
 			success: function(data){				         
-				$('#tbody_rab_edit').html('<tr class="d-none"><td ><input type="text" class="form-control" id="deskripsi_rab_edit" name="deskripsi_rab_edit[]" value=""></td><td ><input type="number" class="form-control" id="jumlah_rab_edit" name="jumlah_rab_edit[]"></td><td ><input type="text" class="form-control" id="unit_rab_edit" name="unit_rab_edit[]" value=""></td><td ><input type="number" class="form-control" id="unit_cost_rab_edit" name="unit_cost_rab_edit[]" value=""></td><td ><input type="number" class="form-control" id="total_cost_rab_edit" name="total_cost_rab_edit[]" value="" readonly=""></td><td><a class="table-remove-edit btn btn-outline-primary btn-sm" href="#"><i class="fas fa-trash"></i></a></td><td><a class="table-up-edit btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-up"></i></a><a class="table-down-edit btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-down"></i></a></td></tr> ');
+				$('#tbody_rab_edit').html('<tr class="d-none"><td ><input type="text" class="form-control" id="deskripsi_rab_edit" name="deskripsi_rab_edit[]" value=""></td><td ><input type="number" class="form-control" id="volume_rab_edit" name="volume_rab_edit[]"></td><td ><input type="number" class="form-control" id="unit_cost_rab_edit" name="unit_cost_rab_edit[]" value=""></td><td ><input type="number" class="form-control" id="total_cost_rab_edit" name="total_cost_rab_edit[]" value="" readonly=""></td><td><a class="table-remove-edit btn btn-outline-primary btn-sm" href="#"><i class="fas fa-trash"></i></a></td><td><a class="table-up-edit btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-up"></i></a><a class="table-down-edit btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-down"></i></a></td></tr> ');
 				$('#tbody_rab_edit').append(data);    
 				calculate_grand_total_edit();
 			}
@@ -227,7 +246,7 @@
 
 	$(document).on("click", ".submit_proposal", function () {					
 		var idpelatihan = $(this).data('idpelatihan');	
-		var judulpelatihan = $(this).data('judulpelatihan');		
+		var judulpelatihan = $(this).data('judulpelatihan');	
 		
 		Swal.fire({
 		  title: 'Apakah anda yakin?',
@@ -239,7 +258,7 @@
 		  confirmButtonText: 'Submit'
 		}).then((result) => {
 		  if (result.value) {				
-			$.post("post_submit_proposal",{pelatihanid: idpelatihan}, function(data, status){
+			$.post("post_submit",{pelatihanid: idpelatihan,status: 'submitted'}, function(data, status){
 				if (status=='success'){
 					Swal.fire({
 					  position: 'center',
@@ -249,7 +268,7 @@
 					  timer: 1500
 					})
 					setTimeout(function () {
-						window.location.href = '<?php echo base_url(); ?>pelatihan/mekaar';
+						window.location.href = '<?php echo base_url(); ?>pelatihan/ulamm';
 					}, 1600);
 				}else{
 					Swal.fire({
@@ -257,13 +276,53 @@
 					  icon: 'error',
 					  title: obj.msg,
 					  showConfirmButton: false,
-					  timer: 1500
+					  timer: 2000
 					})					
 				}			
 			});	
 		  }
-		})			
+		})									
 	});
+
+	$(document).on("click", ".submit_lpj", function () {					
+		var idpelatihan = $(this).data('idpelatihan');	
+		var judulpelatihan = $(this).data('judulpelatihan');	
+		
+		Swal.fire({
+		  title: 'Apakah anda yakin?',
+		  text: "submit lpj "+judulpelatihan,
+		  icon: 'question',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: 'Submit'
+		}).then((result) => {
+		  if (result.value) {				
+			$.post("post_submit",{pelatihanid: idpelatihan,status: 'lpj_submitted'}, function(data, status){
+				if (status=='success'){
+					Swal.fire({
+					  position: 'center',
+					  icon: 'success',
+					  title: 'Pelatihan telah di submit',
+					  showConfirmButton: false,
+					  timer: 1500
+					})
+					setTimeout(function () {
+						window.location.href = '<?php echo base_url(); ?>pelatihan/ulamm';
+					}, 1600);
+				}else{
+					Swal.fire({
+					  position: 'center',
+					  icon: 'error',
+					  title: obj.msg,
+					  showConfirmButton: false,
+					  timer: 2000
+					})					
+				}			
+			});	
+		  }
+		})									
+	});		
 
 	$(document).on("click", ".pelatihan_lpj", function () {							
 		$('#id_pelatihan').val($(this).data('pelatihanid'));													
@@ -284,6 +343,9 @@
 			"url" : '<?php echo base_url('pelatihan/get_paging_pelatihan/'); ?>'+pelatihantype+'/'+tipe_bisnis,
 			"type" :'GET'                      
 			},
+			"columnDefs": [
+    			{ "className": "col-md-2", targets: "_all" },
+			],			
 			"columns" : [
 				{ "data": "ID_TIPE_DESKRIPSI" },
 				{ "data": "TITLE" },
@@ -298,7 +360,7 @@
 					  
 					  tombol_action = '<div class="dropdown"><button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown">Action<span class="caret"></span></button><div class="dropdown-menu">';
 					  
-					  if (row.STATUS=='draft' || row.STATUS=='approved' || row.STATUS=='lpj_draft')
+					  if (row.STATUS=='draft' || row.STATUS=='approved')
 					  {
 						tombol_action +='<a class="dropdown-item pelatihan_details" href="#" data-toggle="modal" data-target="#modaldetails" '
 						+'data-pelatihanid="'+row.ID+'" '
@@ -336,6 +398,7 @@
 						+'data-pelatihandurasi="'+row.DURASI_PELATIHAN+'" '
 						+'data-pelatihankuota="'+row.KUOTA_PESERTA+'" '
 						+'data-pelatihananggaran="'+row.BUDGET+'" '
+						+'data-pelatihanidkrm="'+row.ID_KRM+'" '						
 						+'data-idjenisnasabah="'+row.JENIS_NASABAH+'" '
 						+'data-gradingid="'+row.ID_GRADING+'" '						
 						+'data-pelatihanprovinsi="'+row.PROVINSI+'" '
@@ -351,11 +414,16 @@
 						tombol_action +='<div class="dropdown-divider"></div> <a id="submit_proposal" class="dropdown-item submit_proposal" data-idpelatihan="'+row.ID+'" data-judulpelatihan="'+row.TITLE+'"  href="#" > Submit Proposal</a></div></div> ';
 					  }
 					  
-					  if (row.STATUS=='approved' || row.STATUS=='lpj_draft'){		
+					  if (row.STATUS=='approved'){		
 						tombol_action +='<a class= "dropdown-item" href="<?php  echo base_url('pelatihan/lpj/'); ?>'+row.ID+'/mekaar"> Pelatihan LPJ</a>'; 
 					  }
+
+					  if (row.STATUS=='lpj_draft'){
+						tombol_action +='<a class= "dropdown-item" href="<?php  echo base_url('pelatihan/lpj/'); ?>'+row.ID+'/mekaar"> Edit LPJ</a>'; 
+						tombol_action +='<div class="dropdown-divider"></div> <a id="submit_lpj" class="dropdown-item submit_lpj" data-idpelatihan="'+row.ID+'" data-judulpelatihan="'+row.TITLE+'"  href="#" > Submit Lpj</a></div></div> ';
+					  }					  
 					  
-					if (row.STATUS=='lpj_approved'){
+					  if (row.STATUS=='lpj_approved'){
 						tombol_action +='<a class="dropdown-item pelatihan_details" href="#" data-toggle="modal" '
 						+'data-target="#modaldetails" '
 						+'data-pelatihanid="'+row.ID+'" '
@@ -380,7 +448,7 @@
 						tombol_action += '<a class= "dropdown-item" target="_blank" href="<?php echo $this->config->item('jasper_report').'Pelatihan.pdf?ID=' ?>'+row.ID+'"> Unduh Proposal Approved</a>';
 						
 						tombol_action += '<a class= "dropdown-item" target="_blank" href="<?php echo $this->config->item('jasper_report').'Lpj.pdf?ID=' ?>'+row.ID+'"> Unduh LPJ Approved</a>';
-					}
+					  }
 					
 					
 					  tombol_action += '</div></div> </td>';					  

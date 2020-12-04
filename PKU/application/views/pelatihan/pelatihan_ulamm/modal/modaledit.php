@@ -198,11 +198,10 @@
 						</div>
 						<div class="card-body">
 						  <div class="table">                
-							<table id="table_rab_edit"  class="table">
+							<table id="table_rab_edit"  class="table table-responsive">
 								  <thead class=" text-primary col-md-12">
-									  <th class="col-md-2">Uraian</th>
-									  <th class="col-md-2">Jumlah</th>
-									  <th class="col-md-2">Unit</th>
+									  <th class="col-md-6">Uraian</th>
+									  <th class="col-md-2">Volume</th>
 									  <th class="col-md-2">Unit Cost</th>
 									  <th class="col-md-2">Sub Total Cost</th>
 									  <th></th>
@@ -211,8 +210,7 @@
 								  <tbody id="tbody_rab_edit">
 									<tr class="d-none">
 									  <td ><input type="text" class="form-control" id="deskripsi_rab_edit" name="deskripsi_rab_edit[]" value=""></td>
-									  <td ><input type="number" class="form-control" id="jumlah_rab_edit" name="jumlah_rab_edit[]"></td>
-									  <td ><input type="text" class="form-control" id="unit_rab_edit" name="unit_rab_edit[]" value=""></td>
+									  <td ><input type="number" class="form-control" id="volume_rab_edit" name="volume_rab_edit[]"></td>
 									  <td ><input type="number" class="form-control" id="unit_cost_rab_edit" name="unit_cost_rab_edit[]" value=""></td>
 									  <td ><input type="number" class="form-control" id="total_cost_rab_edit" name="total_cost_rab_edit[]" value="" readonly=""></td>
 									  <td>                            
@@ -394,9 +392,9 @@
 
 	$('#tbody_rab_edit').delegate('tr','keyup',function () {            
 		var index = parseInt($(this).index());
-		var jumlah_rab = $("#table_rab_edit tbody tr:eq("+index+")").find("#jumlah_rab_edit").val(); 
+		var volume_rab = $("#table_rab_edit tbody tr:eq("+index+")").find("#volume_rab_edit").val(); 
 		var unit_cost_rab = $("#table_rab_edit tbody tr:eq("+index+")").find("#unit_cost_rab_edit").val();
-		sum = parseInt(jumlah_rab) * parseInt(unit_cost_rab);                
+		sum = parseInt(volume_rab) * parseInt(unit_cost_rab);                
 
 
 		$("#table_rab_edit tbody tr:eq("+index+")").find("#total_cost_rab_edit").val(sum);

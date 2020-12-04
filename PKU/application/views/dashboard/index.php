@@ -45,7 +45,7 @@
             <div class="col-md-12">
                 <div class="content">
                 <h2>Welcome to Dashboard</h2>
-                <p>Data Realisasi Pelatihan dan Kehadiran Nasabah</p>
+                <p>Data Realisasi Pelatihan dan Kehadiran Nasabah</p>                
                 </div>
             </div>
             </div>
@@ -86,19 +86,128 @@
         </div>
       </div>
     </section>
+<!-- <div style="padding:1%">
+    <iframe style="width: 100%;height: 600px;"  src="http://192.168.10.219/QvAJAXZfc/opendoc.htm?document=dashboard%20pku.qvw&host=QVS%40hqtraining2" title="PDF in an i-Frame" frameborder="1" scrolling="auto"></iframe>
+</div>     -->
+
+
+<?php if (COUNT($top_ten_sub_sektor_mekaar)>0){ ?>
+<div class="welcome">
+      <div class="container-fluid">
+          <div class="row">
+          <div class="col-md-12">
+              <div class="content">
+              <p class="text-center" >Sektor Usaha Mekaar</p> 
+              <hr>
+              </div>
+          </div>
+          </div>
+      </div>
+</div>
+
+<?php $branch='';$x=0; ?>
+<section class='statis text-center text-white'>
+  <div class="container-fluid">
+    <div class="row">
+      <?php foreach($top_ten_sub_sektor_mekaar as $data1){ ?>		      
+      <?php 
+      if ($branch==''){
+        $branch=$data1['branch'];
+      }else if ($data1['branch']==$branch){        
+        continue;              
+      }else if ($data1['branch']!=$branch){
+        $branch=$data1['branch'];                  
+      }           
+      
+      $class = array(
+       'box bg-primary','box bg-danger','box bg-info','box bg-success','box bg-warning'
+      );	
+
+      ?>       
+      <div class="col-md-4" >
+        <div class="<?php echo $class[rand(0,4)];$x++; ?>" data-toggle="collapse" data-target="#<?php echo 'sektor_usaha'.$x; ?>">  
+        <i class="fas fa-address-book"></i>
+          <h3 class="text-white"><?php echo $data1['DESKRIPSI']; ?></h3>      
+          <div id="<?php echo 'sektor_usaha'.$x; ?>" class="collapse">
+          <?php foreach($top_ten_sub_sektor_mekaar as $data2){ ?>
+            <?php if ($data2['branch']==$data1['branch']){ ?>	            
+            <p class="lead"><?php echo $data2['SUB_SEKTOR'].' '.$data2['JML']; ?></p>            
+            <?php } ?>  
+          <?php } ?>  
+          </div>
+        </div>
+      </div> 
+      <?php } ?>  
+    </div>
+  </div>
+</section>
+
+<?php } ?>
 
 
 
-                            <!-- <div class="col-sm-12 col-lg-12">
-                                <div class="overview-item overview-item--c1">
-                                    <div class="overview__inner">                                        
-                                        <div class="overview-chart">
-                                            <canvas id="dashboard_pelatihan"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
 
+
+
+<?php if (COUNT($top_ten_sub_sektor_ulamm)>0){ ?>
+<div class="welcome">
+      <div class="container-fluid">
+          <div class="row">
+          <div class="col-md-12">
+              <div class="content">
+              <p class="text-center" >Sektor Usaha Ulamm</p> 
+              <hr>
+              </div>
+          </div>
+          </div>
+      </div>
+</div>
+
+<?php $KodeUnit='';$y=0; ?>
+<section class='statis text-center text-white'>
+  <div class="container-fluid">
+    <div class="row">
+      <?php foreach($top_ten_sub_sektor_ulamm as $data_ulamm1){ ?>		      
+      <?php 
+      if ($KodeUnit==''){
+        $KodeUnit=$data_ulamm1['KodeUnit'];
+      }else if ($data_ulamm1['KodeUnit']==$KodeUnit){        
+        continue;              
+      }else if ($data_ulamm1['KodeUnit']!=$KodeUnit){
+        $KodeUnit=$data_ulamm1['KodeUnit'];                  
+      }           
+      
+      $class = array(
+        'box bg-primary','box bg-danger','box bg-info','box bg-success','box bg-warning'
+      );	
+
+      ?>       
+      <div class="col-md-4" >
+        <div class="<?php echo $class[rand(0,4)];$y++; ?>" data-toggle="collapse" data-target="#<?php echo 'sektor_usaha_ulamm'.$y; ?>">  
+        <i class="fas fa-address-book"></i>
+          <h3 class="text-white"><?php echo $data_ulamm1['DESKRIPSI']; ?></h3>      
+          <div id="<?php echo 'sektor_usaha_ulamm'.$y; ?>" class="collapse">
+          <?php foreach($top_ten_sub_sektor_ulamm as $data_ulamm2){ ?>
+            <?php if ($data_ulamm1['KodeUnit']==$data_ulamm2['KodeUnit']){ ?>	            
+            <p class="lead"><?php echo $data_ulamm2['Deskripsi_Bidang_Usaha'].' '.$data_ulamm2['JML']; ?></p>            
+            <?php } ?>  
+          <?php } ?>  
+          </div>
+        </div>
+      </div> 
+      <?php } ?>  
+    </div>
+  </div>
+</section>
+
+<?php } ?>
 
 </div>
+
+
+
+
+
+
+
 <!-- END MAIN CONTENT-->

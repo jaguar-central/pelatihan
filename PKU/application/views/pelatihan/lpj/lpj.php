@@ -34,14 +34,14 @@
 									<span class="input-group-addon">
 									<span class="fas fa-calendar"></span>
 									</span>
-									<input type='text' class="form-control" id='timeawal' />
+									<input type='text' class="form-control" id='timeawal' value="<?php echo $timeawal;  ?>" />
 									<span class="input-group-addon bg-custom b-0">s/d</span>
-									<input type='text' class="form-control" id='timeakhir' />
+									<input type='text' class="form-control" id='timeakhir' value="<?php echo $timeakhir; ?>" />
 								</div>							
-								<input type="hidden" id="inputStartTglPelaksanaan" name="inputStartTglPelaksanaan" />						
-								<input type="hidden" id="inputStartTimePelaksanaan" name="inputStartTimePelaksanaan" />
-								<input type="hidden" id="inputAkhirTglPelaksanaan" name="inputAkhirTglPelaksanaan"/>								
-								<input type="hidden" id="inputEndTimePelaksanaan" name="inputEndTimePelaksanaan" />
+								<input type="hidden" id="inputStartTglPelaksanaan" name="inputStartTglPelaksanaan" value="<?php echo $inputStartTglPelaksanaan; ?>" />						
+								<input type="hidden" id="inputStartTimePelaksanaan" name="inputStartTimePelaksanaan" value="<?php echo $inputStartTimePelaksanaan;  ?>" />
+								<input type="hidden" id="inputAkhirTglPelaksanaan" name="inputAkhirTglPelaksanaan" value="<?php echo $inputAkhirTglPelaksanaan;  ?>" />								
+								<input type="hidden" id="inputEndTimePelaksanaan" name="inputEndTimePelaksanaan" value="<?php echo $inputEndTimePelaksanaan;  ?>" />
 							</div>
 						</div>		
 
@@ -68,12 +68,14 @@
 					<div class="form-group row">
 						<label class="col-sm-2">CSI Final <span class="text-danger"></span></label>
 						<div class="col-sm-4">
-							<input type="number" class="form-control"  required="" id="csi_final" name="csi_final" />
-						</div			>							
+							<input type="number" class="form-control"  required="" id="csi_final" name="csi_final" value="<?php echo $csi_final;?>" />
+						</div>							
 					
 						<label class="col-sm-2">Catatan Tambahan <span class="text-danger"></span></label>
 						<div class="col-sm-4">
-						<textarea class="form-control rounded-0" id="catatan_tambahan" name="catatan_tambahan" rows="3"></textarea>																	
+						<textarea class="form-control rounded-0" id="catatan_tambahan" name="catatan_tambahan" rows="3">
+						<?php echo $catatan_tambahan; ?>
+						</textarea>																	
 						</div>							
 					</div>								
 				</div>	
@@ -85,11 +87,10 @@
 						</div>
 						<div class="card-body">
 						  <div class="table">                
-							<table id="table_rab_modallpj"  class="table">
+							<table id="table_rab_modallpj"  class="table table-responsive">
 								  <thead class=" text-primary col-md-12">
 									  <th class="col-md-2">Uraian</th>
-									  <th class="col-md-2">Jumlah</th>
-									  <th class="col-md-2">Unit</th>
+									  <th class="col-md-2">Volume</th>
 									  <th class="col-md-2">Unit Cost</th>
 									  <th class="col-md-2">Sub Total Cost</th>
 									  <th></th>
@@ -98,8 +99,7 @@
 								  <tbody id="tbody_rab_modallpj">
 									<tr class="d-none">
 									  <td ><input type="text" class="form-control" id="deskripsi_rab_modallpj" name="deskripsi_rab[]" value=""></td>
-									  <td ><input type="number" class="form-control" id="jumlah_rab_modallpj" name="jumlah_rab[]"></td>
-									  <td ><input type="text" class="form-control" id="unit_rab_modallpj" name="unit_rab[]" value=""></td>
+									  <td ><input type="number" class="form-control" id="volume_rab_modallpj" name="volume_rab[]"></td>
 									  <td ><input type="number" class="form-control" id="unit_cost_rab_modallpj" name="unit_cost_rab[]" value=""></td>
 									  <td ><input type="number" class="form-control" id="total_cost_rab_modallpj" name="total_cost_rab[]" value="" readonly=""></td>
 									  <td>                            
@@ -157,13 +157,15 @@
 						<div class="col-lg-12">
 							<!--h2 class="title-1 m-b-25">Earnings By Items</h2-->
 							<div class="table-style">
-								<table id="datatable_listkehadiran" class="table table-hover"> 
+								<table id="datatable_listkehadiran" class="table table-hover table-responsive"> 
 									<thead>
 										<tr>
+											<th>ID Nasabah</th>											
 											<th>KTP</th>											
 											<th>Bisnis</th>
 											<th>Nama</th>
-											<th>Tipe Nasabah</th>												
+											<th>Tipe Nasabah</th>																																											
+											<th>Tipe Kredit / Siklus</th>																																											
 										</tr>
 									</thead>
 									<tbody>
@@ -319,11 +321,10 @@
 						</div>
 						<div class="card-body">
 						  <div class="table">                
-							<table class="table">
+							<table class="table table-responsive">
 								  <thead class=" text-primary col-md-12">
 									  <th class="col-md-2">Uraian</th>
-									  <th class="col-md-2">Jumlah</th>
-									  <th class="col-md-2">Unit</th>
+									  <th class="col-md-2">Volume</th>
 									  <th class="col-md-2">Unit Cost</th>
 									  <th class="col-md-2">Sub Total Cost</th>
 									  <th></th>
@@ -331,11 +332,10 @@
 								  </thead>    
 								  <?php foreach($rab as $data_rab){ ?>
 									<tr>
-									  <td ><input type="text" class="form-control" value="<?= $data_rab->URAIAN; ?>" disabled></td>
-									  <td ><input type="number" class="form-control" value="<?= $data_rab->JUMLAH; ?>" disabled></td>
-									  <td ><input type="text" class="form-control"  value="<?= $data_rab->SATUAN; ?>" disabled></td>
-									  <td ><input type="number" class="form-control"  value="<?= $data_rab->UNIT_COST; ?>" disabled></td>
-									  <td ><input type="number" class="form-control" value="<?= $data_rab->SUB_TOTAL_COST; ?>" disabled></td>							
+									  <td ><input type="text" class="form-control" id="deskripsi_rab_details" value="<?= $data_rab->URAIAN; ?>" disabled></td>
+									  <td ><input type="number" class="form-control" id="volumerab_details" value="<?= $data_rab->VOLUME; ?>" disabled></td>
+									  <td ><input type="number" class="form-control" id="unit_cost_rab_details" value="<?= $data_rab->UNIT_COST; ?>" disabled></td>
+									  <td ><input type="number" class="form-control" id="total_cost_rab_details" value="<?= $data_rab->SUB_TOTAL_COST; ?>" disabled></td>							
 									</tr>                        
 								  <?php } ?>
 								  </tbody>                                                                      
@@ -395,23 +395,11 @@
 										<option value="">--pilih sektor ekonomi--</option>							
 											<?php 
 											foreach ($sektor_ekonomi as $data_sektor_ekonomi){
-												echo '<option value="'.$data_sektor_ekonomi->SEKTOR_EKONOMI.'">'.$data_sektor_ekonomi->SEKTOR_EKONOMI.'</option>';                                                                    
+												echo '<option value="'.$data_sektor_ekonomi->SID_SEKTOR_EKONOMI.'">'.$data_sektor_ekonomi->Deskripsi_Bidang_Usaha.'</option>';                                                                    
 											}
 											?>	
 									</select>																	
-								</div>		
-
-								<label class="col-sm-2">Jenis Pinjaman </label>
-								<div class="col-sm-4">
-									<select class="form-control select2" id="jenis_pinjaman" name="jenis_pinjaman">
-										<option value="">--pilih pinjaman--</option>	
-											<?php 
-											foreach ($jenis_pinjaman as $data_jenis_pinjaman){
-												echo '<option value="'.$data_jenis_pinjaman->Jenis_pinjaman.'">'.$data_jenis_pinjaman->Jenis_pinjaman.'</option>';                                                                    
-											}
-											?>								
-									</select>																	
-								</div>										
+								</div>																			
 							</div>		
 							<div class="form-group row">
 								<label class="col-sm-2">Jenis Program </label>
@@ -425,6 +413,16 @@
 											?>							
 									</select>																	
 								</div>	
+
+								<label class="col-sm-2">Tipe Kredit </label>
+								<div class="col-sm-4">
+									<select class="form-control select2" id="tipe_kredit" name="tipe_kredit">
+										<option value="">--pilih program--</option>	
+										<option value="BARU">Baru</option>	
+										<option value="TOP UP">Top Up</option>	
+										<option value="3R">3R</option>								
+									</select>																	
+								</div>									
 									
 							</div>	
 							<div class="form-group row">	
@@ -451,7 +449,7 @@
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="table-style">
-								<table id="datatable_kehadiran_ulamm" class="table table-hover">                                     
+								<table id="datatable_kehadiran_ulamm" class="table table-hover table-responsive">                                     
 								<thead>
 									<tr>
 										<th>ID NASABAH</th>
@@ -461,6 +459,7 @@
 										<th>KOLEKTIBILITAS</th>
 										<th>CABANG</th>
 										<th>UNIT</th>
+										<th>TIPE KREDIT</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -490,7 +489,24 @@
 											}
 											?>	
 									</select>																	
-								</div>																											
+								</div>		
+
+								<label class="col-sm-2">Siklus Kredit </label>
+								<div class="col-sm-4">
+									<select class="form-control select2" id="siklus_kredit" name="siklus_kredit">
+										<option value="">--pilih siklus--</option>							
+										<option value="1">Siklus 1</option>							
+										<option value="2">Siklus 2</option>							
+										<option value="3">Siklus 3</option>								
+										<option value="4">Siklus 4</option>								
+										<option value="5">Siklus 5</option>								
+										<option value="6">Siklus 6</option>								
+										<option value="7">Siklus 7</option>								
+										<option value="8">Siklus 8</option>								
+										<option value="9">Siklus 9</option>								
+										<option value="10">Siklus 10</option>								
+									</select>																	
+								</div>																																		
 							</div>	
 
 							<div class="form-group row">															
@@ -508,7 +524,7 @@
 
 								<label class="col-sm-2">Area </label>
 								<div class="col-sm-4">
-									<select class="form-control" id="area_mekaar" name="area_mekaar">
+									<select class="form-control select2" id="area_mekaar" name="area_mekaar">
 									</select>																	
 								</div>																																				
 							</div>												
@@ -517,7 +533,7 @@
 							<div class="row">
 								<div class="col-lg-12">
 									<div class="table-style">
-									<table id="datatable_kehadiran_mekaar" class="table table-hover">                                     
+									<table id="datatable_kehadiran_mekaar" class="table table-hover table-responsive">                                     
 									<thead>
 										<tr>
 											<th>KTP</th>
@@ -526,6 +542,7 @@
 											<th>PRODUK</th>
 											<th>REGION</th>
 											<th>AREA</th>
+											<th>SIKLUS</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -600,7 +617,7 @@
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="table-style">
-								<table id="datatable_kehadiran_non_nasabah" class="table table-hover">                                     
+								<table id="datatable_kehadiran_non_nasabah" class="table table-hover table-responsive">                                     
 									<thead>
 										<tr>
 											<th>KTP</th>

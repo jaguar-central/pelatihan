@@ -103,6 +103,7 @@ $route['nasabah/get_paging_nasabah_mekaar']     = 'nasabah/api_nasabah_mekaar';
 
 /* API DATA MASTER*/
 $route['master/get_unit_ulamm']                 = 'master/get_unit_ulamm';
+$route['master/get_unit_inisial_ulamm']         = 'master/get_unit_inisial_ulamm';
 $route['master/get_area_mekaar']                = 'master/get_area_mekaar';
 $route['master/get_cabang_mekaar']              = 'master/get_cabang_mekaar';
 $route['master/get_grading']              		= 'master/get_grading';
@@ -127,7 +128,8 @@ $route['pelatihan/get_paging_kehadiran_nasabah_ulamm/(:any)']   = 'pelatihan/get
 $route['pelatihan/get_paging_kehadiran_nasabah_mekaar/(:any)']  = 'pelatihan/get_paging_kehadiran_nasabah_mekaar/$1';
 $route['pelatihan/get_paging_kehadiran_non_nasabah']            = 'pelatihan/get_paging_kehadiran_non_nasabah';
 $route['pelatihan/post_non_nasabah'] 	                        = 'pelatihan/post_non_nasabah';
-$route['pelatihan/post_submit_proposal']                        = 'pelatihan/post_submit_proposal';
+$route['pelatihan/post_submit']                                 = 'pelatihan/post_submit';
+
 $route['pelatihan/post_change_status_pelatihan/(:any)/(:any)']  = 'pelatihan/post_change_status_pelatihan/$1/$2';
 $route['pelatihan/get_paging_pelatihan/(:any)/(:any)']  		= 'pelatihan/get_paging_pelatihan/$1/$2';
 
@@ -140,3 +142,6 @@ $route['pelatihan/get_paging_project_charter/(:any)']           = 'pelatihan/get
 $route['pelatihan/get_project_charter']                         = 'pelatihan/get_project_charter';
 $route['pelatihan/get_ket_approval']                            = 'pelatihan/get_ket_approval';
 
+
+/* API GEOLOCATION */ 
+$route['master/post_geolocation']                              = 'master/post_geolocation';

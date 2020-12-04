@@ -137,6 +137,20 @@ class Master extends MY_Controller
 
 
 
+	public function get_unit_inisial_ulamm()
+	{			
+		$kode_cabang = $_GET['kode_cabang'];
+		$unit = $this->Master_model->select_ms_unit_ulamm_by_kode_cabang($kode_cabang);		
+		$data= '<option value="">--pilih unit--</option>';
+		
+		foreach ($unit as $data_unit) {
+            //$data .= "<option value='".$data_unit->inisial_unit."' >".$data_unit->NAMA_UNIT." </option>";
+            $data .= "<option value='".$data_unit->MS_UNIT_INITIAL_MM."' >".$data_unit->DESKRIPSI." </option>";
+		} 	
+				
+		echo $data;
+	}
+
 	public function get_unit_ulamm()
 	{			
 		$kode_cabang = $_GET['kode_cabang'];
@@ -149,7 +163,9 @@ class Master extends MY_Controller
 		} 	
 				
 		echo $data;
-	}
+	}	
+
+		
 	
 	
 	public function get_area_mekaar()
@@ -432,9 +448,9 @@ class Master extends MY_Controller
 		
 		foreach ($grading as $data_grade) {
 			if ($data_grade->ID==$idgrading){
-				$data .= "<option value='".$data_grade->ID."' selected>".$data_grade->GRADING_DESKRIPSI." </option>";
+				$data .="<option value='$data_grade->ID' selected>Kelas $data_grade->KELAS - ( $data_grade->KATEGORI_STAR_MODEL ) - $data_grade->TEMA_PELATIHAN </option>";
 			}else{
-				$data .= "<option value='".$data_grade->ID."' >".$data_grade->GRADING_DESKRIPSI." </option>";
+				$data .="<option value='$data_grade->ID' >Kelas $data_grade->KELAS - ( $data_grade->KATEGORI_STAR_MODEL ) - $data_grade->TEMA_PELATIHAN </option>";				
 			}	
 		} 	
 				
@@ -451,9 +467,43 @@ class Master extends MY_Controller
 		$data = $this->Master_model->select_ms_grading_where($where);
 		$return = '';
 		foreach ($data as $value) {
-			$return .="<option value='$value->ID' >Kelas $value->KELAS - $value->GRADING_DESKRIPSI</option>";
+			$return .="<option value='$value->ID' >Kelas $value->KELAS - ( $value->KATEGORI_STAR_MODEL ) - $value->TEMA_PELATIHAN </option>";
 		}
 
 		echo $return;		
+	}	
+
+	public function post_geolocation(){
+		$latitude     = $this->security->xss_clean(strip_image_tags($this->input->post('latitude')));
+        $longititude  = $this->security->xss_clean(strip_image_tags($this->input->post('longititude')));
+		$username	  = $this->session->userdata('sess_user_username');	
+		
+		$data = array(
+			'USERNAME' => $username,
+			'LATITUDE' => $latitude,
+			'LONGITITUDE' => $longititude,
+			'TIMESTAMP' => date('Y-m-d H:i:s'),
+		);
+
+		$where = array(
+			'USERNAME' => $username
+		);
+
+		$check = $this->Master_model->select_trx_geolocation($where);
+
+		if (count($check)==0){
+			$this->Master_model->insert_trx_geolocation($data);
+		}else{
+			$this->Master_model->update_trx_geolocation($data,$where);
+		}
+	}
+
+
+	public function get_krm(){		
+		$id_krm = $_GET['id_krm'];
+		$where = array( 'ID' => $id_krm );
+		$data_krm = $this->Master_model->select_ms_krm($where);
+		echo json_encode($data_krm);
+		exit;		
 	}	
 }

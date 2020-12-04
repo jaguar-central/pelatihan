@@ -1,4 +1,4 @@
-!-- MAIN CONTENT-->
+<!-- MAIN CONTENT-->
             <div class="main-content">
                 <div class="section__content section__content--p20">
                     <div class="container-fluid">
@@ -12,17 +12,17 @@
                         <div class="row">
                             <div class="col-lg-12">
 								<div class="table-style">
-									<table id="datatable" class="table table-bordered table-striped">
+									<table id="datatable" class="table table-bordered table-striped table-responsive">
                                         <thead>
                                             <tr>
-                                                <th>JENIS PELATIHAN</th>
-                                                <th>NO MEMO</th>
-                                                <th>TITLE</th>
-                                                <th>TANGGAL MULAI</th>
-                                                <th>TANGGAL SELESAI</th>
-                                                <th>DURASI PELATIHAN</th>
-                                                <th>DESKRIPSI</th>
-                                                <th>Action</th>
+                                                <th >JENIS PELATIHAN</th>
+                                                <th >NO MEMO</th>
+                                                <th >TITLE</th>
+                                                <th >TANGGAL MULAI</th>
+                                                <th >TANGGAL SELESAI</th>
+                                                <th >DURASI PELATIHAN</th>
+                                                <th >DESKRIPSI</th>
+                                                <th >Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>

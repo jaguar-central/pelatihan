@@ -52,9 +52,9 @@
                                 echo '<td>'.$data->TIPE_PELATIHAN_DESKRIPSI.'</td>';
                                 echo '<td>'.$data->NO_PROPOSAL.'</td>';
 								echo '<td>'.$data->NO_PROPOSAL.'</td>';
-                                echo '<td>'.$data->TITLE.'</td>';
+                                echo '<td>'.$data->TEMA_PELATIHAN.'</td>';
 								echo '<td>'.$data->TITLE.'</td>';
-								echo '<td></td>';
+								echo '<td>'.$data->SEKTOR_EKONOMI.'</td>';
                                 echo '<td>'.$data->TANGGAL_MULAI.'</td>';
                                 echo '<td>'.$data->TANGGAL_REALISASI_MULAI.'</td>';
                                 echo '<td>'.$data->BUDGET.'</td>';
