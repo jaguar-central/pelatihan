@@ -38,7 +38,7 @@
 
 <script src="<?php echo base_url(); ?>assets/plugins/moment/moment.js"></script>
 
-<script src="http://cdn.datatables.net/plug-ins/1.10.13/dataRender/datetime.js"></script>
+<!-- <script src="http://cdn.datatables.net/plug-ins/1.10.13/dataRender/datetime.js"></script> -->
 
 
 <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
@@ -178,7 +178,19 @@
 		$('#anggaran_edit').val($(this).data('pelatihananggaran'));					
 		$('#alamat_tempat_pelatihan_edit').val($(this).data('pelatihanalamat'));		
 		$('#provinsi_edit').val($(this).data('pelatihanprovinsi'));	
+
 		
+		$.ajax({
+			url: "<?php echo base_url()?>master/get_krm",
+			data: "id_krm="+$(this).data('pelatihanidkrm'),
+			cache: false,
+			success: function(data){	
+				var obj = $.parseJSON(data);
+				$('#nama_krm_edit').val(obj.KRM);								         
+				$('#no_rek_krm_edit').val(obj.NO_REKENING);	
+				console.log(obj);
+			}
+		});					
 
 		$.ajax({
 			url: "<?php echo base_url()?>master/get_kabkot",
@@ -379,6 +391,7 @@
 						+'data-pelatihandurasi="'+row.DURASI_PELATIHAN+'" '
 						+'data-pelatihankuota="'+row.KUOTA_PESERTA+'" '
 						+'data-pelatihananggaran="'+row.BUDGET+'" '
+						+'data-pelatihanidkrm="'+row.ID_KRM+'" '						
 						+'data-idjenisnasabah="'+row.JENIS_NASABAH+'" '
 						+'data-gradingid="'+row.ID_GRADING+'" '						
 						+'data-pelatihanprovinsi="'+row.PROVINSI+'" '

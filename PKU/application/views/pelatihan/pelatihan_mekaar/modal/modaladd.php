@@ -163,6 +163,23 @@
 					</div>						
 				</div>
 
+				<div class="form-group card">
+					<div class="card-header"><h4>Penanggung Jawab Mekaar</h4></div>
+					<div class="card-body">	
+						<div class="form-group row">   							
+							<label class="col-sm-2">Nama KRM / KA <span class="text-danger">*</span></label>
+							<div class="input-group col-sm-4">
+								<input type="text" class="form-control"  required="" id="nama_krm" name="nama_krm" />				
+							</div>    										
+							
+							<label class="col-sm-2">No. Rekening <span class="text-danger">*</span></label>
+							<div class="input-group col-sm-4">
+								<input type="text" class="form-control"  required="" id="no_rek_krm" name="no_rek_krm" />				
+							</div>    										
+						</div>					
+					</div>					
+				</div>						
+
 
 				<div class="form-group card">
 					<div class="card-header"><h4>Lokasi Pelatihan</h4></div>

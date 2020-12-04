@@ -152,7 +152,7 @@
 						<span class="input-group-addon">Rp</span>
 						<input type="text" class="form-control"  required="" id="anggaran" name="anggaran" />				
 					</div>             	
-				</div>
+				</div>				
 
 
 				<div class="form-group card">

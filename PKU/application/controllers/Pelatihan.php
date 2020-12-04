@@ -302,6 +302,10 @@ class Pelatihan extends MY_Controller
 		$unit_cost_rab        		= $this->security->xss_clean(strip_image_tags($this->input->post('unit_cost_rab')));
 		$total_cost_rab       		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab')));
 		$total_cost_rab_akhir 		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab_akhir')));
+
+		$nama_krm			 		= trim($this->security->xss_clean(strip_image_tags($this->input->post('nama_krm'))));
+		$no_rek_krm 				= trim($this->security->xss_clean(strip_image_tags($this->input->post('no_rek_krm'))));
+
 		
 		$no_trx='';		
 		$no_trx_reject='';
@@ -396,7 +400,23 @@ class Pelatihan extends MY_Controller
 		);		
 		
 		
-		try{			
+		try{	
+			
+			if ($id_bisnis_pelatihan==2){
+				$data_krm = array(
+					'KRM' 					=> $nama_krm,
+					'NO_REKENING'			=> $no_rek_krm,
+					'CREATED_BY' 			=> $id_user,
+					'CREATED_DATE' 			=> date('Y-m-d H:i:s')			
+				);
+
+				$this->Master_model->insert_ms_krm($data_krm);
+
+				$id_krm = $this->db->insert_id(); //last id yang di insert		
+			}else{
+				$id_krm = 0;
+			}
+			
 			$data = array(
 				'ID_TIPE' 				=> $pelatihan_type,
 				'NO_PROPOSAL' 			=> $no_proposal,
@@ -423,6 +443,7 @@ class Pelatihan extends MY_Controller
 				'KECAMATAN'				=> $kecamatan,								
 				'ALAMAT' 				=> $alamat_tempat_pelatihan,
 				'PEMBICARA'				=> $pembicara_pelatihan,
+				'ID_KRM'				=> $id_krm,
 				'CREATED_BY' 			=> $id_user,
 				'CREATED_DATE' 			=> date('Y-m-d H:i:s')			
 			);
@@ -514,7 +535,10 @@ class Pelatihan extends MY_Controller
 		$unit_rab             		= $this->security->xss_clean(strip_image_tags($this->input->post('unit_rab_edit')));
 		$unit_cost_rab        		= $this->security->xss_clean(strip_image_tags($this->input->post('unit_cost_rab_edit')));
 		$total_cost_rab       		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab_edit')));
-		$total_cost_rab_akhir 		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab_akhir_edit')));		
+		$total_cost_rab_akhir 		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab_akhir_edit')));
+		
+		$nama_krm			 		= trim($this->security->xss_clean(strip_image_tags($this->input->post('nama_krm'))));
+		$no_rek_krm 				= trim($this->security->xss_clean(strip_image_tags($this->input->post('no_rek_krm'))));		
 
 		$output = array(
 			'result'  	=> 'OK',
@@ -522,6 +546,22 @@ class Pelatihan extends MY_Controller
 		);	
 
 		try{
+
+			if ($id_bisnis_pelatihan==2){
+				$data_krm = array(
+					'KRM' 					=> $nama_krm,
+					'NO_REKENING'			=> $no_rek_krm,
+					'CREATED_BY' 			=> $id_user,
+					'CREATED_DATE' 			=> date('Y-m-d H:i:s')			
+				);
+
+				$this->Master_model->insert_ms_krm($data_krm);
+
+				$id_krm = $this->db->insert_id(); //last id yang di insert		
+			}else{
+				$id_krm = 0;
+			}			
+
 			$data_update = array(
 				'ID_TIPE' 			=> $pelatihan_type,
 				'ID_GRADING'		=> $grading,
@@ -539,6 +579,7 @@ class Pelatihan extends MY_Controller
 				'KECAMATAN'			=> $kecamatan,
 				'ALAMAT' 			=> $alamat_tempat_pelatihan,
 				'PEMBICARA'			=> $pembicara_pelatihan,
+				'ID_KRM'			=> $id_krm,
 				'CREATED_BY' 		=> $id_user,
 				'CREATED_DATE' 		=> date('Y-m-d H:i:s')			
 			);			

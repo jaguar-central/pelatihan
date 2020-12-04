@@ -417,7 +417,7 @@ $(document).ready(function() {
 
 	$('#table_rab_modallpj tbody tr').keyup(function () {            
 		var index = parseInt($(this).index());		
-		var jumlah_rab = $("#table_rab_modallpj tbody tr:eq("+index+")").find("#jumlah_rab_modallpj").val(); 		
+		var jumlah_rab = $("#table_rab_modallpj tbody tr:eq("+index+")").find("#volume_rab_modallpj").val(); 		
 		var unit_cost_rab = $("#table_rab_modallpj tbody tr:eq("+index+")").find("#unit_cost_rab_modallpj").val();
 		sum = parseInt(jumlah_rab) * parseInt(unit_cost_rab);                
 

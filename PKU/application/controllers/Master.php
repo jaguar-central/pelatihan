@@ -481,4 +481,13 @@ class Master extends MY_Controller
 			$this->Master_model->update_trx_geolocation($data,$where);
 		}
 	}
+
+
+	public function get_krm(){		
+		$id_krm = $_GET['id_krm'];
+		$where = array( 'ID' => $id_krm );
+		$data_krm = $this->Master_model->select_ms_krm($where);
+		echo json_encode($data_krm);
+		exit;		
+	}	
 }
