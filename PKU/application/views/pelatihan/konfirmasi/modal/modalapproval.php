@@ -29,7 +29,7 @@
 
                 </div>		
 
-<?php if ($this->session->userdata('sess_user_id_user_group')=='3'){ ?>
+<?php if ($this->session->userdata('sess_user_id_user_group')=='4'){ ?>
 
 				<div class="form-group card grading_system">
 				<div class="card-header"><h4>Grading System</h4></div>
@@ -77,7 +77,7 @@
 			 	  
 		</div>
 		<div class="modal-footer">
-		<?php $group_id = array('2','3'); ?>
+		<?php $group_id = array('2','3','4'); ?>
 			<?php if (in_array($this->session->userdata('sess_user_id_user_group'),$group_id)){ ?>
 			<?php echo form_submit('submit', 'Verification', 'class="btn btn-primary submit"'); ?>							
 									

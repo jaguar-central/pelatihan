@@ -180,25 +180,28 @@ class Pelatihan extends MY_Controller
 									'pelatihan/konfirmasi/modal/modalapproval'
 								);
 								        
-        $data["menu"] = $this->Menu_model->select_ms_menu();
+		$data["menu"] = $this->Menu_model->select_ms_menu();
 		
-		if ($this->session->userdata('sess_user_id_user_group')=='2'){ //pinca
-			$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('');			
-		}else if ($this->session->userdata('sess_user_id_user_group')=='3' and $this->session->userdata('sess_user_id_bisnis')=='1'){ //pic pusat ulamm
-			$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('Pinca');
-		}else if ($this->session->userdata('sess_user_id_user_group')=='3' and $this->session->userdata('sess_user_id_bisnis')=='2'){ //pic pusat mekaar
-			$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('');			
-		}else if ($this->session->userdata('sess_user_id_user_group')=='4'){
-			$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('PIC Pusat');
-		}else if ($this->session->userdata('sess_user_id_user_group')=='5'){
-			$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('Kabag');			
-		}else if ($this->session->userdata('sess_user_id_user_group')=='6'){
-			$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('Wakadiv');	
-		}else if ($this->session->userdata('sess_user_id_user_group')=='7'){
-			$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('Kadiv');									
-		}else{
-			$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('');
-		}			
+		$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_by_approval();
+
+		
+		// if ($this->session->userdata('sess_user_id_user_group')=='2'){ //pinca
+		// 	$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('');			
+		// }else if ($this->session->userdata('sess_user_id_user_group')=='3' and $this->session->userdata('sess_user_id_bisnis')=='1'){ //pic pusat ulamm
+		// 	$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('Pinca');
+		// }else if ($this->session->userdata('sess_user_id_user_group')=='3' and $this->session->userdata('sess_user_id_bisnis')=='2'){ //pic pusat mekaar
+		// 	$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('');			
+		// }else if ($this->session->userdata('sess_user_id_user_group')=='4'){
+		// 	$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('PIC Pusat');
+		// }else if ($this->session->userdata('sess_user_id_user_group')=='5'){
+		// 	$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('Kabag');			
+		// }else if ($this->session->userdata('sess_user_id_user_group')=='6'){
+		// 	$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('Wakadiv');	
+		// }else if ($this->session->userdata('sess_user_id_user_group')=='7'){
+		// 	$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('Kadiv');									
+		// }else{
+		// 	$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('');
+		// }			
 		
 		$data["cabang"] 		= $this->Master_model->select_ms_cabang_ulamm();		
 		$data["region"] 		= $this->Master_model->select_ms_region_mekaar();
@@ -225,25 +228,27 @@ class Pelatihan extends MY_Controller
 										'pelatihan/konfirmasi/modal/modalapprovallpj'
 									);			
 			
-        $data["menu"] 				= $this->Menu_model->select_ms_menu();
+		$data["menu"] 				= $this->Menu_model->select_ms_menu();
+		
+		$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_by_approval();
 				
-		if ($this->session->userdata('sess_user_id_user_group')=='2'){ //pinca
-			$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('');
-		}else if ($this->session->userdata('sess_user_id_user_group')=='3' and $this->session->userdata('sess_user_id_bisnis')=='1'){ //pic pusat ulamm
-			$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('Pinca');	
-		}else if ($this->session->userdata('sess_user_id_user_group')=='3' and $this->session->userdata('sess_user_id_bisnis')=='2'){ //pic pusat mekaar
-			$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('');				
-		}else if ($this->session->userdata('sess_user_id_user_group')=='4'){
-			$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('PIC Pusat');
-		}else if ($this->session->userdata('sess_user_id_user_group')=='5'){
-			$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('Kabag');
-		}else if ($this->session->userdata('sess_user_id_user_group')=='6'){
-			$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('Wakadiv');	
-		}else if ($this->session->userdata('sess_user_id_user_group')=='6'){
-			$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('Kadiv');									
-		}else{
-			$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('');
-		}								
+		// if ($this->session->userdata('sess_user_id_user_group')=='2'){ //pinca
+		// 	$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('');
+		// }else if ($this->session->userdata('sess_user_id_user_group')=='3' and $this->session->userdata('sess_user_id_bisnis')=='1'){ //pic pusat ulamm
+		// 	$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('Pinca');	
+		// }else if ($this->session->userdata('sess_user_id_user_group')=='3' and $this->session->userdata('sess_user_id_bisnis')=='2'){ //pic pusat mekaar
+		// 	$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('');				
+		// }else if ($this->session->userdata('sess_user_id_user_group')=='4'){
+		// 	$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('PIC Pusat');
+		// }else if ($this->session->userdata('sess_user_id_user_group')=='5'){
+		// 	$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('Kabag');
+		// }else if ($this->session->userdata('sess_user_id_user_group')=='6'){
+		// 	$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('Wakadiv');	
+		// }else if ($this->session->userdata('sess_user_id_user_group')=='6'){
+		// 	$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('Kadiv');									
+		// }else{
+		// 	$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('');
+		// }								
 
 		$data["cabang"] 		= $this->Master_model->select_ms_cabang_ulamm();		
 		$data["region"] 		= $this->Master_model->select_ms_region_mekaar();
