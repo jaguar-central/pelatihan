@@ -90,8 +90,7 @@
 							<table id="table_rab_modallpj"  class="table table-responsive">
 								  <thead class=" text-primary col-md-12">
 									  <th class="col-md-2">Uraian</th>
-									  <th class="col-md-2">Jumlah</th>
-									  <th class="col-md-2">Unit</th>
+									  <th class="col-md-2">Volume</th>
 									  <th class="col-md-2">Unit Cost</th>
 									  <th class="col-md-2">Sub Total Cost</th>
 									  <th></th>
@@ -100,8 +99,7 @@
 								  <tbody id="tbody_rab_modallpj">
 									<tr class="d-none">
 									  <td ><input type="text" class="form-control" id="deskripsi_rab_modallpj" name="deskripsi_rab[]" value=""></td>
-									  <td ><input type="number" class="form-control" id="jumlah_rab_modallpj" name="jumlah_rab[]"></td>
-									  <td ><input type="text" class="form-control" id="unit_rab_modallpj" name="unit_rab[]" value=""></td>
+									  <td ><input type="number" class="form-control" id="volume_rab_modallpj" name="volume_rab[]"></td>
 									  <td ><input type="number" class="form-control" id="unit_cost_rab_modallpj" name="unit_cost_rab[]" value=""></td>
 									  <td ><input type="number" class="form-control" id="total_cost_rab_modallpj" name="total_cost_rab[]" value="" readonly=""></td>
 									  <td>                            

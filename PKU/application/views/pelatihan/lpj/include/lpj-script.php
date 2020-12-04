@@ -294,10 +294,8 @@ $(document).ready(function() {
                 } 
 			  },    
               { "data": "siklus", render: function (data, type, row) 
-                {
-				  var desk_siklus;					  
-				  desk_siklus='Siklus '+row.siklus;				  
-                  return '<input type="hidden" class="form-control" id="siklus_kredit" name="siklus_kredit[]" value="'+row.siklus+'">'+desk_siklus;
+                {			  
+                  return '<input type="hidden" class="form-control" id="siklus_kredit" name="siklus_kredit[]" value="'+row.siklus+'">'+row.siklus;
                 } 
 			  }, 			  				  			  			  
 			],			

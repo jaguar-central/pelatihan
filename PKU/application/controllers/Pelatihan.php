@@ -824,7 +824,7 @@ class Pelatihan extends MY_Controller
         $inputEndTimePelaksanaan    = trim($this->security->xss_clean(strip_image_tags($this->input->post('inputEndTimePelaksanaan'))));
         
 		$deskripsi_rab        		= $this->security->xss_clean(strip_image_tags($this->input->post('deskripsi_rab')));
-		$jumlah_rab           		= $this->security->xss_clean(strip_image_tags($this->input->post('jumlah_rab')));
+		$volume_rab           		= $this->security->xss_clean(strip_image_tags($this->input->post('volume_rab')));
 		$unit_rab             		= $this->security->xss_clean(strip_image_tags($this->input->post('unit_rab')));
 		$unit_cost_rab        		= $this->security->xss_clean(strip_image_tags($this->input->post('unit_cost_rab')));
 		$total_cost_rab       		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab')));
@@ -878,8 +878,7 @@ class Pelatihan extends MY_Controller
 					$rab = array(
 						'ID_PELATIHAN' 		=> $id_pelatihan,
 						'URAIAN' 			=> $deskripsi_rab[$i],
-						'JUMLAH' 			=> $jumlah_rab[$i],
-						'SATUAN' 			=> $unit_rab[$i],
+						'VOLUME' 			=> $volume_rab[$i],
 						'UNIT_COST' 		=> $unit_cost_rab[$i],
 						'SUB_TOTAL_COST' 	=> $total_cost_rab[$i],
 						'GRAND_TOTAL' 		=> $total_cost_rab_akhir,
@@ -1499,7 +1498,7 @@ class Pelatihan extends MY_Controller
 				{ 
 					$data["data"][$i] = $debitur->hits->hits[$i]->_source;					
 				}else{
-					$data["data"][$i] = (object) array('nasabah_id' => '-','noid_ktp' => '-','namanasabah'=>'-','no_hp'=>'-','kolektibilitas'=>'-','namacabang'=>'-','namaunit'=>'-');					
+					$data["data"][$i] = (object) array('nasabah_id' => '-','noid_ktp' => '-','namanasabah'=>'-','no_hp'=>'-','kolektibilitas'=>'-','namacabang'=>'-','namaunit'=>'-','tipekredit'=>'-');					
 				}				
 			}	
 
@@ -1557,7 +1556,7 @@ class Pelatihan extends MY_Controller
 				{ 
 					$data["data"][$i] = $debitur->hits->hits[$i]->_source;					
 				}else{
-					$data["data"][$i] = (object) array('nasabahid' => '-','noktp' => '-','nama' => '-','alamat'=>'-','produk'=>'-','region'=>'-','area'=>'-');					
+					$data["data"][$i] = (object) array('nasabahid' => '-','noktp' => '-','nama' => '-','alamat'=>'-','produk'=>'-','region'=>'-','area'=>'-','siklus'=>'-');					
 				}				
 			}			
 			$data["recordsTotal"] = $debitur_count->count;	

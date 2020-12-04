@@ -43,6 +43,12 @@ class Dashboard_model extends CI_Model {
                 $query = $this->db->query("EXEC dbo.GET_TOP_SUBSEKTOR_MEKAAR_BY_KODE_CABANG_ULAMM '".$kode_cabang."' ");
                 return $query->result_array();                
         }        
+
+        public function select_top_ten_sektor_ulamm($kode_cabang)
+        {
+                $query = $this->db->query("EXEC dbo.GET_TOP_SUBSEKTOR_ULAMM '".$kode_cabang."' ");
+                return $query->result_array();                
+        }        
      
 }
 ?>

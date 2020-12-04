@@ -23,6 +23,7 @@ class Dashboard extends MY_Controller
         $data["nasabah_mekaar"] = $this->Dashboard_model->select_nasabah_mekaar();
         $data["non_nasabah"] = $this->Dashboard_model->select_non_nasabah();				        
         $data["top_ten_sub_sektor_mekaar"] = $this->Dashboard_model->select_top_ten_sektor_mekaar($this->session->userdata('sess_user_cabang'));				        
+        $data["top_ten_sub_sektor_ulamm"] = $this->Dashboard_model->select_top_ten_sektor_ulamm($this->session->userdata('sess_user_cabang'));				        
         
         
         // echo '<pre>';
