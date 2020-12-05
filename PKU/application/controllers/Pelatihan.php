@@ -840,6 +840,18 @@ class Pelatihan extends MY_Controller
 		
 		// var_dump(date("H:i", strtotime($inputStartTimePelaksanaan)));die();
 		// var_dump($inputStartTglPelaksanaan);die();
+
+
+		$check_kehadiran = COUNT($this->Pelatihan_model->select_temp_kehadiran($id_pelatihan));
+
+		if ($check_kehadiran==0){
+			$output = array(
+				'result'  	=> 'NG',
+				'msg'		=> 'Kehadiran nasabah belum terinput'
+			);
+			echo json_encode($output);
+			exit;
+		}
 		
 		
 		$output = array(
