@@ -363,13 +363,7 @@ class Pelatihan extends MY_Controller
 		
 		try{	
 
-			/* START SEMENTARA SAMPAI KORWIL ADA SEMUA */
-			if ($this->Pelatihan_model->cek_korwil_by_kode_cabang($cabang_ulamm)->num_rows() > 0){
-				$approval = 'Korwil';
-			}else{
-				$approval = '';
-			}			
-			/* END SEMENTARA SAMPAI KORWIL ADA SEMUA */
+
 
 			if ($id_bisnis_pelatihan==2){
 				$data_krm = array(
@@ -409,7 +403,6 @@ class Pelatihan extends MY_Controller
 				'BUDGET' 				=> $anggaran,
 				'JUMLAH_ANGGARAN'		=> $total_cost_rab_akhir,
 				'STATUS' 				=> 'draft',
-				'APPROVAL' 				=> $approval,
 				'PROVINSI' 				=> $provinsi,
 				'KABKOT' 				=> $kabkot,
 				'KECAMATAN'				=> $kecamatan,								
@@ -861,17 +854,7 @@ class Pelatihan extends MY_Controller
 
 		$nama_file	= base64_encode($id_pelatihan.'_'.date('Ymd').'at'.date('His'));
 		$config['file_name']	= $nama_file;
-		$this->upload->initialize($config);
-
-
-		
-		/* START SEMENTARA SAMPAI KORWIL ADA SEMUA */
-		if ($this->Pelatihan_model->cek_korwil_by_id_pelatihan($id_pelatihan)->num_rows() > 0){
-			$approval = 'Korwil';
-		}else{
-			$approval = '';
-		}			
-		/* END SEMENTARA SAMPAI KORWIL ADA SEMUA */		
+		$this->upload->initialize($config);			
 
 		if($this->upload->do_upload('lampiran'))
 		{
@@ -915,7 +898,6 @@ class Pelatihan extends MY_Controller
 
 				$data_update 	= array(
 					'STATUS'			=> 'lpj_draft',
-					'APPROVAL'			=> $approval,
 					'UPDATED_BY' 		=> $id_user,
 					'UPDATED_DATE' 		=> date('Y-m-d H:i:s')			
 					);
@@ -1219,23 +1201,34 @@ class Pelatihan extends MY_Controller
 	{
 		$this->is_logged();		
 
-		$output = array(
-			'result'  	=> 'OK',
-			'msg'		=> ''
-		);
+
 		
 		$pelatihanid	= trim($this->security->xss_clean(strip_image_tags($this->input->post('pelatihanid'))));
 		$status			= trim($this->security->xss_clean(strip_image_tags($this->input->post('status'))));
 		$id_user 		= $this->session->userdata('sess_user_idsdm');
+		$approval 		= '';
+
+		/* START SEMENTARA SAMPAI KORWIL ADA SEMUA */
+		if ($this->Pelatihan_model->cek_korwil_by_id_pelatihan($pelatihanid)->num_rows() == 0){
+			$approval = 'Korwil';
+		}			
+		/* END SEMENTARA SAMPAI KORWIL ADA SEMUA */		
 
 		$data_update 	= array(
-			'STATUS' => $status,
-			'UPDATED_BY' => $id_user,
-			'UPDATED_DATE' => date('Y-m-d H:i:s')			
+			'STATUS' 		=> $status,
+			'APPROVAL' 		=> $approval,
+			'UPDATED_BY' 	=> $id_user,
+			'UPDATED_DATE' 	=> date('Y-m-d H:i:s')			
 			);
 		$where_update	= array(
 			'ID' 	=> $pelatihanid
-			);
+			);	
+
+
+		$output = array(
+			'result'  	=> 'OK',
+			'msg'		=> ''
+		);			
 			
 		try
 		{	

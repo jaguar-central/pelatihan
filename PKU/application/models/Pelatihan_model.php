@@ -291,11 +291,6 @@ public function update_aktif_trx_reject($id){
 }	
 
 
-public function cek_korwil_by_kode_cabang($cabang){
-	$query = $this->db->query("select * FROM MS_USER_CABANG_REGION WHERE ID_GROUP=2 AND KODE_CABANG_REGION='".$cabang."'");
-	return $query;   
-}	
-
 
 public function cek_korwil_by_id_pelatihan($id){
 	$query = $this->db->query("select * FROM MS_USER_CABANG_REGION WHERE ID_GROUP=2 AND KODE_CABANG_REGION=(select CABANG_ULAMM from T_PELATIHAN where ID=$id ) ");

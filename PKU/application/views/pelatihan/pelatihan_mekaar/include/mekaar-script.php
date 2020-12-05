@@ -259,7 +259,8 @@
 		}).then((result) => {
 		  if (result.value) {				
 			$.post("post_submit",{pelatihanid: idpelatihan,status: 'submitted'}, function(data, status){
-				if (status=='success'){
+				var obj = $.parseJSON(data);
+				if (obj.result=='OK'){
 					Swal.fire({
 					  position: 'center',
 					  icon: 'success',
@@ -268,7 +269,7 @@
 					  timer: 1500
 					})
 					setTimeout(function () {
-						window.location.href = '<?php echo base_url(); ?>pelatihan/ulamm';
+						window.location.href = '<?php echo base_url(); ?>pelatihan/mekaar';
 					}, 1600);
 				}else{
 					Swal.fire({
@@ -299,7 +300,8 @@
 		}).then((result) => {
 		  if (result.value) {				
 			$.post("post_submit",{pelatihanid: idpelatihan,status: 'lpj_submitted'}, function(data, status){
-				if (status=='success'){
+				var obj = $.parseJSON(data);
+				if (obj.result=='OK'){
 					Swal.fire({
 					  position: 'center',
 					  icon: 'success',
@@ -308,7 +310,7 @@
 					  timer: 1500
 					})
 					setTimeout(function () {
-						window.location.href = '<?php echo base_url(); ?>pelatihan/ulamm';
+						window.location.href = '<?php echo base_url(); ?>pelatihan/mekaar';
 					}, 1600);
 				}else{
 					Swal.fire({
