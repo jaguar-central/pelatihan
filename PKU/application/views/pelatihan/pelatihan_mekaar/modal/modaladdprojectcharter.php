@@ -1,6 +1,6 @@
 <style>
 @media (max-width: 767px) {
-    #judul_pelatihan{
+    #judul_pelatihan_charter{
         width: 400px;
     }
 	#tanggal_pelatihan{
@@ -94,7 +94,7 @@
 								</thead>    
 								<tbody id="tbody_charter_modaladd">
 								<tr class="d-none">									
-									<td><input type="text" class="form-control" id="judul_pelatihan" name="judul_pelatihan[]" value=""></td>
+									<td><input type="text" class="form-control" id="judul_pelatihan_charter" name="judul_pelatihan[]" value=""></td>
 									<td>									  
 									<div class='input-group'>
 										<input type="date" class="form-control" id="tanggal_pelatihan" name="tanggal_pelatihan[]">
