@@ -31,15 +31,6 @@
 
 <script type="text/javascript">	
 
-// $(document).ready(function () {
-// $('#datatable_top_ten').DataTable({
-// "scrollY": "600px",
-// "scrollCollapse": true,
-// "dom": "t",
-// });
-// });
-
-
 $(document).ready(function() {	
     var ctx_pelatihan = document.getElementById("dashboard_pelatihan");
     if (ctx_pelatihan) {

@@ -12,11 +12,12 @@ class MY_Controller extends CI_Controller
 		parent::__construct();
 
 		$data_global['notification_count']='';
-		
+
 		if ($this->session->userdata('logged_in')!=''){
 		$data_global['notification'] = $this->Master_model->notification();		
 		$data_global['notification_count'] = $this->Master_model->notification_count();
 		}
+
 		
 		if ($data_global['notification_count']==''){
 			$data_global['notification_count'] = 0;
