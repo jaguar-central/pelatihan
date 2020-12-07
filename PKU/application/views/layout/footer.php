@@ -89,6 +89,21 @@
 	margin: 0 15px;
 }
 
+
+@media screen and (max-width: 768px) {
+    li.paginate_button.previous {
+        display: inline;
+    }
+ 
+    li.paginate_button.next {
+        display: inline;
+    }
+ 
+    li.paginate_button {
+        display: none;
+    }
+}
+
 </style>
 
 
