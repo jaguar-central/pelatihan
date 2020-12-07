@@ -748,7 +748,7 @@ class Pelatihan extends MY_Controller
 					
 			$this->Pelatihan_model->insert_t_approval($data);
 			
-			if ($this->session->userdata('sess_user_id_user_group')=='3'){
+			if ($this->session->userdata('sess_user_id_user_group')=='4'){
 				$data_update 	= array(
 					'ID_GRADING'		=> $id_grading,				
 					'STATUS'			=> $status_approval,
