@@ -664,14 +664,13 @@ class Pelatihan extends MY_Controller
 				);
 			}
 
-		}
-
-		else
-		$output = array(
-			'result' => 'UP',
-			'msg'	 => $this->upload->display_errors().'nama->'.$nama_file
-		);
+		}else{
+			$output = array(
+				'result' => 'UP',
+				'msg'	 => $this->upload->display_errors().'nama->'.$nama_file
+			);
 		} 	
+		}
 		
 		
         
@@ -1315,12 +1314,47 @@ class Pelatihan extends MY_Controller
 		$cabang_ulamm		= $this->security->xss_clean(strip_image_tags($this->input->post('cabang_ulamm')));
 		$alamat_pelatihan   = $this->security->xss_clean(strip_image_tags($this->input->post('alamat_pelatihan')));
 		$budget_pelatihan   = $this->security->xss_clean(strip_image_tags($this->input->post('budget_pelatihan')));
-		
-
-		
-		
-
+						
 		$id_user			= $this->session->userdata('sess_user_idsdm');	
+
+
+
+		$file='';
+
+		if ($_FILES['filename']) 
+		{
+			$config['upload_path']	= './assets/dokumen/projectcharter';
+			$config['allowed_types']	= 'docx|jpg|jpeg|png|pdf';
+			$config['max_size']	= '8000';
+			$config['overwrite']	= TRUE;
+
+			$nama_file	= base64_encode($id_project_charter.'_'.date('Ymd').'at'.date('His'));
+			$config['file_name']	= $nama_file;			
+			$this->upload->initialize($config);
+
+			if($this->upload->do_upload('filename'))
+			{
+				$this->upload->data();		
+				$file = 'assets/dokumen/projectcharter/'.$nama_file;
+			}else{
+				$output = array(
+					'result' => 'NG',
+					'msg'	 => $this->upload->display_errors().'nama->'.$nama_file
+				);
+				echo json_encode($output);
+				exit();
+			}
+		}else{
+			$output = array(
+				'result'  	=> 'NG',
+				'msg'		=> 'dokumen tidak ada'
+			);
+			echo json_encode($output);
+			exit();
+		}
+
+
+
 		
 		try
 		{
@@ -1329,7 +1363,7 @@ class Pelatihan extends MY_Controller
 					'ID_PROJECT_CHARTER'	=> base64_encode($type_klasterisasi.date('Y-m-d H:i:s')),
 					'ID_TIPE_PELATIHAN' 	=> $type_klasterisasi,
 					'TEMA_PROJECT_CHARTER' 	=> $tema_project_charter,
-					'FILE' 					=> '',
+					'FILE' 					=> $file,
 					'JUDUL_PELATIHAN' 		=> $judul_pelatihan[$i],
 					'TANGGAL' 				=> $tanggal_pelatihan[$i].' '.$time_pelatihan[$i],
 					'CABANG_ULAMM' 			=> $cabang_ulamm[$i],

@@ -23,7 +23,7 @@
 								<?php
 								$klasterisasi = array(10,11,12); 
 								foreach ($pelatihan_type as $cus){
-									if ($this->session->userdata('sess_user_id_user_group')!=3){ //kecuali pic pusat									
+									if ($this->session->userdata('sess_user_id_user_group')!=4){ //kecuali pic pusat									
 										echo '<tr>';
 										echo '<td>'.$cus->TITLE.'</td>'; 
 										echo '<td class="text-center">';										
@@ -34,7 +34,7 @@
 											echo '<button type="button" class="btn btn-outline-success col-md-4 add_pelatihan" data-toggle="modal" data-target="#modaladd" data-pelatihantype="'.$cus->ID.'" data-pelatihantitle="'.$cus->TITLE.'"><span class="btn-label"><i class="fas fa-pencil-alt fa-fw"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add</button></td>'; 											
 										echo '</tr>';
 										}
-									}else if ($this->session->userdata('sess_user_id_user_group')==3 && in_array($cus->ID,$klasterisasi)){ //untuk pic pusat
+									}else if ($this->session->userdata('sess_user_id_user_group')==4 && in_array($cus->ID,$klasterisasi)){ //untuk pic pusat
 										echo '<tr>';
 										echo '<td>'.$cus->TITLE.'</td>'; 									
 										echo '<td class="text-center">';
