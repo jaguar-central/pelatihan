@@ -57,7 +57,7 @@
 				<div class="form-group row">
 					<label class="col-sm-2 offset-sm-3">Tema <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-					<textarea class="form-control" id="tema_project_charter_edit" name="tema_project_charter" rows="4" required=""></textarea>
+					<textarea class="form-control" id="tema_project_charter_edit" name="tema_project_charter" maxlength="250" rows="4" required=""></textarea>
 					</div>
 				</div>
 
@@ -93,7 +93,7 @@
 								  </thead>    
 								  <tbody id="tbody_charter_modaledit">
 								  <tr class="d-none">									
-									<td><input type="text" class="form-control" id="judul_pelatihan_edit" name="judul_pelatihan[]" ></td>
+									<td><input type="text" class="form-control" id="judul_pelatihan_edit" name="judul_pelatihan[]" maxlength="250" ></td>
 									<td>									  
 									<div class='input-group'>
 										<input type="date" class="form-control" id="tanggal_pelatihan_edit" name="tanggal_pelatihan[]">
@@ -114,7 +114,7 @@
 												?>										
 										</select>
 									</td>
-									<td ><input type="text" class="form-control" id="alamat_pelatihan_edit" name="alamat_pelatihan[]" value=""></td>
+									<td ><input type="text" class="form-control" id="alamat_pelatihan_edit" name="alamat_pelatihan[]" maxlength="250" value=""></td>
 									<td ><input type="text" class="form-control" id="budget_pelatihan_edit" name="budget_pelatihan[]" value=""></td>
 									<td>                            
 									<a class="table-remove-modaledit btn btn-outline-primary btn-sm" href="#"><i class="fas fa-trash"></i></a>   
