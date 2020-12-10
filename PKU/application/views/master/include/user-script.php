@@ -38,7 +38,7 @@
 
 <script src="<?php echo base_url(); ?>assets/plugins/moment/moment.js"></script>
 
-<script src="http://cdn.datatables.net/plug-ins/1.10.13/dataRender/datetime.js"></script>
+<!-- <script src="http://cdn.datatables.net/plug-ins/1.10.13/dataRender/datetime.js"></script> -->
 
 <script type="text/javascript">
 
@@ -94,8 +94,12 @@
 		
 		$('#role').on('change', function (e) {			
 			var role = $("#role").val();
+
+			var NONBISNIS = ['1','2','6','7','8','9'];
+
+			var n = NONBISNIS.includes(role);
 			
-			if (role>=5){
+			if (n){
 				$(".bisnis").hide();				
 				$(".cabang_ulamm").hide();
 			}else{

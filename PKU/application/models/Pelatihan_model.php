@@ -86,9 +86,23 @@ public function select_t_approval_where($where)
 }		
 
 	
-public function select_t_pelatihan_by_approval()
+public function select_t_pelatihan_by_approval($status)
         {					
-			$query = $this->db->query("select *,dbo.ID_JENIS_NASABAH(ID_GRADING) as ID_JENIS_NASABAH,dbo.MENIT_TO_JAM(DURASI_PELATIHAN) as JAM_MENIT,dbo.DESKRIPSI_PELATIHAN_TYPE(ID_TIPE) as DESKRIPSI_PELATIHAN_TYPE from T_PELATIHAN where ID_BISNIS in (SELECT BISNIS FROM MS_FLOW_APPROVAL WHERE ID_GROUP=".$this->session->userdata('sess_user_id_user_group').") and STATUS='submitted' and ISNULL(APPROVAL,'') in (SELECT APPROVAL_BY FROM MS_FLOW_APPROVAL WHERE ID_GROUP=".$this->session->userdata('sess_user_id_user_group').") and CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ");																
+			if ($this->session->userdata('sess_user_id_bisnis')==0){
+				$BISNIS = " in (SELECT BISNIS FROM MS_FLOW_APPROVAL WHERE ID_GROUP=".$this->session->userdata('sess_user_id_user_group').")";				
+			}else{
+				$BISNIS = " = ".$this->session->userdata('sess_user_id_bisnis');
+			}
+
+
+			$query = $this->db->query("select *,dbo.ID_JENIS_NASABAH(ID_GRADING) as ID_JENIS_NASABAH
+			,dbo.MENIT_TO_JAM(DURASI_PELATIHAN) as JAM_MENIT
+			,dbo.DESKRIPSI_PELATIHAN_TYPE(ID_TIPE) as DESKRIPSI_PELATIHAN_TYPE 
+			from T_PELATIHAN 
+			where ID_BISNIS $BISNIS 
+			and STATUS='$status' 
+			and ISNULL(APPROVAL,'') in (SELECT APPROVAL_BY FROM MS_FLOW_APPROVAL WHERE ID_GROUP=".$this->session->userdata('sess_user_id_user_group').") 
+			and CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ");																
             return $query->result();
         }
         
@@ -100,24 +114,7 @@ public function insert_t_pelatihan_lpj($data)
 public function insert_t_rab_lpj($data)
         {
                 $this->db->insert('T_RAB_LPJ', $data);
-        }
-        
-public function select_t_pelatihan_lpj_by_approval($approval)
-        {			
-			if ($approval==''){ //pinca dan pic pusat mekaar
-				$query = $this->db->query("select *,dbo.MENIT_TO_JAM(DURASI_PELATIHAN) as JAM_MENIT,dbo.DESKRIPSI_PELATIHAN_TYPE(ID_TIPE) as DESKRIPSI_PELATIHAN_TYPE from T_PELATIHAN where ID_BISNIS=".$this->session->userdata('sess_user_id_bisnis')." and STATUS='lpj_submitted' and ISNULL(APPROVAL,'')='".$approval."' and CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ");			
-			}else if ($approval=='Pinca'){	//pic pusat ulamm
-				$query = $this->db->query("
-				select *,dbo.MENIT_TO_JAM(DURASI_PELATIHAN) as JAM_MENIT,dbo.DESKRIPSI_PELATIHAN_TYPE(ID_TIPE) as DESKRIPSI_PELATIHAN_TYPE from T_PELATIHAN where ID_BISNIS=1 and STATUS='lpj_submitted' and ISNULL(APPROVAL,'')='".$approval."' and CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) 
-				");
-			}else if ($approval=='PIC Pusat'){	//kabag
-				$query = $this->db->query("select *,dbo.MENIT_TO_JAM(DURASI_PELATIHAN) as JAM_MENIT,dbo.DESKRIPSI_PELATIHAN_TYPE(ID_TIPE) as DESKRIPSI_PELATIHAN_TYPE from T_PELATIHAN where ID_BISNIS=".$this->session->userdata('sess_user_id_bisnis')." and STATUS='lpj_submitted' and ISNULL(APPROVAL,'')='".$approval."' and CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ");				
-			}else{
-                $query = $this->db->query("select *,dbo.MENIT_TO_JAM(DURASI_PELATIHAN) as JAM_MENIT,dbo.DESKRIPSI_PELATIHAN_TYPE(ID_TIPE) as DESKRIPSI_PELATIHAN_TYPE from T_PELATIHAN where STATUS='lpj_submitted' and ISNULL(APPROVAL,'')='".$approval."' ");				
-			}
-				
-            return $query->result();			
-        }
+        }        
 		
 		public function insert_temp_kehadiran($data)
         {
@@ -293,6 +290,15 @@ public function update_aktif_trx_reject($id){
 	$this->db->update('TRX_NO_REJECT',array("AKTIF"=>"0"),array("ID"=>$id));
 }	
 
+
+
+public function cek_korwil_by_id_pelatihan($id){
+	$query = $this->db->query("select * FROM MS_USER_CABANG_REGION WHERE ID_GROUP=2 AND KODE_CABANG_REGION=(select CABANG_ULAMM from T_PELATIHAN where ID=$id ) ");
+	return $query;   
+}	
+
 }
+
+
 
 ?>

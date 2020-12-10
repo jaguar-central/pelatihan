@@ -270,7 +270,8 @@
 		}).then((result) => {
 		  if (result.value) {				
 			$.post("post_submit",{pelatihanid: idpelatihan,status: 'submitted'}, function(data, status){
-				if (status=='success'){
+				var obj = $.parseJSON(data);
+				if (obj.result=='OK'){
 					Swal.fire({
 					  position: 'center',
 					  icon: 'success',
@@ -311,7 +312,8 @@
 		}).then((result) => {
 		  if (result.value) {				
 			$.post("post_submit",{pelatihanid: idpelatihan,status: 'lpj_submitted'}, function(data, status){
-				if (status=='success'){
+				var obj = $.parseJSON(data);
+				if (obj.result=='OK'){
 					Swal.fire({
 					  position: 'center',
 					  icon: 'success',

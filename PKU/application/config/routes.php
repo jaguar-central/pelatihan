@@ -143,5 +143,6 @@ $route['pelatihan/get_project_charter']                         = 'pelatihan/get
 $route['pelatihan/get_ket_approval']                            = 'pelatihan/get_ket_approval';
 
 
-/* API GEOLOCATION */ 
+/* GEOLOCATION */ 
 $route['master/post_geolocation']                              = 'master/post_geolocation';
+$route['geolokasi/post_geolocation']                           = 'geolokasi';

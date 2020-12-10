@@ -182,27 +182,8 @@ class Pelatihan extends MY_Controller
 								        
 		$data["menu"] = $this->Menu_model->select_ms_menu();
 		
-		$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_by_approval();
+		$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_by_approval('submitted');
 
-		
-		// if ($this->session->userdata('sess_user_id_user_group')=='2'){ //pinca
-		// 	$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('');			
-		// }else if ($this->session->userdata('sess_user_id_user_group')=='3' and $this->session->userdata('sess_user_id_bisnis')=='1'){ //pic pusat ulamm
-		// 	$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('Pinca');
-		// }else if ($this->session->userdata('sess_user_id_user_group')=='3' and $this->session->userdata('sess_user_id_bisnis')=='2'){ //pic pusat mekaar
-		// 	$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('');			
-		// }else if ($this->session->userdata('sess_user_id_user_group')=='4'){
-		// 	$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('PIC Pusat');
-		// }else if ($this->session->userdata('sess_user_id_user_group')=='5'){
-		// 	$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('Kabag');			
-		// }else if ($this->session->userdata('sess_user_id_user_group')=='6'){
-		// 	$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('Wakadiv');	
-		// }else if ($this->session->userdata('sess_user_id_user_group')=='7'){
-		// 	$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('Kadiv');									
-		// }else{
-		// 	$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_proposal_by_approval('');
-		// }			
-		
 		$data["cabang"] 		= $this->Master_model->select_ms_cabang_ulamm();		
 		$data["region"] 		= $this->Master_model->select_ms_region_mekaar();
 
@@ -230,26 +211,8 @@ class Pelatihan extends MY_Controller
 			
 		$data["menu"] 				= $this->Menu_model->select_ms_menu();
 		
-		$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_by_approval();
-				
-		// if ($this->session->userdata('sess_user_id_user_group')=='2'){ //pinca
-		// 	$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('');
-		// }else if ($this->session->userdata('sess_user_id_user_group')=='3' and $this->session->userdata('sess_user_id_bisnis')=='1'){ //pic pusat ulamm
-		// 	$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('Pinca');	
-		// }else if ($this->session->userdata('sess_user_id_user_group')=='3' and $this->session->userdata('sess_user_id_bisnis')=='2'){ //pic pusat mekaar
-		// 	$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('');				
-		// }else if ($this->session->userdata('sess_user_id_user_group')=='4'){
-		// 	$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('PIC Pusat');
-		// }else if ($this->session->userdata('sess_user_id_user_group')=='5'){
-		// 	$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('Kabag');
-		// }else if ($this->session->userdata('sess_user_id_user_group')=='6'){
-		// 	$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('Wakadiv');	
-		// }else if ($this->session->userdata('sess_user_id_user_group')=='6'){
-		// 	$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('Kadiv');									
-		// }else{
-		// 	$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_lpj_by_approval('');
-		// }								
-
+		$data["t_pelatihan_lpj"] = $this->Pelatihan_model->select_t_pelatihan_by_approval('lpj_submitted');
+					
 		$data["cabang"] 		= $this->Master_model->select_ms_cabang_ulamm();		
 		$data["region"] 		= $this->Master_model->select_ms_region_mekaar();
 
@@ -399,7 +362,9 @@ class Pelatihan extends MY_Controller
 		
 		
 		try{	
-			
+
+
+
 			if ($id_bisnis_pelatihan==2){
 				$data_krm = array(
 					'KRM' 					=> $nama_krm,
@@ -414,6 +379,8 @@ class Pelatihan extends MY_Controller
 			}else{
 				$id_krm = 0;
 			}
+
+
 			
 			$data = array(
 				'ID_TIPE' 				=> $pelatihan_type,
@@ -697,14 +664,13 @@ class Pelatihan extends MY_Controller
 				);
 			}
 
-		}
-
-		else
-		$output = array(
-			'result' => 'UP',
-			'msg'	 => $this->upload->display_errors().'nama->'.$nama_file
-		);
+		}else{
+			$output = array(
+				'result' => 'UP',
+				'msg'	 => $this->upload->display_errors().'nama->'.$nama_file
+			);
 		} 	
+		}
 		
 		
         
@@ -760,9 +726,11 @@ class Pelatihan extends MY_Controller
 			'result'  	=> 'OK',
 			'msg'		=> ''
 		);
+
+
 		
 		try
-		{
+		{			
 			$data = array(
 				'ID_PELATIHAN' 		=> $id_pelatihan,
 				'TIPE_APPROVAL' 	=> 'PROPOSAL',
@@ -780,7 +748,7 @@ class Pelatihan extends MY_Controller
 					
 			$this->Pelatihan_model->insert_t_approval($data);
 			
-			if ($this->session->userdata('sess_user_id_user_group')=='3'){
+			if ($this->session->userdata('sess_user_id_user_group')=='4'){
 				$data_update 	= array(
 					'ID_GRADING'		=> $id_grading,				
 					'STATUS'			=> $status_approval,
@@ -871,6 +839,18 @@ class Pelatihan extends MY_Controller
 		
 		// var_dump(date("H:i", strtotime($inputStartTimePelaksanaan)));die();
 		// var_dump($inputStartTglPelaksanaan);die();
+
+
+		$check_kehadiran = COUNT($this->Pelatihan_model->select_temp_kehadiran($id_pelatihan));
+
+		if ($check_kehadiran==0){
+			$output = array(
+				'result'  	=> 'NG',
+				'msg'		=> 'Kehadiran nasabah belum terinput'
+			);
+			echo json_encode($output);
+			exit;
+		}
 		
 		
 		$output = array(
@@ -885,7 +865,7 @@ class Pelatihan extends MY_Controller
 
 		$nama_file	= base64_encode($id_pelatihan.'_'.date('Ymd').'at'.date('His'));
 		$config['file_name']	= $nama_file;
-		$this->upload->initialize($config);
+		$this->upload->initialize($config);			
 
 		if($this->upload->do_upload('lampiran'))
 		{
@@ -929,7 +909,6 @@ class Pelatihan extends MY_Controller
 
 				$data_update 	= array(
 					'STATUS'			=> 'lpj_draft',
-					'APPROVAL'			=> '',
 					'UPDATED_BY' 		=> $id_user,
 					'UPDATED_DATE' 		=> date('Y-m-d H:i:s')			
 					);
@@ -1233,23 +1212,34 @@ class Pelatihan extends MY_Controller
 	{
 		$this->is_logged();		
 
-		$output = array(
-			'result'  	=> 'OK',
-			'msg'		=> ''
-		);
+
 		
 		$pelatihanid	= trim($this->security->xss_clean(strip_image_tags($this->input->post('pelatihanid'))));
 		$status			= trim($this->security->xss_clean(strip_image_tags($this->input->post('status'))));
 		$id_user 		= $this->session->userdata('sess_user_idsdm');
+		$approval 		= '';
+
+		/* START SEMENTARA SAMPAI KORWIL ADA SEMUA */
+		if ($this->Pelatihan_model->cek_korwil_by_id_pelatihan($pelatihanid)->num_rows() == 0){
+			$approval = 'Korwil';
+		}			
+		/* END SEMENTARA SAMPAI KORWIL ADA SEMUA */		
 
 		$data_update 	= array(
-			'STATUS' => $status,
-			'UPDATED_BY' => $id_user,
-			'UPDATED_DATE' => date('Y-m-d H:i:s')			
+			'STATUS' 		=> $status,
+			'APPROVAL' 		=> $approval,
+			'UPDATED_BY' 	=> $id_user,
+			'UPDATED_DATE' 	=> date('Y-m-d H:i:s')			
 			);
 		$where_update	= array(
 			'ID' 	=> $pelatihanid
-			);
+			);	
+
+
+		$output = array(
+			'result'  	=> 'OK',
+			'msg'		=> ''
+		);			
 			
 		try
 		{	
@@ -1324,12 +1314,47 @@ class Pelatihan extends MY_Controller
 		$cabang_ulamm		= $this->security->xss_clean(strip_image_tags($this->input->post('cabang_ulamm')));
 		$alamat_pelatihan   = $this->security->xss_clean(strip_image_tags($this->input->post('alamat_pelatihan')));
 		$budget_pelatihan   = $this->security->xss_clean(strip_image_tags($this->input->post('budget_pelatihan')));
-		
-
-		
-		
-
+						
 		$id_user			= $this->session->userdata('sess_user_idsdm');	
+
+
+
+		$file='';
+
+		if ($_FILES['filename']) 
+		{
+			$config['upload_path']	= './assets/dokumen/projectcharter';
+			$config['allowed_types']	= 'docx|jpg|jpeg|png|pdf';
+			$config['max_size']	= '8000';
+			$config['overwrite']	= TRUE;
+
+			$nama_file	= base64_encode($id_project_charter.'_'.date('Ymd').'at'.date('His'));
+			$config['file_name']	= $nama_file;			
+			$this->upload->initialize($config);
+
+			if($this->upload->do_upload('filename'))
+			{
+				$this->upload->data();		
+				$file = 'assets/dokumen/projectcharter/'.$nama_file;
+			}else{
+				$output = array(
+					'result' => 'NG',
+					'msg'	 => $this->upload->display_errors().'nama->'.$nama_file
+				);
+				echo json_encode($output);
+				exit();
+			}
+		}else{
+			$output = array(
+				'result'  	=> 'NG',
+				'msg'		=> 'dokumen tidak ada'
+			);
+			echo json_encode($output);
+			exit();
+		}
+
+
+
 		
 		try
 		{
@@ -1338,7 +1363,7 @@ class Pelatihan extends MY_Controller
 					'ID_PROJECT_CHARTER'	=> base64_encode($type_klasterisasi.date('Y-m-d H:i:s')),
 					'ID_TIPE_PELATIHAN' 	=> $type_klasterisasi,
 					'TEMA_PROJECT_CHARTER' 	=> $tema_project_charter,
-					'FILE' 					=> '',
+					'FILE' 					=> $file,
 					'JUDUL_PELATIHAN' 		=> $judul_pelatihan[$i],
 					'TANGGAL' 				=> $tanggal_pelatihan[$i].' '.$time_pelatihan[$i],
 					'CABANG_ULAMM' 			=> $cabang_ulamm[$i],
