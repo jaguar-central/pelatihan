@@ -11,10 +11,10 @@ class Dashboard extends MY_Controller
     	
     
     {
-		$this->is_logged();		
+        $this->is_logged();	        
     	
         $data["content"] = "Dashboard";
-		$data["view"] = "dashboard/index";	
+		$data["view"] = "dashboard/index";				
 		$data["script"] = "dashboard/include/dashboard-script";
 		
         $data["menu"] = $this->Menu_model->select_ms_menu();

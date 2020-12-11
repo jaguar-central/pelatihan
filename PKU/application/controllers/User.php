@@ -226,14 +226,145 @@ class User extends MY_Controller {
 
 		$this->session->set_flashdata('message_success', 'Anda telah berhasil sign out!');
 
-        redirect('dashboard');
+        // redirect('dashboard');
+        redirect('login');
 
     }	
 
 
 	public function login()
-	{
-		
-		$this->load->view('login/login');
+	{	
+		$this->load->view('login');
 	}
+
+	public function process_login(){
+
+		$u   = trim($this->security->xss_clean(strip_image_tags($this->input->post('username'))));        
+		$p   = trim($this->security->xss_clean(strip_image_tags($this->input->post('password'))));    
+		
+		$a = $this->config->item('baseSSOApi').'SSO_Mobile/login.php?user='.$u.'&pass='.$p.'&app_code=MPLT';
+
+		$c = stream_context_create(array(
+            'http' => array(
+                'header'  => "Authorization: Basic " . base64_encode("event:event")
+            )
+        ));
+        
+		$data = json_decode(file_get_contents($a, false, $c));				
+
+		$data = json_encode($data);
+
+		$json = json_decode($data, true);
+
+		// var_dump($json['login'][0]['response']);die();
+
+		if ($json['login'][0]['response']=='FALSE'){
+			$this->session->set_flashdata('message_success', $json['login'][0]['message']);
+			redirect('login');
+			exit();
+		}
+		
+
+		/*====================================================================
+
+		GET DATA FROM API SSO
+
+		======================================================================*/
+		
+		$idsdm 				=$json['login'][0]['data'][0]['idsdm'];
+
+		$nik 				=$json['login'][0]['data'][0]['nik'];
+
+		$username 			=$json['login'][0]['data'][0]['username'];
+
+		$email 				=$json['login'][0]['data'][0]['email'];
+
+		$nama 				=$json['login'][0]['data'][0]['nama'];
+
+		$idsdm 				=$json['login'][0]['data'][0]['idsdm'];
+
+		$posisinama			=$json['login'][0]['data'][0]['posisi_nama'];
+
+		$posisisso			=$json['login'][0]['data'][0]['posisi_sso'];
+
+		$posisisingkatan	=$json['login'][0]['data'][0]['posisi_singkatan'];
+
+		$lokasikerja		=$json['login'][0]['data'][0]['lokasi_kerja'];
+
+		$kodecabang			=$json['login'][0]['data'][0]['kode_cabang'];
+
+		$cabang 			=$json['login'][0]['data'][0]['cabang'];
+
+		$unit				=$json['login'][0]['data'][0]['unit'];
+
+		$kode_unit			=$json['login'][0]['data'][0]['kode_unit'];
+		
+		$kode_mekaar		=$json['login'][0]['data'][0]['kode_mekaar'];
+
+		// $organisasiname		=$json['login'][0]['data'][0]['organisasi_name'];
+
+		// $organisasidesc		=$json['login'][0]['data'][0]['organisasi_desc'];
+
+		$foto 				=$json['login'][0]['data'][0]['foto'];
+						
+
+		
+
+		if($username){
+			$data = $this->Master_model->select_ms_user_by_username($username)[0];
+			
+											
+			//Set session userdata
+
+			$session_array = array(
+
+							'logged_in'					=> TRUE,
+
+							'sess_user_idsdm'			=> $idsdm,
+							
+							'sess_user_lokasi'			=> $data->LOKASI,
+							
+							'sess_menu_user'			=> $data->MENU_USER,
+
+							'sess_user_id'				=> $data->ID,
+
+							'sess_user_id_user_group'	=> $data->IDGROUP,
+							
+							'sess_user_group'			=> $data->NAMA_GROUP,
+
+							'sess_user_nik'       		=> $nik,
+
+							'sess_user_nama'       		=> $nama,
+
+							'sess_user_posisinama' 		=> $posisinama,
+
+							'sess_user_username'       	=> $username,
+
+							'sess_user_email'   	    => $email,
+
+							'sess_user_nama_cabang'		=> $cabang,
+
+							'sess_user_cabang'		    => $kodecabang,
+
+							// 'sess_user_divisi'			=> $organisasidesc,
+							
+							'sess_user_region'		    => $kode_mekaar,							
+
+							'sess_user_foto'  			=> $foto,
+							
+							'sess_user_latitude'        => '-6.205312656111862',
+							
+							'sess_user_longitude'       =>  '106.82113741326904',
+							
+							'sess_user_id_bisnis'       =>  $data->IDBISNIS
+
+						 );               
+
+			$this->session->set_userdata($session_array);
+		}
+		
+		redirect(base_url().'dashboard');
+		
+	}		
+
 }

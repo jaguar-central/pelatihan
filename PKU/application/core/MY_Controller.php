@@ -40,9 +40,7 @@ class MY_Controller extends CI_Controller
 
         $url = $url."?source=".base_url()."check_user&app_code=MPLT";
 
-        //$url = "http://182.23.52.249/Dummy/SSO_WebService/login.php?source=".base_url()."check_user&app_code=EVENT";
-
-        if ($this->session->userdata('logged_in') == FALSE) redirect($url);
+		if ($this->session->userdata('logged_in') == FALSE) redirect($url);
 
     }
 	
