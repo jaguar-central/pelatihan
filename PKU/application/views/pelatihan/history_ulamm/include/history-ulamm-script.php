@@ -139,10 +139,38 @@
 				$("#total_cost_rab_akhir_details").val(total);
 			}	
 		});	
+
+
+		// $('#datatable_listkehadiran').DataTable({	
+		// 	"paging": true,
+		// 	"processing": true,
+		// 	"serverSide": true,
+		// 	"ajax": {
+		// 	"url" : '<?php echo base_url(); ?>'+'pelatihan/get_kehadiran/'+$(this).data("pelatihanid"),
+		// 	"type" :'GET'                      
+		// 	},
+		// 	"columnDefs": [
+    	// 		{ "className": "col-md-2", targets: "_all" },
+		// 	],				
+		// 	"columns" : [
+		// 		{ "data": "ID_NASABAH" },
+		// 		{ "data": "KTP", render: function (data, type, row)
+		// 		    {
+		// 				return '<input type="hidden" class="form-control" id="ktp" name="ktp[]" value="'+row.KTP+'">'+row.KTP;
+		// 			}
+		// 		},
+		// 		{ "data": "BISNIS" },
+		// 		{ "data": "NAMA" },
+		// 		{ "data": "NASABAH_TIPE" },				
+		// 		{ "data": "ID_TIPE_KREDIT"},					
+		// 	],
+		// 	"dom": "<'dom_datable'f>rt<'dom_datable col-md-6'i><'dom_datable col-md-6'p>",
+		// 	"createdRow" : function (row, data, index) {
+		// 		$(row).addClass("remove-kehadiran");      
+		// 	}
+		// });				
 						
 	});
-
-
 
 
 
