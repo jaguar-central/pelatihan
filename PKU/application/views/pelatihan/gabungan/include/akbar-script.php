@@ -38,7 +38,7 @@
 
 <script src="<?php echo base_url(); ?>assets/plugins/moment/moment.js"></script>
 
-<script src="http://cdn.datatables.net/plug-ins/1.10.13/dataRender/datetime.js"></script>
+<!-- <script src="http://cdn.datatables.net/plug-ins/1.10.13/dataRender/datetime.js"></script> -->
 
 
 <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
@@ -46,19 +46,18 @@
 
 <script src="<?php echo base_url(); ?>assets/js/bootstrap-datetimepicker.js"></script>
 
+
+<!-- <script src="<?php echo base_url() ?>assets/js/googlejs.js"></script> -->
+
+<!-- <script src="<?php echo base_url() ?>assets/js/locationpicker.jquery.min.js"></script> -->
+
+
 <script src="<?php echo base_url() ?>assets/js/autoNumeric.js"></script>
 
-<script type="text/javascript">		
+<!-- <script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places&key=AIzaSyCwGoo1jtr3HgU66bulwQ6qDI4CJqpgJjU"></script> -->
 
-	$(document).ready(function() {	
-		$('#datatable').DataTable({			
-			"aaSorting" : [],	
-			"paging": true,
-			"processing": true,
-			"serverSide": false,			
-			"dom": "<'dom_datable'f>Brt<'dom_datable col-md-6'i>",
-			"buttons": ['copy', 'csv', 'excel', 'pdf', 'print'],
-		});																
-	});
-	
-</script>       
+<script>
+    $('#datatable').DataTable({
+        "dom": "<'dom_datable'f>rt<'dom_datable col-md-6'i>"
+    });
+</script>

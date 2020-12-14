@@ -50,16 +50,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 // $route['default_controller'] = 'dashboard';
-$route['default_controller'] = 'User/login';
-$route['login'] = 'User/login';
-$route['user/process_login'] = 'User/process_login';
+$route['default_controller']        = 'User/login';
+$route['login']                     = 'User/login';
+$route['user/process_login']        = 'User/process_login';
 
-$route['404_override'] = '';
-$route['translate_uri_dashes'] = FALSE;
+$route['404_override']              = '';
+$route['translate_uri_dashes']      = FALSE;
 
 // $route['nama url'] = 'nama class/nama function'
 /* DASHBOARD */
-$route['dashboard']	= 'dashboard';
+$route['dashboard']	                = 'dashboard';
 
 
 
@@ -71,6 +71,7 @@ $route['pelatihan/history_mekaar'] 		= 'pelatihan/history_mekaar';
 $route['pelatihan/konfirmasi'] 		    = 'pelatihan/konfirmasi_proposal';
 $route['pelatihan/konfirmasi_lpj'] 	    = 'pelatihan/konfirmasi_lpj';
 $route['pelatihan/lpj/(:any)']   		= 'pelatihan/lpj/$1';
+$route['pelatihan/gabungan']   		    = 'pelatihan/gabungan';
 
 /* NASABAH */
 $route['nasabah/ulamm'] 		= 'nasabah/nasabah_ulamm';
@@ -122,6 +123,7 @@ $route['pelatihan/post_pelatihan']                              = 'pelatihan/pos
 $route['pelatihan/update_pelatihan']                            = 'pelatihan/update_pelatihan_proposal';
 $route['pelatihan/update_pelatihan']                            = 'pelatihan/update_pelatihan_proposal';
 $route['pelatihan/get_rab']                                     = 'pelatihan/get_rab';
+$route['pelatihan/get_rab_lpj']                                     = 'pelatihan/get_rab_lpj';
 $route['pelatihan/post_konfirmasi_proposal']                    = 'pelatihan/post_konfirmasi_proposal';
 $route['pelatihan/post_pelatihan_lpj']                          = 'pelatihan/post_pelatihan_lpj';
 $route['pelatihan/post_konfirmasi_lpj']                         = 'pelatihan/post_konfirmasi_lpj';

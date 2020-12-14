@@ -92,7 +92,17 @@
 			
 			if(obj.result == 'OK')
 			{
-				window.location.href = '<?php echo base_url(); ?>pelatihan/konfirmasi_lpj';
+				Swal.fire({
+					position: 'center',
+					icon: 'success',
+					title: 'Pelatihan telah di verifikasi',
+					showConfirmButton: false,
+					timer: 1500
+				})
+				setTimeout(function () {
+					window.location.href = '<?php echo base_url(); ?>pelatihan/konfirmasi_lpj';
+				}, 1600);					
+				
 			}
 			if(obj.result == 'UP')
 			{
