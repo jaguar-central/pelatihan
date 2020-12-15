@@ -227,14 +227,14 @@ class User extends MY_Controller {
 		$this->session->set_flashdata('message_success', 'Anda telah berhasil sign out!');
 
         // redirect('dashboard');
-        redirect('login');
+        redirect(base_url().'login');
 
     }	
 
 
 	public function login()
 	{	
-		$this->load->view('login');
+		$this->load->view('login/login');
 	}
 
 	public function process_login(){
@@ -260,7 +260,7 @@ class User extends MY_Controller {
 
 		if ($json['login'][0]['response']=='FALSE'){
 			$this->session->set_flashdata('message_success', $json['login'][0]['message']);
-			redirect('login');
+			redirect(base_url().'login');
 			exit();
 		}
 		
