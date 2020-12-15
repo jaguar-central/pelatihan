@@ -89,10 +89,13 @@ class Pelatihan extends MY_Controller
         $data["content"] 	= "Pelatihan";
         $data["view"] 		= "pelatihan/history_ulamm/history_ulamm";
 		$data["script"] 	= "pelatihan/history_ulamm/include/history-ulamm-script";
-		$data["modal"] 		= array( "pelatihan/history_ulamm/modal/modaldetails"); 
+		$data["modal"] 		= array(
+								"pelatihan/history_ulamm/modal/modaldetails",
+								"pelatihan/history_ulamm/modal/modallpjdetails"
+								); 
 
         $data["menu"] 		= $this->Menu_model->select_ms_menu();
-		$data["pelatihan"] 	= $this->Pelatihan_model->select_t_pelatihan_ulamm_by_status(array('draft','submitted','approved','reject','lpj_draft','lpj_submitted','lpj_approved'));
+		$data["pelatihan"] 	= $this->Pelatihan_model->select_t_pelatihan_ulamm_by_status(array('draft','submitted','approved','reject','lpj_draft','lpj_submitted','lpj_approved'));		
 		$data["cabang"] 	= $this->Master_model->select_ms_cabang_ulamm();	
 
 		$data['provinsi'] 		= $this->Master_model->select_ms_provinsi();
@@ -223,6 +226,17 @@ class Pelatihan extends MY_Controller
         $this->load->view('layout/gabung', $data);
     }
 
+	public function gabungan()
+	{
+		$this->is_logged();				
+		
+        $data["content"] 			= "Pelatihan";
+        $data["view"] 				= "pelatihan/gabungan/akbar";
+        $data["script"] 			= "pelatihan/gabungan/include/akbar-script";			
+		$data["menu"] 				= $this->Menu_model->select_ms_menu();		
+					
+        $this->load->view('layout/gabung', $data);
+	}
 
 
 /*-------------------------------------CTRL API POST-------------------------------------*/	
@@ -1441,6 +1455,37 @@ class Pelatihan extends MY_Controller
 			
 		echo $data;	
 	}
+
+
+	public function get_rab_lpj()
+	{
+		$id_pelatihan = $_GET['pelatihanid'];
+		$tipe_modal = $_GET['tipe_modal'];
+		$rab = $this->Pelatihan_model->select_t_rab_lpj_by_id($id_pelatihan);					
+		
+		$data= '';		
+		
+		foreach ($rab as $data_rab) {
+			$data .= '
+			<tr class="">
+			<td><input type="text" class="form-control" id="deskripsi_rab_'.$tipe_modal.'" name="deskripsi_rab_'.$tipe_modal.'[]" value="'.$data_rab->URAIAN.'" ></td>
+			<td><input type="number" class="form-control" id="volume_rab_'.$tipe_modal.'" name="volume_rab_'.$tipe_modal.'[]"  value="'.$data_rab->VOLUME.'"></td>
+			<td><input type="number" class="form-control" id="unit_cost_rab_'.$tipe_modal.'" name="unit_cost_rab_'.$tipe_modal.'[]" value="'.$data_rab->UNIT_COST.'" ></td>
+			<td><input type="number" class="form-control" id="total_cost_rab_'.$tipe_modal.'" name="total_cost_rab_'.$tipe_modal.'[]" value="'.$data_rab->SUB_TOTAL_COST.'" readonly="" ></td>
+			<td>                            
+				<a class="table-remove-'.$tipe_modal.' btn btn-outline-primary btn-sm" href="#"><i class="fas fa-trash"></i></a>   
+			</td>
+			<td>                            
+				<a class="table-up-'.$tipe_modal.' btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-up"></i></a>   
+				<a class="table-down-'.$tipe_modal.' btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-down"></i></a>                               
+			</td>
+			</tr>
+			';
+			
+		} 
+			
+		echo $data;	
+	}	
 
 	public function get_project_charter()
 	{

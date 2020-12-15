@@ -4,7 +4,7 @@ class Menu_model extends CI_Model {
 	public function select_ms_menu()
         {
 			$menu_user = $this->session->userdata('sess_menu_user');
-			$query = $this->db->query("SELECT * FROM MS_MENU WHERE MENU_USER = '".$menu_user."' ");
+			$query = $this->db->query("SELECT * FROM MS_MENU WHERE MENU_USER = '".$menu_user."' ORDER BY [ORDER] ");
 			return $query->result();
         }
         

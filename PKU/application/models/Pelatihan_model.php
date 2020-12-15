@@ -10,7 +10,7 @@ public function select_ms_pelatihan_type()
 
 public function select_ms_pelatihan_type_ulamm()
 {
-		$query = $this->db->query("select * from MS_PELATIHAN_TYPE where bisnis = 'ULAMM' ");
+		$query = $this->db->query("select * from MS_PELATIHAN_TYPE where bisnis = 'ULAMM' and KODE<>'AKBAR-G' ");
 		return $query->result();
 }
 
@@ -45,6 +45,12 @@ public function select_t_rab_by_id($id)
 		$query = $this->db->query("select * from T_RAB where ID_PELATIHAN = '".$id."'");
 		return $query->result();
 }
+
+public function select_t_rab_lpj_by_id($id)
+{
+		$query = $this->db->query("select * from T_RAB_LPJ where ID_PELATIHAN = '".$id."'");
+		return $query->result();
+}
         
 public function insert_t_dokumen($data)
         {
@@ -56,10 +62,21 @@ public function update_t_pelatihan($data,$where){
 
 public function select_t_pelatihan_ulamm_by_status($status)
 {
-		$query = $this->db->select('*,CONVERT(VARCHAR(17),TANGGAL_MULAI,113) as MULAI,CONVERT(VARCHAR(17),TANGGAL_SELESAI,113) as SELESAI,dbo.DESKRIPSI_PELATIHAN_TYPE(ID_TIPE) as DESKRIPSI_PELATIHAN_TYPE')->from('T_PELATIHAN')->
-		where('ID_BISNIS','1')->
-		where(" CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ")->
-		where_in('STATUS',$status)->get();				
+		$query = $this->db->select('T_PELATIHAN.*
+		,CONVERT(VARCHAR(17),T_PELATIHAN.TANGGAL_MULAI,113) as MULAI
+		,CONVERT(VARCHAR(17),T_PELATIHAN.TANGGAL_SELESAI,113) as SELESAI
+		,dbo.DESKRIPSI_PELATIHAN_TYPE(T_PELATIHAN.ID_TIPE) as DESKRIPSI_PELATIHAN_TYPE
+		,CONVERT(VARCHAR(17),T_PELATIHAN_LPJ.TANGGAL_REALISASI_MULAI,113) as LPJ_MULAI
+		,CONVERT(VARCHAR(17),T_PELATIHAN_LPJ.TANGGAL_REALISASI_SELESAI,113) as LPJ_SELESAI
+		,T_PELATIHAN_LPJ.DURASI_PELATIHAN as DURASI_LPJ
+		,T_PELATIHAN_LPJ.CSI_FINAL
+		,T_PELATIHAN_LPJ.CATATAN_TAMBAHAN
+		')->
+		from('T_PELATIHAN')->
+		join('T_PELATIHAN_LPJ','T_PELATIHAN.ID = T_PELATIHAN_LPJ.ID_PELATIHAN','LEFT')->
+		where('T_PELATIHAN.ID_BISNIS','1')->
+		where(" T_PELATIHAN.CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ")->
+		where_in('T_PELATIHAN.STATUS',$status)->get();				
 		
 		return $query->result();
 }

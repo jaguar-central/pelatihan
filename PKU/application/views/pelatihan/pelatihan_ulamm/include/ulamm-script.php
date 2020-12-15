@@ -38,7 +38,7 @@
 
 <script src="<?php echo base_url(); ?>assets/plugins/moment/moment.js"></script>
 
-<script src="http://cdn.datatables.net/plug-ins/1.10.13/dataRender/datetime.js"></script>
+<!-- <script src="http://cdn.datatables.net/plug-ins/1.10.13/dataRender/datetime.js"></script> -->
 
 
 <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>

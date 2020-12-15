@@ -62,11 +62,18 @@
 								data-pelatihankecamatan="'.$cus->KECAMATAN.'"								
 								data-pelatihanalamat="'.$cus->ALAMAT.'"
 								data-pelatihanpembicara="'.$cus->PEMBICARA.'"								
-								> Details</a>'; 
+								> Details Proposal</a>'; 
 						if ($cus->STATUS=='approved'){
 							echo '<a class= "dropdown-item" target="_blank" href="'.$this->config->item('jasper_report').'Pelatihan.pdf?ID='.$cus->ID.'"> Unduh Proposal</a>';
 						}
 						if ($cus->STATUS=='lpj_approved'){
+							echo '<a class="dropdown-item modallpjdetails" href="#" data-toggle="modal" data-target="#modallpjdetails" 
+							data-pelatihanid="'.$cus->ID.'"
+							data-pelatihantanggal="'.$cus->LPJ_MULAI.' - '.$cus->LPJ_SELESAI.'"
+							data-pelatihancsifinal="'.$cus->CSI_FINAL.'"								
+							data-pelatihancatatan="'.$cus->CATATAN_TAMBAHAN.'"
+							data-pelatihandurasi="'.$cus->DURASI_LPJ.'"
+							> Details Lpj</a>';
 							echo '<a class= "dropdown-item" target="_blank" href="'.$this->config->item('jasper_report').'Pelatihan.pdf?ID='.$cus->ID.'"> Unduh Proposal</a>';	
 							echo '<a class= "dropdown-item" target="_blank" href="'.$this->config->item('jasper_report').'Lpj.pdf?ID='.$cus->ID.'"> Unduh Lpj</a>';
 						}

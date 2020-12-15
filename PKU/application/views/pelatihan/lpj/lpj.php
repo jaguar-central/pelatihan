@@ -63,7 +63,7 @@
 
 					<div class="form-group row">
 						<label class="col-sm-2">Lampiran <span class="text-danger">*</span></label>
-						<div class="col-sm-4">
+						<div class="col-sm-10">
 							<input type="file" class="custom-file-input" id="lampiran" name="lampiran">
 							<label class="custom-file-label" for="lampiran">Pilih file</label>
 						</div>
