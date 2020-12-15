@@ -2,11 +2,17 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Report_model extends CI_Model {
 
-    public function select_project_charter()
+    public function select_project_charter_ulamm()
     {
-        $query = $this->db->query("select * from T_PROJECT_CHARTER where AKTIF=1 ");
+        $query = $this->db->query("select * from T_PROJECT_CHARTER where ID_TIPE_PELATIHAN IN (select ID from MS_PELATIHAN_TYPE where BISNIS='ULAMM') AND AKTIF=1 ");  
         return $query->result();
     }
+
+    public function select_project_charter_mekaar()
+    {
+        $query = $this->db->query("select * from T_PROJECT_CHARTER where ID_TIPE_PELATIHAN IN (select ID from MS_PELATIHAN_TYPE where BISNIS='MEKAAR') AND AKTIF=1 ");
+        return $query->result();
+    }    
 
 
     public function report_detail($bisnis)

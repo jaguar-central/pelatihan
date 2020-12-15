@@ -10,7 +10,7 @@ class Menu_model extends CI_Model {
         
         public function select_ms_sub_menu_by_id($menuid)
         {
-                $query = $this->db->query("select * from MS_SUB_MENU where ID_MS_MENU = '".$menuid."' ");
+                $query = $this->db->query("select * from MS_SUB_MENU where ID_MS_MENU = '".$menuid."' ORDER BY [ORDER] ");
                 return $query->result();
         }
 }

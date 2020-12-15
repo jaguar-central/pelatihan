@@ -93,11 +93,12 @@ $route['check_user'] 	= 'User/cek_authorization';
 $route['logout'] 		= 'User/process_signout';
 
 /* REPORT */
-$route['report/agenda_klasterisasi'] 		= 'Report/agenda_klasterisasi';
-$route['report/report_detail_ulamm'] 		= 'Report/report_detail_ulamm';
-$route['report/report_detail_mekaar'] 		= 'Report/report_detail_mekaar';
-$route['report/report_rekap_ulamm'] 		= 'Report/report_rekap_ulamm';
-$route['report/report_rekap_mekaar'] 		= 'Report/report_rekap_mekaar';
+$route['report/agenda_klasterisasi_ulamm'] 		= 'Report/agenda_klasterisasi_ulamm';
+$route['report/agenda_klasterisasi_mekaar'] 	= 'Report/agenda_klasterisasi_mekaar';
+$route['report/report_detail_ulamm'] 		    = 'Report/report_detail_ulamm';
+$route['report/report_detail_mekaar'] 		    = 'Report/report_detail_mekaar';
+$route['report/report_rekap_ulamm'] 		    = 'Report/report_rekap_ulamm';
+$route['report/report_rekap_mekaar'] 		    = 'Report/report_rekap_mekaar';
 
 
 
