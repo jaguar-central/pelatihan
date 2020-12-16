@@ -32,4 +32,10 @@ document.addEventListener('DOMContentLoaded', function() {
   calendar.render();
 });
 
+
+if (window.innerWidth <= 360 ) {
+    $('#calendar').hide();
+} 
+
+
 </script>

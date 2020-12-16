@@ -234,6 +234,8 @@ class Pelatihan extends MY_Controller
         $data["view"] 				= "pelatihan/gabungan/akbar";
         $data["script"] 			= "pelatihan/gabungan/include/akbar-script";			
 		$data["menu"] 				= $this->Menu_model->select_ms_menu();		
+		$data["pelatihan"] 			= $this->Pelatihan_model->select_pelatihan_pku_akabar_gabungan();	
+		
 					
         $this->load->view('layout/gabung', $data);
 	}

@@ -7,24 +7,20 @@ class Report extends MY_Controller
         parent::__construct();
     }
 
-    public function agenda_klasterisasi()    	    
+    public function agenda_klasterisasi_ulamm()    	    
     {
         $this->is_logged();		
         
         
     	
         $data["content"] = "Report";
-		$data["view"] = "report/agenda/agenda_klasterisasi";	
+		$data["view"] = "report/agenda/agenda_klasterisasi_ulamm";	
         $data["script"] = "report/agenda/include/agenda_klasterisasi-script";
         
         
 
-        $data["menu"] = $this->Menu_model->select_ms_menu();
-        // $data["latihan"] = $this->Dashboard_model->select_t_pelatihan();
-        // $data["kehadiran"] = $this->Dashboard_model->select_t_kehadiran();
-        // $data["nasabah"] = $this->Dashboard_model->select_t_jumlah_nasabah();
-        // $data["non_nasabah"] = $this->Dashboard_model->select_t_non_nasabah();        
-        $data["project_charter"] =$this->Report_model->select_project_charter();
+        $data["menu"] = $this->Menu_model->select_ms_menu();       
+        $data["project_charter"] =$this->Report_model->select_project_charter_ulamm();
 
         // echo '<pre>';
 		// print_r($data['agenda']);
@@ -33,6 +29,29 @@ class Report extends MY_Controller
         // var_dump($data);die();
         $this->load->view('layout/gabung', $data);
     }    
+
+    public function agenda_klasterisasi_mekaar()    	    
+    {
+        $this->is_logged();		
+        
+        
+    	
+        $data["content"] = "Report";
+		$data["view"] = "report/agenda/agenda_klasterisasi_mekaar";	
+        $data["script"] = "report/agenda/include/agenda_klasterisasi-script";
+        
+        
+
+        $data["menu"] = $this->Menu_model->select_ms_menu();       
+        $data["project_charter"] =$this->Report_model->select_project_charter_mekaar();
+
+        // echo '<pre>';
+		// print_r($data['agenda']);
+        // echo '</pre>';die;
+        
+        // var_dump($data);die();
+        $this->load->view('layout/gabung', $data);
+    }        
 
     public function report_detail_ulamm()    	    
     {

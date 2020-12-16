@@ -12,20 +12,27 @@
 			<div class="row">
 				<div class="col-lg-12">					
 					<div class="table-style">
+						<div class="p-3">
+							<a href="#"  data-toggle="modal" data-target="#add_user" class="btn btn-outline-primary">
+							<span class="btn-label"><i class="fa fa-plus"></i></span> PKU Akbar Gabungan
+							</a>
+						</div>    					
 						<table id="datatable" class="table table-bordered table-striped">
 							<thead>
 								<tr>
-									<th class="text-center">TITLE</th>
-									<th class="text-center">ACTION</th>
-									<th class="text-center">ACTION</th>
-									<th class="text-center">ACTION</th>
-									<th class="text-center">ACTION</th>
-									<th class="text-center">ACTION</th>
+									<th class="text-center">Judul Pelatihan Gabungan</th>
+									<th class="text-center">Action</th>
 								</tr>
 							</thead>
 							<tbody>
-						
-
+							<?php 
+							foreach($pelatihan as $data){
+								echo '<tr>';
+								echo '<td>'.$data->JUDUL_GABUNGAN.'</td>';
+								echo '<td>'.$data->JUDUL_GABUNGAN.'</td>';
+								echo '</tr>';
+							}
+							?>						
 							</tbody>
 						</table>						
 					</div>
