@@ -324,6 +324,21 @@ public function select_pelatihan_pku_akabar_gabungan()
 		return $query->result();
 }
 
+public function insert_pelatihan_pku_akabar_gabungan($data)
+{
+		$this->db->insert('T_PELATIHAN_AKBAR_GABUNGAN', $data);
+}
+
+public function select_pelatihan_pku_akabar()
+{
+		$query = $this->db->select('*')->
+		from('T_PELATIHAN')->
+		where('ID_TIPE=5')->get();				
+		
+		return $query->result();
+}
+
+
 }
 
 

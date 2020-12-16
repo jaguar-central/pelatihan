@@ -60,4 +60,48 @@
     $('#datatable').DataTable({
         "dom": "<'dom_datable'f>rt<'dom_datable col-md-6'i>"
     });
+
+
+    $("#add_pku_akbar_gabungan").submit(function(e){
+		e.preventDefault();        	
+		var formURL = "<?php echo base_url('pelatihan/post_pku_akbar_gabungan'); ?>";
+		var frmdata = new FormData(this);
+					
+		var xhr = $.ajax({
+			url: formURL,
+			type: 'POST',
+			data: frmdata,
+			processData: false,
+			contentType: false
+		});
+		xhr.done(function(data) {
+			var obj = $.parseJSON(data);		
+
+			if(obj.result == 'OK')
+			{
+				Swal.fire({
+				  position: 'center',
+				  icon: 'success',
+				  title: 'Pelatihan Akbar Gabungan',
+				  showConfirmButton: false,
+				  timer: 1500
+				})
+				setTimeout(function () {
+					window.location.href = '<?php echo base_url(); ?>pelatihan/gabungan';
+				}, 1600);								
+			}
+			if(obj.result == 'UP')
+			{
+				console.log(data);
+			}
+			if(obj.result == 'NG')
+			{
+				$("#m-ap-cab").html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a> '+obj.msg+'</div>');
+			}
+		});
+		xhr.fail(function() {
+			$("#loader_container").hide();
+			var failMsg = "Something error happened! as";
+		});	
+	});	    
 </script>

@@ -13,7 +13,7 @@
 				<div class="col-lg-12">					
 					<div class="table-style">
 						<div class="p-3">
-							<a href="#"  data-toggle="modal" data-target="#add_user" class="btn btn-outline-primary">
+							<a href="#"  data-toggle="modal" data-target="#akbarmodal" class="btn btn-outline-primary">
 							<span class="btn-label"><i class="fa fa-plus"></i></span> PKU Akbar Gabungan
 							</a>
 						</div>    					
