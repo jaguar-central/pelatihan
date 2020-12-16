@@ -232,11 +232,13 @@ class Pelatihan extends MY_Controller
 		
         $data["content"] 			= "Pelatihan";
         $data["view"] 				= "pelatihan/gabungan/akbar";
-        $data["script"] 			= "pelatihan/gabungan/include/akbar-script";			
+		$data["script"] 			= "pelatihan/gabungan/include/akbar-script";					
+		$data["modal"] 				= array("pelatihan/gabungan/modal/akbar-modal");
+
 		$data["menu"] 				= $this->Menu_model->select_ms_menu();		
-		$data["pelatihan"] 			= $this->Pelatihan_model->select_pelatihan_pku_akabar_gabungan();	
-		
-					
+		$data["pelatihan"] 			= $this->Pelatihan_model->select_pelatihan_pku_akabar_gabungan();
+		$data["pelatihan_akbar"] 	= $this->Pelatihan_model->select_pelatihan_pku_akabar();
+											
         $this->load->view('layout/gabung', $data);
 	}
 
@@ -1413,6 +1415,62 @@ class Pelatihan extends MY_Controller
 				);
 			}			
 
+		}
+		catch (Exception $e)
+		{
+			$output = array(
+				'result'  	=> 'NG',
+				'msg'		=> $e->getMessage()
+			);
+		}		
+		
+		echo json_encode($output);
+		exit;
+	}
+
+
+	public function post_pku_akbar_gabungan()
+	{
+		$this->is_logged();	
+
+		$output = array(
+			'result'  	=> 'OK',
+			'msg'		=> ''
+		);	
+
+		$judul_gabungan     = $this->security->xss_clean(strip_image_tags($this->input->post('judul_gabungan')));
+		$id_pelatihan       = $this->security->xss_clean(strip_image_tags($this->input->post('id_pelatihan')));
+		$check		       	= $this->security->xss_clean(strip_image_tags($this->input->post('check')));
+		$id_user			= $this->session->userdata('sess_user_idsdm');			
+		$id_pelatihan_all 	= '';
+
+		var_dump($check);die();
+
+		try
+		{
+
+			for ($i=0;$i<count($id_pelatihan);$i++){	
+
+				if($check[$i]=='on'){
+
+					$data_pelatihan = array ('ID_TIPE' => '13');
+					$where = array ('ID' => $id_pelatihan[$i]);
+
+					$this->Pelatihan_model->update_t_pelatihan($data_pelatihan,$where);
+
+					$id_pelatihan_all .= ','.$id_pelatihan[$i];
+
+				}
+			}
+
+			$data = array(
+				'ID_PELATIHAN' 		=> $id_pelatihan_all,
+				'JUDUL_GABUNGAN' 	=> $judul_gabungan,
+				'CREATED_BY' 		=> $id_user,
+				'CREATED_DATE' 		=> date('Y-m-d H:i:s'),
+			);
+
+			$this->Pelatihan_model->insert_pelatihan_pku_akabar_gabungan($data);
 		}
 		catch (Exception $e)
 		{

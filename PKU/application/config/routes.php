@@ -148,6 +148,7 @@ $route['pelatihan/get_paging_project_charter/(:any)']           = 'pelatihan/get
 
 $route['pelatihan/get_project_charter']                         = 'pelatihan/get_project_charter';
 $route['pelatihan/get_ket_approval']                            = 'pelatihan/get_ket_approval';
+$route['pelatihan/post_pku_akbar_gabungan']                     = 'pelatihan/post_pku_akbar_gabungan';
 
 
 /* GEOLOCATION */ 
