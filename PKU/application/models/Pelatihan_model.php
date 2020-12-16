@@ -314,6 +314,16 @@ public function cek_korwil_by_id_pelatihan($id){
 	return $query;   
 }	
 
+
+
+public function select_pelatihan_pku_akabar_gabungan()
+{
+		$query = $this->db->select('*')->
+		from('T_PELATIHAN_AKBAR_GABUNGAN')->get();				
+		
+		return $query->result();
+}
+
 }
 
 
