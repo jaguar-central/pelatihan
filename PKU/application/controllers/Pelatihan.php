@@ -1629,7 +1629,7 @@ class Pelatihan extends MY_Controller
 		$kode_cabang 	= ($_GET["columns"][3]['search']['value']!='') ? 'inisialcab:'.$_GET["columns"][3]['search']['value'] : NULL;
 		$kode_unit 		= ($_GET["columns"][4]['search']['value']!='') ? 'kodeunit:'.$_GET["columns"][4]['search']['value'] : NULL;
 		$tipe_kredit	= ($_GET["columns"][5]['search']['value']!='') ? 'tipekredit:'.$_GET["columns"][5]['search']['value'] : NULL;
-		$search 		= ($_GET["search"]["value"]!='') ? 'nama_nasabah:'.$_GET["search"]["value"] : NULL ;	
+		$search 		= ($_GET["search"]["value"]!='') ? 'namanasabah:'.$_GET["search"]["value"] : NULL ;	
 
 		$searching = array($sektor_ekonomi,$jenis_pinjaman,$jenis_program,$kode_cabang,$kode_unit,$tipe_kredit,$search);		
 		

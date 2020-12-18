@@ -70,26 +70,22 @@ class Nasabah extends MY_Controller
 
 	public function api_nasabah_ulamm()
 	{					
-		$param['sektor_ekonomi'] = $_GET["columns"][0]['search']['value'];
-		$param['jenis_pinjaman'] = $_GET["columns"][1]['search']['value'];
-		$param['jenis_program'] = $_GET["columns"][2]['search']['value'];
-		$param['cabang'] = $_GET["columns"][3]['search']['value'];
-		$param['unit'] = $_GET["columns"][4]['search']['value'];
-						
-		$param["start"] = isset($_GET["start"]) ? $_GET["start"] : 0;
-		$param["limit"] = isset($_GET["length"]) ? $_GET["length"] : 10;		
-		$param["search"] = isset($_GET["search"]["value"]) ? $_GET["search"]["value"] : NULL ;			
-		$param['count'] = 0;								
-				
-		$this->config->set_item('elastic_index', 'nasabah');		
-		if ($param["search"]!=NULL){
-			$debitur = $this->elastic->call('/_search?q=nama_nasabah:'.$param["search"].'&filter_path=hits.hits.*,aggregations.*');
-			$debitur_count = $this->elastic->call('_count?q=nama_nasabah:'.$param["search"]);			
-		}else{						
-			$debitur = $this->elastic->call('_search?from='.$param["start"].'&size='.$param["limit"].'&filter_path=hits.hits.*,aggregations.*');
-			$debitur_count = $this->elastic->call('_count');
-		}				
+		$this->config->set_item('elastic_index', 'nasabah');			
+		$search 		= ($_GET["search"]["value"]!='') ? 'namanasabah:'.$_GET["search"]["value"] : NULL ;					
 		
+		$start = isset($_GET["start"]) ? '&from='.$_GET["start"] : 0;
+		$limit = isset($_GET["length"]) ? '&size='.$_GET["length"] : 10;		
+		$filter_path 	= '&filter_path=hits.hits.*,aggregations.*';
+						
+				
+		if ($search!=NULL){
+			$debitur = $this->elastic->call('/_search?q='.$search.$start.$limit.$filter_path);
+			$debitur_count = $this->elastic->call('_count?q='.$search);
+		}else{
+			$debitur = $this->elastic->call('/_search?'.$start.$limit.$filter_path);
+			$debitur_count = $this->elastic->call('_count?');
+		}
+
 		if (isset($debitur->hits->hits)){
 			for ($i=0;$i<count($debitur->hits->hits);$i++){
 				$data["data"][$i] = $debitur->hits->hits[$i]->_source;
@@ -103,29 +99,30 @@ class Nasabah extends MY_Controller
 		}		
 		
 						
-		echo json_encode($data);		
+		echo json_encode($data);			
 	}
 
 	public function api_nasabah_mekaar()
 	{				
-		$param["start"] = isset($_GET["start"]) ? $_GET["start"] : 0;
-		$param["limit"] = isset($_GET["length"]) ? $_GET["length"] : 10;		
-		$param["search"] = isset($_GET["search"]["value"]) ? $_GET["search"]["value"] : NULL ;						
+		$this->config->set_item('elastic_index', 'debitur');			
+		$search 		= ($_GET["search"]["value"]!='') ? 'nama:'.$_GET["search"]["value"] : NULL ;					
+		
+		$start = isset($_GET["start"]) ? '&from='.$_GET["start"] : 0;
+		$limit = isset($_GET["length"]) ? '&size='.$_GET["length"] : 10;		
+		$filter_path 	= '&filter_path=hits.hits.*,aggregations.*';
 						
-		$this->config->set_item('elastic_index', 'debitur');		
-		if ($param["search"]!=NULL){
-			$debitur =  $this->elastic->call('/_search?q=nama:'.$param["search"].'&filter_path=hits.hits.*,aggregations.*');			
-			$debitur_count = $this->elastic->call('_count?q=nama:'.$param["search"]);	
-					
-		}else{						
-			$debitur = $this->elastic->call('_search?from='.$param["start"].'&size='.$param["limit"].'&filter_path=hits.hits.*,aggregations.*');
-			$debitur_count = $this->elastic->call('_count');
-		}				
+				
+		if ($search!=NULL){
+			$debitur = $this->elastic->call('/_search?q='.$search.$start.$limit.$filter_path);
+			$debitur_count = $this->elastic->call('_count?q='.$search);
+		}else{
+			$debitur = $this->elastic->call('/_search?'.$start.$limit.$filter_path);
+			$debitur_count = $this->elastic->call('_count?');
+		}
 
 		if (isset($debitur->hits->hits)){
 			for ($i=0;$i<count($debitur->hits->hits);$i++){
 				$data["data"][$i] = $debitur->hits->hits[$i]->_source;
-				
 			}	
 			$data["recordsTotal"] = $debitur_count->count;	
 			$data["recordsFiltered"] = $debitur_count->count;			
@@ -136,6 +133,6 @@ class Nasabah extends MY_Controller
 		}		
 		
 						
-		echo json_encode($data);
+		echo json_encode($data);	
 	}
 }
