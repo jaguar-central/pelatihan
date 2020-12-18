@@ -13,7 +13,7 @@
 				<div class="col-lg-12">					
 					<div class="table-style">
 						<div class="p-3">
-							<a href="#"  data-toggle="modal" data-target="#akbarmodal" class="btn btn-outline-primary">
+							<a href="#" data-toggle="modal" data-target="#akbarmodal" class="btn btn-outline-primary">
 							<span class="btn-label"><i class="fa fa-plus"></i></span> PKU Akbar Gabungan
 							</a>
 						</div>    					
@@ -29,7 +29,10 @@
 							foreach($pelatihan as $data){
 								echo '<tr>';
 								echo '<td>'.$data->JUDUL_GABUNGAN.'</td>';
-								echo '<td>'.$data->JUDUL_GABUNGAN.'</td>';
+								echo '<td class="text-center" >
+								<button type="button" class="btn btn-outline-info gabungan-view" data-toggle="modal" data-target="#akbarviewmodal" data-idakbargabungan="'.$data->ID.'" data-judul="'.$data->JUDUL_GABUNGAN.'" >View</button>
+								<a id="delete_akbar_gabungan" class="btn btn-outline-danger delete_akbar_gabungan" data-idakbargabungan="'.$data->ID.'" href="#" > Delete</a>
+								</td>'; 
 								echo '</tr>';
 							}
 							?>						

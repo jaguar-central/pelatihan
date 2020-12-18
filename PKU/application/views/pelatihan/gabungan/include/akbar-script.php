@@ -62,46 +62,79 @@
     });
 
 
-    $("#add_pku_akbar_gabungan").submit(function(e){
-		e.preventDefault();        	
-		var formURL = "<?php echo base_url('pelatihan/post_pku_akbar_gabungan'); ?>";
-		var frmdata = new FormData(this);
-					
-		var xhr = $.ajax({
-			url: formURL,
-			type: 'POST',
-			data: frmdata,
-			processData: false,
-			contentType: false
-		});
-		xhr.done(function(data) {
-			var obj = $.parseJSON(data);		
 
-			if(obj.result == 'OK')
-			{
-				Swal.fire({
-				  position: 'center',
-				  icon: 'success',
-				  title: 'Pelatihan Akbar Gabungan',
-				  showConfirmButton: false,
-				  timer: 1500
-				})
-				setTimeout(function () {
-					window.location.href = '<?php echo base_url(); ?>pelatihan/gabungan';
-				}, 1600);								
+    $(document).on("click", ".gabungan-view", function () {			
+        
+        $('#judul_gabungan_view').val($(this).data('judul'));	
+
+        $('#akbar_gabungan_view').DataTable().clear();
+		$('#akbar_gabungan_view').DataTable().destroy();
+
+        $('#akbar_gabungan_view').DataTable({			
+			"paging": true,
+			"processing": true,
+			"serverSide": false,
+			"ajax": {
+			"url" : '<?php echo base_url('pelatihan/get_akbar_gabungan/'); ?>'+$(this).data('idakbargabungan'),
+			"type" :'GET'                      
+			},
+			"columnDefs": [
+    			{ "className": "col-md-2", targets: "_all" },
+			],
+			"columns" : [
+				{ "data": "NO_PROPOSAL" },
+				{ "data": "NO_TRX" },
+				{ "data": "TITLE" },
+				{ "data": "TANGGAL_MULAI" },    
+				{ "data": "TANGGAL_SELESAI" },    
+            ],
+            "dom": "<'dom_datable'f>rt<'dom_datable col-md-6'i>",
+			"createdRow" : function (row, data, index) {
+				$(row).addClass("add-kehadiran-non-nasabah");      
 			}
-			if(obj.result == 'UP')
-			{
-				console.log(data);
-			}
-			if(obj.result == 'NG')
-			{
-				$("#m-ap-cab").html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a> '+obj.msg+'</div>');
-			}
-		});
-		xhr.fail(function() {
-			$("#loader_container").hide();
-			var failMsg = "Something error happened! as";
 		});	
-	});	    
+      
+    });	
+  
+
+
+    $(document).on("click", ".delete_akbar_gabungan", function () {					
+		var idakbargabungan = $(this).data('idakbargabungan');	
+		
+		Swal.fire({
+		  title: 'Apakah anda yakin?',
+		  text: "Hapus Pelatihan Akbar Gabungan",
+		  icon: 'question',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: 'Submit'
+		}).then((result) => {
+		  if (result.value) {				
+			$.post("delete_akbar_gabungan",{idakbargabungan: idakbargabungan}, function(data, status){
+				var obj = $.parseJSON(data);
+				if (obj.result=='OK'){
+					Swal.fire({
+					  position: 'center',
+					  icon: 'success',
+					  title: 'Pelatihan akbar gabungan telah dihapus.',
+					  showConfirmButton: false,
+					  timer: 1500
+					})
+					setTimeout(function () {
+						window.location.href = '<?php echo base_url(); ?>pelatihan/gabungan';
+					}, 1600);
+				}else{
+					Swal.fire({
+					  position: 'center',
+					  icon: 'error',
+					  title: obj.msg,
+					  showConfirmButton: false,
+					  timer: 2000
+					})					
+				}			
+			});	
+		  }
+		})									
+	});
 </script>
