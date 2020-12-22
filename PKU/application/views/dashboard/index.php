@@ -92,12 +92,16 @@
 
 
     <ul class="nav nav-tabs px-4">
+    <?php if (COUNT($top_ten_sub_sektor_mekaar)>0){ ?>
 			<li class="nav-item">
 				<a class="nav-link active" data-toggle="tab" href="#kehadiran_mekaar">Sektor Usaha Mekaar</a>
 			</li>
+    <?php } ?>
+    <?php if (COUNT($top_ten_sub_sektor_ulamm)>0){ ?>
 			<li class="nav-item">
 				<a class="nav-link" data-toggle="tab" href="#kehadiran_ulamm">Sektor Usaha Ulamm</a>
 			</li>
+    <?php } ?>
 		</ul>
 
 

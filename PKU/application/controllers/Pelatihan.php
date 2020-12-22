@@ -233,7 +233,10 @@ class Pelatihan extends MY_Controller
         $data["content"] 			= "Pelatihan";
         $data["view"] 				= "pelatihan/gabungan/akbar";
 		$data["script"] 			= "pelatihan/gabungan/include/akbar-script";					
-		$data["modal"] 				= array("pelatihan/gabungan/modal/akbar-modal");
+		$data["modal"] 				= array(
+										"pelatihan/gabungan/modal/akbar-modal",
+										"pelatihan/gabungan/modal/akbar-view-modal"
+										);
 
 		$data["menu"] 				= $this->Menu_model->select_ms_menu();		
 		$data["pelatihan"] 			= $this->Pelatihan_model->select_pelatihan_pku_akabar_gabungan();
@@ -1436,31 +1439,26 @@ class Pelatihan extends MY_Controller
 		$output = array(
 			'result'  	=> 'OK',
 			'msg'		=> ''
-		);	
+		);
 
 		$judul_gabungan     = $this->security->xss_clean(strip_image_tags($this->input->post('judul_gabungan')));
 		$id_pelatihan       = $this->security->xss_clean(strip_image_tags($this->input->post('id_pelatihan')));
-		$check		       	= $this->security->xss_clean(strip_image_tags($this->input->post('check')));
 		$id_user			= $this->session->userdata('sess_user_idsdm');			
 		$id_pelatihan_all 	= '';
 
-		var_dump($check);die();
+		// var_dump($id_pelatihan);die();
 
 		try
 		{
+			foreach($id_pelatihan as $data)
+			{
+				$data_pelatihan = array ('ID_TIPE' => '13');
+				$where = array ('ID' => $data);
 
-			for ($i=0;$i<count($id_pelatihan);$i++){	
+				$this->Pelatihan_model->update_t_pelatihan($data_pelatihan,$where);
 
-				if($check[$i]=='on'){
+				$id_pelatihan_all .= ','.$data;
 
-					$data_pelatihan = array ('ID_TIPE' => '13');
-					$where = array ('ID' => $id_pelatihan[$i]);
-
-					$this->Pelatihan_model->update_t_pelatihan($data_pelatihan,$where);
-
-					$id_pelatihan_all .= ','.$id_pelatihan[$i];
-
-				}
 			}
 
 			$data = array(
@@ -1631,7 +1629,7 @@ class Pelatihan extends MY_Controller
 		$kode_cabang 	= ($_GET["columns"][3]['search']['value']!='') ? 'inisialcab:'.$_GET["columns"][3]['search']['value'] : NULL;
 		$kode_unit 		= ($_GET["columns"][4]['search']['value']!='') ? 'kodeunit:'.$_GET["columns"][4]['search']['value'] : NULL;
 		$tipe_kredit	= ($_GET["columns"][5]['search']['value']!='') ? 'tipekredit:'.$_GET["columns"][5]['search']['value'] : NULL;
-		$search 		= ($_GET["search"]["value"]!='') ? 'nama_nasabah:'.$_GET["search"]["value"] : NULL ;	
+		$search 		= ($_GET["search"]["value"]!='') ? 'namanasabah:'.$_GET["search"]["value"] : NULL ;	
 
 		$searching = array($sektor_ekonomi,$jenis_pinjaman,$jenis_program,$kode_cabang,$kode_unit,$tipe_kredit,$search);		
 		
@@ -1892,6 +1890,20 @@ class Pelatihan extends MY_Controller
 	}
 
 
+	public function get_akbar_gabungan($id)
+	{
+
+		$data_id_pelatihan = $this->Pelatihan_model->select_pelatihan_pku_akabar_gabungan($id)[0]->ID_PELATIHAN;
+
+		$data["data"] = $this->Pelatihan_model->select_t_pelatihan_where_in_id(explode(',',$data_id_pelatihan));						
+		$total = COUNT($data["data"]);				
+		$data["recordsTotal"] = $total;	
+		$data["recordsFiltered"] = $total;		
+		
+		echo json_encode($data);	
+	}
+
+
 /*-------------------------------------CTRL API DELETE-------------------------------------*/	
 	public function delete_kehadiran()
 	{
@@ -1929,6 +1941,54 @@ class Pelatihan extends MY_Controller
 					);
 				$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
 			}			
+
+			$db_error = $this->db->error();
+
+			if (!empty($db_error['message'])) {
+				$output = array(
+					'result'  	=> 'NG',
+					'msg'		=> $db_error['message']
+				);
+			}			
+			
+		}		
+		catch (Exception $e)
+		{
+			$output = array(
+				'result'  	=> 'NG',
+				'msg'		=> $e->getMessage()
+			);
+		}
+		
+		echo json_encode($output);
+		exit;
+	}
+
+
+	public function delete_akbar_gabungan()
+	{
+		$this->is_logged();				
+		
+		$idakbargabungan = trim($this->security->xss_clean(strip_image_tags($this->input->post('idakbargabungan'))));											
+		
+		$output = array(
+			'result'  	=> 'OK',
+			'msg'		=> ''
+		);				
+		
+		try{
+			
+			$data_id_pelatihan = $this->Pelatihan_model->select_pelatihan_pku_akabar_gabungan($idakbargabungan)[0]->ID_PELATIHAN;
+
+			foreach (explode(',',$data_id_pelatihan) as $id_pelatihan){
+
+				$data_update 	= array('ID_TIPE' 	=> '5',	);			
+				$where_update	= array('ID' 		=> $id_pelatihan);			
+
+				$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
+			}
+
+			$this->Pelatihan_model->delete_akbar_gabungan(array('ID'	=> $idakbargabungan));
 
 			$db_error = $this->db->error();
 

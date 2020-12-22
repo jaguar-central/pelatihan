@@ -11,8 +11,8 @@
         <div class="modal-content">
             <div class="card card-signup card-plain">
                 <div class="modal-header">
-                    <div class="card-header card-header-primary text-center">
-                        <h4 class="card-title">Sistem Manajemen Pelatihan Usaha</h4>                   
+                    <div class="card-header card-header-primary text-center" style="margin:auto;">
+                        <h4 class="card-title">Sistem Informasi Manajemen Pelatihan Usaha</h4>                   
                     </div>
                 </div>       
 
@@ -28,34 +28,35 @@
                   
                                               
                 <form class="form" method="post" action="<?php base_url() ?>user/process_login">
-                    <div class="modal-body"></div>
-                    <p class="description text-center">Login</p>
-                        <div class="card-body">
+                    <div class="modal-body">
+						<p class="description text-center">Login - beta version</p>
+							<div class="card-body">
 
-                            <div class="form-group bmd-form-group">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                    <div class="input-group-text"><i class="material-icons">face</i></div>
-                                    </div>
-                                    <input type="text" class="form-control" name="username" placeholder="User Name..." required>
-                                </div>
-                            </div>
+								<div class="form-group bmd-form-group">
+									<div class="input-group">
+										<div class="input-group-prepend">
+										<div class="input-group-text"><i class="material-icons">face</i></div>
+										</div>
+										<input type="text" class="form-control" name="username" placeholder="User Name..." required>
+									</div>
+								</div>
 
-                            <div class="form-group bmd-form-group">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                    <div class="input-group-text"><i class="material-icons">lock_outline</i></div>
-                                    </div>
-                                    <input type="password" name="password" placeholder="Password..." class="form-control" required>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-center">
-                        <button class="btn btn-round btn-success" type="submit" >
-                                Login
-                        </button>
-                    </div>
+								<div class="form-group bmd-form-group">
+									<div class="input-group">
+										<div class="input-group-prepend">
+										<div class="input-group-text"><i class="material-icons">lock_outline</i></div>
+										</div>
+										<input type="password" name="password" placeholder="Password..." class="form-control" required>
+									</div>
+								</div>
+							</div>
+					</div>
+					<div class="modal-footer justify-content-center">
+						<button class="btn btn-round btn-success" type="submit" >
+								Login
+						</button>
+					</div>
+					
                 </form>                
             </div>
         </div>

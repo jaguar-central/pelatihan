@@ -16,7 +16,7 @@
                         <?php } ?>
 
                         <div class="section__content section__content--p30">
-                            <span>Sistem Informasi Manajemen Pelatihan</span>
+                            <span>Sistem Informasi Manajemen Pelatihan Usaha</span>
                          </div>
                          
                     </div>
@@ -156,7 +156,7 @@
             <!-- HEADER DESKTOP-->
             <header class="header-desktop d-none d-lg-block bg-success text-white">
                 <div class="section__content section__content--p30 ">                
-                    <span>Sistem Informasi Manajemen Pelatihan</span>
+                    <span>Sistem Informasi Manajemen Pelatihan Usaha</span>
                 </div>
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">

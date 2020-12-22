@@ -160,6 +160,10 @@ public function delete_temp_kehadiran($data)
                 $this->db->delete('TEMP_KEHADIRAN', $data);
         }
 
+		public function delete_akbar_gabungan($data)
+        {
+				$this->db->delete('T_PELATIHAN_AKBAR_GABUNGAN', $data);				
+        }
 
 public function paging_kehadiran_select_nasabah_ulamm($param)
         {							
@@ -338,6 +342,15 @@ public function select_pelatihan_pku_akabar()
 		return $query->result();
 }
 
+
+public function select_t_pelatihan_where_in_id($id)
+{
+		$query = $this->db->select('*')->
+		from('T_PELATIHAN')->	
+		where_in('ID',$id)->get();				
+		
+		return $query->result();
+}
 
 }
 
