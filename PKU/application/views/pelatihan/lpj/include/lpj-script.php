@@ -474,7 +474,17 @@ $(document).ready(function() {
 				
 				if(obj.result == 'OK')
 				{
-					window.location.href = '<?php echo base_url(); ?>pelatihan/<?php echo $this->uri->segment(4); ?>';
+					Swal.fire({
+					  position: 'center',
+					  icon: 'success',
+					  title: 'Pelatihan LPJ telah di submit',
+					  showConfirmButton: false,
+					  timer: 1500
+					})
+					setTimeout(function () {
+						window.location.href = '<?php echo base_url(); ?>pelatihan/<?php echo $this->uri->segment(4); ?>';
+					}, 1600);					
+					
 				}
 				if(obj.result == 'UP')
 				{

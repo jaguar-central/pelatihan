@@ -37,9 +37,12 @@ class Pelatihan extends MY_Controller
 		
 		$data['nasabah_grading'] = $this->Master_model->select_ms_nasabah_grading();				
 
-        // echo '<pre>';
-		// print_r($data['kecamatan']);
+		$data['openmodal'] = isset($_GET['openmodal']) ? $_GET['openmodal'] : '';
+
+		// echo '<pre>';
+		// print_r($data['openmodal']);
 		// echo '</pre>';die;
+
         $this->load->view('layout/gabung', $data);
 
 	}
@@ -74,7 +77,10 @@ class Pelatihan extends MY_Controller
 		$data['kabkot'] 		= $this->Master_model->select_ms_kabkot();
 		$data['kecamatan'] 		= $this->Master_model->select_ms_kecamatan();
 
-		$data['nasabah_grading'] = $this->Master_model->select_ms_nasabah_grading();			
+		$data['nasabah_grading'] = $this->Master_model->select_ms_nasabah_grading();		
+		
+		$data['openmodal'] = isset($_GET['openmodal']) ? $_GET['openmodal'] : '';
+		
         // echo '<pre>';
 		// print_r($data['kecamatan']);
 		// echo '</pre>';die;
@@ -112,16 +118,22 @@ class Pelatihan extends MY_Controller
         $data["content"] 	= "Pelatihan";
         $data["view"] 		= "pelatihan/history_mekaar/history_mekaar";
 		$data["script"] 	= "pelatihan/history_mekaar/include/history-mekaar-script";
-		$data["modal"] 		= array( "pelatihan/history_mekaar/modal/modaldetails"); 
+		$data["modal"] 		= array(
+								"pelatihan/history_mekaar/modal/modaldetails",
+								"pelatihan/history_mekaar/modal/modallpjdetails"
+								); 
 
         $data["menu"] 		= $this->Menu_model->select_ms_menu();
 		$data["pelatihan"] 	= $this->Pelatihan_model->select_t_pelatihan_mekaar_by_status(array('draft','submitted','approved','reject','lpj_draft','lpj_submitted','lpj_approved'));
+
 		$data["cabang"] 	= $this->Master_model->select_ms_cabang_ulamm();		
 		$data["region"] 	= $this->Master_model->select_ms_region_mekaar();
 
 		$data['provinsi'] 		= $this->Master_model->select_ms_provinsi();
 		$data['kabkot'] 		= $this->Master_model->select_ms_kabkot();
 		$data['kecamatan'] 		= $this->Master_model->select_ms_kecamatan();
+
+		
 		
 		$this->load->view('layout/gabung', $data);				
 	}
@@ -187,6 +199,8 @@ class Pelatihan extends MY_Controller
 		
 		$data["t_pelatihan"] = $this->Pelatihan_model->select_t_pelatihan_by_approval('submitted');
 
+		// var_dump($this->db->last_query());die();
+
 		$data["cabang"] 		= $this->Master_model->select_ms_cabang_ulamm();		
 		$data["region"] 		= $this->Master_model->select_ms_region_mekaar();
 
@@ -245,6 +259,21 @@ class Pelatihan extends MY_Controller
         $this->load->view('layout/gabung', $data);
 	}
 
+
+	public function open_report()
+	{
+		$url = $_GET['url'];
+		$ch = curl_init();
+		$timeout = 5;
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+		$data = curl_exec($ch);
+		curl_close($ch);		
+		var_dump($data);
+		// echo $data;	
+		
+	}
 
 /*-------------------------------------CTRL API POST-------------------------------------*/	
      public function post_pelatihan_proposal()
