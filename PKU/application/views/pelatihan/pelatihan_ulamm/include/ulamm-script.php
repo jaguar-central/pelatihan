@@ -79,6 +79,8 @@
     $(document).ready(function() {	
 
 
+		$( "#<?php echo $openmodal ?>" ).trigger( "click" );
+
 		if (screen.width<660){
 			$("#datatable").addClass("table-responsive"); 
 		}else{
@@ -342,7 +344,7 @@
 		$('#id_pelatihan').val($(this).data('pelatihanid'));													
 	});
 
-
+	
 
 	$(document).on("click", ".view_pelatihan", function () {
 		var pelatihantype 	= $(this).data('pelatihantype');						

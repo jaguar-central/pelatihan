@@ -68,6 +68,8 @@
 
     $(document).ready(function() {	
 
+		$( "#<?php echo $openmodal ?>" ).trigger( "click" );
+
 		if (screen.width<660){
 			$("#datatable").addClass("table-responsive"); 
 		}else{

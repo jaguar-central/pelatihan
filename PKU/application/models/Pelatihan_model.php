@@ -83,11 +83,23 @@ public function select_t_pelatihan_ulamm_by_status($status)
 		
 public function select_t_pelatihan_mekaar_by_status($status)
         {
-                $query = $this->db->select('*,CONVERT(VARCHAR(17),TANGGAL_MULAI,113) as MULAI,CONVERT(VARCHAR(17),TANGGAL_SELESAI,113) as SELESAI,dbo.DESKRIPSI_PELATIHAN_TYPE(ID_TIPE) as DESKRIPSI_PELATIHAN_TYPE')->from('T_PELATIHAN')->
-				where('ID_BISNIS','2')->
-				where(" CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ")->
-				where_in('STATUS',$status)->get();				
-                return $query->result();
+			$query = $this->db->select('T_PELATIHAN.*
+			,CONVERT(VARCHAR(17),T_PELATIHAN.TANGGAL_MULAI,113) as MULAI
+			,CONVERT(VARCHAR(17),T_PELATIHAN.TANGGAL_SELESAI,113) as SELESAI
+			,dbo.DESKRIPSI_PELATIHAN_TYPE(T_PELATIHAN.ID_TIPE) as DESKRIPSI_PELATIHAN_TYPE
+			,CONVERT(VARCHAR(17),T_PELATIHAN_LPJ.TANGGAL_REALISASI_MULAI,113) as LPJ_MULAI
+			,CONVERT(VARCHAR(17),T_PELATIHAN_LPJ.TANGGAL_REALISASI_SELESAI,113) as LPJ_SELESAI
+			,T_PELATIHAN_LPJ.DURASI_PELATIHAN as DURASI_LPJ
+			,T_PELATIHAN_LPJ.CSI_FINAL
+			,T_PELATIHAN_LPJ.CATATAN_TAMBAHAN
+			')->
+			from('T_PELATIHAN')->
+			join('T_PELATIHAN_LPJ','T_PELATIHAN.ID = T_PELATIHAN_LPJ.ID_PELATIHAN','LEFT')->
+			where('T_PELATIHAN.ID_BISNIS','2')->
+			where(" T_PELATIHAN.CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ")->
+			where_in('T_PELATIHAN.STATUS',$status)->get();	
+
+			return $query->result();
         }
 		
 		
@@ -111,15 +123,20 @@ public function select_t_pelatihan_by_approval($status)
 				$BISNIS = " = ".$this->session->userdata('sess_user_id_bisnis');
 			}
 
-
-			$query = $this->db->query("select *,dbo.ID_JENIS_NASABAH(ID_GRADING) as ID_JENIS_NASABAH
+			$q = "select *,dbo.ID_JENIS_NASABAH(ID_GRADING) as ID_JENIS_NASABAH
 			,dbo.MENIT_TO_JAM(DURASI_PELATIHAN) as JAM_MENIT
 			,dbo.DESKRIPSI_PELATIHAN_TYPE(ID_TIPE) as DESKRIPSI_PELATIHAN_TYPE 
 			from T_PELATIHAN 
 			where ID_BISNIS $BISNIS 
 			and STATUS='$status' 
-			and ISNULL(APPROVAL,'') in (SELECT APPROVAL_BY FROM MS_FLOW_APPROVAL WHERE ID_GROUP=".$this->session->userdata('sess_user_id_user_group').") 
-			and CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ");																
+			and ISNULL(APPROVAL,'') in (SELECT APPROVAL_BY FROM MS_FLOW_APPROVAL WHERE ID_GROUP=".$this->session->userdata('sess_user_id_user_group').")";
+
+			if ($this->session->userdata('sess_user_id_user_group')<6){
+				$q .=" and CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ";
+			}
+
+			$query = $this->db->query($q);			
+
             return $query->result();
         }
         

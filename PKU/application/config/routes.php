@@ -103,6 +103,9 @@ $route['report/report_rekap_mekaar'] 		    = 'Report/report_rekap_mekaar';
 
 
 
+
+
+
 /* API DATA NASABAH*/
 $route['nasabah/get_paging_nasabah_ulamm']      = 'nasabah/api_nasabah_ulamm';
 $route['nasabah/get_paging_nasabah_mekaar']     = 'nasabah/api_nasabah_mekaar';
@@ -157,3 +160,6 @@ $route['pelatihan/delete_akbar_gabungan'] 	                    = 'pelatihan/dele
 /* GEOLOCATION */ 
 $route['master/post_geolocation']                              = 'master/post_geolocation';
 $route['geolokasi/post_geolocation']                           = 'geolokasi';
+
+
+$route['pelatihan/open_report'] 		                            = 'pelatihan/open_report';
