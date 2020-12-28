@@ -1,0 +1,20 @@
+A.install dan check node js
+    command -v nvm
+    nvm --version
+    nvm ls
+    node --version
+    nvm install node
+    npm --version
+
+B.install express dan socket
+    npm install express --save
+    npm install  socket.io --save
+
+C.install pm2 untuk jalanin node js di background
+    npm install pm2@latest -g
+
+
+D.running app node js di background menggunakan pm2
+    langsung ke directory file
+    pm2 start server.js
+    pm2 stop server.js
