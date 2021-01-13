@@ -69,17 +69,11 @@
 
 	// });
 
-	$(document).on("click", ".add_project_charter", function () {	
-		var pelatihantype = $(this).data('pelatihantype');	
-		var pelatihantitle = $(this).data('pelatihantitle');    										
-		$('#type_klasterisasi').html('<option value="'+pelatihantype+'">'+pelatihantitle+'</option>');			
-		$('#modaladdprojectcharter').modal('show');
-	});	
-
     $(document).ready(function() {	
 
-
+		<?php if ($openmodal){ ?>
 		$( "#<?php echo $openmodal ?>" ).trigger( "click" );
+		<?php } ?>
 
 		if (screen.width<660){
 			$("#datatable").addClass("table-responsive"); 
@@ -111,6 +105,7 @@
 	});	
 	
 	$(document).on("click", ".add_pelatihan_project_charter", function () {
+		console.log('iya yg ini');
 		$('#add_pelatihan').trigger("reset");
 		var pelatihantype = $(this).data('pelatihantype');	
 		var pelatihantitle = $(this).data('pelatihantitle');
@@ -208,7 +203,7 @@
 		$('#provinsi_edit').val($(this).data('pelatihanprovinsi'));			
 
 		$.ajax({
-			url: "<?php echo base_url()?>master/get_kabkot",
+			url: "<?php echo base_url()?>master/get_kabkot_select",
 			data: "kode_provinsi="+$(this).data('pelatihanprovinsi')+"&select="+$(this).data('pelatihankabkot'),
 			cache: false,
 			success: function(data){				         
@@ -217,7 +212,7 @@
 		});		
 
 		$.ajax({
-			url: "<?php echo base_url()?>master/get_kecamatan",
+			url: "<?php echo base_url()?>master/get_kecamatan_select",
 			data: "kode_kabkot="+$(this).data('pelatihankabkot')+"&select="+$(this).data('pelatihankecamatan'),
 			cache: false,
 			success: function(data){				         
@@ -236,7 +231,7 @@
 			data: "pelatihanid="+$(this).data("pelatihanid")+"&tipe_modal=edit",
 			cache: false,
 			success: function(data){				         
-				$('#tbody_rab_edit').html('<tr class="d-none"><td ><input type="text" class="form-control" id="deskripsi_rab_edit" name="deskripsi_rab_edit[]" value=""></td><td ><input type="number" class="form-control" id="volume_rab_edit" name="volume_rab_edit[]"></td><td ><input type="number" class="form-control" id="unit_cost_rab_edit" name="unit_cost_rab_edit[]" value=""></td><td ><input type="number" class="form-control" id="total_cost_rab_edit" name="total_cost_rab_edit[]" value="" readonly=""></td><td><a class="table-remove-edit btn btn-outline-primary btn-sm" href="#"><i class="fas fa-trash"></i></a></td><td><a class="table-up-edit btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-up"></i></a><a class="table-down-edit btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-down"></i></a></td></tr> ');
+				$('#tbody_rab_edit').html('<tr class="d-none"><td ><input type="text" class="form-control" id="deskripsi_rab_edit" name="deskripsi_rab_edit[]" maxlength="50" value=""></td><td ><input type="number" class="form-control" id="volume_rab_edit" name="volume_rab_edit[]"></td><td ><input type="number" class="form-control" id="unit_cost_rab_edit" name="unit_cost_rab_edit[]" value=""></td><td ><input type="number" class="form-control" id="total_cost_rab_edit" name="total_cost_rab_edit[]" value="" readonly=""></td><td><a class="table-remove-edit btn btn-outline-primary btn-sm" href="#"><i class="fas fa-trash"></i></a></td><td><a class="table-up-edit btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-up"></i></a><a class="table-down-edit btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-down"></i></a></td></tr> ');
 				$('#tbody_rab_edit').append(data);    
 				calculate_grand_total_edit();
 			}
@@ -476,108 +471,4 @@
 		
 	});		
 
-
-
-
-
-
-	$(document).on("click", ".view_project_charter", function () {
-		var pelatihantype 	= $(this).data('pelatihantype');						
-		
-		$('#datatable_modalviewprojectcharter_ulamm').DataTable().clear();
-		$('#datatable_modalviewprojectcharter_ulamm').DataTable().destroy();
-
-		$('#datatable_modalviewprojectcharter_ulamm').DataTable({			
-			"paging": true,
-			"processing": true,
-			"serverSide": true,
-			"ajax": {
-			"url" : '<?php echo base_url('pelatihan/get_paging_project_charter/'); ?>'+pelatihantype,
-			"type" :'GET'                      
-			},
-			"columns" : [
-				{ "data": "TEMA_PROJECT_CHARTER" },  
-				{ "data": "ID", render: function (data, type, row)   
-					{
-					  var tombol_action = '<td>';   
-
-					  tombol_action +='<button type="button" class="btn btn-outline-info project_charter_edit" href="#" data-toggle="modal" data-target="#modaleditprojectcharter" '
-						+'data-tema="'+row.TEMA_PROJECT_CHARTER+'" '
-						// +'data-judul="'+row.JUDUL_PELATIHAN+'" '
-						// +'data-tanggal="'+row.TANGGAL+'" '
-						// +'data-cabang="'+row.CABANG_ULAMM+'" '
-						// +'data-alamat="'+row.ALAMAT+'" '
-						// +'data-budget="'+row.BUDGET+'" '
-						+'data-idtipepelatihan="'+row.ID_TIPE_PELATIHAN+'" '
-						+'data-tipedeskripsipelatihan="'+row.ID_TIPE_DESKRIPSI+'" '												
-						+'data-idprojectcharter="'+row.ID_PROJECT_CHARTER+'"> Edit</button>';
-
-					  tombol_action += '</td>';					  
-					  return tombol_action;
-					} 
-				},  					  
-
-			],
-			"dom": "<'dom_datable'f>rt<'dom_datable col-md-6'i>"
-		});	
-				
-										
-		$('#modalviewprojectcharter').modal({
-			show: true
-		}); 
-		
-	});
-	
-	
-
-	$(document).on("click", ".project_charter_edit", function () {			
-		
-		$('#type_klasterisasi_edit').html('<option value="'+$(this).data('idtipepelatihan')+'">'+$(this).data('tipedeskripsipelatihan')+'</option>');		
-		$('#tema_project_charter_edit').val($(this).data('tema'));	
-		$('#id_project_charter').val($(this).data('idprojectcharter'));	
-		
-		
-		
-		
-		$.ajax({
-			url: "<?php echo base_url()?>pelatihan/get_project_charter",
-			data: "idprojectcharter="+$(this).data("idprojectcharter"),
-			cache: false,
-			success: function(data){				         
-				$('#tbody_charter_modaledit').html('<tr class="d-none">'+
-				'<td><input type="text" class="form-control" id="judul_pelatihan_edit" name="judul_pelatihan[]" ></td>'+
-				'<td>'+
-				'<div class="input-group">'+
-										'<input type="date" class="form-control" id="tanggal_pelatihan_edit" name="tanggal_pelatihan[]">'+
-										'<input type="time" class="form-control" id="time_pelatihan_edit" name="time_pelatihan[]">'+
-										'<span class="input-group-addon">'+
-											'<span class="fa fa-calendar"></span>'+
-										'</span>'+
-									'</div>'+
-									'</td>'+								  
-									'<td >'+
-										'<select class="form-control" id="cabang_ulamm_edit" name="cabang_ulamm[]">'+
-											'<option value="">--pilih cabang--</option>'+
-												'<?php 
-												foreach ($cabang as $data_cabang){
-													echo '<option value="'.$data_cabang->KODE_CABANG.'">'.$data_cabang->KODE_CABANG.' - '.$data_cabang->DESKRIPSI.'</option>';                                                                    
-												}
-												?>'+										
-										'</select>'+
-									'</td>'+
-									'<td ><input type="text" class="form-control" id="alamat_pelatihan_edit" name="alamat_pelatihan[]" value=""></td>'+
-									'<td ><input type="text" class="form-control" id="budget_pelatihan_edit" name="budget_pelatihan[]" value=""></td>'+
-									'<td>'+
-									'<a class="table-remove-modaledit btn btn-outline-primary btn-sm" href="#"><i class="fas fa-trash"></i></a>'+
-									'</td>'+
-									'<td>'+                         
-									'<a class="table-up-modaledit btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-up"></i></a>'+   
-									'<a class="table-down-modaledit btn btn-outline-primary btn-sm" href="#"><i class="fas fa-arrow-circle-down"></i></a>'+              
-									'</td>'+
-								'</tr>    ');
-				$('#tbody_charter_modaledit').append(data);    
-			}
-		});	
-						
-	});	
 </script>     

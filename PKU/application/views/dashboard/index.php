@@ -39,6 +39,8 @@
 
  <!-- MAIN CONTENT-->
 <div class="main-content">
+<!-- <button id="mencoba_socket" class="btn btn-info">mencoba socket</button> -->
+
     <div class="welcome">
         <div class="container-fluid">
             <div class="row">
@@ -132,7 +134,7 @@
 
                   ?>       
                   <div class="col-md-4" >
-                    <div class="<?php echo $class[rand(0,4)];$x++; ?>" data-toggle="collapse" data-target="#<?php echo 'sektor_usaha'.$x; ?>">  
+                    <div class="<?php echo $class[rand(0,4)];$x++; ?>" data-toggle="collapse" data-target="#<?php echo 'sektor_usaha'.$x; ?>" style="cursor: pointer;">  
                     <i class="fas fa-address-book"></i>
                       <h3 class="text-white"><?php echo $data1['DESKRIPSI']; ?></h3>      
                       <div id="<?php echo 'sektor_usaha'.$x; ?>" class="collapse">
@@ -177,7 +179,7 @@
 
             ?>       
             <div class="col-md-4" >
-              <div class="<?php echo $class[rand(0,4)];$y++; ?>" data-toggle="collapse" data-target="#<?php echo 'sektor_usaha_ulamm'.$y; ?>">  
+              <div class="<?php echo $class[rand(0,4)];$y++; ?>" data-toggle="collapse" data-target="#<?php echo 'sektor_usaha_ulamm'.$y; ?>" style="cursor: pointer;">  
               <i class="fas fa-address-book"></i>
                 <h3 class="text-white"><?php echo $data_ulamm1['DESKRIPSI']; ?></h3>      
                 <div id="<?php echo 'sektor_usaha_ulamm'.$y; ?>" class="collapse">

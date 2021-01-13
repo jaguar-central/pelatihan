@@ -51,7 +51,56 @@ class Report extends MY_Controller
         
         // var_dump($data);die();
         $this->load->view('layout/gabung', $data);
-    }        
+    }
+    
+    
+    public function agenda_tunu()    	    
+    {
+        $this->is_logged();		
+        
+        
+    	
+        $data["content"] = "Report";
+		$data["view"] = "report/agenda/agenda_tunu";	
+        $data["script"] = "report/agenda/include/agenda-tunu-script";
+        
+        
+
+        $data["menu"] = $this->Menu_model->select_ms_menu();       
+        $data["project_charter"] =$this->Report_model->select_agenda_tunu();
+
+        // echo '<pre>';
+		// print_r($data['agenda']);
+        // echo '</pre>';die;
+        
+        // var_dump($data);die();
+        $this->load->view('layout/gabung', $data);
+    }
+
+
+    public function agenda_tunm()    	    
+    {
+        $this->is_logged();		
+        
+        
+    	
+        $data["content"] = "Report";
+		$data["view"] = "report/agenda/agenda_tunm";	
+        $data["script"] = "report/agenda/include/agenda-tunm-script";
+        
+        
+
+        $data["menu"] = $this->Menu_model->select_ms_menu();       
+        $data["project_charter"] =$this->Report_model->select_agenda_tunm();
+
+        // echo '<pre>';
+		// print_r($data['agenda']);
+        // echo '</pre>';die;
+        
+        // var_dump($data);die();
+        $this->load->view('layout/gabung', $data);
+    }
+
 
     public function report_detail_ulamm()    	    
     {

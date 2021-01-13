@@ -62,6 +62,7 @@
 									  <th class="col-md-2">No Proposal</th>
 									  <th class="col-md-3">No Trx</th>
 									  <th class="col-md-2">Judul</th>
+									  <th class="col-md-2">CABANG</th>
 									  <th class="col-md-2">Tanggal Mulai</th>
 									  <th class="col-md-2">Tanggal Selesai</th>
 									  <th></th>

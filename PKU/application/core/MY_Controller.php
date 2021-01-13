@@ -11,21 +11,21 @@ class MY_Controller extends CI_Controller
     {
 		parent::__construct();
 
-		$data_global['notification_count']='';
+		// $data_global['notification_count']='';
 
-		if ($this->session->userdata('logged_in')!=''){
-		$data_global['notification'] = $this->Master_model->notification();		
-		$data_global['notification_count'] = $this->Master_model->notification_count();
-		}
+		// if ($this->session->userdata('logged_in')!=''){
+		// $data_global['notification'] = $this->Master_model->notification();		
+		// $data_global['notification_count'] = $this->Master_model->notification_count();
+		// }
 
 		
-		if ($data_global['notification_count']==''){
-			$data_global['notification_count'] = 0;
-		}
+		// if ($data_global['notification_count']==''){
+		// 	$data_global['notification_count'] = 0;
+		// }
 
 		// var_dump($this->db->last_query());die();
 		
-		$this->load->vars($data_global);
+		// $this->load->vars($data_global);
 	}		
 	   
 

@@ -126,6 +126,7 @@ public function select_t_pelatihan_by_approval($status)
 			$q = "select *,dbo.ID_JENIS_NASABAH(ID_GRADING) as ID_JENIS_NASABAH
 			,dbo.MENIT_TO_JAM(DURASI_PELATIHAN) as JAM_MENIT
 			,dbo.DESKRIPSI_PELATIHAN_TYPE(ID_TIPE) as DESKRIPSI_PELATIHAN_TYPE 
+			,dbo.URL_LAMPIRAN_LPJ(ID) as URL_LAMPIRAN_LPJ
 			from T_PELATIHAN 
 			where ID_BISNIS $BISNIS 
 			and STATUS='$status' 
@@ -268,8 +269,7 @@ public function paging_t_project_charter($param)
 {
 	$query = $this->db->query("EXEC GET_PROJECT_CHARTER @START = '".$param["start"]."',@LIMIT = '".$param["limit"]."',@SEARCH = '".$param["search"]."'
 	,@TIPE = '".$param["tipe_pelatihan"]."'
-	,@IDUSER = '".$this->session->userdata('sess_user_id')."'
-	");
+	,@IDUSER = '".$this->session->userdata('sess_user_id')."'");
 	return $query->result();
 }	
 
@@ -279,9 +279,15 @@ public function select_t_project_charter_where($where)
 	return $query->result();
 }
 
-public function select_t_project_charter_by_id_project_charter($id)
+public function select_t_project_charter_per_tema($where)
 {
-	$query = $this->db->query("select * from T_PROJECT_CHARTER where ID_PROJECT_CHARTER='".$id."' and AKTIF=1 ");
+	$query = $this->db->distinct()->select('NO_PROJECT_CHARTER,TEMA_PROJECT_CHARTER')->from('T_PROJECT_CHARTER')->where($where);	
+	return $query->get()->result();
+}
+
+public function select_t_project_charter_by_no_project_charter($no)
+{
+	$query = $this->db->query("select * from T_PROJECT_CHARTER where NO_PROJECT_CHARTER='".$no."' and AKTIF=1 ");
 	return $query->result();
 }
 
@@ -293,6 +299,10 @@ public function select_t_project_charter_by_id($id)
 
 public function update_project_charter($data,$where){
 	$this->db->update('T_PROJECT_CHARTER', $data,$where);
+}	
+
+public function delete_project_charter($where){
+	$this->db->delete('T_PROJECT_CHARTER',$where);
 }	
 
 public function select_trx_no_reject_find_no_trx_reject($param)
@@ -354,7 +364,7 @@ public function select_pelatihan_pku_akabar()
 {
 		$query = $this->db->select('*')->
 		from('T_PELATIHAN')->
-		where('ID_TIPE=5')->get();				
+		where('ID_TIPE=5')->where("STATUS='lpj_approved'")->get();				
 		
 		return $query->result();
 }

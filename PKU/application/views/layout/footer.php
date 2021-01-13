@@ -198,4 +198,112 @@ function showError(error) {
 }
  
 </script>
+
 <!-- END CHECK GEOLOCATION -->
+
+<!-- START Socket Notification Client -->
+
+<script src="<?php echo base_url() ?>assets/js/socket.io.js"></script>
+
+<script>
+
+    //START GLOBAL SOCKET 
+
+    <?php if ($this->config->item('socket_on')=='on'){ ?>
+        let ipAddress = '<?php echo $this->config->item('socket_server'); ?>'; 
+
+        const socketIoAddress = ipAddress;
+
+        var connectionOptions =  {
+            "force new connection" : true,
+            "reconnectionAttempts": "Infinity", 
+            "timeout" : 10000,                  
+            "transports" : ["websocket"],
+            'multiplex': false
+        };
+
+        const socket = io(socketIoAddress,connectionOptions);
+    <?php } ?>
+    //END GLOBAL SOCKET 
+
+
+    $(function () {
+   
+        const reloadNotif = function () {
+            $.ajax({
+                url: "<?= base_url('notifsocket') ?>",
+                method: "GET",
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    
+                    
+                    console.log(data.notification_count);
+
+                    var notifikasi='';
+                    var notifikasi_note='';
+
+                    if (data.notification_count > 0){
+                        notifikasi='<span class="quantity">'+data.notification_count+'</span>';
+                    }else{
+                        notifikasi='<span class="quantity" style="background:black;">0</span>';
+                    }
+
+                    $("#notifikasi_socket_count").html(notifikasi);
+
+
+                    
+                    if (data.notification_count >= 3) {
+                        notifikasi_note ='<div class="notifi-dropdown js-dropdown" style=" height:500px;overflow-y: scroll;">';
+                    } else {
+                        notifikasi_note ='<div class="notifi-dropdown js-dropdown">';
+                    }
+
+
+                    notifikasi_note +='<div class="notifi__title">';
+                    if (data.notification_count > 0){
+                        notifikasi_note +='<p>Kamu memiliki '+data.notification_count+' Notifikasi</p>';
+                    } else {
+                        notifikasi_note +='<p>Tidak ada Notifikasi</p>';
+                    }
+                    notifikasi_note +='</div>';
+
+
+
+                    if (data.notification_count > 0){
+                        for (i=0;i<Object.keys(data.notification).length;i++) {
+
+                            var url = "'<?php echo base_url(); ?>"+data.notification[i].URL_APPROVAL+'';    
+
+                            notifikasi_note +='<div class="notifi__item">'+
+                                '<div class="'+data.notification[i].CLASS_APPROVAL+'">'+
+                                    '<i class="zmdi zmdi-file-text"></i>'+
+                                '</div>'+
+                                '<div class="content">'+
+                                    '<a onclick="window.location.href = '+url+' \' ">'+
+                                        '<p>'+data.notification[i].APPROVAL+'</p>'+
+                                        '<span class="date">'+data.notification[i].TANGGAL+'</span>'+
+                                    '</a>'+
+                                '</div>'+
+                            '</div>';
+                        }
+                    }
+
+
+                    $("#notifikasi_socket_messages").html(notifikasi_note);
+
+                },
+            });
+        }
+        reloadNotif();
+
+        <?php if ($this->config->item('socket_on')=='on'){ ?>
+        socket.on('reload', () => {
+            reloadNotif();
+        });
+        <?php } ?>
+
+    })
+
+</script>
+<!-- END Socket Notification Client -->

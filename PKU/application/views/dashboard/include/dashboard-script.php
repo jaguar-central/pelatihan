@@ -32,6 +32,13 @@
 <script type="text/javascript">	
 
 $(document).ready(function() {	
+
+    // $("#mencoba_socket").click(function () {
+    //     socket.emit('reload-notif');
+    // });
+
+
+
     var ctx_pelatihan = document.getElementById("dashboard_pelatihan");
     if (ctx_pelatihan) {
       ctx_pelatihan.height = 130;

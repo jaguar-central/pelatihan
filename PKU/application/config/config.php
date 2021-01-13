@@ -31,6 +31,9 @@ $config['base_url'] = $root;
 $config['jasper_report'] = 'http://10.61.3.124:8080/jasperserver/rest_v2/reports/reports/Pelatihan_new/';
 $config['elastic_server'] = 'http://10.61.3.198:9200';
 $config['baseSSOApi'] = 'http://appserverapache01.pnm.co.id/WebService/';
+
+$config['socket_server'] = 'http://localhost:3000';
+$config['socket_on'] = 'off';
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -241,7 +244,7 @@ $config['log_threshold'] = 4;
 | application/logs/ directory. Use a full server path with trailing slash.
 |
 */
-$config['log_path'] = '';
+$config['log_path'] = 'application/logs/';
 
 /*
 |--------------------------------------------------------------------------

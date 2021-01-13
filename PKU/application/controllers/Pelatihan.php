@@ -20,10 +20,7 @@ class Pelatihan extends MY_Controller
 									'pelatihan/pelatihan_ulamm/modal/modaladd',									
 									'pelatihan/pelatihan_ulamm/modal/modaldetails',
 									'pelatihan/pelatihan_ulamm/modal/modaledit',
-									'pelatihan/pelatihan_ulamm/modal/modalunggah',
-									'pelatihan/pelatihan_ulamm/modal/modaladdprojectcharter',					
-									'pelatihan/pelatihan_ulamm/modal/modalviewprojectcharter',
-									'pelatihan/pelatihan_ulamm/modal/modaleditprojectcharter'		
+									'pelatihan/pelatihan_ulamm/modal/modalunggah'
 								);
 		
         $data["menu"] 			= $this->Menu_model->select_ms_menu();
@@ -62,10 +59,7 @@ class Pelatihan extends MY_Controller
 									'pelatihan/pelatihan_mekaar/modal/modaladd',									
 									'pelatihan/pelatihan_mekaar/modal/modaldetails',
 									'pelatihan/pelatihan_mekaar/modal/modaledit',
-									'pelatihan/pelatihan_mekaar/modal/modalunggah',
-									'pelatihan/pelatihan_mekaar/modal/modaladdprojectcharter',								
-									'pelatihan/pelatihan_mekaar/modal/modalviewprojectcharter',
-									'pelatihan/pelatihan_mekaar/modal/modaleditprojectcharter'		
+									'pelatihan/pelatihan_mekaar/modal/modalunggah'	
 								);
 
 		$data["pelatihan_type"] = $this->Pelatihan_model->select_ms_pelatihan_type_mekaar();
@@ -259,6 +253,58 @@ class Pelatihan extends MY_Controller
         $this->load->view('layout/gabung', $data);
 	}
 
+    public function project_charter_ulamm()    	   
+    {
+		$this->is_logged();		
+    	
+        $data["content"] 		= "Pelatihan";
+        $data["view"] 			= "pelatihan/project_charter_ulamm/ulamm";
+		$data["script"] 		= "pelatihan/project_charter_ulamm/include/ulamm-script";
+		$data["modal"] 			= array(
+									'pelatihan/project_charter_ulamm/modal/modaladdprojectcharter',					
+									'pelatihan/project_charter_ulamm/modal/modalviewprojectcharter',
+									'pelatihan/project_charter_ulamm/modal/modaleditprojectcharter'		
+								);
+		
+        $data["menu"] 			= $this->Menu_model->select_ms_menu();
+		$data["pelatihan_type"] = $this->Pelatihan_model->select_ms_pelatihan_type_ulamm();       
+		$data["cabang"] 		= $this->Master_model->select_ms_cabang_ulamm();
+				
+
+		// echo '<pre>';
+		// print_r($data['openmodal']);
+		// echo '</pre>';die;
+
+        $this->load->view('layout/gabung', $data);
+
+	}
+	
+	public function project_charter_mekaar()    	    
+    {		
+		$this->is_logged();		
+		
+		
+    	
+        $data["content"] = "Pelatihan";
+        $data["view"] 	 = "pelatihan/project_charter_mekaar/mekaar";
+		$data["script"]  = "pelatihan/project_charter_mekaar/include/mekaar-script";
+		$data["menu"] 	 = $this->Menu_model->select_ms_menu();
+		$data["modal"] 	 = array(
+									'pelatihan/project_charter_mekaar/modal/modaladdprojectcharter',								
+									'pelatihan/project_charter_mekaar/modal/modalviewprojectcharter',
+									'pelatihan/project_charter_mekaar/modal/modaleditprojectcharter'		
+								);
+
+		$data["pelatihan_type"] = $this->Pelatihan_model->select_ms_pelatihan_type_mekaar();
+		$data["cabang"] 		= $this->Master_model->select_ms_cabang_ulamm();		
+			
+		
+        // echo '<pre>';
+		// print_r($data['kecamatan']);
+		// echo '</pre>';die;
+        $this->load->view('layout/gabung', $data);
+
+    }
 
 	public function open_report()
 	{
@@ -660,11 +706,11 @@ class Pelatihan extends MY_Controller
 		if ($_FILES['pilih_file']) 
 		{
 		$config['upload_path']	= './assets/dokumen/proposal';
-		$config['allowed_types']	= 'docx|jpg|jpeg|png|pdf';
+		$config['allowed_types']	= 'pdf';
 		$config['max_size']	= '8000';
 		$config['overwrite']	= TRUE;
 
-		$nama_file	= base64_encode($pelatihan_id.'_'.date('Ymd').'at'.date('His'));
+		$nama_file	= md5($pelatihan_id.'_'.date('Ymd').'at'.date('His'));
 		$config['file_name']	= $nama_file;
 		$this->upload->initialize($config);
 
@@ -909,11 +955,11 @@ class Pelatihan extends MY_Controller
 		);		
 
 		$config['upload_path']	= './assets/dokumen/lampiran_lpj';
-		$config['allowed_types']	= 'docx|jpg|jpeg|png|pdf';
+		$config['allowed_types']	= 'pdf';
 		$config['max_size']	= '8000';
 		$config['overwrite']	= TRUE;
 
-		$nama_file	= base64_encode($id_pelatihan.'_'.date('Ymd').'at'.date('His'));
+		$nama_file	= md5($id_pelatihan.'_'.date('Ymd').'at'.date('His'));
 		$config['file_name']	= $nama_file;
 		$this->upload->initialize($config);			
 
@@ -1347,10 +1393,10 @@ class Pelatihan extends MY_Controller
 			'msg'		=> ''
 		);			
 
-		// var_dump($this->input->post());die();
+		// var_dump($this->input->post());die();		
 
 		$id_project_charter 	= trim($this->security->xss_clean(strip_image_tags($this->input->post('id_project_charter'))));
-
+		$no_project_charter 	= trim($this->security->xss_clean(strip_image_tags($this->input->post('no_project_charter'))));
 		$id_user 				= $this->session->userdata('sess_user_idsdm');
 		$bisnis_pelatihan   	= trim($this->security->xss_clean(strip_image_tags($this->input->post('bisnis_pelatihan'))));
         $type_klasterisasi		= trim($this->security->xss_clean(strip_image_tags($this->input->post('type_klasterisasi'))));
@@ -1374,11 +1420,11 @@ class Pelatihan extends MY_Controller
 		if ($_FILES['filename']) 
 		{
 			$config['upload_path']	= './assets/dokumen/projectcharter';
-			$config['allowed_types']	= 'docx|jpg|jpeg|png|pdf';
+			$config['allowed_types']	= 'pdf';
 			$config['max_size']	= '8000';
 			$config['overwrite']	= TRUE;
 
-			$nama_file	= base64_encode($id_project_charter.'_'.date('Ymd').'at'.date('His'));
+			$nama_file	= md5($no_project_charter.'_'.date('Ymd').'at'.date('His'));
 			$config['file_name']	= $nama_file;			
 			$this->upload->initialize($config);
 
@@ -1389,7 +1435,7 @@ class Pelatihan extends MY_Controller
 			}else{
 				$output = array(
 					'result' => 'NG',
-					'msg'	 => $this->upload->display_errors().'nama->'.$nama_file
+					'msg'	 => $this->upload->display_errors()
 				);
 				echo json_encode($output);
 				exit();
@@ -1408,9 +1454,15 @@ class Pelatihan extends MY_Controller
 		
 		try
 		{
+
+			if (isset($id_project_charter)){
+				$where_delete = array('NO_PROJECT_CHARTER' => $no_project_charter);
+				$this->Pelatihan_model->delete_project_charter($where_delete);
+			}
+
 			for ($i=1;$i<count($judul_pelatihan);$i++){
 				$data = array(
-					'ID_PROJECT_CHARTER'	=> base64_encode($type_klasterisasi.date('Y-m-d H:i:s')),
+					'NO_PROJECT_CHARTER'	=> $no_project_charter,					
 					'ID_TIPE_PELATIHAN' 	=> $type_klasterisasi,
 					'TEMA_PROJECT_CHARTER' 	=> $tema_project_charter,
 					'FILE' 					=> $file,
@@ -1426,15 +1478,15 @@ class Pelatihan extends MY_Controller
 				
 
 				$where = array(
-					'ID_PROJECT_CHARTER'=> $id_project_charter,
+					'NO_PROJECT_CHARTER'=> $no_project_charter,
 					'AKTIF'=> '1',
 				);
 				
-				$project_charter = $this->Pelatihan_model->select_t_project_charter_where($where);	
+				// $project_charter = $this->Pelatihan_model->select_t_project_charter_where($where);	
 
-				if ($project_charter){
-					$this->Pelatihan_model->update_project_charter(array('AKTIF'=>'0'),$where);
-				}
+				// if ($project_charter){
+				// 	$this->Pelatihan_model->update_project_charter(array('AKTIF'=>'0'),$where);
+				// }
 				$this->Pelatihan_model->insert_t_project_charter($data);					
 			}
 
@@ -1524,7 +1576,7 @@ class Pelatihan extends MY_Controller
 		foreach ($rab as $data_rab) {
 			$data .= '
 			<tr class="">
-			<td><input type="text" class="form-control" id="deskripsi_rab_'.$tipe_modal.'" name="deskripsi_rab_'.$tipe_modal.'[]" value="'.$data_rab->URAIAN.'" ></td>
+			<td><input type="text" class="form-control" id="deskripsi_rab_'.$tipe_modal.'" name="deskripsi_rab_'.$tipe_modal.'[]" maxlength="50" value="'.$data_rab->URAIAN.'" ></td>
 			<td><input type="number" class="form-control" id="volume_rab_'.$tipe_modal.'" name="volume_rab_'.$tipe_modal.'[]"  value="'.$data_rab->VOLUME.'"></td>
 			<td><input type="number" class="form-control" id="unit_cost_rab_'.$tipe_modal.'" name="unit_cost_rab_'.$tipe_modal.'[]" value="'.$data_rab->UNIT_COST.'" ></td>
 			<td><input type="number" class="form-control" id="total_cost_rab_'.$tipe_modal.'" name="total_cost_rab_'.$tipe_modal.'[]" value="'.$data_rab->SUB_TOTAL_COST.'" readonly="" ></td>
@@ -1555,7 +1607,7 @@ class Pelatihan extends MY_Controller
 		foreach ($rab as $data_rab) {
 			$data .= '
 			<tr class="">
-			<td><input type="text" class="form-control" id="deskripsi_rab_'.$tipe_modal.'" name="deskripsi_rab_'.$tipe_modal.'[]" value="'.$data_rab->URAIAN.'" ></td>
+			<td><input type="text" class="form-control" id="deskripsi_rab_'.$tipe_modal.'" name="deskripsi_rab_'.$tipe_modal.'[]" maxlength="50" value="'.$data_rab->URAIAN.'" ></td>
 			<td><input type="number" class="form-control" id="volume_rab_'.$tipe_modal.'" name="volume_rab_'.$tipe_modal.'[]"  value="'.$data_rab->VOLUME.'"></td>
 			<td><input type="number" class="form-control" id="unit_cost_rab_'.$tipe_modal.'" name="unit_cost_rab_'.$tipe_modal.'[]" value="'.$data_rab->UNIT_COST.'" ></td>
 			<td><input type="number" class="form-control" id="total_cost_rab_'.$tipe_modal.'" name="total_cost_rab_'.$tipe_modal.'[]" value="'.$data_rab->SUB_TOTAL_COST.'" readonly="" ></td>
@@ -1576,14 +1628,14 @@ class Pelatihan extends MY_Controller
 
 	public function get_project_charter()
 	{
-		$id = $_GET['idprojectcharter'];
+		$noprojectcharter = $_GET['noprojectcharter'];
 
 		$where = array(
-			'ID_PROJECT_CHARTER'=> $id,
+			'NO_PROJECT_CHARTER'=> $noprojectcharter,
 			'AKTIF'=> '1',
 		);
 		
-		$project_charter = $this->Pelatihan_model->select_t_project_charter_where($where);		
+		$project_charter = $this->Pelatihan_model->select_t_project_charter_where($where);			
 		
 		$cabang = $this->Master_model->select_ms_cabang_ulamm();
 
@@ -1722,8 +1774,9 @@ class Pelatihan extends MY_Controller
 		$regionid 		= ($_GET["columns"][1]['search']['value']!='') ? 'regionid:'.$_GET["columns"][1]['search']['value'] : NULL;		
 		$areaid 		= ($_GET["columns"][2]['search']['value']!='' && $_GET["columns"][2]['search']['value']!='null') ? 'areaid:'.$_GET["columns"][2]['search']['value'] : NULL;
 		$siklus 		= ($_GET["columns"][3]['search']['value']!='') ? 'siklus:'.$_GET["columns"][3]['search']['value'] : NULL;
+		$cabangid 		= ($_GET["columns"][4]['search']['value']!='') ? 'cabangid:'.$_GET["columns"][4]['search']['value'] : NULL;
 
-		$searching = array($sektor_ekonomi,$regionid,$areaid,$search,$siklus);	
+		$searching = array($sektor_ekonomi,$regionid,$areaid,$search,$siklus,$cabangid);	
 
 		$this->config->set_item('elastic_index', 'debitur');	
 		
@@ -1830,12 +1883,12 @@ class Pelatihan extends MY_Controller
 			'AKTIF'=> '1',
 		);
 		
-		$project_charter = $this->Pelatihan_model->select_t_project_charter_where($where);					
+		$project_charter = $this->Pelatihan_model->select_t_project_charter_per_tema($where);					
 		$return= "<option value=''>--pilih tema project charter--</option>";
 			
 		if ($project_charter){
 			foreach ($project_charter as $data) {
-				$return .="<option value='$data->ID_PROJECT_CHARTER' >$data->TEMA_PROJECT_CHARTER</option>";
+				$return .="<option value='$data->NO_PROJECT_CHARTER' >$data->NO_PROJECT_CHARTER - $data->TEMA_PROJECT_CHARTER</option>";
 			}
 		}else{
 			$return = "<option value=''>--project charter belum di input--</option>";
@@ -1849,9 +1902,9 @@ class Pelatihan extends MY_Controller
 
 	public function get_data_project_charter()
 	{
-		$id = $_GET['id_project_charter'];
+		$no = $_GET['no_project_charter'];
 
-		$project_charter = $this->Pelatihan_model->select_t_project_charter_by_id_project_charter($id);	
+		$project_charter = $this->Pelatihan_model->select_t_project_charter_by_no_project_charter($no);	
 
 		$return= "<option value=''>--pilih judul project charter--</option>";
 			
@@ -1884,10 +1937,10 @@ class Pelatihan extends MY_Controller
 		$param["start"] = isset($_GET["start"]) ? $_GET["start"] : 0;
 		$param["limit"] = isset($_GET["length"]) ? $_GET["length"] : 10;		
 		$param["tipe_pelatihan"] 	= isset($tipe) ? $tipe : NULL ;				
-		$param["search"] 			= isset($_GET["search"]["value"]) ? $_GET["search"]["value"] : NULL ;			
-		$param['count'] = 0;						
+		$param["search"] 			= isset($_GET["search"]["value"]) ? $_GET["search"]["value"] : NULL ;							
 
-		$data["data"] = $this->Pelatihan_model->paging_t_project_charter($param);				
+		$data["data"] = $this->Pelatihan_model->paging_t_project_charter($param);	
+						
 		$param['count'] = 1;				
 		$total = COUNT($data["data"]);				
 		$data["recordsTotal"] = $total;	
@@ -1932,6 +1985,12 @@ class Pelatihan extends MY_Controller
 		echo json_encode($data);	
 	}
 
+	public function get_no_project_charter()
+	{
+		$no = $this->db->query("SELECT CONCAT('PC-',NEXT VALUE FOR PROJECT_CHARTER,'/',dbo.MONTH_TO_ROMAN(GETDATE()),'/',YEAR(GETDATE())) as NO_PROJECT_CHARTER")->row()->NO_PROJECT_CHARTER;
+
+		echo $no;
+	}
 
 /*-------------------------------------CTRL API DELETE-------------------------------------*/	
 	public function delete_kehadiran()

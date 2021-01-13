@@ -49,10 +49,10 @@
                             foreach ($report as $data){
                                 echo '<tr>';
                                 echo '<td>'.$data->KODE_CABANG.' - '.$data->DESKRIPSI.'</td>';
-                                echo '<td>'.$data->PPNM_PELATIHAN.'</td>';
-                                echo '<td>'.$data->PPNM_PESERTA.'</td>';
                                 echo '<td>'.$data->TUNM_PELATIHAN.'</td>';
                                 echo '<td>'.$data->TUNM_PESERTA.'</td>';
+                                echo '<td>'.$data->PPNM_PELATIHAN.'</td>';
+                                echo '<td>'.$data->PPNM_PESERTA.'</td>';
                                 echo '<td>'.$data->SEKTORAL_PELATIHAN.'</td>';
                                 echo '<td>'.$data->SEKTORAL_PESERTA.'</td>';
                                 echo '<td>'.$data->TERITORIAL_PELATIHAN.'</td>';

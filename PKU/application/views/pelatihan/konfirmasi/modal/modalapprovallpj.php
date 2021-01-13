@@ -30,6 +30,9 @@
 				<div class="form-group row keterangan col-md-8 offset-md-2">	
 				</div>								
 
+				<div class="form-group row download">
+				</div>				
+
 				<div class="form-group row">
 
 					<label class="col-sm-2">Catatan <span class="text-danger">*</span></label>
@@ -92,6 +95,10 @@
 			
 			if(obj.result == 'OK')
 			{
+				<?php if ($this->config->item('socket_on')=='on'){ ?>
+				socket.emit('broadcast-notif');
+				<?php } ?>
+				
 				Swal.fire({
 					position: 'center',
 					icon: 'success',

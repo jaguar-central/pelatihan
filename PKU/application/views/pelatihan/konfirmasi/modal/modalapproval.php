@@ -128,6 +128,10 @@
 			
 			if(obj.result == 'OK')
 			{
+				<?php if ($this->config->item('socket_on')=='on'){ ?>
+				socket.emit('broadcast-notif');
+				<?php } ?>
+
 				Swal.fire({
 					position: 'center',
 					icon: 'success',

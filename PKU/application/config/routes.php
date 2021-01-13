@@ -50,6 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 // $route['default_controller'] = 'dashboard';
+
 $route['default_controller']        = 'User/login';
 $route['login']                     = 'User/login';
 $route['user/process_login']        = 'User/process_login';
@@ -64,14 +65,16 @@ $route['dashboard']	                = 'dashboard';
 
 
 /* PELATIHAN */
-$route['pelatihan/ulamm'] 			    = 'pelatihan/proposal_ulamm';
-$route['pelatihan/mekaar'] 			    = 'pelatihan/proposal_mekaar';
-$route['pelatihan/history_ulamm'] 		= 'pelatihan/history_ulamm';
-$route['pelatihan/history_mekaar'] 		= 'pelatihan/history_mekaar';
-$route['pelatihan/konfirmasi'] 		    = 'pelatihan/konfirmasi_proposal';
-$route['pelatihan/konfirmasi_lpj'] 	    = 'pelatihan/konfirmasi_lpj';
-$route['pelatihan/lpj/(:any)']   		= 'pelatihan/lpj/$1';
-$route['pelatihan/gabungan']   		    = 'pelatihan/gabungan';
+$route['pelatihan/ulamm'] 			        = 'pelatihan/proposal_ulamm';
+$route['pelatihan/mekaar'] 			        = 'pelatihan/proposal_mekaar';
+$route['pelatihan/history_ulamm'] 		    = 'pelatihan/history_ulamm';
+$route['pelatihan/history_mekaar'] 		    = 'pelatihan/history_mekaar';
+$route['pelatihan/konfirmasi'] 		        = 'pelatihan/konfirmasi_proposal';
+$route['pelatihan/konfirmasi_lpj'] 	        = 'pelatihan/konfirmasi_lpj';
+$route['pelatihan/lpj/(:any)']   		    = 'pelatihan/lpj/$1';
+$route['pelatihan/gabungan']   		        = 'pelatihan/gabungan';
+$route['pelatihan/project_charter_ulamm']   = 'pelatihan/project_charter_ulamm';
+$route['pelatihan/project_charter_mekaar'] 	= 'pelatihan/project_charter_mekaar';
 
 /* NASABAH */
 $route['nasabah/ulamm'] 		= 'nasabah/nasabah_ulamm';
@@ -117,7 +120,9 @@ $route['master/get_area_mekaar']                = 'master/get_area_mekaar';
 $route['master/get_cabang_mekaar']              = 'master/get_cabang_mekaar';
 $route['master/get_grading']              		= 'master/get_grading';
 $route['master/get_kabkot']              		= 'master/get_kabkot';
+$route['master/get_kabkot_select']              = 'master/get_kabkot_select';
 $route['master/get_kecamatan']              	= 'master/get_kecamatan';
+$route['master/get_kecamatan_select']           = 'master/get_kecamatan_select';
 $route['master/get_list_nasabah_grading']       = 'master/get_list_nasabah_grading';
 
 
@@ -163,3 +168,10 @@ $route['geolokasi/post_geolocation']                           = 'geolokasi';
 
 
 $route['pelatihan/open_report'] 		                            = 'pelatihan/open_report';
+
+
+/* Notif Socket */
+$route['notifsocket'] 		                            = 'notifsocket';
+
+
+

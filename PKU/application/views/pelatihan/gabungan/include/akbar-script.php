@@ -85,6 +85,7 @@
 				{ "data": "NO_PROPOSAL" },
 				{ "data": "NO_TRX" },
 				{ "data": "TITLE" },
+				{ "data": "CABANG_ULAMM" },
 				{ "data": "TANGGAL_MULAI" },    
 				{ "data": "TANGGAL_SELESAI" },    
             ],

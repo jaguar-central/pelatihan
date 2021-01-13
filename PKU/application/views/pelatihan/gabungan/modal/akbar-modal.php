@@ -67,6 +67,7 @@
 									  <th class="col-md-2">No Proposal</th>
 									  <th class="col-md-3">No Trx</th>
 									  <th class="col-md-2">Judul</th>
+									  <th class="col-md-2">Cabang</th>
 									  <th class="col-md-2">Tanggal Mulai</th>
 									  <th class="col-md-2">Tanggal Selesai</th>
 									  <th></th>
@@ -80,7 +81,8 @@
                                       echo '<td><input type="checkbox" id="id_pelatihan" name="id_pelatihan[]" value="'.$data_akbar->ID.'" ></td>';
                                       echo '<td>'.$data_akbar->NO_PROPOSAL.'</td>';
                                       echo '<td>'.$data_akbar->NO_TRX.'</td>';
-                                      echo '<td>'.$data_akbar->TITLE.'</td>';
+									  echo '<td>'.$data_akbar->TITLE.'</td>';
+									  echo '<td>'.$data_akbar->CABANG_ULAMM.'</td>';
                                       echo '<td>'.$data_akbar->TANGGAL_MULAI.'</td>';
                                       echo '<td>'.$data_akbar->TANGGAL_SELESAI.'</td>';
                                       echo '</tr>';

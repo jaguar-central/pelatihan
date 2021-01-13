@@ -44,13 +44,13 @@
 <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/timepicker/bootstrap-timepicker.min.js"></script>
 
+<!--
+<script src="<?php //echo base_url() ?>assets/js/googlejs.js"></script>
 
-<script src="<?php echo base_url() ?>assets/js/googlejs.js"></script>
-
-<script src="<?php echo base_url() ?>assets/js/locationpicker.jquery.min.js"></script>
+<script src="<?php //echo base_url() ?>assets/js/locationpicker.jquery.min.js"></script>
 
 <script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places&key=AIzaSyCwGoo1jtr3HgU66bulwQ6qDI4CJqpgJjU"></script>
-
+-->
 
 <script type="text/javascript">
     $(document).ready(function() {	
@@ -132,5 +132,11 @@
 				$('.keterangan').html(data)           
 			}
 		});		
+
+		$('.download').html('<label class="col-sm-2">View Lampiran </label>'+
+		'<div class="col-sm-8">'+
+			'<a class="btn" href="<?php echo base_url(); ?>assets/'+$(this).data('urllampiranlpj')+'" target="_blank"><i class="fa fa-download"></i> View</a>'+
+		'</div>');
+
 	});	
 </script>

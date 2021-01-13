@@ -314,17 +314,19 @@ $(document).ready(function() {
 		});
 
 
-		$(document).on("change", "#sektor_ekonomi_mekaar,#regional_mekaar,#area_mekaar,#siklus_kredit", function () {			
+		$(document).on("change", "#sektor_ekonomi_mekaar,#regional_mekaar,#area_mekaar,#cabang_mekaar,#siklus_kredit", function () {			
 			var sektor_ekonomi_mekaar 	= $('#sektor_ekonomi_mekaar').val();			
 			var regional_mekaar 		= $('#regional_mekaar').val();			
-			var area_mekaar 			= $('#area_mekaar').val();			
-			var siklus_kredit 			= $('#siklus_kredit').val();			
+			var area_mekaar 			= $('#area_mekaar').val();				
+			var siklus_kredit 			= $('#siklus_kredit').val();		
+			var cabang_mekaar 			= $('#cabang_mekaar').val();			
 					
 			table_kehadiran_mekaar.clear();
 			table_kehadiran_mekaar.column(0).search( sektor_ekonomi_mekaar=='0' ? '' : sektor_ekonomi_mekaar   );
 			table_kehadiran_mekaar.column(1).search( regional_mekaar=='0' ? '' : regional_mekaar   );
-			table_kehadiran_mekaar.column(2).search( area_mekaar=='0' ? '' : area_mekaar   );
+			table_kehadiran_mekaar.column(2).search( area_mekaar=='0' ? '' : area_mekaar   );			
 			table_kehadiran_mekaar.column(3).search( siklus_kredit=='0' ? '' : siklus_kredit   );
+			table_kehadiran_mekaar.column(4).search( cabang_mekaar=='0' ? '' : cabang_mekaar   );
 
 			table_kehadiran_mekaar.clear().draw(false);
 		});				
@@ -697,4 +699,17 @@ $(document).ready(function() {
 			});
 			
 	});
+	
+
+	$('#area_mekaar').on('change', function (e) {			
+			$.ajax({
+				url: "<?php echo base_url()?>master/get_cabang_mekaar",
+				data: "kode_area="+$("#area_mekaar").val(),
+				cache: false,
+				success: function(data){				         
+					$('#cabang_mekaar').html(data)           
+				}
+			});
+			
+	});	
 </script>       

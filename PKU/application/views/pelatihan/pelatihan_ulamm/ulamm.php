@@ -24,7 +24,6 @@
 								$klasterisasi = array(3,4);	
 								// var_dump($pelatihan_type);					
 								foreach ($pelatihan_type as $cus){
-									if ($this->session->userdata('sess_user_id_user_group')!=4){ //untuk pic cabang
 										echo '<tr>';
 										echo '<td>'.$cus->TITLE.'</td>'; 								
 										echo '<td class="text-center ">';	
@@ -35,16 +34,7 @@
 											echo '<button type="button" class="btn btn-outline-success col-md-4 add_pelatihan" data-toggle="modal" data-target="#modaladd" data-pelatihantype="'.$cus->ID.'" data-pelatihantitle="'.$cus->TITLE.'"><span class="btn-label"><i class="fas fa-pencil-alt fa-fw"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add</button>'; 					
 										}
 										echo '</td>';
-										echo '</tr>';
-									}else if ($this->session->userdata('sess_user_id_user_group')==4 && in_array($cus->ID,$klasterisasi)){ //untuk pic pusat
-										echo '<tr>';
-										echo '<td>'.$cus->TITLE.'</td>'; 								
-										echo '<td class="text-center">';										
-										echo '<button type="button" class="btn btn-outline-info col-md-4 view_project_charter" data-pelatihantype="'.$cus->ID.'" ><span class="btn-label"><i class="fa fa-eye"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;View Project Charter</button>&nbsp;&nbsp;';																			
-										echo '<button type="button" class="btn btn-outline-success col-md-4 add_project_charter"
-										data-toggle="modal" data-target="#modaladdklasterisasi" data-pelatihantype="'.$cus->ID.'" data-pelatihantitle="'.$cus->TITLE.'"><span class="btn-label"><i class="fas fa-pencil-alt fa-fw"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add Project Charter</button></td>'; 																				
-										echo '</tr>';
-									}
+										echo '</tr>';									
 								}
 								?>
 
