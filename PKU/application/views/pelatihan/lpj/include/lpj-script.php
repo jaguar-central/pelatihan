@@ -187,6 +187,7 @@ $(document).ready(function() {
 			  { "data": "nasabah_id", render: function (data, type, row) 
                 {
 				  return '<input type="hidden" class="form-control" id="sektor_ekonomi" name="sektor_ekonomi[]" value="'+row.sid_sektor_ekonomi+'">'			
+				  +'<input type="hidden" class="form-control" id="plafond" name="plafond[]" value="'+row.jml_pinjaman+'">'
                   +'<input type="hidden" class="form-control" id="id_nasabah" name="id_nasabah[]" value="'+row.nasabah_id+'">'+row.nasabah_id;
                 } 
               },				
@@ -270,6 +271,7 @@ $(document).ready(function() {
                 {
 				  return '<input type="hidden" class="form-control" id="sektor_ekonomi" name="sektor_ekonomi[]" value="'+row.sektor_ekonomi+'">'
 				  +'<input type="hidden" class="form-control" id="bisnis" name="bisnis[]" value="MEKAAR">'
+				  +'<input type="hidden" class="form-control" id="plafond" name="plafond[]" value="'+row.plafond+'">'
 				  +'<input type="hidden" class="form-control" id="id_nasabah" name="id_nasabah[]" value="'+row.nasabahid+'">'
 				  +'<input type="hidden" class="form-control" id="regionid" name="regionid[]" value="'+row.regionid+'">'
 				  +'<input type="hidden" class="form-control" id="ktp" name="ktp[]" value="'+row.noktp+'">'+row.noktp;
