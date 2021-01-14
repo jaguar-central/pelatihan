@@ -1,3 +1,0 @@
-# pelatihan
-# pelatihan
-# pelatihan
