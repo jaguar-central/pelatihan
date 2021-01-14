@@ -18,6 +18,7 @@
 									<th class="text-center" rowspan="2">Tipe Debitur</th>
 									<th class="text-center" rowspan="2">Nasabah ID</th>
                                     <th class="text-center" rowspan="2">Nama Nasabah</th>
+                                    <th class="text-center" rowspan="2">Plafond Nasabah</th>
                                     <th class="text-center" rowspan="2">Wilayah</th>
                                     <th class="text-center" rowspan="2">Cabang Ulamm</th>
                                     <th class="text-center" rowspan="2">Unit Ulamm</th>
@@ -45,6 +46,7 @@
                                 echo '<td>'.$data->NASABAH_TIPE.'</td>';
                                 echo '<td>'.$data->ID_NASABAH.'</td>';
                                 echo '<td>'.$data->NAMA.'</td>';
+                                echo '<td>'.$data->PLAFOND.'</td>';
                                 echo '<td>'.$data->WILAYAH.'</td>';
                                 echo '<td>'.$data->CABANG_ULAMM.'</td>';
                                 echo '<td>'.$data->UNIT_ULAMM.'</td>';

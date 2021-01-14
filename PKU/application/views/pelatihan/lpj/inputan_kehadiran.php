@@ -202,7 +202,7 @@
                         <table id="datatable_kehadiran_mekaar" class="table table-hover table-responsive">
                             <thead>
                                 <tr>
-                                    <!--th>ID NASABAH</th-->
+                                    <th>ID NASABAH</th>
                                     <th>KTP</th>
                                     <th>NAMA NASABAH</th>
                                     <th>ALAMAT</th>

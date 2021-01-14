@@ -172,7 +172,7 @@
 					</div>
 					<div class="card-body">
 						<div class="form-group row">
-							<label class="col-sm-2">Nama KRM / KA <span class="text-danger">*</span></label>
+							<label class="col-sm-2">Nama KRM / KA / PIC Cabang <span class="text-danger">*</span></label>
 							<div class="input-group col-sm-4">
 								<input type="text" class="form-control" required="" id="nama_krm" name="nama_krm" />
 							</div>

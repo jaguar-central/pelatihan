@@ -266,13 +266,18 @@ $(document).ready(function() {
 			"columnDefs": [
     			{ "className": "col-md-2", targets: "_all" },
 			],			
-			"columns" : [										
+			"columns" : [
+
+				{ "data": "nasabahid", render: function (data, type, row) 
+                {
+                  return '<input type="text" class="form-control" id="id_nasabah" name="id_nasabah[]" value="'+row.nasabahid+'">'+row.nasabahid;
+                } 
+              },										
               { "data": "noktp", render: function (data, type, row) 
                 {
 				  return '<input type="hidden" class="form-control" id="sektor_ekonomi" name="sektor_ekonomi[]" value="'+row.sektor_ekonomi+'">'
 				  +'<input type="hidden" class="form-control" id="bisnis" name="bisnis[]" value="MEKAAR">'
 				  +'<input type="hidden" class="form-control" id="plafond" name="plafond[]" value="'+row.plafond+'">'
-				  +'<input type="hidden" class="form-control" id="id_nasabah" name="id_nasabah[]" value="'+row.nasabahid+'">'
 				  +'<input type="hidden" class="form-control" id="regionid" name="regionid[]" value="'+row.regionid+'">'
 				  +'<input type="hidden" class="form-control" id="ktp" name="ktp[]" value="'+row.noktp+'">'+row.noktp;
                 } 
