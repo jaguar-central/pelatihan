@@ -70,7 +70,8 @@
 
                     <li class="active has-sub">
                         <a class="js-arrow" href="#">
-                            <img src="<?php echo $this->session->userdata('sess_user_foto'); ?>" alt="PNM" width="10%" /> <?php echo $this->session->userdata('sess_user_nama'); ?>
+                            <img src="<?= base_url() ?>assets/images/logo-pnm.png" alt="PNM" width="10%" /> <?php echo $this->session->userdata('sess_user_nama'); ?>
+                            <!-- <img src="<?php //echo $this->session->userdata('sess_user_foto'); ?>" alt="PNM" width="10%" /> <?php //echo $this->session->userdata('sess_user_nama'); ?> -->
                         </a>
 
                         <?php if (isset($notification)) { ?>
@@ -215,8 +216,9 @@
                                 </div>
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
-                                        <div class="image ">
-                                            <img src="<?php echo $this->session->userdata('sess_user_foto'); ?>" alt="PNM" />
+                                        <div class="image " style="margin-top:10px;">
+                                            <!-- <img src="<?php //echo $this->session->userdata('sess_user_foto'); ?>" alt="PNM" /> -->
+                                            <img src="<?= base_url() ?>assets/images/logo-pnm.png" alt="PNM" />
                                         </div>
                                         <div class="content ">
                                             <a class="js-acc-btn text-white" href="#"><?php echo $this->session->userdata('sess_user_nama'); ?> </a>
@@ -225,7 +227,8 @@
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="<?php echo $this->session->userdata('sess_user_foto'); ?>" alt="PNM" />
+                                                        <!-- <img src="<?php //echo $this->session->userdata('sess_user_foto'); ?>" alt="PNM" /> -->
+                                                        <img src="<?= base_url() ?>assets/images/logo-pnm.png" alt="PNM" />
                                                     </a>
                                                 </div>
 

@@ -573,6 +573,8 @@ class Pelatihan extends MY_Controller
         $pelatihan_type     = trim($this->security->xss_clean(strip_image_tags($this->input->post('pelatihan_type_edit'))));
 		$judul_pelatihan    = trim($this->security->xss_clean(strip_image_tags($this->input->post('judul_pelatihan_edit'))));
 		$grading   			= trim($this->security->xss_clean(strip_image_tags($this->input->post('grading_edit'))));
+		
+        $id_bisnis_pelatihan   		= trim($this->security->xss_clean(strip_image_tags($this->input->post('id_bisnis_edit')))); 		
 
         $deskripsi_pelatihan 		= trim($this->security->xss_clean(strip_image_tags($this->input->post('deskripsi_pelatihan_edit'))));
         $durasi_pelatihan    		= trim($this->security->xss_clean(strip_image_tags($this->input->post('durasi_pelatihan_edit'))));
@@ -593,7 +595,7 @@ class Pelatihan extends MY_Controller
 				
 		$deskripsi_rab        		= $this->security->xss_clean(strip_image_tags($this->input->post('deskripsi_rab_edit')));
 		$jumlah_rab           		= $this->security->xss_clean(strip_image_tags($this->input->post('jumlah_rab_edit')));
-		$unit_rab             		= $this->security->xss_clean(strip_image_tags($this->input->post('unit_rab_edit')));
+		$volume_rab             		= $this->security->xss_clean(strip_image_tags($this->input->post('volume_rab_edit')));
 		$unit_cost_rab        		= $this->security->xss_clean(strip_image_tags($this->input->post('unit_cost_rab_edit')));
 		$total_cost_rab       		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab_edit')));
 		$total_cost_rab_akhir 		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab_akhir_edit')));
@@ -655,8 +657,7 @@ class Pelatihan extends MY_Controller
 					'ID_PELATIHAN' 		=> $pelatihan_id,
 					'ID_BISNIS' 		=> $id_bisnis,
 					'URAIAN' 			=> $deskripsi_rab[$i],
-					'JUMLAH' 			=> $jumlah_rab[$i],
-					'SATUAN' 			=> $unit_rab[$i],
+					'VOLUME' 			=> $volume_rab[$i],
 					'UNIT_COST' 		=> $unit_cost_rab[$i],
 					'SUB_TOTAL_COST' 	=> $total_cost_rab[$i],
 					'GRAND_TOTAL' 		=> $total_cost_rab_akhir,
@@ -1172,7 +1173,7 @@ class Pelatihan extends MY_Controller
 		$id_nasabah		= trim($this->security->xss_clean(strip_image_tags($this->input->post('id_nasabah'))));
 		$nama_nasabah	= trim($this->security->xss_clean(strip_image_tags($this->input->post('nama_nasabah'))));
 		$no_hp          = trim($this->security->xss_clean(strip_image_tags($this->input->post('no_hp'))));
-		
+		$plafond        = trim($this->security->xss_clean(strip_image_tags($this->input->post('plafond'))));		
 		
         $kolektibilitas = $this->security->xss_clean(strip_image_tags($this->input->post('kolektibilitas')));
         $cabang        	= trim($this->security->xss_clean(strip_image_tags($this->input->post('cabang'))));
@@ -1219,6 +1220,7 @@ class Pelatihan extends MY_Controller
 					'NASABAH_TIPE' 		=> $nasabah_type,
 					'ID_SEKTOR_EKONOMI' => $sektor_ekonomi,
 					'ID_TIPE_KREDIT' 	=> $id_tipe_kredit,
+					'PLAFOND'		 	=> $plafond,
 					'AKTIF' 			=> '1',
 					'CREATED_BY' 		=> $id_user,
 					'CREATED_DATE' 		=> date('Y-m-d H:i:s')			

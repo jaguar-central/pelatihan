@@ -101,7 +101,11 @@
 			
 			if (n){
 				$(".bisnis").hide();				
-				$(".cabang_ulamm").hide();
+				if (role==1){
+					$(".cabang_ulamm").show();					
+				}else{
+					$(".cabang_ulamm").hide();
+				}
 			}else{
 				$(".bisnis").show();
 				$(".cabang_ulamm").show();

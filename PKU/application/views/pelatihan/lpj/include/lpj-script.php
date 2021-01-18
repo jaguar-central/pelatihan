@@ -270,7 +270,7 @@ $(document).ready(function() {
 
 				{ "data": "nasabahid", render: function (data, type, row) 
                 {
-                  return '<input type="text" class="form-control" id="id_nasabah" name="id_nasabah[]" value="'+row.nasabahid+'">'+row.nasabahid;
+                  return '<input type="hidden" class="form-control" id="id_nasabah" name="id_nasabah[]" value="'+row.nasabahid+'">'+row.nasabahid;
                 } 
               },										
               { "data": "noktp", render: function (data, type, row) 
@@ -576,6 +576,7 @@ $(document).ready(function() {
 		var kolektibilitas 	= $("tr.add-kehadiran-ulamm:eq("+index+") #kolektibilitas").val();				
 		var cabang 			= $("tr.add-kehadiran-ulamm:eq("+index+") #cabang").val();				
 		var unit 			= $("tr.add-kehadiran-ulamm:eq("+index+") #unit").val();				
+		var plafond 		= $("tr.add-kehadiran-ulamm:eq("+index+") #plafond").val();				
 
 
 		var sektor_ekonomi 	= $("tr.add-kehadiran-ulamm:eq("+index+") #sektor_ekonomi").val();				
@@ -593,7 +594,8 @@ $(document).ready(function() {
 			cabang			: cabang,
 			unit			: unit,
 			sektor_ekonomi	: sektor_ekonomi,
-			tipe_kredit		: tipe_kredit			
+			tipe_kredit		: tipe_kredit,
+			plafond			: plafond	
 		},
 		function(data, status){
 			$('#datatable_listkehadiran').DataTable().draw(false);
@@ -615,6 +617,7 @@ $(document).ready(function() {
 		var produk		 	= $("tr.add-kehadiran-mekaar:eq("+index+") #produk").val();				
 		var region 			= $("tr.add-kehadiran-mekaar:eq("+index+") #Region").val();				
 		var area 			= $("tr.add-kehadiran-mekaar:eq("+index+") #Area").val();	
+		var plafond 			= $("tr.add-kehadiran-mekaar:eq("+index+") #plafond").val();	
 		
 		var sektor_ekonomi 	= $("tr.add-kehadiran-mekaar:eq("+index+") #sektor_ekonomi").val();				
 		var siklus_kredit 	= $("tr.add-kehadiran-mekaar:eq("+index+") #siklus_kredit").val();	
@@ -631,7 +634,8 @@ $(document).ready(function() {
 			region			: region,
 			area			: area,
 			sektor_ekonomi	: sektor_ekonomi,
-			siklus_kredit	: siklus_kredit
+			siklus_kredit	: siklus_kredit,
+			plafond			: plafond
 		},
 		function(data, status){
 			$('#datatable_listkehadiran').DataTable().draw(false);
