@@ -37,9 +37,9 @@
 						echo '<td>'.$cus->TITLE.'</td>';
 						echo '<td>'.$cus->MULAI.'</td>';
 						echo '<td>'.$cus->SELESAI.'</td>';
-						echo '<td>'.$cus->REGIONAL_MEKAAR.'</td>';
-						echo '<td>'.$cus->AREA_MEKAAR.'</td>';
-						echo '<td>'.$cus->CABANG_MEKAAR.'</td>';
+						echo '<td>'.$cus->DESKRIPSI_REGION.'</td>';
+						echo '<td>'.$cus->DESKRIPSI_AREA.'</td>';
+						echo '<td>'.$cus->DESKRIPSI_CABANG.'</td>';
 						echo '<td>'.$cus->STATUS.'</td>'; 	
 						echo '<td>'.$cus->APPROVAL.'</td>'; 		
 						echo '<td>

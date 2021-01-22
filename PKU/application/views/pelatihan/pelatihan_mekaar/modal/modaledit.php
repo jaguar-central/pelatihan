@@ -283,29 +283,29 @@
 			}
 		});
 		if ($(this).val() == 1) {
-				$('.grading_system').addClass('bg-danger text-white');
-				$(".grading_system").removeClass('bg-warning bg-success bg-info');
+				$('.grading_system_edit').addClass('bg-danger text-white');
+				$(".grading_system_edit").removeClass('bg-warning bg-success bg-info');
 			} else if ($(this).val() == 2) {
-				$('.grading_system').addClass('bg-danger text-white');
-				$(".grading_system").removeClass('bg-warning bg-success bg-info');				
+				$('.grading_system_edit').addClass('bg-danger text-white');
+				$(".grading_system_edit").removeClass('bg-warning bg-success bg-info');				
 			} else if ($(this).val() == 3) {
-				$('.grading_system').addClass('bg-danger text-white');
-				$(".grading_system").removeClass('bg-warning bg-success bg-info');											
+				$('.grading_system_edit').addClass('bg-danger text-white');
+				$(".grading_system_edit").removeClass('bg-warning bg-success bg-info');											
 			} else if ($(this).val() == 4) {
-				$('.grading_system').addClass('bg-warning');
-				$(".grading_system").removeClass('bg-danger bg-success bg-info text-white');
+				$('.grading_system_edit').addClass('bg-warning');
+				$(".grading_system_edit").removeClass('bg-danger bg-success bg-info text-white');
 			} else if ($(this).val() == 5) {
-				$('.grading_system').addClass('bg-warning');
-				$(".grading_system").removeClass('bg-danger bg-success bg-info text-white');								
+				$('.grading_system_edit').addClass('bg-warning');
+				$(".grading_system_edit").removeClass('bg-danger bg-success bg-info text-white');								
 			} else if ($(this).val() == 6) {
-				$('.grading_system').addClass('bg-success text-white');
-				$(".grading_system").removeClass('bg-danger bg-warning bg-info');
+				$('.grading_system_edit').addClass('bg-success text-white');
+				$(".grading_system_edit").removeClass('bg-danger bg-warning bg-info');
 			} else if ($(this).val() == 7) {
-				$('.grading_system').addClass('bg-info text-white');
-				$(".grading_system").removeClass('bg-danger bg-warning bg-success');
+				$('.grading_system_edit').addClass('bg-info text-white');
+				$(".grading_system_edit").removeClass('bg-danger bg-warning bg-success');
 			} else {
-				$('.grading_system').addClass('bg-default');
-				$(".grading_system").removeClass('bg-danger bg-warning bg-success bg-info text-white');
+				$('.grading_system_edit').addClass('bg-default');
+				$(".grading_system_edit").removeClass('bg-danger bg-warning bg-success bg-info text-white');
 			}
 		
 	});	

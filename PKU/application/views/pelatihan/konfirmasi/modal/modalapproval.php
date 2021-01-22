@@ -28,8 +28,8 @@
 					
 
                 </div>		
-
-<?php if ($this->session->userdata('sess_user_id_user_group')=='4'){ ?>
+<?php $grading = array(4,5); ?>
+<?php if (in_array($this->session->userdata('sess_user_id_user_group'),$grading)){ ?>
 
 				<div class="form-group card grading_system">
 				<div class="card-header"><h4>Grading System</h4></div>

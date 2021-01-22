@@ -56,7 +56,7 @@
 			"paging": true,
 			"processing": true,
 			"serverSide": false,			
-			"dom": "<'dom_datable'f>rt<'dom_datable col-md-6'i>"
+			"dom": "<'dom_datable'f>rt<'dom_datable col-md-6'i><'dom_datable col-md-6'p>"
 		});								
 	});
 

@@ -50,7 +50,7 @@
 				
 					<label class="col-sm-2">Area <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control"  required="" id="area_pelatihan_details" name="area_pelatihan_details" disabled />
+						<input type="text" class="form-control"  required="" id="area_mekaar_details" name="area_mekaar_details" disabled />
 																						
 					</div>					
 			

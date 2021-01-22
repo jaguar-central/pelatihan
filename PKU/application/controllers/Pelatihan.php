@@ -203,7 +203,7 @@ class Pelatihan extends MY_Controller
 		$data['kecamatan'] 		= $this->Master_model->select_ms_kecamatan();
 
 		$data['nasabah_grading'] = $this->Master_model->select_ms_nasabah_grading();	
-		// var_dump($this->db->last_query());die();
+		// var_dump($data["t_pelatihan"]);die();
 
         $this->load->view('layout/gabung', $data);
     }
@@ -434,11 +434,17 @@ class Pelatihan extends MY_Controller
 
 
 			//create no proposal
+			// $param = array(
+			// 	'PELATIHAN_TYPE_ID' => $pelatihan_type,
+			// 	'PARAMETER' => 'PROPOSAL',
+			// 	'PARAM1' => $regional_mekaar,
+			// 	'PARAM2' => $area_mekaar
+			// );
 			$param = array(
 				'PELATIHAN_TYPE_ID' => $pelatihan_type,
 				'PARAMETER' => 'PROPOSAL',
-				'PARAM1' => $regional_mekaar,
-				'PARAM2' => $area_mekaar
+				'PARAM1' => $cabang_ulamm,
+				'PARAM2' => ''
 			);
 			
 			$no_proposal = $this->create_trx_no($param);
@@ -845,7 +851,8 @@ class Pelatihan extends MY_Controller
 					
 			$this->Pelatihan_model->insert_t_approval($data);
 			
-			if ($this->session->userdata('sess_user_id_user_group')=='4'){
+			$grading = array(4,5);
+			if (in_array($this->session->userdata('sess_user_id_user_group'),$grading)){
 				$data_update 	= array(
 					'ID_GRADING'		=> $id_grading,				
 					'STATUS'			=> $status_approval,
