@@ -34,10 +34,12 @@
 										<thead>
 											<tr>
 												<th>JENIS PELATIHAN</th>
+												<th>NO PROPOSAL</th>
 												<th>JUDUL PELATIHAN</th>
 												<th>REGION</th>
 												<th>AREA</th>
-												<th>CABANG</th>
+												<th>CABANG MEKAAR</th>
+												<th>CABANG ULAMM</th>
 												<th>TANGGAL PELATIHAN</th>
 												<th>STATUS</th>
 												<th>ACTION</th>

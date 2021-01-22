@@ -361,9 +361,10 @@
 			],
 			"columns" : [
 				{ "data": "ID_TIPE_DESKRIPSI" },
+				{ "data": "NO_PROPOSAL" },
+				{ "data": "TITLE" },    				
 				{ "data": "CABANG_ULAMM" },
 				{ "data": "UNIT_ULAMM" },
-				{ "data": "TANGGAL_PEMBUATAN" },    
 				{ "data": "TANGGAL_PELATIHAN" },    
 				{ "data": "STATUS" },    
 				{ "data": "STATUS", render: function (data, type, row) 

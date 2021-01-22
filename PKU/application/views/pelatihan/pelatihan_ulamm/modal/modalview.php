@@ -34,9 +34,10 @@
 										<thead>
 											<tr >
 												<th>JENIS PELATIHAN</th>
+												<th>NO PROPOSAL</th>
+												<th>JUDUL PELATIHAN</th>												
 												<th>CABANG</th>
 												<th>UNIT</th>
-												<th>TANGGAL PEMBUATAN</th>
 												<th>TANGGAL PELATIHAN</th>
 												<th>STATUS</th>
 												<th>ACTION</th>

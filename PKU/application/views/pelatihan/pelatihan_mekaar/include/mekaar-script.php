@@ -346,10 +346,12 @@
 			],			
 			"columns" : [
 				{ "data": "ID_TIPE_DESKRIPSI" },
+				{ "data": "NO_PROPOSAL" },
 				{ "data": "TITLE" },
-				{ "data": "REGIONAL_MEKAAR" },
-				{ "data": "AREA_MEKAAR" },    
-				{ "data": "CABANG_MEKAAR" },    
+				{ "data": "DESKRIPSI_REGION" },
+				{ "data": "DESKRIPSI_AREA" },    
+				{ "data": "DESKRIPSI_CABANG_MEKAAR" },    
+				{ "data": "CABANG_ULAMM" },    
 				{ "data": "TANGGAL_PELATIHAN" },    
 				{ "data": "STATUS" },    
 				{ "data": "STATUS", render: function (data, type, row) 
@@ -366,8 +368,8 @@
 						+'data-pelatihantiddeskripsi="'+row.ID_TIPE_DESKRIPSI+'" '														
 						+'data-pelatihantitle="'+row.TITLE+'" '
 						+'data-pelatihanregion="'+row.REGIONAL_MEKAAR+'" '
-						+'data-pelatihanarea="'+row.AREA_MEKAAR+'" '
-						+'data-pelatihancabang="'+row.CABANG_MEKAAR+'" '
+						+'data-pelatihanarea="'+row.DESKRIPSI_AREA+'" '
+						+'data-pelatihancabang="'+row.DESKRIPSI_CABANG_MEKAAR+'" '
 						+'data-pelatihancabangulamm="'+row.CABANG_ULAMM+'" '
 						+'data-pelatihandeskripsi="'+row.DESKRIPSI+'" '
 						+'data-pelatihantanggal="'+row.TANGGAL_MULAI+' - '+row.TANGGAL_SELESAI+'" '

@@ -642,6 +642,7 @@ class Pelatihan extends MY_Controller
 				'TANGGAL_SELESAI' 	=> $inputAkhirTglPelaksanaan.' '.date("H:i", strtotime($inputEndTimePelaksanaan)),
 				'KUOTA_PESERTA' 	=> $kuota_peserta,
 				'BUDGET' 			=> $anggaran,
+				'JUMLAH_ANGGARAN'	=> $total_cost_rab_akhir,
 				'STATUS' 			=> 'draft',
 				'PROVINSI' 			=> $provinsi,
 				'KABKOT' 			=> $kabkot,

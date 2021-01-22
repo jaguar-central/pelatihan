@@ -44,7 +44,7 @@
 
                     <label class="col-sm-2">Catatan Tambahan <span class="text-danger"></span></label>
                     <div class="col-sm-4">
-                        <textarea class="form-control rounded-0" id="catatan_tambahan" name="catatan_tambahan" rows="3"><?php echo $catatan_tambahan; ?></textarea>
+                        <textarea class="form-control rounded-0" id="catatan_tambahan" name="catatan_tambahan" rows="3" maxlength="250"><?php echo $catatan_tambahan; ?></textarea>
                     </div>
                 </div>
 
