@@ -124,19 +124,21 @@
 
 		$.ajax({
 			url: "<?php echo base_url()?>pelatihan/get_rab_lpj",
-			data: "pelatihanid="+$(this).data("pelatihanid")+"&tipe_modal=details",
+			data: "pelatihanid="+$(this).data("pelatihanid")+"&tipe_modal=modallpj",
 			cache: false,
 			success: function(data){				         
 				$('#tbody_rab_modallpj').html(data);    
-				var total = 0;
-				$('tr #total_cost_rab_akhir_modallpj').each(function () {            
-				var total_cost_rab = $(this).val();			
-				if (!isNaN(total_cost_rab) && total_cost_rab.length !== 0) {
-					total += parseFloat(total_cost_rab);
+				var total_lpj = 0;
+				$('tr #total_cost_rab_modallpj').each(function () {            
+				var total_cost_rab_lpj = $(this).val();			
+				if (!isNaN(total_cost_rab_lpj) && total_cost_rab_lpj.length !== 0) {
+					total_lpj += parseFloat(total_cost_rab_lpj);
 				}
 				});
+
+				console.log('total_lpj',total_lpj);
 				var rowCount = $('tr #total_cost_rab_akhir_modallpj').length;
-				$("#total_cost_rab_akhir_details").val(total);
+				$("#total_cost_rab_akhir_modallpj").val(total_lpj);
 			}	
 		});	
 
