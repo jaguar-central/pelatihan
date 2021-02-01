@@ -152,7 +152,7 @@ public function select_t_pelatihan_by_approval($status)
 			//sementara sampe korwil ada semua
 			if ($this->session->userdata('sess_user_id_user_group')==4){
 				$q .= "
-				AND APPROVAL in (SELECT * FROM dbo.[sementara_pic_pusat](".$this->session->userdata('sess_user_id').",CABANG_ULAMM)) ";
+				AND APPROVAL in (SELECT * FROM dbo.[sementara_pic_pusat](".$this->session->userdata('sess_user_id').",CABANG_ULAMM,ID,[STATUS])) ";
 			}else{
 				$q .="and ISNULL(APPROVAL,'') in (SELECT APPROVAL_BY FROM MS_FLOW_APPROVAL WHERE ID_GROUP=".$this->session->userdata('sess_user_id_user_group').")";
 			}				

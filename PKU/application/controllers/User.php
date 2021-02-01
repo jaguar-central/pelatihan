@@ -251,10 +251,14 @@ class User extends MY_Controller {
 
 			$cek_minggu_ini = $this->db->query(" select * from T_PKM_BERMAKNA WHERE MODUL_PKM_ID=".$data["content"]->ID." and KELOMPOKID='".$cek_kelompok->groupid."' and MINGGU_KE=DATEPART(WEEK,GETDATE()) ORDER BY MINGGU_KE DESC ")->result();
 
-			if ($cek_minggu_ini[0]->MINGGU_KE>4){
-				$this->load->view('pkm/pkm_survey');
-			}else if (count($cek_minggu_ini)){
-				$this->load->view('pkm/pkm_selesai');
+			// var_dump($cek_minggu_ini);die();
+			if (count($cek_minggu_ini)){
+				if ($cek_minggu_ini[0]->MINGGU_KE>4)
+				{
+					$this->load->view('pkm/pkm_survey');
+				}else{
+					$this->load->view('pkm/pkm_selesai');
+				}
 			}else{
 				$this->load->view('pkm/pkm_bermakna',$data);
 			}

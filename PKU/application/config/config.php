@@ -28,7 +28,7 @@ $root.= str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME
 
 $config['base_url'] = $root;
 
-$config['jasper_report'] = 'http://10.61.3.124:8080/jasperserver/rest_v2/reports/reports/Pelatihan_new/';
+$config['jasper_report'] = 'http://10.61.3.124/jasperserver/rest_v2/reports/reports/Pelatihan_new/';
 $config['elastic_server'] = 'http://10.61.3.198:9200';
 $config['baseSSOApi'] = 'http://appserverapache01.pnm.co.id/WebService/';
 
