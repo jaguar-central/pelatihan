@@ -421,7 +421,11 @@
 					  if (row.STATUS=='lpj_draft'){
 						tombol_action +='<a class= "dropdown-item" href="<?php  echo base_url('pelatihan/lpj/'); ?>'+row.ID+'/mekaar"> Edit LPJ</a>'; 
 						tombol_action +='<div class="dropdown-divider"></div> <a id="submit_lpj" class="dropdown-item submit_lpj" data-idpelatihan="'+row.ID+'" data-judulpelatihan="'+row.TITLE+'"  href="#" > Submit Lpj</a></div></div> ';
-					  }					  
+					  }				
+
+					  if (row.STATUS=='lpj_revisi'){
+						tombol_action +='<a class= "dropdown-item" href="<?php  echo base_url('pelatihan/lpj/'); ?>'+row.ID+'/mekaar"> Edit LPJ</a>'; 
+					  }						  
 					  
 					  if (row.STATUS=='lpj_approved'){
 						tombol_action +='<a class="dropdown-item pelatihan_details" href="#" data-toggle="modal" '
@@ -456,7 +460,7 @@
 					} 
 				},                         
 			],
-			"dom": "<'dom_datable'f>rt<'dom_datable col-md-6'i>",
+			"dom": "<'dom_datable'f>rt<'dom_datable col-md-6'i><'dom_datable col-md-6'p>",
 			"createdRow" : function (row, data, index) {
 				$(row).addClass("add-kehadiran-non-nasabah");      
 			}

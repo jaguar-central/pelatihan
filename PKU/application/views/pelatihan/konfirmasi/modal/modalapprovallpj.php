@@ -111,29 +111,29 @@
 				}, 1600);					
 				
 			}
-			if(obj.result == 'UP')
-			{
-				console.log(data);
-			}
+
 			if(obj.result == 'NG')
 			{
-				$("#m-ap-cab").html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a> '+obj.msg+'</div>');
+				Swal.fire({
+					position: 'center',
+					icon: 'error',
+					title: obj.msg,
+					showConfirmButton: false,
+					timer: 1500
+				});
 			}
 		});
 		xhr.fail(function() {
-			$("#loader_container").hide();
-			var failMsg = "Something error happened! as";
+			Swal.fire({
+				position: 'center',
+				icon: 'error',
+				title: obj.msg,
+				showConfirmButton: false,
+				timer: 1500
+			});
 		});	
 	});	
 	
-	// $(".reject").click(function(){
-	// 	var id_pelatihan = $("#id_pelatihan").val();
-	//   $.post("<?php echo base_url('pelatihan/post_change_status_pelatihan/"+id_pelatihan+"/reject') ?>", function(data, status){
-	// 	window.location.href = '<?php echo base_url(); ?>pelatihan/konfirmasi_lpj';
-	//   });
-	// });	
-
-
 	$(".reject").click(function(e){
 		e.preventDefault();    
 		var id_pelatihan = $("#id_pelatihan").val();
@@ -160,28 +160,90 @@
 			{
 				window.location.href = '<?php echo base_url(); ?>pelatihan/konfirmasi';
 			}
-			if(obj.result == 'UP')
-			{
-				console.log(data);
-			}
+
 			if(obj.result == 'NG')
 			{
-				$("#m-ap-cab").html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a> '+obj.msg+'</div>');
+				Swal.fire({
+					position: 'center',
+					icon: 'error',
+					title: obj.msg,
+					showConfirmButton: false,
+					timer: 1500
+				});
 			}
 		});
 		xhr.fail(function() {
-			$("#loader_container").hide();
-			var failMsg = "Something error happened! as";
+			Swal.fire({
+				position: 'center',
+				icon: 'error',
+				title: obj.msg,
+				showConfirmButton: false,
+				timer: 1500
+			});
 		});			
 
 	});		
 
 
 	
-	$(".return").click(function(){
-		var id_pelatihan = $("#id_pelatihan").val();
-	  $.post("<?php echo base_url('pelatihan/post_change_status_pelatihan/"+id_pelatihan+"/lpj_draft') ?>", function(data, status){
-		window.location.href = '<?php echo base_url(); ?>pelatihan/konfirmasi_lpj';
-	  });
+	$(".return").click(function(e){
+		e.preventDefault();    
+		var formURL = "<?php echo base_url('pelatihan/post_revisi_lpj'); ?>";
+		var frmdata = new FormData();
+
+		frmdata.append('id_pelatihan',$("#id_pelatihan").val());
+		frmdata.append('keterangan',CKEDITOR.instances.catatan.getData());
+		frmdata.append('result','revisi');
+		
+		var xhr = $.ajax({
+			url: formURL,
+			type: 'POST',
+			data: frmdata,
+			processData: false,
+			contentType: false
+		});
+		xhr.done(function(data) {
+			var obj = $.parseJSON(data);
+			
+			console.log(data);
+			
+			if(obj.result == 'OK')
+			{
+				Swal.fire({
+					position: 'center',
+					icon: 'success',
+					title: 'Pelatihan telah di revisi',
+					showConfirmButton: false,
+					timer: 1500
+				})
+				setTimeout(function () {
+					window.location.href = '<?php echo base_url(); ?>pelatihan/konfirmasi_lpj';
+				}, 1600);					
+				
+			}
+
+			if(obj.result == 'NG')
+			{
+				Swal.fire({
+					position: 'center',
+					icon: 'error',
+					title: obj.msg,
+					showConfirmButton: false,
+					timer: 1500
+				});
+			}
+		});
+		xhr.fail(function() {
+			Swal.fire({
+				position: 'center',
+				icon: 'error',
+				title: obj.msg,
+				showConfirmButton: false,
+				timer: 1500
+			});
+		});	  
+	  
+	  
+	  
 	});			
 </script>

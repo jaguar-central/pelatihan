@@ -76,6 +76,7 @@
 							> Details Lpj</a>';
 							echo '<a class= "dropdown-item" target="_blank" href="'.$this->config->item('jasper_report').'Pelatihan.pdf?ID='.$cus->ID.'"> Unduh Proposal</a>';	
 							echo '<a class= "dropdown-item" target="_blank" href="'.$this->config->item('jasper_report').'Lpj.pdf?ID='.$cus->ID.'"> Unduh Lpj</a>';
+							echo '<a class="dropdown-item" href="'.base_url().'assets/'.$cus->URL_LAMPIRAN.'" target="_blank"> Lampiran Lpj</a>';
 						}
 						echo '</div></div> </td>';								
 						echo '</tr>';

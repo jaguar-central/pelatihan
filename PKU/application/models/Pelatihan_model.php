@@ -60,6 +60,14 @@ public function update_t_pelatihan($data,$where){
 	$this->db->update('T_PELATIHAN', $data,$where);
 }	
 
+public function update_t_pelatihan_lpj($data,$where){
+	$this->db->update('T_PELATIHAN_LPJ', $data,$where);
+}
+
+public function update_t_rab_lpj($data,$where){
+	$this->db->update('T_RAB_LPJ', $data,$where);
+}
+
 public function select_t_pelatihan_ulamm_by_status($status)
 {
 		$query = $this->db->select('T_PELATIHAN.*
@@ -71,9 +79,10 @@ public function select_t_pelatihan_ulamm_by_status($status)
 		,T_PELATIHAN_LPJ.DURASI_PELATIHAN as DURASI_LPJ
 		,T_PELATIHAN_LPJ.CSI_FINAL
 		,T_PELATIHAN_LPJ.CATATAN_TAMBAHAN
+		,dbo.URL_LAMPIRAN_LPJ(T_PELATIHAN.ID) as URL_LAMPIRAN
 		')->
 		from('T_PELATIHAN')->
-		join('T_PELATIHAN_LPJ','T_PELATIHAN.ID = T_PELATIHAN_LPJ.ID_PELATIHAN','LEFT')->
+		join('T_PELATIHAN_LPJ','T_PELATIHAN.ID = T_PELATIHAN_LPJ.ID_PELATIHAN AND T_PELATIHAN_LPJ.AKTIF=1','LEFT')->
 		where('T_PELATIHAN.ID_BISNIS','1')->
 		where(" T_PELATIHAN.CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ")->
 		where_in('T_PELATIHAN.STATUS',$status)->get();				
@@ -94,10 +103,11 @@ public function select_t_pelatihan_mekaar_by_status($status)
 			,T_PELATIHAN_LPJ.CATATAN_TAMBAHAN
 			,dbo.DESKRIPSI_REGION(REGIONAL_MEKAAR) as DESKRIPSI_REGION
 			,dbo.DESKRIPSI_AREA(AREA_MEKAAR) as DESKRIPSI_AREA
-			,dbo.DESKRIPSI_CABANG_MEKAAR(CABANG_MEKAAR) as DESKRIPSI_CABANG
+			,dbo.DESKRIPSI_CABANG_MEKAAR(CABANG_MEKAAR) as DESKRIPSI_CABANG	
+			,dbo.URL_LAMPIRAN_LPJ(T_PELATIHAN.ID) as URL_LAMPIRAN			
 			')->
 			from('T_PELATIHAN')->
-			join('T_PELATIHAN_LPJ','T_PELATIHAN.ID = T_PELATIHAN_LPJ.ID_PELATIHAN','LEFT')->
+			join('T_PELATIHAN_LPJ','T_PELATIHAN.ID = T_PELATIHAN_LPJ.ID_PELATIHAN AND T_PELATIHAN_LPJ.AKTIF=1','LEFT')->
 			where('T_PELATIHAN.ID_BISNIS','2')->
 			where(" T_PELATIHAN.CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ")->
 			where_in('T_PELATIHAN.STATUS',$status)->get();	
@@ -133,11 +143,19 @@ public function select_t_pelatihan_by_approval($status)
 			from T_PELATIHAN 
 			where ID_BISNIS $BISNIS 
 			and STATUS='$status' 
-			and ISNULL(APPROVAL,'') in (SELECT APPROVAL_BY FROM MS_FLOW_APPROVAL WHERE ID_GROUP=".$this->session->userdata('sess_user_id_user_group').")";
+			";
 
 			if ($this->session->userdata('sess_user_id_user_group')<6){
 				$q .=" and CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ";
 			}
+			
+			//sementara sampe korwil ada semua
+			if ($this->session->userdata('sess_user_id_user_group')==4){
+				$q .= "
+				AND APPROVAL in (SELECT * FROM dbo.[sementara_pic_pusat](".$this->session->userdata('sess_user_id').",CABANG_ULAMM)) ";
+			}else{
+				$q .="and ISNULL(APPROVAL,'') in (SELECT APPROVAL_BY FROM MS_FLOW_APPROVAL WHERE ID_GROUP=".$this->session->userdata('sess_user_id_user_group').")";
+			}				
 
 			$query = $this->db->query($q);			
 
@@ -258,11 +276,12 @@ public function check_bwmp_approval_lpj($idpelatihan,$tingkat_approval)
 }
 		
 public function paging_t_pelatihan($param)
-{
+{		
 	$query = $this->db->query("EXEC GET_PELATIHAN @START = '".$param["start"]."',@LIMIT = '".$param["limit"]."',@SEARCH = '".$param["search"]."'
 	,@TIPEPELATIHAN = '".$param["tipe_pelatihan"]."'
 	,@TIPEBISNIS = '".$param["tipe_bisnis"]."'
 	,@IDUSER = '".$this->session->userdata('sess_user_id')."'
+	,@COUNT='".$param["count"]."'
 	");
 
 	return $query->result();

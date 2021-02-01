@@ -41,7 +41,7 @@ class MY_Controller extends CI_Controller
 
 		if ($this->session->userdata('logged_in') == FALSE) redirect('login');;
 
-    }
+	}	
 	
 	public function create_trx_no($param)
 	{			

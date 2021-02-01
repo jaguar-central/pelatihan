@@ -981,6 +981,18 @@ class Pelatihan extends MY_Controller
 			chmod($zfile,0777);
 		
 			try{
+				
+				$data_update 	= array(
+					'STATUS'			=> 'lpj_draft',
+					'UPDATED_BY' 		=> $id_user,
+					'UPDATED_DATE' 		=> date('Y-m-d H:i:s')			
+					);
+				$where_update	= array(
+					'ID' 	=> $id_pelatihan
+					);
+				$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);			
+				
+				
 				$data = array(
 					'ID_PELATIHAN' 			   => $id_pelatihan,
 					'LINK_LAMPIRAN' 	   	   => 'dokumen/lampiran_lpj/'.$nama_file,
@@ -1006,21 +1018,12 @@ class Pelatihan extends MY_Controller
 						'UNIT_COST' 		=> $unit_cost_rab[$i],
 						'SUB_TOTAL_COST' 	=> $total_cost_rab[$i],
 						'GRAND_TOTAL' 		=> $total_cost_rab_akhir,
+						'AKTIF'				=> '1',
 						'CREATED_BY' 		=> $id_user,
 						'CREATED_DATE' 		=> date('Y-m-d H:i:s')
 					);							
 					$this->Pelatihan_model->insert_t_rab_lpj($rab);
 				}
-
-				$data_update 	= array(
-					'STATUS'			=> 'lpj_draft',
-					'UPDATED_BY' 		=> $id_user,
-					'UPDATED_DATE' 		=> date('Y-m-d H:i:s')			
-					);
-				$where_update	= array(
-					'ID' 	=> $id_pelatihan
-					);
-				$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
 
 				$db_error = $this->db->error();
 
@@ -1392,6 +1395,150 @@ class Pelatihan extends MY_Controller
 			);
 		$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);	
 		
+		
+		if ($status=='lpj_draft'){
+			//REVISI PELATIHAN LPJ
+			$data_update_lpj 	= array(
+				'AKTIF' => '0',
+				'UPDATED_BY' => $id_user,
+				'UPDATED_DATE' => date('Y-m-d H:i:s')			
+				);
+			$where_update_lpj	= array(
+				'ID_PELATIHAN' 	=> $idpelatihan
+				);
+			$this->Pelatihan_model->update_t_pelatihan_lpj($data_update_lpj,$where_update_lpj);
+
+
+			//REVISI RAB LPJ
+			$data_update_rab_lpj 	= array(
+				'AKTIF' => '0',
+				'UPDATED_BY' => $id_user,
+				'UPDATED_DATE' => date('Y-m-d H:i:s')			
+				);
+			$where_update_rab_lpj	= array(
+				'ID_PELATIHAN' 	=> $idpelatihan
+				);		
+			$this->Pelatihan_model->update_t_rab_lpj($data_update_rab_lpj,$where_update_rab_lpj);
+		}		
+		
+	}
+
+	public function post_revisi_lpj()
+	{
+		$id_pelatihan  	= trim($this->security->xss_clean(strip_image_tags($this->input->post('id_pelatihan'))));
+        $keterangan	   	= trim($this->security->xss_clean(strip_image_tags($this->input->post('keterangan'))));
+        $result        	= trim($this->security->xss_clean(strip_image_tags($this->input->post('result'))));
+		$id_user 		= $this->session->userdata('sess_user_idsdm');	
+		$approval 		= $this->session->userdata('sess_user_group');
+		$username		= $this->session->userdata('sess_user_username');
+		$getdate		= date('Y-m-d H:i:s');	
+		
+		$output = array(
+			'result'  	=> 'OK',
+			'msg'		=> ''
+		);		
+		
+		$this->db->trans_begin();
+		
+		$data_update 	= array(
+			'STATUS' => 'lpj_revisi',
+			'APPROVAL' => $approval,
+			'UPDATED_BY' => $id_user,
+			'UPDATED_DATE' => $getdate
+			);
+		$where_update	= array(
+			'ID' 	=> $id_pelatihan
+			);
+		$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);		
+
+		//REVISI PELATIHAN LPJ
+		$data_update_lpj 	= array(
+			'AKTIF' => '0',
+			'UPDATED_BY' => $id_user,
+			'UPDATED_DATE' => $getdate
+			);
+		$where_update_lpj	= array(
+			'ID_PELATIHAN' 	=> $id_pelatihan
+			);
+		$this->Pelatihan_model->update_t_pelatihan_lpj($data_update_lpj,$where_update_lpj);
+
+
+		//REVISI RAB LPJ
+		$data_update_rab_lpj 	= array(
+			'AKTIF' => '0',
+			'UPDATED_BY' => $id_user,
+			'UPDATED_DATE' => $getdate
+			);
+		$where_update_rab_lpj	= array(
+			'ID_PELATIHAN' 	=> $id_pelatihan
+			);		
+		$this->Pelatihan_model->update_t_rab_lpj($data_update_rab_lpj,$where_update_rab_lpj);
+		
+		
+		//INSERT REVISI
+		switch ($this->session->userdata('sess_user_id_user_group')) {
+		  case "2":
+			$urutan_approval = '1';
+			break;
+		  case "3":
+			$urutan_approval = '2';
+			break;
+		  case "4":
+			$urutan_approval = '3';
+			break;		  
+		  case "5":
+			$urutan_approval = '4';
+			break;	
+		  case "6":
+			$urutan_approval = '5';
+			break;	
+		  case "7":
+			$urutan_approval = '6';
+			break;				
+		}			
+		
+		$data_insert = array(
+			'id_pelatihan' 		=> $id_pelatihan,
+			'tipe_approval' 	=> 'lpj',
+			'urutan_approval'	=> $urutan_approval,
+			'username'			=> $username,	
+			'ttd'				=> '',
+			'approval'			=> $approval,
+			'result'			=> 'revisi',
+			'final_approval'	=> '0',
+			'keterangan'		=> $keterangan,
+			'aktif' 			=> '1',
+			'created_by' 		=> $id_user,
+			'created_date' 		=> $getdate			
+		);
+				
+		$this->Pelatihan_model->insert_t_approval($data_insert);
+		
+		
+		$db_error = $this->db->error();
+
+		if (!empty($db_error['message']))
+		{
+			$this->db->trans_rollback();
+				
+			$output = array(
+				'result'  	=> 'NG',
+				'msg'		=> $db_error['message']
+			);
+		}
+		else
+		{
+			$this->db->trans_commit();
+			$output = array(
+				'result'  	=> 'OK',
+				'msg'		=> ''
+			);
+		}
+		
+		
+		
+		echo json_encode($output);
+		exit;
 	}
 
     public function post_project_charter()
@@ -1784,7 +1931,7 @@ class Pelatihan extends MY_Controller
 		$regionid 		= ($_GET["columns"][1]['search']['value']!='') ? 'regionid:'.$_GET["columns"][1]['search']['value'] : NULL;		
 		$areaid 		= ($_GET["columns"][2]['search']['value']!='' && $_GET["columns"][2]['search']['value']!='null') ? 'areaid:'.$_GET["columns"][2]['search']['value'] : NULL;
 		$siklus 		= ($_GET["columns"][3]['search']['value']!='') ? 'siklus:'.$_GET["columns"][3]['search']['value'] : NULL;
-		$cabangid 		= ($_GET["columns"][4]['search']['value']!='') ? 'cabangid:'.$_GET["columns"][4]['search']['value'] : NULL;
+		$cabangid 		= ($_GET["columns"][4]['search']['value']!='' && $_GET["columns"][4]['search']['value']!='null') ? 'cabangid:'.$_GET["columns"][4]['search']['value'] : NULL;
 
 		$searching = array($sektor_ekonomi,$regionid,$areaid,$search,$siklus,$cabangid);	
 
@@ -1866,15 +2013,18 @@ class Pelatihan extends MY_Controller
 
 	public function get_paging_pelatihan($tipe,$bisnis)
 	{
-						
+		$param["count"] = 0;			
 		$param["start"] = isset($_GET["start"]) ? $_GET["start"] : 0;
 		$param["limit"] = isset($_GET["length"]) ? $_GET["length"] : 10;		
 		$param["tipe_pelatihan"] 	= isset($tipe) ? $tipe : NULL ;			
 		$param["tipe_bisnis"] 		= isset($bisnis) ? $bisnis : NULL ;			
 		$param["search"] 			= isset($_GET["search"]["value"]) ? $_GET["search"]["value"] : NULL ;								
 
-		$data["data"] = $this->Pelatihan_model->paging_t_pelatihan($param);				
-		$total = COUNT($data["data"]);
+		$data["data"] = $this->Pelatihan_model->paging_t_pelatihan($param);	
+
+		$param["count"] = 1;			
+		$total = $this->Pelatihan_model->paging_t_pelatihan($param)[0]->COUNT_DATA;		
+		
 		$data["recordsTotal"] = $total;	
 		$data["recordsFiltered"] = $total;		
 		

@@ -167,11 +167,17 @@ $route['master/post_geolocation']                              = 'master/post_ge
 $route['geolokasi/post_geolocation']                           = 'geolokasi';
 
 
-$route['pelatihan/open_report'] 		                            = 'pelatihan/open_report';
+$route['pelatihan/open_report'] 		                       = 'pelatihan/open_report';
 
 
 /* Notif Socket */
-$route['notifsocket'] 		                            = 'notifsocket';
+$route['notifsocket'] 		                                    = 'notifsocket';
 
+
+
+
+/* PKM Bermakna */
+$route['pkm/pkm_bermakna'] 		                               = 'User/login_pkm_bermakna';
+$route['pkm/post_pkm_bermakna'] 		                       = 'pkm/post_pkm_bermakna';
 
 
