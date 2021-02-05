@@ -31,4 +31,62 @@ class Dashboard extends MY_Controller
 		// echo '</pre>';die;
         $this->load->view('layout/gabung', $data);
     }
+
+
+
+    public function dashboard_index_pemberdayaan()    	    
+    {    
+    	
+        $data["content"] = "Dashboard";		
+		$data["script"] = "dashboard/include/dashboard-script";
+		
+        $data["menu"] = $this->Menu_model->select_ms_menu();	
+        $data["TOTAL_ULAMM"] = $this->db->query("select SUM(TOTAL_NILAI)/COUNT(*) as TOTAL from T_INDEX_PEMBERDAYAAN WHERE ID_BISNIS=1")->row()->TOTAL;
+        $data["TOTAL_MEKAAR"] = $this->db->query("select SUM(TOTAL_NILAI)/COUNT(*) as TOTAL from T_INDEX_PEMBERDAYAAN WHERE ID_BISNIS=2")->row()->TOTAL;        
+        $data["TOP_ULAMM"] = $this->db->query("select TOP 10 PROVINSI,KABUPATEN,SUM(TOTAL_NILAI) AS TOTAL FROM T_INDEX_PEMBERDAYAAN WHERE ID_BISNIS=1 GROUP BY PROVINSI,KABUPATEN ORDER BY SUM(TOTAL_NILAI) DESC")->result();
+        $data["BOTTOM_ULAMM"] = $this->db->query("select TOP 10 PROVINSI,KABUPATEN,SUM(TOTAL_NILAI) AS TOTAL FROM T_INDEX_PEMBERDAYAAN WHERE ID_BISNIS=1 GROUP BY PROVINSI,KABUPATEN ORDER BY SUM(TOTAL_NILAI) ASC")->result();
+        $data["TOP_MEKAAR"] = $this->db->query("select TOP 10 PROVINSI,KABUPATEN,SUM(TOTAL_NILAI) AS TOTAL FROM T_INDEX_PEMBERDAYAAN WHERE ID_BISNIS=2 GROUP BY PROVINSI,KABUPATEN ORDER BY SUM(TOTAL_NILAI) DESC")->result();
+        $data["BOTTOM_MEKAAR"] = $this->db->query("select TOP 10 PROVINSI,KABUPATEN,SUM(TOTAL_NILAI) AS TOTAL FROM T_INDEX_PEMBERDAYAAN WHERE ID_BISNIS=2 GROUP BY PROVINSI,KABUPATEN ORDER BY SUM(TOTAL_NILAI) ASC")->result();
+        
+        // echo '<pre>';
+		// print_r($data['TOP_MEKAAR']);
+		// echo '</pre>';die;
+        // $this->load->view('layout/gabung', $data);
+
+                                                  
+        $this->load->view('dashboard/index_pemberdayaan',$data);        
+                                        
+    }
+
+
+    public function get_index_pemberdayaan_ulamm()
+    {
+		$param["start"] = isset($_GET["start"]) ? $_GET["start"] : 0;
+		$param["limit"] = isset($_GET["length"]) ? $_GET["length"] : 10;		
+		$param["search"] = isset($_GET["search"]["value"]) ? $_GET["search"]["value"] : NULL ;			
+		$param['count'] = 0;						
+        $data["data"] = $this->Dashboard_model->select_index_pemberdayaan_ulamm($param,0);                
+		$param['count'] = 1;				
+        $total = $this->Dashboard_model->select_index_pemberdayaan_ulamm($param,1)[0]->JML_DATA;				
+		$data["recordsTotal"] = $total;	
+		$data["recordsFiltered"] = $total;		
+		
+		echo json_encode($data);
+    }
+
+    public function get_index_pemberdayaan_mekaar()
+    {
+		$param["start"] = isset($_GET["start"]) ? $_GET["start"] : 0;
+		$param["limit"] = isset($_GET["length"]) ? $_GET["length"] : 10;		
+		$param["search"] = isset($_GET["search"]["value"]) ? $_GET["search"]["value"] : NULL ;			
+		$param['count'] = 0;						
+        $data["data"] = $this->Dashboard_model->select_index_pemberdayaan_mekaar($param,0);                
+		$param['count'] = 1;				
+        $total = $this->Dashboard_model->select_index_pemberdayaan_mekaar($param,1)[0]->JML_DATA;				
+		$data["recordsTotal"] = $total;	
+		$data["recordsFiltered"] = $total;		
+		
+		echo json_encode($data);
+    }
+
 }

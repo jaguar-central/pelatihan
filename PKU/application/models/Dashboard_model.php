@@ -48,7 +48,28 @@ class Dashboard_model extends CI_Model {
         {
                 $query = $this->db->query("EXEC dbo.GET_TOP_SUBSEKTOR_ULAMM '".$kode_cabang."' ");
                 return $query->result_array();                
-        }        
+        }   
+        
+        public function select_index_pemberdayaan_ulamm($param,$count)
+        {
+                if ($count==1){
+                        $query = $this->db->query("select COUNT(*) AS JML_DATA FROM T_INDEX_PEMBERDAYAAN WHERE ID_BISNIS=1 ");
+                }else{
+                        $query = $this->db->query("select * from T_INDEX_PEMBERDAYAAN WHERE ID_BISNIS=1 ORDER BY ID DESC OFFSET ".$param['start']." ROWS FETCH NEXT ".$param['limit']." ROWS ONLY");                
+                }
+               
+                return $query->result(); 
+        }
+
+        public function select_index_pemberdayaan_mekaar($param,$count)
+        {
+                if ($count==1){
+                        $query = $this->db->query("select COUNT(*) AS JML_DATA FROM T_INDEX_PEMBERDAYAAN WHERE ID_BISNIS=2 ");
+                }else{
+                        $query = $this->db->query("select * from T_INDEX_PEMBERDAYAAN WHERE ID_BISNIS=2 ORDER BY ID DESC OFFSET ".$param['start']." ROWS FETCH NEXT ".$param['limit']." ROWS ONLY");                
+                }
+               
+                return $query->result(); 
+        }
      
 }
-?>

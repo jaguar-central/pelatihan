@@ -60,8 +60,10 @@ $route['translate_uri_dashes']      = FALSE;
 
 // $route['nama url'] = 'nama class/nama function'
 /* DASHBOARD */
-$route['dashboard']	                = 'dashboard';
-
+$route['dashboard']	                    = 'dashboard';
+$route['dashboard_index_pemberdayaan']	= 'dashboard/dashboard_index_pemberdayaan';
+$route['get_index_pemberdayaan_ulamm']	= 'dashboard/get_index_pemberdayaan_ulamm';
+$route['get_index_pemberdayaan_mekaar']	= 'dashboard/get_index_pemberdayaan_mekaar';
 
 
 /* PELATIHAN */
