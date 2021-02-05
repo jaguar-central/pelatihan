@@ -54,7 +54,7 @@
                             <?php 
                             foreach ($report as $data){
                                 echo '<tr>';
-                                echo '<td>'.$data->KODE_CABANG.' - '.$data->DESKRIPSI.'</td>';
+                                echo '<td>'.$data->DESKRIPSI.'</td>';
                                 echo '<td>'.$data->TUNU_PELATIHAN.'</td>';
                                 echo '<td>'.$data->TUNU_PESERTA.'</td>';
                                 echo '<td>'.$data->TUNCA_PELATIHAN.'</td>';

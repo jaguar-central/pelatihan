@@ -238,7 +238,7 @@
 					timer: 1500
 				})
 				setTimeout(function () {
-					window.location.href = '<?php echo base_url(); ?>pelatihan/konfirmasi_prop';
+					window.location.href = '<?php echo base_url(); ?>pelatihan/konfirmasi';
 				}, 1600);					
 				
 			}
