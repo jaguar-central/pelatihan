@@ -179,7 +179,7 @@ $route['notifsocket'] 		                                    = 'notifsocket';
 
 
 /* PKM Bermakna */
-$route['pkm/pkm_bermakna'] 		                               = 'User/login_pkm_bermakna';
+$route['pkm/pkm_bermakna'] 		                               = 'pkm/login_pkm_bermakna';
 $route['pkm/post_pkm_bermakna'] 		                       = 'pkm/post_pkm_bermakna';
 
 

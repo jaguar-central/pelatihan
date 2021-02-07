@@ -1,7 +1,10 @@
 <link href="<?php echo base_url() ?>assets/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
 
-<body style="width:80%;margin-left:auto;margin-right:auto">
+<body class="card text-white bg-info" >
+<div class="card-header text-center">Pkm Bermakna</div>
+<div class="card-body text-center">
 <?php echo $content->KONTEN ?>
+</div>		
 </body>
 
 

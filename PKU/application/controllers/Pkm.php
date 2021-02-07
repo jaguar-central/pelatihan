@@ -7,6 +7,56 @@ class Pkm extends MY_Controller
         parent::__construct();
     }
 
+	public function login_pkm_bermakna()
+	{	
+		//penambahan parameter CABANGID dan AOM
+		$cek_kelompok = $this->db->query("select * FROM [10.61.3.64].[INISEMENTARA].dbo.list_kelompok WHERE groupid='".$this->input->get('kelompokid')."' ")->row();
+		if ($cek_kelompok) {
+			//SET SESSION PKM START
+			$session_array = array(
+				'sess_cabang_id'			=> $cek_kelompok->cabangid,				
+				'sess_kelompok_id'			=> $cek_kelompok->groupid,				
+				'sess_nama_kelompok'		=> $cek_kelompok->groupname,				
+				'sess_user_id'				=> 'FZL'
+
+			);
+
+			$this->session->set_userdata($session_array);
+			//SET SESSION PKM END
+
+			$data["content"] = $this->db->query(" select * FROM MS_MODUL_PKM_BERMAKNA WHERE ID=(SELECT MODUL_PKM_ID FROM MS_JADWAL_PKM_BERMAKNA WHERE TAHUN=YEAR(GETDATE()) AND BULAN=MONTH(GETDATE())) ")->row();
+
+			$cek_minggu_ini = $this->db->query(" select * from T_PKM_BERMAKNA WHERE MODUL_PKM_ID=".$data["content"]->ID." and KELOMPOKID='".$cek_kelompok->groupid."' AND MINGGU_KE=(SELECT MINGGU_KE FROM CEK_MINGGU_KE_PER_BULAN()) ORDER BY MINGGU_KE DESC ")->result();
+
+			// var_dump($cek_minggu_ini);die();
+			if (count($cek_minggu_ini)){
+				if ($cek_minggu_ini[0]->MINGGU_KE==$cek_minggu_ini[0]->MINGGU_TERAKHIR)
+				{
+					$this->load->view('pkm/pkm_survey');
+				}else{
+
+					$session_destroy = array(
+					'sess_cabang_id'			=> '',				
+					'sess_kelompok_id'			=> '',				
+					'sess_nama_kelompok'		=> '',				
+					'sess_user_id'				=> ''
+					);                
+
+					$this->session->set_userdata($session_destroy);
+					$this->session->unset_userdata($session_destroy);
+
+					$this->load->view('pkm/pkm_selesai');
+				}
+			}else{
+				$this->load->view('pkm/pkm_bermakna',$data);
+			}
+			
+		}else{
+			echo "Kelompok tidak ditemukan";
+		}			
+	}
+
+
 	public function post_pkm_bermakna()
 	{
 		$output = array(
