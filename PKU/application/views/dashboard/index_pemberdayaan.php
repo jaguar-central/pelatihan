@@ -25,16 +25,57 @@
                                 <div class="col-lg-6">
                                     <div class="au-card m-b-30">
                                         <div class="au-card-inner">
-                                            <h3 class="title-2 m-b-40">Index Pemberdayaan</h3>
-                                            <canvas id="index_pemberdayaan"></canvas>
+                                            <h3 class="title-2 m-b-40">Index Pemberdayaan Ulamm & Mekaar</h3>
+                                            <canvas id="index-pemberdayaan"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="offset-lg-1 col-lg-5">
+                                    <div class="au-card m-b-30">
+                                        <div class="au-card-inner">
+                                            <h3 class="title-2 m-b-40">Mikro & Ultra Mikro</h3>
+                                            <canvas id="pieChart"></canvas>
+                                        </div>
+                                    </div>
+                                </div> -->
+
+                                <div class="col-lg-6">
+                                    <div class="au-card m-b-30">
+                                        <div class="au-card-inner">
+                                            <h3 class="title-2 m-b-40">Index Pemberdayaan PNM</h3>
+                                            <canvas id="index-pemberdayaan-pnm"></canvas>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- <div class="col-lg-6">
                                     <div class="au-card m-b-30">
                                         <div class="au-card-inner">
-                                            <h3 class="title-2 m-b-40">Pie Chart</h3>
-                                            <canvas id="pieChart"></canvas>
+                                            <h3 class="title-2 m-b-40">Bar chart</h3>
+                                            <canvas id="barChart"></canvas>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <!-- <div class="col-lg-6">
+                                    <div class="au-card m-b-30">
+                                        <div class="au-card-inner">
+                                            <h3 class="title-2 m-b-40">Rader chart</h3>
+                                            <canvas id="radarChart"></canvas>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <!-- <div class="col-lg-6">
+                                    <div class="au-card m-b-30">
+                                        <div class="au-card-inner">
+                                            <h3 class="title-2 m-b-40">Line Chart</h3>
+                                            <canvas id="lineChart"></canvas>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <!-- <div class="col-lg-6">
+                                    <div class="au-card m-b-30">
+                                        <div class="au-card-inner">
+                                            <h3 class="title-2 m-b-40">Doughut Chart</h3>
+                                            <canvas id="doughutChart"></canvas>
                                         </div>
                                     </div>
                                 </div> -->
@@ -42,53 +83,12 @@
                                 <!-- <div class="col-lg-6">
                                     <div class="au-card m-b-30">
                                         <div class="au-card-inner">
-                                            <h3 class="title-2 m-b-40">Team Commits</h3>
-                                            <canvas id="team-chart"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="au-card m-b-30">
-                                        <div class="au-card-inner">
-                                            <h3 class="title-2 m-b-40">Bar chart</h3>
-                                            <canvas id="barChart"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="au-card m-b-30">
-                                        <div class="au-card-inner">
-                                            <h3 class="title-2 m-b-40">Rader chart</h3>
-                                            <canvas id="radarChart"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="au-card m-b-30">
-                                        <div class="au-card-inner">
-                                            <h3 class="title-2 m-b-40">Line Chart</h3>
-                                            <canvas id="lineChart"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="au-card m-b-30">
-                                        <div class="au-card-inner">
-                                            <h3 class="title-2 m-b-40">Doughut Chart</h3>
-                                            <canvas id="doughutChart"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <div class="au-card m-b-30">
-                                        <div class="au-card-inner">
                                             <h3 class="title-2 m-b-40">Polar Chart</h3>
                                             <canvas id="polarChart"></canvas>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
+                                </div> -->
+                                <!-- <div class="col-lg-6">
                                     <div class="au-card m-b-30">
                                         <div class="au-card-inner">
                                             <h3 class="title-2 m-b-40">Single Bar Chart</h3>
@@ -232,7 +232,7 @@
                                         <div class="col-md-12">
                                             <div class="card">
                                                 <div class="card-header card-header-primary">
-                                                    <h4 class="card-title ">TOP 3 PER PROVINSI INDEX PEMBERDAYAAN</h4>
+                                                    <h4 class="card-title ">TOP 10 PER PROVINSI INDEX PEMBERDAYAAN</h4>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="table">
@@ -273,7 +273,7 @@
                                         <div class="col-md-12">
                                             <div class="card">
                                                 <div class="card-header card-header-primary">
-                                                    <h4 class="card-title ">TOP 3 PER PROVINSI INDEX PEMBERDAYAAN</h4>
+                                                    <h4 class="card-title ">TOP 10 PER PROVINSI INDEX PEMBERDAYAAN</h4>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="table">
