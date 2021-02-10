@@ -17,7 +17,7 @@ class Pkm extends MY_Controller
 				'sess_cabang_id'			=> $cek_kelompok->cabangid,				
 				'sess_kelompok_id'			=> $cek_kelompok->groupid,				
 				'sess_nama_kelompok'		=> $cek_kelompok->groupname,				
-				'sess_user_id'				=> 'FZL'
+				'sess_user_id'				=> $this->input->get('nip')
 
 			);
 

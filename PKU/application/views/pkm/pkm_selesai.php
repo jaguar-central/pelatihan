@@ -1,8 +1,15 @@
 <link href="<?php echo base_url() ?>assets/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
 
-<body style="width:80%;margin:auto;margin-top:200px;">
-<h4 class="text-center">pkm bermakna selesai</h4>
-</body>
+
+    <div class="form-group card text-white bg-info" style="height:100%">
+        <div class="card-header text-center">Pkm Bermakna</div>
+
+        <div class="card-body text-center" style="margin-top:200px;">
+            <label class="text-center">Selesai</label>
+        </div>
+    </div>
+
+
 
 
 

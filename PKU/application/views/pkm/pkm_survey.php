@@ -146,7 +146,7 @@ echo form_open('', $attrib);
         </div>  
 
         <div class="card-body text-center">
-        <button type="submit" class="btn btn-primary selesai-survey">Selesai</button>        
+        <button type="submit" class="btn btn-success selesai-survey">Selesai</button>        
         </div> 
 
     </div>

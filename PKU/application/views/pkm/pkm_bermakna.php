@@ -10,7 +10,7 @@
 
 <div class="text-center">
 <input type="hidden" class="form-control" id="id_konten" value="<?= $content->ID ?>" />
-<button type="button" class="btn btn-primary telah-baca">Telah Baca</button>
+<button type="button" class="btn btn-success telah-baca">Telah Baca</button>
 </div>
 
 
