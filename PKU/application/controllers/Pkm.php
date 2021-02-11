@@ -7,6 +7,7 @@ class Pkm extends MY_Controller
         parent::__construct();
     }
 
+
 	public function login_pkm_bermakna()
 	{	
 		//penambahan parameter CABANGID dan AOM
@@ -55,7 +56,6 @@ class Pkm extends MY_Controller
 			echo "Kelompok tidak ditemukan";
 		}			
 	}
-
 
 	public function post_pkm_bermakna()
 	{

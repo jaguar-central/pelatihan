@@ -65,7 +65,6 @@ $route['dashboard_index_pemberdayaan']	= 'dashboard/dashboard_index_pemberdayaan
 $route['get_index_pemberdayaan_ulamm']	= 'dashboard/get_index_pemberdayaan_ulamm';
 $route['get_index_pemberdayaan_mekaar']	= 'dashboard/get_index_pemberdayaan_mekaar';
 
-
 /* PELATIHAN */
 $route['pelatihan/ulamm'] 			        = 'pelatihan/proposal_ulamm';
 $route['pelatihan/mekaar'] 			        = 'pelatihan/proposal_mekaar';
@@ -147,7 +146,7 @@ $route['pelatihan/get_paging_kehadiran_non_nasabah']            = 'pelatihan/get
 $route['pelatihan/post_non_nasabah'] 	                        = 'pelatihan/post_non_nasabah';
 $route['pelatihan/post_submit']                                 = 'pelatihan/post_submit';
 
-$route['pelatihan/post_change_status_pelatihan/(:any)/(:any)']  = 'pelatihan/post_change_status_pelatihan/$1/$2';
+// $route['pelatihan/post_change_status_pelatihan/(:any)/(:any)']  = 'pelatihan/post_change_status_pelatihan/$1/$2';
 $route['pelatihan/get_paging_pelatihan/(:any)/(:any)']  		= 'pelatihan/get_paging_pelatihan/$1/$2';
 
 $route['pelatihan/post_project_charter']                        = 'pelatihan/post_project_charter';

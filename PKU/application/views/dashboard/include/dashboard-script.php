@@ -31,7 +31,6 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-
     // $("#mencoba_socket").click(function () {
     //     socket.emit('reload-notif');
     // });
@@ -196,6 +195,7 @@
 
 
 
+
     try {
 
     //Team chart
@@ -271,11 +271,13 @@
               },
               ticks: {
                 fontFamily: "Poppins"
+
               }
             }]
           },
           title: {
             display: false,
+
           }
         }
       });
@@ -287,4 +289,5 @@
     }    
 
   });
+
 </script>

@@ -463,108 +463,110 @@ class Pelatihan extends MY_Controller
 		);		
 		
 		
-		try{	
+		$this->db->trans_begin();
 
-
-
-			if ($id_bisnis_pelatihan==2){
-				$data_krm = array(
-					'KRM' 					=> $nama_krm,
-					'NO_REKENING'			=> $no_rek_krm,
-					'CREATED_BY' 			=> $id_user,
-					'CREATED_DATE' 			=> date('Y-m-d H:i:s')			
-				);
-
-				$this->Master_model->insert_ms_krm($data_krm);
-
-				$id_krm = $this->db->insert_id(); //last id yang di insert		
-			}else{
-				$id_krm = 0;
-			}
-
-
-			
-			$data = array(
-				'ID_TIPE' 				=> $pelatihan_type,
-				'NO_PROPOSAL' 			=> $no_proposal,
-				'NO_TRX' 				=> $no_trx,
-				'ID_PROJECT_CHARTER'	=> $id_pelatihan_project_charter,
-				'ID_GRADING'			=> $grading,
-				'TITLE' 				=> $judul_pelatihan,
-				'ID_BISNIS'				=> $id_bisnis_pelatihan,
-				'REGIONAL_MEKAAR'		=> $regional_mekaar,
-				'AREA_MEKAAR' 			=> $area_mekaar,
-				'CABANG_MEKAAR'			=> $data_cabang_mekaar,
-				'CABANG_ULAMM' 			=> $cabang_ulamm,
-				'UNIT_ULAMM'			=> $data_unit_ulamm,
-				'DESKRIPSI' 			=> $deskripsi_pelatihan,
-				'DURASI_PELATIHAN' 		=> $durasi_pelatihan,
-				'TANGGAL_MULAI' 		=> $inputStartTglPelaksanaan.' '.date("H:i", strtotime($inputStartTimePelaksanaan)),
-				'TANGGAL_SELESAI' 		=> $inputAkhirTglPelaksanaan.' '.date("H:i", strtotime($inputEndTimePelaksanaan)),
-				'KUOTA_PESERTA' 		=> $kuota_peserta,
-				'BUDGET' 				=> $anggaran,
-				'JUMLAH_ANGGARAN'		=> $total_cost_rab_akhir,
-				'STATUS' 				=> 'draft',
-				'PROVINSI' 				=> $provinsi,
-				'KABKOT' 				=> $kabkot,
-				'KECAMATAN'				=> $kecamatan,								
-				'ALAMAT' 				=> $alamat_tempat_pelatihan,
-				'PEMBICARA'				=> $pembicara_pelatihan,
-				'ID_KRM'				=> $id_krm,
+		if ($id_bisnis_pelatihan==2){
+			$data_krm = array(
+				'KRM' 					=> $nama_krm,
+				'NO_REKENING'			=> $no_rek_krm,
 				'CREATED_BY' 			=> $id_user,
 				'CREATED_DATE' 			=> date('Y-m-d H:i:s')			
 			);
-			
-			
-			$this->Pelatihan_model->insert_t_pelatihan($data);
-			
-			
-			$id_pelatihan = $this->db->insert_id(); //last id yang di insert		
-			
-			for ($i=1;$i<count($deskripsi_rab);$i++){
-				$rab = array(
-					'ID_PELATIHAN' 		=> $id_pelatihan,
-					'ID_BISNIS' 		=> $id_bisnis_pelatihan,
-					'URAIAN' 			=> $deskripsi_rab[$i],
-					'VOLUME' 			=> $volume_rab[$i],
-					'UNIT_COST' 		=> $unit_cost_rab[$i],
-					'SUB_TOTAL_COST' 	=> $total_cost_rab[$i],
-					'GRAND_TOTAL' 		=> $total_cost_rab_akhir,
-					'CREATED_BY' 		=> $id_user,
-					'CREATED_DATE' 		=> date('Y-m-d H:i:s')
-				);							
-				$this->Pelatihan_model->insert_t_rab($rab);
-			}
-			/*nonaktifkan pelatihan project charter yang telah terpakai*/
-			if ($id_pelatihan_project_charter){
 
-				$data_update = array(
-					'AKTIF' 		=> '0',
-					'UPDATED_BY'	=> $id_user,
-					'UPDATED_DATE' 	=> date('Y-m-d H:i:s')
-				);
+			$this->Master_model->insert_ms_krm($data_krm);
 
-				$where_update	= array('ID' 	=> $id_pelatihan_project_charter);
+			$id_krm = $this->db->insert_id(); //last id yang di insert		
+		}else{
+			$id_krm = 0;
+		}
 
-				$this->Pelatihan_model->update_project_charter($data_update,$where_update);
-			}
 
-			$db_error = $this->db->error();
+		
+		$data = array(
+			'ID_TIPE' 				=> $pelatihan_type,
+			'NO_PROPOSAL' 			=> $no_proposal,
+			'NO_TRX' 				=> $no_trx,
+			'ID_PROJECT_CHARTER'	=> $id_pelatihan_project_charter,
+			'ID_GRADING'			=> $grading,
+			'TITLE' 				=> $judul_pelatihan,
+			'ID_BISNIS'				=> $id_bisnis_pelatihan,
+			'REGIONAL_MEKAAR'		=> $regional_mekaar,
+			'AREA_MEKAAR' 			=> $area_mekaar,
+			'CABANG_MEKAAR'			=> $data_cabang_mekaar,
+			'CABANG_ULAMM' 			=> $cabang_ulamm,
+			'UNIT_ULAMM'			=> $data_unit_ulamm,
+			'DESKRIPSI' 			=> $deskripsi_pelatihan,
+			'DURASI_PELATIHAN' 		=> $durasi_pelatihan,
+			'TANGGAL_MULAI' 		=> $inputStartTglPelaksanaan.' '.date("H:i", strtotime($inputStartTimePelaksanaan)),
+			'TANGGAL_SELESAI' 		=> $inputAkhirTglPelaksanaan.' '.date("H:i", strtotime($inputEndTimePelaksanaan)),
+			'KUOTA_PESERTA' 		=> $kuota_peserta,
+			'BUDGET' 				=> $anggaran,
+			'JUMLAH_ANGGARAN'		=> $total_cost_rab_akhir,
+			'STATUS' 				=> 'draft',
+			'PROVINSI' 				=> $provinsi,
+			'KABKOT' 				=> $kabkot,
+			'KECAMATAN'				=> $kecamatan,								
+			'ALAMAT' 				=> $alamat_tempat_pelatihan,
+			'PEMBICARA'				=> $pembicara_pelatihan,
+			'ID_KRM'				=> $id_krm,
+			'CREATED_BY' 			=> $id_user,
+			'CREATED_DATE' 			=> date('Y-m-d H:i:s')			
+		);
+		
+		
+		$this->Pelatihan_model->insert_t_pelatihan($data);
+		
+		
+		$id_pelatihan = $this->db->insert_id(); //last id yang di insert		
+		
+		for ($i=1;$i<count($deskripsi_rab);$i++){
+			$rab = array(
+				'ID_PELATIHAN' 		=> $id_pelatihan,
+				'ID_BISNIS' 		=> $id_bisnis_pelatihan,
+				'URAIAN' 			=> $deskripsi_rab[$i],
+				'VOLUME' 			=> $volume_rab[$i],
+				'UNIT_COST' 		=> $unit_cost_rab[$i],
+				'SUB_TOTAL_COST' 	=> $total_cost_rab[$i],
+				'GRAND_TOTAL' 		=> $total_cost_rab_akhir,
+				'CREATED_BY' 		=> $id_user,
+				'CREATED_DATE' 		=> date('Y-m-d H:i:s')
+			);							
+			$this->Pelatihan_model->insert_t_rab($rab);
+		}
+		/*nonaktifkan pelatihan project charter yang telah terpakai*/
+		if ($id_pelatihan_project_charter){
 
-			if (!empty($db_error['message'])) {
-				$output = array(
-					'result'  	=> 'NG',
-					'msg'		=> $db_error['message']
-				);
-			}
-		}		
-		catch (Exception $e)
+			$data_update = array(
+				'AKTIF' 		=> '0',
+				'UPDATED_BY'	=> $id_user,
+				'UPDATED_DATE' 	=> date('Y-m-d H:i:s')
+			);
+
+			$where_update	= array('ID' 	=> $id_pelatihan_project_charter);
+
+			$this->Pelatihan_model->update_project_charter($data_update,$where_update);
+		}
+
+
+		$db_error = $this->db->error();
+
+		if (!empty($db_error['message']))
 		{
+			$this->db->trans_rollback();
+				
 			$output = array(
 				'result'  	=> 'NG',
-				'msg'		=> $e->getMessage()
+				'msg'		=> $db_error['message']
 			);
 		}
+		else
+		{
+			$this->db->trans_commit();
+			$output = array(
+				'result'  	=> 'OK',
+				'msg'		=> ''
+			);
+		}			
         
 		echo json_encode($output);
 		exit;
@@ -614,83 +616,86 @@ class Pelatihan extends MY_Controller
 			'msg'		=> ''
 		);	
 
-		try{
+		$this->db->trans_begin();
 
-			if ($id_bisnis_pelatihan==2){
-				$data_krm = array(
-					'KRM' 					=> $nama_krm,
-					'NO_REKENING'			=> $no_rek_krm,
-					'CREATED_BY' 			=> $id_user,
-					'CREATED_DATE' 			=> date('Y-m-d H:i:s')			
-				);
+		if ($id_bisnis_pelatihan==2){
+			$data_krm = array(
+				'KRM' 					=> $nama_krm,
+				'NO_REKENING'			=> $no_rek_krm,
+				'CREATED_BY' 			=> $id_user,
+				'CREATED_DATE' 			=> date('Y-m-d H:i:s')			
+			);
 
-				$this->Master_model->insert_ms_krm($data_krm);
+			$this->Master_model->insert_ms_krm($data_krm);
 
-				$id_krm = $this->db->insert_id(); //last id yang di insert		
-			}else{
-				$id_krm = 0;
-			}			
+			$id_krm = $this->db->insert_id(); //last id yang di insert		
+		}else{
+			$id_krm = 0;
+		}			
 
-			$data_update = array(
-				'ID_TIPE' 			=> $pelatihan_type,
-				'ID_GRADING'		=> $grading,
-				'TITLE' 			=> $judul_pelatihan,
-				'ID_BISNIS'			=> $id_bisnis,
-				'DESKRIPSI' 		=> $deskripsi_pelatihan,
-				'DURASI_PELATIHAN' 	=> $durasi_pelatihan,
-				'TANGGAL_MULAI' 	=> $inputStartTglPelaksanaan.' '.date("H:i", strtotime($inputStartTimePelaksanaan)),
-				'TANGGAL_SELESAI' 	=> $inputAkhirTglPelaksanaan.' '.date("H:i", strtotime($inputEndTimePelaksanaan)),
-				'KUOTA_PESERTA' 	=> $kuota_peserta,
-				'BUDGET' 			=> $anggaran,
-				'JUMLAH_ANGGARAN'	=> $total_cost_rab_akhir,
-				'STATUS' 			=> 'draft',
-				'PROVINSI' 			=> $provinsi,
-				'KABKOT' 			=> $kabkot,
-				'KECAMATAN'			=> $kecamatan,
-				'ALAMAT' 			=> $alamat_tempat_pelatihan,
-				'PEMBICARA'			=> $pembicara_pelatihan,
-				'ID_KRM'			=> $id_krm,
+		$data_update = array(
+			'ID_TIPE' 			=> $pelatihan_type,
+			'ID_GRADING'		=> $grading,
+			'TITLE' 			=> $judul_pelatihan,
+			'ID_BISNIS'			=> $id_bisnis,
+			'DESKRIPSI' 		=> $deskripsi_pelatihan,
+			'DURASI_PELATIHAN' 	=> $durasi_pelatihan,
+			'TANGGAL_MULAI' 	=> $inputStartTglPelaksanaan.' '.date("H:i", strtotime($inputStartTimePelaksanaan)),
+			'TANGGAL_SELESAI' 	=> $inputAkhirTglPelaksanaan.' '.date("H:i", strtotime($inputEndTimePelaksanaan)),
+			'KUOTA_PESERTA' 	=> $kuota_peserta,
+			'BUDGET' 			=> $anggaran,
+			'JUMLAH_ANGGARAN'	=> $total_cost_rab_akhir,
+			'STATUS' 			=> 'draft',
+			'PROVINSI' 			=> $provinsi,
+			'KABKOT' 			=> $kabkot,
+			'KECAMATAN'			=> $kecamatan,
+			'ALAMAT' 			=> $alamat_tempat_pelatihan,
+			'PEMBICARA'			=> $pembicara_pelatihan,
+			'ID_KRM'			=> $id_krm,
+			'CREATED_BY' 		=> $id_user,
+			'CREATED_DATE' 		=> date('Y-m-d H:i:s')			
+		);			
+		$where_update	= array('ID' 	=> $pelatihan_id);
+		$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
+
+		$where_rab = array('ID_PELATIHAN' 	=> $pelatihan_id);
+		$this->Pelatihan_model->delete_t_rab($where_rab);
+
+		for ($i=1;$i<count($deskripsi_rab);$i++){
+			$rab = array(
+				'ID_PELATIHAN' 		=> $pelatihan_id,
+				'ID_BISNIS' 		=> $id_bisnis,
+				'URAIAN' 			=> $deskripsi_rab[$i],
+				'VOLUME' 			=> $volume_rab[$i],
+				'UNIT_COST' 		=> $unit_cost_rab[$i],
+				'SUB_TOTAL_COST' 	=> $total_cost_rab[$i],
+				'GRAND_TOTAL' 		=> $total_cost_rab_akhir,
 				'CREATED_BY' 		=> $id_user,
-				'CREATED_DATE' 		=> date('Y-m-d H:i:s')			
-			);			
-			$where_update	= array('ID' 	=> $pelatihan_id);
-			$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
+				'CREATED_DATE' 		=> date('Y-m-d H:i:s')
+			);							
+			$this->Pelatihan_model->insert_t_rab($rab);				
+		}
 
-			$where_rab = array('ID_PELATIHAN' 	=> $pelatihan_id);
-			$this->Pelatihan_model->delete_t_rab($where_rab);
+		$db_error = $this->db->error();
 
-			for ($i=1;$i<count($deskripsi_rab);$i++){
-				$rab = array(
-					'ID_PELATIHAN' 		=> $pelatihan_id,
-					'ID_BISNIS' 		=> $id_bisnis,
-					'URAIAN' 			=> $deskripsi_rab[$i],
-					'VOLUME' 			=> $volume_rab[$i],
-					'UNIT_COST' 		=> $unit_cost_rab[$i],
-					'SUB_TOTAL_COST' 	=> $total_cost_rab[$i],
-					'GRAND_TOTAL' 		=> $total_cost_rab_akhir,
-					'CREATED_BY' 		=> $id_user,
-					'CREATED_DATE' 		=> date('Y-m-d H:i:s')
-				);							
-				$this->Pelatihan_model->insert_t_rab($rab);				
-			}
-
-			$db_error = $this->db->error();			
-
-			if (!empty($db_error['message'])) {
-				$output = array(
-					'result'  	=> 'NG',
-					'msg'		=> $db_error['message']
-				);
-			}
-			
-		}		
-		catch (Exception $e)
+		if (!empty($db_error['message']))
 		{
+			$this->db->trans_rollback();
+				
 			$output = array(
 				'result'  	=> 'NG',
-				'msg'		=> $e->getMessage()
+				'msg'		=> $db_error['message']
 			);
 		}
+		else
+		{
+			$this->db->trans_commit();
+			$output = array(
+				'result'  	=> 'OK',
+				'msg'		=> ''
+			);
+		}		
+		
 		
 		echo json_encode($output);
 		exit;	
@@ -713,20 +718,21 @@ class Pelatihan extends MY_Controller
 		
 		if ($_FILES['pilih_file']) 
 		{
-		$config['upload_path']	= './assets/dokumen/proposal';
-		$config['allowed_types']	= 'pdf';
-		$config['max_size']	= '8000';
-		$config['overwrite']	= TRUE;
+			$config['upload_path']	= './assets/dokumen/proposal';
+			$config['allowed_types']	= 'pdf';
+			$config['max_size']	= '8000';
+			$config['overwrite']	= TRUE;
 
-		$nama_file	= md5($pelatihan_id.'_'.date('Ymd').'at'.date('His'));
-		$config['file_name']	= $nama_file;
-		$this->upload->initialize($config);
+			$nama_file	= md5($pelatihan_id.'_'.date('Ymd').'at'.date('His'));
+			$config['file_name']	= $nama_file;
+			$this->upload->initialize($config);
 
-		if($this->upload->do_upload('pilih_file'))
-		{
-			$this->upload->data();
-			try
+			if($this->upload->do_upload('pilih_file'))
 			{
+				$this->upload->data();
+
+				$this->db->trans_begin();
+
 				$data = array(
 					'ID_PELATIHAN' 		=> $pelatihan_id,
 					'NAMA_FILE' 		=> $nama_file,
@@ -752,30 +758,25 @@ class Pelatihan extends MY_Controller
 				
 				$db_error = $this->db->error();
 
-				if (!empty($db_error['message'])) {
+				if (!empty($db_error['message']))
+				{
+					$this->db->trans_rollback();
+						
 					$output = array(
 						'result'  	=> 'NG',
 						'msg'		=> $db_error['message']
 					);
 				}
-
-			}		
-			catch (Exception $e)
-			{
-				$output = array(
-					'result'  	=> 'NG',
-					'msg'		=> $e->getMessage()
-				);
+				else
+				{
+					$this->db->trans_commit();
+					$output = array(
+						'result'  	=> 'OK',
+						'msg'		=> ''
+					);
+				}
 			}
-
-		}else{
-			$output = array(
-				'result' => 'UP',
-				'msg'	 => $this->upload->display_errors().'nama->'.$nama_file
-			);
-		} 	
 		}
-		
 		
         
 		echo json_encode($output);
@@ -832,86 +833,88 @@ class Pelatihan extends MY_Controller
 		);
 
 
+
+		$this->db->trans_begin();
+			
+		$data = array(
+			'ID_PELATIHAN' 		=> $id_pelatihan,
+			'TIPE_APPROVAL' 	=> 'PROPOSAL',
+			'URUTAN_APPROVAL'	=> $urutan_approval,
+			'USERNAME'			=> $username,	
+			'TTD'				=> $this->config->item('ttd_path').$username,
+			'APPROVAL'			=> $tingkat_approval,
+			'RESULT'			=> $status_result,
+			'FINAL_APPROVAL'	=> $final_approval,
+			'KETERANGAN'		=> $keterangan,
+			'AKTIF' 			=> '1',
+			'CREATED_BY' 		=> $id_user,
+			'CREATED_DATE' 		=> date('Y-m-d H:i:s')			
+		);
+				
+		$this->Pelatihan_model->insert_t_approval($data);
 		
-		try
-		{			
-			$data = array(
-				'ID_PELATIHAN' 		=> $id_pelatihan,
-				'TIPE_APPROVAL' 	=> 'PROPOSAL',
-				'URUTAN_APPROVAL'	=> $urutan_approval,
-				'USERNAME'			=> $username,	
-				'TTD'				=> $this->config->item('ttd_path').$username,
-				'APPROVAL'			=> $tingkat_approval,
-				'RESULT'			=> $status_result,
-				'FINAL_APPROVAL'	=> $final_approval,
-				'KETERANGAN'		=> $keterangan,
-				'AKTIF' 			=> '1',
-				'CREATED_BY' 		=> $id_user,
-				'CREATED_DATE' 		=> date('Y-m-d H:i:s')			
-			);
-					
-			$this->Pelatihan_model->insert_t_approval($data);
-			
-			$grading = array(4,5);
-			if (in_array($this->session->userdata('sess_user_id_user_group'),$grading)){
-				$data_update 	= array(
-					'ID_GRADING'		=> $id_grading,				
-					'STATUS'			=> $status_approval,
-					'APPROVAL' 			=> $tingkat_approval,
-					'UPDATED_BY' 		=> $id_user,
-					'UPDATED_DATE' 		=> date('Y-m-d H:i:s')			
-					);
-			}else{
-				$data_update 	= array(		
-					'STATUS'			=> $status_approval,
-					'APPROVAL' 			=> $tingkat_approval,
-					'UPDATED_BY' 		=> $id_user,
-					'UPDATED_DATE' 		=> date('Y-m-d H:i:s')			
-					);	
-			}
-			$where_update	= array(
-				'ID' 	=> $id_pelatihan
+		$grading = array(4,5);
+		if (in_array($this->session->userdata('sess_user_id_user_group'),$grading)){
+			$data_update 	= array(
+				'ID_GRADING'		=> $id_grading,				
+				'STATUS'			=> $status_approval,
+				'APPROVAL' 			=> $tingkat_approval,
+				'UPDATED_BY' 		=> $id_user,
+				'UPDATED_DATE' 		=> date('Y-m-d H:i:s')			
 				);
-			$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
-
-
-			// jika status reject NO_TRX disimpan di table TRX_NO_REJECT
-			if ($status_result=='reject'){		
-			
-				$NO_TRX = $this->Pelatihan_model->select_t_pelatihan_by_id($id_pelatihan)->row()->NO_TRX;
-
-				$ARRAY_NO_TRX = explode(",",$NO_TRX);
-
-				foreach ($ARRAY_NO_TRX as $NO){
-					$data = array(
-						'NO_TRX' 		=> $NO,
-						'AKTIF' 		=> '1',
-						'CREATED_BY' 	=> $id_user,
-						'CREATED_DATE' 	=> date('Y-m-d H:i:s')			
-					);			
-
-					$this->Pelatihan_model->insert_trx_no_reject($data);
-				}
-			}
-
-			
-			$db_error = $this->db->error();
-
-			if (!empty($db_error['message'])) {
-				$output = array(
-					'result'  	=> 'NG',
-					'msg'		=> $db_error['message']
-				);
-			}			
-			
+		}else{
+			$data_update 	= array(		
+				'STATUS'			=> $status_approval,
+				'APPROVAL' 			=> $tingkat_approval,
+				'UPDATED_BY' 		=> $id_user,
+				'UPDATED_DATE' 		=> date('Y-m-d H:i:s')			
+				);	
 		}
-		catch (Exception $e)
+		$where_update	= array(
+			'ID' 	=> $id_pelatihan
+			);
+		$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
+
+
+		// jika status reject NO_TRX disimpan di table TRX_NO_REJECT
+		if ($status_result=='reject'){		
+		
+			$NO_TRX = $this->Pelatihan_model->select_t_pelatihan_by_id($id_pelatihan)->row()->NO_TRX;
+
+			$ARRAY_NO_TRX = explode(",",$NO_TRX);
+
+			foreach ($ARRAY_NO_TRX as $NO){
+				$data = array(
+					'NO_TRX' 		=> $NO,
+					'AKTIF' 		=> '1',
+					'CREATED_BY' 	=> $id_user,
+					'CREATED_DATE' 	=> date('Y-m-d H:i:s')			
+				);			
+
+				$this->Pelatihan_model->insert_trx_no_reject($data);
+			}
+		}
+
+		$db_error = $this->db->error();
+
+		if (!empty($db_error['message']))
 		{
+			$this->db->trans_rollback();
+				
 			$output = array(
 				'result'  	=> 'NG',
-				'msg'		=> $e->getMessage()
+				'msg'		=> $db_error['message']
 			);
 		}
+		else
+		{
+			$this->db->trans_commit();
+			$output = array(
+				'result'  	=> 'OK',
+				'msg'		=> ''
+			);
+		}			
+			
 		
 		
         
@@ -980,76 +983,72 @@ class Pelatihan extends MY_Controller
 			$zfile = $zdata['upload_data']['full_path']; // get file path
 			chmod($zfile,0777);
 		
-			try{
+			$this->db->trans_begin();
 				
-				$data_update 	= array(
-					'STATUS'			=> 'lpj_draft',
-					'UPDATED_BY' 		=> $id_user,
-					'UPDATED_DATE' 		=> date('Y-m-d H:i:s')			
-					);
-				$where_update	= array(
-					'ID' 	=> $id_pelatihan
-					);
-				$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);			
-				
-				
-				$data = array(
-					'ID_PELATIHAN' 			   => $id_pelatihan,
-					'LINK_LAMPIRAN' 	   	   => 'dokumen/lampiran_lpj/'.$nama_file,
-					'TANGGAL_REALISASI_MULAI'  => $inputStartTglPelaksanaan.' '.date("H:i", strtotime($inputStartTimePelaksanaan)),
-					'TANGGAL_REALISASI_SELESAI'=> $inputAkhirTglPelaksanaan.' '.date("H:i", strtotime($inputEndTimePelaksanaan)),
-					'DURASI_PELATIHAN' 		   => $durasi_pelatihan,				
-					'JUMLAH_ANGGARAN'		   => $total_cost_rab_akhir,
-					'CSI_FINAL' 			   => $csi_final,
-					'CATATAN_TAMBAHAN' 		   => $catatan_tambahan,
-					'AKTIF' 				   => '1',
-					'CREATED_BY' 			   => $id_user,
-					'CREATED_DATE' 			   => date('Y-m-d H:i:s')			
+			$data_update 	= array(
+				'STATUS'			=> 'lpj_draft',
+				'UPDATED_BY' 		=> $id_user,
+				'UPDATED_DATE' 		=> date('Y-m-d H:i:s')			
 				);
-				
-				$this->Pelatihan_model->insert_t_pelatihan_lpj($data);
-						
-				
-				for ($i=1;$i<count($deskripsi_rab);$i++){
-					$rab = array(
-						'ID_PELATIHAN' 		=> $id_pelatihan,
-						'URAIAN' 			=> $deskripsi_rab[$i],
-						'VOLUME' 			=> $volume_rab[$i],
-						'UNIT_COST' 		=> $unit_cost_rab[$i],
-						'SUB_TOTAL_COST' 	=> $total_cost_rab[$i],
-						'GRAND_TOTAL' 		=> $total_cost_rab_akhir,
-						'AKTIF'				=> '1',
-						'CREATED_BY' 		=> $id_user,
-						'CREATED_DATE' 		=> date('Y-m-d H:i:s')
-					);							
-					$this->Pelatihan_model->insert_t_rab_lpj($rab);
-				}
-
-				$db_error = $this->db->error();
-
-				if (!empty($db_error['message'])) {
-					$output = array(
-						'result'  	=> 'NG',
-						'msg'		=> $db_error['message']
-					);
-				}
-
+			$where_update	= array(
+				'ID' 	=> $id_pelatihan
+				);
+			$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);			
+			
+			
+			$data = array(
+				'ID_PELATIHAN' 			   => $id_pelatihan,
+				'LINK_LAMPIRAN' 	   	   => 'dokumen/lampiran_lpj/'.$nama_file,
+				'TANGGAL_REALISASI_MULAI'  => $inputStartTglPelaksanaan.' '.date("H:i", strtotime($inputStartTimePelaksanaan)),
+				'TANGGAL_REALISASI_SELESAI'=> $inputAkhirTglPelaksanaan.' '.date("H:i", strtotime($inputEndTimePelaksanaan)),
+				'DURASI_PELATIHAN' 		   => $durasi_pelatihan,				
+				'JUMLAH_ANGGARAN'		   => $total_cost_rab_akhir,
+				'CSI_FINAL' 			   => $csi_final,
+				'CATATAN_TAMBAHAN' 		   => $catatan_tambahan,
+				'AKTIF' 				   => '1',
+				'CREATED_BY' 			   => $id_user,
+				'CREATED_DATE' 			   => date('Y-m-d H:i:s')			
+			);
+			
+			$this->Pelatihan_model->insert_t_pelatihan_lpj($data);
+					
+			
+			for ($i=1;$i<count($deskripsi_rab);$i++){
+				$rab = array(
+					'ID_PELATIHAN' 		=> $id_pelatihan,
+					'URAIAN' 			=> $deskripsi_rab[$i],
+					'VOLUME' 			=> $volume_rab[$i],
+					'UNIT_COST' 		=> $unit_cost_rab[$i],
+					'SUB_TOTAL_COST' 	=> $total_cost_rab[$i],
+					'GRAND_TOTAL' 		=> $total_cost_rab_akhir,
+					'AKTIF'				=> '1',
+					'CREATED_BY' 		=> $id_user,
+					'CREATED_DATE' 		=> date('Y-m-d H:i:s')
+				);							
+				$this->Pelatihan_model->insert_t_rab_lpj($rab);
 			}
 
-			catch (Exception $e)
+			$db_error = $this->db->error();
+
+			if (!empty($db_error['message']))
 			{
+				$this->db->trans_rollback();
+					
 				$output = array(
 					'result'  	=> 'NG',
-					'msg'		=> $e->getMessage()
+					'msg'		=> $db_error['message']
 				);
 			}
-		}else
-		{
-			$output = array(
-				'result'  	=> 'NG',
-				'msg'		=> $this->upload->display_errors()
-			);
+			else
+			{
+				$this->db->trans_commit();
+				$output = array(
+					'result'  	=> 'OK',
+					'msg'		=> ''
+				);
+			}
 		}
+
         
 		echo json_encode($output);
 		exit;
@@ -1100,73 +1099,77 @@ class Pelatihan extends MY_Controller
 			'msg'		=> ''
 		);
 		
-		try
-		{
-			$data = array(
-				'ID_PELATIHAN' 		=> $id_pelatihan,
-				'TIPE_APPROVAL' 	=> 'LPJ',
-				'URUTAN_APPROVAL'	=> $urutan_approval,
-				'USERNAME'			=> $username,				
-				'APPROVAL'			=> $tingkat_approval,
-				'RESULT'			=> $status_result,
-				'FINAL_APPROVAL'	=> $final_approval,
-				'TTD'				=> $this->config->item('ttd_path')..$username,
-				'KETERANGAN'		=> $keterangan,				
-				'AKTIF' 			=> '1',
-				'CREATED_BY' 		=> $id_user,
-				'CREATED_DATE' 		=> date('Y-m-d H:i:s')			
+		$this->db->trans_begin();
+
+		$data = array(
+			'ID_PELATIHAN' 		=> $id_pelatihan,
+			'TIPE_APPROVAL' 	=> 'LPJ',
+			'URUTAN_APPROVAL'	=> $urutan_approval,
+			'USERNAME'			=> $username,				
+			'APPROVAL'			=> $tingkat_approval,
+			'RESULT'			=> $status_result,
+			'FINAL_APPROVAL'	=> $final_approval,
+			'TTD'				=> $this->config->item('ttd_path').$username,
+			'KETERANGAN'		=> $keterangan,				
+			'AKTIF' 			=> '1',
+			'CREATED_BY' 		=> $id_user,
+			'CREATED_DATE' 		=> date('Y-m-d H:i:s')			
+		);
+				
+		$this->Pelatihan_model->insert_t_approval($data);
+		
+		
+		$data_update 	= array(
+			'STATUS'			=> $status_approval,
+			'APPROVAL' 			=> $tingkat_approval,
+			'UPDATED_BY' 		=> $id_user,
+			'UPDATED_DATE' 		=> date('Y-m-d H:i:s')			
 			);
-					
-			$this->Pelatihan_model->insert_t_approval($data);
-			
-			
-			$data_update 	= array(
-				'STATUS'			=> $status_approval,
-				'APPROVAL' 			=> $tingkat_approval,
-				'UPDATED_BY' 		=> $id_user,
-				'UPDATED_DATE' 		=> date('Y-m-d H:i:s')			
-				);
-			$where_update	= array(
-				'ID' 	=> $id_pelatihan
-				);
-			$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
+		$where_update	= array(
+			'ID' 	=> $id_pelatihan
+			);
+		$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
 
-			// jika status reject NO_TRX disimpan di table TRX_NO_REJECT
-			if ($status_result=='reject'){		
-			
-				$NO_TRX = $this->Pelatihan_model->select_t_pelatihan_by_id($id_pelatihan)->row()->NO_TRX;
+		// jika status reject NO_TRX disimpan di table TRX_NO_REJECT
+		if ($status_result=='reject'){		
+		
+			$NO_TRX = $this->Pelatihan_model->select_t_pelatihan_by_id($id_pelatihan)->row()->NO_TRX;
 
-				$ARRAY_NO_TRX = explode(",",$NO_TRX);
+			$ARRAY_NO_TRX = explode(",",$NO_TRX);
 
-				foreach ($ARRAY_NO_TRX as $NO){
-					$data = array(
-						'NO_TRX' 		=> $NO,
-						'AKTIF' 		=> '1',
-						'CREATED_BY' 	=> $id_user,
-						'CREATED_DATE' 	=> date('Y-m-d H:i:s')			
-					);			
+			foreach ($ARRAY_NO_TRX as $NO){
+				$data = array(
+					'NO_TRX' 		=> $NO,
+					'AKTIF' 		=> '1',
+					'CREATED_BY' 	=> $id_user,
+					'CREATED_DATE' 	=> date('Y-m-d H:i:s')			
+				);			
 
-					$this->Pelatihan_model->insert_trx_no_reject($data);
-				}
+				$this->Pelatihan_model->insert_trx_no_reject($data);
 			}
-			
-			$db_error = $this->db->error();
-
-			if (!empty($db_error['message'])) {
-				$output = array(
-					'result'  	=> 'NG',
-					'msg'		=> $db_error['message']
-				);
-			}			
-			
 		}
-		catch (Exception $e)
+		
+		$db_error = $this->db->error();
+
+		if (!empty($db_error['message']))
 		{
+			$this->db->trans_rollback();
+				
 			$output = array(
 				'result'  	=> 'NG',
-				'msg'		=> $e->getMessage()
+				'msg'		=> $db_error['message']
 			);
 		}
+		else
+		{
+			$this->db->trans_commit();
+			$output = array(
+				'result'  	=> 'OK',
+				'msg'		=> ''
+			);
+		}		
+			
+		
 		
 		
         
@@ -1221,41 +1224,48 @@ class Pelatihan extends MY_Controller
 		}
 		
 		if ($id_nasabah!='-'){			
-			try{
-				$data = array(
-					'ID_PELATIHAN' 		=> $id_pelatihan,
-					'BISNIS' 			=> $bisnis,
-					'KTP' 				=> $ktp,
-					'ID_NASABAH'		=> $id_nasabah,
-					'NAMA' 				=> $nama_nasabah,
-					'NASABAH_TIPE' 		=> $nasabah_type,
-					'ID_SEKTOR_EKONOMI' => $sektor_ekonomi,
-					'ID_TIPE_KREDIT' 	=> $id_tipe_kredit,
-					'PLAFOND'		 	=> $plafond,
-					'AKTIF' 			=> '1',
-					'CREATED_BY' 		=> $id_user,
-					'CREATED_DATE' 		=> date('Y-m-d H:i:s')			
-				);
-				
-				$this->Pelatihan_model->insert_temp_kehadiran($data);
+
+			$this->db->trans_begin();
+
+			$data = array(
+				'ID_PELATIHAN' 		=> $id_pelatihan,
+				'BISNIS' 			=> $bisnis,
+				'KTP' 				=> $ktp,
+				'ID_NASABAH'		=> $id_nasabah,
+				'NAMA' 				=> $nama_nasabah,
+				'NASABAH_TIPE' 		=> $nasabah_type,
+				'ID_SEKTOR_EKONOMI' => $sektor_ekonomi,
+				'ID_TIPE_KREDIT' 	=> $id_tipe_kredit,
+				'PLAFOND'		 	=> $plafond,
+				'AKTIF' 			=> '1',
+				'CREATED_BY' 		=> $id_user,
+				'CREATED_DATE' 		=> date('Y-m-d H:i:s')			
+			);
 			
-				$db_error = $this->db->error();
+			$this->Pelatihan_model->insert_temp_kehadiran($data);
+						
+			$db_error = $this->db->error();
 
-				if (!empty($db_error['message'])) {
-					$output = array(
-						'result'  	=> 'NG',
-						'msg'		=> $db_error['message']
-					);
-				}				
-
-			}		
-			catch (Exception $e)
+			if (!empty($db_error['message']))
 			{
+				$this->db->trans_rollback();
+					
 				$output = array(
 					'result'  	=> 'NG',
-					'msg'		=> $e->getMessage()
+					'msg'		=> $db_error['message']
 				);
 			}
+			else
+			{
+				$this->db->trans_commit();
+				$output = array(
+					'result'  	=> 'OK',
+					'msg'		=> ''
+				);
+			}			
+
+			
+
 		}
         
 		echo json_encode($output);
@@ -1279,39 +1289,49 @@ class Pelatihan extends MY_Controller
 			'msg'		=> ''
 		);
 		
-		
-		
-		try{
-			$data = array(
-				'NO_KTP' 			=> $ktp ,
-				'NO_HP' 		=> $no_hp,
-				'NAMA' 			=> $nama,
-				'LOKASI_PNM' 	=> $lokasi_pnm,
-				'ALAMAT' 		=> $alamat,
-				'CATATAN' 		=> $catatan,
-				'CREATED_BY' 	=> $id_user,
-				'CREATED_DATE' 	=> date('Y-m-d H:i:s')			
-			);
-			
-			$this->Pelatihan_model->insert_t_non_nasabah($data);
+		$this->db->trans_begin();
 
-			$db_error = $this->db->error();
+		$data = array(
+			'NO_KTP' 			=> $ktp ,
+			'NO_HP' 		=> $no_hp,
+			'NAMA' 			=> $nama,
+			'LOKASI_PNM' 	=> $lokasi_pnm,
+			'ALAMAT' 		=> $alamat,
+			'CATATAN' 		=> $catatan,
+			'CREATED_BY' 	=> $id_user,
+			'CREATED_DATE' 	=> date('Y-m-d H:i:s')			
+		);
+		
+		$this->Pelatihan_model->insert_t_non_nasabah($data);
 
-			if (!empty($db_error['message'])) {
-				$output = array(
-					'result'  	=> 'NG',
-					'msg'		=> $db_error['message']
-				);
-			}			
-			
-		}		
-		catch (Exception $e)
-		{
+		$db_error = $this->db->error();
+
+		if (!empty($db_error['message'])) {
 			$output = array(
 				'result'  	=> 'NG',
-				'msg'		=> $e->getMessage()
+				'msg'		=> $db_error['message']
+			);
+		}			
+		
+		$db_error = $this->db->error();
+
+		if (!empty($db_error['message']))
+		{
+			$this->db->trans_rollback();
+				
+			$output = array(
+				'result'  	=> 'NG',
+				'msg'		=> $db_error['message']
 			);
 		}
+		else
+		{
+			$this->db->trans_commit();
+			$output = array(
+				'result'  	=> 'OK',
+				'msg'		=> ''
+			);
+		}		
         
 		echo json_encode($output);
 		exit;
@@ -1320,8 +1340,6 @@ class Pelatihan extends MY_Controller
 	public function post_submit()
 	{
 		$this->is_logged();		
-
-
 		
 		$pelatihanid	= trim($this->security->xss_clean(strip_image_tags($this->input->post('pelatihanid'))));
 		$status			= trim($this->security->xss_clean(strip_image_tags($this->input->post('status'))));
@@ -1350,27 +1368,30 @@ class Pelatihan extends MY_Controller
 			'msg'		=> ''
 		);			
 			
-		try
-		{	
-			$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
+		$this->db->trans_begin();
+		
+		$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
 
-			$db_error = $this->db->error();
+		$db_error = $this->db->error();
 
-			if (!empty($db_error['message'])) {
-				$output = array(
-					'result'  	=> 'NG',
-					'msg'		=> $db_error['message']
-				);
-			}
-
-		}
-		catch (Exception $e)
+		if (!empty($db_error['message']))
 		{
+			$this->db->trans_rollback();
+				
 			$output = array(
 				'result'  	=> 'NG',
-				'msg'		=> $e->getMessage()
+				'msg'		=> $db_error['message']
 			);
 		}
+		else
+		{
+			$this->db->trans_commit();
+			$output = array(
+				'result'  	=> 'OK',
+				'msg'		=> ''
+			);
+		}			
+
 		
 		echo json_encode($output);
 		exit;
@@ -1378,50 +1399,107 @@ class Pelatihan extends MY_Controller
 	}
 
 
-	public function post_change_status_pelatihan($idpelatihan,$status)
-	{		
-		$id_user = $this->session->userdata('sess_user_idsdm');	
-		$approval = $this->session->userdata('sess_user_group');
+	// public function post_change_status_pelatihan($idpelatihan,$status)
+	// {		
+	// 	$id_user = $this->session->userdata('sess_user_idsdm');	
+	// 	$approval = $this->session->userdata('sess_user_group');
 		
+		
+	// 	$data_update 	= array(
+	// 		'STATUS' => $status,
+	// 		'APPROVAL' => $approval,
+	// 		'UPDATED_BY' => $id_user,
+	// 		'UPDATED_DATE' => date('Y-m-d H:i:s')			
+	// 		);
+	// 	$where_update	= array(
+	// 		'ID' 	=> $idpelatihan
+	// 		);
+	// 	$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);	
+		
+		
+	// 	if ($status=='lpj_draft'){
+	// 		//REVISI PELATIHAN LPJ
+	// 		$data_update_lpj 	= array(
+	// 			'AKTIF' => '0',
+	// 			'UPDATED_BY' => $id_user,
+	// 			'UPDATED_DATE' => date('Y-m-d H:i:s')			
+	// 			);
+	// 		$where_update_lpj	= array(
+	// 			'ID_PELATIHAN' 	=> $idpelatihan
+	// 			);
+	// 		$this->Pelatihan_model->update_t_pelatihan_lpj($data_update_lpj,$where_update_lpj);
+
+
+	// 		//REVISI RAB LPJ
+	// 		$data_update_rab_lpj 	= array(
+	// 			'AKTIF' => '0',
+	// 			'UPDATED_BY' => $id_user,
+	// 			'UPDATED_DATE' => date('Y-m-d H:i:s')			
+	// 			);
+	// 		$where_update_rab_lpj	= array(
+	// 			'ID_PELATIHAN' 	=> $idpelatihan
+	// 			);		
+	// 		$this->Pelatihan_model->update_t_rab_lpj($data_update_rab_lpj,$where_update_rab_lpj);
+	// 	}		
+		
+	// }
+
+
+	public function post_revisi()
+	{
+		$id_pelatihan  	= trim($this->security->xss_clean(strip_image_tags($this->input->post('id_pelatihan'))));
+        $keterangan	   	= trim($this->security->xss_clean(strip_image_tags($this->input->post('keterangan'))));
+        $result        	= trim($this->security->xss_clean(strip_image_tags($this->input->post('result'))));
+		$id_user 		= $this->session->userdata('sess_user_idsdm');	
+		$approval 		= $this->session->userdata('sess_user_group');
+		$username		= $this->session->userdata('sess_user_username');
+		$getdate		= date('Y-m-d H:i:s');	
+		
+		$output = array(
+			'result'  	=> 'OK',
+			'msg'		=> ''
+		);		
+		
+		$this->db->trans_begin();
 		
 		$data_update 	= array(
-			'STATUS' => $status,
+			'STATUS' => 'revisi',
 			'APPROVAL' => $approval,
 			'UPDATED_BY' => $id_user,
-			'UPDATED_DATE' => date('Y-m-d H:i:s')			
+			'UPDATED_DATE' => $getdate
 			);
 		$where_update	= array(
-			'ID' 	=> $idpelatihan
+			'ID' 	=> $id_pelatihan
 			);
-		$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);	
-		
-		
-		if ($status=='lpj_draft'){
-			//REVISI PELATIHAN LPJ
-			$data_update_lpj 	= array(
-				'AKTIF' => '0',
-				'UPDATED_BY' => $id_user,
-				'UPDATED_DATE' => date('Y-m-d H:i:s')			
-				);
-			$where_update_lpj	= array(
-				'ID_PELATIHAN' 	=> $idpelatihan
-				);
-			$this->Pelatihan_model->update_t_pelatihan_lpj($data_update_lpj,$where_update_lpj);
+		$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
 
+		$db_error = $this->db->error();
 
-			//REVISI RAB LPJ
-			$data_update_rab_lpj 	= array(
-				'AKTIF' => '0',
-				'UPDATED_BY' => $id_user,
-				'UPDATED_DATE' => date('Y-m-d H:i:s')			
-				);
-			$where_update_rab_lpj	= array(
-				'ID_PELATIHAN' 	=> $idpelatihan
-				);		
-			$this->Pelatihan_model->update_t_rab_lpj($data_update_rab_lpj,$where_update_rab_lpj);
-		}		
+		if (!empty($db_error['message']))
+		{
+			$this->db->trans_rollback();
+				
+			$output = array(
+				'result'  	=> 'NG',
+				'msg'		=> $db_error['message']
+			);
+		}
+		else
+		{
+			$this->db->trans_commit();
+			$output = array(
+				'result'  	=> 'OK',
+				'msg'		=> ''
+			);
+		}
 		
+		
+		
+		echo json_encode($output);
+		exit;
+
 	}
+
 
 	public function post_revisi_lpj()
 	{
@@ -1609,61 +1687,64 @@ class Pelatihan extends MY_Controller
 
 
 		
-		try
-		{
+		$this->db->trans_begin();
 
-			if (isset($id_project_charter)){
-				$where_delete = array('NO_PROJECT_CHARTER' => $no_project_charter);
-				$this->Pelatihan_model->delete_project_charter($where_delete);
-			}
-
-			for ($i=1;$i<count($judul_pelatihan);$i++){
-				$data = array(
-					'NO_PROJECT_CHARTER'	=> $no_project_charter,					
-					'ID_TIPE_PELATIHAN' 	=> $type_klasterisasi,
-					'TEMA_PROJECT_CHARTER' 	=> $tema_project_charter,
-					'FILE' 					=> $file,
-					'JUDUL_PELATIHAN' 		=> $judul_pelatihan[$i],
-					'TANGGAL' 				=> $tanggal_pelatihan[$i].' '.$time_pelatihan[$i],
-					'CABANG_ULAMM' 			=> $cabang_ulamm[$i],
-					'ALAMAT' 				=> $alamat_pelatihan[$i],
-					'BUDGET' 				=> $budget_pelatihan[$i],
-					'AKTIF'					=> '1',
-					'CREATED_BY' 			=> $id_user,
-					'CREATED_DATE' 			=> date('Y-m-d H:i:s')			
-				);
-				
-
-				$where = array(
-					'NO_PROJECT_CHARTER'=> $no_project_charter,
-					'AKTIF'=> '1',
-				);
-				
-				// $project_charter = $this->Pelatihan_model->select_t_project_charter_where($where);	
-
-				// if ($project_charter){
-				// 	$this->Pelatihan_model->update_project_charter(array('AKTIF'=>'0'),$where);
-				// }
-				$this->Pelatihan_model->insert_t_project_charter($data);					
-			}
-
-			$db_error = $this->db->error();
-
-			if (!empty($db_error['message'])) {
-				$output = array(
-					'result'  	=> 'NG',
-					'msg'		=> $db_error['message']
-				);
-			}			
-
+		if (isset($id_project_charter)){
+			$where_delete = array('NO_PROJECT_CHARTER' => $no_project_charter);
+			$this->Pelatihan_model->delete_project_charter($where_delete);
 		}
-		catch (Exception $e)
+
+		for ($i=1;$i<count($judul_pelatihan);$i++){
+			$data = array(
+				'NO_PROJECT_CHARTER'	=> $no_project_charter,					
+				'ID_TIPE_PELATIHAN' 	=> $type_klasterisasi,
+				'TEMA_PROJECT_CHARTER' 	=> $tema_project_charter,
+				'FILE' 					=> $file,
+				'JUDUL_PELATIHAN' 		=> $judul_pelatihan[$i],
+				'TANGGAL' 				=> $tanggal_pelatihan[$i].' '.$time_pelatihan[$i],
+				'CABANG_ULAMM' 			=> $cabang_ulamm[$i],
+				'ALAMAT' 				=> $alamat_pelatihan[$i],
+				'BUDGET' 				=> $budget_pelatihan[$i],
+				'AKTIF'					=> '1',
+				'CREATED_BY' 			=> $id_user,
+				'CREATED_DATE' 			=> date('Y-m-d H:i:s')			
+			);
+			
+
+			$where = array(
+				'NO_PROJECT_CHARTER'=> $no_project_charter,
+				'AKTIF'=> '1',
+			);
+			
+			// $project_charter = $this->Pelatihan_model->select_t_project_charter_where($where);	
+
+			// if ($project_charter){
+			// 	$this->Pelatihan_model->update_project_charter(array('AKTIF'=>'0'),$where);
+			// }
+			$this->Pelatihan_model->insert_t_project_charter($data);					
+		}
+
+
+		$db_error = $this->db->error();
+
+		if (!empty($db_error['message']))
 		{
+			$this->db->trans_rollback();
+				
 			$output = array(
 				'result'  	=> 'NG',
-				'msg'		=> $e->getMessage()
+				'msg'		=> $db_error['message']
+			);
+		}
+		else
+		{
+			$this->db->trans_commit();
+			$output = array(
+				'result'  	=> 'OK',
+				'msg'		=> ''
 			);
 		}		
+			
 		
 		echo json_encode($output);
 		exit;
@@ -1684,37 +1765,50 @@ class Pelatihan extends MY_Controller
 		$id_user			= $this->session->userdata('sess_user_idsdm');			
 		$id_pelatihan_all 	= '';
 
-		// var_dump($id_pelatihan);die();
+		$this->db->trans_begin();
 
-		try
+
+		foreach($id_pelatihan as $data)
 		{
-			foreach($id_pelatihan as $data)
-			{
-				$data_pelatihan = array ('ID_TIPE' => '13');
-				$where = array ('ID' => $data);
+			$data_pelatihan = array ('ID_TIPE' => '13');
+			$where = array ('ID' => $data);
 
-				$this->Pelatihan_model->update_t_pelatihan($data_pelatihan,$where);
+			$this->Pelatihan_model->update_t_pelatihan($data_pelatihan,$where);
 
-				$id_pelatihan_all .= ','.$data;
+			$id_pelatihan_all .= ','.$data;
 
-			}
-
-			$data = array(
-				'ID_PELATIHAN' 		=> $id_pelatihan_all,
-				'JUDUL_GABUNGAN' 	=> $judul_gabungan,
-				'CREATED_BY' 		=> $id_user,
-				'CREATED_DATE' 		=> date('Y-m-d H:i:s'),
-			);
-
-			$this->Pelatihan_model->insert_pelatihan_pku_akabar_gabungan($data);
 		}
-		catch (Exception $e)
+
+		$data = array(
+			'ID_PELATIHAN' 		=> $id_pelatihan_all,
+			'JUDUL_GABUNGAN' 	=> $judul_gabungan,
+			'CREATED_BY' 		=> $id_user,
+			'CREATED_DATE' 		=> date('Y-m-d H:i:s'),
+		);
+
+		$this->Pelatihan_model->insert_pelatihan_pku_akabar_gabungan($data);
+		
+		$db_error = $this->db->error();
+
+		if (!empty($db_error['message']))
 		{
+			$this->db->trans_rollback();
+				
 			$output = array(
 				'result'  	=> 'NG',
-				'msg'		=> $e->getMessage()
+				'msg'		=> $db_error['message']
 			);
-		}		
+		}
+		else
+		{
+			$this->db->trans_commit();
+			$output = array(
+				'result'  	=> 'OK',
+				'msg'		=> ''
+			);
+		}			
+
+	
 		
 		echo json_encode($output);
 		exit;

@@ -48,8 +48,8 @@
                                 echo '<td>'.$data->NAMA.'</td>';
                                 echo '<td>'.$data->PLAFOND.'</td>';
 								echo '<td>'.$data->WILAYAH.'</td>';
-                                echo '<td>'.$data->CABANG_ULAMM.'</td>';
-                                echo '<td>'.$data->REGIONAL_MEKAAR.'</td>';
+                                echo '<td>'.$data->DESKRIPSI_CABANG_ULAMM.'</td>';
+                                echo '<td>'.$data->DESKRIPSI_REGION_MEKAAR.'</td>';
                                 echo '<td>'.$data->CABANG_MEKAAR.'</td>';
                                 echo '<td>'.$data->TIPE_PELATIHAN_DESKRIPSI.'</td>';
                                 echo '<td>'.$data->NO_PROPOSAL.'</td>';

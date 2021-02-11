@@ -32,8 +32,6 @@ class Dashboard extends MY_Controller
         $this->load->view('layout/gabung', $data);
     }
 
-
-
     public function dashboard_index_pemberdayaan()    	    
     {    
     	

@@ -372,8 +372,8 @@
 					  var tombol_action = '';
 					  
 					  tombol_action = '<div class="dropdown"><button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown">Action<span class="caret"></span></button><div class="dropdown-menu">';
-					  
-					  if (row.STATUS=='draft' || row.STATUS=='approved')
+
+					  if (row.STATUS=='draft' || row.STATUS=='approved' || row.STATUS=='revisi')
 					  {
 						tombol_action +='<a class="dropdown-item pelatihan_details" href="#" data-toggle="modal" data-target="#modaldetails" '
 						+'data-pelatihanid="'+row.ID+'"data-pelatihantype="'+row.ID_TIPE+'" '
