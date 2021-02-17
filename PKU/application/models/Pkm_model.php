@@ -7,4 +7,9 @@ class Pkm_model extends CI_Model {
             $this->db->insert('T_PKM_BERMAKNA', $data);
     }
 
+    public function insert_t_pkm_survey($data)
+    {
+            $this->db->insert('T_PKM_SURVEY', $data);
+    }
+
 }

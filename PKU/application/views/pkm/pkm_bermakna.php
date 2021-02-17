@@ -1,19 +1,15 @@
 <link href="<?php echo base_url() ?>assets/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
 
-
-<body class="card text-white bg-info" >
+<body class="card text-white bg-info" style="font-size:2em">
 <div class="card-header text-center">Pkm Bermakna</div>
-<div class="card-body text-center">
+<div class="card-body" >
 <?php echo $content->KONTEN ?>
 </div>		
-</body>
-
-
-<div class="text-center">
+<div class="text-center" style="margin-bottom:50px;">
 <input type="hidden" class="form-control" id="id_konten" value="<?= $content->ID ?>" />
-<button type="button" class="btn btn-success telah-baca">Telah Baca</button>
+<button type="button" class="btn btn-success telah-baca" style="font-size:1em">Telah Baca</button>
 </div>
-
+</body>
 
 <script src="<?php echo base_url() ?>assets/vendor/jquery-3.2.1.min.js"></script>
 <script src="<?php echo base_url() ?>assets/vendor/bootstrap-4.1/bootstrap.min.js"></script>

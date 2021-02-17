@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-FROM php:7.2-apache
-=======
 FROM php:7.3-apache
->>>>>>> 8131bc15cac87688b05bbb62d5f11e1111c30de4
 
 LABEL author="FZL"
 USER root
@@ -26,21 +22,12 @@ RUN cp /etc/ssl/openssl.cnf /etc/ssl/openssl.cnf.ORI && \
 
 
 # Install Memcached for php 7
-<<<<<<< HEAD
-RUN curl -L -o /tmp/memcached.tar.gz "https://github.com/php-memcached-dev/php-memcached/archive/php7.tar.gz" \
-    && mkdir -p /usr/src/php/ext/memcached \
-    && tar -C /usr/src/php/ext/memcached -zxvf /tmp/memcached.tar.gz --strip 1 \
-    && docker-php-ext-configure memcached \
-    && docker-php-ext-install memcached \
-    && rm /tmp/memcached.tar.gz
-=======
 # RUN curl -L -o /tmp/memcached.tar.gz "https://github.com/php-memcached-dev/php-memcached/archive/php7.tar.gz" \
 #     && mkdir -p /usr/src/php/ext/memcached \
 #     && tar -C /usr/src/php/ext/memcached -zxvf /tmp/memcached.tar.gz --strip 1 \
 #     && docker-php-ext-configure memcached \
 #     && docker-php-ext-install memcached \
 #     && rm /tmp/memcached.tar.gz
->>>>>>> 8131bc15cac87688b05bbb62d5f11e1111c30de4
 
 
 
@@ -63,8 +50,4 @@ RUN a2enmod rewrite
 
 # EXPOSE 30001
 
-<<<<<<< HEAD
-COPY PKU /var/www/html/pku
-=======
 COPY PKU /var/www/html/
->>>>>>> 8131bc15cac87688b05bbb62d5f11e1111c30de4
