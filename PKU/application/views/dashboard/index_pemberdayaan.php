@@ -5,15 +5,16 @@
     <?php $this->load->view("layout/header"); ?>
 </head>
 
-<body class="animsition">
+<body class="animsition" style="background-color:#d9e8ff;">
     <!-- MAIN CONTENT-->
     <div>
         <div class="section__content section__content--p20">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="overview-wrap">
-                            <h2 class="title-2 text-center">Dashboard</h2>
+                        <div class="overview-wrap" style="margin-top: 20px;">
+                            <!--h2 class="title-2 text-center">Dashboard Index Pemberdayaan</h2-->
+							<img style="margin-left:auto;margin-right:auto;" src="<?= base_url() ?>assets/images/logo-pnm.png" width="200" />
                         </div>
                     </div>
                 </div>

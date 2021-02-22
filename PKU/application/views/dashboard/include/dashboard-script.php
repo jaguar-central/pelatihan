@@ -108,17 +108,7 @@
             defaultFontFamily: 'Poppins',
             datasets: [{
               label: "Mikro (Ulamm)",
-              data: [0, 3, 1, 12, 5, 6, 1,0, 3, 1, 12, 5],
-              backgroundColor: 'transparent',
-              borderColor: 'rgba(220,53,69,0.75)',
-              borderWidth: 3,
-              pointStyle: 'circle',
-              pointRadius: 5,
-              pointBorderColor: 'transparent',
-              pointBackgroundColor: 'rgba(220,53,69,0.75)',
-            }, {
-              label: "Ultra Mikro (Mekaar)",
-              data: [0, 5, 4, 8, 4, 7, 10,0, 3, 1, 12, 5],
+              data: [<?= $U1 ?>, <?= $U2 ?>, <?= $U3 ?>, <?= $U4 ?>, <?= $U5 ?>, <?= $U6 ?>, <?= $U7 ?>, <?= $U8 ?>, <?= $U9 ?>, <?= $U10 ?>, <?= $U11 ?>, <?= $U12 ?>],
               backgroundColor: 'transparent',
               borderColor: 'rgba(40,167,69,0.75)',
               borderWidth: 3,
@@ -126,6 +116,16 @@
               pointRadius: 5,
               pointBorderColor: 'transparent',
               pointBackgroundColor: 'rgba(40,167,69,0.75)',
+            }, {
+              label: "Ultra Mikro (Mekaar)",
+              data: [<?= $M1 ?>, <?= $M2 ?>, <?= $M3 ?>, <?= $M4 ?>, <?= $M5 ?>, <?= $M6 ?>, <?= $M7 ?>, <?= $M8 ?>, <?= $M9 ?>, <?= $M10 ?>, <?= $M11 ?>, <?= $M12 ?>],
+              backgroundColor: 'transparent',              
+              borderColor: 'rgba(220,53,69,0.75)',
+              borderWidth: 3,
+              pointStyle: 'circle',
+              pointRadius: 5,
+              pointBorderColor: 'transparent',
+              pointBackgroundColor: 'rgba(220,53,69,0.75)',
             }]
           },
           options: {
@@ -209,7 +209,7 @@
           type: 'line',
           defaultFontFamily: 'Poppins',
           datasets: [{
-            data: [0, 3, 1, 8, 5, 6, 1,0, 3, 1, 10, 5],
+            data: [<?= $P1 ?>, <?= $P2 ?>, <?= $P3 ?>, <?= $P4 ?>, <?= $P5 ?>, <?= $P6 ?>, <?= $P7 ?>, <?= $P8 ?>, <?= $P9 ?>, <?= $P10 ?>, <?= $P11 ?>, <?= $P12 ?>],
             label: "Index Pmeberdayaan PNM",
             backgroundColor: 'rgba(0,103,255,.15)',
             borderColor: 'rgba(0,103,255,0.5)',
