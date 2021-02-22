@@ -128,7 +128,35 @@ class Report extends MY_Controller
         $data["report"] = $this->Report_model->report_detail(2);        
 
         $this->load->view('layout/gabung', $data);
-    }     
+    }
+    
+    public function report_summary_ulamm()    	    
+    {
+        $this->is_logged();	
+
+        $data["content"] = "Report";
+		$data["view"] = "report/summary_ulamm/summary_ulamm";	
+        $data["script"] = "report/summary_ulamm/include/summary-ulamm-script";     
+        
+        $data["menu"] = $this->Menu_model->select_ms_menu();
+        $data["report"] = $this->Report_model->select_summary(1);        
+
+        $this->load->view('layout/gabung', $data);
+    }    
+
+    public function report_summary_mekaar()    	    
+    {
+        $this->is_logged();	
+
+        $data["content"] = "Report";
+		$data["view"] = "report/summary_mekaar/summary_mekaar";	
+        $data["script"] = "report/summary_mekaar/include/summary-mekaar-script";     
+        
+        $data["menu"] = $this->Menu_model->select_ms_menu();
+        $data["report"] = $this->Report_model->select_summary(2);        
+
+        $this->load->view('layout/gabung', $data);
+    }
 
     public function report_rekap_ulamm()    	    
     {

@@ -103,6 +103,8 @@ $route['report/report_detail_ulamm'] 		    = 'Report/report_detail_ulamm';
 $route['report/report_detail_mekaar'] 		    = 'Report/report_detail_mekaar';
 $route['report/report_rekap_ulamm'] 		    = 'Report/report_rekap_ulamm';
 $route['report/report_rekap_mekaar'] 		    = 'Report/report_rekap_mekaar';
+$route['report/summary_ulamm'] 		            = 'Report/report_summary_ulamm';
+$route['report/summary_mekaar'] 		        = 'Report/report_summary_mekaar';
 
 
 

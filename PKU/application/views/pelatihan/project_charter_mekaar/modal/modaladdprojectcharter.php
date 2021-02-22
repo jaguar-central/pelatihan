@@ -229,6 +229,12 @@ $("#add_project_charter").submit(function(e){
 		e.preventDefault();        	
 		var formURL = "<?php echo base_url('pelatihan/post_project_charter'); ?>";
 		var frmdata = new FormData(this);
+
+		Swal.fire({
+              imageUrl: "<?= base_url() ?>assets/images/loader.gif",
+              showConfirmButton: false,
+              allowOutsideClick: false
+            });
 					
 		var xhr = $.ajax({
 			url: formURL,

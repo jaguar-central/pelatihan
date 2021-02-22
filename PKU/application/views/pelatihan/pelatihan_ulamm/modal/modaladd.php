@@ -639,6 +639,12 @@
 		var frmdata = new FormData(this);
 
 
+		Swal.fire({
+              imageUrl: "<?= base_url() ?>assets/images/loader.gif",
+              showConfirmButton: false,
+              allowOutsideClick: false
+            });
+
 		if ($('#total_cost_rab_akhir').val() > 0) {
 			var xhr = $.ajax({
 				url: formURL,
@@ -696,6 +702,6 @@
 				showConfirmButton: false,
 				timer: 1500
 			})
-		}
+		}	
 	});
 </script>

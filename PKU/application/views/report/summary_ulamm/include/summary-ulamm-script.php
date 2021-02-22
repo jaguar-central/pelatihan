@@ -50,16 +50,16 @@
 
 <script type="text/javascript">		
 
-    $(document).ready(function() {	
+	$(document).ready(function() {	
+        $('#datatable').DataTable();
 		$('#datatable').DataTable({			
-			"aaSorting" : [],	
-			"paging": true,
-			"processing": true,
-			"serverSide": false,			
-			"dom": "<'dom_datable'f>Brt<'dom_datable col-md-6'i>p",
-			"buttons": ['copy', 'csv', 'excel', 'pdf', 'print'],
-		});																
+		 	"aaSorting" : [],	
+		 	"paging": true,
+		 	"processing": true,
+		 	"serverSide": false,			
+		 	"dom": "<'dom_datable'f>Brt<'dom_datable col-md-6'i>p",
+		 	"buttons": ['copy', 'csv', 'excel', 'pdf', 'print'],
+		 });																
 	});
-	
 	
 </script>       

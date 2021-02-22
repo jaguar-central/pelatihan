@@ -294,6 +294,48 @@
 	});
 
 
+	$(document).on("click", ".reject_proposal", function () {					
+		var idpelatihan = $(this).data('idpelatihan');	
+		var judulpelatihan = $(this).data('judulpelatihan');	
+		
+		Swal.fire({
+		  title: 'Apakah anda yakin?',
+		  text: "reject proposal "+judulpelatihan,
+		  icon: 'question',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: 'Reject'
+		}).then((result) => {
+		  if (result.value) {				
+			$.post("post_reject",{pelatihanid: idpelatihan,status: 'reject'}, function(data, status){
+				var obj = $.parseJSON(data);
+				if (obj.result=='OK'){
+					Swal.fire({
+					  position: 'center',
+					  icon: 'success',
+					  title: 'Proposal telah di reject',
+					  showConfirmButton: false,
+					  timer: 1500
+					})
+					setTimeout(function () {
+						window.location.href = '<?php echo base_url(); ?>pelatihan/ulamm';
+					}, 1600);
+				}else{
+					Swal.fire({
+					  position: 'center',
+					  icon: 'error',
+					  title: obj.msg,
+					  showConfirmButton: false,
+					  timer: 2000
+					})					
+				}			
+			});	
+		  }
+		})									
+	});
+
+
 	$(document).on("click", ".submit_lpj", function () {					
 		var idpelatihan = $(this).data('idpelatihan');	
 		var judulpelatihan = $(this).data('judulpelatihan');	
@@ -418,8 +460,10 @@
 					  }
 					  
 					  if (row.STATUS=='draft'){	
+						tombol_action +='<a id="reject_proposal" class="dropdown-item bg-danger text-white reject_proposal" data-idpelatihan="'+row.ID+'" data-judulpelatihan="'+row.TITLE+'"  href="#" > Reject Proposal</a> ';
 						tombol_action +='<div class="dropdown-divider"></div> <a id="submit_proposal" class="dropdown-item submit_proposal" data-idpelatihan="'+row.ID+'" data-judulpelatihan="'+row.TITLE+'"  href="#" > Submit Proposal</a></div></div> ';
 					  }
+
 					  
 					  if (row.STATUS=='approved'){		
 						tombol_action +='<a class= "dropdown-item" href="<?php  echo base_url('pelatihan/lpj/'); ?>'+row.ID+'/ulamm"> Pelatihan LPJ</a>'; 

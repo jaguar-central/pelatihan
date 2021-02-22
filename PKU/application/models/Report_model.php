@@ -27,6 +27,14 @@ class Report_model extends CI_Model {
     }
 
 
+    public function select_summary($bisnis)
+    {
+        $query = $this->db->query(" select * from dbo.REPORT_SUMMARY ");
+        return $query->result();
+
+    }
+
+
     public function report_detail($bisnis)
     {
         $query = $this->db->query("select A.NASABAH_TIPE
