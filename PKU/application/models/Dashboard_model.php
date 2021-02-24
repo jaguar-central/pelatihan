@@ -64,9 +64,9 @@ class Dashboard_model extends CI_Model {
         public function select_index_pemberdayaan_mekaar($param,$count)
         {
                 if ($count==1){
-                        $query = $this->db->query("select COUNT(*) AS JML_DATA FROM T_INDEX_PEMBERDAYAAN WHERE ID_BISNIS=2 ");
+                        $query = $this->db->query("select COUNT(*) AS JML_DATA FROM T_INDEX_PEMBERDAYAAN WHERE ID_BISNIS=2 AND NILAI_GRADING!=0 ");
                 }else{
-                        $query = $this->db->query("select * from T_INDEX_PEMBERDAYAAN WHERE ID_BISNIS=2 ORDER BY ID DESC OFFSET ".$param['start']." ROWS FETCH NEXT ".$param['limit']." ROWS ONLY");                
+                        $query = $this->db->query("select * from T_INDEX_PEMBERDAYAAN WHERE ID_BISNIS=2 AND NILAI_GRADING!=0 ORDER BY ID DESC OFFSET ".$param['start']." ROWS FETCH NEXT ".$param['limit']." ROWS ONLY");                
                 }
                
                 return $query->result(); 

@@ -10,44 +10,70 @@
     <div>
         <div class="section__content section__content--p20">
             <div class="container-fluid">
-                <div class="row">
                     <div class="col-md-12">
-                        <div class="overview-wrap" style="margin-top: 20px;">
-                            <!--h2 class="title-2 text-center">Dashboard Index Pemberdayaan</h2-->
-							<img style="margin-left:auto;margin-right:auto;" src="<?= base_url() ?>assets/images/logo-pnm.png" width="200" />
+                        <div class="overview-wrap" style="margin-top: 20px;">                            
+                            <div class="title-2 bg-white text-center">                                
+                                <h2 class="title-2 bg-info text-white">
+                                <img style="float:left"  src="<?= base_url() ?>assets/images/logo-pnm.png" width="65" />                                 
+                                INDEX PEMBERDAYAAN
+                                <img style="float:right" src="<?= base_url() ?>assets/images/BUMN2020.png" width="100" /> 
+                                </h2>
+                            </div>
                         </div>
                     </div>
-                </div>
                 <!-- MAIN CONTENT-->
                 <div style="padding-top:10px">
                     <div class="section__content section__content--p0">
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <div class="au-card m-b-30">
+                                    <div class="au-card m-b-10">
                                         <div class="au-card-inner">
-                                            <h3 class="title-2 m-b-40">Index Pemberdayaan Ulamm & Mekaar</h3>
-                                            <canvas id="index-pemberdayaan"></canvas>
+                                            <h3 class="title-2 m-b-40 bg-danger text-center text-white">Mekaar</h3>
+                                            <canvas id="index-pemberdayaan-mekaar"></canvas>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- <div class="offset-lg-1 col-lg-5">
-                                    <div class="au-card m-b-30">
-                                        <div class="au-card-inner">
-                                            <h3 class="title-2 m-b-40">Mikro & Ultra Mikro</h3>
-                                            <canvas id="pieChart"></canvas>
-                                        </div>
-                                    </div>
-                                </div> -->
+                                </div>                             
 
                                 <div class="col-lg-6">
-                                    <div class="au-card m-b-30">
+                                    <div class="au-card m-b-10">
                                         <div class="au-card-inner">
-                                            <h3 class="title-2 m-b-40">Index Pemberdayaan PNM</h3>
+                                            <h4 class="title-2 m-b-40 bg-success text-center text-white">Ulamm</h4>
+                                            <canvas id="index-pemberdayaan-ulamm"></canvas>
+                                        </div>
+                                    </div>
+                                </div>      
+
+                                <div class="col-lg-6">
+                                    <div class="au-card m-b-10">
+                                        <div class="au-card-inner">
+                                            <h3 class="title-2 m-b-40 bg-success text-center text-white">Cabang Ulamm Top 10 </h3>
+                                            <canvas id="index-cabang-ulamm"></canvas>
+                                        </div>
+                                    </div>
+                                </div>                                
+                                
+                                <div class="col-lg-6">
+                                    <div class="au-card m-b-10">
+                                        <div class="au-card-inner">
+                                            <h3 class="title-2 m-b-40 bg-danger text-center text-white">Cabang Mekaar Top 10 </h3>
+                                            <canvas id="index-cabang-mekaar"></canvas>
+                                        </div>
+                                    </div>
+                                </div>   
+
+
+                                <div class="col-lg-12">
+                                    <div class="au-card m-b-10">
+                                        <div class="au-card-inner">
+                                            <h3 class="title-2 m-b-40 bg-info text-center text-white">PNM</h3>
                                             <canvas id="index-pemberdayaan-pnm"></canvas>
                                         </div>
                                     </div>
-                                </div>
+                                </div>                                                          
+
+
+ 
                                 <!-- <div class="col-lg-6">
                                     <div class="au-card m-b-30">
                                         <div class="au-card-inner">
@@ -133,7 +159,7 @@
                                         <div class="col-md-12">
                                             <div class="card">
                                                 <div class="card-header card-header-primary">
-                                                    <h4 class="card-title ">Index Pemberdayaan Ulamm</h4>
+                                                    <h4 class="title-2 bg-info card-title text-center text-white">Index Pemberdayaan Ulamm</h4>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="table">
@@ -183,7 +209,7 @@
                                         <div class="col-md-12">
                                             <div class="card">
                                                 <div class="card-header card-header-primary">
-                                                    <h4 class="card-title ">Index Pemberdayaan Mekaar</h4>
+                                                    <h4 class="title-2 bg-info card-title text-center text-white">Index Pemberdayaan Mekaar</h4>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="table">
@@ -233,7 +259,7 @@
                                         <div class="col-md-12">
                                             <div class="card">
                                                 <div class="card-header card-header-primary">
-                                                    <h4 class="card-title ">TOP 10 PER PROVINSI INDEX PEMBERDAYAAN</h4>
+                                                    <h4 class="title-2 bg-info card-title text-center text-white">Top 10 Per Provinsi Index Pemberdayaan</h4>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="table">
@@ -274,7 +300,7 @@
                                         <div class="col-md-12">
                                             <div class="card">
                                                 <div class="card-header card-header-primary">
-                                                    <h4 class="card-title ">TOP 10 PER PROVINSI INDEX PEMBERDAYAAN</h4>
+                                                    <h4 class="title-2 bg-info card-title text-center text-white">Top 10 Per Provinsi Index Pemberdayaan</h4>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="table">
@@ -316,7 +342,7 @@
                                         <div class="col-md-12">
                                             <div class="card">
                                                 <div class="card-header card-header-primary">
-                                                    <h4 class="card-title ">BOTTOM 10 PER PROVINSI INDEX PEMBERDAYAAN</h4>
+                                                    <h4 class="title-2 bg-info card-title text-center text-white">Bottom 10 Per Provinsi Index Pemberdayaan</h4>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="table">
@@ -357,7 +383,7 @@
                                         <div class="col-md-12">
                                             <div class="card">
                                                 <div class="card-header card-header-primary">
-                                                    <h4 class="card-title ">BOTTOM 3 PER PROVINSI INDEX PEMBERDAYAAN</h4>
+                                                    <h4 class="title-2 bg-info card-title text-center text-white">Bottom 10 Per Provinsi Index Pemberdayaan</h4>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="table">

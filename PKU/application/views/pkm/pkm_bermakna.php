@@ -1,8 +1,18 @@
 <link href="<?php echo base_url() ?>assets/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+<style>
+.bg-info{
+	background-color : #3061d8 !important;
+}
+</style>
 
-<body class="card text-white bg-info" style="font-size:2em">
-<div class="card-header text-center">Pkm Bermakna</div>
+<body class="card text-white bg-info" style="font-size:2em;width:100%;">
+<!--div class="card-header text-center">Pkm Bermakna</div-->
 <div class="card-body" >
+
+<div class="text-center" style="margin:5%;">
+<a class="btn btn-success" target="_blank" download="modul-pkm" href="<?= base_url().$content->GAMBAR_PATH ?>" style="font-size:1em">Download Modul</a>
+</div>
+
 <?php echo $content->KONTEN ?>
 </div>		
 <div class="text-center" style="margin-bottom:50px;">
