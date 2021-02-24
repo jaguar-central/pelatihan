@@ -11,13 +11,13 @@ class Pkm extends MY_Controller
 	public function login_pkm_bermakna()
 	{
 		//penambahan parameter CABANGID dan AOM
-		$cek_kelompok = $this->db->query("select * FROM [10.61.3.64].[INISEMENTARA].dbo.list_kelompok WHERE groupid='" . $this->input->get('kelompokid') . "' ")->row();
+		$cek_kelompok = $this->db->query("select OurBranchID,GroupID,GroupName FROM [10.61.3.15].[PKMMobile].[dbo].[PKM_LPM] WHERE GroupID='" . $this->input->get('kelompokid') . "' ")->row();
 		if ($cek_kelompok) {
 			//SET SESSION PKM START
 			$session_array = array(
-				'sess_cabang_id'			=> $cek_kelompok->cabangid,
-				'sess_kelompok_id'			=> $cek_kelompok->groupid,
-				'sess_nama_kelompok'		=> $cek_kelompok->groupname,
+				'sess_cabang_id'			=> $cek_kelompok->OurBranchID,
+				'sess_kelompok_id'			=> $cek_kelompok->GroupID,
+				'sess_nama_kelompok'		=> $cek_kelompok->GroupName,
 				'sess_user_id'				=> $this->input->get('nip')
 
 			);
@@ -27,7 +27,7 @@ class Pkm extends MY_Controller
 
 			$data["content"] = $this->db->query(" select * FROM MS_MODUL_PKM_BERMAKNA WHERE ID=(SELECT MODUL_PKM_ID FROM MS_JADWAL_PKM_BERMAKNA WHERE TAHUN=YEAR(GETDATE()) AND BULAN=MONTH(GETDATE())) ")->row();
 
-			$cek_minggu_ini = $this->db->query(" select * from T_PKM_BERMAKNA WHERE MODUL_PKM_ID=" . $data["content"]->ID . " and KELOMPOKID='" . $cek_kelompok->groupid . "' AND MINGGU_KE=(SELECT MINGGU_KE FROM CEK_MINGGU_KE_PER_BULAN()) ORDER BY MINGGU_KE DESC ")->result();
+			$cek_minggu_ini = $this->db->query(" select * from T_PKM_BERMAKNA WHERE MODUL_PKM_ID=" . $data["content"]->ID . " and KELOMPOKID='" . $cek_kelompok->GroupID . "' AND MINGGU_KE=(SELECT MINGGU_KE FROM CEK_MINGGU_KE_PER_BULAN()) ORDER BY MINGGU_KE DESC ")->result();
 
 			// var_dump($cek_minggu_ini);die();
 			if (count($cek_minggu_ini)) {
@@ -106,6 +106,7 @@ class Pkm extends MY_Controller
 		$survey_aset 			= $this->security->xss_clean(strip_image_tags($this->input->post('survey_aset')));
 		$survey_ijin 			= $this->security->xss_clean(strip_image_tags($this->input->post('survey_ijin')));
 		$survey_produk 			= $this->security->xss_clean(strip_image_tags($this->input->post('survey_produk')));
+		$survey_plafond			= $this->security->xss_clean(strip_image_tags($this->input->post('survey_plafond')));
 		$survey_omset 			= $this->security->xss_clean(strip_image_tags($this->input->post('survey_omset')));
 
 		$survey_materi_detail 			= $this->security->xss_clean(strip_image_tags($this->input->post('survey_materi_detail')));
@@ -113,6 +114,7 @@ class Pkm extends MY_Controller
 		$survey_aset_detail 			= $this->security->xss_clean(strip_image_tags($this->input->post('survey_aset_detail')));
 		$survey_ijin_detail 			= $this->security->xss_clean(strip_image_tags($this->input->post('survey_ijin_detail')));
 		$survey_produk_detail 			= $this->security->xss_clean(strip_image_tags($this->input->post('survey_produk_detail')));
+		$survey_plafond_detail 			= $this->security->xss_clean(strip_image_tags($this->input->post('survey_plafond_detail')));
 		$survey_omset_detail 			= $this->security->xss_clean(strip_image_tags($this->input->post('survey_omset_detail')));
 
 		$survey_materi_detail 		= ($survey_materi=="0") ? "0" : $survey_materi_detail;
@@ -120,6 +122,7 @@ class Pkm extends MY_Controller
 		$survey_aset_detail 		= ($survey_aset=="0") ? "0" : $survey_aset_detail;
 		$survey_ijin_detail 		= ($survey_ijin=="0") ? "0" : $survey_ijin_detail;
 		$survey_produk_detail 		= ($survey_produk=="0") ? "0" : $survey_produk_detail;
+		$survey_plafond_detail 		= ($survey_plafond=="0") ? "0" : $survey_plafond_detail;
 		$survey_omset_detail 		= ($survey_omset=="0") ? "0" : $survey_omset_detail;
 
 
@@ -132,6 +135,7 @@ class Pkm extends MY_Controller
 			'NILAI_ASET' 				=> $survey_aset_detail,
 			'NILAI_IJIN' 				=> $survey_ijin_detail,
 			'NILAI_PRODUK' 				=> $survey_produk_detail,
+			'NILAI_PLAFOND'				=> $survey_plafond_detail,
 			'NILAI_OMSET' 				=> $survey_omset_detail,
 			'CREATED_BY' 				=> $id_user,
 			'CREATED_DATE' 				=> date('Y-m-d H:i:s')

@@ -139,6 +139,32 @@
 
         </div>
 
+
+        <div class="card-body row">
+            <label class="col-sm-12">Apakah plafond pinjaman meningkat? </label>
+            <div class="col-sm-12">
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="survey_plafond1" name="survey_plafond" value="1" />
+                    <label for="survey_plafond1">Ada</label>
+                </div>
+
+                <div class="survey_omset_detail">
+                    <select class="form-control" id="survey_plafond_detail" name="survey_plafond_detail" size="3">
+                        <option value="0.50" selected>Peningkatan plafond pinjaman kurang dari separuh jumlah anggota kelompok</option>
+                        <option value="1">Peningkatan plafond pinjaman lebih dari separuh jumlah anggota kelompok</option>
+                    </select>
+                </div>
+
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="survey_plafond2" name="survey_plafond" value="0" />
+                    <label for="survey_plafond2">Tidak</label>
+                </div>
+            </div>
+
+        </div>
+
+
+
         <div class="card-body row">
             <label class="col-sm-12">Apakah ada penambahan pendapatan (omset) rata-rata per hari? </label>
             <div class="col-sm-12">
