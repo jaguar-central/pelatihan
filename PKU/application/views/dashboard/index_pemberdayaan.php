@@ -145,16 +145,16 @@
                         <a class="nav-link" data-toggle="tab" href="#ultra_mikro_mekaar">Detail Ultra Mikro</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#top_mikro_ulamm">Detail TOP 10 Mikro</a>
+                        <a class="nav-link" data-toggle="tab" href="#top_mikro_ulamm">Detail Top 10 Mikro</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#top_ultra_mikro_mekaar">Detail TOP 10 Ultra Mikro</a>
+                        <a class="nav-link" data-toggle="tab" href="#top_ultra_mikro_mekaar">Detail Top 10 Ultra Mikro</a>
                     </li>                    
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#bottom_mikro_ulamm">Detail BOTTOM 10 Mikro</a>
+                        <a class="nav-link" data-toggle="tab" href="#bottom_mikro_ulamm">Detail Bottom 10 Mikro</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#bottom_ultra_mikro_mekaar">Detail BOTTOM 10 Ultra Mikro</a>
+                        <a class="nav-link" data-toggle="tab" href="#bottom_ultra_mikro_mekaar">Detail Bottom 10 Ultra Mikro</a>
                     </li>                    
                 </ul>
                 <div class="tab-content">
