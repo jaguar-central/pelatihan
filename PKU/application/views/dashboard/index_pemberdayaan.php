@@ -12,12 +12,10 @@
             <div class="container-fluid">
                     <div class="col-md-12">
                         <div class="overview-wrap" style="margin-top: 20px;">                            
-                            <div class="title-2 bg-white text-center">                                
-                                <h2 class="title-2 bg-info text-white">
-                                <img style="float:left"  src="<?= base_url() ?>assets/images/logo-pnm.png" width="65" />                                 
-                                INDEX PEMBERDAYAAN
-                                <img style="float:right" src="<?= base_url() ?>assets/images/BUMN2020.png" width="100" /> 
-                                </h2>
+                            <div class="title-2 bg-white text-center" style="display:flex;">
+								<img class="col-lg-1 " style="height:35px;margin:auto;" src="<?= base_url() ?>assets/images/logo-pnm.png" />
+								<h2 class="title-2 bg-info text-white col-lg-10" >INDEX PEMBERDAYAAN</h2>
+								<img class="col-lg-1 d-none d-md-block d-lg-block" style="height:30px;margin:auto;" src="<?= base_url() ?>assets/images/BUMN2020.png"  /> 
                             </div>
                         </div>
                     </div>
@@ -73,15 +71,24 @@
                                 </div>                                                          
 
 
- 
-                                <!-- <div class="col-lg-6">
+                                <div class="col-lg-6">
                                     <div class="au-card m-b-30">
                                         <div class="au-card-inner">
-                                            <h3 class="title-2 m-b-40">Bar chart</h3>
-                                            <canvas id="barChart"></canvas>
+                                            <h3 class="title-2 m-b-40 bg-danger text-center text-white">Provinsi Mekaar Top 10</h3>
+                                            <canvas id="index-provinsi-mekaar"></canvas>
                                         </div>
                                     </div>
-                                </div> -->
+                                </div>    
+ 
+                                <div class="col-lg-6">
+                                    <div class="au-card m-b-30">
+                                        <div class="au-card-inner">
+                                            <h3 class="title-2 m-b-40 bg-success text-center text-white">Provinsi Ulamm Top 10</h3>
+                                            <canvas id="index-provinsi-ulamm"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            
                                 <!-- <div class="col-lg-6">
                                     <div class="au-card m-b-30">
                                         <div class="au-card-inner">
@@ -132,22 +139,22 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#mikro_ulamm">Mikro</a>
+                        <a class="nav-link active" data-toggle="tab" href="#mikro_ulamm">Detail Mikro</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#ultra_mikro_mekaar">Ultra Mikro</a>
+                        <a class="nav-link" data-toggle="tab" href="#ultra_mikro_mekaar">Detail Ultra Mikro</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#top_mikro_ulamm">TOP 10 Mikro</a>
+                        <a class="nav-link" data-toggle="tab" href="#top_mikro_ulamm">Detail TOP 10 Mikro</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#top_ultra_mikro_mekaar">TOP 10 Ultra Mikro</a>
+                        <a class="nav-link" data-toggle="tab" href="#top_ultra_mikro_mekaar">Detail TOP 10 Ultra Mikro</a>
                     </li>                    
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#bottom_mikro_ulamm">BOTTOM 10 Mikro</a>
+                        <a class="nav-link" data-toggle="tab" href="#bottom_mikro_ulamm">Detail BOTTOM 10 Mikro</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#bottom_ultra_mikro_mekaar">BOTTOM 10 Ultra Mikro</a>
+                        <a class="nav-link" data-toggle="tab" href="#bottom_ultra_mikro_mekaar">Detail BOTTOM 10 Ultra Mikro</a>
                     </li>                    
                 </ul>
                 <div class="tab-content">
@@ -163,7 +170,7 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="table">
-                                                        <table id="datatable_pemberdayaan_ulamm" class="table ">
+                                                        <table id="datatable_pemberdayaan_ulamm" class="table table-responsive">
                                                             <thead class=" text-primary col-md-12">
                                                                 <tr>
                                                                     <th rowspan="2" colspan="1">ID Nasabah</th>
@@ -213,7 +220,7 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="table">
-                                                        <table id="datatable_pemberdayaan_mekaar" class="table">
+                                                        <table id="datatable_pemberdayaan_mekaar" class="table table-responsive">
                                                             <thead class=" text-primary col-md-12">
                                                                 <tr>
                                                                     <th rowspan="2" colspan="1">ID Kelompok</th>
@@ -263,7 +270,7 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="table">
-                                                        <table id="datatable_pemberdayaan_mekaar" class="table">
+                                                        <table id="datatable_pemberdayaan_mekaar" class="table table-responsive">
                                                             <thead class=" text-primary col-md-12">
                                                                 <tr>
                                                                     <th>Provinsi</th>
@@ -304,7 +311,7 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="table">
-                                                        <table id="datatable_pemberdayaan_mekaar" class="table">
+                                                        <table id="datatable_pemberdayaan_mekaar" class="table table-responsive">
                                                             <thead class=" text-primary col-md-12">
                                                                 <tr>
                                                                     <th>Provinsi</th>
@@ -346,7 +353,7 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="table">
-                                                        <table id="datatable_pemberdayaan_mekaar" class="table">
+                                                        <table id="datatable_pemberdayaan_mekaar" class="table table-responsive">
                                                             <thead class=" text-primary col-md-12">
                                                                 <tr>
                                                                     <th>Provinsi</th>
@@ -387,7 +394,7 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="table">
-                                                        <table id="datatable_pemberdayaan_mekaar" class="table">
+                                                        <table id="datatable_pemberdayaan_mekaar" class="table table-responsive">
                                                             <thead class=" text-primary col-md-12">
                                                                 <tr>
                                                                     <th>Provinsi</th>

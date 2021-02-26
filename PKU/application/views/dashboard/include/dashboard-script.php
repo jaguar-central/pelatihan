@@ -273,6 +273,97 @@
 
 
 
+  
+
+
+    try {
+
+    //radar chart
+    var ctx = document.getElementById("index-cabang-mekaar");
+    if (ctx) {
+      ctx.height = 150;
+      var myChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+          labels: [<?php foreach($CABANG_MEKAAR as $MEKAAR_LABEL){echo '"'.trim($MEKAAR_LABEL->CABANG).'",';} ?>],
+          defaultFontFamily: 'Poppins',
+          datasets: [
+            {
+              label: "Per Cabang Mekaar",
+              data: [<?php foreach($CABANG_MEKAAR as $MEKAAR_DATA){ echo $MEKAAR_DATA->TOTAL.',';} ?>],
+              borderColor: "rgba(208, 73, 15, 0.6)",
+              borderWidth: "3",
+              backgroundColor: "rgba(208, 73, 15, 0.4)"
+            }
+          ]
+        },
+        options: {
+          legend: {
+            position: 'top',
+            labels: {
+              fontFamily: 'Poppins'
+            }
+
+          },
+          scale: {
+            ticks: {
+              beginAtZero: true,
+              fontFamily: "Poppins"
+            }
+          }
+        }
+      });
+    }
+
+    } catch (error) {
+    console.log(error)
+    }
+
+
+    try {
+
+    //radar chart
+    var ctx = document.getElementById("index-cabang-ulamm");
+    if (ctx) {
+      ctx.height = 150;
+      var myChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+          labels: [<?php foreach($CABANG_ULAMM as $ULAMM_LABEL){echo '"'.trim($ULAMM_LABEL->CABANG).'",';} ?>],
+          defaultFontFamily: 'Poppins',
+          datasets: [
+            {
+              label: "Per Cabang Ulamm",
+              data: [<?php foreach($CABANG_ULAMM as $ULAMM_DATA){ echo $ULAMM_DATA->TOTAL.',';} ?>],
+              borderColor: "rgba(13, 189, 51, 0.6)",
+              borderWidth: "3",
+              backgroundColor: "rgba(13, 189, 51, 0.4)"
+            }
+          ]
+        },
+        options: {
+          legend: {
+            position: 'top',
+            labels: {
+              fontFamily: 'Poppins'
+            }
+
+          },
+          scale: {
+            ticks: {
+              beginAtZero: true,
+              fontFamily: "Poppins"
+            }
+          }
+        }
+      });
+    }
+
+    } catch (error) {
+    console.log(error)
+    }
+
+
     try {
 
     //Team chart
@@ -363,24 +454,26 @@
 
     } catch (error) {
     console.log(error);
-    }    
+    }  
+
+
 
 
     try {
 
     //radar chart
-    var ctx = document.getElementById("index-cabang-mekaar");
+    var ctx = document.getElementById("index-provinsi-mekaar");
     if (ctx) {
       ctx.height = 150;
       var myChart = new Chart(ctx, {
         type: 'radar',
         data: {
-          labels: [<?php foreach($CABANG_MEKAAR as $MEKAAR_LABEL){echo '"'.trim($MEKAAR_LABEL->CABANG).'",';} ?>],
+          labels: [<?php foreach($TOP_MEKAAR as $TOP_MEKAAR_DATA){echo '"'.trim($TOP_MEKAAR_DATA->PROVINSI).'",';} ?>],
           defaultFontFamily: 'Poppins',
           datasets: [
             {
-              label: "Index Pemberdayaan Cabang Mekaar Top 10",
-              data: [<?php foreach($CABANG_MEKAAR as $MEKAAR_DATA){ echo $MEKAAR_DATA->TOTAL.',';} ?>],
+              label: "Per Provinsi Mekaar",
+              data: [<?php foreach($TOP_MEKAAR as $TOP_MEKAAR_DATA){ echo $TOP_MEKAAR_DATA->TOTAL.',';} ?>],
               borderColor: "rgba(208, 73, 15, 0.6)",
               borderWidth: "3",
               backgroundColor: "rgba(208, 73, 15, 0.4)"
@@ -413,18 +506,18 @@
     try {
 
     //radar chart
-    var ctx = document.getElementById("index-cabang-ulamm");
+    var ctx = document.getElementById("index-provinsi-ulamm");
     if (ctx) {
       ctx.height = 150;
       var myChart = new Chart(ctx, {
         type: 'radar',
         data: {
-          labels: [<?php foreach($CABANG_ULAMM as $ULAMM_LABEL){echo '"'.trim($ULAMM_LABEL->CABANG).'",';} ?>],
+          labels: [<?php foreach($TOP_ULAMM as $TOP_ULAMM_DATA){echo '"'.trim($TOP_ULAMM_DATA->PROVINSI).'",';} ?>],
           defaultFontFamily: 'Poppins',
           datasets: [
             {
-              label: "Index Pemberdayaan Cabang Ulamm Top 10",
-              data: [<?php foreach($CABANG_ULAMM as $ULAMM_DATA){ echo $ULAMM_DATA->TOTAL.',';} ?>],
+              label: "Per Provinsi Ulamm",
+              data: [<?php foreach($TOP_ULAMM as $TOP_ULAMM_DATA){ echo $TOP_ULAMM_DATA->TOTAL.',';} ?>],
               borderColor: "rgba(13, 189, 51, 0.6)",
               borderWidth: "3",
               backgroundColor: "rgba(13, 189, 51, 0.4)"
@@ -452,6 +545,7 @@
     } catch (error) {
     console.log(error)
     }
+
 
   });
 

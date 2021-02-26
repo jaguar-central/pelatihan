@@ -10,14 +10,11 @@
 <!--div class="card-header text-center">Pkm Bermakna</div-->
 <div class="card-body" >
 
-<div class="text-center" style="margin:5%;">
-<a class="btn btn-success" target="_blank" download="modul-pkm" href="<?= base_url().$content->GAMBAR_PATH ?>" style="font-size:1em">Download Modul</a>
-</div>
-
 <?php echo $content->KONTEN ?>
 </div>		
 <div class="text-center" style="margin-bottom:50px;">
 <input type="hidden" class="form-control" id="id_konten" value="<?= $content->ID ?>" />
+<a class="btn btn-success" target="_blank" download="modul-pkm" href="<?= base_url().$content->GAMBAR_PATH ?>" style="font-size:1em"><i class="fas fa-cloud-download-alt"></i> Modul</a>
 <button type="button" class="btn btn-success telah-baca" style="font-size:1em">Telah Baca</button>
 </div>
 </body>

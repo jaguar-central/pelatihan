@@ -268,6 +268,18 @@
         });
 
 
+        //SURVEY PLAFOND
+        $('.survey_plafond_detail').hide();
+
+        $('input[type=radio][name=survey_plafond]').change(function() {
+            if (this.value == '1') {
+                $('.survey_plafond_detail').show();
+            } else if (this.value == '0') {
+                $('.survey_plafond_detail').hide();
+            }
+        });
+
+
         //SURVEY OMSET
         $('.survey_omset_detail').hide();
 
