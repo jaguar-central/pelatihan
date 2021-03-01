@@ -99,7 +99,7 @@
     try {
       var ctx = document.getElementById("index-pemberdayaan-ulamm");
       if (ctx) {
-        ctx.height = 100;
+        ctx.height = 150;
         var myChart = new Chart(ctx, {
           type: 'line',
           data: {
@@ -187,7 +187,7 @@
     try {
       var ctx = document.getElementById("index-pemberdayaan-mekaar");
       if (ctx) {
-        ctx.height = 100;
+        ctx.height = 150;
         var myChart = new Chart(ctx, {
           type: 'line',
           data: {

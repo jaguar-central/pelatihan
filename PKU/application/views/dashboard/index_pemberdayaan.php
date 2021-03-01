@@ -11,7 +11,7 @@
         <div class="section__content section__content--p20">
             <div class="container-fluid">
                     <div class="col-md-12">
-                        <div class="overview-wrap" style="margin-top: 20px;">                            
+                        <div class="overview-wrap" style="margin-top: 5px;">                            
                             <div class="title-2 bg-white text-center" style="display:flex;">
 								<img class="col-lg-1 " style="height:35px;margin:auto;" src="<?= base_url() ?>assets/images/logo-pnm.png" />
 								<h2 class="title-2 bg-info text-white col-lg-10" >INDEX PEMBERDAYAAN</h2>
@@ -24,34 +24,16 @@
                     <div class="section__content section__content--p0">
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                     <div class="au-card m-b-10">
                                         <div class="au-card-inner">
                                             <h3 class="title-2 m-b-40 bg-danger text-center text-white">Mekaar</h3>
                                             <canvas id="index-pemberdayaan-mekaar"></canvas>
                                         </div>
                                     </div>
-                                </div>                             
-
-                                <div class="col-lg-6">
-                                    <div class="au-card m-b-10">
-                                        <div class="au-card-inner">
-                                            <h4 class="title-2 m-b-40 bg-success text-center text-white">Ulamm</h4>
-                                            <canvas id="index-pemberdayaan-ulamm"></canvas>
-                                        </div>
-                                    </div>
-                                </div>      
-
-                                <div class="col-lg-6">
-                                    <div class="au-card m-b-10">
-                                        <div class="au-card-inner">
-                                            <h3 class="title-2 m-b-40 bg-success text-center text-white">Cabang Ulamm Top 10 </h3>
-                                            <canvas id="index-cabang-ulamm"></canvas>
-                                        </div>
-                                    </div>
-                                </div>                                
+                                </div>                                                             
                                 
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                     <div class="au-card m-b-10">
                                         <div class="au-card-inner">
                                             <h3 class="title-2 m-b-40 bg-danger text-center text-white">Cabang Mekaar Top 10 </h3>
@@ -59,6 +41,42 @@
                                         </div>
                                     </div>
                                 </div>   
+
+                                <div class="col-lg-4">
+                                    <div class="au-card m-b-10">
+                                        <div class="au-card-inner">
+                                            <h3 class="title-2 m-b-40 bg-danger text-center text-white">Provinsi Mekaar Top 10</h3>
+                                            <canvas id="index-provinsi-mekaar"></canvas>
+                                        </div>
+                                    </div>
+                                </div>    
+
+                                <div class="col-lg-4">
+                                    <div class="au-card m-b-10">
+                                        <div class="au-card-inner">
+                                            <h4 class="title-2 m-b-40 bg-success text-center text-white">Ulamm</h4>
+                                            <canvas id="index-pemberdayaan-ulamm"></canvas>
+                                        </div>
+                                    </div>
+                                </div>   
+
+                                <div class="col-lg-4">
+                                    <div class="au-card m-b-10">
+                                        <div class="au-card-inner">
+                                            <h3 class="title-2 m-b-40 bg-success text-center text-white">Cabang Ulamm Top 10 </h3>
+                                            <canvas id="index-cabang-ulamm"></canvas>
+                                        </div>
+                                    </div>
+                                </div>                                                                   
+ 
+                                <div class="col-lg-4">
+                                    <div class="au-card m-b-10">
+                                        <div class="au-card-inner">
+                                            <h3 class="title-2 m-b-40 bg-success text-center text-white">Provinsi Ulamm Top 10</h3>
+                                            <canvas id="index-provinsi-ulamm"></canvas>
+                                        </div>
+                                    </div>
+                                </div>                                
 
 
                                 <div class="col-lg-12">
@@ -71,23 +89,7 @@
                                 </div>                                                          
 
 
-                                <div class="col-lg-6">
-                                    <div class="au-card m-b-30">
-                                        <div class="au-card-inner">
-                                            <h3 class="title-2 m-b-40 bg-danger text-center text-white">Provinsi Mekaar Top 10</h3>
-                                            <canvas id="index-provinsi-mekaar"></canvas>
-                                        </div>
-                                    </div>
-                                </div>    
- 
-                                <div class="col-lg-6">
-                                    <div class="au-card m-b-30">
-                                        <div class="au-card-inner">
-                                            <h3 class="title-2 m-b-40 bg-success text-center text-white">Provinsi Ulamm Top 10</h3>
-                                            <canvas id="index-provinsi-ulamm"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
+
                             
                                 <!-- <div class="col-lg-6">
                                     <div class="au-card m-b-30">
