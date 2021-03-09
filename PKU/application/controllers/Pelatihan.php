@@ -118,7 +118,7 @@ class Pelatihan extends MY_Controller
 								); 
 
         $data["menu"] 		= $this->Menu_model->select_ms_menu();
-		$data["pelatihan"] 	= $this->Pelatihan_model->select_t_pelatihan_mekaar_by_status(array('draft','submitted','approved','reject','lpj_draft','lpj_submitted','lpj_approved'));
+		$data["pelatihan"] 	= $this->Pelatihan_model->select_t_pelatihan_mekaar_by_status(array('draft','submitted','approved','reject','lpj_draft','lpj_submitted','lpj_approved'));		
 
 		$data["cabang"] 	= $this->Master_model->select_ms_cabang_ulamm();		
 		$data["region"] 	= $this->Master_model->select_ms_region_mekaar();
@@ -460,8 +460,7 @@ class Pelatihan extends MY_Controller
 		$output = array(
 			'result'  	=> 'OK',
 			'msg'		=> ''
-		);		
-		
+		);			
 		
 		$this->db->trans_begin();
 
@@ -480,7 +479,7 @@ class Pelatihan extends MY_Controller
 			$id_krm = 0;
 		}
 
-
+		
 		
 		$data = array(
 			'ID_TIPE' 				=> $pelatihan_type,
@@ -514,8 +513,7 @@ class Pelatihan extends MY_Controller
 		);
 		
 		
-		$this->Pelatihan_model->insert_t_pelatihan($data);
-		
+		$this->Pelatihan_model->insert_t_pelatihan($data);		
 		
 		$id_pelatihan = $this->db->insert_id(); //last id yang di insert		
 		

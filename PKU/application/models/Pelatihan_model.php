@@ -86,7 +86,7 @@ public function select_t_pelatihan_ulamm_by_status($status)
 		from('T_PELATIHAN')->
 		join('T_PELATIHAN_LPJ','T_PELATIHAN.ID = T_PELATIHAN_LPJ.ID_PELATIHAN AND T_PELATIHAN_LPJ.AKTIF=1','LEFT')->
 		where('T_PELATIHAN.ID_BISNIS','1')->
-		where(" T_PELATIHAN.CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ")->
+		where(" T_PELATIHAN.CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." and AKTIF=1 )   ")->
 		where_in('T_PELATIHAN.STATUS',$status)->get();				
 		
 		return $query->result();
@@ -111,7 +111,7 @@ public function select_t_pelatihan_mekaar_by_status($status)
 			from('T_PELATIHAN')->
 			join('T_PELATIHAN_LPJ','T_PELATIHAN.ID = T_PELATIHAN_LPJ.ID_PELATIHAN AND T_PELATIHAN_LPJ.AKTIF=1','LEFT')->
 			where('T_PELATIHAN.ID_BISNIS','2')->
-			where(" T_PELATIHAN.CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ")->
+			where(" T_PELATIHAN.CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." and AKTIF=1 ) ")->
 			where_in('T_PELATIHAN.STATUS',$status)->get();	
 
 			return $query->result();
@@ -148,7 +148,7 @@ public function select_t_pelatihan_by_approval($status)
 			";
 
 			if ($this->session->userdata('sess_user_id_user_group')<6){
-				$q .=" and CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." ) ";
+				$q .=" and CABANG_ULAMM in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." and AKTIF=1 ) ";
 			}
 			
 			//sementara sampe korwil ada semua
@@ -365,7 +365,7 @@ public function update_aktif_trx_reject($id){
 
 
 public function cek_korwil_by_id_pelatihan($id){
-	$query = $this->db->query("select * FROM MS_USER_CABANG_REGION WHERE ID_GROUP=2 AND KODE_CABANG_REGION=(select CABANG_ULAMM from T_PELATIHAN where ID=$id ) ");
+	$query = $this->db->query("select * FROM MS_USER_CABANG_REGION WHERE ID_GROUP=2 AND KODE_CABANG_REGION=(select CABANG_ULAMM from T_PELATIHAN where ID=$id ) and AKTIF=1 ");
 	return $query;   
 }	
 

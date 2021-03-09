@@ -24,6 +24,19 @@
                     <div class="section__content section__content--p0">
                         <div class="container-fluid">
                             <div class="row">
+
+                                <div class="col-lg-6">
+                                    <div class="au-card m-b-10">
+                                        <div class="au-card-inner">
+                                            <h3 class="title-2 m-b-40 bg-danger text-center text-white">Mekaar</h3>
+                                            <div id="chartdiv" style="height:300px" ></div>
+                                        </div>
+                                    </div>
+                                </div>   
+
+
+                            
+
                                 <div class="col-lg-4">
                                     <div class="au-card m-b-10">
                                         <div class="au-card-inner">

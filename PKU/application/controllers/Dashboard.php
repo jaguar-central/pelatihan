@@ -36,22 +36,21 @@ class Dashboard extends MY_Controller
     {    
     	
         $data["content"] = "Dashboard";		
-		$data["script"] = "dashboard/include/dashboard-script";
+		$data["script"] = "dashboard/include/dashboard-script-2";
 		
         $data["menu"] = $this->Menu_model->select_ms_menu();	
-        $data["TOTAL_ULAMM"] = $this->db->query("select SUM(TOTAL_NILAI)/COUNT(*) as TOTAL from T_INDEX_PEMBERDAYAAN WHERE ID_BISNIS=1")->row()->TOTAL;
-        $data["TOTAL_MEKAAR"] = $this->db->query("select SUM(TOTAL_NILAI)/COUNT(*) as TOTAL from T_INDEX_PEMBERDAYAAN WHERE ID_BISNIS=2")->row()->TOTAL;        
-        $data["TOP_ULAMM"] = $this->db->query("select TOP 10 PROVINSI,KABUPATEN,ROUND(SUM(TOTAL_NILAI)/COUNT(*),4) AS TOTAL FROM T_INDEX_PEMBERDAYAAN WHERE ID_BISNIS=1 GROUP BY PROVINSI,KABUPATEN ORDER BY ROUND(SUM(TOTAL_NILAI)/COUNT(*),4) DESC")->result();
-        $data["BOTTOM_ULAMM"] = $this->db->query("select TOP 10 PROVINSI,KABUPATEN,ROUND(SUM(TOTAL_NILAI)/COUNT(*),4) AS TOTAL FROM T_INDEX_PEMBERDAYAAN WHERE ID_BISNIS=1 GROUP BY PROVINSI,KABUPATEN ORDER BY ROUND(SUM(TOTAL_NILAI)/COUNT(*),4) ASC")->result();
-        $data["TOP_MEKAAR"] = $this->db->query("select TOP 10 PROVINSI,KABUPATEN,ROUND(SUM(TOTAL_NILAI)/COUNT(*),4) AS TOTAL FROM T_INDEX_PEMBERDAYAAN WHERE ID_BISNIS=2 GROUP BY PROVINSI,KABUPATEN ORDER BY ROUND(SUM(TOTAL_NILAI)/COUNT(*),4) DESC")->result();
-        $data["BOTTOM_MEKAAR"] = $this->db->query("select TOP 10 PROVINSI,KABUPATEN,ROUND(SUM(TOTAL_NILAI)/COUNT(*),4) AS TOTAL FROM T_INDEX_PEMBERDAYAAN WHERE ID_BISNIS=2 GROUP BY PROVINSI,KABUPATEN ORDER BY ROUND(SUM(TOTAL_NILAI)/COUNT(*),4) ASC")->result();
+        $data["TOTAL_ULAMM"] = $this->db->query("select SUM(TOTAL_NILAI)/COUNT(*) as TOTAL,COUNT(*) as TOTAL_NASABAH from T_INDEX_PEMBERDAYAAN WHERE ID_BISNIS=1")->result()[0];
+        $data["TOTAL_MEKAAR"] = $this->db->query("select SUM(TOTAL_NILAI)/COUNT(*) as TOTAL,COUNT(*) as TOTAL_NASABAH from T_INDEX_PEMBERDAYAAN WHERE ID_BISNIS=2")->result()[0];        
+        $data["PROVINSI_ULAMM"] = $this->db->query("select TOP 5 PROVINSI,KABUPATEN,ROUND(SUM(TOTAL_NILAI)/COUNT(*),4) AS TOTAL FROM T_INDEX_PEMBERDAYAAN WHERE ID_BISNIS=1 GROUP BY PROVINSI,KABUPATEN ORDER BY ROUND(SUM(TOTAL_NILAI)/COUNT(*),4) DESC")->result();
+        $data["PROVINSI_MEKAAR"] = $this->db->query("select TOP 5 PROVINSI,KABUPATEN,ROUND(SUM(TOTAL_NILAI)/COUNT(*),4) AS TOTAL FROM T_INDEX_PEMBERDAYAAN WHERE ID_BISNIS=2 GROUP BY PROVINSI,KABUPATEN ORDER BY ROUND(SUM(TOTAL_NILAI)/COUNT(*),4) DESC")->result();
 
+        $data["DATA_ULAMM"] = $this->db->query("select TOP 5 * from T_INDEX_PEMBERDAYAAN WHERE ID_BISNIS=1 ORDER BY TOTAL_NILAI DESC")->result();
+        $data["DATA_MEKAAR"] = $this->db->query("select TOP 5 * from T_INDEX_PEMBERDAYAAN WHERE ID_BISNIS=2 ORDER BY TOTAL_NILAI DESC")->result();
 
-
-        $data["CABANG_ULAMM"] = $this->db->query("select TOP 10 (SELECT DESKRIPSI FROM MS_CABANG_ULAMM WHERE KODE_CABANG=A.KODE_CABANG_ULAMM) as CABANG,SUM(A.TOTAL_NILAI)/COUNT(A.TOTAL_NILAI) as TOTAL FROM T_INDEX_PEMBERDAYAAN A where A.ID_BISNIS=1
+        $data["CABANG_ULAMM"] = $this->db->query("select TOP 5 (SELECT DESKRIPSI FROM MS_CABANG_ULAMM WHERE KODE_CABANG=A.KODE_CABANG_ULAMM) as CABANG,SUM(A.TOTAL_NILAI)/COUNT(A.TOTAL_NILAI) as TOTAL FROM T_INDEX_PEMBERDAYAAN A where A.ID_BISNIS=1
         GROUP BY A.KODE_CABANG_ULAMM ORDER BY SUM(A.TOTAL_NILAI)/COUNT(A.TOTAL_NILAI) DESC")->result();
         
-        $data["CABANG_MEKAAR"] = $this->db->query("select TOP 10 (SELECT DESKRIPSI FROM MS_CABANG_MEKAAR WHERE KODE_CABANG=A.KODE_CABANG_MEKAAR) as CABANG,SUM(A.TOTAL_NILAI)/COUNT(A.TOTAL_NILAI) as TOTAL FROM T_INDEX_PEMBERDAYAAN A where A.ID_BISNIS=2
+        $data["CABANG_MEKAAR"] = $this->db->query("select TOP 5 (SELECT DESKRIPSI FROM MS_CABANG_MEKAAR WHERE KODE_CABANG=A.KODE_CABANG_MEKAAR) as CABANG,SUM(A.TOTAL_NILAI)/COUNT(A.TOTAL_NILAI) as TOTAL FROM T_INDEX_PEMBERDAYAAN A where A.ID_BISNIS=2
         GROUP BY A.KODE_CABANG_MEKAAR ORDER BY SUM(A.TOTAL_NILAI)/COUNT(A.TOTAL_NILAI) DESC")->result();
 
         $tahun = date('Y');
@@ -84,21 +83,18 @@ class Dashboard extends MY_Controller
         $data["M12"] = $this->db->query("IF OBJECT_ID ('Z_INDEX_PEMBERDAYAAN_12_".$tahun."', 'U') IS NOT NULL select SUM(TOTAL_NILAI)/COUNT(*) AS TOTAL FROM Z_INDEX_PEMBERDAYAAN_12_2021 WHERE ID_BISNIS=2 ELSE SELECT 0 AS TOTAL")->row()->TOTAL;
 
 
+        $data['U_START_MODEL'] = $this->db->query("select C.KATEGORI_STAR_MODEL,COUNT(C.KATEGORI_STAR_MODEL) AS TOTAL FROM T_KEHADIRAN a 
+        LEFT JOIN T_PELATIHAN b ON a.ID_PELATIHAN=b.ID 
+        LEFT JOIN MS_GRADING c ON b.ID_GRADING=c.ID
+        WHERE b.ID_BISNIS='1'
+        GROUP BY C.KATEGORI_STAR_MODEL")->result();
 
-        $data["P1"] = $this->db->query("IF OBJECT_ID ('Z_INDEX_PEMBERDAYAAN_01_".$tahun."', 'U') IS NOT NULL select SUM(TOTAL_NILAI)/COUNT(*) AS TOTAL FROM Z_INDEX_PEMBERDAYAAN_01_2021 ELSE SELECT 0 AS TOTAL")->row()->TOTAL;
-        $data["P2"] = $this->db->query("IF OBJECT_ID ('Z_INDEX_PEMBERDAYAAN_02_".$tahun."', 'U') IS NOT NULL select SUM(TOTAL_NILAI)/COUNT(*) AS TOTAL FROM Z_INDEX_PEMBERDAYAAN_02_2021 ELSE SELECT 0 AS TOTAL")->row()->TOTAL;
-        $data["P3"] = $this->db->query("IF OBJECT_ID ('Z_INDEX_PEMBERDAYAAN_03_".$tahun."', 'U') IS NOT NULL select SUM(TOTAL_NILAI)/COUNT(*) AS TOTAL FROM Z_INDEX_PEMBERDAYAAN_03_2021 ELSE SELECT 0 AS TOTAL")->row()->TOTAL;
-        $data["P4"] = $this->db->query("IF OBJECT_ID ('Z_INDEX_PEMBERDAYAAN_04_".$tahun."', 'U') IS NOT NULL select SUM(TOTAL_NILAI)/COUNT(*) AS TOTAL FROM Z_INDEX_PEMBERDAYAAN_04_2021 ELSE SELECT 0 AS TOTAL")->row()->TOTAL;
-        $data["P5"] = $this->db->query("IF OBJECT_ID ('Z_INDEX_PEMBERDAYAAN_05_".$tahun."', 'U') IS NOT NULL select SUM(TOTAL_NILAI)/COUNT(*) AS TOTAL FROM Z_INDEX_PEMBERDAYAAN_05_2021 ELSE SELECT 0 AS TOTAL")->row()->TOTAL;
-        $data["P6"] = $this->db->query("IF OBJECT_ID ('Z_INDEX_PEMBERDAYAAN_06_".$tahun."', 'U') IS NOT NULL select SUM(TOTAL_NILAI)/COUNT(*) AS TOTAL FROM Z_INDEX_PEMBERDAYAAN_06_2021 ELSE SELECT 0 AS TOTAL")->row()->TOTAL;
-        $data["P7"] = $this->db->query("IF OBJECT_ID ('Z_INDEX_PEMBERDAYAAN_07_".$tahun."', 'U') IS NOT NULL select SUM(TOTAL_NILAI)/COUNT(*) AS TOTAL FROM Z_INDEX_PEMBERDAYAAN_07_2021 ELSE SELECT 0 AS TOTAL")->row()->TOTAL;
-        $data["P8"] = $this->db->query("IF OBJECT_ID ('Z_INDEX_PEMBERDAYAAN_08_".$tahun."', 'U') IS NOT NULL select SUM(TOTAL_NILAI)/COUNT(*) AS TOTAL FROM Z_INDEX_PEMBERDAYAAN_08_2021 ELSE SELECT 0 AS TOTAL")->row()->TOTAL;
-        $data["P9"] = $this->db->query("IF OBJECT_ID ('Z_INDEX_PEMBERDAYAAN_09_".$tahun."', 'U') IS NOT NULL select SUM(TOTAL_NILAI)/COUNT(*) AS TOTAL FROM Z_INDEX_PEMBERDAYAAN_09_2021 ELSE SELECT 0 AS TOTAL")->row()->TOTAL;
-        $data["P10"] = $this->db->query("IF OBJECT_ID ('Z_INDEX_PEMBERDAYAAN_10_".$tahun."', 'U') IS NOT NULL select SUM(TOTAL_NILAI)/COUNT(*) AS TOTAL FROM Z_INDEX_PEMBERDAYAAN_10_2021 ELSE SELECT 0 AS TOTAL")->row()->TOTAL;
-        $data["P11"] = $this->db->query("IF OBJECT_ID ('Z_INDEX_PEMBERDAYAAN_11_".$tahun."', 'U') IS NOT NULL select SUM(TOTAL_NILAI)/COUNT(*) AS TOTAL FROM Z_INDEX_PEMBERDAYAAN_11_2021 ELSE SELECT 0 AS TOTAL")->row()->TOTAL;
-        $data["P12"] = $this->db->query("IF OBJECT_ID ('Z_INDEX_PEMBERDAYAAN_12_".$tahun."', 'U') IS NOT NULL select SUM(TOTAL_NILAI)/COUNT(*) AS TOTAL FROM Z_INDEX_PEMBERDAYAAN_12_2021 ELSE SELECT 0 AS TOTAL")->row()->TOTAL;
-
-
+        $data['M_START_MODEL'] = $this->db->query("select C.KATEGORI_STAR_MODEL,COUNT(C.KATEGORI_STAR_MODEL) AS TOTAL FROM T_KEHADIRAN a 
+        LEFT JOIN T_PELATIHAN b ON a.ID_PELATIHAN=b.ID 
+        LEFT JOIN MS_GRADING c ON b.ID_GRADING=c.ID
+        WHERE b.ID_BISNIS='2'
+        GROUP BY C.KATEGORI_STAR_MODEL")->result();        
+        
 
         // echo '<pre>';
 		// print_r($data['ULAMM_1']);
@@ -106,7 +102,7 @@ class Dashboard extends MY_Controller
         // $this->load->view('layout/gabung', $data);
 
                                                   
-        $this->load->view('dashboard/index_pemberdayaan',$data);        
+        $this->load->view('dashboard/index_pemberdayaan_2',$data);        
                                         
     }
 

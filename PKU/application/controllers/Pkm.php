@@ -27,18 +27,22 @@ class Pkm extends MY_Controller
 
 			$data["content"] = $this->db->query(" select * FROM MS_MODUL_PKM_BERMAKNA WHERE ID=(SELECT MODUL_PKM_ID FROM MS_JADWAL_PKM_BERMAKNA WHERE TAHUN=YEAR(GETDATE()) AND BULAN=MONTH(GETDATE())) ")->row();
 
-			$cek_minggu_ini = $this->db->query(" select * from T_PKM_BERMAKNA WHERE MODUL_PKM_ID=" . $data["content"]->ID . " and KELOMPOKID='" . $cek_kelompok->GroupID . "' AND MINGGU_KE=(SELECT MINGGU_KE FROM CEK_MINGGU_KE_PER_BULAN()) ORDER BY MINGGU_KE DESC ")->result();
-
-			// var_dump($cek_minggu_ini);die();
-			if (count($cek_minggu_ini)) {
-				if ($cek_minggu_ini[0]->MINGGU_KE == $cek_minggu_ini[0]->MINGGU_TERAKHIR && $cek_minggu_ini[0]->SURVEY_DONE=="N") {
+			$cek_minggu_ke = $this->db->query("select MINGGU_KE FROM CEK_MINGGU_KE_PER_BULAN()")->row()->MINGGU_KE;
+			
+			if ($cek_minggu_ke==2){				
+				$cek_survey = $this->db->query("select * from T_PKM_SURVEY WHERE  KELOMPOK_ID='".$cek_kelompok->GroupID."' AND CAST(CREATED_DATE as DATE)=CAST(GETDATE() as DATE)")->result();
+				if (count($cek_survey)==0){
 					$this->load->view('pkm/pkm_survey');
-				} else {
-					// $this->load->view('pkm/pkm_survey');
+				}else{
+					$this->pkm_selesai_survey();
+				}				
+			}else{
+				$cek_pkm_bermakna = $this->db->query("select * from T_PKM_BERMAKNA WHERE  KELOMPOKID='".$cek_kelompok->GroupID."' AND CAST(CREATED_DATE as DATE)=CAST(GETDATE() as DATE)")->result();
+				if (count($cek_pkm_bermakna)==0){
+					$this->load->view('pkm/pkm_bermakna', $data);
+				}else{
 					$this->pkm_selesai();
 				}
-			} else {
-				$this->load->view('pkm/pkm_bermakna', $data);
 			}
 		} else {
 			echo "Kelompok tidak ditemukan";
@@ -128,6 +132,15 @@ class Pkm extends MY_Controller
 
 		$this->db->trans_begin();
 
+		$data_u = array(
+			'AKTIF'				=> '0'
+		);
+		$where = array(
+			'KELOMPOK_ID'				=> $kelompokid
+		);
+
+		$this->Pkm_model->update_t_pkm_survey($data_u,$where);
+
 		$data = array(
 			'KELOMPOK_ID'				=> $kelompokid,
 			'NILAI_SURVEY_MATERI' 	    => $survey_materi_detail,
@@ -137,6 +150,7 @@ class Pkm extends MY_Controller
 			'NILAI_PRODUK' 				=> $survey_produk_detail,
 			'NILAI_PLAFOND'				=> $survey_plafond_detail,
 			'NILAI_OMSET' 				=> $survey_omset_detail,
+			'AKTIF'						=> '1',
 			'CREATED_BY' 				=> $id_user,
 			'CREATED_DATE' 				=> date('Y-m-d H:i:s')
 		);
@@ -164,8 +178,10 @@ class Pkm extends MY_Controller
 		exit;
 	}
 
+
 	public function pkm_selesai()
 	{
+
 		$session_destroy = array(
 		'sess_cabang_id'			=> '',				
 		'sess_kelompok_id'			=> '',				
@@ -177,5 +193,23 @@ class Pkm extends MY_Controller
 		$this->session->unset_userdata($session_destroy);
 
 		$this->load->view('pkm/pkm_selesai');
+	}	
+
+	public function pkm_selesai_survey()
+	{
+
+		$data["SURVEY"] = $this->db->query("select TOP 1 * from T_PKM_SURVEY WHERE KELOMPOK_ID='".$this->session->userdata('sess_kelompok_id')."' ORDER BY CREATED_DATE DESC")->result();
+
+		$session_destroy = array(
+		'sess_cabang_id'			=> '',				
+		'sess_kelompok_id'			=> '',				
+		'sess_nama_kelompok'		=> '',				
+		'sess_user_id'				=> ''
+		);                
+
+		$this->session->set_userdata($session_destroy);
+		$this->session->unset_userdata($session_destroy);
+
+		$this->load->view('pkm/pkm_selesai',$data);
 	}
 }

@@ -2,7 +2,7 @@
 <link href="<?php echo base_url() ?>assets/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
 <style>
 .bg-info{
-	background-color : #3061d8 !important;
+	background-color : #0D67B2 !important;
 }
 </style>
 

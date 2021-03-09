@@ -28,19 +28,19 @@
 
 <script src="<?php echo base_url(); ?>assets/plugins/datatables/responsive.bootstrap4.min.js"></script>
 
+<!-- <script src="<?php echo base_url(); ?>assets/vendor/canvasjs-3.2.9/canvasjs.min.js"></script> -->
+
+
+
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
 
 <script type="text/javascript">
   $(document).ready(function() {
     // $("#mencoba_socket").click(function () {
     //     socket.emit('reload-notif');
-    // });
-
-    // $('#datatable_pemberdayaan_ulamm').DataTable({
-    //   "dom": "rt<'dom_datable col-md-6'i><'dom_datable col-md-6'p>"
-    // });
-
-    // $('#datatable_pemberdayaan_mekaar').DataTable({
-    //   "dom": "rt<'dom_datable col-md-6'i><'dom_datable col-md-6'p>"
     // });
     
     $('#datatable_pemberdayaan_ulamm').DataTable({			
@@ -548,5 +548,79 @@
 
 
   });
+
+
+
+
+
+
+
+
+
+
+
+
+
+am4core.ready(function() {
+
+  // Themes begin
+  am4core.useTheme(am4themes_animated);
+  // Themes end
+
+  var chart = am4core.create("chartdiv", am4charts.PieChart3D);
+  chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+  chart.fontSize = 10;
+
+
+  chart.legend = new am4charts.Legend();
+  // chart.legend.position = "right";
+  chart.legend.scrollable = true;
+  chart.legend.itemContainers.template.paddingTop = -5;
+
+  chart.data = [
+    {
+      country: "Lithuania",
+      litres: 501.9
+    },
+    {
+      country: "Czech Republic",
+      litres: 301.9
+    },
+    {
+      country: "Ireland",
+      litres: 201.1
+    },
+    {
+      country: "Germany",
+      litres: 165.8
+    },
+    {
+      country: "Australia",
+      litres: 139.9
+    },
+    {
+      country: "Austria",
+      litres: 128.3
+    },
+    {
+      country: "UK",
+      litres: 99
+    },
+    {
+      country: "Belgium",
+      litres: 60
+    },
+    {
+      country: "The Netherlands",
+      litres: 50
+    }
+  ];
+
+  var series = chart.series.push(new am4charts.PieSeries3D());
+  series.dataFields.value = "litres";
+  series.dataFields.category = "country";
+
+}); // end am4core.ready()
+
 
 </script>

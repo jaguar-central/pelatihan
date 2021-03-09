@@ -8,7 +8,7 @@ class Master_model extends CI_Model {
 	}
 	public function select_ms_cabang_ulamm()
 	{
-			$query = $this->db->query("select * from MS_CABANG_ULAMM where KODE_CABANG in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." )  ");
+			$query = $this->db->query("select * from MS_CABANG_ULAMM where KODE_CABANG in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." and AKTIF=1 )  ");
 			return $query->result();
 	}
 
