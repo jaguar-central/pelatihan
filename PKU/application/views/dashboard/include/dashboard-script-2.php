@@ -115,16 +115,26 @@ $(document).ready(function() {
           $(this).appendTo(self)
           kids=self.children()
         })
-      },3000)
+      },10000)
       return this
     }	
 
     // datatable_pemberdayaan_ulamm();
     // datatable_pemberdayaan_mekaar();
 
-    // $(function(){
-    //   $('#data_pemberdayaan_ulamm').infiniteScrollUp();
-    // })
+    $(function(){
+      $('#tbody_datatable_pemberdayaan_ulamm').infiniteScrollUp();
+
+      $('#tbody_datatable_pemberdayaan_mekaar').infiniteScrollUp();
+
+      $('#tbody_datatable_pemberdayaan_provinsi_ulamm').infiniteScrollUp();
+
+      $('#tbody_datatable_pemberdayaan_provinsi_mekaar').infiniteScrollUp();
+
+      $('#tbody_datatable_pemberdayaan_cabang_ulamm').infiniteScrollUp();
+
+      $('#tbody_datatable_pemberdayaan_cabang_mekaar').infiniteScrollUp();
+    })
 
     
   // function datatable_pemberdayaan_ulamm(){  

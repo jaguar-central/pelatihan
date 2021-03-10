@@ -126,7 +126,7 @@
                                                                     <th>Total Nilai</th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody id="data_pemberdayaan_ulamm">
+                                                            <tbody id="tbody_datatable_pemberdayaan_ulamm">
                                                             <?php 
                                                             foreach ($DATA_ULAMM as $DATA_U){
                                                                 echo '<tr>';
@@ -198,7 +198,7 @@
                                                                     <th>Total Nilai</th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody id="data_pemberdayaan_mekaar">
+                                                            <tbody id="tbody_datatable_pemberdayaan_mekaar">
                                                             <?php 
                                                             foreach ($DATA_MEKAAR as $DATA_M){
                                                                 echo '<tr>';
@@ -259,7 +259,7 @@
                                                                     <th>Nilai Index Keberhasilan</th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody id="index-provinsi-ulamm">
+                                                            <tbody id="tbody_datatable_pemberdayaan_provinsi_ulamm">
                                                             <?php 
                                                             foreach ($PROVINSI_ULAMM as $data_ulamm){
                                                                 echo '<tr>';
@@ -300,7 +300,7 @@
                                                                     <th>Nilai Index Keberhasilan</th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody id="index-provinsi-mekaar">
+                                                            <tbody id="tbody_datatable_pemberdayaan_provinsi_mekaar">
                                                             <?php 
                                                             foreach ($PROVINSI_MEKAAR as $data_mekaar){
                                                                 echo '<tr>';
@@ -341,7 +341,7 @@
                                                                     <th>Nilai Index Keberdayaan</th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody>
+                                                            <tbody id="tbody_datatable_pemberdayaan_cabang_ulamm" >
                                                             <?php 
                                                             foreach ($CABANG_ULAMM as $data_ulamm){
                                                                 echo '<tr>';
@@ -380,7 +380,7 @@
                                                                     <th>Nilai Index Keberdayaan</th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody id="table_scroll">
+                                                            <tbody id="tbody_datatable_pemberdayaan_cabang_mekaar">
                                                             <?php 
                                                             foreach ($CABANG_MEKAAR as $data_mekaar){
                                                                 echo '<tr>';

@@ -514,7 +514,7 @@ class Pelatihan extends MY_Controller
 		
 		
 		$this->Pelatihan_model->insert_t_pelatihan($data);		
-		
+
 		$id_pelatihan = $this->db->insert_id(); //last id yang di insert		
 		
 		for ($i=1;$i<count($deskripsi_rab);$i++){
