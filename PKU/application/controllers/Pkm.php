@@ -25,7 +25,7 @@ class Pkm extends MY_Controller
 			$this->session->set_userdata($session_array);
 			//SET SESSION PKM END
 
-			$data["content"] = $this->db->query(" select * FROM MS_MODUL_PKM_BERMAKNA WHERE ID=(SELECT MODUL_PKM_ID FROM MS_JADWAL_PKM_BERMAKNA WHERE TAHUN=YEAR(GETDATE()) AND BULAN=MONTH(GETDATE())) ")->row();
+			$data["content"] = $this->db->query(" select *,REPLACE(KONTEN,'font-size:16px','') as KONTEN2 FROM MS_MODUL_PKM_BERMAKNA WHERE ID=(SELECT MODUL_PKM_ID FROM MS_JADWAL_PKM_BERMAKNA WHERE TAHUN=YEAR(GETDATE()) AND BULAN=MONTH(GETDATE())) ")->row();
 
 			$cek_minggu_ke = $this->db->query("select MINGGU_KE FROM CEK_MINGGU_KE_PER_BULAN()")->row()->MINGGU_KE;
 			

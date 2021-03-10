@@ -10,7 +10,7 @@
 <!--div class="card-header text-center">Pkm Bermakna</div-->
 <div class="card-body" >
 
-<?php echo $content->KONTEN ?>
+<?php echo $content->KONTEN2 ?>
 </div>		
 <div class="text-center" style="margin-bottom:50px;">
 <input type="hidden" class="form-control" id="id_konten" value="<?= $content->ID ?>" />
