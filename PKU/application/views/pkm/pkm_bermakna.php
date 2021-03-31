@@ -7,7 +7,6 @@
 </style>
 
 <body class="card text-white bg-info" style="font-size:2em;width:100%;">
-<!--div class="card-header text-center">Pkm Bermakna</div-->
 <div class="card-body" >
 
 <?php echo $content->KONTEN2 ?>

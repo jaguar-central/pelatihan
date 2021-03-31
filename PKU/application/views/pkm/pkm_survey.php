@@ -23,165 +23,166 @@
 
 
 <div class="form-group card text-white bg-info" style="font-size:3em;">
-    <div class="card-header text-center">Survey Kelompok</div>
+    <div class="card-header text-center">Survey Nasabah</div>
 
 
 
     <form id="pkm_survey">
 
         <div class="card-body row">        
-            <label class="col-sm-12">Apakah kelompok ini sudah mempraktekan PKM Bermakna? </label>
+            <label class="col-sm-12">ID : <?= $nasabah_id ?> </label>
+            <label class="col-sm-12">Nama : <?= $nama_nasabah ?> </label>
+        </div>    
+        <input type="hidden" name="nasabah_id"  value="<?= $nasabah_id ?>" />
+        <div class="card-body row">        
+            <label class="col-sm-12">Apakah nasabah ini sudah menabung? </label>
             <div class="col-sm-12">
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="survey_materi1" name="survey_materi" value="1" required />
-                    <label for="survey_materi1">Sudah</label>
-                </div>
-
-                <div class="survey_materi_detail">
-                    <select class="form-control" id="survey_materi_detail" name="survey_materi_detail" size="3">
-                        <option value="1" selected>Kurang dari separuh Jumlah Anggota Kelompok</option>
-                        <option value="2">Lebih dari separuh Jumlah Anggota Kelompok</option>
-                    </select>
+                    <input type="radio" id="survey_menabung1" name="survey_menabung" value="2" checked />
+                    <label for="survey_menabung1">Sudah menabung</label>
                 </div>
 
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="survey_materi2" name="survey_materi" value="0" />
-                    <label for="survey_materi2">Belum</label>
+                    <input type="radio" id="survey_menabung2" name="survey_menabung" value="0" />
+                    <label for="survey_menabung2">Belum menabung</label>
                 </div>
             </div>
         </div>    
 
         <div class="card-body row">
-            <label class="col-sm-12">Apakah plafond pinjaman meningkat? </label>
+            <label class="col-sm-12">Apakah nasabah sudah melakukan pengelolaan keuangan? </label>
             <div class="col-sm-12">
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="survey_plafond1" name="survey_plafond" value="1" required />
-                    <label for="survey_plafond1">Ada</label>
-                </div>
-
-                <div class="survey_plafond_detail">
-                    <select class="form-control" id="survey_plafond_detail" name="survey_plafond_detail" size="3">
-                        <option value="0.50" selected>Peningkatan plafond pinjaman kurang dari separuh jumlah anggota kelompok</option>
-                        <option value="1">Peningkatan plafond pinjaman lebih dari separuh jumlah anggota kelompok</option>
-                    </select>
+                    <input type="radio" id="survey_pengelolaan_keuangan1" name="survey_pengelolaan_keuangan" value="0" checked />
+                    <label for="survey_pengelolaan_keuangan1">Belum memisahkan keuangan keluarga dengan usaha</label>
                 </div>
 
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="survey_plafond2" name="survey_plafond" value="0" />
-                    <label for="survey_plafond2">Tidak</label>
+                    <input type="radio" id="survey_pengelolaan_keuangan2" name="survey_pengelolaan_keuangan" value="0.5" />
+                    <label for="survey_pengelolaan_keuangan2">Sudah dipisahkan dan tertib</label>
                 </div>
+
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="survey_pengelolaan_keuangan3" name="survey_pengelolaan_keuangan" value="1" />
+                    <label for="survey_pengelolaan_keuangan3">Sudah mencatat pengeluaran dan pemasukan usaha</label>
+                </div>                
             </div>
         </div>
 
         <div class="card-body row">
-            <label class="col-sm-12">Apakah ada penambahan pendapatan (omset) rata-rata per hari? </label>
+            <label class="col-sm-12">Apakah ada penambahan pendapatan (omset) per hari? </label>
             <div class="col-sm-12">
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="survey_omset1" name="survey_omset" value="1" required />
-                    <label for="survey_omset1">Ada</label>
-                </div>
-
-                <div class="survey_omset_detail">
-                    <select class="form-control" id="survey_omset_detail" name="survey_omset_detail" size="3">
-                        <option value="0.50" selected>Kurang dari separuh Jumlah Anggota Kelompok</option>
-                        <option value="1">Lebih dari separuh Jumlah Anggota Kelompok</option>
-                    </select>
+                    <input type="radio" id="survey_omset1" name="survey_omset" value="0" checked />
+                    <label for="survey_omset1"> < Rp 50.000</label>
                 </div>
 
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="survey_omset2" name="survey_omset" value="0" />
-                    <label for="survey_omset2">Tidak</label>
+                    <input type="radio" id="survey_omset2" name="survey_omset" value="0.3" />
+                    <label for="survey_omset2">Rp 50.000 - 100.000</label>
                 </div>
+
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="survey_omset3" name="survey_omset" value="0.5" />
+                    <label for="survey_omset3">Rp 100.001 - 150.000</label>
+                </div>                
+
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="survey_omset4" name="survey_omset" value="1" />
+                    <label for="survey_omset4"> > Rp 150.000</label>
+                </div>                                
             </div>
         </div>        
 
         <div class="card-body row">
-            <label class="col-sm-12">Apakah produk usaha bertambah? </label>
+            <label class="col-sm-12">Strategi penjualan nasabah? </label>
             <div class="col-sm-12">
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="survey_produk1" name="survey_produk" value="1" required />
-                    <label for="survey_produk1">Bertambah</label>
-                </div>
-
-                <div class="survey_produk_detail">
-                    <select class="form-control" id="survey_produk_detail" name="survey_produk_detail" size="3">
-                        <option value="0.25" selected>Kurang dari separuh Jumlah Anggota Kelompok</option>
-                        <option value="0.50">Lebih dari separuh Jumlah Anggota Kelompok</option>
-                    </select>
+                    <input type="radio" id="survey_strategi_penjualan1" name="survey_strategi_penjualan" value="0" checked />
+                    <label for="survey_strategi_penjualan1">Secara tradisional / keliling</label>
                 </div>
 
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="survey_produk2" name="survey_produk" value="0" />
-                    <label for="survey_produk2">Tidak</label>
+                    <input type="radio" id="survey_strategi_penjualan2" name="survey_strategi_penjualan" value="0.5" />
+                    <label for="survey_strategi_penjualan2">Menetap (tempat usaha sudah tetap)</label>
                 </div>
+
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="survey_strategi_penjualan3" name="survey_strategi_penjualan" value="1" />
+                    <label for="survey_strategi_penjualan3">Memanfaatkan media elektronik/digital/social media</label>
+                </div>                
             </div>
         </div>
 
         <div class="card-body row">
-            <label class="col-sm-12">Apakah ada penambahan serapan jumlah tenaga kerja ? </label>
+            <label class="col-sm-12">Kepemilikan aset nasabah? </label>
             <div class="col-sm-12">
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="survey_tenaga_kerja1" name="survey_tenaga_kerja" value="1" required />
-                    <label for="survey_tenaga_kerja1">Ada penambahan</label>
-                </div>
-
-                <div class="survey_tenaga_kerja_detail">
-                    <select class="form-control" id="survey_tenaga_kerja_detail" name="survey_tenaga_kerja_detail" size="3">
-                        <option value="0.25" selected>Kurang dari separuh Jumlah Anggota Kelompok</option>
-                        <option value="0.50">Lebih dari separuh Jumlah Anggota Kelompok</option>
-                    </select>
+                    <input type="radio" id="survey_aset1" name="survey_aset" value="0" checked />
+                    <label for="survey_aset1">Belum punya </label>
                 </div>
 
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="survey_tenaga_kerja2" name="survey_tenaga_kerja" value="0" />
-                    <label for="survey_tenaga_kerja2">Tidak ada penambahan</label>
+                    <input type="radio" id="survey_aset2" name="survey_aset" value="0.2" />
+                    <label for="survey_aset2">Asset bergerak (motor atau emas min. 10 gr)</label>
                 </div>
+
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="survey_aset3" name="survey_aset" value="0.3" />
+                    <label for="survey_aset3">Tanah / bangunan (non sertifikat)</label>
+                </div>                
+
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="survey_aset4" name="survey_aset" value="0.5" />
+                    <label for="survey_aset4">Tanah / bangunan</label>
+                </div>                                
             </div>
         </div>       
 
         <div class="card-body row">
-            <label class="col-sm-12">Berapa banyak yang sudah mempunyai ijin usaha (misalnya:IUMK/NIB/PIRT)? </label>
+            <label class="col-sm-12">Apakah nasabah sudah mempunyai ijin usaha? </label>
             <div class="col-sm-12">
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="survey_ijin1" name="survey_ijin" value="1" required />
-                    <label for="survey_ijin1">Ada</label>
-                </div>
-
-                <div class="survey_ijin_detail">
-                    <select class="form-control" id="survey_ijin_detail" name="survey_ijin_detail" size="3">
-                        <option value="0.25" selected>Kurang dari separuh Jumlah Anggota Kelompok</option>
-                        <option value="0.50">Lebih dari separuh Jumlah Anggota Kelompok</option>
-                    </select>
+                    <input type="radio" id="survey_ijin1" name="survey_ijin" value="0" checked />
+                    <label for="survey_ijin1">Tidak Ada</label>
                 </div>
 
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="survey_ijin2" name="survey_ijin" value="0" />
-                    <label for="survey_ijin2">Tidak</label>
-                </div>
+                    <input type="radio" id="survey_ijin2" name="survey_ijin" value="0.5" />
+                    <label for="survey_ijin2">Ada (misal ijin usaha dari kelurahan, NIB, PIRT, dll)</label>
+                </div>              
             </div>
         </div>       
 
         <div class="card-body row">
-            <label class="col-sm-12">Apakah ada penambahan jumlah aset (misalnya: TV/Hp/Kulkas/Motor)? </label>
+            <label class="col-sm-12">Diversifikasi (penambahan) produk? </label>
             <div class="col-sm-12">
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="survey_aset1" name="survey_aset" value="1" required />
-                    <label for="survey_aset1">Ada penambahan</label>
-                </div>
-
-                <div class="survey_aset_detail">
-                    <select class="form-control" id="survey_aset_detail" name="survey_aset_detail" size="3">
-                        <option value="0.25" selected>Kurang dari separuh Jumlah Anggota Kelompok</option>
-                        <option value="0.50">Lebih dari separuh Jumlah Anggota Kelompok</option>
-                    </select>
+                    <input type="radio" id="survey_diversifikasi1" name="survey_diversifikasi" value="0" checked />
+                    <label for="survey_diversifikasi1">Tetap</label>
                 </div>
 
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="survey_aset2" name="survey_aset" value="0" />
-                    <label for="survey_aset2">Tidak ada penambahan</label>
+                    <input type="radio" id="survey_diversifikasi2" name="survey_diversifikasi" value="0.5" />
+                    <label for="survey_diversifikasi2">Ada penambahan produk</label>
                 </div>
             </div>
-        </div>          
+        </div>    
+
+        <div class="card-body row">
+            <label class="col-sm-12">Serapan tenaga kerja ? </label>
+            <div class="col-sm-12">
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="survey_serapan_tenaga1" name="survey_serapan_tenaga" value="0" checked />
+                    <label for="survey_serapan_tenaga1">Dikerjakan sendiri</label>
+                </div>
+
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="survey_serapan_tenaga2" name="survey_serapan_tenaga" value="0.5" />
+                    <label for="survey_serapan_tenaga2">Ada penambahan tenaga kerja</label>
+                </div>
+            </div>
+        </div>                
 
         <div class="card-body text-center">
             <input type="submit" name="submit" value="Selesai" class="btn btn-success submit" style="font-size:1em;">
@@ -200,92 +201,16 @@
 <script type="text/javascript">
     $(document).ready(function() {
 
-
         //SURVEY MATERI
-        $('.survey_materi_detail').hide();
+        // $('.survey_materi_detail').hide();
 
-        $('input[type=radio][name=survey_materi]').change(function() {
-            if (this.value == '1') {
-                $('.survey_materi_detail').show();
-            } else if (this.value == '0') {
-                $('.survey_materi_detail').hide();
-            }
-        });
-
-
-
-
-        //SURVEY TENAGA KERJA
-        $('.survey_tenaga_kerja_detail').hide();
-
-        $('input[type=radio][name=survey_tenaga_kerja]').change(function() {
-            if (this.value == '1') {
-                $('.survey_tenaga_kerja_detail').show();
-            } else if (this.value == '0') {
-                $('.survey_tenaga_kerja_detail').hide();
-            }
-        });
-
-
-        //SURVEY ASET
-        $('.survey_aset_detail').hide();
-
-        $('input[type=radio][name=survey_aset]').change(function() {
-            if (this.value == '1') {
-                $('.survey_aset_detail').show();
-            } else if (this.value == '0') {
-                $('.survey_aset_detail').hide();
-            }
-        });
-
-
-        //SURVEY IJIN
-        $('.survey_ijin_detail').hide();
-
-        $('input[type=radio][name=survey_ijin]').change(function() {
-            if (this.value == '1') {
-                $('.survey_ijin_detail').show();
-            } else if (this.value == '0') {
-                $('.survey_ijin_detail').hide();
-            }
-        });
-
-
-        //SURVEY PRODUK
-        $('.survey_produk_detail').hide();
-
-        $('input[type=radio][name=survey_produk]').change(function() {
-            if (this.value == '1') {
-                $('.survey_produk_detail').show();
-            } else if (this.value == '0') {
-                $('.survey_produk_detail').hide();
-            }
-        });
-
-
-        //SURVEY PLAFOND
-        $('.survey_plafond_detail').hide();
-
-        $('input[type=radio][name=survey_plafond]').change(function() {
-            if (this.value == '1') {
-                $('.survey_plafond_detail').show();
-            } else if (this.value == '0') {
-                $('.survey_plafond_detail').hide();
-            }
-        });
-
-
-        //SURVEY OMSET
-        $('.survey_omset_detail').hide();
-
-        $('input[type=radio][name=survey_omset]').change(function() {
-            if (this.value == '1') {
-                $('.survey_omset_detail').show();
-            } else if (this.value == '0') {
-                $('.survey_omset_detail').hide();
-            }
-        });
-
+        // $('input[type=radio][name=survey_materi]').change(function() {
+        //     if (this.value == '1') {
+        //         $('.survey_materi_detail').show();
+        //     } else if (this.value == '0') {
+        //         $('.survey_materi_detail').hide();
+        //     }
+        // });
 
     });
 
@@ -316,8 +241,7 @@
                     timer: 1500
                 })
                 setTimeout(function() {
-                    // window.location.href = '<?php echo base_url(); ?>/pkm/pkm_selesai';
-                    location.reload();
+                    window.location.href = '<?php echo base_url(); ?>/pkm/pkm_survey_pilih_nasabah';
                 }, 1600);
             } else {
                 Swal.fire({

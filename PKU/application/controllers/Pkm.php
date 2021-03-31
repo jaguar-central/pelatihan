@@ -19,29 +19,22 @@ class Pkm extends MY_Controller
 				'sess_kelompok_id'			=> $cek_kelompok->GroupID,
 				'sess_nama_kelompok'		=> $cek_kelompok->GroupName,
 				'sess_user_id'				=> $this->input->get('nip')
-
 			);
 
 			$this->session->set_userdata($session_array);
-			//SET SESSION PKM END
-
-			$data["content"] = $this->db->query(" select *,REPLACE(KONTEN,'font-size:16px','') as KONTEN2 FROM MS_MODUL_PKM_BERMAKNA WHERE ID=(SELECT MODUL_PKM_ID FROM MS_JADWAL_PKM_BERMAKNA WHERE TAHUN=YEAR(GETDATE()) AND BULAN=MONTH(GETDATE())) ")->row();
+			//SET SESSION PKM END			
 
 			$cek_minggu_ke = $this->db->query("select MINGGU_KE FROM CEK_MINGGU_KE_PER_BULAN()")->row()->MINGGU_KE;
 			
-			if ($cek_minggu_ke==2){				
-				$cek_survey = $this->db->query("select * from T_PKM_SURVEY WHERE  KELOMPOK_ID='".$cek_kelompok->GroupID."' AND CAST(CREATED_DATE as DATE)=CAST(GETDATE() as DATE)")->result();
-				if (count($cek_survey)==0){
-					$this->load->view('pkm/pkm_survey');
-				}else{
-					$this->pkm_selesai_survey();
-				}				
+			if ($cek_minggu_ke==1){								
+				$this->pkm_survey_pilih_nasabah();
 			}else{
 				$cek_pkm_bermakna = $this->db->query("select * from T_PKM_BERMAKNA WHERE  KELOMPOKID='".$cek_kelompok->GroupID."' AND CAST(CREATED_DATE as DATE)=CAST(GETDATE() as DATE)")->result();
 				if (count($cek_pkm_bermakna)==0){
+					$data["content"] = $this->db->query(" select *,REPLACE(KONTEN,'font-size:16px','') as KONTEN2 FROM MS_MODUL_PKM_BERMAKNA WHERE ID=(SELECT MODUL_PKM_ID FROM MS_JADWAL_PKM_BERMAKNA WHERE TAHUN=YEAR(GETDATE()) AND BULAN=MONTH(GETDATE())) ")->row();
 					$this->load->view('pkm/pkm_bermakna', $data);
 				}else{
-					$this->pkm_selesai();
+					$this->pkm_bermakna_selesai();
 				}
 			}
 		} else {
@@ -74,7 +67,6 @@ class Pkm extends MY_Controller
 
 			$this->Pkm_model->insert_t_pkm_bermakna($data);
 
-
 			$db_error = $this->db->error();
 
 			if (!empty($db_error['message'])) {
@@ -102,57 +94,44 @@ class Pkm extends MY_Controller
 			'msg'		=> ''
 		);
 
-
-		$kelompokid				= $this->session->userdata('sess_kelompok_id');
-		$id_user				= $this->session->userdata('sess_user_id');
-		$survey_materi 			= $this->security->xss_clean(strip_image_tags($this->input->post('survey_materi')));
-		$survey_tenaga_kerja 	= $this->security->xss_clean(strip_image_tags($this->input->post('survey_tenaga_kerja')));
-		$survey_aset 			= $this->security->xss_clean(strip_image_tags($this->input->post('survey_aset')));
-		$survey_ijin 			= $this->security->xss_clean(strip_image_tags($this->input->post('survey_ijin')));
-		$survey_produk 			= $this->security->xss_clean(strip_image_tags($this->input->post('survey_produk')));
-		$survey_plafond			= $this->security->xss_clean(strip_image_tags($this->input->post('survey_plafond')));
-		$survey_omset 			= $this->security->xss_clean(strip_image_tags($this->input->post('survey_omset')));
-
-		$survey_materi_detail 			= $this->security->xss_clean(strip_image_tags($this->input->post('survey_materi_detail')));
-		$survey_tenaga_kerja_detail 	= $this->security->xss_clean(strip_image_tags($this->input->post('survey_tenaga_kerja_detail')));
-		$survey_aset_detail 			= $this->security->xss_clean(strip_image_tags($this->input->post('survey_aset_detail')));
-		$survey_ijin_detail 			= $this->security->xss_clean(strip_image_tags($this->input->post('survey_ijin_detail')));
-		$survey_produk_detail 			= $this->security->xss_clean(strip_image_tags($this->input->post('survey_produk_detail')));
-		$survey_plafond_detail 			= $this->security->xss_clean(strip_image_tags($this->input->post('survey_plafond_detail')));
-		$survey_omset_detail 			= $this->security->xss_clean(strip_image_tags($this->input->post('survey_omset_detail')));
-
-		$survey_materi_detail 		= ($survey_materi=="0") ? "0" : $survey_materi_detail;
-		$survey_tenaga_kerja_detail = ($survey_tenaga_kerja=="0") ? "0" : $survey_tenaga_kerja_detail;
-		$survey_aset_detail 		= ($survey_aset=="0") ? "0" : $survey_aset_detail;
-		$survey_ijin_detail 		= ($survey_ijin=="0") ? "0" : $survey_ijin_detail;
-		$survey_produk_detail 		= ($survey_produk=="0") ? "0" : $survey_produk_detail;
-		$survey_plafond_detail 		= ($survey_plafond=="0") ? "0" : $survey_plafond_detail;
-		$survey_omset_detail 		= ($survey_omset=="0") ? "0" : $survey_omset_detail;
-
+		$kelompokid						= $this->session->userdata('sess_kelompok_id');
+		$id_user						= $this->session->userdata('sess_user_id');
+		$id_nasabah						= $this->security->xss_clean(strip_image_tags($this->input->post('nasabah_id')));
+		$survey_menabung 				= $this->security->xss_clean(strip_image_tags($this->input->post('survey_menabung')));
+		$survey_pengelolaan_keuangan 	= $this->security->xss_clean(strip_image_tags($this->input->post('survey_pengelolaan_keuangan')));
+		$survey_omset 					= $this->security->xss_clean(strip_image_tags($this->input->post('survey_omset')));
+		$survey_strategi_penjualan 		= $this->security->xss_clean(strip_image_tags($this->input->post('survey_strategi_penjualan')));
+		$survey_aset					= $this->security->xss_clean(strip_image_tags($this->input->post('survey_aset')));
+		$survey_ijin 					= $this->security->xss_clean(strip_image_tags($this->input->post('survey_ijin')));
+		$survey_diversifikasi 			= $this->security->xss_clean(strip_image_tags($this->input->post('survey_diversifikasi')));
+		$survey_serapan_tenaga 			= $this->security->xss_clean(strip_image_tags($this->input->post('survey_serapan_tenaga')));		
 
 		$this->db->trans_begin();
 
 		$data_u = array(
-			'AKTIF'				=> '0'
+			'AKTIF'			=> '0'
 		);
 		$where = array(
-			'KELOMPOK_ID'				=> $kelompokid
+			'KELOMPOK_ID'	=> $kelompokid,
+			'NASABAH_ID'	=> $id_nasabah
 		);
 
 		$this->Pkm_model->update_t_pkm_survey($data_u,$where);
 
 		$data = array(
-			'KELOMPOK_ID'				=> $kelompokid,
-			'NILAI_SURVEY_MATERI' 	    => $survey_materi_detail,
-			'NILAI_SURVEY_TENAGA_KERJA' => $survey_tenaga_kerja_detail,
-			'NILAI_ASET' 				=> $survey_aset_detail,
-			'NILAI_IJIN' 				=> $survey_ijin_detail,
-			'NILAI_PRODUK' 				=> $survey_produk_detail,
-			'NILAI_PLAFOND'				=> $survey_plafond_detail,
-			'NILAI_OMSET' 				=> $survey_omset_detail,
-			'AKTIF'						=> '1',
-			'CREATED_BY' 				=> $id_user,
-			'CREATED_DATE' 				=> date('Y-m-d H:i:s')
+			'KELOMPOK_ID'						=> $kelompokid,
+			'NASABAH_ID'						=> $id_nasabah,
+			'NILAI_SURVEY_MENABUNG' 	    	=> $survey_menabung,
+			'NILAI_SURVEY_PENGELOLAAN_KEUANGAN' => $survey_pengelolaan_keuangan,
+			'NILAI_SURVEY_OMSET' 				=> $survey_omset,
+			'NILAI_STRATEGI_PENJUALAN' 			=> $survey_strategi_penjualan,
+			'NILAI_SURVEY_ASSET' 				=> $survey_aset,
+			'NILAI_SURVEY_IJIN'					=> $survey_ijin,
+			'NILAI_SURVEY_DIVERSIFIKASI'		=> $survey_diversifikasi,
+			'NILAI_SURVEY_TENAGA_KERJA' 		=> $survey_serapan_tenaga,
+			'AKTIF'								=> '1',
+			'CREATED_BY' 						=> $id_user,
+			'CREATED_DATE' 						=> date('Y-m-d H:i:s')
 		);
 
 		$this->Pkm_model->insert_t_pkm_survey($data);
@@ -179,7 +158,7 @@ class Pkm extends MY_Controller
 	}
 
 
-	public function pkm_selesai()
+	public function pkm_bermakna_selesai()
 	{
 
 		$session_destroy = array(
@@ -192,24 +171,21 @@ class Pkm extends MY_Controller
 		$this->session->set_userdata($session_destroy);
 		$this->session->unset_userdata($session_destroy);
 
-		$this->load->view('pkm/pkm_selesai');
+		$this->load->view('pkm/pkm_bermakna_selesai');
 	}	
 
-	public function pkm_selesai_survey()
+	public function pkm_survey_pilih_nasabah()
 	{
+		$data['nasabah'] = $this->db->query("select a.ClientID,a.ClientName,b.NILAI_SURVEY_MENABUNG,b.NILAI_SURVEY_PENGELOLAAN_KEUANGAN,b.NILAI_SURVEY_OMSET,b.NILAI_STRATEGI_PENJUALAN,b.NILAI_SURVEY_ASSET,b.NILAI_SURVEY_IJIN,b.NILAI_SURVEY_DIVERSIFIKASI,b.NILAI_SURVEY_TENAGA_KERJA FROM [10.61.3.15].[PKMMobile].[dbo].[PKM_LPM] a LEFT JOIN T_PKM_SURVEY b
+		ON a.GroupID=b.KELOMPOK_ID COLLATE DATABASE_DEFAULT AND a.ClientID=b.NASABAH_ID COLLATE DATABASE_DEFAULT AND b.AKTIF=1 WHERE a.GroupID='" . $this->session->userdata('sess_kelompok_id') . "' ORDER BY a.ClientName ")->result();
+		$this->load->view('pkm/pkm_survey_pilih_nasabah', $data);
+	}
 
-		$data["SURVEY"] = $this->db->query("select TOP 1 * from T_PKM_SURVEY WHERE KELOMPOK_ID='".$this->session->userdata('sess_kelompok_id')."' ORDER BY CREATED_DATE DESC")->result();
-
-		$session_destroy = array(
-		'sess_cabang_id'			=> '',				
-		'sess_kelompok_id'			=> '',				
-		'sess_nama_kelompok'		=> '',				
-		'sess_user_id'				=> ''
-		);                
-
-		$this->session->set_userdata($session_destroy);
-		$this->session->unset_userdata($session_destroy);
-
-		$this->load->view('pkm/pkm_selesai',$data);
+	public function pkm_survey()
+	{
+		$nasabah = $this->db->query("select ClientID,ClientName FROM [10.61.3.15].[PKMMobile].[dbo].[PKM_LPM] WHERE ClientID='" . $this->uri->segment(3) . "' ")->row();
+		$data['nasabah_id'] = $nasabah->ClientID;
+		$data['nama_nasabah'] = $nasabah->ClientName;
+		$this->load->view('pkm/pkm_survey',$data);
 	}
 }
