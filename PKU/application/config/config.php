@@ -35,6 +35,8 @@ $config['baseSSOApi'] = 'http://appserverapache01.pnm.co.id/WebService/';
 
 $config['socket_server'] = 'http://localhost:3000';
 $config['socket_on'] = 'off';
+
+$config['server_pkm'] = '[10.61.3.15]';
 /*
 |--------------------------------------------------------------------------
 | Index File

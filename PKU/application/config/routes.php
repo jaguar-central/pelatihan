@@ -180,9 +180,11 @@ $route['notifsocket'] 		                                    = 'notifsocket';
 
 
 /* PKM Bermakna */
-$route['pkm/pkm_bermakna'] 		                               = 'pkm/login_pkm_bermakna';
-$route['pkm/post_pkm_bermakna'] 		                       = 'pkm/post_pkm_bermakna';
-$route['pkm/post_pkm_survey'] 		                           = 'pkm/post_pkm_survey';
-$route['pkm/pkm_selesai'] 		                               = 'pkm/pkm_selesai';
+$route['pkm/pkm_bermakna'] 		        = 'pkm/login_pkm_bermakna';
+$route['pkm/post_pkm_bermakna'] 		= 'pkm/post_pkm_bermakna';
+$route['pkm/post_pkm_survey'] 		    = 'pkm/post_pkm_survey';
+$route['pkm/pkm_bermakna_selesai'] 		= 'pkm/pkm_bermakna_selesai';
+$route['pkm/pkm_survey_pilih_nasabah']  = 'pkm/pkm_survey_pilih_nasabah';
+$route['pkm/pkm_survey']                = 'pkm/pkm_survey';
 
 
