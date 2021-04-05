@@ -175,7 +175,7 @@ class Pkm extends MY_Controller
 	}	
 
 	public function pkm_survey_pilih_nasabah()
-	{
+	{		
 		$data['nasabah'] = $this->db->query("select a.ClientID,a.ClientName,b.NILAI_SURVEY_MENABUNG,b.NILAI_SURVEY_PENGELOLAAN_KEUANGAN,b.NILAI_SURVEY_OMSET,b.NILAI_STRATEGI_PENJUALAN,b.NILAI_SURVEY_ASSET,b.NILAI_SURVEY_IJIN,b.NILAI_SURVEY_DIVERSIFIKASI,b.NILAI_SURVEY_TENAGA_KERJA FROM ".$this->config->item('server_pkm').".[PKMMobile].[dbo].[PKM_LPM] a LEFT JOIN T_PKM_SURVEY b
 		ON a.GroupID=b.KELOMPOK_ID COLLATE DATABASE_DEFAULT AND a.ClientID=b.NASABAH_ID COLLATE DATABASE_DEFAULT AND b.AKTIF=1 WHERE a.GroupID='" . $this->session->userdata('sess_kelompok_id') . "' ORDER BY a.ClientName ")->result();
 		$this->load->view('pkm/pkm_survey_pilih_nasabah', $data);
@@ -183,7 +183,9 @@ class Pkm extends MY_Controller
 
 	public function pkm_survey()
 	{
+
 		$nasabah = $this->db->query("select ClientID,ClientName FROM ".$this->config->item('server_pkm').".[PKMMobile].[dbo].[PKM_LPM] WHERE ClientID='" . $this->uri->segment(3) . "' ")->row();
+		$data['kategori_plafond'] = $this->db->query("select * FROM ".$this->config->item('server_pkm').".[PKMMobile].[dbo].[Kategori_plafond_survey] WHERE ClientID='" . $this->uri->segment(3) . "'")->row()->KategoriPlafond;
 		$data['nasabah_id'] = $nasabah->ClientID;
 		$data['nama_nasabah'] = $nasabah->ClientName;
 		$this->load->view('pkm/pkm_survey',$data);
