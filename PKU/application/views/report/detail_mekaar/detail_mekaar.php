@@ -39,32 +39,7 @@
                                     <th class="text-center" rowspan="1">Kelas / Warna</th>
                                 </tr>
 							</thead>
-							<tbody>		
-                            <?php 
-                            foreach ($report as $data){
-                                echo '<tr>';
-                                echo '<td>'.$data->NASABAH_TIPE.'</td>';
-                                echo '<td>'.$data->ID_NASABAH.'</td>';
-                                echo '<td>'.$data->NAMA.'</td>';
-                                echo '<td>'.$data->PLAFOND.'</td>';
-								echo '<td>'.$data->WILAYAH.'</td>';
-                                echo '<td>'.$data->DESKRIPSI_CABANG_ULAMM.'</td>';
-                                echo '<td>'.$data->DESKRIPSI_REGION_MEKAAR.'</td>';
-                                echo '<td>'.$data->CABANG_MEKAAR.'</td>';
-                                echo '<td>'.$data->TIPE_PELATIHAN_DESKRIPSI.'</td>';
-                                echo '<td>'.$data->NO_PROPOSAL.'</td>';
-								echo '<td>'.$data->NO_PROPOSAL.'</td>';
-                                echo '<td>'.$data->TEMA_PELATIHAN.'</td>';
-								echo '<td>'.$data->TITLE.'</td>';
-								echo '<td>'.$data->SEKTOR_EKONOMI.'</td>';
-                                echo '<td>'.$data->TANGGAL_MULAI.'</td>';
-                                echo '<td>'.$data->TANGGAL_REALISASI_MULAI.'</td>';
-                                echo '<td>'.$data->BUDGET.'</td>';
-                                echo '<td>'.$data->GRADING.'</td>';
-								echo '<td>'.$data->KELAS_WARNA.'</td>';
-                                echo '</tr>';
-                            }
-                            ?>			
+							<tbody>		            	
 							</tbody>
 						</table>						
 					</div>

@@ -368,8 +368,7 @@ class Pelatihan extends MY_Controller
 		$total_cost_rab_akhir 		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab_akhir')));
 
 		$nama_krm			 		= trim($this->security->xss_clean(strip_image_tags($this->input->post('nama_krm'))));
-		$no_rek_krm 				= trim($this->security->xss_clean(strip_image_tags($this->input->post('no_rek_krm'))));
-
+		$no_rek_krm 				= trim($this->security->xss_clean(strip_image_tags($this->input->post('no_rek_krm'))));				
 		
 		$no_trx='';		
 		$no_trx_reject='';
@@ -531,6 +530,31 @@ class Pelatihan extends MY_Controller
 			);							
 			$this->Pelatihan_model->insert_t_rab($rab);
 		}
+
+		//start insert t_pelatihan_detail
+		if ($id_bisnis_pelatihan==1){
+			for ($i=0;$i<count($unit_ulamm);$i++){
+				$deskripsi_unit_ulamm = $this->Master_model->select_ms_unit_ulamm_by_kode_unit($unit_ulamm[$i])[0]->DESKRIPSI;
+				$detail = array(
+					'ID_PELATIHAN' 	=> $id_pelatihan,
+					'KODE_UNIT' 	=> $unit_ulamm[$i],
+					'DESKRIPSI' 	=> $deskripsi_unit_ulamm
+				);							
+				$this->Pelatihan_model->insert_t_pelatihan_detail_unit_ulamm($detail);
+			}			
+		}else if ($id_bisnis_pelatihan==2){
+			for ($i=0;$i<count($cabang_mekaar);$i++){
+				$deskripsi_cabang_mekaar = $this->Master_model->select_ms_cabang_mekaar_by_kode_cabang($cabang_mekaar[$i])[0]->DESKRIPSI;
+				$detail = array(
+					'ID_PELATIHAN' 	=> $id_pelatihan,
+					'KODE_CABANG' 	=> $cabang_mekaar[$i],
+					'DESKRIPSI' 	=> $deskripsi_cabang_mekaar
+				);							
+				$this->Pelatihan_model->insert_t_pelatihan_detail_cabang_mekaar($detail);
+			}
+		}
+		//stop insert t_pelatihan_detail
+
 		/*nonaktifkan pelatihan project charter yang telah terpakai*/
 		if ($id_pelatihan_project_charter){
 

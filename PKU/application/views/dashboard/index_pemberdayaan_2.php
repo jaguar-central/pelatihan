@@ -107,13 +107,14 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="table">
-                                                        <table id="datatable_pemberdayaan_ulamm" class="table" > 
+                                                        <table id="datatable_pemberdayaan_ulamm" class="table table-bordered" > 
                                                             <thead class="text-primary ">
                                                                 <tr>
                                                                     <th rowspan="2" colspan="1">ID Nasabah</th>
-                                                                    <th rowspan="2" colspan="1">Nasabah</th>
+                                                                    <th rowspan="2" colspan="1">Nama Nasabah</th>
                                                                     <th class="text-center" rowspan="1" colspan="2">Penilaian Intrinsik</th>
                                                                     <th class="text-center" rowspan="1" colspan="5">Penilaian Ekstrinsik</th>
+                                                                    <th class="text-center" rowspan="2" colspan="1">Total Nilai</th>
                                                                 </tr>
                                                                 <tr>
                                                                     <th>Grading System</th>
@@ -122,8 +123,7 @@
                                                                     <th>Diversifikasi Produk</th>
                                                                     <th>Pendapatan Perbulan</th>
                                                                     <th>Tenaga Kerja</th>
-                                                                    <th>Perijinan Usaha</th>
-                                                                    <th>Total Nilai</th>
+                                                                    <th>Perijinan Usaha</th>                                                                    
                                                                 </tr>
                                                             </thead>
                                                             <tbody id="tbody_datatable_pemberdayaan_ulamm">
@@ -179,23 +179,25 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="table">
-                                                        <table id="datatable_pemberdayaan_mekaar" class="table" width="100%" >
+                                                        <table id="datatable_pemberdayaan_mekaar" class="table table-bordered table-responsive" width="100%" >
                                                             <thead class=" text-primary ">
                                                                 <tr>
-                                                                    <th rowspan="2" colspan="1">ID Kelompok</th>
-                                                                    <th rowspan="2" colspan="1">Kelompok</th>
-                                                                    <th class="text-center" rowspan="1" colspan="2">Penilaian Intrinsik</th>
-                                                                    <th class="text-center" rowspan="1" colspan="5">Penilaian Ekstrinsik</th>
+                                                                    <th rowspan="2" colspan="1">ID Nasabah</th>
+                                                                    <th rowspan="2" colspan="1">Nama Nasabah</th>
+                                                                    <th class="text-center" rowspan="1" colspan="1">Penilaian Intrinsik</th>
+                                                                    <th class="text-center" rowspan="1" colspan="8">Penilaian Ekstrinsik</th>
+                                                                    <th class="text-center" rowspan="2" colspan="1">Total Nilai</th>                                                                    
                                                                 </tr>
                                                                 <tr>
                                                                     <th>Grading System</th>
-                                                                    <th>Aspek Implementasi</th>
-                                                                    <th>Jumlah Plafond</th>
-                                                                    <th>Diversifikasi Produk</th>
+                                                                    <th>Aspek Menabung</th>
+                                                                    <th>Pengelolaan Keuangan</th>
                                                                     <th>Pendapatan Perhari</th>
-                                                                    <th>Perijinan Usaha</th>
+                                                                    <th>Strategi Penjualan</th>
                                                                     <th>Kepemilikan Aset</th>
-                                                                    <th>Total Nilai</th>
+                                                                    <th>Perijinan Usaha</th>
+                                                                    <th>Diversifikasi Produk</th>
+                                                                    <th>Serapan Tenaga Kerja</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody id="tbody_datatable_pemberdayaan_mekaar">
@@ -205,12 +207,14 @@
                                                                 echo '<td>'.$DATA_M->ID_NASABAH.'</td>';
                                                                 echo '<td>'.$DATA_M->NAMA.'</td>';
                                                                 echo '<td>'.$DATA_M->NILAI_GRADING.'</td>';
-                                                                echo '<td>'.$DATA_M->ASPEK_IMPLEMENTASI.'</td>';
-                                                                echo '<td>'.$DATA_M->JUMLAH_PLAFOND.'</td>';
-                                                                echo '<td>'.$DATA_M->DIVERSIFIKASI_PRODUK.'</td>';
-                                                                echo '<td>'.$DATA_M->PENDAPATAN_PERBULAN.'</td>';
-                                                                echo '<td>'.$DATA_M->TENAGA_KERJA.'</td>';
+                                                                echo '<td>'.$DATA_M->MENABUNG.'</td>';
+                                                                echo '<td>'.$DATA_M->PENGELOLAAN_KEUANGAN.'</td>';
+                                                                echo '<td>'.$DATA_M->OMSET.'</td>';
+                                                                echo '<td>'.$DATA_M->STRATEGI_PENJUALAN.'</td>';
+                                                                echo '<td>'.$DATA_M->ASSET.'</td>';
                                                                 echo '<td>'.$DATA_M->PERIJINAN_USAHA.'</td>';
+                                                                echo '<td>'.$DATA_M->DIVERSIFIKASI.'</td>';
+                                                                echo '<td>'.$DATA_M->TENAGA_KERJA.'</td>';
                                                                 echo '<td>'.$DATA_M->TOTAL_NILAI.'</td>';
                                                                 echo '</tr>';
                                                             }

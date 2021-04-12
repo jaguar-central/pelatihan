@@ -403,6 +403,17 @@ public function select_t_pelatihan_where_in_id($id)
 		return $query->result();
 }
 
+
+public function insert_t_pelatihan_detail_cabang_mekaar($data)
+{
+		$this->db->insert('T_PELATIHAN_DETAIL_CABANG_MEKAAR', $data);
+}	
+
+public function insert_t_pelatihan_detail_unit_ulamm($data)
+{
+		$this->db->insert('T_PELATIHAN_DETAIL_UNIT_ULAMM', $data);
+}	
+
 }
 
 

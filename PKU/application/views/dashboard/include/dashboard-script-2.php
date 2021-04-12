@@ -38,169 +38,36 @@
 
 
 <script type="text/javascript">
-$(document).ready(function() {
-
-    // $('#datatable_pemberdayaan_ulamm').DataTable( {
-    //     "scrollY" : "200px",
-    //     // "scrollX" : true,
-    //     "responsive" : true,
-    //     "scrollCollapse" : true,
-    //     "autoWidth" : false,
-    //     "paging" : false,              
-    //     "dom" : "rt<'dom_datable col-md-6'><'dom_datable col-md-6'p>"        
-    // } );
-
-    // $('#datatable_pemberdayaan_mekaar').DataTable( {
-    //     "scrollY" : "200px",
-    //     // "scrollX" : true,
-    //     "responsive" : true,
-    //     "scrollCollapse" : true,
-    //     "autoWidth" : true,
-    //     "paging" : false,                      
-    //     "dom" : "rt<'dom_datable col-md-6'><'dom_datable col-md-6'p>"        
-    // } ).draw();
-
-    // $('#datatable_pemberdayaan_provinsi_ulamm').DataTable( {
-    //     "scrollY" : "200px",
-    //     // "scrollX" : true,
-    //     "responsive" : true,
-    //     "scrollCollapse" : true,
-    //     "autoWidth" : false,
-    //     "paging" : false,              
-    //     "dom" : "rt<'dom_datable col-md-6'><'dom_datable col-md-6'p>"        
-    // } );
-
-    // $('#datatable_pemberdayaan_provinsi_mekaar').DataTable( {
-    //     "scrollY" : "200px",
-    //     // "scrollX" : true,
-    //     "responsive" : true,
-    //     "scrollCollapse" : true,
-    //     "autoWidth" : false,
-    //     "paging" : false,              
-    //     "dom" : "rt<'dom_datable col-md-6'><'dom_datable col-md-6'p>"        
-    // } );
-
-    // $('#datatable_pemberdayaan_cabang_ulamm').DataTable( {
-    //     "scrollY" : "200px",
-    //     // "scrollX" : true,
-    //     "responsive" : true,
-    //     "scrollCollapse" : true,
-    //     "autoWidth" : false,
-    //     "paging" : false,              
-    //     "dom" : "rt<'dom_datable col-md-6'><'dom_datable col-md-6'p>"        
-    // } );
-
-    // $('#datatable_pemberdayaan_cabang_mekaar').DataTable( {
-    //     "scrollY" : "200px",
-    //     // "scrollX" : true,
-    //     "responsive" : true,
-    //     "scrollCollapse" : true,
-    //     "autoWidth" : false,
-    //     "paging" : false,              
-    //     "dom" : "rt<'dom_datable col-md-6'><'dom_datable col-md-6'p>"        
-    // } );
-
-
-
-    
-
-    
-
-    $.fn.infiniteScrollUp=function(){
-      var self=this,kids=self.children()
-      kids.slice(20).hide()
-      setInterval(function(){
-        kids.filter(':hidden').eq(0).fadeIn()
-        kids.eq(0).fadeOut(function(){
-          $(this).appendTo(self)
-          kids=self.children()
-        })
-      },10000)
-      return this
-    }	
-
-    // datatable_pemberdayaan_ulamm();
-    // datatable_pemberdayaan_mekaar();
-
-    $(function(){
-      $('#tbody_datatable_pemberdayaan_ulamm').infiniteScrollUp();
-
-      $('#tbody_datatable_pemberdayaan_mekaar').infiniteScrollUp();
-
-      $('#tbody_datatable_pemberdayaan_provinsi_ulamm').infiniteScrollUp();
-
-      $('#tbody_datatable_pemberdayaan_provinsi_mekaar').infiniteScrollUp();
-
-      $('#tbody_datatable_pemberdayaan_cabang_ulamm').infiniteScrollUp();
-
-      $('#tbody_datatable_pemberdayaan_cabang_mekaar').infiniteScrollUp();
-    })
-
-    
-  // function datatable_pemberdayaan_ulamm(){  
-    // $('#datatable_pemberdayaan_ulamm').DataTable({			
-		// 	"paging": true,
-		// 	"processing": true,
-		// 	"serverSide": true,
-    //   "destroy": true,
-		// 	"ajax": {
-		// 	"url" : '<?php //echo base_url('get_index_pemberdayaan_ulamm'); ?>',
-		// 	"type" :'GET'                      
-		// 	},
-		// 	"columnDefs": [
-    // 			{ "className": "col-md-2", targets: "_all" },
-		// 	],			
-		// 	"columns" : [
-		// 		{ "data": "ID_NASABAH" },
-		// 		{ "data": "NAMA" },
-		// 		{ "data": "NILAI_GRADING" },
-		// 		{ "data": "ASPEK_IMPLEMENTASI" },
-		// 		{ "data": "JUMLAH_PLAFOND" },    
-		// 		{ "data": "DIVERSIFIKASI_PRODUK" },    
-		// 		{ "data": "PENDAPATAN_PERBULAN" },    
-		// 		{ "data": "TENAGA_KERJA" },    
-		// 		{ "data": "PERIJINAN_USAHA" },    
-		// 		{ "data": "TOTAL_NILAI" } 		                 
-		// 	],
-    //   "dom": "rt<'dom_datable col-md-6'i><'dom_datable col-md-6'p>"
-    // });
-
-
-  // }  
-
-
+// $(document).ready(function() {
   
-  // function datatable_pemberdayaan_mekaar(){
-    // $('#datatable_pemberdayaan_mekaar').DataTable({			
-		// 	"paging": true,
-		// 	"processing": true,
-		// 	"serverSide": true,
-    //   "destroy": true,
-		// 	"ajax": {
-		// 	"url" : '<?php //echo base_url('get_index_pemberdayaan_mekaar'); ?>',
-		// 	"type" :'GET'                      
-		// 	},
-		// 	"columnDefs": [
-    // 			{ "className": "col-md-2", targets: "_all" },
-		// 	],			
-		// 	"columns" : [
-		// 		{ "data": "ID_NASABAH" },
-		// 		{ "data": "NAMA" },
-		// 		{ "data": "NILAI_GRADING" },
-		// 		{ "data": "ASPEK_IMPLEMENTASI" },
-		// 		{ "data": "JUMLAH_PLAFOND" },    
-		// 		{ "data": "DIVERSIFIKASI_PRODUK" },    
-		// 		{ "data": "PENDAPATAN_PERBULAN" },    
-		// 		{ "data": "TENAGA_KERJA" },    
-		// 		{ "data": "PERIJINAN_USAHA" },    
-		// 		{ "data": "TOTAL_NILAI" } 		                 
-		// 	],
-    //   "dom": "rt<'dom_datable col-md-6'i><'dom_datable col-md-6'p>"
-		// });
+//     $.fn.infiniteScrollUp=function(){
+//       var self=this,kids=self.children()
+//       kids.slice(20).hide()
+//       setInterval(function(){
+//         kids.filter(':hidden').eq(0).fadeIn()
+//         kids.eq(0).fadeOut(function(){
+//           $(this).appendTo(self)
+//           kids=self.children()
+//         })
+//       },10000)
+//       return this
+//     }	
 
-  // }
+//     $(function(){
+//       $('#tbody_datatable_pemberdayaan_ulamm').infiniteScrollUp();
 
-});
+//       $('#tbody_datatable_pemberdayaan_mekaar').infiniteScrollUp();
+
+//       $('#tbody_datatable_pemberdayaan_provinsi_ulamm').infiniteScrollUp();
+
+//       $('#tbody_datatable_pemberdayaan_provinsi_mekaar').infiniteScrollUp();
+
+//       $('#tbody_datatable_pemberdayaan_cabang_ulamm').infiniteScrollUp();
+
+//       $('#tbody_datatable_pemberdayaan_cabang_mekaar').infiniteScrollUp();
+//     })
+
+// });
 
 am4core.ready(function() {
 
