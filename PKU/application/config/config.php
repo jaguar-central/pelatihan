@@ -1,8 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-ini_set('memory_limit','1024M');
+ini_set('memory_limit','2048M');
 ini_set('sqlsrv.ClientBufferMaxKBSize','102400');
+ini_set('max_execution_time', 0);
 
 /*
 |--------------------------------------------------------------------------

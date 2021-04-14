@@ -4,61 +4,27 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit5e4ce120f64d7bb2306695253758acd6
+class ComposerStaticInit5079c1084c2e53aeb0efaa669f910755
 {
-    public static $files = array (
-        'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
-        '8592c7b0947d8a0965a9e8c3d16f9c24' => __DIR__ . '/..' . '/elasticsearch/elasticsearch/src/autoload.php',
-    );
-
     public static $prefixLengthsPsr4 = array (
-        'R' => 
+        'B' => 
         array (
-            'React\\Promise\\' => 14,
-        ),
-        'P' => 
-        array (
-            'Psr\\Log\\' => 8,
-        ),
-        'G' => 
-        array (
-            'GuzzleHttp\\Stream\\' => 18,
-            'GuzzleHttp\\Ring\\' => 16,
-        ),
-        'E' => 
-        array (
-            'Elasticsearch\\' => 14,
+            'Box\\Spout\\' => 10,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'React\\Promise\\' => 
+        'Box\\Spout\\' => 
         array (
-            0 => __DIR__ . '/..' . '/react/promise/src',
-        ),
-        'Psr\\Log\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
-        ),
-        'GuzzleHttp\\Stream\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/ezimuel/guzzlestreams/src',
-        ),
-        'GuzzleHttp\\Ring\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/ezimuel/ringphp/src',
-        ),
-        'Elasticsearch\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/elasticsearch/elasticsearch/src/Elasticsearch',
+            0 => __DIR__ . '/..' . '/box/spout/src/Spout',
         ),
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit5e4ce120f64d7bb2306695253758acd6::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit5e4ce120f64d7bb2306695253758acd6::$prefixDirsPsr4;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit5079c1084c2e53aeb0efaa669f910755::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit5079c1084c2e53aeb0efaa669f910755::$prefixDirsPsr4;
 
         }, null, ClassLoader::class);
     }

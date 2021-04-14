@@ -37,7 +37,7 @@ class Report_model extends CI_Model {
 
     public function report_detail($bisnis)
     {
-        $query = $this->db->query("select A.NASABAH_TIPE
+        $query = $this->db->query("select A.ID,A.NASABAH_TIPE
         ,A.ID_NASABAH
         ,A.NAMA
         ,dbo.WILAYAH_BY_KODE_CABANG(B.CABANG_ULAMM) as WILAYAH
