@@ -386,6 +386,8 @@
 	$(document).on("click", ".view_pelatihan", function () {
 		var pelatihantype 	= $(this).data('pelatihantype');						
 		var tipe_bisnis 	= $(this).data('pelatihanbisnis');	
+
+		console.log("pelatihan type : "+pelatihantype);
 		
 		$('#datatable_modalview').DataTable().clear();
 		$('#datatable_modalview').DataTable().destroy();

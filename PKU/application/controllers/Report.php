@@ -139,7 +139,7 @@ class Report extends MY_Controller
         $data["script"] = "report/summary_ulamm/include/summary-ulamm-script";     
         
         $data["menu"] = $this->Menu_model->select_ms_menu();
-        $data["report"] = $this->Report_model->select_summary(1);        
+        $data["report"] = $this->Report_model->report_summary(1);        
 
         $this->load->view('layout/gabung', $data);
     }    
@@ -153,7 +153,7 @@ class Report extends MY_Controller
         $data["script"] = "report/summary_mekaar/include/summary-mekaar-script";     
         
         $data["menu"] = $this->Menu_model->select_ms_menu();
-        $data["report"] = $this->Report_model->select_summary(2);        
+        $data["report"] = $this->Report_model->report_summary(2);        
 
         $this->load->view('layout/gabung', $data);
     }

@@ -27,9 +27,25 @@ class Report_model extends CI_Model {
     }
 
 
-    public function select_summary($bisnis)
+    public function report_summary($bisnis)
     {
-        $query = $this->db->query(" select * from dbo.REPORT_SUMMARY ");
+        $query = $this->db->query(" select a.NO_PROPOSAL
+        , dbo.DESKRIPSI_PELATIHAN_TYPE(a.ID_TIPE) as 'TIPE_PELATIHAN'
+        , a.TITLE
+        , a.NO_TRX
+        , a.CABANG_ULAMM
+        , dbo.DESKRIPSI_AREA(a.AREA_MEKAAR) as 'AREA_MEKAAR'
+        , dbo.DESKRIPSI_REGION(a.REGIONAL_MEKAAR) as 'REGIONAL_MEKAAR'
+        , a.KUOTA_PESERTA
+        , a.JUMLAH_ANGGARAN as 'ANGGARAN_PROPOSAL'
+        , a.STATUS, a.TANGGAL_MULAI
+        , a.TANGGAL_SELESAI
+        --, b.GRAND_TOTAL as 'ANGGARAN_REALISASI'
+        ,(select TOP 1 GRAND_TOTAL FROM T_RAB_LPJ WHERE ID_PELATIHAN=a.ID) as ANGGARAN_REALISASI 
+        from T_PELATIHAN a
+        where ID_BISNIS=$bisnis and STATUS = 'lpj_approved'
+        ");
+        
         return $query->result();
 
     }
@@ -69,6 +85,43 @@ class Report_model extends CI_Model {
 
         return $query->result();
     }
+
+
+
+    // public function report_detail($bisnis)
+    // {
+    //     $query = $this->db->query("select A.NASABAH_TIPE
+    //     ,A.ID_NASABAH
+    //     ,A.NAMA
+    //     ,dbo.WILAYAH_BY_KODE_CABANG(B.CABANG_ULAMM) as WILAYAH
+    //     ,B.CABANG_ULAMM,B.UNIT_ULAMM,B.REGIONAL_MEKAAR
+    //     ,B.AREA_MEKAAR,B.CABANG_MEKAAR
+    //     ,dbo.DESKRIPSI_PELATIHAN_TYPE(B.ID_TIPE) TIPE_PELATIHAN_DESKRIPSI
+    //     ,B.NO_PROPOSAL,B.TITLE,B.TANGGAL_MULAI
+    //     ,C.TANGGAL_REALISASI_MULAI
+    //     ,B.BUDGET
+    //     ,dbo.DESKRIPSI_GRADING(ID_GRADING) as GRADING
+    //     ,dbo.GRADING_KELAS_WARNA(B.ID_GRADING) as KELAS_WARNA
+    //     ,dbo.GET_TEMA_PELATIHAN(B.ID_GRADING) AS TEMA_PELATIHAN
+    //     ,CASE WHEN BISNIS='ULAMM' THEN D.Deskripsi_Bidang_Usaha COLLATE DATABASE_DEFAULT  ELSE CONCAT(E.SUB_SEKTOR,' - ',E.SEKTOR) COLLATE DATABASE_DEFAULT  END AS SEKTOR_EKONOMI
+    //     ,A.ID_TIPE_KREDIT AS TIPE_KREDIT
+    //     ,A.PLAFOND
+    //     ,X.DESKRIPSI AS DESKRIPSI_CABANG_ULAMM
+        
+    //     ,Z.DESKRIPSI AS DESKRIPSI_REGION_MEKAAR
+    //     from T_KEHADIRAN A 
+    //     INNER JOIN T_PELATIHAN B ON A.ID_PELATIHAN=B.ID
+    //     INNER JOIN T_PELATIHAN_LPJ C ON A.ID_PELATIHAN=C.ID_PELATIHAN AND C.AKTIF=1
+    //     LEFT JOIN MS_CABANG_ULAMM X ON B.CABANG_ULAMM=X.KODE_CABANG
+        
+    //     LEFT JOIN MS_REGION_MEKAAR Z ON B.REGIONAL_MEKAAR=Z.KODE_REGION
+    //     LEFT JOIN MS_SEKTOR_ULAMM D ON A.ID_SEKTOR_EKONOMI =D.SID_SEKTOR_EKONOMI COLLATE DATABASE_DEFAULT
+    //     LEFT JOIN MS_SEKTOR_MEKAAR E ON A.ID_SEKTOR_EKONOMI =CAST(E.ID_SUB_SEKTOR as  VARCHAR(50)) COLLATE DATABASE_DEFAULT      
+    //     where ID_BISNIS=$bisnis and B.STATUS='lpj_approved'
+    //     ");
+
+    //     return $query->result();
+    // }
 
     // public function report_detail($bisnis)
 

@@ -36,6 +36,7 @@
 				<div class="card-body row">
 					<label class="col-sm-2">Jenis Nasabah <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
+			
 						<select class="form-control" required="" id="jenis_nasabah_grading">
 							<option value="">--pilih jenis nasabah--</option>
 

@@ -1048,6 +1048,13 @@ class Pelatihan extends MY_Controller
 				);
 			}
 		}
+		else
+		{
+			$output = array(
+				'result'  	=> 'NG',
+				'msg'		=> array('error' => $this->upload->display_errors())
+			);		
+		}
 
         
 		echo json_encode($output);
