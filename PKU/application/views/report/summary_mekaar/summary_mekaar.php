@@ -12,18 +12,22 @@
 			<div class="row">
 				<div class="col-lg-12">					
 					<div class="table-style">
-						<table id="datatable12" class="table table-bordered table-striped table-responsive">
+						<table id="datatable" class="table table-bordered table-striped table-responsive">
 							<thead>
-									<th class="text-center" rowspan="2">Nomor Memo</th>
-									<th class="text-center" rowspan="2">Tipe Pelatihan</th>
-                                    <th class="text-center" rowspan="2">Judul</th>
-                                    <th class="text-center" rowspan="2">Nomor Unit</th>
-                                    <th class="text-center" rowspan="2">Cabang Ulamm</th>
-                                    <th class="text-center" rowspan="2">Anggaran Proposal</th>
-                                    <th class="text-center" rowspan="2">Anggaran Realisasi</th>
-                                    <th class="text-center" rowspan="2">Status</th>
-                                    <th class="text-center" rowspan="2">Tanggal Mulai</th>
-                                    <th class="text-center" rowspan="2">Tanggal Selesai</th>
+									<th class="text-center">Nomor Memo</th>
+									<th class="text-center">Tipe Pelatihan</th>
+                                    <th class="text-center">Judul</th>
+                                    <th class="text-center">Nomor Unit</th>
+                                    <th class="text-center">Cabang Ulamm</th>
+									<th class="text-center">Area Mekaar</th>
+									<th class="text-center">Region Mekaar</th>
+									<!--th class="text-center">Pembicara</th-->
+									<th class="text-center" >Jumlah Peserta</th>
+                                    <th class="text-center">Anggaran Proposal</th>
+                                    <th class="text-center">Anggaran Realisasi</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Tanggal Mulai</th>
+                                    <th class="text-center">Tanggal Selesai</th>
 							</thead>
 							<tbody>		
                             <?php 
@@ -34,6 +38,10 @@
                                 echo '<td>'.$data->TITLE.'</td>';
                                 echo '<td>'.$data->NO_TRX.'</td>';
                                 echo '<td>'.$data->CABANG_ULAMM.'</td>';
+								echo '<td>'.$data->AREA_MEKAAR.'</td>';
+								echo '<td>'.$data->REGIONAL_MEKAAR.'</td>';
+								//echo '<td>'.$data->PEMBICARA.'</td>';
+								echo '<td>'.$data->KUOTA_PESERTA.'</td>';
                                 echo '<td>'.$data->ANGGARAN_PROPOSAL.'</td>';
                                 echo '<td>'.$data->ANGGARAN_REALISASI.'</td>';
                                 echo '<td>'.$data->STATUS.'</td>';

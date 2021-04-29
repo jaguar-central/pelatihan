@@ -466,6 +466,13 @@ $(document).ready(function() {
 		e.preventDefault();        	
 		var formURL = "<?php echo base_url('pelatihan/post_pelatihan_lpj'); ?>";
 		var frmdata = new FormData(this);
+
+		Swal.fire({
+              imageUrl: "<?= base_url() ?>assets/images/loader.gif",
+              showConfirmButton: false,
+              allowOutsideClick: false
+            });
+
 					
 		
 		if ($('#total_cost_rab_akhir_modallpj').val()>0) {	
