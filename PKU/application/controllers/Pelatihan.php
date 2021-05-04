@@ -118,7 +118,7 @@ class Pelatihan extends MY_Controller
 								); 
 
         $data["menu"] 		= $this->Menu_model->select_ms_menu();
-		$data["pelatihan"] 	= $this->Pelatihan_model->select_t_pelatihan_mekaar_by_status(array('draft','submitted','approved','reject','lpj_draft','lpj_submitted','lpj_approved'));
+		$data["pelatihan"] 	= $this->Pelatihan_model->select_t_pelatihan_mekaar_by_status(array('draft','submitted','approved','reject','lpj_draft','lpj_submitted','lpj_approved'));		
 
 		$data["cabang"] 	= $this->Master_model->select_ms_cabang_ulamm();		
 		$data["region"] 	= $this->Master_model->select_ms_region_mekaar();
@@ -368,8 +368,7 @@ class Pelatihan extends MY_Controller
 		$total_cost_rab_akhir 		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab_akhir')));
 
 		$nama_krm			 		= trim($this->security->xss_clean(strip_image_tags($this->input->post('nama_krm'))));
-		$no_rek_krm 				= trim($this->security->xss_clean(strip_image_tags($this->input->post('no_rek_krm'))));
-
+		$no_rek_krm 				= trim($this->security->xss_clean(strip_image_tags($this->input->post('no_rek_krm'))));				
 		
 		$no_trx='';		
 		$no_trx_reject='';
@@ -460,8 +459,7 @@ class Pelatihan extends MY_Controller
 		$output = array(
 			'result'  	=> 'OK',
 			'msg'		=> ''
-		);		
-		
+		);			
 		
 		$this->db->trans_begin();
 
@@ -480,7 +478,7 @@ class Pelatihan extends MY_Controller
 			$id_krm = 0;
 		}
 
-
+		
 		
 		$data = array(
 			'ID_TIPE' 				=> $pelatihan_type,
@@ -514,9 +512,8 @@ class Pelatihan extends MY_Controller
 		);
 		
 		
-		$this->Pelatihan_model->insert_t_pelatihan($data);
-		
-		
+		$this->Pelatihan_model->insert_t_pelatihan($data);		
+
 		$id_pelatihan = $this->db->insert_id(); //last id yang di insert		
 		
 		for ($i=1;$i<count($deskripsi_rab);$i++){
@@ -533,6 +530,31 @@ class Pelatihan extends MY_Controller
 			);							
 			$this->Pelatihan_model->insert_t_rab($rab);
 		}
+
+		//start insert t_pelatihan_detail
+		if ($id_bisnis_pelatihan==1){
+			for ($i=0;$i<count($unit_ulamm);$i++){
+				$deskripsi_unit_ulamm = $this->Master_model->select_ms_unit_ulamm_by_kode_unit($unit_ulamm[$i])[0]->DESKRIPSI;
+				$detail = array(
+					'ID_PELATIHAN' 	=> $id_pelatihan,
+					'KODE_UNIT' 	=> $unit_ulamm[$i],
+					'DESKRIPSI' 	=> $deskripsi_unit_ulamm
+				);							
+				$this->Pelatihan_model->insert_t_pelatihan_detail_unit_ulamm($detail);
+			}			
+		}else if ($id_bisnis_pelatihan==2){
+			for ($i=0;$i<count($cabang_mekaar);$i++){
+				$deskripsi_cabang_mekaar = $this->Master_model->select_ms_cabang_mekaar_by_kode_cabang($cabang_mekaar[$i])[0]->DESKRIPSI;
+				$detail = array(
+					'ID_PELATIHAN' 	=> $id_pelatihan,
+					'KODE_CABANG' 	=> $cabang_mekaar[$i],
+					'DESKRIPSI' 	=> $deskripsi_cabang_mekaar
+				);							
+				$this->Pelatihan_model->insert_t_pelatihan_detail_cabang_mekaar($detail);
+			}
+		}
+		//stop insert t_pelatihan_detail
+
 		/*nonaktifkan pelatihan project charter yang telah terpakai*/
 		if ($id_pelatihan_project_charter){
 
@@ -1053,9 +1075,8 @@ class Pelatihan extends MY_Controller
 			$output = array(
 				'result'  	=> 'NG',
 				'msg'		=> array('error' => $this->upload->display_errors())
-			);		
+			);	
 		}
-
         
 		echo json_encode($output);
 		exit;
@@ -1378,80 +1399,6 @@ class Pelatihan extends MY_Controller
 		$this->db->trans_begin();
 		
 		$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
-
-		$db_error = $this->db->error();
-
-		if (!empty($db_error['message']))
-		{
-			$this->db->trans_rollback();
-				
-			$output = array(
-				'result'  	=> 'NG',
-				'msg'		=> $db_error['message']
-			);
-		}
-		else
-		{
-			$this->db->trans_commit();
-			$output = array(
-				'result'  	=> 'OK',
-				'msg'		=> ''
-			);
-		}			
-
-		
-		echo json_encode($output);
-		exit;
-		
-	}
-
-
-
-	public function post_reject()
-	{
-
-		$this->is_logged();		
-		
-		$pelatihanid	= trim($this->security->xss_clean(strip_image_tags($this->input->post('pelatihanid'))));
-		$status			= trim($this->security->xss_clean(strip_image_tags($this->input->post('status'))));
-		$id_user 		= $this->session->userdata('sess_user_idsdm');
-		$approval 		= '';
-
-		
-		$data_update 	= array(
-			'STATUS' 		=> $status,
-			'APPROVAL' 		=> $approval,
-			'UPDATED_BY' 	=> $id_user,
-			'UPDATED_DATE' 	=> date('Y-m-d H:i:s')			
-			);
-		$where_update	= array(
-			'ID' 	=> $pelatihanid
-			);	
-
-
-		$output = array(
-			'result'  	=> 'OK',
-			'msg'		=> ''
-		);			
-			
-		$this->db->trans_begin();
-		
-		$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
-		$NO_TRX = $this->Pelatihan_model->select_t_pelatihan_by_id($pelatihanid)->row()->NO_TRX;
-
-			$ARRAY_NO_TRX = explode(",",$NO_TRX);
-			//var_dump($ARRAY_NO_TRX);die();
-
-			foreach ($ARRAY_NO_TRX as $NO){
-				$data = array(
-					'NO_TRX' 		=> $NO,
-					'AKTIF' 		=> '1',
-					'CREATED_BY' 	=> $id_user,
-					'CREATED_DATE' 	=> date('Y-m-d H:i:s')			
-				);			
-
-				$this->Pelatihan_model->insert_trx_no_reject($data);
-			}
 
 		$db_error = $this->db->error();
 

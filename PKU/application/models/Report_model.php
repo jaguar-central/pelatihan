@@ -52,7 +52,7 @@ class Report_model extends CI_Model {
 
     public function report_detail($bisnis)
     {
-        $query = $this->db->query("select A.NASABAH_TIPE
+        $query = $this->db->query("select A.ID,A.NASABAH_TIPE
         ,A.ID_NASABAH
         ,A.NAMA
         ,dbo.WILAYAH_BY_KODE_CABANG(B.CABANG_ULAMM) as WILAYAH
@@ -71,6 +71,8 @@ class Report_model extends CI_Model {
         ,X.DESKRIPSI AS DESKRIPSI_CABANG_ULAMM
         
         ,Z.DESKRIPSI AS DESKRIPSI_REGION_MEKAAR
+        ,STUFF((SELECT ', '+DESKRIPSI FROM T_PELATIHAN_DETAIL_CABANG_MEKAAR WHERE ID_PELATIHAN=B.ID FOR XML PATH('')), 1, 1, '') as DESKRIPSI_CABANG_MEKAAR
+        ,STUFF((SELECT ', '+DESKRIPSI FROM T_PELATIHAN_DETAIL_UNIT_ULAMM WHERE ID_PELATIHAN=B.ID FOR XML PATH('')), 1, 1, '') as DESKRIPSI_UNIT_ULAMM
         from T_KEHADIRAN A 
         INNER JOIN T_PELATIHAN B ON A.ID_PELATIHAN=B.ID
         INNER JOIN T_PELATIHAN_LPJ C ON A.ID_PELATIHAN=C.ID_PELATIHAN AND C.AKTIF=1
@@ -80,6 +82,7 @@ class Report_model extends CI_Model {
         LEFT JOIN MS_SEKTOR_ULAMM D ON A.ID_SEKTOR_EKONOMI =D.SID_SEKTOR_EKONOMI COLLATE DATABASE_DEFAULT
         LEFT JOIN MS_SEKTOR_MEKAAR E ON A.ID_SEKTOR_EKONOMI =CAST(E.ID_SUB_SEKTOR as  VARCHAR(50)) COLLATE DATABASE_DEFAULT      
         where ID_BISNIS=$bisnis and B.STATUS='lpj_approved'
+
         ");
 
         return $query->result();
@@ -199,6 +202,22 @@ class Report_model extends CI_Model {
         return $query->result();
     }    
     
+    public function get_redis_report_detail_ulamm(){
 
+        $this->load->driver('cache');
+ 
+        $data = $this->cache->redis->get('report_detail_ulamm');
+ 
+        return $data;
+     }
+
+     public function get_redis_report_detail_mekaar(){
+
+        $this->load->driver('cache');
+ 
+        $data = $this->cache->redis->get('report_detail_mekaar');
+
+        return $data;
+     }      
 
 }

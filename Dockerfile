@@ -10,7 +10,8 @@ RUN apt-get update && apt-get install -y gnupg2 libpq-dev libmemcached-dev curl 
     && curl https://packages.microsoft.com/config/ubuntu/18.04/prod.list > /etc/apt/sources.list.d/mssql-release.list \
     && apt-get update \
     && ACCEPT_EULA=Y apt-get install -y msodbcsql17 \
-	&& apt-get install -y unixodbc-dev
+	&& apt-get install -y unixodbc-dev \
+    && docker-php-ext-install zip
 
 RUN pecl install sqlsrv pdo_sqlsrv && docker-php-ext-enable sqlsrv pdo_sqlsrv
 
@@ -45,6 +46,11 @@ RUN ufw allow in on docker0
 # COPY iptables.sh /usr/local/bin/iptables.sh
 # RUN chmod +x /usr/local/bin/iptables.sh && apt-get install -y iptables
 # CMD iptables.sh
+
+# PHP-REDIS
+RUN apt-get install -y libzstd-dev
+RUN pecl install igbinary && docker-php-ext-enable igbinary.so
+RUN pecl install redis && docker-php-ext-enable redis.so
 
 RUN a2enmod rewrite
 

@@ -55,10 +55,37 @@
 			"aaSorting" : [],	
 			"paging": true,
 			"processing": true,
-			"serverSide": false,			
-			"dom": "<'dom_datable'f>Brt<'dom_datable col-md-6'i>p",
-			"buttons": ['copy', 'csv', 'excel', 'pdf', 'print'],
-		});																
+			"serverSide": true,			
+			"ajax": {
+				"url": '<?php echo base_url('report/get_paging_report_detail/'); ?>',
+				"type": 'POST',
+				"data": {"tipe_bisnis":"2"}
+			},
+			"columns" : [
+				{ "data": "NASABAH_TIPE" },
+				{ "data": "ID_NASABAH" },
+				{ "data": "NAMA" },    				
+				{ "data": "PLAFOND" },
+				{ "data": "WILAYAH" },
+				{ "data": "DESKRIPSI_CABANG_ULAMM" },    
+				{ "data": "DESKRIPSI_REGION_MEKAAR" }, 
+				{ "data": "DESKRIPSI_CABANG_MEKAAR" }, 
+				{ "data": "TIPE_PELATIHAN_DESKRIPSI" }, 
+				{ "data": "NO_PROPOSAL" }, 
+				{ "data": "NO_PROPOSAL" }, 
+				{ "data": "TEMA_PELATIHAN" }, 
+				{ "data": "TITLE" }, 
+				{ "data": "SEKTOR_EKONOMI" }, 
+				{ "data": "TANGGAL_MULAI" }, 
+				{ "data": "TANGGAL_REALISASI_MULAI" }, 
+				{ "data": "BUDGET" }, 
+				{ "data": "GRADING" }, 
+				{ "data": "KELAS_WARNA" }, 
+			],	
+			"dom": "<'tombol'>rt<'dom_datable col-md-6'i>p",
+		});		
+		
+		$("div.tombol").html('<a class="btn btn-success m-2" href="<?php echo base_url('report/download_excel_report_detail_mekaar'); ?>" target="_blank">Download Excel</a>');		
 	});
 	
 	

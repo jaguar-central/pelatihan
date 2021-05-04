@@ -1,6 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+ini_set('memory_limit','2048M');
+ini_set('sqlsrv.ClientBufferMaxKBSize','102400');
+ini_set('max_execution_time', 0);
+
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -35,6 +39,8 @@ $config['baseSSOApi'] = 'http://appserverapache01.pnm.co.id/WebService/';
 
 $config['socket_server'] = 'http://localhost:3000';
 $config['socket_on'] = 'off';
+
+$config['server_pkm'] = '[10.61.3.15]';
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -389,9 +395,11 @@ $config['encryption_key'] = '';
 |
 */
 $config['sess_driver'] = 'files';
+// $config['sess_driver'] = 'redis';
 $config['sess_cookie_name'] = 'ci_session';
 $config['sess_expiration'] = 7200;
 $config['sess_save_path'] = sys_get_temp_dir();
+// $config['sess_save_path'] = 'tcp://some-redis:6379';
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;

@@ -1,19 +1,22 @@
 <link href="<?php echo base_url() ?>assets/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+<link href="<?php echo base_url() ?>assets/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+<style>
+.bg-info{
+	background-color : #0D67B2 !important;
+}
+</style>
 
+<body class="card text-white bg-info" style="font-size:2em;width:100%;">
+<div class="card-body" >
 
-<body class="card text-white bg-info" >
-<div class="card-header text-center">Pkm Bermakna</div>
-<div class="card-body text-center">
-<?php echo $content->KONTEN ?>
+<?php echo $content->KONTEN2 ?>
 </div>		
-</body>
-
-
-<div class="text-center">
+<div class="text-center" style="margin-bottom:50px;">
 <input type="hidden" class="form-control" id="id_konten" value="<?= $content->ID ?>" />
-<button type="button" class="btn btn-success telah-baca">Telah Baca</button>
+<a class="btn btn-success" target="_blank" download="modul-pkm" href="<?= base_url().$content->GAMBAR_PATH ?>" style="font-size:1em"><i class="fas fa-cloud-download-alt"></i> Modul</a>
+<button type="button" class="btn btn-success telah-baca" style="font-size:1em">Telah Baca</button>
 </div>
-
+</body>
 
 <script src="<?php echo base_url() ?>assets/vendor/jquery-3.2.1.min.js"></script>
 <script src="<?php echo base_url() ?>assets/vendor/bootstrap-4.1/bootstrap.min.js"></script>

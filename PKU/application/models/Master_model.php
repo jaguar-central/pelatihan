@@ -8,7 +8,7 @@ class Master_model extends CI_Model {
 	}
 	public function select_ms_cabang_ulamm()
 	{
-			$query = $this->db->query("select * from MS_CABANG_ULAMM where KODE_CABANG in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." )  ");
+			$query = $this->db->query("select * from MS_CABANG_ULAMM where KODE_CABANG in (SELECT KODE_CABANG_REGION FROM MS_USER_CABANG_REGION WHERE ID_USER=".$this->session->userdata('sess_user_id')." and AKTIF=1 )  ");
 			return $query->result();
 	}
 
@@ -218,6 +218,19 @@ class Master_model extends CI_Model {
 	public function select_ms_krm($where){
 		$query = $this->db->get_where('MS_KRM',$where);	
 		return $query->row();			
+	}	
+
+
+	public function select_ms_cabang_mekaar_by_kode_cabang($cabang)
+	{
+			$query = $this->db->query("select * from MS_CABANG_MEKAAR where KODE_CABANG='$cabang' ");
+			return $query->result();
+	}	
+
+	public function select_ms_unit_ulamm_by_kode_unit($unit)
+	{
+			$query = $this->db->query("select * from MS_UNIT_ULAMM WHERE KODE_UNIT='$unit' ");
+			return $query->result();
 	}	
 
 }
