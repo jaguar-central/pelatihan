@@ -40,7 +40,6 @@ class Report_model extends CI_Model {
         , a.JUMLAH_ANGGARAN as 'ANGGARAN_PROPOSAL'
         , a.STATUS, a.TANGGAL_MULAI
         , a.TANGGAL_SELESAI
-        --, b.GRAND_TOTAL as 'ANGGARAN_REALISASI'
         ,(select TOP 1 GRAND_TOTAL FROM T_RAB_LPJ WHERE ID_PELATIHAN=a.ID) as ANGGARAN_REALISASI 
         from T_PELATIHAN a
         where ID_BISNIS=$bisnis and STATUS = 'lpj_approved'
