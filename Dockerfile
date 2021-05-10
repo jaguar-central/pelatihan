@@ -48,9 +48,9 @@ RUN ufw allow in on docker0
 # CMD iptables.sh
 
 # PHP-REDIS
-RUN apt-get install -y libzstd-dev
-RUN pecl install igbinary && docker-php-ext-enable igbinary.so
-RUN pecl install redis && docker-php-ext-enable redis.so
+# RUN apt-get install -y libzstd-dev
+# RUN pecl install igbinary && docker-php-ext-enable igbinary.so
+# RUN pecl install redis && docker-php-ext-enable redis.so
 
 RUN a2enmod rewrite
 

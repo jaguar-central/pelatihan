@@ -82,7 +82,7 @@
 				{ "data": "GRADING" }, 
 				{ "data": "KELAS_WARNA" }, 
 			],
-			"dom": "<'tombol'>rt<'dom_datable col-md-6'i>p",
+			"dom": "<'tombol'>frt<'dom_datable col-md-6'i>p",
 
 		});	
 				

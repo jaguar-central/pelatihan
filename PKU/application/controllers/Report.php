@@ -197,11 +197,13 @@ class Report extends MY_Controller
     {
         $param["start"] = isset($_POST["start"]) ? $_POST["start"] : 0;
         $param["limit"] = isset($_POST["length"]) ? $_POST["length"] : 10;
-        $param["tipe_bisnis"]         = $_POST["tipe_bisnis"];
+        $param["tipe_bisnis"]   = $_POST["tipe_bisnis"];
+		$param["search"] 		= isset($_POST["search"]["value"]) ? $_POST["search"]["value"] : NULL ;	
+				
 
-        $data["data"] = $this->db->query('EXEC [GET_REPORT_DETAIL] @TIPEBISNIS=' . $param["tipe_bisnis"] . ',@START=' . $param["start"] . ',@LIMIT=' . $param["limit"] . ' ')->result();
+        $data["data"] = $this->db->query("EXEC [GET_REPORT_DETAIL] @TIPEBISNIS=" . $param["tipe_bisnis"] . ",@START=" . $param["start"] . ",@LIMIT=" . $param["limit"] . ",@SEARCH='".$param["search"]."' ")->result();
 
-        $total = $this->db->query('EXEC [GET_REPORT_DETAIL] @TIPEBISNIS=' . $param["tipe_bisnis"] . ',@COUNT=1 ')->row()->COUNT_DATA;
+        $total = $this->db->query("EXEC [GET_REPORT_DETAIL] @TIPEBISNIS=" . $param["tipe_bisnis"] . ",@COUNT=1,@SEARCH='".$param["search"]."' ")->row()->COUNT_DATA;
 
         $data["recordsTotal"] = $total;
         $data["recordsFiltered"] = $total;
@@ -241,9 +243,9 @@ class Report extends MY_Controller
 
         $objPHPExcel->setActiveSheetIndex(0);
 
-        // $h = $this->Report_model->report_detail(1);		
+        $h = $this->Report_model->report_detail(1);		
 
-        $h = $this->Report_model->get_redis_report_detail_ulamm();
+        // $h = $this->Report_model->get_redis_report_detail_ulamm();
 
         $rowStart = 5;
 
@@ -306,9 +308,9 @@ class Report extends MY_Controller
 
         $objPHPExcel->setActiveSheetIndex(0);
 
-        // $h = $this->Report_model->report_detail(2);			
+        $h = $this->Report_model->report_detail(2);			
 
-        $h = $this->Report_model->get_redis_report_detail_mekaar();
+        // $h = $this->Report_model->get_redis_report_detail_mekaar();
 
         $rowStart = 5;
 

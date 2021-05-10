@@ -82,7 +82,7 @@
 				{ "data": "GRADING" }, 
 				{ "data": "KELAS_WARNA" }, 
 			],	
-			"dom": "<'tombol'>rt<'dom_datable col-md-6'i>p",
+			"dom": "<'tombol'>frt<'dom_datable col-md-6'i>p",
 		});		
 		
 		$("div.tombol").html('<a class="btn btn-success m-2" href="<?php echo base_url('report/download_excel_report_detail_mekaar'); ?>" target="_blank">Download Excel</a>');		
