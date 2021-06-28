@@ -193,6 +193,39 @@ class Report extends MY_Controller
         $this->load->view('layout/gabung', $data);
     }
 
+
+    public function proposal_belum_lpj()
+    {
+        $this->is_logged();
+
+        $data["content"] = "Report";
+        $data["view"] = "report/proposal_belum_lpj/proposal_belum_lpj";
+        $data["script"] = "report/proposal_belum_lpj/include/proposal-belum-lpj-script";
+
+        $data["menu"] = $this->Menu_model->select_ms_menu();
+
+        $this->load->view('layout/gabung', $data);
+    }
+
+
+    public function get_paging_proposal_belum_lpj()
+    {
+        $param["start"] = isset($_POST["start"]) ? $_POST["start"] : 0;
+        $param["limit"] = isset($_POST["length"]) ? $_POST["length"] : 10;
+		$param["search"] = isset($_POST["search"]["value"]) ? $_POST["search"]["value"] : NULL ;	
+		// var_dump("EXEC [GET_PROPOSAL_BELUM_LPJ] @START=" . $param["start"] . ",@LIMIT=" . $param["limit"] . ",@SEARCH='".$param["search"]."' ");die();		
+
+        $data["data"] = $this->db->query("EXEC [GET_PROPOSAL_BELUM_LPJ] @START=" . $param["start"] . ",@LIMIT=" . $param["limit"] . ",@SEARCH='".$param["search"]."' ")->result();
+        $total = $this->db->query("EXEC [GET_PROPOSAL_BELUM_LPJ] @COUNT=1,@SEARCH='".$param["search"]."' ")->row()->COUNT_DATA;
+
+        $data["recordsTotal"] = $total;
+        $data["recordsFiltered"] = $total;
+
+        echo json_encode($data);
+    }    
+
+
+
     public function get_paging_report_detail()
     {
         $param["start"] = isset($_POST["start"]) ? $_POST["start"] : 0;
@@ -364,6 +397,60 @@ class Report extends MY_Controller
         $objWriter->save('php://output');
         exit();
     }
+
+
+
+
+    public function download_proposal_belum_lpj()
+    {
+
+        $objPHPExcel = PHPExcel_IOFactory::load("./assets/template/proposal_belum_lpj.xlsx");
+
+        $objPHPExcel->setActiveSheetIndex(0);
+
+        $h = $this->Report_model->get_proposal_belum_lpj();		
+
+        $rowStart = 5;
+
+        if ($h) {
+            for ($i = 0; $i < count($h); $i++) {
+                $objPHPExcel->getActiveSheet()->setCellValueExplicit('B' . ($i + $rowStart), $h[$i]->NO_PROPOSAL, PHPExcel_Cell_DataType::TYPE_STRING);
+                $objPHPExcel->getActiveSheet()->setCellValueExplicit('C' . ($i + $rowStart), $h[$i]->TITLE, PHPExcel_Cell_DataType::TYPE_STRING);
+                $objPHPExcel->getActiveSheet()->setCellValueExplicit('D' . ($i + $rowStart), $h[$i]->TANGGAL_MULAI, PHPExcel_Cell_DataType::TYPE_STRING);
+                $objPHPExcel->getActiveSheet()->setCellValueExplicit('E' . ($i + $rowStart), $h[$i]->TANGGAL_SELESAI, PHPExcel_Cell_DataType::TYPE_STRING);
+                $objPHPExcel->getActiveSheet()->setCellValueExplicit('F' . ($i + $rowStart), $h[$i]->ID_BISNIS, PHPExcel_Cell_DataType::TYPE_STRING);
+                $objPHPExcel->getActiveSheet()->setCellValueExplicit('G' . ($i + $rowStart), $h[$i]->CABANG_ULAMM, PHPExcel_Cell_DataType::TYPE_STRING);
+                $objPHPExcel->getActiveSheet()->setCellValueExplicit('H' . ($i + $rowStart), $h[$i]->CREATED_BY, PHPExcel_Cell_DataType::TYPE_STRING);
+                $objPHPExcel->getActiveSheet()->setCellValueExplicit('I' . ($i + $rowStart), $h[$i]->STATUS, PHPExcel_Cell_DataType::TYPE_STRING);                
+            }
+        }
+
+        $styleArray = array(
+            'borders' => array(
+                'allborders' => array(
+                    'style' => PHPExcel_Style_Border::BORDER_THIN
+                )
+            ),
+            'font' => array(
+                'size' => 8
+            ),
+            'alignment' => array(
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                'wrap' => true
+            )
+        );
+
+        $objPHPExcel->getActiveSheet()->getStyle('B' . $rowStart . ':I' . ($rowStart + count($h) - 1))->applyFromArray($styleArray);
+
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="proposal_belum_lpj.xlsx"');
+        header('Cache-Control: max-age=0');
+
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        $objWriter->save('php://output');
+        exit();
+    }    
 
 
     // public function readExcelFile()

@@ -245,6 +245,24 @@ class Report_model extends CI_Model {
 
         return $query->result();
     }    
+
+    public function get_proposal_belum_lpj(){        
+        $query = $this->db->query("
+        SELECT 
+		NO_PROPOSAL,TITLE
+		,CONVERT(VARCHAR(17),TANGGAL_MULAI,113) as TANGGAL_MULAI
+		,CONVERT(VARCHAR(17),TANGGAL_SELESAI,113) as TANGGAL_SELESAI
+		,dbo.DESKRIPSI_BISNIS(ID_BISNIS) as ID_BISNIS
+		,CABANG_ULAMM
+		,dbo.GET_NAME_BY_ID_SDM(CREATED_BY) as CREATED_BY
+		,[STATUS]
+		FROM T_PELATIHAN 
+		WHERE [STATUS] in ('draft','submitted') 
+        ");
+ 
+        return $query->result();
+     }
+
     
     public function get_redis_report_detail_ulamm(){
 
