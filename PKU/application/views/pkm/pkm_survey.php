@@ -266,7 +266,7 @@
         $("#pkm_survey").submit(function(e) {
             e.preventDefault();
 
-            var formURL = "/pkm/post_pkm_survey";
+            var formURL = "<?php echo base_url('pkm/post_pkm_survey'); ?>";
             var frmdata = new FormData(this);
 
             var xhr = $.ajax({
