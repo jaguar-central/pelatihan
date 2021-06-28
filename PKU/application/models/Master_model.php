@@ -213,7 +213,12 @@ class Master_model extends CI_Model {
 	public function insert_ms_krm($data)
 	{
 		$this->db->insert('MS_KRM', $data);
-	}	
+	}
+	
+	public function insert_ms_pembicara($data)
+	{
+		$this->db->insert('MS_PEMBICARA', $data);
+	}
 
 	public function select_ms_krm($where){
 		$query = $this->db->get_where('MS_KRM',$where);	

@@ -128,22 +128,39 @@
 						<input type="hidden" class="form-control"  required="" id="durasi_pelatihan_edit" name="durasi_pelatihan_edit" />
 					</div>														
 
+				</div>
+
+				<div class="form-group card">
+					<div class="card-header">
+						<h4>Pembicara</h4>
+					</div>
+					<div class="card-body">
+						<div class="form-group row">
+							<label class="col-sm-2">Nama <span class="text-danger">*</span></label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" required="" id="nama_pembicara_edit" name="nama_pembicara_edit" />
+							</div>
+
+							<label class="col-sm-2">Lembaga / Instansi <span class="text-danger">*</span></label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" required="" id="instansi_pembicara_edit" name="instansi_pembicara_edit" />
+							</div>
+						</div>
+					</div>
 				</div>			
 
 
 				<div class="form-group row">
-					<label class="col-sm-2">Pembicara <span class="text-danger">*</span></label>
+					<!--label class="col-sm-2">Pembicara <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control"  required="" id="pembicara_pelatihan_edit" name="pembicara_pelatihan_edit" />
-					</div>							
+					</div-->							
 				
 					<label class="col-sm-2">Kuota Peserta <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control"  required="" id="kuota_peserta_edit" name="kuota_peserta_edit" />
 					</div>						
-				</div>
-
-				<div class="form-group row">
+				
 					<!--label class="col-sm-2">Modul <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control"  required="" id="modul" name="modul" />

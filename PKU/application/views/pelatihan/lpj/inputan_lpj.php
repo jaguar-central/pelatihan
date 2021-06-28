@@ -57,6 +57,19 @@
                     </div>
                 </div>
 
+                <div class="form-group row">
+                    <label class="col-sm-2">Fee <span class="text-danger">*</span></label>
+                    <div class="col-sm-4">
+                        <!-- <span class="input-group-addon">Rp</span> -->
+                        <input type="text" class="form-control" required="" id="fee_pelatihan" name="fee_pelatihan" />
+                    </div>
+
+                    <label class="col-sm-2">Efisiensi / Pendapatan <span class="text-danger">*</span></label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" required="" id="efisiensi_pelatihan" name="efisiensi_pelatihan" />
+                    </div>
+                </div>
+
             </div>
             <div class="row">
                 <div class="col-md-12">

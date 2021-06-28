@@ -136,27 +136,45 @@
 					</div>
 				</div>
 
+				<div class="form-group card">
+					<div class="card-header">
+						<h4>Pembicara</h4>
+					</div>
+					<div class="card-body">
+						<div class="form-group row">
+							<label class="col-sm-2">Nama <span class="text-danger">*</span></label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" required="" id="nama_pembicara" name="nama_pembicara" />
+							</div>
+
+							<label class="col-sm-2">Lembaga / Instansi <span class="text-danger">*</span></label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" required="" id="instansi_pembicara" name="instansi_pembicara" />
+							</div>
+						</div>
+					</div>
+				</div>
+
 
 				<div class="form-group row">
-					<label class="col-sm-2">Pembicara <span class="text-danger">*</span></label>
+					<!--label class="col-sm-2">Pembicara <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" required="" id="pembicara_pelatihan" name="pembicara_pelatihan" />
-					</div>
+					</div-->
 
 					<label class="col-sm-2">Kuota Peserta <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" required="" id="kuota_peserta" name="kuota_peserta" onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
 					</div>
-				</div>
+				
 
-				<div class="form-group row">
 					<label class="col-sm-2">Anggaran <span class="text-danger">*</span></label>
 					<div class="input-group col-sm-4">
 						<span class="input-group-addon">Rp</span>
 						<input type="text" class="form-control" required="" id="anggaran" name="anggaran" />
 					</div>
 				</div>
-
+				
 
 				<div class="form-group card">
 					<div class="card-header">
@@ -167,10 +185,12 @@
 							<div class="radio offset-sm-4 col-sm-2">
 								<label><input type="radio" name="radio_lokasi" value="onsite" checked> On-site</label>
 							</div>
+							
 							<div class="radio col-sm-2">
 								<label><input type="radio" name="radio_lokasi" value="online"> Online</label>
 							</div>
 						</div>
+
 						<div class="form-group row" id="select_tag_provinsi">
 							<label class="col-sm-2">Provinsi <span class="text-danger">*</span></label>
 							<div class="col-sm-4">
@@ -206,6 +226,7 @@
 					</div>
 				</div>
 
+
 				<div class="form-group card grading_system">
 					<div class="card-header">
 						<h4>Grading System</h4>
@@ -223,8 +244,6 @@
 								?>
 							</select>
 						</div>
-						<!-- </div>	
-				<div class="card-body row" id="grading_list"> -->
 						<label class="col-sm-2">Grade <span class="text-danger">*</span></label>
 						<div class="col-sm-4">
 							<select class="form-control grading" required="" id="grading" name="grading">
@@ -263,7 +282,7 @@
 
 				<div class="col-xs-12" style="margin-bottom:30px;">
 						<div id="us_add" style="width:100%; height: 400px;"></div>
-				</div> -->
+				</div-->
 
 				<div class="container-fluid">
 					<div class="row">
@@ -341,8 +360,8 @@
 			selected_value = $("input[name='radio_lokasi']:checked").val();
 			if (selected_value == 'online') {
 				$('#provinsi').val('0');
-				$('#kabkot').val('0');
-				$('#kecamatan').val('0');
+				$('#kabkot').hide('0');
+				$('#kecamatan').hide('0');
 
 				$('#kabkot').html('<option value="0">online</option>');
 				$('#kecamatan').html('<option value="0">online</option>');

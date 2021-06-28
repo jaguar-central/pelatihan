@@ -88,23 +88,20 @@
             <div class="col-sm-4">
                 <input type="text" class="form-control" value="<?php echo $pelatihan->DURASI_PELATIHAN; ?>" disabled />
             </div>
-
         </div>
 
 
         <div class="form-group row">
-            <label class="col-sm-2">Pembicara <span class="text-danger">*</span></label>
+            <!-- <label class="col-sm-2">Pembicara <span class="text-danger">*</span></label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" value="<?php echo $pelatihan->PEMBICARA; ?>" disabled />
-            </div>
+            </div-->
 
             <label class="col-sm-2">Kuota Peserta <span class="text-danger">*</span></label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" value="<?php echo $pelatihan->KUOTA_PESERTA; ?>" disabled />
             </div>
-        </div>
-
-        <div class="form-group row">
+        
             <label class="col-sm-2">Anggaran <span class="text-danger">*</span></label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" value="<?php echo $pelatihan->BUDGET; ?>" disabled />

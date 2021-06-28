@@ -91,18 +91,16 @@
 
 
 				<div class="form-group row">
-					<label class="col-sm-2">Pembicara <span class="text-danger">*</span></label>
+					<!--label class="col-sm-2">Pembicara <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control"  required="" id="pembicara_pelatihan_details" name="pembicara_pelatihan_details" disabled />
-					</div>							
+					</div-->
 				
 					<label class="col-sm-2">Kuota Peserta <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control"  required="" id="kuota_peserta_details" name="kuota_peserta_details" disabled />
 					</div>						
-				</div>
-
-				<div class="form-group row">
+				
 					<!--label class="col-sm-2">Modul <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control"  required="" id="modul" name="modul" />

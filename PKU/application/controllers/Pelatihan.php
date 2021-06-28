@@ -131,6 +131,29 @@ class Pelatihan extends MY_Controller
 		
 		$this->load->view('layout/gabung', $data);				
 	}
+
+	public function survey_ulamm()
+    {
+		$this->is_logged();				
+		
+        $data["content"] 	= "Survey";
+        $data["view"] 		= "survey_pku/survey_ulamm";
+		$data["script"] 	= "survey_pku/include/survey-script-pku";
+		$data["modal"] 		= array(
+								"survey_pku/modal/modaladdsurvey",
+								//"pelatihan/history_ulamm/modal/modallpjdetails"
+								); 
+
+        $data["menu"] 		= $this->Menu_model->select_ms_menu();
+		$data["pelatihan"] 	= $this->Pelatihan_model->select_t_pelatihan_ulamm_by_status(array('draft','submitted','approved','reject','lpj_draft','lpj_submitted','lpj_approved'));		
+		$data["cabang"] 	= $this->Master_model->select_ms_cabang_ulamm();	
+
+		$data['provinsi'] 		= $this->Master_model->select_ms_provinsi();
+		$data['kabkot'] 		= $this->Master_model->select_ms_kabkot();
+		$data['kecamatan'] 		= $this->Master_model->select_ms_kecamatan();
+		
+        $this->load->view('layout/gabung', $data);
+	}
 	
 	public function lpj($idpelatihan)    	    
     {		
@@ -345,7 +368,9 @@ class Pelatihan extends MY_Controller
         $inputStartTimePelaksanaan  = trim($this->security->xss_clean(strip_image_tags($this->input->post('inputStartTimePelaksanaan'))));
         $inputAkhirTglPelaksanaan   = trim($this->security->xss_clean(strip_image_tags($this->input->post('inputAkhirTglPelaksanaan'))));
         $inputEndTimePelaksanaan    = trim($this->security->xss_clean(strip_image_tags($this->input->post('inputEndTimePelaksanaan'))));
-        $pembicara_pelatihan        = trim($this->security->xss_clean(strip_image_tags($this->input->post('pembicara_pelatihan'))));
+		//$pembicara_pelatihan        = trim($this->security->xss_clean(strip_image_tags($this->input->post('pembicara_pelatihan'))));
+        $nama_pembicara        		= trim($this->security->xss_clean(strip_image_tags($this->input->post('nama_pembicara'))));
+		$instansi_pembicara        	= trim($this->security->xss_clean(strip_image_tags($this->input->post('instansi_pembicara'))));
         $kuota_peserta              = trim($this->security->xss_clean(strip_image_tags($this->input->post('kuota_peserta'))));
 
         $anggaran               	= str_replace(array('.',',00'),'',trim($this->security->xss_clean(strip_image_tags($this->input->post('anggaran')))));
@@ -478,6 +503,21 @@ class Pelatihan extends MY_Controller
 			$id_krm = 0;
 		}
 
+		if ($id_bisnis_pelatihan){
+			$data_pembicara = array(
+				'NAMA' 					=> $nama_pembicara,
+				'INSTANSI'				=> $instansi_pembicara,
+				'CREATED_BY' 			=> $id_user,
+				'CREATED_DATE' 			=> date('Y-m-d H:i:s')			
+			);
+
+			$this->Master_model->insert_ms_pembicara($data_pembicara);
+
+			$id_pembicara = $this->db->insert_id(); //last id yang di insert		
+		}else{
+			$id_pembicara = 0;
+		}
+
 		
 		
 		$data = array(
@@ -505,7 +545,8 @@ class Pelatihan extends MY_Controller
 			'KABKOT' 				=> $kabkot,
 			'KECAMATAN'				=> $kecamatan,								
 			'ALAMAT' 				=> $alamat_tempat_pelatihan,
-			'PEMBICARA'				=> $pembicara_pelatihan,
+			//'PEMBICARA'				=> $pembicara_pelatihan,
+			'ID_PEMBICARA'			=> $id_pembicara,
 			'ID_KRM'				=> $id_krm,
 			'CREATED_BY' 			=> $id_user,
 			'CREATED_DATE' 			=> date('Y-m-d H:i:s')			
@@ -612,7 +653,9 @@ class Pelatihan extends MY_Controller
         $inputStartTimePelaksanaan  = trim($this->security->xss_clean(strip_image_tags($this->input->post('inputStartTimePelaksanaan_edit'))));
         $inputAkhirTglPelaksanaan   = trim($this->security->xss_clean(strip_image_tags($this->input->post('inputAkhirTglPelaksanaan_edit'))));
         $inputEndTimePelaksanaan    = trim($this->security->xss_clean(strip_image_tags($this->input->post('inputEndTimePelaksanaan_edit'))));
-        $pembicara_pelatihan        = trim($this->security->xss_clean(strip_image_tags($this->input->post('pembicara_pelatihan_edit'))));
+        //$pembicara_pelatihan        = trim($this->security->xss_clean(strip_image_tags($this->input->post('pembicara_pelatihan_edit'))));
+		$nama_pembicara        		= trim($this->security->xss_clean(strip_image_tags($this->input->post('nama_pembicara_edit'))));
+		$instansi_pembicara        	= trim($this->security->xss_clean(strip_image_tags($this->input->post('instansi_pembicara_edit'))));
         $kuota_peserta              = trim($this->security->xss_clean(strip_image_tags($this->input->post('kuota_peserta_edit'))));
 
         $anggaran               	= str_replace(array('.',',00'),'',trim($this->security->xss_clean(strip_image_tags($this->input->post('anggaran_edit')))));
@@ -653,7 +696,22 @@ class Pelatihan extends MY_Controller
 			$id_krm = $this->db->insert_id(); //last id yang di insert		
 		}else{
 			$id_krm = 0;
-		}			
+		}
+		
+		if ($id_bisnis_pelatihan){
+			$data_pembicara = array(
+				'NAMA' 					=> $nama_pembicara,
+				'INSTANSI'				=> $instansi_pembicara,
+				'CREATED_BY' 			=> $id_user,
+				'CREATED_DATE' 			=> date('Y-m-d H:i:s')			
+			);
+
+			$this->Master_model->insert_ms_pembicara($data_pembicara);
+
+			$id_pembicara = $this->db->insert_id(); //last id yang di insert		
+		}else{
+			$id_pembicara = 0;
+		}
 
 		$data_update = array(
 			'ID_TIPE' 			=> $pelatihan_type,
@@ -672,7 +730,8 @@ class Pelatihan extends MY_Controller
 			'KABKOT' 			=> $kabkot,
 			'KECAMATAN'			=> $kecamatan,
 			'ALAMAT' 			=> $alamat_tempat_pelatihan,
-			'PEMBICARA'			=> $pembicara_pelatihan,
+			//'PEMBICARA'			=> $pembicara_pelatihan,
+			'ID_PEMBICARA'		=> $id_pembicara,
 			'ID_KRM'			=> $id_krm,
 			'CREATED_BY' 		=> $id_user,
 			'CREATED_DATE' 		=> date('Y-m-d H:i:s')			
@@ -954,6 +1013,9 @@ class Pelatihan extends MY_Controller
 		$catatan_tambahan       	= trim($this->security->xss_clean(strip_image_tags($this->input->post('catatan_tambahan'))));
 		$id_user					= $this->session->userdata('sess_user_idsdm');
 		$durasi_pelatihan           = trim($this->security->xss_clean(strip_image_tags($this->input->post('durasi_pelatihan'))));
+		$fee_pelatihan            	= trim($this->security->xss_clean(strip_image_tags($this->input->post('fee_pelatihan'))));
+		$efisiensi_pelatihan        = trim($this->security->xss_clean(strip_image_tags($this->input->post('efisiensi_pelatihan'))));
+
 
 		$inputStartTglPelaksanaan   = trim($this->security->xss_clean(strip_image_tags($this->input->post('inputStartTglPelaksanaan'))));
         $inputStartTimePelaksanaan  = trim($this->security->xss_clean(strip_image_tags($this->input->post('inputStartTimePelaksanaan'))));
@@ -1026,6 +1088,8 @@ class Pelatihan extends MY_Controller
 				'DURASI_PELATIHAN' 		   => $durasi_pelatihan,				
 				'JUMLAH_ANGGARAN'		   => $total_cost_rab_akhir,
 				'CSI_FINAL' 			   => $csi_final,
+				'FEE' 		   			   => $fee_pelatihan,
+				'EFISIENSI' 		   	   => $efisiensi_pelatihan,
 				'CATATAN_TAMBAHAN' 		   => $catatan_tambahan,
 				'AKTIF' 				   => '1',
 				'CREATED_BY' 			   => $id_user,
@@ -1426,6 +1490,78 @@ class Pelatihan extends MY_Controller
 		
 	}
 
+	public function post_reject()
+	{
+
+		$this->is_logged();		
+		
+		$pelatihanid	= trim($this->security->xss_clean(strip_image_tags($this->input->post('pelatihanid'))));
+		$status			= trim($this->security->xss_clean(strip_image_tags($this->input->post('status'))));
+		$id_user 		= $this->session->userdata('sess_user_idsdm');
+		$approval 		= '';
+
+		
+		$data_update 	= array(
+			'STATUS' 		=> $status,
+			'APPROVAL' 		=> $approval,
+			'UPDATED_BY' 	=> $id_user,
+			'UPDATED_DATE' 	=> date('Y-m-d H:i:s')			
+			);
+		$where_update	= array(
+			'ID' 	=> $pelatihanid
+			);	
+
+
+		$output = array(
+			'result'  	=> 'OK',
+			'msg'		=> ''
+		);			
+			
+		$this->db->trans_begin();
+		
+		$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
+		$NO_TRX = $this->Pelatihan_model->select_t_pelatihan_by_id($pelatihanid)->row()->NO_TRX;
+
+			$ARRAY_NO_TRX = explode(",",$NO_TRX);
+			//var_dump($ARRAY_NO_TRX);die();
+
+			foreach ($ARRAY_NO_TRX as $NO){
+				$data = array(
+					'NO_TRX' 		=> $NO,
+					'AKTIF' 		=> '1',
+					'CREATED_BY' 	=> $id_user,
+					'CREATED_DATE' 	=> date('Y-m-d H:i:s')			
+				);			
+
+				$this->Pelatihan_model->insert_trx_no_reject($data);
+			}
+
+		$db_error = $this->db->error();
+
+		if (!empty($db_error['message']))
+		{
+			$this->db->trans_rollback();
+				
+			$output = array(
+				'result'  	=> 'NG',
+				'msg'		=> $db_error['message']
+			);
+		}
+		else
+		{
+			$this->db->trans_commit();
+			$output = array(
+				'result'  	=> 'OK',
+				'msg'		=> ''
+			);
+		}			
+
+		
+		echo json_encode($output);
+		exit;
+		
+	}
+
 
 	// public function post_change_status_pelatihan($idpelatihan,$status)
 	// {		
@@ -1500,6 +1636,45 @@ class Pelatihan extends MY_Controller
 			'ID' 	=> $id_pelatihan
 			);
 		$this->Pelatihan_model->update_t_pelatihan($data_update,$where_update);
+
+		//INSERT REVISI PROPOSAL
+		switch ($this->session->userdata('sess_user_id_user_group')) {
+			case "2":
+			  $urutan_approval = '1';
+			  break;
+			case "3":
+			  $urutan_approval = '2';
+			  break;
+			case "4":
+			  $urutan_approval = '3';
+			  break;		  
+			case "5":
+			  $urutan_approval = '4';
+			  break;	
+			case "6":
+			  $urutan_approval = '5';
+			  break;	
+			case "7":
+			  $urutan_approval = '6';
+			  break;				
+		  }			
+		  
+		  $data_insert = array(
+			  'id_pelatihan' 	=> $id_pelatihan,
+			  'tipe_approval' 	=> 'proposal',
+			  'urutan_approval'	=> $urutan_approval,
+			  'username'		=> $username,	
+			  'ttd'				=> '',
+			  'approval'		=> $approval,
+			  'result'			=> 'revisi',
+			  'final_approval'	=> '0',
+			  'keterangan'		=> $keterangan,
+			  'aktif' 			=> '1',
+			  'created_by' 		=> $id_user,
+			  'created_date' 	=> $getdate			
+		  );
+				  
+		  $this->Pelatihan_model->insert_t_approval($data_insert);
 
 		$db_error = $this->db->error();
 
@@ -1581,7 +1756,7 @@ class Pelatihan extends MY_Controller
 		$this->Pelatihan_model->update_t_rab_lpj($data_update_rab_lpj,$where_update_rab_lpj);
 		
 		
-		//INSERT REVISI
+		//INSERT REVISI LPJ
 		switch ($this->session->userdata('sess_user_id_user_group')) {
 		  case "2":
 			$urutan_approval = '1';
@@ -2143,7 +2318,7 @@ class Pelatihan extends MY_Controller
 		$param["search"] 			= isset($_GET["search"]["value"]) ? $_GET["search"]["value"] : NULL ;								
 
 		$data["data"] = $this->Pelatihan_model->paging_t_pelatihan($param);	
-
+		//var_dump($this->db->last_query());die();
 		$param["count"] = 1;			
 		$total = $this->Pelatihan_model->paging_t_pelatihan($param)[0]->COUNT_DATA;		
 		
@@ -2381,6 +2556,30 @@ class Pelatihan extends MY_Controller
 		echo json_encode($output);
 		exit;
 	}
+
+
+
+	public function get_nasabah_survey()
+	{									
+		$filter_path 	= '&filter_path=hits.hits.*,aggregations.*';
+
+		$search = 'nama:'.$_GET['q'];		
+
+		$this->config->set_item('elastic_index', 'debitur');	
+				
+		$nasabah = $this->elastic->call('/_search?q='.$search.$filter_path);
+		
+		if (isset($nasabah->hits->hits)){
+			for ($i=0;$i<count($nasabah->hits->hits);$i++){
+				$data["data"][$i] = $nasabah->hits->hits[$i]->_source;					
+			}						
+		}else{
+			$data["data"] = array();
+		}				
+						
+		echo json_encode($data);		
+	}
+
 
 }
 

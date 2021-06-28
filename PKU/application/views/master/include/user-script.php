@@ -101,7 +101,7 @@
 			
 			if (n){
 				$(".bisnis").hide();				
-				if (role==1){
+				if (role==1,2){
 					$(".cabang_ulamm").show();					
 				}else{
 					$(".cabang_ulamm").hide();
