@@ -105,6 +105,8 @@ $(document).ready(function() {
 		   durasi();
         });
 
+		// new AutoNumeric("#anggaran", "commaDecimalCharDotSeparator");
+
 
 
 		$('.submit_lpj').prop('disabled', true);

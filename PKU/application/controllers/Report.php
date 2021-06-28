@@ -241,9 +241,9 @@ class Report extends MY_Controller
 
         $objPHPExcel->setActiveSheetIndex(0);
 
-        // $h = $this->Report_model->report_detail(1);		
+        $h = $this->Report_model->report_detail(1);		
 
-        $h = $this->Report_model->get_redis_report_detail_ulamm();
+        // $h = $this->Report_model->get_redis_report_detail_ulamm();
 
         $rowStart = 5;
 
@@ -306,9 +306,9 @@ class Report extends MY_Controller
 
         $objPHPExcel->setActiveSheetIndex(0);
 
-        // $h = $this->Report_model->report_detail(2);			
+        $h = $this->Report_model->report_detail(2);			
 
-        $h = $this->Report_model->get_redis_report_detail_mekaar();
+        // $h = $this->Report_model->get_redis_report_detail_mekaar();
 
         $rowStart = 5;
 

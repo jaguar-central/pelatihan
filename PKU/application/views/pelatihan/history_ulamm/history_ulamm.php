@@ -58,7 +58,7 @@
 								data-pelatihankabkot="'.$cus->KABKOT.'"
 								data-pelatihankecamatan="'.$cus->KECAMATAN.'"
 								data-pelatihanalamat="'.$cus->ALAMAT.'"
-								data-pelatihanpembicara="'.$cus->PEMBICARA.'"	
+								data-pelatihanpembicara="'.$cus->ID_PEMBICARA.'"	
 								> Details Proposal</a>';
 						if ($cus->STATUS=='approved'){
 						echo '<a class= "dropdown-item" target="_blank" href="'.$this->config->item('jasper_report').'Pelatihan.pdf?ID='.$cus->ID.'"> Unduh Proposal</a>';

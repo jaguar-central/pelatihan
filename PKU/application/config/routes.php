@@ -64,12 +64,14 @@ $route['dashboard']	                    = 'dashboard';
 $route['dashboard_index_pemberdayaan']	= 'dashboard/dashboard_index_pemberdayaan';
 $route['get_index_pemberdayaan_ulamm']	= 'dashboard/get_index_pemberdayaan_ulamm';
 $route['get_index_pemberdayaan_mekaar']	= 'dashboard/get_index_pemberdayaan_mekaar';
+//$route['pelatihan/survey_pku'] 		    = 'pelatihan/survey_ulamm';
 
 /* PELATIHAN */
 $route['pelatihan/ulamm'] 			        = 'pelatihan/proposal_ulamm';
 $route['pelatihan/mekaar'] 			        = 'pelatihan/proposal_mekaar';
 $route['pelatihan/history_ulamm'] 		    = 'pelatihan/history_ulamm';
 $route['pelatihan/history_mekaar'] 		    = 'pelatihan/history_mekaar';
+$route['survey'] 		        = 'pelatihan/survey_ulamm';
 $route['pelatihan/konfirmasi'] 		        = 'pelatihan/konfirmasi_proposal';
 $route['pelatihan/konfirmasi_lpj'] 	        = 'pelatihan/konfirmasi_lpj';
 $route['pelatihan/lpj/(:any)']   		    = 'pelatihan/lpj/$1';
@@ -135,7 +137,7 @@ $route['pelatihan/post_pelatihan']                              = 'pelatihan/pos
 $route['pelatihan/update_pelatihan']                            = 'pelatihan/update_pelatihan_proposal';
 $route['pelatihan/update_pelatihan']                            = 'pelatihan/update_pelatihan_proposal';
 $route['pelatihan/get_rab']                                     = 'pelatihan/get_rab';
-$route['pelatihan/get_rab_lpj']                                     = 'pelatihan/get_rab_lpj';
+$route['pelatihan/get_rab_lpj']                                 = 'pelatihan/get_rab_lpj';
 $route['pelatihan/post_konfirmasi_proposal']                    = 'pelatihan/post_konfirmasi_proposal';
 $route['pelatihan/post_pelatihan_lpj']                          = 'pelatihan/post_pelatihan_lpj';
 $route['pelatihan/post_konfirmasi_lpj']                         = 'pelatihan/post_konfirmasi_lpj';

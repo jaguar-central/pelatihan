@@ -59,7 +59,7 @@
                                                 data-pelatihankabkot="'.$data->KABKOT.'"
                                                 data-pelatihankecamatan="'.$data->KECAMATAN.'" 
                                                 data-pelatihanalamat="'.$data->ALAMAT.'"
-                                                data-pelatihanpembicara="'.$data->PEMBICARA.'" 
+                                                data-pelatihanpembicara="'.$data->ID_PEMBICARA.'" 
                                                                 > Details</a>
                                                                 
 																<a class= "dropdown-item" target="_blank" href="'.$this->config->item("jasper_report").'Pelatihan.pdf?ID='.$data->ID.'"> Unduh Proposal</a>				

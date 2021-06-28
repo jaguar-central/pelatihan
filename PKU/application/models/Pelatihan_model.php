@@ -54,9 +54,9 @@ public function select_t_rab_lpj_by_id($id)
 }
         
 public function insert_t_dokumen($data)
-        {
-                $this->db->insert('T_DOKUMEN', $data);
-		}
+{
+    $this->db->insert('T_DOKUMEN', $data);
+}
 			
 public function update_t_pelatihan($data,$where){
 	$this->db->update('T_PELATIHAN', $data,$where);

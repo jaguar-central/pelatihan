@@ -155,14 +155,33 @@
 
 
 				<div class="form-group row">
-					<label class="col-sm-2">Pembicara <span class="text-danger">*</span></label>
+					<!--label class="col-sm-2">Pembicara <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" required="" id="pembicara_pelatihan" name="pembicara_pelatihan" />
-					</div>
+					</div-->
 
 					<label class="col-sm-2">Kuota Peserta <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" required="" id="kuota_peserta" name="kuota_peserta" onkeypress="return event.charCode >= 48 && event.charCode <= 57" />
+					</div>
+				</div>
+
+				<div class="form-group card">
+					<div class="card-header">
+						<h4>Pembicara</h4>
+					</div>
+					<div class="card-body">
+						<div class="form-group row">
+							<label class="col-sm-2">Nama <span class="text-danger">*</span></label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" required="" id="nama_pembicara" name="nama_pembicara" />
+							</div>
+
+							<label class="col-sm-2">Lembaga / Instansi <span class="text-danger">*</span></label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" required="" id="instansi_pembicara" name="instansi_pembicara" />
+							</div>
+						</div>
 					</div>
 				</div>
 
