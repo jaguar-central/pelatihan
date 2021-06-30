@@ -58,6 +58,12 @@
                             ?>
                         </select>
                     </div>
+
+
+                    <label class="col-sm-2">ID Nasabah </label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" id="find_id_nasabah_ulamm" name="find_id_nasabah_ulamm">                        
+                    </div>                    
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2">Jenis Program </label>
@@ -193,6 +199,11 @@
                         <select class="form-control select2" id="cabang_mekaar" name="cabang_mekaar">
                         </select>
                     </div>
+
+                    <label class="col-sm-2">ID Nasabah </label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" id="find_id_nasabah_mekaar" name="find_id_nasabah_mekaar">                        
+                    </div>                    
                 </div>
             </div>
 

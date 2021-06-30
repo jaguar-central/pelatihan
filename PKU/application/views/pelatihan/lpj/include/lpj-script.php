@@ -236,13 +236,15 @@ $(document).ready(function() {
 		});			
 		
 
-		$(document).on("change", "#sektor_ekonomi, #jenis_pinjaman, #jenis_program, #cabang_kehadiran, #unit_kehadiran, #tipe_kredit", function () {			
+		$(document).on("change", "#sektor_ekonomi, #find_id_nasabah_ulamm, #jenis_pinjaman, #jenis_program, #cabang_kehadiran, #unit_kehadiran, #tipe_kredit", function () {			
 			var sektor_ekonomi 	= $('#sektor_ekonomi').val();			
 			var jenis_pinjaman 	= $('#jenis_pinjaman').val();			
 			var jenis_program 	= $('#jenis_program').val();			
 			var cabang 			= $('#cabang_kehadiran').val();			
 			var unit 			= $('#unit_kehadiran').val();	
 			var tipe_kredit 	= $('#tipe_kredit').val();	
+
+			var id_nasabah 		= $('#find_id_nasabah_ulamm').val();	
 					
 			
 			table_kehadiran_ulamm.clear();
@@ -252,6 +254,7 @@ $(document).ready(function() {
 			table_kehadiran_ulamm.column(3).search( cabang=='0' ? '' : cabang   );
 			table_kehadiran_ulamm.column(4).search( unit=='0' ? '' : unit   );
 			table_kehadiran_ulamm.column(5).search( tipe_kredit=='0' ? '' : tipe_kredit   );
+			table_kehadiran_ulamm.column(6).search( id_nasabah=='0' ? '' : id_nasabah   );
 
 			table_kehadiran_ulamm.clear().draw(false);
 		});		
@@ -323,12 +326,13 @@ $(document).ready(function() {
 		});
 
 
-		$(document).on("change", "#sektor_ekonomi_mekaar,#regional_mekaar,#area_mekaar,#cabang_mekaar,#siklus_kredit", function () {			
+		$(document).on("change", "#sektor_ekonomi_mekaar ,#find_id_nasabah_mekaar ,#regional_mekaar,#area_mekaar,#cabang_mekaar,#siklus_kredit", function () {			
 			var sektor_ekonomi_mekaar 	= $('#sektor_ekonomi_mekaar').val();			
 			var regional_mekaar 		= $('#regional_mekaar').val();			
 			var area_mekaar 			= $('#area_mekaar').val();				
 			var siklus_kredit 			= $('#siklus_kredit').val();		
 			var cabang_mekaar 			= $('#cabang_mekaar').val();			
+			var id_nasabah	 			= $('#find_id_nasabah_mekaar').val();			
 					
 			table_kehadiran_mekaar.clear();
 			table_kehadiran_mekaar.column(0).search( sektor_ekonomi_mekaar=='0' ? '' : sektor_ekonomi_mekaar   );
@@ -336,6 +340,7 @@ $(document).ready(function() {
 			table_kehadiran_mekaar.column(2).search( area_mekaar=='0' ? '' : area_mekaar   );			
 			table_kehadiran_mekaar.column(3).search( siklus_kredit=='0' ? '' : siklus_kredit   );
 			table_kehadiran_mekaar.column(4).search( cabang_mekaar=='0' ? '' : cabang_mekaar   );
+			table_kehadiran_mekaar.column(5).search( id_nasabah=='0' ? '' : id_nasabah   );
 
 			table_kehadiran_mekaar.clear().draw(false);
 		});				

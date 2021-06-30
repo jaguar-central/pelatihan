@@ -2164,9 +2164,10 @@ class Pelatihan extends MY_Controller
 		$kode_cabang 	= ($_GET["columns"][3]['search']['value']!='') ? 'inisialcab:'.$_GET["columns"][3]['search']['value'] : NULL;
 		$kode_unit 		= ($_GET["columns"][4]['search']['value']!='') ? 'kodeunit:'.$_GET["columns"][4]['search']['value'] : NULL;
 		$tipe_kredit	= ($_GET["columns"][5]['search']['value']!='') ? 'tipekredit:'.$_GET["columns"][5]['search']['value'] : NULL;
+		$idnasabah		= ($_GET["columns"][6]['search']['value']!='') ? 'nasabah_id:'.$_GET["columns"][6]['search']['value'] : NULL;
 		$search 		= ($_GET["search"]["value"]!='') ? 'namanasabah:'.$_GET["search"]["value"] : NULL ;	
 
-		$searching = array($sektor_ekonomi,$jenis_pinjaman,$jenis_program,$kode_cabang,$kode_unit,$tipe_kredit,$search);		
+		$searching = array($sektor_ekonomi,$jenis_pinjaman,$jenis_program,$kode_cabang,$kode_unit,$tipe_kredit,$idnasabah,$search);		
 		
 		$start = isset($_GET["start"]) ? '&from='.$_GET["start"] : 0;
 		$limit = isset($_GET["length"]) ? '&size='.$_GET["length"] : 10;		
@@ -2229,8 +2230,9 @@ class Pelatihan extends MY_Controller
 		$areaid 		= ($_GET["columns"][2]['search']['value']!='' && $_GET["columns"][2]['search']['value']!='null') ? 'areaid:'.$_GET["columns"][2]['search']['value'] : NULL;
 		$siklus 		= ($_GET["columns"][3]['search']['value']!='') ? 'siklus:'.$_GET["columns"][3]['search']['value'] : NULL;
 		$cabangid 		= ($_GET["columns"][4]['search']['value']!='' && $_GET["columns"][4]['search']['value']!='null') ? 'cabangid:'.$_GET["columns"][4]['search']['value'] : NULL;
+		$nasabahid 		= ($_GET["columns"][5]['search']['value']!='' && $_GET["columns"][5]['search']['value']!='null') ? 'nasabahid:'.$_GET["columns"][5]['search']['value'].'*' : NULL;
 
-		$searching = array($sektor_ekonomi,$regionid,$areaid,$search,$siklus,$cabangid);	
+		$searching = array($sektor_ekonomi,$regionid,$areaid,$search,$siklus,$cabangid,$nasabahid);	
 
 		$this->config->set_item('elastic_index', 'debitur');	
 		
