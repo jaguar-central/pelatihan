@@ -174,63 +174,21 @@
 
                                     <div id="notifikasi_socket_count"></div>
 
-                                    <!-- <?php //if (isset($notification)) { ?>
-                                        <span class="quantity"><?php //echo $notification_count; ?></span>
-                                    <?php //} else { ?>
-                                        <span class="quantity" style="background:black;"><?php //echo $notification_count; ?></span>
-                                    <?php //} ?> -->
 
                                     <div id="notifikasi_socket_messages"></div>
-
-                                    <!-- <?php //if ($notification_count >= 3) { ?>
-                                        <div class="notifi-dropdown js-dropdown" style=" height:500px;overflow-y: scroll;">
-                                        <?php //} else { ?>
-                                            <div class="notifi-dropdown js-dropdown">
-                                            <?php //} ?>
-                                            <div class="notifi__title">
-                                                <?php //if (isset($notification)) { ?>
-                                                    <p>Kamu memiliki <?php //echo $notification_count; ?> Notifikasi</p>
-                                                <?php //} else { ?>
-                                                    <p>Tidak ada Notifikasi</p>
-                                                <?php //} ?>
-                                            </div>          
-
-                                            <?php //if (isset($notification)) { ?>
-                                                <?php //foreach ($notification as $data_notif) { ?>
-                                                    <div class="notifi__item">
-                                                        <div class="<?php //echo $data_notif->CLASS_APPROVAL; ?>">
-                                                            <i class="zmdi zmdi-file-text"></i>
-                                                        </div>
-                                                        <div class="content">
-                                                            <a href="<?php //echo base_url($data_notif->URL_APPROVAL) ?>">
-                                                                <p><?php //echo $data_notif->APPROVAL; ?></p>
-                                                                <span class="date"><?php //echo $data_notif->TANGGAL; ?></span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                <?php //} ?>
-                                            <?php //} ?>
-
-                                            </div> -->
-                                        </div>
                                 </div>
+                            </div>
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
-                                        <div class="image " style="margin-top:10px;">
+                                        <div style="float: left;font-size: 30px;" >
                                             <!-- <img src="<?php //echo $this->session->userdata('sess_user_foto'); ?>" alt="PNM" /> -->
-                                            <img src="<?= base_url() ?>assets/images/logo-pnm.png" alt="PNM" />
+                                            <i class="zmdi zmdi-account"></i>
                                         </div>
                                         <div class="content ">
                                             <a class="js-acc-btn text-white" href="#"><?php echo $this->session->userdata('sess_user_nama'); ?> </a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
-                                                <div class="image">
-                                                    <a href="#">
-                                                        <!-- <img src="<?php //echo $this->session->userdata('sess_user_foto'); ?>" alt="PNM" /> -->
-                                                        <img src="<?= base_url() ?>assets/images/logo-pnm.png" alt="PNM" />
-                                                    </a>
-                                                </div>
 
                                                 <div class="content">
                                                     <h5 class="name">
