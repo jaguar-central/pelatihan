@@ -29,7 +29,7 @@
                                               
                 <form class="form" method="post" action="<?php base_url() ?>user/process_login">
                     <div class="modal-body">
-						<p class="description text-center">Login - rc version</p>
+						<p class="description text-center">Login - release candidate version</p>
 							<div class="card-body">
 
 								<div class="form-group bmd-form-group">
