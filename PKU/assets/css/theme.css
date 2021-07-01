@@ -319,6 +319,10 @@ section {
 .main-content {
     padding-top: 116px;
     min-height: 100vh;
+
+    background-image: url("/assets/images/clip-hardworking-man.png");
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 @media (max-width: 991px) {

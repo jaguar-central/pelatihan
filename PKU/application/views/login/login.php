@@ -6,6 +6,7 @@
 <link href="<?php echo base_url() ?>assets/css/material-dashboard.css" rel="stylesheet" media="all">
 <link href="<?php echo base_url() ?>assets/css/font.css" rel="stylesheet" media="all">
 
+
 <div id="loginModal" tabindex="-1" role="">
     <div class="modal-dialog modal-login" role="document">
         <div class="modal-content">
