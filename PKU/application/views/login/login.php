@@ -29,7 +29,7 @@
                                               
                 <form class="form" method="post" action="<?php base_url() ?>user/process_login">
                     <div class="modal-body">
-						<p class="description text-center">Login - beta version</p>
+						<p class="description text-center">Login - rc version</p>
 							<div class="card-body">
 
 								<div class="form-group bmd-form-group">
@@ -52,7 +52,7 @@
 							</div>
 					</div>
 					<div class="modal-footer justify-content-center">
-						<button class="btn btn-round btn-success" type="submit" >
+						<button class="btn btn-round btn-info" type="submit" >
 								Login
 						</button>
 					</div>

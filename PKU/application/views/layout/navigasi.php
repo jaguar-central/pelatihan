@@ -1,6 +1,6 @@
 <!-- HEADER MOBILE-->
 <header class="header-mobile d-block d-lg-none">
-    <div class="header-mobile__bar bg-success text-white">
+    <div class="header-mobile__bar bg-info text-white">
         <div class="container-fluid">
             <div class="header-mobile-inner">
 
@@ -111,7 +111,7 @@
 
     <!-- MENU SIDEBAR-->
     <aside class="menu-sidebar d-none d-lg-block">
-        <div class="logo">
+        <div class="bg-info text-center logo">
             <a href="#">
                 <img src="<?php echo base_url() ?>assets/images/logo-pnm.png" style="max-width:70%;" />
             </a>
@@ -160,7 +160,7 @@
     <!-- PAGE CONTAINER-->
     <div class="page-container">
         <!-- HEADER DESKTOP-->
-        <header class="header-desktop d-none d-lg-block bg-success text-white">
+        <header class="header-desktop d-none d-lg-block bg-info text-white">
             <div class="section__content section__content--p30 ">
                 <span>Sistem Informasi Manajemen Pelatihan Usaha</span>
             </div>
