@@ -41,6 +41,7 @@
 						</select>
 					</div>
 
+					<input type="hidden" class="form-control" required="" id="id_nasabah" name="id_nasabah" readonly/>
 
 					<label class="col-sm-2">Jenis Usaha <span class="text-danger">*</span></label>
 					<div class="col-sm-4">

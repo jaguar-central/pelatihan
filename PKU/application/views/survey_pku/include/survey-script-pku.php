@@ -110,6 +110,7 @@
         }).on('change', function (e) {
 			var myarr = this.value.split(":");
 
+			$("#id_nasabah").val(myarr[0]);
 			$("#nama_nasabah").val(myarr[1]);
 			$("#usaha_nasabah").val(myarr[2]);
 			$("#plafond_nasabah").val(myarr[3]);
@@ -153,6 +154,7 @@
         }).on('change', function (e) {
 			var myarr = this.value.split(":");
 
+			$("#id_nasabah").val(myarr[0]);
 			$("#nama_nasabah").val(myarr[1]);
 			$("#usaha_nasabah").val(myarr[2]);
 			$("#plafond_nasabah").val(myarr[3]);
