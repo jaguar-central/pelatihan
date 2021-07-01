@@ -1363,12 +1363,12 @@ section {
 }
 
 .noti__item:hover i {
-    color: #999;
+    color: white;
 }
 
 .noti__item i {
     font-size: 25px;
-    color: #a9b3c9;
+    color: #82C459;
     -webkit-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -1644,7 +1644,14 @@ section {
 }
 
 .navbar-sidebar .navbar__list li a:hover {
-    color: #28A745;
+    /*color: #28A745;*/
+
+	color :white;
+	box-shadow : 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
+	padding: 15px 10px;
+	width: 170px;
+	border-radius: 5px;
+	background-color :#17A2B8;    
 }
 
 .navbar-sidebar .navbar__list li.active > a {
