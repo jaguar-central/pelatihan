@@ -159,6 +159,7 @@
 			$("#usaha_nasabah").val(myarr[2]);
 			$("#plafond_nasabah").val(myarr[3]);
 			$("#alamat_nasabah").val(myarr[4]);
+			$("#no_hp").val("");
 		});
 
 
