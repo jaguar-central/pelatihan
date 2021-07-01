@@ -44,9 +44,9 @@
     <div class="welcome">
         <div class="container-fluid">
             <div class="row">
-            <div class="col-md-12">
-                <div class="content">
-                <h2>Welcome to Dashboard</h2>
+            <div class="col-md-12 card bg-info">
+                <div class="content card-body text-center text-white">
+                <h2 class="text-white">Welcome to Dashboard</h2>
                 <p>Data Realisasi Pelatihan dan Kehadiran Nasabah</p>     
                 </div>
             </div>
@@ -58,7 +58,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-3">
-            <div class="box bg-primary">
+            <div class="box bg-warning">
             <i class="fas fa-edit"></i>
               <h3 class="text-white"><?php echo $pelatihan;?></h3>
               <p class="lead">Pelatihan</p>
