@@ -47,7 +47,7 @@
             <div class="col-md-12 card bg-info">
                 <div class="content card-body text-center text-white">
                 <h2 class="text-white">Welcome to Dashboard</h2>
-                <p>Data Realisasi Pelatihan dan Kehadiran Nasabah</p>     
+                <p>Data Realisasi Pelatihan, Kehadiran Nasabah dan Sektor Usaha Nasabah</p>     
                 </div>
             </div>
             </div>
