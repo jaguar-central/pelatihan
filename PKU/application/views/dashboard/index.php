@@ -11,6 +11,8 @@
   overflow: hidden;
   border-radius: 3px;
   margin-bottom: 25px;
+  border-radius: 10px;
+
 }
 .statis .box h3:after {
   content: "";
