@@ -2565,9 +2565,9 @@ class Pelatihan extends MY_Controller
 	{									
 		$filter_path 	= '&filter_path=hits.hits.*,aggregations.*';
 
-		$search = 'nama:'.$_GET['q'];		
+		$search = $_GET['column'].':'.$_GET['find'];		
 
-		$this->config->set_item('elastic_index', 'debitur');	
+		$this->config->set_item('elastic_index', $_GET['table']);	
 				
 		$nasabah = $this->elastic->call('/_search?q='.$search.$filter_path);
 		
