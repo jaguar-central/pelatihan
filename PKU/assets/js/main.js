@@ -1264,7 +1264,7 @@
       loading: true,
       loadingParentElement: 'html',
       loadingClass: 'page-loader',
-      loadingInner: '<div class="page-loader__spin"></div>',
+      loadingInner: '<div class="page-loader__spin"></div>',      
       timeout: false,
       timeoutCountdown: 5000,
       onLoadEvent: true,

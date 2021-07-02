@@ -5537,7 +5537,7 @@ button.close {
 }
 
 .modal-content {
-  opacity:0.8;
+  opacity:0.9;
   position: relative;
   display: flex;
   flex-direction: column;
