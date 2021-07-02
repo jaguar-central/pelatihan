@@ -177,6 +177,61 @@
 
                                     <div id="notifikasi_socket_messages"></div>
                                 </div>
+
+                                <div class="noti__item js-item-menu">
+									<i class="zmdi zmdi-book"></i>
+									
+									
+									<div class="notifi-dropdown js-dropdown" >
+										<div class="notifi__title">
+											<p>User Manual Aplikasi</p>
+										</div>
+										<div class="notifi__item">
+											<div class="bg-c1 img-cir img-40">
+												<i class="zmdi zmdi-book"></i>
+											</div>
+											<div class="content">
+												<a href="<?= base_url() ?>/assets/manual/PIC_Cabang.pdf" target="_blank" >
+												<p>User PIC Cabang</p>
+												</a>
+											</div>
+										</div>
+										
+										<div class="notifi__item">
+											<div class="bg-c2 img-cir img-40">
+												<i class="zmdi zmdi-book"></i>
+											</div>
+											<div class="content">
+												<a href="<?= base_url() ?>/assets/manual/PIC_Pusat.pdf" target="_blank" >
+												<p>User PIC Pusat</p>
+												</a>
+											</div>
+										</div>
+
+										<div class="notifi__item">
+											<div class="bg-c3 img-cir img-40">
+												<i class="zmdi zmdi-book"></i>
+											</div>
+											<div class="content">
+												<a href="<?= base_url() ?>/assets/manual/Kabag_Wakadiv_Kadiv.pdf" target="_blank" >
+												<p>User Kabag, Wakadiv dan Kadiv</p>
+												</a>
+											</div>
+										</div>
+
+										<div class="notifi__item">
+											<div class="bg-info img-cir img-40">
+												<i class="zmdi zmdi-book"></i>
+											</div>
+											<div class="content">
+												<a href="<?= base_url() ?>/assets/manual/Pinca_Ulamm.pdf" target="_blank" >
+												<p>User Pemimpin Cabang Ulamm</p>
+												</a>
+											</div>
+										</div>										
+									</div>
+								</div>
+
                             </div>
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
@@ -188,15 +243,36 @@
                                             <a class="js-acc-btn text-white" href="#"><?php echo $this->session->userdata('sess_user_nama'); ?> </a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
-                                            <div class="info clearfix">
+                                            <!-- <div class="info clearfix">
 
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#"><?php echo $this->session->userdata('sess_user_nama') . '</br> ' . ucfirst(strtolower($this->session->userdata('sess_user_group'))) . ' </br> ' . $this->session->userdata('sess_user_lokasi') . ' ' . $this->session->userdata('sess_user_cabang'); ?></a>
+                                                        <a href="#"><?php //echo $this->session->userdata('sess_user_nama') . '</br> ' . ucfirst(strtolower($this->session->userdata('sess_user_group'))) . ' </br> ' . $this->session->userdata('sess_user_lokasi') . ' ' . $this->session->userdata('sess_user_cabang'); ?></a>
                                                     </h5>
           
                                                 </div>
-                                            </div>          
+                                            </div>     -->
+
+                                            <div class="notifi__item">
+                                                <div class="bg-info img-cir img-40">
+                                                    <i class="zmdi zmdi-accounts-list"></i>
+                                                </div>
+                                                <div class="content">												
+                                                    <p><?php echo $this->session->userdata('sess_user_nama')?></p>
+                                                    <p><?php echo $this->session->userdata('sess_user_group')?></p>
+                                                </div>
+                                            </div>    
+
+                                            <div class="notifi__item">
+                                                <div class="bg-info img-cir img-40">
+                                                    <i class="zmdi zmdi-home"></i>
+                                                </div>
+                                                <div class="content">												
+                                                    <p><?php echo $this->session->userdata('sess_user_lokasi')?></p>
+                                                    <p><?php echo $this->session->userdata('sess_user_cabang')?></p>
+                                                </div>
+                                            </div>                                            
+
                                             <div class="account-dropdown__footer">
                                                 <a href="<?php echo base_url() . 'logout'; ?>">
                                                     <i class="zmdi zmdi-power"></i>Logout</a>
