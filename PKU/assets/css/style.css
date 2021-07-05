@@ -30,6 +30,12 @@
 	min-height: 300px;
 }
 
+.tombol_masuk_keluar:hover {
+	background-color: #A6CF39;
+	text-align: justify;
+	border-radius: 5px;
+	padding: 10px;
+}
 
 .table{
 	width : 100% !IMPORTANT;
