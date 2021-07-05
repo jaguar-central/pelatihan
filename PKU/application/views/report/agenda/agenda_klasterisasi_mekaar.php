@@ -10,7 +10,6 @@
 				</div>
 			</div>
             <div class="row card">
-                <div class="card-header bg-success text-center"></div>
                 <div class="card-body" id="calendar"></div>
             </div>
         </div>
