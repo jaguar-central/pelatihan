@@ -246,7 +246,7 @@ function showError(error) {
                     if (data.notification_count > 0){
                         notifikasi='<span class="quantity">'+data.notification_count+'</span>';
                     }else{
-                        notifikasi='<span class="quantity" style="background:black;">0</span>';
+                        notifikasi='<span class="quantity" style="background:#0066B3;">0</span>';
                     }
 
                     $("#notifikasi_socket_count").html(notifikasi);
