@@ -160,11 +160,23 @@
     <!-- PAGE CONTAINER-->
     <div class="page-container">
         <!-- HEADER DESKTOP-->
-        <header class="header-desktop d-none d-lg-block bg-info text-white">
-            <div class="section__content section__content--p30 ">
+        
+        <header class="header-desktop d-none d-lg-block bg-info text-white">            
+            <!-- <div class="section__content section__content--p30 ">
                 <span>Sistem Informasi Manajemen Pelatihan Usaha</span>
-            </div>
+            </div> -->
             <div class="section__content section__content--p30">
+                <div class="container-fluid">
+                    <div class="header-wrap float-left">
+                        <div class="header-button">
+                            <div class="noti-wrap ">
+                                <div class="noti__item js-item-menu tombol_masuk_keluar">
+                                    <i class="zmdi zmdi-caret-left-circle"></i>&nbsp;&nbsp;<span>Sistem Informasi Manajemen Pelatihan Usaha</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
                 <div class="container-fluid">
                     <div class="header-wrap float-right">
                         <div class="header-button">

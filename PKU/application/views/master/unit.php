@@ -14,7 +14,7 @@
                                         <span class="btn-label"><i class="fa fa-plus"></i></span> Tambah Unit
                                         </a>
                                     </div-->
-                                    <table id="unit_table" class="table table-bordered table-striped">
+                                    <table id="unit_table" class="table table-bordered table-striped fzl-table-responsive">
                                         <thead>
                                             <tr>
                                                 <th>KODE CABANG</th>

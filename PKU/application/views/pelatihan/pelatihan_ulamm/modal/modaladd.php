@@ -293,7 +293,7 @@
 								</div>
 								<div class="card-body">
 									<div class="table">
-										<table id="table_rab_modaladd" class="table table-responsive">
+										<table id="table_rab_modaladd" class="table fzl-table-responsive">
 											<thead class=" text-primary">
 												<tr>
 													<th class="col-md-6">Uraian</th>

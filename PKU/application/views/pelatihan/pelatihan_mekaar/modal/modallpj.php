@@ -50,7 +50,7 @@
 						</div>
 						<div class="card-body">
 						  <div class="table">                
-							<table id="table_rab_modallpj"  class="table">
+							<table id="table_rab_modallpj"  class="table fzl-table-responsive">
 								  <thead class=" text-primary col-md-12">
 									  <th class="col-md-2">Uraian</th>
 									  <th class="col-md-2">Jumlah</th>

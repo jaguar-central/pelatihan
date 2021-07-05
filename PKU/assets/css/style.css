@@ -24,6 +24,12 @@
 	font-size: 0.9em !IMPORTANT;
 }
 
+.fzl-table-responsive {
+	overflow-x: auto;
+	display: block;
+	min-height: 300px;
+}
+
 
 .table{
 	width : 100% !IMPORTANT;

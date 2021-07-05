@@ -30,7 +30,7 @@
 							<div class="col-lg-12">
 								<!--h2 class="title-1 m-b-25">Earnings By Items</h2-->
 								<div class="table-style">
-									<table id="datatable_modalview" class="table table-bordered table-striped table-responsive"> 
+									<table id="datatable_modalview" class="table table-bordered table-striped fzl-table-responsive"> 
 										<thead>
 											<tr >
 												<th>JENIS PELATIHAN</th>

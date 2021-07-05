@@ -29,6 +29,10 @@
 <!-- end document-->
 
 <style>
+.dataTables_empty {
+    text-align: center;
+}
+
 @media (max-width: 767px) {
     #deskripsi_rab{
         width: 400px;
@@ -113,6 +117,25 @@ var watchId = 0;
 
 $(document).ready(function() {
 
+    localStorage.setItem("maximize", "0");    
+
+    $(".tombol_masuk_keluar").on('click', function(){    
+
+
+        if (localStorage.getItem("maximize")=="0"){
+            localStorage.setItem("maximize", "1");    
+            $(".menu-sidebar").animate({"width": "0"}, 500 );
+            $(".page-container").animate({"padding-left": "0px"}, 500 );
+            $(".header-desktop").animate({"left": "0px"}, 500 );
+            $(this).html('<i class="zmdi zmdi-caret-right-circle"></i>&nbsp;&nbsp;<span>Sistem Informasi Manajemen Pelatihan Usaha</span>');
+        }else{
+            localStorage.setItem("maximize", "0");    
+            $(".menu-sidebar").animate({"width": "220px"}, 500 );
+            $(".page-container").animate({"padding-left": "220px"}, 500 );
+            $(".header-desktop").animate({"left": "220px"}, 500 );            
+            $(this).html('<i class="zmdi zmdi-caret-left-circle"></i>&nbsp;&nbsp;<span>Sistem Informasi Manajemen Pelatihan Usaha</span>');
+        }
+    });
 
     
     // $('#startMonitoring').on('click', getLocation);
