@@ -71,7 +71,7 @@ $route['pelatihan/ulamm'] 			        = 'pelatihan/proposal_ulamm';
 $route['pelatihan/mekaar'] 			        = 'pelatihan/proposal_mekaar';
 $route['pelatihan/history_ulamm'] 		    = 'pelatihan/history_ulamm';
 $route['pelatihan/history_mekaar'] 		    = 'pelatihan/history_mekaar';
-$route['survey'] 		        = 'pelatihan/survey_ulamm';
+$route['survey'] 		                    = 'pelatihan/survey_ulamm';
 $route['pelatihan/konfirmasi'] 		        = 'pelatihan/konfirmasi_proposal';
 $route['pelatihan/konfirmasi_lpj'] 	        = 'pelatihan/konfirmasi_lpj';
 $route['pelatihan/lpj/(:any)']   		    = 'pelatihan/lpj/$1';
@@ -131,7 +131,8 @@ $route['master/get_kecamatan']              	= 'master/get_kecamatan';
 $route['master/get_kecamatan_select']           = 'master/get_kecamatan_select';
 $route['master/get_list_nasabah_grading']       = 'master/get_list_nasabah_grading';
 
-
+/* API DATA SURVEY*/
+$route['survey/post_survey']                                    = 'pelatihan/post_pelatihan_survey';
 
 /* API DATA PELATIHAN*/
 $route['pelatihan/post_pelatihan']                              = 'pelatihan/post_pelatihan_proposal';
@@ -149,6 +150,7 @@ $route['pelatihan/get_paging_kehadiran_nasabah_ulamm/(:any)']   = 'pelatihan/get
 $route['pelatihan/get_paging_kehadiran_nasabah_mekaar/(:any)']  = 'pelatihan/get_paging_kehadiran_nasabah_mekaar/$1';
 $route['pelatihan/get_paging_kehadiran_non_nasabah']            = 'pelatihan/get_paging_kehadiran_non_nasabah';
 $route['pelatihan/post_non_nasabah'] 	                        = 'pelatihan/post_non_nasabah';
+//$route['pelatihan/post_survey']                                 = 'pelatihan/post_pelatihan_survey';
 $route['pelatihan/post_submit']                                 = 'pelatihan/post_submit';
 
 // $route['pelatihan/post_change_status_pelatihan/(:any)/(:any)']  = 'pelatihan/post_change_status_pelatihan/$1/$2';

@@ -170,6 +170,59 @@
 			$("#datatable").removeClass("table-responsive"); 
 		}
 
+		$("#survey_pelatihan").submit(function(e){
+		e.preventDefault();        	
+		var formURL = "<?php echo base_url('pelatihan/post_pelatihan_survey'); ?>";
+		var frmdata = new FormData(this);
+
+		//frmdata.append('survey_pelatihan');
+		//frmdata.append('keterangan',CKEDITOR.instances.catatan.getData());
+		//frmdata.append('result','approve');
+		
+		var xhr = $.ajax({
+			url: formURL,
+			type: 'POST',
+			data: frmdata,
+			processData: false,
+			contentType: false
+		});
+		xhr.done(function(data) {
+			var obj = $.parseJSON(data);
+			
+			console.log(data);
+			
+			if(obj.result == 'OK')
+			{
+				<?php if ($this->config->item('socket_on')=='on'){ ?>
+				socket.emit('broadcast-notif');
+				<?php } ?>
+
+				Swal.fire({
+					position: 'center',
+					icon: 'success',
+					title: 'Survey telah di submit',
+					showConfirmButton: false,
+					timer: 1500
+				})
+				setTimeout(function () {
+					window.location.href = '<?php echo base_url(); ?>pelatihan/survey_ulamm';
+				}, 1600);				
+			}
+			if(obj.result == 'UP')
+			{
+				console.log(data);
+			}
+			if(obj.result == 'NG')
+			{
+				$("#m-ap-cab").html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a> '+obj.msg+'</div>');
+			}
+		});
+		xhr.fail(function() {
+			$("#loader_container").hide();
+			var failMsg = "Something error happened! as";
+		});	
+	});	
+
 
 		$('#datatable').DataTable({
 			"aaSorting" : [],	

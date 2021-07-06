@@ -49,7 +49,7 @@
 					</div>
 				</div>
 
-				<div class="form-group row" id="select_tag_area">
+				<div class="form-group row">
 					<label class="col-sm-2">Nama Nasabah <span class="text-danger">*</span></label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" required="" id="nama_nasabah" name="nama_nasabah" maxlength="150" readonly/>
@@ -73,8 +73,73 @@
 					</div>
 				</div>
 
+
+				<div class="form-group row">
+					<label class="col-form-label col-md-2">Apakah jumlah plafon meningkat? </label>
+					<div class="col-md-10">
+						<input type="radio" id="pilih_tetap" name="pilih_plafon" value="1" >
+						<label for="pilih_tetap">Tetap / Kurang &nbsp;&nbsp;&nbsp; </label>
+						<input type="radio" id="pilih_bawah" name="pilih_plafon" value="2">
+						<label for="pilih_bawah">Meningkat dibawah 100% &nbsp;&nbsp;&nbsp; </label>
+						<input type="radio" id="pilih_meningkat" name="pilih_plafon" value="3">
+						<label for="pilih_meningkat">Meningkat >/= 100%</label>
+					</div>
+				</div>
+
+
+				<div class="form-group row">
+					<label class="col-form-label col-md-2">Apakah produk usaha bertambah? </label>
+					<div class="col-md-10">
+						<input type="radio" id="pilih_berubah" name="pilih_prod" value="4" >
+						<label for="pilih_berubah">Tetap / Berubah &nbsp; </label>
+						<input type="radio" id="pilih_bertambah" name="pilih_prod" value="5">
+						<label for="pilih_bertambah">Bertambah </label>
+					</div>
+				</div>
+
+
+				<div class="form-group row">
+					<label class="col-form-label col-md-2">Apakah jumlah pendapatan perbulan meningkat? </label>
+					<div class="col-md-10">
+						<input type="radio" id="pilih_menurun" name="pilih_pendapatan" value="6" >
+						<label for="pilih_menurun">Menurun &nbsp;&nbsp;&nbsp; </label>
+						<input type="radio" id="pilih_ningkat" name="pilih_pendapatan" value="7">
+						<label for="pilih_ningkat">Tetap / meningkat sampai dengan 20% &nbsp;&nbsp;&nbsp; </label>
+						<input type="radio" id="pilih_atas" name="pilih_pendapatan" value="8">
+						<label for="pilih_atas">Meningkat di atas 20%</label>
+					</div>
+				</div>
+
+
+				<div class="form-group row">
+					<label class="col-form-label col-md-2">Apakah ada penambahan serapan tenaga kerja? </label>
+					<div class="col-md-10">
+						<input type="radio" id="pilih_turun" name="pilih_tenaga" value="9" >
+						<label for="pilih_turun">Tetap / Menurun &nbsp;&nbsp;&nbsp; </label>
+						<input type="radio" id="pilih_tambah" name="pilih_tenaga" value="10">
+						<label for="pilih_tambah">Menambah 1 tenaga kerja &nbsp;&nbsp;&nbsp; </label>
+						<input type="radio" id="pilih_one" name="pilih_tenaga" value="11">
+						<label for="pilih_one">Menambah lebih dari 1 tenaga kerja</label>
+					</div>
+				</div>
+
+
+				<div class="form-group row">
+					<label class="col-form-label col-md-2">Apakah ada penambahan izin usaha lain? </label>
+					<div class="col-md-10">
+						<input type="radio" id="pilih_two" name="pilih_izin" value="12" >
+						<label for="pilih_two">Tidak ada &nbsp;&nbsp;&nbsp; </label>
+						<input type="radio" id="pilih_tree" name="pilih_izin" value="13">
+						<label for="pilih_tree">SKU / PIRT / NIB / SIUP &nbsp;&nbsp;&nbsp; </label>
+						<input type="radio" id="pilih_four" name="pilih_izin" value="14">
+						<label for="pilih_four">HALAL / SNI / HAKI</label>
+					</div>
+				</div>
+
+
+
 				<div class="modal-footer">
-					<?php echo form_submit('submit', 'Submit', 'class="btn btn-outline-primary submit"'); ?>
+					<?php echo form_submit('.submit', 'Submit', 'class="btn btn-outline-primary submit"'); ?>
 					<button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
 				</div>
 

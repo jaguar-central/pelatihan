@@ -29,6 +29,11 @@ public function insert_t_pelatihan($data)
 {
 		$this->db->insert('T_PELATIHAN', $data);
 }
+
+public function insert_t_pelatihan_survey($data)
+{
+		$this->db->insert('T_SURVEY_PKU', $data);
+}
 		
 public function insert_t_rab($data)
 {

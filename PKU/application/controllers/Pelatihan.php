@@ -141,7 +141,7 @@ class Pelatihan extends MY_Controller
 		$data["script"] 	= "survey_pku/include/survey-script-pku";
 		$data["modal"] 		= array(
 								"survey_pku/modal/modaladdsurvey",
-								//"pelatihan/history_ulamm/modal/modallpjdetails"
+								//"survey_pku/survey_ulamm"
 								); 
 
         $data["menu"] 		= $this->Menu_model->select_ms_menu();
@@ -1428,6 +1428,265 @@ class Pelatihan extends MY_Controller
 		echo json_encode($output);
 		exit;
 	}
+
+	public function post_pelatihan_survey()
+    {
+		$this->is_logged();				
+		
+
+		//$id_pelatihan_project_charter= trim($this->security->xss_clean(strip_image_tags($this->input->post('judul_project_charter'))));
+
+        $pilih_nasabah   			= trim($this->security->xss_clean(strip_image_tags($this->input->post('pilih_nasabah'))));        
+		$id_nasabah    				= trim($this->security->xss_clean(strip_image_tags($this->input->post('id_nasabah'))));
+		$usaha_nasabah				= trim($this->security->xss_clean(strip_image_tags($this->input->post('usaha_nasabah'))));
+		//$unit_ulamm         		= $this->security->xss_clean(strip_image_tags($this->input->post('unit_ulamm')));
+		$nama_nasabah				= trim($this->security->xss_clean(strip_image_tags($this->input->post('nama_nasabah'))));       
+		$no_hp						= trim($this->security->xss_clean(strip_image_tags($this->input->post('no_hp'))));        
+		//$cabang_mekaar   			= $this->security->xss_clean(strip_image_tags($this->input->post('cabang_mekaar')));							
+        $plafond_nasabah        	= trim($this->security->xss_clean(strip_image_tags($this->input->post('plafond_nasabah'))));
+        $alamat_nasabah           	= trim($this->security->xss_clean(strip_image_tags($this->input->post('alamat_nasabah'))));
+        $pilih_plafon   			= trim($this->security->xss_clean(strip_image_tags($this->input->post('pilih_plafon'))));
+        $pilih_prod  				= trim($this->security->xss_clean(strip_image_tags($this->input->post('pilih_prod'))));
+        $pilih_pendapatan   		= trim($this->security->xss_clean(strip_image_tags($this->input->post('pilih_pendapatan'))));
+        $pilih_tenaga    			= trim($this->security->xss_clean(strip_image_tags($this->input->post('pilih_tenaga'))));
+		//$pembicara_pelatihan        = trim($this->security->xss_clean(strip_image_tags($this->input->post('pembicara_pelatihan'))));
+        $pilih_izin        			= trim($this->security->xss_clean(strip_image_tags($this->input->post('pilih_izin'))));
+		$id_user					= $this->session->userdata('sess_user_idsdm');	
+		
+				
+		// $deskripsi_rab        		= $this->security->xss_clean(strip_image_tags($this->input->post('deskripsi_rab')));
+		// $volume_rab           		= $this->security->xss_clean(strip_image_tags($this->input->post('volume_rab')));
+		// $unit_cost_rab        		= $this->security->xss_clean(strip_image_tags($this->input->post('unit_cost_rab')));
+		// $total_cost_rab       		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab')));
+		// $total_cost_rab_akhir 		= $this->security->xss_clean(strip_image_tags($this->input->post('total_cost_rab_akhir')));
+
+		// $nama_krm			 		= trim($this->security->xss_clean(strip_image_tags($this->input->post('nama_krm'))));
+		// $no_rek_krm 				= trim($this->security->xss_clean(strip_image_tags($this->input->post('no_rek_krm'))));				
+		
+		// $no_trx='';		
+		// $no_trx_reject='';
+		// $no_proposal='';
+		// if ($id_bisnis_pelatihan=='1'){
+		// 	$data_unit_ulamm = '';
+		// 	$data_cabang_mekaar = '';
+		// 	foreach ($unit_ulamm as $key => $value) {	
+
+		// 		$PARAMETER = $this->Master_model->select_ms_pelatihan_type_by_id($pelatihan_type)->row()->KODE;
+
+		// 		$param = array(
+		// 			'PELATIHAN_TYPE_ID' => $pelatihan_type,
+		// 			'PARAMETER' => $PARAMETER,
+		// 			'PARAM1' => $value,
+		// 			'PARAM2' => ''
+		// 		);
+								
+		// 		if (COUNT($this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->result_array())>0){
+		// 			$no_trx .= ','.$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->NO_TRX;					
+		// 			$this->Pelatihan_model->update_aktif_trx_reject($this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->ID);
+		// 		}else{
+		// 			$no_trx .= ','.$this->create_trx_no($param);
+		// 		}
+		// 		$data_unit_ulamm .= ','.$value;
+		// 	}
+			
+		// 	//create no proposal
+		// 	$param = array(
+		// 		'PELATIHAN_TYPE_ID' => $pelatihan_type,
+		// 		'PARAMETER' => 'PROPOSAL',
+		// 		'PARAM1' => $cabang_ulamm,
+		// 		'PARAM2' => ''
+		// 	);
+			
+		// 	$no_proposal = $this->create_trx_no($param);
+		// }	
+
+		
+		// if ($id_bisnis_pelatihan=='2'){	
+		// 	$data_unit_ulamm = '';
+		// 	$data_cabang_mekaar = '';
+		// 	foreach ($cabang_mekaar as $key => $value) {
+				
+		// 		$PARAMETER = $this->Master_model->select_ms_pelatihan_type_by_id($pelatihan_type)->row()->KODE;
+		// 		$param = array(
+		// 			'PELATIHAN_TYPE_ID' => $pelatihan_type,
+		// 			'PARAMETER' => $PARAMETER,
+		// 			'PARAM1' => $value,
+		// 			'PARAM2' => ''
+		// 		);					
+				
+		// 		if (COUNT($this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->result_array())>0){
+		// 			$no_trx .= ','.$this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->NO_TRX;					
+		// 			$this->Pelatihan_model->update_aktif_trx_reject($this->Pelatihan_model->select_trx_no_reject_find_no_trx_reject($PARAMETER."-".$value)->row()->ID);
+		// 		}else{
+		// 			$no_trx .= ','.$this->create_trx_no($param);
+		// 		}
+				
+		// 		$data_cabang_mekaar .= ','.$value;
+		// 	}					
+
+
+			//create no proposal
+			// $param = array(
+			// 	'PELATIHAN_TYPE_ID' => $pelatihan_type,
+			// 	'PARAMETER' => 'PROPOSAL',
+			// 	'PARAM1' => $regional_mekaar,
+			// 	'PARAM2' => $area_mekaar
+			// );
+			// $param = array(
+			// 	'PELATIHAN_TYPE_ID' => $pelatihan_type,
+			// 	'PARAMETER' => 'PROPOSAL',
+			// 	'PARAM1' => $cabang_ulamm,
+			// 	'PARAM2' => ''
+			// );
+			
+			// $no_proposal = $this->create_trx_no($param);
+		//}	
+		
+
+		
+		
+		//$no_trx = substr($no_trx,1,strlen($no_trx));	
+		
+
+		
+		$output = array(
+		'result'  	=> 'OK',
+		'msg'		=> ''
+		 );			
+		
+		 $this->db->trans_begin();
+
+		// if ($id_bisnis_pelatihan==2){
+		// 	$data_krm = array(
+		// 		'KRM' 					=> $nama_krm,
+		// 		'NO_REKENING'			=> $no_rek_krm,
+		// 		'CREATED_BY' 			=> $id_user,
+		// 		'CREATED_DATE' 			=> date('Y-m-d H:i:s')			
+		// 	);
+
+		// 	$this->Master_model->insert_ms_krm($data_krm);
+
+		// 	$id_krm = $this->db->insert_id(); //last id yang di insert		
+		// }else{
+		// 	$id_krm = 0;
+		// }
+
+		// if ($id_bisnis_pelatihan){
+		// 	$data_pembicara = array(
+		// 		'NAMA' 					=> $nama_pembicara,
+		// 		'INSTANSI'				=> $instansi_pembicara,
+		// 		'CREATED_BY' 			=> $id_user,
+		// 		'CREATED_DATE' 			=> date('Y-m-d H:i:s')			
+		// 	);
+
+		// 	$this->Master_model->insert_ms_pembicara($data_pembicara);
+
+		// 	$id_pembicara = $this->db->insert_id(); //last id yang di insert		
+		// }else{
+		// 	$id_pembicara = 0;
+		// }
+
+		
+		
+		$data = array(
+			'JENIS_NASABAH' 						=> $pilih_nasabah,
+			'ID_NASABAH' 							=> $id_nasabah,
+			'NAMA_NASABAH' 							=> $nama_nasabah,
+			'JENIS_USAHA' 							=> $usaha_nasabah,
+			'ALAMAT_NASABAH'						=> $alamat_nasabah,
+			'TELP_NASABAH'							=> $no_hp,
+			'PLAFOND' 								=> $plafond_nasabah,
+			'JUMLAH_PLAFON_MENINGKAT'				=> $pilih_plafon,
+			'PRODUK_USAHA_BERTAMBAH'				=> $pilih_prod,
+			'JUMLAH_PENDAPATAN_PERBULAN_MENINGKAT' 	=> $pilih_pendapatan,
+			'PENAMBAHAN_SERAPAN_TENAGA_KERJA'		=> $pilih_tenaga,
+			'PENAMBAHAN_IZIN_USAHA_LAIN' 			=> $pilih_izin,
+			'CREATED_BY' 							=> $id_user,
+			'CREATED_DATE' 							=> date('Y-m-d H:i:s')			
+		);
+		
+		
+		$this->Pelatihan_model->insert_t_pelatihan_survey($data);		
+
+		// $id_pelatihan = $this->db->insert_id(); //last id yang di insert		
+		
+		// for ($i=1;$i<count($deskripsi_rab);$i++){
+		// 	$rab = array(
+		// 		'ID_PELATIHAN' 		=> $id_pelatihan,
+		// 		'ID_BISNIS' 		=> $id_bisnis_pelatihan,
+		// 		'URAIAN' 			=> $deskripsi_rab[$i],
+		// 		'VOLUME' 			=> $volume_rab[$i],
+		// 		'UNIT_COST' 		=> $unit_cost_rab[$i],
+		// 		'SUB_TOTAL_COST' 	=> $total_cost_rab[$i],
+		// 		'GRAND_TOTAL' 		=> $total_cost_rab_akhir,
+		// 		'CREATED_BY' 		=> $id_user,
+		// 		'CREATED_DATE' 		=> date('Y-m-d H:i:s')
+		// 	);							
+		// 	$this->Pelatihan_model->insert_t_rab($rab);
+		// }
+
+		// //start insert t_pelatihan_detail
+		// if ($id_bisnis_pelatihan==1){
+		// 	for ($i=0;$i<count($unit_ulamm);$i++){
+		// 		$deskripsi_unit_ulamm = $this->Master_model->select_ms_unit_ulamm_by_kode_unit($unit_ulamm[$i])[0]->DESKRIPSI;
+		// 		$detail = array(
+		// 			'ID_PELATIHAN' 	=> $id_pelatihan,
+		// 			'KODE_UNIT' 	=> $unit_ulamm[$i],
+		// 			'DESKRIPSI' 	=> $deskripsi_unit_ulamm
+		// 		);							
+		// 		$this->Pelatihan_model->insert_t_pelatihan_detail_unit_ulamm($detail);
+		// 	}			
+		// }else if ($id_bisnis_pelatihan==2){
+		// 	for ($i=0;$i<count($cabang_mekaar);$i++){
+		// 		$deskripsi_cabang_mekaar = $this->Master_model->select_ms_cabang_mekaar_by_kode_cabang($cabang_mekaar[$i])[0]->DESKRIPSI;
+		// 		$detail = array(
+		// 			'ID_PELATIHAN' 	=> $id_pelatihan,
+		// 			'KODE_CABANG' 	=> $cabang_mekaar[$i],
+		// 			'DESKRIPSI' 	=> $deskripsi_cabang_mekaar
+		// 		);							
+		// 		$this->Pelatihan_model->insert_t_pelatihan_detail_cabang_mekaar($detail);
+		// 	}
+		// }
+		// //stop insert t_pelatihan_detail
+
+		// /*nonaktifkan pelatihan project charter yang telah terpakai*/
+		// if ($id_pelatihan_project_charter){
+
+		// 	$data_update = array(
+		// 		'AKTIF' 		=> '0',
+		// 		'UPDATED_BY'	=> $id_user,
+		// 		'UPDATED_DATE' 	=> date('Y-m-d H:i:s')
+		// 	);
+
+		// 	$where_update	= array('ID' 	=> $id_pelatihan_project_charter);
+
+		// 	$this->Pelatihan_model->update_project_charter($data_update,$where_update);
+		// }
+
+
+		$db_error = $this->db->error();
+
+		if (!empty($db_error['message']))
+		{
+			$this->db->trans_rollback();
+				
+			$output = array(
+				'result'  	=> 'NG',
+				'msg'		=> $db_error['message']
+			);
+		}
+		else
+		{
+			$this->db->trans_commit();
+			$output = array(
+				'result'  	=> 'OK',
+				'msg'		=> ''
+			);
+		}			
+        
+		echo json_encode($output);
+		exit;
+    }
 
 	public function post_submit()
 	{
