@@ -17,7 +17,7 @@
 				<span class="btn-label"><i class="fa fa-plus"></i></span> Add Survey Nasabah
 				</a>
 			</div>    
-			<table id="datatable" class="table table-bordered table-striped table-responsive">
+			<table id="datatable" class="table table-bordered table-striped fzl-table-responsive">
 				<thead>
 					<tr>
 						<th>ID NASABAH</th>

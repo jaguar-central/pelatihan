@@ -1,6 +1,6 @@
 <!-- HEADER MOBILE-->
 <header class="header-mobile d-block d-lg-none">
-    <div class="header-mobile__bar bg-success text-white">
+    <div class="header-mobile__bar bg-info text-white">
         <div class="container-fluid">
             <div class="header-mobile-inner">
 
@@ -111,7 +111,7 @@
 
     <!-- MENU SIDEBAR-->
     <aside class="menu-sidebar d-none d-lg-block">
-        <div class="logo">
+        <div class="bg-info text-center logo">
             <a href="#">
                 <img src="<?php echo base_url() ?>assets/images/logo-pnm.png" style="max-width:70%;" />
             </a>
@@ -160,11 +160,23 @@
     <!-- PAGE CONTAINER-->
     <div class="page-container">
         <!-- HEADER DESKTOP-->
-        <header class="header-desktop d-none d-lg-block bg-success text-white">
-            <div class="section__content section__content--p30 ">
+        
+        <header class="header-desktop d-none d-lg-block bg-info text-white">            
+            <!-- <div class="section__content section__content--p30 ">
                 <span>Sistem Informasi Manajemen Pelatihan Usaha</span>
-            </div>
+            </div> -->
             <div class="section__content section__content--p30">
+                <div class="container-fluid">
+                    <div class="header-wrap float-left">
+                        <div class="header-button">
+                            <div class="noti-wrap ">
+                                <div class="noti__item js-item-menu tombol_masuk_keluar">
+                                    <i class="zmdi zmdi-caret-left-circle"></i>&nbsp;&nbsp;<span>Sistem Informasi Manajemen Pelatihan Usaha</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
                 <div class="container-fluid">
                     <div class="header-wrap float-right">
                         <div class="header-button">
@@ -174,71 +186,105 @@
 
                                     <div id="notifikasi_socket_count"></div>
 
-                                    <!-- <?php //if (isset($notification)) { ?>
-                                        <span class="quantity"><?php //echo $notification_count; ?></span>
-                                    <?php //} else { ?>
-                                        <span class="quantity" style="background:black;"><?php //echo $notification_count; ?></span>
-                                    <?php //} ?> -->
 
                                     <div id="notifikasi_socket_messages"></div>
-
-                                    <!-- <?php //if ($notification_count >= 3) { ?>
-                                        <div class="notifi-dropdown js-dropdown" style=" height:500px;overflow-y: scroll;">
-                                        <?php //} else { ?>
-                                            <div class="notifi-dropdown js-dropdown">
-                                            <?php //} ?>
-                                            <div class="notifi__title">
-                                                <?php //if (isset($notification)) { ?>
-                                                    <p>Kamu memiliki <?php //echo $notification_count; ?> Notifikasi</p>
-                                                <?php //} else { ?>
-                                                    <p>Tidak ada Notifikasi</p>
-                                                <?php //} ?>
-                                            </div>          
-
-                                            <?php //if (isset($notification)) { ?>
-                                                <?php //foreach ($notification as $data_notif) { ?>
-                                                    <div class="notifi__item">
-                                                        <div class="<?php //echo $data_notif->CLASS_APPROVAL; ?>">
-                                                            <i class="zmdi zmdi-file-text"></i>
-                                                        </div>
-                                                        <div class="content">
-                                                            <a href="<?php //echo base_url($data_notif->URL_APPROVAL) ?>">
-                                                                <p><?php //echo $data_notif->APPROVAL; ?></p>
-                                                                <span class="date"><?php //echo $data_notif->TANGGAL; ?></span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                <?php //} ?>
-                                            <?php //} ?>
-
-                                            </div> -->
-                                        </div>
                                 </div>
+
+                                <div class="noti__item js-item-menu">
+									<i class="zmdi zmdi-book"></i>
+									
+									
+									<div class="notifi-dropdown js-dropdown" >
+										<div class="notifi__title">
+											<p>User Manual Aplikasi</p>
+										</div>
+										<div class="notifi__item">
+											<div class="bg-c1 img-cir img-40">
+												<i class="zmdi zmdi-book"></i>
+											</div>
+											<div class="content">
+												<a href="<?= base_url() ?>/assets/manual/PIC_Cabang.pdf" target="_blank" >
+												<p>User PIC Cabang</p>
+												</a>
+											</div>
+										</div>
+										
+										<div class="notifi__item">
+											<div class="bg-c2 img-cir img-40">
+												<i class="zmdi zmdi-book"></i>
+											</div>
+											<div class="content">
+												<a href="<?= base_url() ?>/assets/manual/PIC_Pusat.pdf" target="_blank" >
+												<p>User PIC Pusat</p>
+												</a>
+											</div>
+										</div>
+
+										<div class="notifi__item">
+											<div class="bg-c3 img-cir img-40">
+												<i class="zmdi zmdi-book"></i>
+											</div>
+											<div class="content">
+												<a href="<?= base_url() ?>/assets/manual/Kabag_Wakadiv_Kadiv.pdf" target="_blank" >
+												<p>User Kabag, Wakadiv dan Kadiv</p>
+												</a>
+											</div>
+										</div>
+
+										<div class="notifi__item">
+											<div class="bg-info img-cir img-40">
+												<i class="zmdi zmdi-book"></i>
+											</div>
+											<div class="content">
+												<a href="<?= base_url() ?>/assets/manual/Pinca_Ulamm.pdf" target="_blank" >
+												<p>User Pemimpin Cabang Ulamm</p>
+												</a>
+											</div>
+										</div>										
+									</div>
+								</div>
+
+                            </div>
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
-                                        <div class="image " style="margin-top:10px;">
+                                        <div style="float: left;font-size: 30px;" >
                                             <!-- <img src="<?php //echo $this->session->userdata('sess_user_foto'); ?>" alt="PNM" /> -->
-                                            <img src="<?= base_url() ?>assets/images/logo-pnm.png" alt="PNM" />
+                                            <i class="zmdi zmdi-account"></i>
                                         </div>
                                         <div class="content ">
                                             <a class="js-acc-btn text-white" href="#"><?php echo $this->session->userdata('sess_user_nama'); ?> </a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
-                                            <div class="info clearfix">
-                                                <div class="image">
-                                                    <a href="#">
-                                                        <!-- <img src="<?php //echo $this->session->userdata('sess_user_foto'); ?>" alt="PNM" /> -->
-                                                        <img src="<?= base_url() ?>assets/images/logo-pnm.png" alt="PNM" />
-                                                    </a>
-                                                </div>
+                                            <!-- <div class="info clearfix">
 
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#"><?php echo $this->session->userdata('sess_user_nama') . '</br> ' . ucfirst(strtolower($this->session->userdata('sess_user_group'))) . ' </br> ' . $this->session->userdata('sess_user_lokasi') . ' ' . $this->session->userdata('sess_user_cabang'); ?></a>
+                                                        <a href="#"><?php //echo $this->session->userdata('sess_user_nama') . '</br> ' . ucfirst(strtolower($this->session->userdata('sess_user_group'))) . ' </br> ' . $this->session->userdata('sess_user_lokasi') . ' ' . $this->session->userdata('sess_user_cabang'); ?></a>
                                                     </h5>
           
                                                 </div>
-                                            </div>          
+                                            </div>     -->
+
+                                            <div class="notifi__item">
+                                                <div class="bg-info img-cir img-40">
+                                                    <i class="zmdi zmdi-accounts-list"></i>
+                                                </div>
+                                                <div class="content">												
+                                                    <p><?php echo $this->session->userdata('sess_user_nama')?></p>
+                                                    <p><?php echo $this->session->userdata('sess_user_group')?></p>
+                                                </div>
+                                            </div>    
+
+                                            <div class="notifi__item">
+                                                <div class="bg-info img-cir img-40">
+                                                    <i class="zmdi zmdi-home"></i>
+                                                </div>
+                                                <div class="content">												
+                                                    <p><?php echo $this->session->userdata('sess_user_lokasi')?></p>
+                                                    <p><?php echo $this->session->userdata('sess_user_cabang')?></p>
+                                                </div>
+                                            </div>                                            
+
                                             <div class="account-dropdown__footer">
                                                 <a href="<?php echo base_url() . 'logout'; ?>">
                                                     <i class="zmdi zmdi-power"></i>Logout</a>

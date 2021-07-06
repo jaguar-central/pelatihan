@@ -89,7 +89,7 @@
 					</div>
 					<div class="card-body">
 						<div class="table">                
-						<table id="table_charter_modaladd"  class="table">
+						<table id="table_charter_modaladd"  class="table fzl-table-responsive">
 								<thead class=" text-primary col-md-12">
 									<th class="col-md-2">Judul</th>
 									<th class="col-md-3">Tanggal</th>

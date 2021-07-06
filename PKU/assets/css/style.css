@@ -11,6 +11,30 @@
 	background-color : #F5F5F5;
 	border-radius: 5px;
 	box-shadow : 0 10px 20px 15px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
+	opacity:0.9;
+	font-size: 0.9em !IMPORTANT;
+	white-space: nowrap;
+}
+
+.btn {
+	font-size: 0.9em !IMPORTANT;
+}
+
+.dropdown-menu {
+	font-size: 0.9em !IMPORTANT;
+}
+
+.fzl-table-responsive {
+	overflow-x: auto;
+	display: block;
+	min-height: 300px;
+}
+
+.tombol_masuk_keluar:hover {
+	background-color: #A6CF39;
+	text-align: justify;
+	border-radius: 5px;
+	padding: 10px;
 }
 
 .table{
@@ -27,26 +51,29 @@
 
 
 .navbar-sidebar .navbar__list li.active > a {
-	color :grey;	
+	color :white;
 	box-shadow : 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
 	padding: 15px 10px;
 	width: 170px;
 	border-radius: 5px;
+	background-color :#17A2B8;
 }
 
 .navbar-sidebar .navbar__list li > a {
-	color :grey;	
+	/*color :grey;	*/
+	color :#17A2B8;
 	padding: 15px 10px;
 	width: 170px;
 	border-radius: 5px;
 }
 
 .title-2{
-	background-color :#F5F5F5;	
+	/*background-color :#F5F5F5;*/
+	background-color :#17A2B8;
+	color : white;
+	font-size: 15px;
 	box-shadow : 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
 	padding: 15px;
 	width: 100%;
 	border-radius: 5px;
 }
-
-

@@ -319,6 +319,10 @@ section {
 .main-content {
     padding-top: 116px;
     min-height: 100vh;
+
+    background-image: url("/assets/images/clip-hardworking-man.png");
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 @media (max-width: 991px) {
@@ -579,15 +583,21 @@ section {
 }
 
 .page-loader__spin {
-    width: 35px;
-    height: 35px;
     position: absolute;
     top: 50%;
     left: 50%;
-    border-top: 6px solid #f6f6f6;
+    width: 35px;
+    height: 35px;    
+    border-top: 6px solid #b5d0ee;
+    border-right: 6px solid #b5d0ee;
+    border-bottom: 6px solid #b5d0ee;
+    border-left: 6px solid #468bd8;
+
+    /* border-top: 6px solid #f6f6f6;
     border-right: 6px solid #f6f6f6;
     border-bottom: 6px solid #f6f6f6;
-    border-left: 6px solid #1b1b1b;
+    border-left: 6px solid #1b1b1b; */
+    
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
@@ -1363,12 +1373,12 @@ section {
 }
 
 .noti__item:hover i {
-    color: #999;
+    color: white;
 }
 
 .noti__item i {
     font-size: 25px;
-    color: #a9b3c9;
+    color: white;
     -webkit-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -1422,7 +1432,7 @@ section {
 }
 
 .account-item > .content {
-    margin-left: 45px;
+    margin-left: 20px;
     padding: 9px 0;
     padding-left: 12px;
 }
@@ -1567,7 +1577,7 @@ section {
 }
 
 .account-dropdown__footer a:hover {
-    background: #4272d7;
+    background: #DC3545;
     color: #fff;
 }
 
@@ -1644,7 +1654,14 @@ section {
 }
 
 .navbar-sidebar .navbar__list li a:hover {
-    color: #4272d7;
+    /*color: #28A745;*/
+
+	color :white;
+	box-shadow : 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
+	padding: 15px 10px;
+	width: 170px;
+	border-radius: 5px;
+	background-color :#17A2B8;    
 }
 
 .navbar-sidebar .navbar__list li.active > a {
@@ -1866,7 +1883,7 @@ section {
 .mess-dropdown, .email-dropdown, .notifi-dropdown, .setting-dropdown {
     position: absolute;
     z-index: 9999;
-    min-width: 340px;
+    min-width: 380px;
     background: #fff;
     -webkit-box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.1);

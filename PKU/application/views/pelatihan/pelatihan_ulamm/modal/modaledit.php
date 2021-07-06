@@ -215,7 +215,7 @@
 						</div>
 						<div class="card-body">
 						  <div class="table">                
-							<table id="table_rab_edit"  class="table table-responsive">
+							<table id="table_rab_edit"  class="table fzl-table-responsive">
 								  <thead class=" text-primary col-md-12">
 									  <th class="col-md-6">Uraian</th>
 									  <th class="col-md-2">Volume</th>

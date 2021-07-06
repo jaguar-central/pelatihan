@@ -14,7 +14,7 @@
                                         <span class="btn-label"><i class="fa fa-plus"></i></span> Tambah Area
                                         </a>
                                     </div-->   
-                                    <table id="area_table" class="table table-bordered table-striped">
+                                    <table id="area_table" class="table table-bordered table-striped fzl-table-responsive">
                                         <thead>
                                             <tr>
                                                 <th>KODE AREA</th>

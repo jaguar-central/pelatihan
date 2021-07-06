@@ -14,7 +14,7 @@
                                         <span class="btn-label"><i class="fa fa-plus"></i></span> Tambah User Group
                                         </a>
                                 </div>   
-						        <table id="user_table" class="table table-bordered table-striped">
+						        <table id="user_table" class="table table-bordered table-striped fzl-table-responsive">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>

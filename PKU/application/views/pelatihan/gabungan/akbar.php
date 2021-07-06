@@ -17,7 +17,7 @@
 							<span class="btn-label"><i class="fa fa-plus"></i></span> PKU Akbar Gabungan
 							</a>
 						</div>    					
-						<table id="datatable" class="table table-bordered table-striped">
+						<table id="datatable" class="table table-bordered table-striped fzl-table-responsive">
 							<thead>
 								<tr>
 									<th class="text-center">Judul Pelatihan Gabungan</th>

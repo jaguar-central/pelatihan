@@ -6,6 +6,7 @@
 <link href="<?php echo base_url() ?>assets/css/material-dashboard.css" rel="stylesheet" media="all">
 <link href="<?php echo base_url() ?>assets/css/font.css" rel="stylesheet" media="all">
 
+
 <div id="loginModal" tabindex="-1" role="">
     <div class="modal-dialog modal-login" role="document">
         <div class="modal-content">
@@ -29,7 +30,7 @@
                                               
                 <form class="form" method="post" action="<?php base_url() ?>user/process_login">
                     <div class="modal-body">
-						<p class="description text-center">Login - beta version</p>
+						<p class="description text-center">Login - release candidate version</p>
 							<div class="card-body">
 
 								<div class="form-group bmd-form-group">
@@ -52,7 +53,7 @@
 							</div>
 					</div>
 					<div class="modal-footer justify-content-center">
-						<button class="btn btn-round btn-success" type="submit" >
+						<button class="btn btn-round btn-info" type="submit" >
 								Login
 						</button>
 					</div>

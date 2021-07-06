@@ -244,7 +244,7 @@ class Report extends MY_Controller
         echo json_encode($data);
     }
 
-    //set redis
+    //set redis klw di production pake crontab pengambilan data 30 menit sekali
     public function set_redis_report_detail()
     {
 

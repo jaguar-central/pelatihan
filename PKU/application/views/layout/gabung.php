@@ -27,5 +27,6 @@ if (isset($script)){$this->load->view($script);} ?>
 if (isset($modal)){foreach($modal as $modalview){$this->load->view($modalview);}} ?>
 </body>
 
+
 </html>
 

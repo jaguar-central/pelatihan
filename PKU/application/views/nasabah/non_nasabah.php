@@ -12,7 +12,7 @@
                         <div class="row">
                             <div class="col-lg-12">
 								<div class="table-style table-responsive">
-									<table id="datanonnasabah" class="table table-bordered table-striped table-responsive"> 
+									<table id="datanonnasabah" class="table table-bordered table-striped fzl-table-responsive"> 
                                         <thead>
                                             <tr>
                                                 <th>NO KTP</th>

@@ -12,7 +12,7 @@
 			<div class="row">
 				<div class="col-lg-12">					
 					<div class="table-style">
-						<table id="datatable" class="table table-bordered table-striped table-responsive">
+						<table id="datatable" class="table table-bordered table-striped fzl-table-responsive">
 							<thead>
 								<tr>
 									<th class="text-center" rowspan="2">Tipe Debitur</th>

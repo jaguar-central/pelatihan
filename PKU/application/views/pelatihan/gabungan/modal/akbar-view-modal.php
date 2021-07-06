@@ -57,7 +57,7 @@
 						</div>
 						<div class="card-body">
 						  <div class="table">                
-								<table id="akbar_gabungan_view"  class="table table-responsive">
+								<table id="akbar_gabungan_view"  class="table fzl-table-responsive">
 								  <thead class=" text-primary col-md-12">
 									  <th class="col-md-2">No Proposal</th>
 									  <th class="col-md-3">No Trx</th>

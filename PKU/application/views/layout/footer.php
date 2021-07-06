@@ -29,6 +29,10 @@
 <!-- end document-->
 
 <style>
+.dataTables_empty {
+    text-align: center;
+}
+
 @media (max-width: 767px) {
     #deskripsi_rab{
         width: 400px;
@@ -113,6 +117,25 @@ var watchId = 0;
 
 $(document).ready(function() {
 
+    localStorage.setItem("maximize", "0");    
+
+    $(".tombol_masuk_keluar").on('click', function(){    
+
+
+        if (localStorage.getItem("maximize")=="0"){
+            localStorage.setItem("maximize", "1");    
+            $(".menu-sidebar").animate({"width": "0"}, 500 );
+            $(".page-container").animate({"padding-left": "0px"}, 500 );
+            $(".header-desktop").animate({"left": "0px"}, 500 );
+            $(this).html('<i class="zmdi zmdi-caret-right-circle"></i>&nbsp;&nbsp;<span>Sistem Informasi Manajemen Pelatihan Usaha</span>');
+        }else{
+            localStorage.setItem("maximize", "0");    
+            $(".menu-sidebar").animate({"width": "220px"}, 500 );
+            $(".page-container").animate({"padding-left": "220px"}, 500 );
+            $(".header-desktop").animate({"left": "220px"}, 500 );            
+            $(this).html('<i class="zmdi zmdi-caret-left-circle"></i>&nbsp;&nbsp;<span>Sistem Informasi Manajemen Pelatihan Usaha</span>');
+        }
+    });
 
     
     // $('#startMonitoring').on('click', getLocation);
@@ -246,7 +269,7 @@ function showError(error) {
                     if (data.notification_count > 0){
                         notifikasi='<span class="quantity">'+data.notification_count+'</span>';
                     }else{
-                        notifikasi='<span class="quantity" style="background:black;">0</span>';
+                        notifikasi='<span class="quantity" style="background:#0066B3;">0</span>';
                     }
 
                     $("#notifikasi_socket_count").html(notifikasi);
