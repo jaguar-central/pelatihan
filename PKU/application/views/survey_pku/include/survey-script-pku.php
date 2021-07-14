@@ -169,8 +169,11 @@
 		}else{
 			$("#datatable").removeClass("table-responsive"); 
 		}
+	});	
 
-		$("#survey_pelatihan").submit(function(e){
+
+
+	$("#survey_pelatihan").submit(function(e){
 		e.preventDefault();        	
 		var formURL = "<?php echo base_url('pelatihan/post_pelatihan_survey'); ?>";
 		var frmdata = new FormData(this);
@@ -221,8 +224,7 @@
 			$("#loader_container").hide();
 			var failMsg = "Something error happened! as";
 		});	
-	});	
-
+		
 
 		$('#datatable').DataTable({
 			"aaSorting" : [],	
