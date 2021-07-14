@@ -31,13 +31,15 @@
 				<div class="form-group row" id="select_nasabah_survey">
 					<label class="col-sm-2">ID Nasabah <span class="text-danger">*</span></label>
 					<div class="col-sm-4 nasabah_ulamm">
-						<select class="form-control" required="" id="nasabah_id_ulamm" name="nasabah_id_ulamm">
+						<select class="form-control" id="nasabah_id_ulamm" name="nasabah_id_ulamm">
 							<option value="">--pilih ID--</option>
+							<option value="1">ok</option>
 						</select>
 					</div>
 					<div class="col-sm-4 nasabah_mekaar">
-						<select class="form-control" required="" id="nasabah_id_mekaar" name="nasabah_id_mekaar">
+						<select class="form-control" id="nasabah_id_mekaar" name="nasabah_id_mekaar">
 							<option value="">--pilih ID--</option>
+							<option value="1">ok</option>
 						</select>
 					</div>
 
@@ -149,3 +151,80 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript" >
+
+
+$("#survey_pelatihan").submit(function(e) {
+		e.preventDefault();
+		var formURL = "<?php echo base_url('pelatihan/post_pelatihans'); ?>";
+		var frmdata = new FormData(this);
+
+
+		Swal.fire({
+              imageUrl: "<?= base_url() ?>assets/images/loader.gif",
+              showConfirmButton: false,
+              allowOutsideClick: false
+            });
+
+		if ($('#total_cost_rab_akhir').val() > 0) {
+			var xhr = $.ajax({
+				url: formURL,
+				type: 'POST',
+				data: frmdata,
+				processData: false,
+				contentType: false
+			});
+			xhr.done(function(data) {
+				var obj = $.parseJSON(data);
+
+				console.log(data);
+
+				if (obj.result == 'OK') {
+					Swal.fire({
+						position: 'center',
+						icon: 'success',
+						title: 'Pelatihan telah di simpan',
+						showConfirmButton: false,
+						timer: 1500
+					})
+					setTimeout(function() {
+						window.location.href = '<?php echo base_url(); ?>pelatihan/ulamm';
+					}, 1600);
+				}
+				if (obj.result == 'UP') {
+					console.log(data);
+					Swal.fire({
+						position: 'center',
+						icon: 'error',
+						title: obj.msg,
+						showConfirmButton: false,
+						timer: 1500
+					})
+				}
+				if (obj.result == 'NG') {
+					Swal.fire({
+						position: 'center',
+						icon: 'error',
+						title: obj.msg,
+						showConfirmButton: false,
+						timer: 1500
+					})
+				}
+			});
+			xhr.fail(function() {
+				$("#loader_container").hide();
+				var failMsg = "Something error happened! as";
+			});
+		} else {
+			Swal.fire({
+				position: 'center',
+				icon: 'error',
+				title: 'Rencana Anggaran Biaya tidak boleh kosong',
+				showConfirmButton: false,
+				timer: 1500
+			})
+		}	
+	});	
+
+ 
+</script>

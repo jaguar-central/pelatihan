@@ -226,7 +226,7 @@ function showError(error) {
 
 <!-- START Socket Notification Client -->
 
-<script src="<?php echo base_url() ?>assets/js/socket.io.js"></script>
+<script src="<?php echo base_url() ?>assets/js/socket.io.min.js"></script>
 
 <script>
 
