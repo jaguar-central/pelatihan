@@ -27,9 +27,33 @@
 						<th>ALAMAT NASABAH</th>
 						<th>NO. HANDPHONE NASABAH</th>
 						<th>PLAFOND</th>
-						<th>ACTION</th>
+						<th>Apakah jumlah plafon meningkat?</th>
+						<th>Apakah produk usaha bertambah?</th>
+						<th>Apakah jumlah pendapatan perbulan meningkat?</th>
+						<th>Apakah ada penambahan serapan tenaga kerja?</th>
+						<th>Apakah ada penambahan izin usaha lain?</th>
 					</tr>
-				</thead>				
+				</thead>
+				<tbody>	
+				<?php	
+				foreach ($survey as $data){
+						echo '<tr>';
+						echo '<td>'.$data->ID_NASABAH.'</td>'; 													
+						echo '<td>'.$data->NAMA_NASABAH.'</td>'; 													
+						echo '<td>'.$data->JENIS_NASABAH.'</td>'; 													
+						echo '<td>'.$data->JENIS_USAHA.'</td>'; 													
+						echo '<td>'.$data->ALAMAT_NASABAH.'</td>'; 													
+						echo '<td>'.$data->TELP_NASABAH.'</td>'; 													
+						echo '<td>'.$data->PLAFOND.'</td>'; 																							
+						echo '<td>'.$data->P1.'</td>'; 																							
+						echo '<td>'.$data->P2.'</td>'; 																							
+						echo '<td>'.$data->P3.'</td>'; 																							
+						echo '<td>'.$data->P4.'</td>'; 																							
+						echo '<td>'.$data->P5.'</td>'; 																							
+						echo '</tr>';									
+				}	
+				?>	
+				</tbody>				
 			</table>
 		</div>
 	</div>
