@@ -107,23 +107,25 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="table">
-                                                        <table id="datatable_pemberdayaan_ulamm" class="table table-bordered" > 
+                                                        <table id="datatable_pemberdayaan_ulamm" class="table table-bordered table-responsive" > 
                                                             <thead class="text-primary ">
                                                                 <tr>
                                                                     <th rowspan="2" colspan="1">ID Nasabah</th>
                                                                     <th rowspan="2" colspan="1">Nama Nasabah</th>
-                                                                    <th class="text-center" rowspan="1" colspan="2">Penilaian Intrinsik</th>
-                                                                    <th class="text-center" rowspan="1" colspan="5">Penilaian Ekstrinsik</th>
+                                                                    <th class="text-center" rowspan="1" colspan="1">Penilaian Intrinsik</th>
+                                                                    <th class="text-center" rowspan="1" colspan="8">Penilaian Ekstrinsik</th>
                                                                     <th class="text-center" rowspan="2" colspan="1">Total Nilai</th>
                                                                 </tr>
                                                                 <tr>
                                                                     <th>Grading System</th>
-                                                                    <th>Aspek Implementasi</th>
-                                                                    <th>Jumlah Plafond</th>
-                                                                    <th>Diversifikasi Produk</th>
-                                                                    <th>Pendapatan Perbulan</th>
-                                                                    <th>Tenaga Kerja</th>
-                                                                    <th>Perijinan Usaha</th>                                                                    
+                                                                    <th>Pembayaran Angsuran</th>
+                                                                    <th>Serapan Tenaga Kerja</th>
+                                                                    <th>Ijin Usaha</th>
+                                                                    <th>Diversifikasi</th>
+                                                                    <th>Strategi Penjualan</th>
+                                                                    <th>Jaringan Kelompok Usaha</th>                                                                    
+                                                                    <th>Pengelolaan Keuangan</th>                                                                    
+                                                                    <th>Pembelian Asset</th>                                                                    
                                                                 </tr>
                                                             </thead>
                                                             <tbody id="tbody_datatable_pemberdayaan_ulamm">
@@ -132,13 +134,15 @@
                                                                 echo '<tr>';
                                                                 echo '<td >'.$DATA_U->ID_NASABAH.'</td>';
                                                                 echo '<td >'.$DATA_U->NAMA.'</td>';
-                                                                echo '<td >'.$DATA_U->NILAI_GRADING.'</td>';
-                                                                echo '<td >'.$DATA_U->ASPEK_IMPLEMENTASI.'</td>';
-                                                                echo '<td >'.$DATA_U->JUMLAH_PLAFOND.'</td>';
-                                                                echo '<td >'.$DATA_U->DIVERSIFIKASI_PRODUK.'</td>';
-                                                                echo '<td >'.$DATA_U->PENDAPATAN_PERBULAN.'</td>';
-                                                                echo '<td >'.$DATA_U->TENAGA_KERJA.'</td>';
-                                                                echo '<td >'.$DATA_U->PERIJINAN_USAHA.'</td>';
+                                                                echo '<td >'.$DATA_U->IKUT_PELATIHAN_GRADING.'</td>';
+                                                                echo '<td >'.$DATA_U->PEMBAYARAN_ANGSURAN.'</td>';
+                                                                echo '<td >'.$DATA_U->SERAPAN_TENAGA_KERJA.'</td>';
+                                                                echo '<td >'.$DATA_U->IJIN_USAHA.'</td>';
+                                                                echo '<td >'.$DATA_U->DIVERSIFIKASI.'</td>';
+                                                                echo '<td >'.$DATA_U->STRATEGI_PENJUALAN.'</td>';
+                                                                echo '<td >'.$DATA_U->JARINGAN_KELOMPOK_USAHA.'</td>';
+                                                                echo '<td >'.$DATA_U->PENGELOLAAN_KEUANGAN.'</td>';
+                                                                echo '<td >'.$DATA_U->PEMBELIAN_ASSET.'</td>';
                                                                 echo '<td >'.$DATA_U->TOTAL_NILAI.'</td>';
                                                                 echo '</tr>';
                                                             }
