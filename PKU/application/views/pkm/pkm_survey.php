@@ -38,7 +38,7 @@
                 <label class="col-sm-12">Apakah nasabah ini sudah menabung? </label>
                 <div class="col-sm-12">
                     <div class="custom-control custom-radio">
-                        <input type="radio" id="survey_menabung1" name="survey_menabung" value="2" checked />
+                        <input type="radio" id="survey_menabung1" name="survey_menabung" value="10" checked />
                         <label for="survey_menabung1">Sudah menabung</label>
                     </div>
 
@@ -54,16 +54,16 @@
                 <div class="col-sm-12">
                     <div class="custom-control custom-radio">
                         <input type="radio" id="survey_pengelolaan_keuangan1" name="survey_pengelolaan_keuangan" value="0" checked />
-                        <label for="survey_pengelolaan_keuangan1">Belum memisahkan keuangan keluarga dengan usaha</label>
+                        <label for="survey_pengelolaan_keuangan1">Belum memisahkan keuangan keluarga dan keuangan usaha</label>
                     </div>
 
                     <div class="custom-control custom-radio">
-                        <input type="radio" id="survey_pengelolaan_keuangan2" name="survey_pengelolaan_keuangan" value="0.5" />
-                        <label for="survey_pengelolaan_keuangan2">Sudah dipisahkan dan tertib</label>
+                        <input type="radio" id="survey_pengelolaan_keuangan2" name="survey_pengelolaan_keuangan" value="5" />
+                        <label for="survey_pengelolaan_keuangan2">Sudah memisahkan keuangan keluarga dan keuangan usaha</label>
                     </div>
 
                     <div class="custom-control custom-radio">
-                        <input type="radio" id="survey_pengelolaan_keuangan3" name="survey_pengelolaan_keuangan" value="1" />
+                        <input type="radio" id="survey_pengelolaan_keuangan3" name="survey_pengelolaan_keuangan" value="10" />
                         <label for="survey_pengelolaan_keuangan3">Sudah mencatat pengeluaran dan pemasukan usaha</label>
                     </div>
                 </div>
@@ -82,18 +82,18 @@
                         </div>
 
                         <div class="custom-control custom-radio">
-                            <input type="radio" id="survey_omset2" name="survey_omset" value="0.3" />
-                            <label for="survey_omset2">Rp 50.000 - 100.000</label>
+                            <input type="radio" id="survey_omset2" name="survey_omset" value="3" />
+                            <label for="survey_omset2">Rp 50.001 - 100.000</label>
                         </div>
 
                         <div class="custom-control custom-radio">
-                            <input type="radio" id="survey_omset3" name="survey_omset" value="0.5" />
+                            <input type="radio" id="survey_omset3" name="survey_omset" value="5" />
                             <label for="survey_omset3">Rp 100.001 - 150.000</label>
                         </div>
 
                         <div class="custom-control custom-radio">
-                            <input type="radio" id="survey_omset4" name="survey_omset" value="1" />
-                            <label for="survey_omset4"> > Rp 150.000</label>
+                            <input type="radio" id="survey_omset4" name="survey_omset" value="10" />
+                            <label for="survey_omset4"> > Rp 150.001</label>
                         </div>
 
                     <?php } else if ($kategori_plafond == "B") { ?>
@@ -104,18 +104,18 @@
                         </div>
 
                         <div class="custom-control custom-radio">
-                            <input type="radio" id="survey_omset2" name="survey_omset" value="0.3" />
+                            <input type="radio" id="survey_omset2" name="survey_omset" value="3" />
                             <label for="survey_omset2">Rp 100.001 - 150.000</label>
                         </div>
 
                         <div class="custom-control custom-radio">
-                            <input type="radio" id="survey_omset3" name="survey_omset" value="0.5" />
+                            <input type="radio" id="survey_omset3" name="survey_omset" value="5" />
                             <label for="survey_omset3">Rp 150.001 - 200.000</label>
                         </div>
 
                         <div class="custom-control custom-radio">
-                            <input type="radio" id="survey_omset4" name="survey_omset" value="1" />
-                            <label for="survey_omset4"> > Rp 200.000</label>
+                            <input type="radio" id="survey_omset4" name="survey_omset" value="10" />
+                            <label for="survey_omset4"> > Rp 200.001</label>
                         </div>
                     <?php } else if ($kategori_plafond == "C") { ?>
                         <div class="custom-control custom-radio">
@@ -125,18 +125,18 @@
                         </div>
 
                         <div class="custom-control custom-radio">
-                            <input type="radio" id="survey_omset2" name="survey_omset" value="0.3" />
+                            <input type="radio" id="survey_omset2" name="survey_omset" value="3" />
                             <label for="survey_omset2">Rp 200.001 - 250.000</label>
                         </div>
 
                         <div class="custom-control custom-radio">
-                            <input type="radio" id="survey_omset3" name="survey_omset" value="0.5" />
+                            <input type="radio" id="survey_omset3" name="survey_omset" value="5" />
                             <label for="survey_omset3">Rp 250.001 - 300.000</label>
                         </div>
 
                         <div class="custom-control custom-radio">
-                            <input type="radio" id="survey_omset4" name="survey_omset" value="1" />
-                            <label for="survey_omset4"> > Rp 300.000</label>
+                            <input type="radio" id="survey_omset4" name="survey_omset" value="10" />
+                            <label for="survey_omset4"> > Rp 300.001</label>
                         </div>
                     <?php } ?>
                 </div>
@@ -151,12 +151,12 @@
                     </div>
 
                     <div class="custom-control custom-radio">
-                        <input type="radio" id="survey_strategi_penjualan2" name="survey_strategi_penjualan" value="0.5" />
+                        <input type="radio" id="survey_strategi_penjualan2" name="survey_strategi_penjualan" value="5" />
                         <label for="survey_strategi_penjualan2">Menetap (tempat usaha sudah tetap)</label>
                     </div>
 
                     <div class="custom-control custom-radio">
-                        <input type="radio" id="survey_strategi_penjualan3" name="survey_strategi_penjualan" value="1" />
+                        <input type="radio" id="survey_strategi_penjualan3" name="survey_strategi_penjualan" value="10" />
                         <label for="survey_strategi_penjualan3">Memanfaatkan media elektronik/digital/social media</label>
                     </div>
                 </div>
@@ -171,17 +171,17 @@
                     </div>
 
                     <div class="custom-control custom-radio">
-                        <input type="radio" id="survey_aset2" name="survey_aset" value="0.2" />
+                        <input type="radio" id="survey_aset2" name="survey_aset" value="4" />
                         <label for="survey_aset2">Asset bergerak (motor atau emas min. 10 gr)</label>
                     </div>
 
                     <div class="custom-control custom-radio">
-                        <input type="radio" id="survey_aset3" name="survey_aset" value="0.3" />
+                        <input type="radio" id="survey_aset3" name="survey_aset" value="6" />
                         <label for="survey_aset3">Tanah / bangunan (non sertifikat)</label>
                     </div>
 
                     <div class="custom-control custom-radio">
-                        <input type="radio" id="survey_aset4" name="survey_aset" value="0.5" />
+                        <input type="radio" id="survey_aset4" name="survey_aset" value="10" />
                         <label for="survey_aset4">Tanah / bangunan</label>
                     </div>
                 </div>
@@ -196,7 +196,7 @@
                     </div>
 
                     <div class="custom-control custom-radio">
-                        <input type="radio" id="survey_ijin2" name="survey_ijin" value="0.5" />
+                        <input type="radio" id="survey_ijin2" name="survey_ijin" value="5" />
                         <label for="survey_ijin2">Ada (misal ijin usaha dari kelurahan, NIB, PIRT, dll)</label>
                     </div>
                 </div>
@@ -211,7 +211,7 @@
                     </div>
 
                     <div class="custom-control custom-radio">
-                        <input type="radio" id="survey_diversifikasi2" name="survey_diversifikasi" value="0.5" />
+                        <input type="radio" id="survey_diversifikasi2" name="survey_diversifikasi" value="10" />
                         <label for="survey_diversifikasi2">Ada penambahan produk</label>
                     </div>
                 </div>
@@ -226,7 +226,7 @@
                     </div>
 
                     <div class="custom-control custom-radio">
-                        <input type="radio" id="survey_serapan_tenaga2" name="survey_serapan_tenaga" value="0.5" />
+                        <input type="radio" id="survey_serapan_tenaga2" name="survey_serapan_tenaga" value="10" />
                         <label for="survey_serapan_tenaga2">Ada penambahan tenaga kerja</label>
                     </div>
                 </div>

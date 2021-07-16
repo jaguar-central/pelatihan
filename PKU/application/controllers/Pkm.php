@@ -26,7 +26,7 @@ class Pkm extends MY_Controller
 
 			$cek_minggu_ke = $this->db->query("select MINGGU_KE FROM CEK_MINGGU_KE_PER_BULAN()")->row()->MINGGU_KE;
 			
-			if ($cek_minggu_ke==1){								
+			if ($cek_minggu_ke==2){								
 				$this->pkm_survey_pilih_nasabah();
 			}else{
 				$cek_pkm_bermakna = $this->db->query("select * from T_PKM_BERMAKNA WHERE  KELOMPOKID='".$cek_kelompok->GroupID."' AND CAST(CREATED_DATE as DATE)=CAST(GETDATE() as DATE)")->result();
