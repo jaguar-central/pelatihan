@@ -33,7 +33,7 @@
                                 <div class="col-lg-6">
                                     <div class="au-card m-b-10 p-2">
                                         <div class="au-card-inner">
-                                            <h3 class="title-2 p-2 m-b-10 bg-info text-center text-white">Ulamm</h3>
+                                            <h3 class="title-2 p-2 m-b-10 bg-info text-center text-white">Mikro</h3>
                                             <div id="index-pemberdayaan-ulamm-bar" style="height:200px" ></div>
                                         </div>
                                     </div>
@@ -42,11 +42,30 @@
                                 <div class="col-lg-6">
                                     <div class="au-card m-b-10 p-2">
                                         <div class="au-card-inner">
-                                            <h3 class="title-2 p-2 m-b-10 bg-info text-center text-white">Mekaar</h3>
+                                            <h3 class="title-2 p-2 m-b-10 bg-info text-center text-white">Ultra Mikro</h3>
                                             <div id="index-pemberdayaan-mekaar-bar" style="height:200px" ></div>
                                         </div>
                                     </div>
-                                </div>                                   
+                                </div>          
+
+
+                                <div class="col-lg-6">
+                                    <div class="au-card m-b-10 p-2">
+                                        <div class="au-card-inner">
+                                            <h3 class="title-2 p-2 m-b-10 bg-info text-center text-white">Detail Mikro</h3>
+                                            <div id="index-pemberdayaan-ulamm-pertanyaan" style="height:300px" ></div>
+                                        </div>
+                                    </div>
+                                </div>              
+
+                                <div class="col-lg-6">
+                                    <div class="au-card m-b-10 p-2">
+                                        <div class="au-card-inner">
+                                            <h3 class="title-2 p-2 m-b-10 bg-info text-center text-white">Detail Ultra Mikro</h3>
+                                            <div id="index-pemberdayaan-mekaar-pertanyaan" style="height:300px" ></div>
+                                        </div>
+                                    </div>
+                                </div>                                                          
 
                                 <div class="col-lg-6">
                                     <div class="au-card m-b-10 p-2">
@@ -64,7 +83,9 @@
                                             <div id="index-pemberdayaan-mekaar-start-model" style="height:300px" ></div>
                                         </div>
                                     </div>
-                                </div>                                              
+                                </div>     
+
+                                                                          
 
                             </div>
                         </div>

@@ -271,6 +271,66 @@ am4core.ready(function() {
 
 
 
+    //chart_pie_u_pertanyaan start
+    var chart_pie_u_pertanyaan = am4core.create("index-pemberdayaan-ulamm-pertanyaan", am4charts.PieChart3D);
+    chart_pie_u_pertanyaan.hiddenState.properties.opacity = 0; // this creates initial fade-in
+    chart_pie_u_pertanyaan.fontSize = 10;
+
+
+    chart_pie_u_pertanyaan.legend = new am4charts.Legend();
+    chart_pie_u_pertanyaan.legend.scrollable = true;
+    chart_pie_u_pertanyaan.legend.itemContainers.template.paddingTop = 0;
+
+    chart_pie_u_pertanyaan.legend.valueLabels.template.disabled = true;
+
+    chart_pie_u_pertanyaan.data = [
+    <?php
+    for ($x = 0; $x < count($DETAIL_ULAMM); $x++) {    
+      echo '{';
+      echo 'country: "'.$DETAIL_ULAMM[$x]->PERTANYAAN.'",';
+      echo 'litres: '.$DETAIL_ULAMM[$x]->NILAI;
+      echo '},';    
+    }
+    ?>
+    ];
+
+    var chart_pie_u_pertanyaan = chart_pie_u_pertanyaan.series.push(new am4charts.PieSeries3D());
+    chart_pie_u_pertanyaan.dataFields.value = "litres";
+    chart_pie_u_pertanyaan.dataFields.category = "country";
+    chart_pie_u_pertanyaan.legendSettings.labelText = "{category}: {value}";
+    chart_pie_u_pertanyaan.labels.template.text = "{category}: {value}";
+    //chart_pie_u_pertanyaan end
+
+
+    //chart_pie_m_pertanyaan start
+    var chart_pie_m_pertanyaan = am4core.create("index-pemberdayaan-mekaar-pertanyaan", am4charts.PieChart3D);
+    chart_pie_m_pertanyaan.hiddenState.properties.opacity = 0; // this creates initial fade-in
+    chart_pie_m_pertanyaan.fontSize = 10;
+
+
+    chart_pie_m_pertanyaan.legend = new am4charts.Legend();
+    chart_pie_m_pertanyaan.legend.scrollable = true;
+    chart_pie_m_pertanyaan.legend.itemContainers.template.paddingTop = 0;
+
+    chart_pie_m_pertanyaan.legend.valueLabels.template.disabled = true;
+
+    chart_pie_m_pertanyaan.data = [
+    <?php
+    for ($x = 0; $x < count($DETAIL_MEKAAR); $x++) {    
+      echo '{';
+      echo 'country: "'.$DETAIL_MEKAAR[$x]->PERTANYAAN.'",';
+      echo 'litres: '.$DETAIL_MEKAAR[$x]->NILAI;
+      echo '},';    
+    }
+    ?>
+    ];
+
+    var chart_pie_m_pertanyaan = chart_pie_m_pertanyaan.series.push(new am4charts.PieSeries3D());
+    chart_pie_m_pertanyaan.dataFields.value = "litres";
+    chart_pie_m_pertanyaan.dataFields.category = "country";
+    chart_pie_m_pertanyaan.legendSettings.labelText = "{category}: {value}";
+    chart_pie_m_pertanyaan.labels.template.text = "{category}: {value}";
+    //chart_pie_u_pertanyaan end      
 
 
 }); // end am4core.ready()
